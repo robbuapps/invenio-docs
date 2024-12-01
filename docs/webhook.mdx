@@ -4,6 +4,77 @@ sidebarTitle: "Webhook"
 description: "A integração via Webhook permite o envio de eventos gerados em tempo real pelas plataformas Invenio Center e Invenio Live diretamente para o seu sistema, facilitando a automação e o monitoramento de ações importantes."
 ---
 
+### Como funciona um Webhook?
+
+Um Webhook é um mecanismo de integração que permite que sistemas diferentes se comuniquem em tempo real, utilizando chamadas HTTP para notificar eventos específicos. Ao contrário das APIs tradicionais, que funcionam de maneira mais reativa, onde o cliente precisa fazer requisições para obter informações, os Webhooks adotam uma abordagem proativa. Eles "empurram" dados diretamente para um endpoint configurado no sistema do cliente assim que um evento ocorre no sistema de origem.
+
+Por exemplo, em um contexto de mensagens, um Webhook pode ser configurado para notificar seu sistema sempre que uma mensagem for enviada ou recebida, fornecendo detalhes em tempo real para que ações automáticas possam ser tomadas imediatamente, como armazenar logs, enviar notificações ou atualizar dashboards.
+
+A principal vantagem dos Webhooks está na sua eficiência: eles eliminam a necessidade de realizar consultas constantes ao servidor, economizando recursos e melhorando a responsividade das integrações. Para que funcionem corretamente, é necessário que o sistema receptor tenha um endpoint preparado para receber e processar as notificações enviadas.
+
+Agora que entendemos o conceito de Webhooks, vamos explorar como o Invenio utiliza esse recurso para facilitar integrações em tempo real.
+
+Imagine o **Webhook do Invenio** como um mensageiro automático que trabalha nos bastidores para avisar o seu sistema sobre o que está acontecendo na plataforma Invenio, em tempo real. Aqui estão exemplos simples de como ele funciona:
+
+1. **Mensagens enviadas:**
+Assim que o Invenio envia uma mensagem (por exemplo, um WhatsApp para um cliente), ele avisa seu sistema se a mensagem foi entregue com sucesso ou se houve algum problema.
+
+*Exemplo:*  
+`Mensagem para o João entregue às 15h.`
+
+2. **Mensagens recebidas:**
+Quando alguém responde ou envia uma mensagem para você, o Invenio imediatamente notifica o seu sistema.
+
+*Exemplo:*  
+`Mensagem recebida do João: "Preciso de ajuda com o pedido."`
+
+3. **Eventos de KPI:**
+Sempre que um indicador importante é registrado (como número de atendimentos concluídos), seu sistema recebe os dados.
+
+*Exemplo:*  
+`5 novos atendimentos registrados hoje.`
+
+4. **Campanhas:**
+Se você criou uma campanha de mensagens, o Invenio avisa sobre o andamento, como o número de mensagens enviadas ou se a campanha terminou.
+
+*Exemplo:*  
+`Campanha "Promoção de Verão" está 75% concluída.`
+
+5. **Carteiras:**
+Quando você atualiza as configurações das carteiras (listas de clientes ou grupos), o Invenio avisa sobre qualquer alteração feita.
+
+*Exemplo:*  
+`A carteira "Clientes VIP" foi atualizada com 20 novos contatos.`
+
+6. **Templates HSM:**
+Se você utiliza mensagens pré-aprovadas (templates HSM) para enviar comunicações, o Webhook informa mudanças de status, qualidade ou edições.
+
+*Exemplo:*  
+`Template "Promoção 10%" aprovado com sucesso.`
+
+7. **Linhas WhatsApp:**
+Caso sua linha do WhatsApp mude de status (ativa, inativa ou com problemas), o Webhook te avisa.
+
+*Exemplo:*  
+`Linha WhatsApp "Suporte" está ativa e funcionando normalmente.`
+
+8. **Usuários:**
+Sempre que um usuário da sua equipe faz alterações no sistema, o Webhook registra e envia essas informações.
+
+*Exemplo:*  
+`Usuário "Maria" atualizou o perfil dela.`
+
+9. **Protocolos:**
+Se você utiliza protocolos para monitorar atendimentos ou processos, o Webhook envia os dados detalhados.
+
+*Exemplo:*  
+`Protocolo #12345 foi finalizado com sucesso.`
+
+**Obs.:**
+Os eventos enviados pelo Webhook são estruturados no formato **JSON**, garantindo que seu sistema possa processar as informações de maneira organizada e confiável. Os exemplos apresentados acima são apenas ilustrativos para facilitar o entendimento e não representam o formato real das notificações enviadas.
+
+---
+
 ### Eventos
 
 1. **Mensagens enviadas**: Inclui atualizações sobre o status de entrega.  

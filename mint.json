@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Robbu Docs",
   "logo": {
-    "dark": "https://robbu.global/wp-content/uploads/2024/03/Robbu-logo.svg",
+    "dark": "/logo/light.svg",
     "light": "/logo/light.svg"
   },
-  "favicon": "https://robbu.global/wp-content/uploads/2024/03/Robbu-logo.svg",
+  "favicon": "/logo/light.svg",
   "colors": {
     "primary": "#007aff",
     "light": "#007aff",
