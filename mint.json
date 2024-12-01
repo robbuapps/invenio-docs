@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Robbu Docs",
   "logo": {
-    "dark": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
   "favicon": "/logo/light.svg",
