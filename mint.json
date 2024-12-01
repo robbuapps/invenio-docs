@@ -1,14 +1,14 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Robbu Docs",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "https://robbu.global/wp-content/uploads/2024/03/Robbu-logo.svg",
     "light": "/logo/light.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://robbu.global/wp-content/uploads/2024/03/Robbu-logo.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
+    "primary": "#007aff",
+    "light": "#007aff",
     "dark": "#0D9373",
     "anchors": {
       "from": "#0D9373",
@@ -50,13 +50,30 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Invenio Center",
+      "pages": [
+        "docs/webhook",
+        "quickstart",
+        "development"
+      ]
+    },
+    {
+      "group": "Invenio Live",
       "pages": [
         "introduction",
         "quickstart",
         "development"
       ]
     },
+    {
+      "group": "Robbu APIs",
+      "pages": [
+        "docs/robbu-api/auth",
+        "docs/robbu-api/send-message",
+        "quickstart",
+        "development"
+      ]
+    },    
     {
       "group": "Essentials",
       "pages": [

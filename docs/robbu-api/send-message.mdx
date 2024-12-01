@@ -1,0 +1,212 @@
+---
+title: "Send Message"
+sidebarTitle: "Send Message"
+description: "Este documento traz as especificações técnicas para chamada da API SendMessage que faz disparos de mensagens via Invenio, independente do canal."
+---
+
+### Request
+
+#### Base URL
+
+`https://api.robbu.global/v1`
+
+```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+{
+  "invenioPrivateToken": "xxxxxx-xxxxxxx-xxxxxxxx-xxxxxxxx",
+  "text": "olá usuário",
+  "emailSubject": "",
+  "channel": 3,
+  "templateName": "template1",
+  "attendantUserName": "Usuário 1",
+  "templateParameters": [
+    {
+      "parameterName": "PrimeiroNome",
+      "parameterValue": "Nome alternativo"
+    },
+    {
+      "parameterName": "Coringa1",
+      "parameterValue": "01/01/1993"
+    }
+  ],
+  "source": {
+    "countryCode": 55,
+    "phoneNumber": 1112345678,
+    "prospect": false
+  },
+  "destination": {
+    "countryCode": 55,
+    "phoneNumber": 11992568547,
+    "email": ""
+  },
+  "discardSettings": {
+    "recentContactLastHours": 0,
+    "InAttendance": true
+  },
+  "contact": {
+    "name": "Ana da Silva",
+    "customCode": "5150",
+    "id": "85695874563",
+    "tag": "nometag",
+    "jokers": [
+      "coringa1",
+      "coringa2",
+      "coringa3",
+      "coringa4",
+      "coringa5"
+    ],
+    "walletClientCode": "CodDefault",
+    "updateIfExists": true
+  },
+  "voiceSettings": {
+    "callId": "123123"
+  },
+  "files": [
+    {
+      "address": "https://robbublob.blob/download/boletoteste.pdf",
+      "base64": "...u5y3i4y5iu345yu345yu345y5y4...",
+      "name": "seuboleto.pdf"
+    }
+  ]
+}
+```
+
+#### Parâmetros da Requisição
+
+| Parâmetro                   | Tipo            | Obrigatório | Descrição                                                                                         | Exemplo                                 |
+|-----------------------------|-----------------|-------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
+| `invenioPrivateToken`       | `String`        | Sim         | Token privado para autenticação.                                                                 | `xxxxxx-xxxxxxx-xxxxxxxx-xxxxxxxx`     |
+| `text`                      | `String`        | Sim         | O texto da mensagem que será enviado. Ignorado se o template HSM estiver preenchido.             | `olá usuário`                          |
+| `emailSubject`              | `String`        | Não         | O título do e-mail (considerando que o canal utilizado será o e-mail).                           | `(vazio)`                              |
+| `channel`                   | `Inteiro`       | Sim         | Canal de envio da mensagem (1 – Email, 2 – SMS, 3 – WhatsApp).                                   | `3`                                    |
+| `templateName`              | `String`        | Sim         | Nome do template HSM criado e aprovado junto ao Facebook.                                        | `template1`                            |
+| `attendantUserName`         | `String`        | Não         | Nome do usuário no Invenio para fidelização de fila de login específico.                         | `Usuário 1`                            |
+| `templateParameters`        | `Array`         | Não         | Parâmetros para personalização do template.                                                     | Veja abaixo                             |
+| ├─ `parameterName`          | `String`        | Sim         | Nome da variável no template dinâmico.                                                           | `PrimeiroNome`                         |
+| ├─ `parameterValue`         | `String`        | Sim         | Valor da variável no template dinâmico.                                                          | `Nome alternativo`                     |
+| `source`                    | `Objeto`        | Sim         | Dados de origem da mensagem.                                                                    | Veja abaixo                             |
+| ├─ `countryCode`            | `Inteiro`       | Sim         | Código do país do número que enviará a mensagem.                                                 | `55`                                   |
+| ├─ `phoneNumber`            | `Inteiro`       | Sim         | Número de telefone que enviará a mensagem (DDD + número).                                        | `1112345678`                           |
+| ├─ `prospect`               | `Booleano`      | Não         | Indica se a mensagem será enviada por um número de prospect integrado ao Invenio.                | `false`                                |
+| `destination`               | `Objeto`        | Sim         | Dados de destino da mensagem.                                                                   | Veja abaixo                             |
+| ├─ `countryCode`            | `Inteiro`       | Sim         | Código do país do telefone que receberá a mensagem.                                              | `55`                                   |
+| ├─ `phoneNumber`            | `Inteiro`       | Sim         | Número de telefone que receberá a mensagem (DDD + número).                                       | `11992568547`                          |
+| ├─ `email`                  | `String`        | Não         | E-mail que receberá a mensagem.                                                                  | `(vazio)`                              |
+| `discardSettings`           | `Objeto`        | Não         | Configurações para descartar mensagens.                                                         | Veja abaixo                             |
+| ├─ `recentContactLastHours` | `Inteiro`       | Não         | Ignora o envio da mensagem se houve contato nas últimas X horas.                                 | `0`                                    |
+| ├─ `inAttendance`           | `Booleano`      | Não         | Ignora o envio da mensagem se o cliente estiver fidelizado com um operador.                      | `true`                                 |
+| `contact`                   | `Objeto`        | Sim         | Informações do contato que receberá a mensagem.                                                 | Veja abaixo                             |
+| ├─ `name`                   | `String`        | Sim         | Nome do contato que receberá a mensagem.                                                         | `Ana da Silva`                         |
+| ├─ `customCode`             | `String`        | Sim         | Código do cliente utilizado para o contato.                                                     | `5150`                                 |
+| ├─ `id`                     | `String`        | Sim         | CPF ou CNPJ do contato que receberá a mensagem.                                                  | `85695874563`                          |
+| ├─ `tag`                    | `String`        | Não         | Hashtag associada ao contato que receberá a mensagem.                                            | `nometag`                              |
+| ├─ `jokers`                 | `Array`         | Não         | Valores coringa para templates HSM aprovados no Facebook.                                        | `["coringa1", "coringa2", "coringa3"]` |
+| `walletClientCode`          | `String`        | Sim         | Código do segmento cadastrado pelo cliente dentro do Invenio.                                    | `CodDefault`                           |
+| `updateIfExists`            | `Booleano`      | Não         | Indica se o contato será atualizado caso já esteja cadastrado no Invenio.                        | `true`                                 |
+| `voiceSettings`             | `Objeto`        | Sim         | Configurações de chamada de voz.                                                                | Veja abaixo                             |
+| ├─ `callId`                 | `String`        | Sim         | ID da chamada de voz. Necessário em fluxos voltados a esse tipo de canal.                        | `123123`                               |
+| `files`                     | `Array`         | Sim         | Arquivos anexados à mensagem.                                                                   | Veja abaixo                             |
+| ├─ `address`                | `String`        | Sim         | URL da mídia a ser enviada.                                                                      | `https://exemplo.com/arquivo.pdf`      |
+| ├─ `base64`                 | `String`        | Sim         | Código Base64 da mídia a ser enviada.                                                            | `...u5y3i4y5iu345yu345yu345y5y4...`    |
+| ├─ `name`                   | `String`        | Sim         | Nome do arquivo a ser enviado.                                                                   | `seuboleto.pdf`                        |
+
+
+
+#### Exemplos
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="curl" label="Curl" default>
+```bash  showLineNumbers
+curl --location 'https://api.robbu.global/v1/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"Company": "#####",
+"Username": "#####",
+"Password": "#####"
+}'
+```
+  </TabItem>
+  <TabItem value="chsarp" label="C#">
+    ```cs showLineNumbers
+var client = new HttpClient();
+var request = new HttpRequestMessage(HttpMethod.Post, "https://api.robbu.global/v1/login");
+var content = new StringContent("{\n\"Company\": \"#####\",\n\"Username\": \"#####\",\n\"Password\": \"#####\"\n}", null, "application/json");
+request.Content = content;
+var response = await client.SendAsync(request);
+response.EnsureSuccessStatusCode();
+Console.WriteLine(await response.Content.ReadAsStringAsync());
+    ```
+    </TabItem>
+  <TabItem value="node" label="Node">
+    ```js showLineNumbers
+const axios = require('axios');
+let data = JSON.stringify({
+"Company": "#####",
+"Username": "#####",
+"Password": "#####"
+});
+
+let config = {
+method: 'post',
+maxBodyLength: Infinity,
+url: 'https://api.robbu.global/v1/login',
+headers: { 
+    'Content-Type': 'application/json'
+},
+data : data
+};
+
+axios.request(config)
+.then((response) => {
+console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+console.log(error);
+});
+    ```
+  </TabItem>
+</Tabs>
+
+### Responses
+
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success">
+    <div class="admonitionHeading_Gvgb">
+        <div class="admonitionContent_BuS1"><p>200 - Ok</p></div>
+    </div>
+</div>
+
+```json showLineNumbers
+{
+    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+    "expire_in": 324684897,
+    "refresh_token": "",
+    "token_type": "Bearer"
+}
+```
+
+#### Parâmetros da Resposta
+
+| **Campo**         | **Descrição**                                             | **Exemplo**                      |
+|--------------------|---------------------------------------------------------|-----------------------------------|
+| `access_token`    | Token JWT utilizado para autenticação nas chamadas da API. | `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9` |
+| `expire_in`       | Tempo de validade do token em segundos.                   | `3600`                           |
+| `refresh_token`   | Token utilizado para renovar o `access_token` (se aplicável). | `null`                           |
+| `token_type`      | Tipo do token retornado, geralmente `Bearer`.             | `Bearer`                         |
+
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--danger">
+    <div class="admonitionHeading_Gvgb">
+        <div class="admonitionContent_BuS1"><p>401 - Unauthorized</p></div>
+    </div>
+</div>
+
+```json
+{
+    "message": "Username or password is incorrect"
+}
+```
+
+| **Campo**         | **Descrição**                                             | **Exemplo**                      |
+|--------------------|---------------------------------------------------------|-----------------------------------|
+| `message`    | Mensagem de Erro | `Username or password is incorrect` |
