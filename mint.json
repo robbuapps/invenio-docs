@@ -35,7 +35,7 @@
     {
       "name": "Institucional",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://robbu.global"
     },
     {
       "name": "Blog",
@@ -44,22 +44,6 @@
     }
   ],
   "navigation": [
-    {
-      "group": "Invenio Center",
-      "pages": [
-        "docs/webhook",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Invenio Live",
-      "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
     {
       "group": "Robbu APIs",
       "pages": [
