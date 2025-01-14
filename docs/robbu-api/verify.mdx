@@ -1,0 +1,95 @@
+---
+title: "Robbu Verify"
+sidebarTitle: "Robbu Verify"
+description: "Robbu Verify permite verificar se um número de telefone está ativo no WhatsApp. Este serviço é ideal para integrar em sistemas que precisam confirmar a presença no WhatsApp antes de interagir com um usuário."
+---
+
+## Introdução
+O serviço Robbu Verify API oferece a funcionalidade de verificar se um número de telefone está ativo no WhatsApp, tornando-se uma solução essencial para sistemas que exigem a validação da presença no WhatsApp antes de realizar qualquer interação com o usuário. Para utilizar este serviço, é necessário entrar em contato com a equipe comercial da Robbu para habilitá-lo na sua conta.
+
+## Integração
+
+Para usar a API, você deve realizar uma requisição `POST` para o endpoint `/verify`, enviando um **array de números de telefone** no corpo da requisição.
+
+#### Regras para os números de telefone
+
+- Os números devem ser enviados no formato **DDI + Número de Telefone**.  
+  - **Exemplo:** `+5511999999999` para um número no Brasil.
+- O **array pode conter até 1000 números** por chamada.
+- Todos os números devem ser **únicos**, ou seja, **não podem haver repetições** no mesmo array.
+
+####  Base Url
+`http://api.robbu.global/v1/verify`
+
+####  Modelo de Requisição
+
+```json request.json
+{
+    "PhoneNumbers": [
+        "+5511941705630",
+        "5511941705630",
+        "11941705630",
+        "941705630",
+        "11999999999"
+    ]
+}
+```
+
+| **Parâmetro**    | **Tipo**  | **Obrigatório** | **Descrição**                                  | **Exemplo**           |
+|-------------------|-----------|-----------------|-----------------------------------------------|-----------------------|
+| `PhoneNumbers`    | `array`   | Sim             | Lista de números de telefone para validação. Deve conter no máximo 1000 números, todos no formato **DDI + Número** e sem repetições. | `["+5511941705630", "+5511999999999"]` |
+
+
+####  Modelo de Resposta
+
+```json response.json
+{
+    "numbersVerified": [
+        {
+            "exists": true,
+            "jid": "5511941705630@s.whatsapp.net",
+            "name": "Gilmar Junior",
+            "number": "+5511941705630"
+        },
+        {
+            "exists": true,
+            "jid": "5511941705630@s.whatsapp.net",
+            "name": "Gilmar Junior",
+            "number": "5511941705630"
+        },
+        {
+            "exists": false,
+            "jid": "11941705630@s.whatsapp.net",
+            "number": "11941705630"
+        },
+        {
+            "exists": false,
+            "jid": "941705630@s.whatsapp.net",
+            "number": "941705630"
+        },
+        {
+            "exists": false,
+            "jid": "11999999999@s.whatsapp.net",
+            "number": "11999999999"
+        }
+    ]
+}
+```
+
+| **Parâmetro**        | **Tipo**   | **Descrição**                                                                                      | **Exemplo**                      |
+|-----------------------|------------|--------------------------------------------------------------------------------------------------|----------------------------------|
+| `numbersVerified`     | `array`    | Lista de números verificados contendo os detalhes de cada número enviado.                        | Ver descrição abaixo            |
+| `numbersVerified[].exists` | `boolean` | Indica se o número está ativo no WhatsApp.                                                       | `true` ou `false`               |
+| `numbersVerified[].jid`    | `string`  | Identificador do número no WhatsApp no formato JID (Jabber ID).                                   | `"5511941705630@s.whatsapp.net"` |
+| `numbersVerified[].name`   | `string`  | Nome associado ao número no WhatsApp (caso exista).                                              | `"Gilmar Junior"`               |
+| `numbersVerified[].number` | `string`  | Número de telefone no formato enviado.                                                           | `"+5511941705630"`              |
+
+####  HTTP Status Codes
+
+| **Status Code** | **Descrição**                                                                          |
+|------------------|----------------------------------------------------------------------------------------|
+| `200`           | Sucesso. A requisição foi processada corretamente.                                     |
+| `400`           | Erro no request. Verifique os parâmetros enviados na requisição.                      |
+| `401`           | Não autorizado. O token de autenticação é inválido ou está ausente.                   |
+| `403`           | Sem permissão. O cliente não possui autorização para acessar este recurso.            |
+| `500`           | Erro interno. As 3 tentativas de request na Evolution falharam.                       |
