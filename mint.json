@@ -67,8 +67,7 @@
         "docs/robbu-api/send-message",
         "docs/robbu-api/verify"
       ]
-    },    
-    
+    },
     {
       "group": "API Documentation",
       "pages": [
@@ -82,6 +81,12 @@
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
       ]
+    }
+  ],
+  "versions": [
+    {
+      "name": "Portugues",
+      "locale": "pt-BR"
     }
   ],
   "footerSocials": {
