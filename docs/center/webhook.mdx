@@ -132,68 +132,42 @@ Os eventos enviados pelo Webhook são estruturados no formato **JSON**, garantin
 	}
 }]
 ```
+### Parâmetros
 
-### Estrtutura dos Campos
+| **Parâmetro**                 | **Tipo**    | **Descrição**                                                                                      | **Exemplo**                      |
+|--------------------------------|-------------|----------------------------------------------------------------------------------------------------|----------------------------------|
+| `message`                     | `object`    | Objeto principal contendo as informações da mensagem.                                              | -                                |
+| `message.receivedAt`          | `string`    | Data e hora em que a mensagem foi recebida (formato ISO 8601).                                     | `"2020-01-31T02:01:03"`         |
+| `message.direction`           | `string`    | Direção da mensagem (`incoming` ou `outgoing`).                                                    | `"incoming"`                    |
+| `message.id`                  | `number`    | Identificador único da mensagem.                                                                   | `13232322244444`                |
+| `message.channel`             | `number`    | Canal pelo qual a mensagem foi enviada.                                                            | `3`                              |
+| `message.text`                | `string`    | Texto da mensagem.                                                                                 | `"Olá, teste whats!"`           |
+| `message.source`              | `object`    | Informações do número de origem da mensagem.                                                       | -                                |
+| `message.source.countryCode`  | `number`    | Código do país do número de origem.                                                                | `55`                            |
+| `message.source.phoneNumber`  | `number`    | Número de telefone de origem.                                                                      | `11999999992`                   |
+| `message.destination`         | `object`    | Informações do número de destino da mensagem.                                                      | -                                |
+| `message.destination.countryCode` | `number` | Código do país do número de destino.                                                               | `55`                            |
+| `message.destination.phoneNumber` | `number` | Número de telefone de destino.                                                                     | `11944497777`                   |
+| `message.location`            | `object`    | Informações de localização associadas à mensagem.                                                  | -                                |
+| `message.location.latitude`   | `number`    | Latitude da localização.                                                                           | `-23.5535317`                   |
+| `message.location.longitude`  | `number`    | Longitude da localização.                                                                          | `-46.6631181`                   |
+| `message.file`                | `object`    | Informações sobre o arquivo enviado na mensagem.                                                   | -                                |
+| `message.file.url`            | `string`    | URL do arquivo enviado.                                                                            | `"http://s.robbu.com.br/arquivo?hash=ROBBU"` |
+| `message.file.name`           | `string`    | Nome do arquivo enviado.                                                                           | `"robbu"`                       |
+| `message.file.extension`      | `string`    | Extensão do arquivo enviado.                                                                       | `"pdf"`                         |
+| `message.contact`             | `object`    | Informações sobre o contato associado à mensagem.                                                  | -                                |
+| `message.contact.robbuid`     | `number`    | Identificador único do contato na Robbu.                                                           | `11111111111`                   |
+| `message.contact.name`        | `string`    | Nome do contato.                                                                                   | `"TESTE ROBBU"`                 |
+| `message.contact.customCode`  | `string`    | Código personalizado do contato.                                                                   | `"1372511"`                     |
+| `message.contact.id`          | `string`    | Identificador único do contato.                                                                    | `"00000000000"`                 |
+| `message.contact.mainWhatsapp` | `object`   | Informações do número principal de WhatsApp do contato.                                            | -                                |
+| `message.contact.mainWhatsapp.countryCode` | `number` | Código do país do número principal de WhatsApp.                                                    | `55`                            |
+| `message.contact.mainWhatsapp.phoneNumber` | `number` | Número principal de WhatsApp.                                                                      | `11999999992`                   |
+| `message.contact.mainSMS`     | `object`    | Informações do número principal de SMS do contato.                                                 | -                                |
+| `message.contact.mainSMS.countryCode` | `number` | Código do país do número principal de SMS.                                                         | `55`                            |
+| `message.contact.mainSMS.phoneNumber` | `number` | Número principal de SMS.                                                                           | `11999999992`                   |
+| `message.contact.mainEmail`   | `string`    | E-mail principal do contato.                                                                       | `"teste@robbu.global"`          |
 
-| **Campo**                         | **Descrição**                                                       | **Tipo**        |
-|--------------------------------------|------------------------------------------------------------------|-----------------|
-| `MessageSentToProviderAt`            | Data e Hora do envio da mensagem ao provedor                     | `Datetime`      |
-| `MessageDeliveredAt`                 | Data e Hora de entrega da mensagem                               | `Datetime`      |
-| `MessageReadAt`                      | Data e Hora da leitura da mensagem                               | `Datetime`      |
-| `MessageFailedAt`                    | Data e Hora da falha na entrega da mensagem                      | `Datetime`      |
-| `MessagemSentAt`                     | Data e Hora do envio da mensagem                                 | `Datetime`      |
-| `MessageReceivedAt`                  | Data e Hora do recebimento da mensagem                           | `Datetime`      |
-| `MessageCampaignid`                  | Id da campanha                                                   | `Int`           |
-| `MessageType`                        | Tipo do envio da mensagem                                        | `String`        |
-| `MessageDirection`                   | Informa se a mensagem é Outcoming (Saída) ou Incoming (Entrada)  | `String`        |
-| `MessageId`                          | Id da Mensagem                                                   | `Long`          |
-| `MessageChannel`                     | Enumerador referente à mensagem.                                 | `Int`           |
-|                                      | 1 – E-mail                                                       |                 |
-|                                      | 2 – SMS                                                          |                 |
-|                                      | 3 – Whatsapp                                                     |                 |
-|                                      | 4 – Chat                                                         |                 |
-|                                      | 5 – Facebook                                                     |                 |
-|                                      | 6 – Telegram                                                     |                 |
-|                                      | 7 – Voz                                                          |                 |
-|                                      | 8 – Instagram                                                    |                 |
-|                                      | 9 – Viber                                                        |                 |
-| `MessageText`                        | Texto da mensagem                                                | `String`        |
-| `MessageSourceCountryCode`           | Código do país do remetente                                      | `Int`           |
-| `MessageSourcePhoneNumber`           | Número de telefone do remetente                                  | `Long`          |
-| `MessageSourceEmail`                 | Email do remetente                                               | `String`        |
-| `MessageDestinationCountryCode`      | Código do país do destinatário                                   | `Int`           |
-| `MessageDestinationPhoneNumber`      | Número de telefone do destinatário                               | `Long`          |
-| `MessageDestinationEmail`            | Email do destinatário                                            | `String`        |
-| `ContactRobbuId`                     | ID do contato na Robbu                                           | `Long`          |
-| `ContactName`                        | Nome do contato                                                  | `String`        |
-| `ContactID`                          | Id do contato                                                    | `String`        |
-| `ContactCustomCode`                  | Código do cliente do contato                                     | `String`        |
-| `ContactMainEmail`                   | Email principal do contato                                       | `String`        |
-| `ContactMainWhatsAppCountryCode`     | Código do país da linha principal do WhatsApp do contato         | `Int`           |
-| `ContactMainWhatsAppPhoneNumber`     | Número de telefone principal de WhatsApp do contato              | `Long`          |
-| `ContactMainSmsCountryCode`          | Código do país da linha principal de SMS do contato              | `Int`           |
-| `ContactMainSmsPhoneNumber`          | Número de telefone principal de SMS do contato                   | `Long`          |
-| `QueueWaitingSince`                  | Data e Hora de início da espera do contato na fila da operação   | `Datetime`      |
-| `QueueFirstAnswerAt`                 | Data e Hora da primeira resposta ao contato                      | `Datetime`      |
-| `ContactLastWalletCode`              | Código do último segmento do contato                             | `String`        |
-| `ContactLastWalletName`              | Nome do último segmento do contato                               | `String`        |
-| `ContactLastChannelDescripton`       | Descrição do último canal do contato                             | `String`        |
-| `ContactCreatedAt`                   | Data e Hora da inclusão do contato                               | `Datetime`      |
-| `ContactLastAnswearAt`               | Data e Hora da última mensagem enviada ao contato pela operação  | `Datetime`      |
-| `ContactLastIncomingMessageAt`       | Data e Hora da última mensagem recebida pelo contato             | `Datetime`      |
-| `DigitalPostman`                     | Informa se o envio é via Carteiro Digital                        | `Bool`          |
-| `LocationLatitude`                   | Latitude da localização                                          | `Double`        |
-| `LocationLongitude`                  | Longitude da localização                                         | `Double`        |
-| `FileUrl`                            | URL do arquivo                                                   | `String`        |
-| `FileName`                           | Nome do arquivo                                                  | `String`        |
-| `FileExtension`                      | Extensão do arquivo                                              | `String`        |
-| `ProtocolMessageId`                  | Id do Protocolo                                                  | `Long`          |
-| `ProtocolMessageNumber`              | Número do Protocolo                                              | `String`        |
-| `MessageErrorCode`                   | Código da falha na entrega da mensagem                           | `String`        |
-| `ErrorMessage`                       | Descrição da mensagem de erro                                    | `String`        |
-| `MessageChannelDescription`          | Descrição do Canal                                               | `String`        |
-| `MessageTemplateName`                | Nome do Template                                                 | `String`        |
-| `MessageTemplateId`                  | Id do Template                                                   | `Long`          |
 
 ## Mensagem de Saída
 

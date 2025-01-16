@@ -43,7 +43,13 @@
       "pages": [
         "docs/accounts/sso"
       ]
-    },    
+    },
+    {
+      "group": "Center",
+      "pages": [
+        "docs/center/webhook"
+      ]
+    },
     {
       "group": "Robbu APIs",
       "pages": [
