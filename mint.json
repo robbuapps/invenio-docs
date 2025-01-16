@@ -39,6 +39,12 @@
   ],
   "navigation": [
     {
+      "group": "Autenticação e Contas",
+      "pages": [
+        "docs/accounts/sso"
+      ]
+    },    
+    {
       "group": "Robbu APIs",
       "pages": [
         "docs/robbu-api/auth",

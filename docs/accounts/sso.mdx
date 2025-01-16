@@ -1,0 +1,56 @@
+---
+title: "Single-Sign On"
+sidebarTitle: "Single-Sign On"
+description: "A plataforma Invenio by Robbu atualmente suporta autenticação Single Sign-On (SSO) exclusivamente por meio da integração com o Azure Entra ID. Estamos avaliando a possibilidade de expandir o suporte para os padrões de integração OpenID Connect e SAML no futuro, permitindo maior flexibilidade para integrar com diferentes provedores de identidade que utilizam esses protocolos."
+---
+
+## Entra Id
+Esta seção fornece instruções passo a passo para configurar o Entra ID como provedor de identidade para Single Sign-On (SSO) entre a sua empresa e o Invenio.
+
+### Configurando um Aplicativo no Microsoft Entra Id
+<Steps>
+  <Step title="Criando um Aplicativo no Microsoft Entra Id">
+    1. Acesse o Portal do Azure
+    2. Navegue até o menu Microsoft Entra Id
+    3. Clique em App Registrations
+    4. Clique em New Registration
+  </Step>
+  <Step title="Configurando o seu Aplicativo do Microsoft Entra Id">
+    1. De um nome para o seu aplicativo. Ex.: Robbu Invenio SSO
+    2. Marque a opção "Accounts in this organizational directory only (Company only - Single tenant)"
+    3. Em Redirect URI, escolha a opção Web e entre com a seguinte URL de redirecionamento 
+    ```
+    https://api.invenio.common.robbu.global/v1/login/sso/authentication
+    ```
+    4. Clique em Save
+  </Step>
+  <Step title="Habilitando Access Tokens e Id Tokens">
+    1. Clique em Authentication no menu lateral
+    2. Habilite os dois checkboxes na guia Implicit grant and hybrid flows<br />
+    ✅ Access tokens (used for implicit flows) <br />
+    ✅ ID tokens (used for implicit and hybrid flows)
+  </Step>
+  <Step title="Obtendo o Application Id">
+    Assim que todas as etapas acima estiverem finalizadas, iremos obter o Application Id do nosso Aplicativo no Microsoft Entra Id, este código será o responsável por fazer a ponte entre a Robbu e o seu Microsoft Entra Id.
+    1. Clique no menu lateral Overview
+    2. Copie o valor do campo Application (client) ID
+  </Step>  
+</Steps>
+
+<AccordionGroup>
+  <Accordion title="O que é o Single Sign-On (SSO) e como ele funciona na plataforma da Robbu?">
+    O Single Sign-On (SSO) permite que os usuários se autentiquem na plataforma da Robbu utilizando suas credenciais corporativas já configuradas no Microsoft Entra ID, sem a necessidade de criar e gerenciar novas credenciais na aplicação.
+  </Accordion>
+
+  <Accordion title="Posso usar outro provedor de identidade além do Microsoft Entra ID para SSO?">
+    Atualmente, a plataforma da Robbu suporta exclusivamente o Microsoft Entra ID para autenticação SSO. Estamos avaliando a possibilidade de adicionar suporte aos padrões OpenID Connect e SAML no futuro.  
+    </Accordion>
+
+  <Accordion title="A Robbu oferece suporte para problemas durante a configuração do SSO?">
+    Sim, caso encontre dificuldades na configuração do SSO com o Microsoft Entra ID, você pode entrar em contato com o suporte técnico da Robbu para obter assistência.
+  </Accordion>
+
+    <Accordion title="Quais permissões são necessárias para criar e configurar o aplicativo no Microsoft Entra ID?">
+    Você precisa de permissões administrativas no portal do Azure para criar e gerenciar aplicativos no Microsoft Entra ID.
+  </Accordion>
+</AccordionGroup>
