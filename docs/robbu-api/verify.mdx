@@ -22,8 +22,104 @@ Para usar a API, você deve realizar uma requisição `POST` para o endpoint `/v
 ```
 https://api.robbu.global/v1/verify
 ```
+####  Autenticação
+Para acessar os endpoints da API da Robbu, você precisa autenticar suas requisições utilizando dois tipos de token:
+
+1. PrivateToken: Um token de acesso privado fornecido pela Robbu.
+2. Authorization: Um token no formato `Bearer` que valida sua identidade.
+
+Ambos os tokens devem ser incluídos como cabeçalhos na requisição HTTP.
+
+<Tip>Clique <a href="https://inveniocenter.robbu.global/painel/configuracoes/conta" target="_blank">aqui</a> para obter o Private Token do seu ambiente.</Tip>
 
 ####  Modelo de Requisição
+
+#####  Headers
+
+<ParamField header="PrivateToken" type="string" placeholder="Teste" required="true">
+29d08afc-a349-42b8-995a-562242264357
+</ParamField>
+
+<ParamField header="Authentication" type="string" placeholder="Bearer" required="true">
+Bearer MEU_TOKEN
+</ParamField>
+
+#####  Body
+
+<ParamField body="PhoneNumbers" type="array" required>
+  Lista de números de telefone para validação. Deve conter no máximo 1000 números, todos no formato **DDI + Número** e sem repetições. | `["+5511941705630", "+5511999999999"]`
+</ParamField>
+
+#####  Exemplo
+
+<CodeGroup>
+
+```bash Curl
+curl --location 'https://api.robbu.global/v1/verify' \
+--header 'Content-Type: application/json' \
+--header 'PrivateToken: teste' \
+--header 'Authorization: Bearer MEU_TOKEN' \
+--data '{
+    "PhoneNumbers": [
+        "14128880043",
+        "56971332420",
+        "17077878069",
+        "18176475163",
+        "50431999232",
+        "51941700660",
+        "18057965469",
+        "18402846702",
+        "15097929172"
+    ]
+}
+```
+
+```csharp C# HttpClient
+var client = new HttpClient();
+var request = new HttpRequestMessage(HttpMethod.Post, "https://api.robbu.global/v1/verify");
+request.Headers.Add("PrivateToken", "teste");
+request.Headers.Add("Authorization", "Bearer MEU_TOKEN");
+var content = new StringContent("{\n    \"PhoneNumbers\": [\n        \"14128880043\",\n        \"56971332420\",\n        \"17077878069\",\n        \"18176475163\",\n        \"50431999232\",\n        \"51941700660\",\n        \"18057965469\",\n        \"18402846702\",\n        \"15097929172\"\n    ]\n}\n", null, "application/json");
+request.Content = content;
+var response = await client.SendAsync(request);
+response.EnsureSuccessStatusCode();
+Console.WriteLine(await response.Content.ReadAsStringAsync());
+```
+
+```js JavaScript XHR
+// WARNING: For POST requests, body is set to null by browsers.
+var data = JSON.stringify({
+  "PhoneNumbers": [
+    "14128880043",
+    "56971332420",
+    "17077878069",
+    "18176475163",
+    "50431999232",
+    "51941700660",
+    "18057965469",
+    "18402846702",
+    "15097929172"
+  ]
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://api.robbu.global/v1/verify");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("PrivateToken", "teste");
+xhr.setRequestHeader("Authorization", "Bearer MEU_TOKEN");
+
+xhr.send(data);
+```
+
+</CodeGroup>
 
 ```json request.json
 {
@@ -37,11 +133,6 @@ https://api.robbu.global/v1/verify
 }
 ```
 
-| **Parâmetro**    | **Tipo**  | **Obrigatório** | **Descrição**                                  | **Exemplo**           |
-|-------------------|-----------|-----------------|-----------------------------------------------|-----------------------|
-| `PhoneNumbers`    | `array`   | Sim             | Lista de números de telefone para validação. Deve conter no máximo 1000 números, todos no formato **DDI + Número** e sem repetições. | `["+5511941705630", "+5511999999999"]` |
-
-
 ####  Modelo de Resposta
 
 ```json response.json
@@ -49,14 +140,14 @@ https://api.robbu.global/v1/verify
     "numbersVerified": [
         {
             "exists": true,
-            "jid": "5511941705630@s.whatsapp.net",
-            "name": "Gilmar Junior",
+            "jid": "5511456789789@s.whatsapp.net",
+            "name": "Mauricio da Silva",
             "number": "+5511941705630"
         },
         {
             "exists": true,
-            "jid": "5511941705630@s.whatsapp.net",
-            "name": "Gilmar Junior",
+            "jid": "5511456789789@s.whatsapp.net",
+            "name": "Joao Teste",
             "number": "5511941705630"
         },
         {
@@ -104,12 +195,11 @@ https://api.robbu.global/v1/verify
   </Accordion>
 
   <Accordion title="Como posso habilitar o Robbu Verify na minha conta?">
-    Você precisa entrar em contato com a equipe comercial da Robbu para ativar o serviço na sua conta.
+    Você precisa entrar em contato com o seu Gerente de Contas da Robbu para ativar o serviço na sua conta.
     </Accordion>
 
   <Accordion title="Existe algum custo para usar o Robbu Verify?">
-Entre em contato com a equipe comercial da Robbu para detalhes sobre custos e planos disponíveis.
-
+    Entre em contato com a equipe comercial da Robbu para detalhes sobre custos e planos disponíveis.
   </Accordion>
 
 </AccordionGroup>
