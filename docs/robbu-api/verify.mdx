@@ -37,7 +37,7 @@ Ambos os tokens devem ser incluídos como cabeçalhos na requisição HTTP.
 #####  Headers
 
 <ParamField header="PrivateToken" type="string" placeholder="Teste" required="true">
-29d08afc-a349-42b8-995a-562242264357
+29d08afc-a349-42b8-995a-562242999
 </ParamField>
 
 <ParamField header="Authentication" type="string" placeholder="Bearer" required="true">
@@ -47,7 +47,7 @@ Bearer MEU_TOKEN
 #####  Body
 
 <ParamField body="PhoneNumbers" type="array" required>
-  Lista de números de telefone para validação. Deve conter no máximo 1000 números, todos no formato **DDI + Número** e sem repetições. | `["+5511941705630", "+5511999999999"]`
+  Lista de números de telefone para validação. Deve conter no máximo 1000 números, todos no formato **DDI + Número** e sem repetições. | `["+5511941709999", "+5511999999999"]`
 </ParamField>
 
 #####  Exemplo
@@ -124,10 +124,10 @@ xhr.send(data);
 ```json request.json
 {
     "PhoneNumbers": [
-        "+5511941705630",
-        "5511941705630",
-        "11941705630",
-        "941705630",
+        "+5511941709999",
+        "5511941709999",
+        "11941709999",
+        "941709999",
         "11999999999"
     ]
 }
@@ -140,25 +140,25 @@ xhr.send(data);
     "numbersVerified": [
         {
             "exists": true,
-            "jid": "5511456789789@s.whatsapp.net",
+            "jid": "551145679999@s.whatsapp.net",
             "name": "Mauricio da Silva",
-            "number": "+5511941705630"
+            "number": "+5511941709999"
         },
         {
             "exists": true,
-            "jid": "5511456789789@s.whatsapp.net",
+            "jid": "551145679999@s.whatsapp.net",
             "name": "Joao Teste",
-            "number": "5511941705630"
+            "number": "5511941709999"
         },
         {
             "exists": false,
-            "jid": "11941705630@s.whatsapp.net",
-            "number": "11941705630"
+            "jid": "119417099990@s.whatsapp.net",
+            "number": "11941709999"
         },
         {
             "exists": false,
-            "jid": "941705630@s.whatsapp.net",
-            "number": "941705630"
+            "jid": "941709999@s.whatsapp.net",
+            "number": "941709999"
         },
         {
             "exists": false,
@@ -173,9 +173,9 @@ xhr.send(data);
 |-----------------------|------------|--------------------------------------------------------------------------------------------------|----------------------------------|
 | `numbersVerified`     | `array`    | Lista de números verificados contendo os detalhes de cada número enviado.                        | Ver descrição abaixo            |
 | `numbersVerified[].exists` | `boolean` | Indica se o número está ativo no WhatsApp.                                                       | `true` ou `false`               |
-| `numbersVerified[].jid`    | `string`  | Identificador do número no WhatsApp no formato JID (Jabber ID).                                   | `"5511941705630@s.whatsapp.net"` |
-| `numbersVerified[].name`   | `string`  | Nome associado ao número no WhatsApp (caso exista).                                              | `"Gilmar Junior"`               |
-| `numbersVerified[].number` | `string`  | Número de telefone no formato enviado.                                                           | `"+5511941705630"`              |
+| `numbersVerified[].jid`    | `string`  | Identificador do número no WhatsApp no formato JID (Jabber ID).                                   | `"5511941709999@s.whatsapp.net"` |
+| `numbersVerified[].name`   | `string`  | Nome associado ao número no WhatsApp (caso exista).                                              | `"Usuario Teste"`               |
+| `numbersVerified[].number` | `string`  | Número de telefone no formato enviado.                                                           | `"+5511941709999"`              |
 
 ####  HTTP Status Codes
 
