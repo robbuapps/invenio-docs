@@ -55,7 +55,8 @@
       "pages": [
         "docs/robbu-api/auth",
         "docs/robbu-api/send-message",
-        "docs/robbu-api/verify"
+        "docs/robbu-api/verify",
+        "docs/robbu-api/idr-external-flow"
       ]
     }
   ],

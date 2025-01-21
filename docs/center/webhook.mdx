@@ -16,6 +16,19 @@ Agora que entendemos o conceito de Webhooks, vamos explorar como o Invenio utili
 
 Imagine o **Webhook do Invenio** como um mensageiro automático que trabalha nos bastidores para avisar o seu sistema sobre o que está acontecendo na plataforma Invenio, em tempo real. Aqui estão exemplos simples de como ele funciona:
 
+```mermaid
+sequenceDiagram
+    participant UsuarioFinal as Usuário Final
+    participant Invenio as Invenio (Sistema)
+    participant Cliente as Cliente (Aplicação)
+
+    UsuarioFinal->>Invenio: Envia mensagem (Texto/Arquivo/Localização)
+    Invenio->>Cliente: Dispara Webhook com dados da mensagem
+    Cliente-->>Invenio: Retorna resposta (HTTP 200/erro)
+    Cliente->>Invenio: Opcional: Envia instruções para resposta automática
+    Invenio->>UsuarioFinal: Responde mensagem ou exibe notificação
+```
+
 1. **Mensagens enviadas:**
 Assim que o Invenio envia uma mensagem (por exemplo, um WhatsApp para um cliente), ele avisa seu sistema se a mensagem foi entregue com sucesso ou se houve algum problema.
 
@@ -75,103 +88,9 @@ Os eventos enviados pelo Webhook são estruturados no formato **JSON**, garantin
 
 ---
 
-### Eventos
+## Mensagem de Saida
 
-1. **Mensagens enviadas**: Inclui atualizações sobre o status de entrega.  
-2. **Mensagens recebidas**: Inclui atualizações sobre o status de recebimento.  
-3. **Eventos de KPI**: Registro de indicadores inseridos no ambiente, seja por usuários ou pelo sistema.  
-4. **Campanhas**: Atualizações sobre o status e progresso das campanhas.  
-5. **Carteiras**: Notificações sobre alterações ou edições nas configurações de carteiras.  
-6. **Templates HSM**: Atualizações sobre status, qualidade e alterações realizadas nos templates.  
-7. **Linhas WhatsApp**: Informações sobre o status, qualidade e mudanças relacionadas às linhas.  
-8. **Usuários**: Registro de relações, logs e alterações feitas nos perfis.  
-9. **Protocolos**: Estatísticas e dados detalhados relacionados aos protocolos gerados.  
-
-## Mensagem de Entrada
-
-```json message-incoming.json
-[{
-	"message": {
-		"receivedAt": "2020-01-31T02:01:03",
-		"direction": "incoming",
-		"id": 13232322244444,
-		"channel": 3,
-		"text": "Olá, teste whats!",
-		"source": {
-			"countryCode": 55,
-			"phoneNumber": 11999999992
-		},
-		"destination": {
-			"countryCode": 55,
-			"phoneNumber": 11944497777
-		},
-		"location": {
-			"latitude": -23.5535317,
-			"longitude": -46.6631181
-		},
-		"file": {
-			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
-			"name": "robbu",
-			"extension": "pdf"
-		},
-		"contact": {
-			"robbuid": 11111111111,
-			"name": "TESTE ROBBU",
-			"customCode": "1372511",
-			"id": "00000000000",
-			"mainWhatsapp": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainSMS": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainEmail": "teste@robbu.global"
-		}
-	}
-}]
-```
-### Parâmetros
-
-| **Parâmetro**                 | **Tipo**    | **Descrição**                                                                                      | **Exemplo**                      |
-|--------------------------------|-------------|----------------------------------------------------------------------------------------------------|----------------------------------|
-| `message`                     | `object`    | Objeto principal contendo as informações da mensagem.                                              | -                                |
-| `message.receivedAt`          | `string`    | Data e hora em que a mensagem foi recebida (formato ISO 8601).                                     | `"2020-01-31T02:01:03"`         |
-| `message.direction`           | `string`    | Direção da mensagem (`incoming` ou `outgoing`).                                                    | `"incoming"`                    |
-| `message.id`                  | `number`    | Identificador único da mensagem.                                                                   | `13232322244444`                |
-| `message.channel`             | `number`    | Canal pelo qual a mensagem foi enviada.                                                            | `3`                              |
-| `message.text`                | `string`    | Texto da mensagem.                                                                                 | `"Olá, teste whats!"`           |
-| `message.source`              | `object`    | Informações do número de origem da mensagem.                                                       | -                                |
-| `message.source.countryCode`  | `number`    | Código do país do número de origem.                                                                | `55`                            |
-| `message.source.phoneNumber`  | `number`    | Número de telefone de origem.                                                                      | `11999999992`                   |
-| `message.destination`         | `object`    | Informações do número de destino da mensagem.                                                      | -                                |
-| `message.destination.countryCode` | `number` | Código do país do número de destino.                                                               | `55`                            |
-| `message.destination.phoneNumber` | `number` | Número de telefone de destino.                                                                     | `11944497777`                   |
-| `message.location`            | `object`    | Informações de localização associadas à mensagem.                                                  | -                                |
-| `message.location.latitude`   | `number`    | Latitude da localização.                                                                           | `-23.5535317`                   |
-| `message.location.longitude`  | `number`    | Longitude da localização.                                                                          | `-46.6631181`                   |
-| `message.file`                | `object`    | Informações sobre o arquivo enviado na mensagem.                                                   | -                                |
-| `message.file.url`            | `string`    | URL do arquivo enviado.                                                                            | `"http://s.robbu.com.br/arquivo?hash=ROBBU"` |
-| `message.file.name`           | `string`    | Nome do arquivo enviado.                                                                           | `"robbu"`                       |
-| `message.file.extension`      | `string`    | Extensão do arquivo enviado.                                                                       | `"pdf"`                         |
-| `message.contact`             | `object`    | Informações sobre o contato associado à mensagem.                                                  | -                                |
-| `message.contact.robbuid`     | `number`    | Identificador único do contato na Robbu.                                                           | `11111111111`                   |
-| `message.contact.name`        | `string`    | Nome do contato.                                                                                   | `"TESTE ROBBU"`                 |
-| `message.contact.customCode`  | `string`    | Código personalizado do contato.                                                                   | `"1372511"`                     |
-| `message.contact.id`          | `string`    | Identificador único do contato.                                                                    | `"00000000000"`                 |
-| `message.contact.mainWhatsapp` | `object`   | Informações do número principal de WhatsApp do contato.                                            | -                                |
-| `message.contact.mainWhatsapp.countryCode` | `number` | Código do país do número principal de WhatsApp.                                                    | `55`                            |
-| `message.contact.mainWhatsapp.phoneNumber` | `number` | Número principal de WhatsApp.                                                                      | `11999999992`                   |
-| `message.contact.mainSMS`     | `object`    | Informações do número principal de SMS do contato.                                                 | -                                |
-| `message.contact.mainSMS.countryCode` | `number` | Código do país do número principal de SMS.                                                         | `55`                            |
-| `message.contact.mainSMS.phoneNumber` | `number` | Número principal de SMS.                                                                           | `11999999992`                   |
-| `message.contact.mainEmail`   | `string`    | E-mail principal do contato.                                                                       | `"teste@robbu.global"`          |
-
-
-## Mensagem de Saída
-
-```json message-outgoing.json
+```json
 [{
 	"message": {
 		"sentAt": "2020-01-31T02:05:21.2900000",
@@ -218,67 +137,448 @@ Os eventos enviados pelo Webhook são estruturados no formato **JSON**, garantin
 }]
 ```
 
-### Estrtutura dos Campos
+### Estrutura dos Campos
 
-| **Campo**                         | **Descrição**                                                       | **Tipo**        |
-|--------------------------------------|------------------------------------------------------------------|-----------------|
-| `MessageSentToProviderAt`            | Data e Hora do envio da mensagem ao provedor                     | `Datetime`      |
-| `MessageDeliveredAt`                 | Data e Hora de entrega da mensagem                               | `Datetime`      |
-| `MessageReadAt`                      | Data e Hora da leitura da mensagem                               | `Datetime`      |
-| `MessageFailedAt`                    | Data e Hora da falha na entrega da mensagem                      | `Datetime`      |
-| `MessagemSentAt`                     | Data e Hora do envio da mensagem                                 | `Datetime`      |
-| `MessageReceivedAt`                  | Data e Hora do recebimento da mensagem                           | `Datetime`      |
-| `MessageCampaignid`                  | Id da campanha                                                   | `Int`           |
-| `MessageType`                        | Tipo do envio da mensagem                                        | `String`        |
-| `MessageDirection`                   | Informa se a mensagem é Outcoming (Saída) ou Incoming (Entrada)  | `String`        |
-| `MessageId`                          | Id da Mensagem                                                   | `Long`          |
-| `MessageChannel`                     | Enumerador referente à mensagem.                                 | `Int`           |
-|                                      | 1 – E-mail                                                       |                 |
-|                                      | 2 – SMS                                                          |                 |
-|                                      | 3 – Whatsapp                                                     |                 |
-|                                      | 4 – Chat                                                         |                 |
-|                                      | 5 – Facebook                                                     |                 |
-|                                      | 6 – Telegram                                                     |                 |
-|                                      | 7 – Voz                                                          |                 |
-|                                      | 8 – Instagram                                                    |                 |
-|                                      | 9 – Viber                                                        |                 |
-| `MessageText`                        | Texto da mensagem                                                | `String`        |
-| `MessageSourceCountryCode`           | Código do país do remetente                                      | `Int`           |
-| `MessageSourcePhoneNumber`           | Número de telefone do remetente                                  | `Long`          |
-| `MessageSourceEmail`                 | Email do remetente                                               | `String`        |
-| `MessageDestinationCountryCode`      | Código do país do destinatário                                   | `Int`           |
-| `MessageDestinationPhoneNumber`      | Número de telefone do destinatário                               | `Long`          |
-| `MessageDestinationEmail`            | Email do destinatário                                            | `String`        |
-| `ContactRobbuId`                     | ID do contato na Robbu                                           | `Long`          |
-| `ContactName`                        | Nome do contato                                                  | `String`        |
-| `ContactID`                          | Id do contato                                                    | `String`        |
-| `ContactCustomCode`                  | Código do cliente do contato                                     | `String`        |
-| `ContactMainEmail`                   | Email principal do contato                                       | `String`        |
-| `ContactMainWhatsAppCountryCode`     | Código do país da linha principal do WhatsApp do contato         | `Int`           |
-| `ContactMainWhatsAppPhoneNumber`     | Número de telefone principal de WhatsApp do contato              | `Long`          |
-| `ContactMainSmsCountryCode`          | Código do país da linha principal de SMS do contato              | `Int`           |
-| `ContactMainSmsPhoneNumber`          | Número de telefone principal de SMS do contato                   | `Long`          |
-| `QueueWaitingSince`                  | Data e Hora de início da espera do contato na fila da operação   | `Datetime`      |
-| `QueueFirstAnswerAt`                 | Data e Hora da primeira resposta ao contato                      | `Datetime`      |
-| `ContactLastWalletCode`              | Código do último segmento do contato                             | `String`        |
-| `ContactLastWalletName`              | Nome do último segmento do contato                               | `String`        |
-| `ContactLastChannelDescripton`       | Descrição do último canal do contato                             | `String`        |
-| `ContactCreatedAt`                   | Data e Hora da inclusão do contato                               | `Datetime`      |
-| `ContactLastAnswearAt`               | Data e Hora da última mensagem enviada ao contato pela operação  | `Datetime`      |
-| `ContactLastIncomingMessageAt`       | Data e Hora da última mensagem recebida pelo contato             | `Datetime`      |
-| `DigitalPostman`                     | Informa se o envio é via Carteiro Digital                        | `Bool`          |
-| `LocationLatitude`                   | Latitude da localização                                          | `Double`        |
-| `LocationLongitude`                  | Longitude da localização                                         | `Double`        |
-| `FileUrl`                            | URL do arquivo                                                   | `String`        |
-| `FileName`                           | Nome do arquivo                                                  | `String`        |
-| `FileExtension`                      | Extensão do arquivo                                              | `String`        |
-| `ProtocolMessageId`                  | Id do Protocolo                                                  | `Long`          |
-| `ProtocolMessageNumber`              | Número do Protocolo                                              | `String`        |
-| `MessageErrorCode`                   | Código da falha na entrega da mensagem                           | `String`        |
-| `ErrorMessage`                       | Descrição da mensagem de erro                                    | `String`        |
-| `MessageChannelDescription`          | Descrição do Canal                                               | `String`        |
-| `MessageTemplateName`                | Nome do Template                                                 | `String`        |
-| `MessageTemplateId`                  | Id do Template                                                   | `Long`          |
+<ResponseField name="message" type="Message Object">
+  <Expandable title="properties">
+    <ResponseField name="sentAt" type="datetime">
+      Data e Hora do envio da mensagem.
+    </ResponseField>
+
+    <ResponseField name="direction" type="string">
+      Direção da mensagem. Pode ser "outgoing" (saída).
+    </ResponseField>
+
+    <ResponseField name="id" type="long">
+      ID único da mensagem, calculado como (@IdMensagem * 1024) + (cast(@IdCanal as bigint) * 1000000000000000).
+    </ResponseField>
+
+    <ResponseField name="channel" type="int">
+      ID do canal utilizado para a mensagem.
+    </ResponseField>
+
+    <ResponseField name="channelDescription" type="string">
+      Descrição do canal utilizado para a mensagem.
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Tipo de mensagem (e.g., LONGCODE ou SHORTCODE para SMS). Este campo é específico para o canal 2.
+    </ResponseField>
+
+    <ResponseField name="text" type="string">
+      Texto da mensagem.
+    </ResponseField>
+
+    <ResponseField name="campaignId" type="long">
+      ID da campanha associada à mensagem.
+    </ResponseField>
+
+    <ResponseField name="digitalPostman" type="bool">
+      Indica se o envio foi realizado via Carteiro Digital.
+    </ResponseField>
+
+    <ResponseField name="templateName" type="string">
+      Nome do template associado à mensagem.
+    </ResponseField>
+
+    <ResponseField name="templateId" type="long">
+      ID do template associado à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.source" type="Source Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país do remetente.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do remetente.
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Email do remetente.
+    </ResponseField>
+
+    <ResponseField name="sender" type="string">
+      Nome do remetente.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.destination" type="Destination Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país do destinatário.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do destinatário.
+    </ResponseField>
+
+    <ResponseField name="provider" type="string">
+      Provedor do destinatário.
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Email do destinatário.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.file" type="File Object">
+  <Expandable title="properties">
+    <ResponseField name="url" type="string">
+      URL do arquivo associado à mensagem.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Nome do arquivo associado à mensagem.
+    </ResponseField>
+
+    <ResponseField name="extension" type="string">
+      Extensão do arquivo associado à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.contact" type="Contact Object">
+  <Expandable title="properties">
+    <ResponseField name="robbuid" type="long">
+      ID do contato na Robbu.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Nome do contato.
+    </ResponseField>
+
+    <ResponseField name="createdAt" type="datetime">
+      Data e Hora da criação do contato.
+    </ResponseField>
+
+    <ResponseField name="lastAnswerAt" type="datetime">
+      Data e Hora da última resposta enviada ao contato.
+    </ResponseField>
+
+    <ResponseField name="lastIncomingMessageAt" type="datetime">
+      Data e Hora da última mensagem recebida do contato.
+    </ResponseField>
+
+    <ResponseField name="lastChannelDescription" type="string">
+      Descrição do último canal utilizado pelo contato.
+    </ResponseField>
+
+    <ResponseField name="customCode" type="string">
+      Código personalizado do contato.
+    </ResponseField>
+
+    <ResponseField name="id" type="string">
+      Identificador do contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletId" type="long">
+      ID da última carteira do contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletCode" type="string">
+      Código da última carteira do contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletName" type="string">
+      Nome da última carteira do contato.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.mainWhatsapp" type="Whatsapp Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país do WhatsApp principal do contato.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do WhatsApp principal do contato.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.mainSMS" type="SMS Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país do SMS principal do contato.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do SMS principal do contato.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.queue" type="Queue Object">
+  <Expandable title="properties">
+    <ResponseField name="waitingSince" type="datetime">
+      Data e Hora do início da espera do contato na fila.
+    </ResponseField>
+
+    <ResponseField name="firstAnswerAt" type="datetime">
+      Data e Hora da primeira resposta ao contato.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.protocol" type="Protocol Object">
+  <Expandable title="properties">
+    <ResponseField name="number" type="string">
+      Número do protocolo associado à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="message.buttons" type="Button Object">
+  <Expandable title="properties">
+    <ResponseField name="additionalData" type="string">
+      Dados adicionais relacionados aos botões da mensagem (caso aplicável).
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+
+## Mensagem de Entrada
+
+```json
+[{
+	"message": {
+		"receivedAt": "2020-01-31T02:01:03",
+		"direction": "incoming",
+		"id": 13232322244444,
+		"channel": 3,
+		"text": "Olá, teste whats!",
+		"source": {
+			"countryCode": 55,
+			"phoneNumber": 11999999992
+		},
+		"destination": {
+			"countryCode": 55,
+			"phoneNumber": 11944497777
+		},
+		"location": {
+			"latitude": -23.5535317,
+			"longitude": -46.6631181
+		},
+		"file": {
+			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
+			"name": "robbu",
+			"extension": "pdf"
+		},
+		"contact": {
+			"robbuid": 11111111111,
+			"name": "TESTE ROBBU",
+			"customCode": "1372511",
+			"id": "00000000000",
+			"mainWhatsapp": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainSMS": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainEmail": "teste@robbu.global"
+		}
+	}
+}]
+```
+
+### Estrutura dos Campos
+
+<ResponseField name="message" type="Message Object">
+  <Expandable title="properties">
+    <ResponseField name="receivedAt" type="datetime">
+      Data e Hora de recebimento da mensagem, convertida para UTC.
+    </ResponseField>
+
+    <ResponseField name="direction" type="string">
+      Direção da mensagem. Valor fixo: "incoming".
+    </ResponseField>
+
+    <ResponseField name="id" type="long">
+      ID único da mensagem, calculado como (@IdMensagem * 1024) + (cast(@IdCanal as bigint) * 1000000000000000).
+    </ResponseField>
+
+    <ResponseField name="channel" type="int">
+      ID do canal utilizado para a mensagem.
+    </ResponseField>
+
+    <ResponseField name="channelDescription" type="string">
+      Descrição do canal utilizado para a mensagem.
+    </ResponseField>
+
+    <ResponseField name="text" type="string">
+      Texto da mensagem, com caracteres HTML decodificados.
+    </ResponseField>
+
+    <ResponseField name="digitalPostman" type="bool">
+      Indica se a mensagem foi recebida via Carteiro Digital.
+    </ResponseField>
+
+    <ResponseField name="contextMessageId" type="long">
+      ID da mensagem de contexto associada à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="source" type="Source Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país de origem do remetente.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do remetente, formatado com DDD.
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Endereço de email do remetente.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="destination" type="Destination Object">
+  <Expandable title="properties">
+    <ResponseField name="countryCode" type="int">
+      Código do país de destino do destinatário.
+    </ResponseField>
+
+    <ResponseField name="phoneNumber" type="string">
+      Número de telefone do destinatário, formatado com DDD.
+    </ResponseField>
+
+    <ResponseField name="email" type="string">
+      Endereço de email do destinatário.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="file" type="File Object">
+  <Expandable title="properties">
+    <ResponseField name="url" type="string">
+      URL do arquivo associado à mensagem.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Nome do arquivo associado à mensagem.
+    </ResponseField>
+
+    <ResponseField name="extension" type="string">
+      Extensão do arquivo associado à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="location" type="Location Object">
+  <Expandable title="properties">
+    <ResponseField name="latitude" type="float">
+      Latitude associada à localização da mensagem.
+    </ResponseField>
+
+    <ResponseField name="longitude" type="float">
+      Longitude associada à localização da mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="contact" type="Contact Object">
+  <Expandable title="properties">
+    <ResponseField name="robbuid" type="long">
+      ID único do contato na Robbu, calculado como (@IdPessoa * 1024).
+    </ResponseField>
+
+    <ResponseField name="createdAt" type="datetime">
+      Data e Hora da criação do contato, convertida para UTC.
+    </ResponseField>
+
+    <ResponseField name="lastAnswerAt" type="datetime">
+      Data e Hora da última resposta enviada ao contato, convertida para UTC.
+    </ResponseField>
+
+    <ResponseField name="lastIncomingMessageAt" type="datetime">
+      Data e Hora da última mensagem recebida do contato, convertida para UTC.
+    </ResponseField>
+
+    <ResponseField name="lastChannelDescription" type="string">
+      Descrição do último canal utilizado pelo contato.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Nome do contato, com caracteres HTML decodificados.
+    </ResponseField>
+
+    <ResponseField name="customCode" type="string">
+      Código personalizado do contato.
+    </ResponseField>
+
+    <ResponseField name="id" type="string">
+      Identificador único do contato (e.g., CPF/CNPJ).
+    </ResponseField>
+
+    <ResponseField name="mainWhatsapp" type="Whatsapp Object">
+      <Expandable title="properties">
+        <ResponseField name="countryCode" type="int">
+          Código do país do WhatsApp principal do contato.
+        </ResponseField>
+
+        <ResponseField name="phoneNumber" type="string">
+          Número de telefone do WhatsApp principal do contato.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="mainSMS" type="SMS Object">
+      <Expandable title="properties">
+        <ResponseField name="countryCode" type="int">
+          Código do país do SMS principal do contato.
+        </ResponseField>
+
+        <ResponseField name="phoneNumber" type="string">
+          Número de telefone do SMS principal do contato.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="mainEmail" type="string">
+      Email principal do contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletId" type="long">
+      ID da última carteira associada ao contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletCode" type="string">
+      Código da última carteira associada ao contato.
+    </ResponseField>
+
+    <ResponseField name="lastWalletName" type="string">
+      Nome da última carteira associada ao contato.
+    </ResponseField>
+
+    <ResponseField name="instagram" type="Instagram Object">
+      <Expandable title="properties">
+        <ResponseField name="username" type="string">
+          Nome de usuário no Instagram do contato.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="protocol" type="Protocol Object">
+  <Expandable title="properties">
+    <ResponseField name="number" type="string">
+      Número do protocolo associado à mensagem.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
 
 ## Status de Mensagens
 
