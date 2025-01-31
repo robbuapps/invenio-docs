@@ -1,9 +1,93 @@
 ---
 title: "Carga de Mailing e Campanhas via FTP"
-sidebarTitle: "Carga FTP"
-description: "A integração via Webhook permite o envio de eventos gerados em tempo real pelas plataformas Invenio Center e Invenio Live diretamente para o seu sistema, facilitando a automação e o monitoramento de ações importantes."
+sidebarTitle: "Importação via FTP"
+description: "Como alternativa à importação pelo Invenio Center, também é possível realizar a carga de mailing e geração de campanhas automaticamente por meio do protocolo FTP."
 ---
 
-# Carga de Mailing e Campanhas via FTP
+A importação de mailings e a criação de campanhas podem ser feitas automaticamente através do protocolo FTP. Este documento detalha o processo de configuração e os padrões necessários para garantir o correto funcionamento da importação via FTP.
 
-## Subtitulo
+## 📡 Configuração da Conexão FTP
+
+Para que a importação ocorra corretamente, é necessário configurar a conexão com o servidor FTP.
+
+<img src="https://i0.wp.com/robbu.global/wp-content/uploads/2022/06/Animacao2.gif?resize=768%2C453&ssl=1" />
+
+### 🔧 Parâmetros de Conexão
+
+1. **Acesse as configurações de FTP na plataforma**:
+   - Navegue até: `Configurações > FTP`
+   - Registre as credenciais fornecidas pela equipe de suporte.
+
+2. **Preencha os seguintes campos:**
+   - **Servidor**: Endereço do servidor FTP (exemplo: `ftp.robbu.com.br`).
+   - **Usuário**: Nome de usuário para autenticação.
+   - **Senha**: Senha de acesso.
+   - **Porta**: Padrão `21` para conexões FTP normais.
+   - **Modo de criptografia**: Utilize `'Explícito'` para maior segurança.
+
+3. **Testando a Conexão**
+   - Utilize um cliente FTP (exemplo: `FileZilla`) para validar a conexão.
+   - Confirme o acesso enviando um arquivo de teste.
+
+## 📜 Regras de Nomenclatura dos Arquivos
+
+Os arquivos a serem importados devem seguir uma nomenclatura padronizada. Isso é essencial para que o sistema consiga processá-los corretamente.
+
+### 🏷️ Padrão de Nomenclatura
+
+| Parâmetro                     | Descrição |
+|--------------------------------|-----------|
+| `mailing`                      | Todo documento de importação deverá ser iniciado com o termo `mailing`. |
+| `_DDMMYY`                      | Representa o dia/mês/ano da geração do arquivo. Por segurança o sistema importará apenas os mailings gerados com a data do dia corrente.|
+| `_999`                         | Representa a sequência de geração do arquivo no dia (não pode haver mais de um arquivo com mesma sequência no mesmo dia).|
+| `_cXXXXXXXX`                   | Código da carteira. Se não informado, o arquivo deve estar em uma pasta com o nome da carteira. |
+| `_d`                           | Descrição do mailing. Se não informado, o nome do arquivo será utilizado. Não pode conter `_` (underline). |
+| `_h`                           | Indica que o mailing deve ser higienizado. |
+| `_smslong`                     | Campanha de SMS (longcode) para o mailing. |
+| `_smsshort`                    | Campanha de SMS (shortcode) para o mailing. |
+| `_whatsappexclusivo`           | Campanha de WhatsApp Oficial usando número exclusivo. |
+| `_whatsappcompartilhado`       | Campanha de WhatsApp Oficial usando número compartilhado. |
+| `_nw99999999999`               | Número de WhatsApp Oficial (exclusivo) pelo qual a campanha será enviada. |
+| `_ntXXXXXXXXXXXXXXXX`          | Nome do template a ser utilizado na campanha de WhatsApp Oficial. |
+| `_email`                       | Indica que uma campanha de E-MAIL será realizada para o mailing. |
+| `_ceXXXXXXX@XXXX.XXX.XX`       | Conta de e-mail a ser utilizada na campanha. Se não informado, será usada a conta ativa do cliente ou a conta padrão da Robbu. |
+| `_teXXXXXXXXXXXXXXXX`          | Título do e-mail a ser utilizado na campanha. |
+| `_iDDMMYYHHMM`                 | Define a data (`DDMMYY`) e hora (`HHMM`) específicas para o início da campanha. |
+| `_q88999`                      | Define envio parcelado: `88%` de envio por lote e `999` minutos de intervalo entre disparos. |
+| `_x999`                        | Descarta clientes com qualquer contato receptivo nos últimos `999` horas. |
+| `_limpartag`                   | Substitui todas as tags das pessoas no arquivo pela nova tag definida. |
+| `_removercarteiras`            | Remove os contatos das demais carteiras, mantendo apenas a carteira do arquivo. |
+| `_LEddMMyyHHmm`                | Define data e hora limite para envio, evitando disparos fora do horário desejado. |
+| `_whatsappprospect`            | Campanha via módulo WhatsApp Prospect. Obrigatório informar o template. |
+
+### 📂 Exemplos de Nomenclatura para Importação via FTP
+
+Aqui estão exemplos práticos de nomenclatura de arquivos para importação de mailings e criação de campanhas via FTP. Utilize essas referências para garantir que seus arquivos sejam processados corretamente pelo sistema. 🚀
+
+<ResponseField name="mailing_101117_1.csv" type="string">
+  Apenas importar sem especificar carteira (o arquivo deve estar em uma pasta com o nome da carteira).
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_c123_dRégua 60 dias.csv" type="string">
+  Importar na carteira `123`, informando a descrição `Régua 60 dias`.
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_c123_h.csv" type="string">
+  Importar na carteira `123` e realizar a higienização dos contatos.
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_cALTORISCO3_smslong_i0102180820.csv" type="string">
+  Importar na carteira `ALTORISCO3` e criar uma campanha de SMS Longcode para iniciar em `01/02/18 às 08:20`.
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_cBRAD_smsshort_q15020.csv" type="string">
+  Importar na carteira `BRAD` e criar uma campanha de SMS Shortcode com início imediato, enviando `15%` da base a cada `20 minutos`.
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_cMAIOR30_whatsappexclusivo_nw11998877665_ntTEMPLATE HOMOLOGADO ITAU_x36.csv" type="string">
+  Importar na carteira `MAIOR30` e criar campanha de WhatsApp Oficial (número exclusivo) para início imediato, descartando contatos que tiveram interação nos últimos `36 horas`.
+</ResponseField>
+
+<ResponseField name="mailing_101117_1_c123_email_teAportunidade!!!_ceAVISO@COMUNICADO.COM.BR.csv" type="string">
+  Importar na carteira `123` e criar uma campanha de e-mail para início imediato, definindo o título `"Aportunidade!!!"` e utilizando a conta `AVISO@COMUNICADO.COM.BR`.
+</ResponseField>
