@@ -6,6 +6,11 @@ description: "Como alternativa à importação pelo Invenio Center, também é p
 
 A importação de mailings e a criação de campanhas podem ser feitas automaticamente através do protocolo FTP. Este documento detalha o processo de configuração e os padrões necessários para garantir o correto funcionamento da importação via FTP.
 
+## ⚙️ Configurações Gerais
+🛠 **Tipo de Serviço**: Job recorrente para processamento automático. <br />
+⏳**Frequência de Execução**: A cada 2 minutos para garantir a importação contínua dos arquivos.<br />
+🌐**IP de Saída**: `191.233.248.49` (Certifique-se de liberar esse IP em seu firewall caso utilize um serviço FTP/SFTP próprio).
+
 ## 📡 Configuração da Conexão FTP
 
 Para que a importação ocorra corretamente, é necessário configurar a conexão com o servidor FTP.
@@ -91,3 +96,16 @@ Aqui estão exemplos práticos de nomenclatura de arquivos para importação de 
 <ResponseField name="mailing_101117_1_c123_email_teAportunidade!!!_ceAVISO@COMUNICADO.COM.BR.csv" type="string">
   Importar na carteira `123` e criar uma campanha de e-mail para início imediato, definindo o título `"Aportunidade!!!"` e utilizando a conta `AVISO@COMUNICADO.COM.BR`.
 </ResponseField>
+
+## ⁉️ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="Qual o IP de saída do serviço de importação via FTP?">
+    Se você estiver utilizando um serviço de FTP/SFTP próprio e sua infraestrutura possuir restrições de acesso, como firewalls ou regras de segurança, entre em contato com a equipe de infraestrutura da sua empresa para garantir que o seguinte IP esteja liberado para conexão:
+
+📌 IP a ser liberado: `191.233.248.49`
+
+Isso garantirá que a comunicação entre o seu servidor e o serviço de importação ocorra sem interrupções. 🚀
+  </Accordion>
+</AccordionGroup>
+  
