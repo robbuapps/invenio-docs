@@ -1,4 +1,3 @@
-<script src="https://webchatapi.robbu.global/v3/chat.js"></script>
   chatRobbu.init("BFC66391CDB3DA97", {
     open: true,
     feedback: false,
