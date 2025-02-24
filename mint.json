@@ -48,7 +48,8 @@
       "group": "Center",
       "pages": [
         "docs/center/webhook",
-        "docs/center/carga-ftp"
+        "docs/center/carga-ftp",
+        "docs/center/cancelamento-inscricao"
       ]
     },
     {
