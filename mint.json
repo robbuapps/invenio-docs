@@ -47,6 +47,7 @@
     {
       "group": "Center",
       "pages": [
+        "docs/center/canais-de-atendimento",
         "docs/center/webhook",
         "docs/center/carga-ftp",
         "docs/center/cancelamento-inscricao"
