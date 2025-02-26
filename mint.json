@@ -54,8 +54,10 @@
     {
       "group": "Center",
       "pages": [
+        "docs/center/canais-atendimento",
         "docs/center/webhook",
-        "docs/center/carga-ftp"
+        "docs/center/carga-ftp",
+        "docs/center/cancelamento-inscricao"
       ]
     },
     {
