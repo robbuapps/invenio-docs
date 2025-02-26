@@ -45,6 +45,13 @@
       ]
     },
     {
+      "group": "Maestro",
+      "pages": [
+        "docs/maestro/intro"
+        
+      ]
+    },
+    {
       "group": "Center",
       "pages": [
         "docs/center/webhook",
