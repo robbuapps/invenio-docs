@@ -1,0 +1,73 @@
+---
+title: "Configuração e Criação de Segmentos (Invenio Center)"
+sidebar_label: "Segmentos"
+description: "Os segmentos têm como propósito organizar o espaço de trabalho, vinculando os contatos ao grupo de atendimento correto, além de restringir o acesso dos operadores aos segmentos atribuídos."
+---
+
+# 📌 Sumário
+
+- [🆕 1. Criação de Segmentos](#-1-criação-de-segmentos)
+  - [1.1. Inativação de Segmento](#11-inativação-de-segmento)
+- [⚙️ 2. Configurações de Segmento](#️-2-configurações-de-segmento)
+  - [2.1. Código Cliente](#21-código-cliente)
+  - [2.2. Tempo Máximo de Permanência na IDR](#22-tempo-máximo-de-permanência-na-idr)
+  - [2.3. Termos de IDR (Separados por vírgula)](#23-termos-de-idr-separados-por-vírgula)
+- [🛠️ 3. Configurações de Atendimento por Segmento](#-3-configurações-de-atendimento-por-segmento)
+  - [3.1. Quantidade Máxima de Fidelizados por Atendente](#31-quantidade-máxima-de-fidelizados-por-atendente)
+
+---
+
+# 🆕 1. Criação de Segmentos
+
+Os segmentos, ou carteiras, podem ser criados e configurados por usuários com permissão de **Administrador** ou **Supervisor** através de **Recursos** na aba **Segmentos** da Invenio Center, selecionando a opção **Adicionar segmento**.
+
+## 1.1. Inativação de Segmento
+
+- Segmentos podem ser inativados, mas não excluídos.
+- Para inativar um segmento, acesse a opção **Editar** dentro do segmento desejado. Em seguida, clique na seta do campo **Situação** e selecione a opção **Inativo**.
+- Quando um segmento está inativo e um contato vinculado a ele entra em atendimento, o contato será enviado para a fila sem segmentação, **caso não haja ação na IDR que vincule o contato a outro segmento**.
+- Antes de inativar um segmento, é necessário verificar se não há vínculos desse segmento nas IDRs ativas do ambiente.
+
+---
+
+# ⚙️ 2. Configurações de Segmento
+
+## 2.1. Código Cliente
+
+- O Código Cliente é um identificador único para cada segmento.
+- A duplicidade do código pode gerar erros nos disparos via Carteiro Digital.
+- O código pode ser utilizado na API **Send Message** para definir o segmento ao qual o contato será atribuído.
+
+## 2.2. Tempo Máximo de Permanência na IDR
+
+- Define o tempo máximo que um contato pode permanecer sem interação no ChatBot. Isso inclui tanto a falta de resposta da IDR quanto do contato.
+- O tempo pode ser definido de maneira global (para toda a conta) ou individualmente em cada segmento. O tempo mais curto entre as configurações será utilizado para o contato.
+- Quando o contato atingir o tempo máximo de permanência, a plataforma executa uma das seguintes ações:
+  - Enviar o contato para a fila de operação.
+  - Finalizar o atendimento.
+  - Enviar o contato para uma etapa específica da IDR.
+
+> **Caso a opção de enviar para uma etapa específica da IDR seja escolhida, é necessário definir a IDR e a etapa exata que o contato seguirá.**
+
+## 2.3. Termos de IDR (Separados por vírgula)
+
+- Termos configurados neste campo são usados para identificar e vincular o segmento a contatos com base nas mensagens enviadas.
+
+**Comportamento:**
+- A mensagem do contato é comparada com os termos do segmento até uma correspondência ser encontrada.
+- Se não houver correspondência, o resultado será **False** e o contato ficará **sem segmento**.
+- Cada segmento deve ter seus termos separados por vírgula, **sem espaços**. Para termos compostos, utilize o espaço entre as palavras.
+
+  **Exemplo:** `negociar,negociação,proposta,acordo`
+
+---
+
+# 🛠️ 3. Configurações de Atendimento por Segmento
+
+Essas configurações podem ser aplicadas tanto a nível de conta quanto de segmento individual. As configurações no segmento **sobrescrevem** as da conta quando habilitadas.
+
+## 3.1. Quantidade Máxima de Fidelizados por Atendente
+
+- **Quantidade Máxima de contatos fidelizados:** Limita a quantidade de contatos fidelizados que um atendente pode receber por segmento, com base na distribuição automática. 
+- Se o atendente estiver em um segmento com distribuição manual, ele poderá puxar novos contatos. Nesse caso, as fidelizações mais antigas são desfeitas, e os novos contatos são enviados para a fila.
+- É importante lembrar que, para que esse parâmetro seja utilizado de forma efetiva, devemos deixar a opção **Manter a quantidade máxima de fidelizados** ativa nas configurações da conta.
