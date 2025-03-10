@@ -68,7 +68,13 @@
         "docs/robbu-api/send-message",
         "docs/robbu-api/verify"
       ]
-    }
+    },
+    {
+      "group": "Atualizações",
+      "pages": [
+        "changelog"
+      ]
+    }    
   ],
   "versions": [
     {
