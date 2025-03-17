@@ -58,3 +58,59 @@ Essas configurações podem ser aplicadas tanto a nível de conta quanto de segm
 - **Quantidade Máxima de contatos fidelizados:** Limita a quantidade de contatos fidelizados que um atendente pode receber por segmento, com base na distribuição automática. 
 - Se o atendente estiver em um segmento com distribuição manual, ele poderá puxar novos contatos. Nesse caso, as fidelizações mais antigas são desfeitas, e os novos contatos são enviados para a fila.
 - É importante lembrar que, para que esse parâmetro seja utilizado de forma efetiva, devemos deixar a opção **Manter a quantidade máxima de fidelizados** ativa nas configurações da conta.
+
+## ⁉️ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="O que são os segmentos e qual é sua função?">
+    Os segmentos são grupos que organizam o espaço de trabalho, vinculando contatos ao grupo de atendimento correto e restringindo o acesso dos operadores aos segmentos atribuídos.
+  </Accordion>
+
+  <Accordion title="Quem pode criar segmentos?">
+    Somente usuários com permissão de **Administrador** ou **Supervisor** podem criar e configurar segmentos.
+  </Accordion>
+
+  <Accordion title="Como criar um segmento?">
+    Para criar um segmento, acesse a aba **Segmentos** na Invenio Center, dentro de **Recursos**, e selecione a opção **Adicionar segmento**.
+  </Accordion>
+
+  <Accordion title="É possível excluir um segmento?">
+    Não, os segmentos não podem ser excluídos, mas podem ser inativados.
+  </Accordion>
+
+  <Accordion title="Como inativar um segmento?">
+    Para inativar um segmento, clique em **Editar** dentro do segmento desejado, depois selecione **Inativo** no campo **Situação**.
+  </Accordion>
+
+  <Accordion title="O que acontece quando um segmento é inativo?">
+    Quando um segmento é inativo, os contatos vinculados a ele serão enviados para a fila sem segmentação, a menos que haja uma ação na IDR que vincule o contato a outro segmento.
+  </Accordion>
+
+  <Accordion title="O que é o Código Cliente e como ele é utilizado?">
+    O Código Cliente é um identificador único para cada segmento. Ele é usado na API **Send Message** para atribuir contatos a um segmento e evita a duplicidade que pode gerar erros nos disparos via Carteiro Digital.
+  </Accordion>
+
+  <Accordion title="O que é o Tempo Máximo de Permanência na IDR e como funciona?">
+    O **Tempo Máximo de Permanência** define o tempo que um contato pode permanecer sem interação no ChatBot, tanto por falta de resposta da IDR quanto do contato. Ao atingir o tempo, a plataforma pode: enviar o contato para a fila de operação, finalizar o atendimento ou enviar o contato para uma etapa específica da IDR.
+  </Accordion>
+
+  <Accordion title="Como configurar os Termos de IDR em um segmento?">
+    Os termos são usados para vincular um segmento a contatos com base nas mensagens enviadas. Devem ser separados por vírgula, sem espaços, e podem ser compostos (por exemplo, `negociar,negociação,proposta,acordo`).
+  </Accordion>
+
+  <Accordion title="O que acontece se não houver correspondência entre os termos de IDR e a mensagem do contato?">
+    Se não houver correspondência, o resultado será **False** e o contato ficará **sem segmento**.
+  </Accordion>
+
+  <Accordion title="Como configurar a quantidade máxima de fidelizados por atendente?">
+    Esse parâmetro limita a quantidade de contatos fidelizados que um atendente pode receber por segmento. Se o atendente estiver em um segmento com distribuição manual, ele poderá puxar novos contatos, desfazendo as fidelizações mais antigas.
+  </Accordion>
+
+  <Accordion title="O que acontece quando a configuração de **Quantidade Máxima de Fidelizados** está ativa?">
+    Quando essa configuração está ativa, é importante manter a opção **Manter a quantidade máxima de fidelizados** nas configurações da conta para que a limitação seja aplicada corretamente.
+  </Accordion>
+
+  <Accordion title="Como a configuração de segmento influencia o atendimento?">
+    As configurações de atendimento podem ser aplicadas tanto a nível de conta quanto de segmento individual, sendo que as configurações no segmento **sobrescrevem** as da conta quando habilitadas.
+  </Accordion>
+</AccordionGroup>
