@@ -3,6 +3,51 @@ title: "Changelog"
 mode: "center"
 ---
 
+<Update label="Março 2025" description="Melhorias no Invenio Live e Center">
+
+### 😎 [CENTER/LIVE] Notificações Automáticas para Atualizações de Template da Meta WhatsApp  
+
+Temos o prazer de anunciar uma melhoria significativa em nossa integração com o **Meta WhatsApp**. Implementamos uma regra de notificação no webhook de atualização de template que, automaticamente, dispara um e-mail aos responsáveis financeiros do cliente sempre que ocorre uma alteração na categoria que aciona o webhook.  
+
+Essa inovação assegura que todas as mudanças críticas sejam comunicadas de forma imediata, promovendo maior transparência e otimizando a gestão dos templates. Com essa atualização, reafirmamos nosso compromisso com a **eficiência e a melhoria contínua** dos nossos serviços.  
+
+### 😎 [LIVE] Ordenação Personalizada de Mensagens e Eventos por UTC do Usuário  
+
+A experiência do usuário no **Invenio Live** foi aprimorada! Agora, a ordenação das mensagens e eventos é realizada de acordo com o **fuso horário (UTC)** definido no perfil de cada usuário, garantindo que todas as interações sejam exibidas de forma precisa e personalizada.  
+
+Essa melhoria assegura que os atendimentos e contatos **refletem o horário correto**, proporcionando **maior transparência e eficiência na comunicação**.  
+
+### 😎 [CENTER] Confirmação de Seleção de Template  
+
+#### 🎯 Objetivo  
+Prevenir incidentes (especialmente para casos de **troca automática de categoria pela Meta**) e sinalizar o cliente sobre o uso de templates do tipo **Marketing**, independentemente de ter ou não mudado de status recentemente.  
+
+#### 🖥️ Como funciona?  
+Na **tela de campanhas**, ao selecionar um template do tipo **Marketing**, será aberta uma caixa de **confirmação** com a seguinte mensagem:  
+
+📌 **Confirmar seleção de template**  
+
+> O template `{nometemplate}` é da categoria **Marketing**, deseja realizar a campanha com este template?  
+
+**[Cancelar] [Confirmar]**  
+
+- **Cancelar:** O usuário retorna à listagem de templates para selecionar outro.  
+- **Confirmar:** O template é definido e o usuário retorna à tela da campanha que estava sendo criada.  
+
+### 🤖 [CENTER - ROBBU APP] Correção e Ordenação de Eventos por UTC do Usuário  
+
+Detectamos uma questão em que os eventos disparados **não eram contabilizados corretamente** no contato.  
+- Eventos comuns **não apareciam** no front do app nem na versão Desktop.  
+- Para eventos finalizadores, apenas o **protocolo de encerramento** era registrado, sem exibir o evento finalizador.  
+
+Para resolver esse problema, implementamos uma **melhoria que garante a correta ordenação dos KPI de Eventos e dos Eventos do Sistema**, alinhada com o **UTC definido no perfil do usuário**.  
+
+Essa correção assegura que **todos os eventos sejam contabilizados e exibidos de maneira consistente**, proporcionando **maior transparência e eficiência na gestão dos dados de interação**.  
+
+🚀 **Nosso compromisso continua sendo a excelência na experiência do usuário e na robustez dos nossos serviços!**  
+
+</Update>
+
 <Update label="Fevereiro 2025" description="Agendamento de Mensagens">
 
 O **Invenio Live** agora conta com uma nova funcionalidade que aprimora o agendamento de mensagens, permitindo que operadores configurem interações personalizadas para clientes específicos.
