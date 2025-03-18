@@ -59,7 +59,8 @@
         "docs/center/carga-ftp",
         "docs/center/cancelamento-inscricao",
         "docs/center/segmentos",
-        "docs/center/otimizacao"
+        "docs/center/otimizacao",
+        "docs/center/agendamentoRelatorioFTP"
       ]
     },
     {

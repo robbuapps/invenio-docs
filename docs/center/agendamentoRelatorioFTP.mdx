@@ -1,0 +1,129 @@
+---
+title: "Agendamento Relatório FTP"
+sidebarTitle: "Relatório FTP"
+description: "Este serviço possibilita a geração automatizada de arquivos, permitindo que o cliente exporte relatórios e os transfira de forma segura para um servidor FTP. A solução garante praticidade e eficiência no armazenamento e compartilhamento das informações, facilitando a integração com outros sistemas e a consulta posterior dos arquivos.."
+---
+
+**Para criar um agendamento no Invenio Center, siga os passos abaixo.**
+# Criando um Novo Agendamento
+Acesse a aba **Agendamentos** e clique em **Gerar Relatório**.
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_1.png" />
+Escolha o formato de relatório desejado.
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_2.png" />
+Defina os parâmetros do relatório, como:
+    -	**Período**
+    -	**Carteira**
+    -	**KPI – Eventos (caso o relatório seja de KPI Eventos)**
+    -	**Usuários**
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_3.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_4.png" />
+
+# Configuração do Agendamento via FTP
+
+-	Após aplicar os filtros, inicie a configuração do envio via **FTP**.
+-	O sistema permitirá definir o **dia e horário** de envio do relatório.
+-	Escolha o método de entrega: **FTP** ou e-mail.
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_5.png" />
+
+# Configuração e preenchimento de campos do servidor
+**o	Para envio via FTP, ative a opção "Enviar relatório por FTP" e configure os seguintes campos:**
+
+
+| **Campo**     | **Descrição**                                               |
+|---------------|-------------------------------------------------------------|
+| `Server`      | Host, IP ou link do servidor                                |
+| `User`        | Usuário com permissão para acessar a pasta de envios FTP    | 
+| `Password`    | Senha de acesso à pasta dos arquivos FTP                    |
+| `Port`        | Padrão 21 (protocolo FTP explícito)                         |
+| `Encryption`  | Defina se o FTP usará criptografia segura (recomendado: TLS)|
+| `Protocol`    | Selecione FTP ou SFTP, conforme a configuração do servidor  |
+
+
+
+Confirme que os dados do servidor FTP estão corretamente configurados em:
+**Configurações >> FTP >> Gerenciar**
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_6.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_7.png" />
+Caso sua empresa não possua um servidor FTP, ao acessar **Configurações >> Conta >> Gerenciar >> FTP**
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_12.png" />
+
+ Habilite o botão  **Habilitar transferência de arquivos** 
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_13.png" />
+
+ Acesse **Configurações >> FTP >> Gerenciar** para incluir as chaves disponibilizadas anteriormente nas configurações da conta. 
+
+
+# Organização e Estrutura dos Relatórios
+
+	Para facilitar a gestão dos arquivos, recomendamos a criação de um **diretório exclusivo** para os relatórios.
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_8.png" />
+
+	No campo **Server**, inclua o nome do servidor + **diretório raiz** onde o arquivo será armazenado.
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_9.png" />
+
+## ⚠ Nota Importante
+Se o servidor for **SFTP**, verifique se o protocolo correto está selecionado na configuração do relatório.
+
+# Finalização e Validação
+- 	Clique em **Agendar Relatório** para concluir o processo.
+- 	O relatório será enviado para o diretório **relatórios** do servidor configurado.
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_10.png" />
+
+	Caso a geração não seja bem-sucedida, o arquivo será redirecionado para o diretório **descartados**.
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_11.png" />
+
+## ⁉️ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="O que é o serviço de Agendamento de Relatório FTP?">
+    O serviço permite a geração automatizada de arquivos, possibilitando que o cliente exporte relatórios e os transfira de forma segura para um servidor FTP. Isso facilita a integração com outros sistemas e a consulta posterior dos arquivos.
+  </Accordion>
+
+  <Accordion title="Como criar um novo agendamento no Invenio Center?">
+    Para criar um agendamento:
+    1. Acesse a aba **Agendamentos** e clique em **Gerar Relatório**.
+    2. Escolha o formato do relatório desejado.
+    3. Defina os parâmetros, como **Período, Carteira, KPI – Eventos e Usuários**.
+  </Accordion>
+
+  <Accordion title="Como configurar o envio do relatório via FTP?">
+    Após definir os filtros do relatório:
+    1. Ative a opção **Enviar relatório por FTP**.
+    2. Configure os seguintes campos:
+       - **Server**: Host, IP ou link do servidor.
+       - **User**: Usuário com permissão para acessar a pasta de envios FTP.
+       - **Password**: Senha de acesso ao FTP.
+       - **Port**: Padrão 21 (FTP explícito).
+       - **Encryption**: Defina se usará criptografia segura (TLS recomendado).
+       - **Protocol**: Escolha entre FTP ou SFTP.
+  </Accordion>
+
+  <Accordion title="Onde configurar os dados do servidor FTP?">
+    Acesse **Configurações >> FTP >> Gerenciar** para revisar e editar as configurações do servidor FTP.
+  </Accordion>
+
+  <Accordion title="O que fazer se minha empresa não possuir um servidor FTP?">
+    Se sua empresa não tiver um servidor FTP:
+    1. Acesse **Configurações >> Conta >> Gerenciar >> FTP**.
+    2. Habilite a opção **Habilitar transferência de arquivos**.
+    3. Em **Configurações >> FTP >> Gerenciar**, inclua as chaves fornecidas nas configurações da conta.
+  </Accordion>
+  <Accordion title="O que acontece se o servidor for SFTP?">
+    Caso utilize **SFTP**, verifique se o protocolo correto foi selecionado na configuração do relatório para evitar falhas na transmissão.
+  </Accordion>
+
+  <Accordion title="Como validar que o relatório foi enviado corretamente?">
+    1. Clique em **Agendar Relatório** para concluir o processo.
+    2. O relatório será armazenado no diretório **relatórios** do servidor configurado.
+    3. Se houver falha na geração, o arquivo será movido para o diretório **descartados**.
+  </Accordion>
+</AccordionGroup>
