@@ -54,7 +54,8 @@
     {
       "group": "Live",
       "pages": [
-        "docs/live/meu-perfil"
+        "docs/live/meu-perfil",
+        "docs/live/criar-contato"
       ]
     },
     {
