@@ -52,6 +52,12 @@
       ]
     },
     {
+      "group": "Live",
+      "pages": [
+        "docs/live/meu-perfil"
+      ]
+    },
+    {
       "group": "Center",
       "pages": [
         "docs/center/canais-atendimento",
