@@ -56,7 +56,9 @@
       "pages": [
         "docs/live/meu-perfil",
         "docs/live/criar-contato",
-        "docs/live/adicionar-canal-email"
+        "docs/live/adicionar-canal-email",
+        "docs/live/adicionar-canal-sms",
+        "docs/live/adicionar-canal-whatsapp"
       ]
     },
     {
