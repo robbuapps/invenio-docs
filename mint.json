@@ -58,7 +58,8 @@
         "docs/live/criar-contato",
         "docs/live/adicionar-canal-email",
         "docs/live/adicionar-canal-sms",
-        "docs/live/adicionar-canal-whatsapp"
+        "docs/live/adicionar-canal-whatsapp",
+        "docs/live/enviar-mensagem"
       ]
     },
     {
