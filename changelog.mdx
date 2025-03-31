@@ -16,3 +16,116 @@ Essa funcionalidade **facilita pesquisas e a gestão de perfis**, permitindo uma
 dos usuários por categoria. Com isso, a análise e a tomada de decisão tornam-se **mais ágeis e eficientes**. 🚀  
 </Update>
 
+<Update label="Março 2025 - 2.0.48" description="Invenio Live">
+### 😎 [CENTER/LIVE] Notificações Automáticas para Atualizações de Template da Meta WhatsApp
+
+Temos o prazer de anunciar uma melhoria significativa em nossa integração com o *Meta WhatsApp*. Implementamos uma regra de notificação no webhook de atualização de template que, automaticamente, dispara um e-mail aos responsáveis financeiros do cliente sempre que ocorre uma alteração na categoria que aciona o webhook.  
+
+Essa inovação assegura que todas as mudanças críticas sejam comunicadas de forma imediata, promovendo maior transparência e otimizando a gestão dos templates. Com essa atualização, reafirmamos nosso compromisso com a *eficiência e a melhoria contínua* dos nossos serviços.  
+
+### 😎 [LIVE] Ordenação Personalizada de Mensagens e Eventos por UTC do Usuário.  
+
+A experiência do usuário no *Invenio Live* foi aprimorada! Agora, a ordenação das mensagens e eventos é realizada de acordo com o *fuso horário (UTC)* definido no perfil de cada usuário, garantindo que todas as interações sejam exibidas de forma precisa e personalizada.  
+
+Essa melhoria assegura que os atendimentos e contatos *refletem o horário correto, proporcionando **maior transparência e eficiência na comunicação*.  
+
+### 😎 [CENTER] Confirmação de Seleção de Template. 
+
+#### 🎯 Objetivo  
+Prevenir incidentes (especialmente para casos de *troca automática de categoria pela Meta) e sinalizar o cliente sobre o uso de templates do tipo **Marketing*, independentemente de ter ou não mudado de status recentemente.  
+
+#### 🖥️ Como funciona?  
+Na *tela de campanhas, ao selecionar um template do tipo **Marketing, será aberta uma caixa de **confirmação* com a seguinte mensagem:  
+
+📌 *Confirmar seleção de template*  
+
+> O template {nometemplate} é da categoria *Marketing*, deseja realizar a campanha com este template?  
+
+*[Cancelar] [Confirmar]*  
+
+- *Cancelar:* O usuário retorna à listagem de templates para selecionar outro.  
+- *Confirmar:* O template é definido e o usuário retorna à tela da campanha que estava sendo criada.  
+
+### 🤖 [CENTER - ROBBU APP] Correção e Ordenação de Eventos por UTC do Usuário. 
+
+Detectamos uma questão em que os eventos disparados *não eram contabilizados corretamente* no contato.  
+- Eventos comuns *não apareciam* no front do app nem na versão Desktop.  
+- Para eventos finalizadores, apenas o *protocolo de encerramento* era registrado, sem exibir o evento finalizador.  
+
+Para resolver esse problema, implementamos uma *melhoria que garante a correta ordenação dos KPI de Eventos e dos Eventos do Sistema, alinhada com o **UTC definido no perfil do usuário*.  
+
+Essa correção assegura que *todos os eventos sejam contabilizados e exibidos de maneira consistente, proporcionando **maior transparência e eficiência na gestão dos dados de interação*.  
+
+🚀 *Nosso compromisso continua sendo a excelência na experiência do usuário e na robustez dos nossos serviços!*  
+
+ ### 😎 [LIVE] Aprimoramento da Função de Agendamento de Mensagens no Invenio Live
+
+O *Invenio Live* apresenta uma nova funcionalidade que aprimora o agendamento de mensagens, permitindo que operadores configurem interações personalizadas para clientes específicos. Essa atualização possibilita a criação de agendamentos com alertas automáticos, disparados na data e horário previamente definidos, assegurando que as interações ocorram no momento exato e com máxima eficiência.
+
+> *Perspectiva do Usuário:*
+> 
+>"Como operador do Invenio Live, gostaria de criar agendamentos para clientes específicos com alertas automáticos na data e horário definidos, para garantir que as interações sejam realizadas no momento certo e com eficiência."
+
+Essa melhoria demonstra o compromisso do Invenio Live em oferecer soluções inteligentes e precisas, otimizando a comunicação e promovendo uma experiência superior aos usuários.
+
+### Como Criar um Agendamento de Mensagens
+
+A criação do agendamento de mensagens ocorre na tela "*Editar informações de contato*" do Invenio Live. Essa funcionalidade permite ao operador:
+
+1. *Definir a Data e Hora:* Especifique o momento exato para o envio da mensagem ao cliente.
+2. *Registrar um Motivo Detalhado:* Utilize o campo "*Motivo*" para documentar a razão do agendamento, garantindo clareza e rastreabilidade para futuras interações.
+
+Essa abordagem assegura que todas as comunicações sejam realizadas de forma organizada e transparente, beneficiando tanto os operadores quanto os clientes atendidos.&#8203;:contentReference[oaicite:0]{index=0}
+
+## Agendamento de Mensagens no Invenio Live
+
+Para agendar mensagens no Invenio Live, siga os passos abaixo:
+
+1. *Acessar a tela*:  
+   Entre na tela "Editar informações de contato" no Invenio Live.
+2. *Definir o agendamento*:  
+   Localize a seção de agendamento de mensagens.
+3. *Inserir data e hora*:  
+   Selecione a data e o horário desejados para o agendamento.
+4. *Registrar o motivo*:  
+   Preencha o campo "Motivo" com uma descrição detalhada do propósito do agendamento.
+5. *Confirmar*:  
+   Salve as alterações para concluir a criação do agendamento.
+
+A tela "Agendamentos Pendentes" exibe todos os agendamentos com suas respectivas datas e horários. Nela, os operadores podem editar ou excluir os agendamentos diretamente, além de utilizar filtros para facilitar a visualização e o gerenciamento das informações.
+
+### Como gerenciar agendamentos pendentes:
+
+1. *Acessar a Tela*:  
+   Navegue até a interface "Agendamentos Pendentes" no Invenio Live.
+2. *Visualizar Agendamentos*:  
+   Consulte a lista de agendamentos, que apresenta data e horário de cada item.
+3. *Editar Agendamentos*:  
+   Selecione o agendamento desejado e clique na opção de edição. Faça as alterações necessárias e salve as modificações.
+4. *Excluir Agendamentos*:  
+   Para remover um agendamento, clique na opção de exclusão correspondente ao item.
+5. *Aplicar Filtros*:  
+   Utilize os filtros disponíveis para refinar a visualização por data, horário ou outros critérios, facilitando o gerenciamento dos agendamentos.
+
+Essa funcionalidade aprimora a organização e o controle dos agendamentos, tornando a gestão mais ágil e eficiente para os operadores.
+
+### Política de Exclusão de Agendamentos
+
+- *Gestão Manual*:  
+  Os agendamentos não serão excluídos automaticamente pelo sistema.
+- *Ação do Operador*:  
+  A exclusão ocorrerá somente quando o operador decidir realizar a remoção manual.
+- *Persistência dos Agendamentos*:  
+  Mesmo após interação com o contato, o agendamento permanecerá na lista até que o operador o exclua.
+- *Autonomia do Usuário*:  
+  Essa política garante que o usuário mantenha total controle sobre a gestão de seus agendamentos, sem interferências automáticas que possam comprometer o gerenciamento.
+
+### Redirecionamento e Alerta de Fidelização
+
+Ao clicar em um agendamento, o sistema permitirá que o operador interaja diretamente com o contato, redirecionando-o para a tela de interação. O sistema exibirá um alerta visual se o contato já estiver fidelizado com outro operador, evitando duplicidade de ações.
+
+### Notificações de Agendamentos Pendentes
+
+O sistema envia notificações automáticas sobre agendamentos pendentes, com um botão "Retomar Conversa" para que o operador continue a interação. Se o contato já estiver vinculado a outro operador, um alerta visual é exibido para evitar ações duplicadas.
+
+</Update>
