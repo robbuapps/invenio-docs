@@ -109,66 +109,6 @@ Para acessar e criar flows no Invenio Center, siga os passos abaixo:
 
 **Endpoints:**
 
-- Usar seu endpoint próprio.
-- Criar um novo endpoint customizado para o flow em questão.
-- Usar um endpoint customizado já existente para o flow em questão.
-
-## Edição e Publicação de Flows
-
-- Após criar um flow, você pode editá-lo e personalizá-lo conforme as necessidades do negócio.
-- Um flow pode ser editado, deletado ou publicado (a publicação ocorre na API da Meta).
-
-## Enviando Flows
-
-Você pode enviar um flow de WhatsApp usando a ação "Enviar flow de WhatsApp" da IDR (vide exemplo abaixo).
-
-
- ### "Nova Ferramenta: Endpoints Customizados"
-
-
-## Endpoints Customizados: Flexibilidade e Agilidade na Integração
-
-Prepare-se para elevar sua integração a um novo patamar com a nossa inovadora ferramenta de **Endpoints Customizados**. Desenvolvida para oferecer máxima flexibilidade e agilidade, essa solução permite a criação, edição, exclusão e utilização de APIs programadas em JavaScript, conectando e potencializando suas operações de forma inteligente e personalizada.
-
-## Principais Benefícios
-
-### Flexibilidade Total
-
-- Crie APIs sob medida para diversas finalidades, adaptando a solução às necessidades específicas do seu negócio.
-
-### Integração Inteligente
-
-- Conecte-se facilmente a flows dinâmicos e otimize o uso em IDRs através da ação "API - Chamada Externa", garantindo uma comunicação mais fluida e robusta.
-
-### Funcionalidades Ampliadas
-
-Desenvolva endpoints para uma ampla variedade de funcionalidades, incluindo:
-
-- Validação de CPF.
-- Verificação de datas.
-- Integração com APIs de clientes.
-- Organização de listas, entre outras aplicações.
-
-### Agilidade e Personalização
-
-- Reduza o tempo de desenvolvimento e adapte suas integrações com rapidez, proporcionando uma experiência de usuário superior e atendendo às demandas do mercado de forma proativa.
-
-## Transforme sua Operação
-
-Com os Endpoints Customizados, sua empresa ganha uma poderosa ferramenta para criar soluções únicas e eficientes, 
-impulsionando a inovação e melhorando a performance das suas integrações. Prepare-se para oferecer aos seus clientes um 
-atendimento mais ágil, personalizado e tecnológico.
-
-**Observação:** Para realizar o CRUD (Criar, Ler, Atualizar, Deletar) de um endpoint, é necessário ter as permissões 
-liberadas no usuário.
-
-Para listar os endpoints customizados de um cliente, siga o passo a passo abaixo.
-
-1. Para criar um endpoint basta clicar em “+ Criar endpoint”, após isso, será exigida uma descrição para o endpoint.
-2. Após a criação, uma tela com o código do endpoint será aberta, permitindo que você programe em JavaScript. 
-Por exemplo, é possível implementar a validação de um CPF.
-3. Após atualizar o endpoint você já pode testá-los via Postman;
-
 # Endpoints em JavaScript
 
 Os endpoints programados utilizando **JavaScript** possuem algumas funcionalidades que precisam ser respeitadas para que funcionem corretamente.
@@ -177,10 +117,10 @@ Os endpoints programados utilizando **JavaScript** possuem algumas funcionalidad
 
 Os endpoints possuem algumas constantes e funções predefinidas que são fundamentais para seu funcionamento. Portanto, **não é possível criar novas constantes** com as seguintes palavras reservadas:
 
-- logger
-- loggerHistory
-- response
-- request
+- `logger`
+- `loggerHistory`
+- `response`
+- `request`
 
 Caso você tente definir uma constante com alguma dessas palavras reservadas, o seu endpoint **retornará erro**.
 
@@ -189,34 +129,33 @@ Caso você tente definir uma constante com alguma dessas palavras reservadas, o 
 Os endpoints possuem as seguintes limitações:
 
 - **Tempo máximo de execução:** 10 segundos. Se ultrapassar esse limite, será exibido o erro:
-  json
+  ```json
   {
     "error": "The JavaScript code took more than 10 seconds to execute"
   }
-  
-- **Obrigatoriedade de retorno:** É necessário sempre retornar algo no endpoint utilizando o método "response()". 
-Caso contrário, será exibido o erro:
-  json
+  ```
+- **Obrigatoriedade de retorno:** É necessário sempre retornar algo no endpoint utilizando o método `response()`. Caso contrário, será exibido o erro:
+  ```json
   {
     "error": "Endpoint has no data returned"
   }
-  
+  ```
 
 ## Variáveis Globais
 
 Por padrão, existem algumas variáveis essenciais para o funcionamento dos endpoints:
 
-### request
+### `request`
 
 Variável que contém várias informações sobre a requisição, como:
 
-- method → Método da requisição (GET, POST, etc.).
-- headers → Cabeçalhos da requisição.
-- body → Corpo da requisição.
-- query → Parâmetros da query string.
+- `method` → Método da requisição (GET, POST, etc.).
+- `headers` → Cabeçalhos da requisição.
+- `body` → Corpo da requisição.
+- `query` → Parâmetros da query string.
 
 #### Exemplos de Uso:
-javascript
+```javascript
 if (request.method === "get") {}
 
 if (request.headers.hasOwnProperty("server")) {}
@@ -224,43 +163,42 @@ if (request.headers.hasOwnProperty("server")) {}
 if (request.body.user.status === "active") {}
 
 if (request.query.user.q === "Nome") {}
-
+```
 
 ## Métodos
 
 Existem alguns métodos fundamentais para o funcionamento de um endpoint:
 
-### logger(data: any)
+### `logger(data: any)`
 
 Método utilizado para adicionar dados ao **logger** do request, útil no processo de debugging.
 
 #### Exemplos:
-javascript
+```javascript
 logger(request)
 logger(request.body.user)
 logger("Testando o log")
 logger({data: request, tipo: "Chamada externa"})
+```
 
-
-### response(data: object, status: number = 200, success: boolean = true)
+### `response(data: object, status: number = 200, success: boolean = true)`
 
 Método utilizado para **retornar a resposta do endpoint**.
 
 #### Exemplos:
-javascript
+```javascript
 // Retorna sucesso
 return response({success: true})
 
 // Retorna erro
 return response({error: true}, 400)
-
+```
 
 ## Funcionalidades Extras
 
-Além dos aspectos mencionados acima, os endpoints customizados contam com duas funcionalidades adicionais para facilitar a 
-documentação e a organização do código.
+Além dos aspectos mencionados acima, os endpoints customizados contam com duas funcionalidades adicionais para facilitar a documentação e a organização do código.
 
-###  Anotações nos Endpoints
+### 📌 Anotações nos Endpoints
 
 - É possível adicionar **anotações** diretamente nos endpoints, servindo como documentação integrada.
 - Para adicionar, basta clicar em **"Anotações"**, inserir as informações desejadas e salvar.
@@ -268,11 +206,10 @@ documentação e a organização do código.
 
 ### Bibliotecas Pré-definidas
 
-- A nova funcionalidade permite a **utilização de bibliotecas externas**, possibilitando a execução de códigos adicionais 
-dentro dos endpoints.
+- A nova funcionalidade permite a **utilização de bibliotecas externas**, possibilitando a execução de códigos adicionais dentro dos endpoints.
 - Isso amplia as possibilidades de **integração e automação** de processos, tornando as implementações mais flexíveis e poderosas.
 
-Essas melhorias tornam os endpoints customizados **mais organizados, eficientes e fáceis de manter**, 
-garantindo uma melhor experiência para desenvolvedores e usuários da plataforma.
+Essas melhorias tornam os endpoints customizados **mais organizados, eficientes e fáceis de manter**, garantindo uma melhor experiência para desenvolvedores e usuários da plataforma.
+
 
 </Update>
