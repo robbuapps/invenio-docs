@@ -378,92 +378,80 @@ Essa funcionalidade, frequentemente solicitada por diversos clientes, será agor
 <Update label="Junho 2024 - 2.0.73" description="Invenio Live e Center.">
 ## 😎 Compra de número para WhatsApp
 
-Estamos entusiasmados em apresentar uma nova funcionalidade que vai transformar a maneira como você ativa contas de WhatsApp. Agora é possível comprar números de telefone de forma rápida e simples diretamente pelo nosso sistema! 
+Estamos entusiasmados em apresentar uma nova funcionalidade que vai transformar a maneira como você ativa contas de WhatsApp. Agora é possível comprar números de telefone de forma rápida e simples diretamente pelo nosso sistema!
 
-### Passos para Compra de Número
-1. Acesse o menu **Recursos** --> **Canais** --> **Voz**;
+### Como comprar um número:
+1. Acesse o menu **Recursos > Canais > Voz**;
 2. Na opção **Números**, você terá acesso a uma lista de números disponíveis para compra;
-3. Clique em **<+Adicionar>** para visualizar a lista de números disponíveis;
-4. Selecione um número, adicione e consulte seu gerente de contas para contratação do canal de voz;
-5. Associe o número escolhido a um agente (**Tipo Atendente**), certificando-se de que este está habilitado em seu perfil como **Canal de voz habilitado**.
+3. Clique em **+ Adicionar** para ver a lista de números disponíveis;
+4. Após selecionar um número, basta adicionar e consultar seu gerente de contas para a contratação do canal de voz;
+5. Associe o número escolhido a um agente (**tipo atendente**). Certifique-se de que o **Canal de Voz** está habilitado no perfil do agente.
 
-Com essa atualização, você pode adquirir números de telefone para ativação de contas de WhatsApp com apenas alguns cliques, garantindo uma maior escalabilidade para suas operações.
+Com essa atualização, você pode adquirir números de telefone para ativação de contas de WhatsApp com apenas alguns cliques, garantindo maior escalabilidade para suas operações.
 
 ---
 
 ## 😎 Novo JOB de Notificação
 
-- Nova estrutura de **Card** foi implementada e o serviço foi reativado, voltando a gerenciar as notificações.
+- Implementamos uma nova estrutura de **Card**, reativando o serviço e otimizando o gerenciamento de notificações.
+- **Atualização da documentação de Webhook:** agora inclui novas informações retornadas.
+  - Acesse a documentação atualizada: [Documentação Webhook](https://robbu.global/docs/webhook-invenio/)
 
 ---
 
-## 😎 Atualização na Documentação de Webhook
+## 😎 Nova Feature no Módulo de Criação de Templates
 
-- Atualizamos a documentação de **Webhook** para incluir novas informações retornadas.
-- A documentação já está disponível na FAQ: [Webhook Invenio](https://robbu.global/docs/webhook-invenio/)
+Agora é possível criar **templates para carrosséis de produtos**, tanto para marketing quanto para utilidades. Cada carrossel pode conter **até 10 cards**, cada um com descrição, imagem e pelo menos um botão do mesmo tipo.
 
----
+### Como criar um template de carrossel:
+1. Acesse **Recursos > Canais > WhatsApp**;
+2. Selecione uma conta e clique em **Templates**;
+3. Clique em **+ Criar Template**;
+4. Escolha a categoria: **Marketing** ou **Utilidades**;
+5. Selecione a opção **Carrossel**;
+6. Configure os **cards**:
+   - Adicione até 10 cards ao carrossel;
+   - Para cada card, insira uma descrição e uma imagem (cabeçalho);
+   - Adicione pelo menos um botão por card (todos devem ser do mesmo tipo);
+7. Revise todas as configurações e **salve o template**.
 
-## 😎 Nova Feature: Criação de Templates para Carrossel de Produtos
+### Criando uma campanha com carrossel:
+1. Acesse **Converter > Campanhas**;
+2. Clique em **+ Criar Campanha**;
+3. Defina:
+   - Nome da campanha;
+   - Segmento e público;
+   - Início e horário;
+   - Fluxo de envio (%);
+4. Em **Contatos de atendimento**, marque **Remover (recomendado)**;
+5. Selecione o **número do WhatsApp** que deseja usar;
+6. Escolha o **template** desejado;
+7. Configure as **variáveis**, se necessário;
+8. Clique em **Criar**.
 
-Agora é possível criar templates para **carrosséis de produtos**, tanto para **marketing** quanto **utilidades**. Cada carrossel pode conter até **10 cards**, cada um com descrição, imagem e pelo menos um botão do mesmo tipo.
-
-### Passos para Criação de Template
-1. Acesse **Recursos** --> **Canais** --> **WhatsApp**;
-2. Selecione uma conta;
-3. Escolha a opção **Template**;
-4. Clique em **<+ Criar template>**;
-5. Selecione o tipo de template e escolha a categoria: **Marketing** ou **Utilidades**;
-6. Escolha a opção **Carrossel**.
-
-### Configuração dos Cards
-- Adicione até **10 cards** ao carrossel.
-- Para cada card, insira uma **descrição** e uma **imagem** (cabeçalho).
-- Adicione pelo menos **um botão** por card. Todos os botões devem ser do **mesmo tipo** (ex: se um botão for "resposta rápida", todos devem ser "resposta rápida").
-
-### Finalização da Criação do Template
-- Revise todas as configurações e salve o template.
-
----
-
-## Criando uma Campanha
-
-Para utilizar suas templates, você pode:
-
-1. Acessar **Converter** --> **Campanhas**;
-2. Clicar em **<+Criar campanha>**;
-3. Nomear a campanha;
-4. Escolher o **segmento** e **público**;
-5. Definir **início da campanha** e **hora para iniciar**;
-6. Definir um **fluxo de envio** (%);
-7. Em **Contatos de atendimento**, marque "**Remover (recomendado)**";
-8. Em **Remetente**, selecione o número de WhatsApp que deseja usar;
-9. Selecione um **template** (criado ou existente);
-10. Informar as **variáveis de mídia** (imagem, vídeo, PDF...);
-11. Vincular o **número da campanha** ao template escolhido;
-12. Clicar em **Criar**.
-
-**Lembrete Importante**: Agora é possível **alterar variáveis no envio da campanha**.
+**📝 Importante:**
+- Informe as variáveis quando utilizar mídia (imagem, vídeo, PDF...);
+- Vincule o número correto à campanha e ao template escolhido.
 
 ---
 
-## 😎 Novo Editor de Templates de E-mail com HTML Puro
+## 😎 Editor de Templates de E-mail com Suporte a HTML
 
 Agora é possível colar **código HTML puro** diretamente no editor de templates de e-mail!
 
-Essa atualização oferece mais flexibilidade na criação de e-mails, permitindo:
-- Layouts complexos;
+### Benefícios:
+- Flexibilidade total para criar layouts personalizados;
 - Integração de elementos interativos;
-- Melhor controle sobre identidade visual da marca.
+- Melhor alinhamento com a identidade visual da sua marca.
 
-### Como Utilizar o Novo Editor
-1. Acesse **Converter** --> **Campanhas**;
-2. Em **Campanhas de E-mail**, clique em **Templates**;
-3. Clique em **<+ Criar template>**;
+### Como usar:
+1. Acesse **Converter > Campanhas**;
+2. Clique em **Campanhas de E-mail** > **Templates**;
+3. Clique em **+ Criar Template**;
 4. Escolha o tipo **HTML Direto**;
-5. Insira o **código HTML** e as configurações necessárias.
+5. Insira seu código HTML e as configurações desejadas.
 
-Essa melhoria permite personalizar ao máximo os templates, garantindo e-mails mais eficazes e impactantes!
+Com essa melhoria, você tem **controle total** sobre o design dos seus e-mails, garantindo uma comunicação mais eficaz e profissional.
 
 ---
 
