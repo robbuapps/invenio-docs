@@ -345,6 +345,105 @@ Você pode definir que seja permitido o envio de apenas **1 HSM a cada 1440 minu
 
 Essa novidade proporciona uma **gestão mais rigorosa e eficiente**, garantindo que as mensagens sejam enviadas dentro dos critérios estabelecidos!
 
+</Update>
 
+<Update label="Julho 2024 - 2.0.74" description="Invenio Live e Center.">
+## 😎 Integração com GMail no Invenio
+
+Implementamos a funcionalidade de conexão com o Google no nosso sistema de integração de e-mails, permitindo o envio e recebimento de mensagens. A integração padrão via IMAP/POP do Google foi descontinuada. Portanto, a partir de agora, as caixas de e-mail via Google/Gmail precisarão ser conectadas através do botão **Conectar com o Google**.
+
+### Importante:
+- A mensagem só irá aparecer no Invenio Live caso não tenha sido lida na caixa postal do GMail.
+- Agora, além da opção de integração com a Microsoft, os usuários também podem conectar suas contas via Autenticação do Gmail.
+- Essa atualização aumenta a segurança do sistema, oferecendo mais fatores de autenticação para proteger as contas dos usuários.
+
+### Como configurar:
+1. No **Invenio Center**, acesse **Recursos** > **Canais** > **E-mail**.
+2. Clique em **+Adicionar E-mail**.
+3. Em seguida, clique em **Conectar com o Google**.
+4. Após concluir a conexão, clique em **Criar**.
+
+> **Importante:** Conectar com o Google não necessita de configurações adicionais como tipo de conta ou configurações SMTP.
+
+## 😎 Nova Funcionalidade: Frases Prontas no Invenio Center
+Essa funcionalidade, frequentemente solicitada por diversos clientes, será agora integrada ao Invenio Center. Perfis de **administrador e supervisor** terão a capacidade de adicionar frases prontas para uso em suas operações, facilitando a padronização e a eficiência no atendimento.
+
+### Como configurar:
+1. Acesse o [Invenio Center](https://inveniocenter.robbu.global/painel/) e no menu **Recursos**, clique na opção **Frases**.
+2. Você será levado até a tela de **Cadastro de frases**.
+3. Clique em **Adicionar frases** e insira um identificador e a mensagem desejada.
+
+---
+
+# Correções de Bugs – Bug Fixes
+
+### Bug #ID 4463: Problema no Botão "Próximo" (LIVE) - RESOLVIDO
+- O erro ocorria no segmento call center com 23 pessoas na fila. O atendimento manual zerava a fila.
+
+### Bug #ID 3508: Webhook enviando múltiplos itens de protocolo - RESOLVIDO
+- O processamento do webhook foi migrado para um **container app** e as regras de processamento foram melhoradas.
+
+### Bug #ID 3568: Filtro de último evento no Live - RESOLVIDO
+- Foi aumentado o limite de registros retornados e ajustado o filtro do **Invenio Live**.
+
+### Bug #ID 4702: Inconsistências no Dashboard Analítico - RESOLVIDO
+- Fechamos conexões desnecessárias e corrigimos sobreposição de informações.
+
+### Bug #ID 4609: Imagens divergentes no Live - RESOLVIDO
+- Ajuste realizado na **API de WebSocket** para gerar URLs corretas.
+
+### Bug #ID 4687: Cliente parado em etapa do fluxo - RESOLVIDO
+- Ocorriam casos onde o cliente ficava travado sem motivo na **IDR**.
+
+### Bug #ID 4687: Lentidão no retorno de IDR - RESOLVIDO
+- Otimização da estrutura de banco **NoSQL** para evitar concorrência com SQL.
+
+### Bug #ID 4687: Duplicidade de templates - RESOLVIDO
+- Identificada falha pontual onde o sistema criava **dois templates idênticos**.
+
+### Bug #ID 4712: Processo de interação no Webchat - RESOLVIDO
+- Correção no registro de término do chat no **WebSocket**.
+
+### Bug #ID 4820: REP com erro API RegexReplace - RESOLVIDO
+- Atualização da API para suportar maior volume de caracteres.
+
+### Bug #ID 4714: Live indicando contatos na fila geral - RESOLVIDO
+- Ajuste nas listas e filas do sistema para corrigir inconsistências.
+
+---
+
+# Correções de Inconsistências
+
+### #ID 4630: Timeout na conexão SFTP/FTP - RESOLVIDO
+- Ajustada a porta SFTP para a correta saída.
+
+### #ID 4607: Eventos finalizadores sem registro no Live - RESOLVIDO
+- Atualizada a versão da **API de eventos finalizadores**.
+
+### #ID 4623: Instabilidade no motor da IDR - RESOLVIDO
+- Otimizações no **banco de dados** para melhor estabilidade e tempos de resposta mais rápidos.
+
+### #ID 4607: Revisão da integração Instagram/Facebook - RESOLVIDO
+- Inclusão dos botões **Inativar** e **Deletar Integração**.
+- Atualização de tabelas para remoção completa de tokens de acesso.
+
+### #ID 4587: Requisição API status code 0 - RESOLVIDO
+- Melhorias na **IDR** para evitar que contatos fiquem presos no sistema.
+
+### #ID 4622: Lentidão na importação de público - RESOLVIDO
+- Reiniciado **Job de importação**, restabelecendo processamento normal.
+
+### #ID 4716: Tags do mailing não eram salvas - RESOLVIDO
+- Ajustada referência necessária para inserir tags corretamente.
+
+### #ID 4590/4609: Atraso no tempo de resposta do Bot - RESOLVIDO
+- Correção na **API de WebSocket** e atualização da regra de geração de URLs.
+
+### #ID 4658: Problema de interação repetida do contato - RESOLVIDO
+- Ajuste no fluxo do **Invenio** para evitar erros de interação indevida.
+
+---
+
+Se precisar de ajustes ou quiser incluir mais detalhes, me avise! 🚀
 
 </Update>
