@@ -1,56 +1,151 @@
 ---
 title: "Single-Sign On"
 sidebarTitle: "Single-Sign On"
-description: "A plataforma Invenio by Robbu atualmente suporta autenticação Single Sign-On (SSO) exclusivamente por meio da integração com o Azure Entra ID. Estamos avaliando a possibilidade de expandir o suporte para os padrões de integração OpenID Connect e SAML no futuro, permitindo maior flexibilidade para integrar com diferentes provedores de identidade que utilizam esses protocolos"
+description: "A plataforma Invenio by Robbu atualmente suporta autenticação Single Sign-On (SSO) com provedores de identidade que utilizam os protocolos SAML 2.0 e OpenID Connect, incluindo Microsoft Entra ID, JumpCloud e Active Directory Federado via SAML. Essa integração permite que seus usuários acessem o Invenio com suas credenciais corporativas, promovendo segurança e praticidade."
 ---
 
-## Entra Id
-Esta seção fornece instruções passo a passo para configurar o Entra ID como provedor de identidade para Single Sign-On (SSO) entre a sua empresa e o Invenio.
+## Visão Geral
 
-### Configurando um Aplicativo no Microsoft Entra Id
+A funcionalidade de **Single Sign-On (SSO)** permite que os usuários autentiquem-se na plataforma Invenio utilizando suas **credenciais corporativas** já existentes. Atualmente, suportamos:
+
+- **Microsoft Entra ID** (via OpenID Connect)
+- **JumpCloud** (via SAML 2.0)
+- **Active Directory Federado (ADFS)** (via SAML 2.0)
+
+---
+
+## Integração com Microsoft Entra ID (OpenID Connect)
+
+Essa opção utiliza o protocolo OpenID Connect (OIDC), baseado em OAuth2. Abaixo estão os passos para configurar:
+
+### Etapas de Configuração
+
 <Steps>
-  <Step title="Criando um Aplicativo no Microsoft Entra Id">
-    1. Acesse o Portal do Azure
-    2. Navegue até o menu Microsoft Entra Id
-    3. Clique em App Registrations
-    4. Clique em New Registration
+  <Step title="Criando um Aplicativo no Microsoft Entra ID">
+    1. Acesse o [Portal do Azure](https://portal.azure.com)
+    2. Vá até o menu **Microsoft Entra ID**
+    3. Clique em **App registrations**
+    4. Clique em **New Registration**
   </Step>
-  <Step title="Configurando o seu Aplicativo do Microsoft Entra Id">
-    1. De um nome para o seu aplicativo. Ex.: Robbu Invenio SSO
-    2. Marque a opção "Accounts in this organizational directory only (Company only - Single tenant)"
-    3. Em Redirect URI, escolha a opção Web e entre com a seguinte URL de redirecionamento 
+
+  <Step title="Configurando o Aplicativo">
+    1. Defina um nome para o aplicativo. Ex: `Invenio SSO`
+    2. Selecione **Accounts in this organizational directory only (Single tenant)**
+    3. Em **Redirect URI**, selecione **Web** e insira:
     ```
     https://api.invenio.common.robbu.global/v1/login/sso/authentication
     ```
-    4. Clique em Save
+    4. Clique em **Register**
   </Step>
-  <Step title="Habilitando Access Tokens e Id Tokens">
-    1. Clique em Authentication no menu lateral
-    2. Habilite os dois checkboxes na guia Implicit grant and hybrid flows<br />
-    ✅ Access tokens (used for implicit flows) <br />
-    ✅ ID tokens (used for implicit and hybrid flows)
+
+  <Step title="Habilitando ID Tokens">
+    1. Vá para **Authentication**
+    2. Marque os checkboxes:
+      - ✅ Access tokens
+      - ✅ ID tokens
   </Step>
-  <Step title="Obtendo o Application Id">
-    Assim que todas as etapas acima estiverem finalizadas, iremos obter o Application Id do nosso Aplicativo no Microsoft Entra Id, este código será o responsável por fazer a ponte entre a Robbu e o seu Microsoft Entra Id.
-    1. Clique no menu lateral Overview
-    2. Copie o valor do campo Application (client) ID
-  </Step>  
+
+  <Step title="Obtendo o Application ID">
+    1. Acesse o menu **Overview**
+    2. Copie o valor de **Application (client) ID**
+  </Step>
 </Steps>
 
+---
+
+## Integração com JumpCloud (SAML 2.0)
+
+A plataforma suporta autenticação com JumpCloud utilizando SAML 2.0. Siga as etapas abaixo para configurar:
+
+### Etapas de Configuração
+
+<Steps>
+  <Step title="Criando Aplicação SAML no JumpCloud">
+    1. Acesse o [Console do JumpCloud](https://console.jumpcloud.com/)
+    2. Vá para **User Authentication > SSO**
+    3. Clique em **+** para adicionar uma nova aplicação SAML
+  </Step>
+
+  <Step title="Preenchendo Dados da Aplicação">
+    1. **Display Label**: Invenio Robbu
+    2. **SP Entity ID**: 
+    ```
+    https://api.invenio.common.robbu.global/v1/login/sso/metadata
+    ```
+    3. **ACS URL**: 
+    ```
+    https://api.invenio.common.robbu.global/v1/login/sso/acs
+    ```
+    4. **IdP Entity ID**: fornecido automaticamente pelo JumpCloud
+  </Step>
+
+  <Step title="Atribuindo Usuários e Salvando">
+    1. Atribua os usuários ou grupos que poderão usar o SSO
+    2. Salve a configuração
+    3. Compartilhe os metadados SAML (XML) com o time da Robbu
+  </Step>
+</Steps>
+
+---
+
+## Integração com Active Directory Federado (ADFS via SAML 2.0)
+
+O ADFS pode ser configurado como Provedor de Identidade SAML para autenticar usuários do Invenio.
+
+### Etapas de Configuração
+
+<Steps>
+  <Step title="Criando Relying Party Trust no ADFS">
+    1. Acesse o **ADFS Management**
+    2. Vá para **Relying Party Trusts** > **Add Relying Party Trust**
+    3. Escolha a opção **Enter data manually**
+    4. Nomeie como `Invenio Robbu`
+  </Step>
+
+  <Step title="Configurando os Endpoints">
+    1. **SAML Assertion Consumer Service (ACS) URL**:
+    ```
+    https://api.invenio.common.robbu.global/v1/login/sso/acs
+    ```
+    2. **Entity ID**:
+    ```
+    https://api.invenio.common.robbu.global/v1/login/sso/metadata
+    ```
+  </Step>
+
+  <Step title="Configurando as Claims">
+    Adicione as seguintes regras de emissão:
+    - `Name ID`: E-mail
+    - `email`: E-mail
+    - `given_name`: Nome
+    - `family_name`: Sobrenome
+  </Step>
+
+  <Step title="Exportando Metadados">
+    Exporte os metadados do ADFS e envie para o time da Robbu para integração.
+  </Step>
+</Steps>
+
+---
+
+## Perguntas Frequentes
+
 <AccordionGroup>
-  <Accordion title="O que é o Single Sign-On (SSO) e como ele funciona na plataforma da Robbu?">
-    O Single Sign-On (SSO) permite que os usuários se autentiquem na plataforma da Robbu utilizando suas credenciais corporativas já configuradas no Microsoft Entra ID, sem a necessidade de criar e gerenciar novas credenciais na aplicação.
+  <Accordion title="O que é Single Sign-On (SSO)?">
+    O SSO permite que os usuários acessem a plataforma Invenio utilizando suas credenciais corporativas, eliminando a necessidade de múltiplas senhas e promovendo segurança e conveniência.
   </Accordion>
 
-  <Accordion title="Posso usar outro provedor de identidade além do Microsoft Entra ID para SSO?">
-    Atualmente, a plataforma da Robbu suporta exclusivamente o Microsoft Entra ID para autenticação SSO. Estamos avaliando a possibilidade de adicionar suporte aos padrões OpenID Connect e SAML no futuro.  
-    </Accordion>
-
-  <Accordion title="A Robbu oferece suporte para problemas durante a configuração do SSO?">
-    Sim, caso encontre dificuldades na configuração do SSO com o Microsoft Entra ID, você pode entrar em contato com o suporte técnico da Robbu para obter assistência.
+  <Accordion title="Quais protocolos são suportados?">
+    Atualmente, suportamos:
+    - **OpenID Connect** para Microsoft Entra ID
+    - **SAML 2.0** para JumpCloud e Active Directory Federado (ADFS)
   </Accordion>
 
-    <Accordion title="Quais permissões são necessárias para criar e configurar o aplicativo no Microsoft Entra ID?">
-    Você precisa de permissões administrativas no portal do Azure para criar e gerenciar aplicativos no Microsoft Entra ID.
+  <Accordion title="A Robbu fornece suporte durante a configuração?">
+    Sim. Nossa equipe de suporte está disponível para ajudar em qualquer etapa da integração com seu provedor de identidade.
+  </Accordion>
+
+  <Accordion title="É necessário enviar algo para a Robbu após configurar o IdP?">
+    Sim. Após a criação da aplicação no seu IdP (JumpCloud, ADFS ou Entra ID), você deve compartilhar os **metadados SAML (XML)** ou as configurações de client ID/redirection URL com nossa equipe técnica.
   </Accordion>
 </AccordionGroup>
