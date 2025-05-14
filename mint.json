@@ -41,6 +41,7 @@
     {
       "group": "Autenticação e Contas",
       "pages": [
+        "docs/live/como-acessar-plataforma",
         "docs/accounts/sso"
       ]
     },
@@ -54,7 +55,6 @@
     {
       "group": "Live",
       "pages": [
-        "docs/live/como-acessar-plataforma",
         "docs/live/meu-perfil",
         "docs/live/criar-contato",
         "docs/live/adicionar-canal-email",
