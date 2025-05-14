@@ -46,6 +46,9 @@ alimentar a variável Tokenacesso ou se o Token estiver expirado, renová-lo.
 - Após a renovação ou atualização do Token, ele será enviado para uma variável responsável pelo armazenamento do conteúdo mais recente.
 ![renovação](https://robbublob.blob.core.windows.net/docs/renovacao.png)
 
+- Agora com o Token atualizado/renovado já podemos fazer as conversões e
+envio ao RD Station. Como as variáveis já estão mapeadas, é só enviar via POST.
+[renovação](https://robbublob.blob.core.windows.net/docs/renovacao1.png)
 
 ---
 
@@ -54,13 +57,13 @@ alimentar a variável Tokenacesso ou se o Token estiver expirado, renová-lo.
 - Com o Token atualizado ou renovado:
   - Realize as conversões necessárias.
   - Envie os dados via `POST` para a RD Station.
-
+![envio rdstation](https://robbublob.blob.core.windows.net/docs/enviord.png)
 ---
 
 ### 🏷️ Mapeamento de Tags
 
 - Mapeie as tags para identificar a origem dos dados.
 - Exemplo: adicionar uma tag indicando que um chat foi iniciado no RD Station.
-
+![origem](https://robbublob.blob.core.windows.net/docs/origem.png)
 > Todos os envios são realizados via `POST` à RD Station.
 
