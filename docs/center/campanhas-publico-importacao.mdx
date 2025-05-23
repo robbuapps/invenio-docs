@@ -4,99 +4,142 @@ sidebarTitle: "Importação de Público e Campanhas"
 description: "A importação de público é um recurso que pode ser utilizado tanto como ponto de partida para uma campanha massificada (WhatsApp, e-mail ou SMS) quanto para atualização da sua base de contatos e clientes."
 ---
 
+## 📣📦📬 Campanhas – Público e Importação
 
-## Visão Geral
+A importação de público é um recurso que pode ser utilizado tanto como ponto de partida para uma campanha massificada (WhatsApp, e-mail ou SMS), quanto para atualização da base de contatos e clientes. 🎯📈🔁
 
-A importação de público é uma funcionalidade que pode ser utilizada de duas formas principais:
+### 🗃️🧾🛠️ Atualização da Base
 
+Ao inserir uma base de clientes:
 
-1. **Atualização da Base de Contatos:**
+* O sistema garante que, ao enviar uma nova mensagem por canais especificados, o cliente já terá seu cadastro preenchido com as informações fornecidas.
+* Facilita o trabalho de:
 
-   * Permite que clientes já estejam com seus cadastros preenchidos ao interagirem com os canais da empresa.
-   * Facilita o atendimento humano e a automação via IDR.
+  * Agentes de atendimento
+  * Fluxos de automação via IDR
 
-2. **Público para Campanha:**
+### 🎯📊📨 Público para Campanha
 
-   * A base importada pode ser utilizada em campanhas massificadas via WhatsApp, e-mail ou SMS.
-   * Permite envios pontuais ou recorrentes.
-   ![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub.png) 
+* Toda base importada pode ser utilizada em campanhas massificadas (pontuais ou recorrentes).
+![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub.png)
 
-## Acessando a Importação de Público
+### 🧭📂⬇️ Acesso à Importação
 
-Para iniciar, selecione a opção **Engajar > Importar Público**.
+1. Selecione a primeira opção do menu **Engajar**.
+2. Na tela seguinte, são exibidos todos os públicos previamente importados.
+3. Clique em **Layout** no canto inferior esquerdo para baixar o template `.csv`.
+![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub1.png)
 
-
-
-## Layout do Arquivo de Importação
-
-Clique em **Layout** no canto inferior esquerdo da tela para baixar o template `.csv`.
-![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub1.png) 
-
-
-### Campos do Template
-
-* **Tipo de Registro \[OBRIGATÓRIO]**: `TELEFONE` ou `EMAIL`. Pode haver múltiplas linhas por contato.
-* **Valor do Registro \[OBRIGATÓRIO]**: Canal do cliente (telefone com DDD ou e-mail).
-* **Mensagem**: Pré-preenchida para campanhas de SMS (opcional).
-* **Nome Cliente**: Recomendado para facilitar identificação.
-* **CPFCNPJ**: Auxilia na diferenciação de homônimos e integração com sistemas.
-* **CODCLIENTE**: Código interno do cliente na empresa.
-* **TAG**: Auxilia em buscas e relatórios.
-* **CORINGA (1\~5)**: Campos personalizados para compor mensagens com variáveis.
+### 📋📄📌 Estrutura do Arquivo CSV
 ![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub2.png) 
-#### Exemplo de uso dos Coringas:
+#### 🧱📌📤 Colunas do Template
 
-Mensagem:
+* **Tipo de Registro \[OBRIGATÓRIO]**: Valores possíveis: `TELEFONE` ou `EMAIL`.
 
-```
-Olá, @PrimeiroNome, teremos neste sábado uma promoção especial em um endereço perto de você: @Coringa1
-```
+  * Um contato pode ter múltiplas linhas (um canal por linha).
 
+* **Valor do Registro \[OBRIGATÓRIO]**:
 
+  * Insira o canal (número de telefone com DDD ou e-mail).
 
-* **PRIORIDADE**: Define ordem de atendimento (`BAIXA`, `MEDIA`, `ALTA`).
+* **Mensagem**:
 
-## Regras para Importação Bem-sucedida
+  * Usado em campanhas SMS para pré-determinar o conteúdo.
+  * Não obrigatório.
 
-A importação **falhará** se:
+* **Nome Cliente**:
 
-* A estrutura de colunas for alterada.
-* Existirem colunas obrigatórias vazias (TIPO\_DE\_REGISTRO; VALOR\_DO\_REGISTRO).
-* Houver fórmulas nas células.
-* Abas extras forem adicionadas.
-* Houver conteúdo fora das colunas do layout.
+  * Recomendado para facilitar localização e interação.
 
- ### Coringa1 a Coringa4: até 300 caracteres. Coringa5: até 3000 caracteres.
+* **CPFCNPJ**:
 
-## Limites de Mensagens SMS
+  * Importante para evitar homônimos e permitir integrações externas.
 
-Cada envio de SMS:
+* **CODCLIENTE**:
 
-* Limite de 160 caracteres.
-* Caracteres especiais (\n, ^, {, }, \[, \~, ], |, €, etc.) contam como **2 caracteres**.
-* Exceder o limite resulta em cobrança duplicada.
+  * Identificador interno da empresa (ex: número de contrato).
 
-## Importação no Invenio Center
+* **TAG**:
 
-Clique em **Importar Público** para prosseguir:
+  * Facilita relatórios e buscas.
+
+* **CORINGA (1 a 5)**:
+
+  * Campos de personalização de mensagens.
+  * Exemplo de uso:
+
+    ```
+    "Olá, @PrimeiroNome, teremos neste sábado uma promoção especial em um endereço perto de você: @Coringa1"
+    ```
+  * **Coringas 1 a 4**: Até 300 caracteres cada
+  * **Coringa 5**: Até 3000 caracteres
+
+* **PRIORIDADE**:
+
+  * Defina entre: `BAIXA`, `MEDIA` ou `ALTA`
+  * Impacta a fila de atendimento
+
+### 🚫📛🛑 Regras para Importação Bem-Sucedida
+
+* Não alterar quantidade de colunas
+* Não deixar colunas obrigatórias vazias
+* Não usar fórmulas nas células
+* Não adicionar abas
+* Não inserir conteúdo fora das colunas do layout
+
+### ✉️📏💬 Considerações sobre Mensagens SMS
+
+* Limite de 160 caracteres por envio
+* Caracteres especiais (\n, ^, {}, \[], \~, |, €) contam como 2 caracteres
+* Se excedido, será cobrado como dois envios
+
+### 🧩📥🖥️ Processo de Importação no Invenio Center
+
+1. Salve o arquivo
+2. Clique em **Importar Público**
+3. Preencha os seguintes campos na nova janela:
 ![importar publico](https://robbublob.blob.core.windows.net/docs/importarpub.png) 
-
-
-### Configurações da Janela de Importação
-
-* **Descrição**: Nome do público.
-* **Segmento**: Grupo ao qual o público pertence.
-* **Arquivo**: CSV com os dados.
-* **Autorização de Processamento**: Política de consentimento da empresa.
+   * **Descrição**: Nome do público
+   * **Segmento**: Segmento de destino
+   * **Arquivo**: Selecione o arquivo preparado
+   * **Autorização de Processamento**: Escolha de acordo com a política da empresa
 ![importar publico](https://robbublob.blob.core.windows.net/docs/importarpub1.png) 
-#### Invenio Verify
+### ⚙️🔍🧠 Recursos Avançados
 
-Ferramenta que verifica se o telefone já teve interação na plataforma. Atualiza os dados ou descarta linhas sem histórico.
+#### 📞📊🧪 Invenio Verify
 
- ## Nota: Não verifica se o número possui WhatsApp no momento da importação.
+* Valida se o telefone teve interação anterior
+* Atualiza dados ou descarta a linha
+* **Não valida** previamente a disponibilidade de WhatsApp
+* A confirmação vem por callback da API da Meta após o envio
 
-(Para contratar, entre em contato com seu agente comercial.)
+> Para contratação, contate seu agente comercial 📞📝🤝
 
-* **Verificar site Não Perturbe**: Impede importação de contatos registrados nesse serviço.
-* **Manter apenas neste segmento**: Remove segmentos anteriores.
-* **Limpar tag de localização**: Exclui tags de localização existentes.
+#### 🚫📵🔍 Verificar site Não Perturbe
+
+* Checa contatos na lista do site Não Perturbe
+* Contatos encontrados são descartados
+
+#### 📌📍🚫 Manter Apenas Neste Segmento
+
+* Remove outros segmentos vinculados ao contato
+
+#### 🧼🏷️🗑️ Limpar Tag de Localização
+
+* Remove tags de localização anteriores
+
+
+   
+
+
+
+
+
+
+
+
+
+
+![importar publico](https://robbublob.blob.core.windows.net/docs/importarpub1.png) 
+
+
