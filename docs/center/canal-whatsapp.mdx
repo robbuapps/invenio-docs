@@ -1,0 +1,161 @@
+---
+title: "Canal WhatsApp"
+sidebarTitle: "Canal WhatsApp"
+description: "Informações sobre o uso, integração e boas práticas do canal WhatsApp no Invenio."
+---
+
+## 📲 Canal WhatsApp
+
+O **WhatsApp** é um dos canais mais usados para comunicação entre empresas e clientes.  
+Na **plataforma Invenio**, esse canal:
+
+- É considerado **online**
+- Pode ser integrado por meio de:
+  - Linhas adquiridas com a **Robbu**
+  - Números existentes do cliente
+
+A integração é realizada pela equipe da **Positus**, utilizando a **API oficial do WhatsApp via Meta Business**.
+
+> 🚀 **Vantagens**: alta performance e escalabilidade  
+> ⚠️ **Atenção**: siga as regras da Meta, pois o uso é monitorado constantemente
+
+![Integração WhatsApp](https://exemplo.com/imagem1.png)
+
+---
+
+## ✉️ Envio de Mensagens e Limites
+
+O WhatsApp permite:
+
+- Mensagens de até **60 mil caracteres**
+- Suporte a **diversos tipos de mídias**
+
+### 📦 Tabela de limites por tipo de mídia
+
+| Tipo de mídia | Tamanho máximo | Formatos aceitos (MIME)                              |
+|---------------|----------------|-------------------------------------------------------|
+| Áudio         | 16 MB          | `audio/aac`, `audio/mp4`, `audio/amr`, `audio/mpeg`, `audio/ogg; codecs=opus` |
+| Documento     | 100 MB         | Qualquer formato válido (`application/pdf`, etc.)    |
+| Imagem        | 5 MB           | `image/jpeg`, `image/png`                            |
+| Sticker       | 100 KB         | `image/webp`                                         |
+| Vídeo         | 16 MB          | `video/mp4`, `video/3gpp`                            |
+
+🔗 [Consulte a documentação oficial da Meta](https://developers.facebook.com/docs/whatsapp/on-premises/reference/media)
+
+---
+
+## 🧾 WABA – WhatsApp Business Account
+
+**WABA** é a conta comercial usada para gerenciar as linhas vinculadas à Meta.  
+A configuração é feita pela **Positus**, seguindo as diretrizes da **Meta Business**.
+
+> 💡 É possível conectar múltiplas WABAs ao mesmo ambiente Invenio, proporcionando flexibilidade e controle.
+
+![WABA](https://exemplo.com/imagem2.png)
+
+---
+
+## 📥 Linhas Receptivas
+
+As **linhas receptivas**:
+
+- Recebem mensagens iniciadas pelos clientes
+- São canais de **entrada essenciais** para manter uma comunicação espontânea e contínua
+
+![Linhas receptivas](https://exemplo.com/imagem3.png)
+
+---
+
+## 📤 Linhas Prospect
+
+As **linhas prospect** são voltadas para campanhas de **envio ativo (Outbound)**.
+
+### ✅ Benefícios
+
+- Preservam as linhas receptivas contra SPAM e bloqueios
+- Se penalizadas, **não afetam a operação principal**
+
+> 💡 Para enviar campanhas com linhas prospect:
+> - Tenha ao menos **3 linhas ativas**
+> - Todas com **boa classificação de qualidade**
+
+### 🔀 Aleatorização Inteligente
+
+O sistema alterna entre as linhas ativamente, o que:
+
+- Evita desgaste concentrado
+- Minimiza riscos de bloqueio
+- Garante continuidade mesmo em caso de queda de qualidade
+
+![Linhas prospect](https://exemplo.com/imagem4.png)
+
+---
+
+## 📊 Limites e Classificações das Linhas
+
+Na interface do Invenio, é possível acompanhar:
+
+- 📈 **Limite de mensagens**
+- 🟢 **Classificação de qualidade**
+
+Ambos são definidos pela Meta com base em:
+
+- Critérios técnicos
+- Engajamento e comportamento dos usuários
+
+![Classificação de linhas](https://exemplo.com/imagem5.png)
+
+---
+
+## 🔼 Aumento de Limite
+
+Cada linha começa com **1.000 mensagens/dia**.  
+Com uso responsável, pode alcançar até **100.000 mensagens/dia**.
+
+### 📈 Critérios para aumento automático:
+
+- Linha com status **Conectado**
+- Classificação **Green** ou **Yellow**
+- Pelo menos **50% do limite atual** utilizado nos últimos 7 dias
+
+---
+
+## 🔽 Redução de Limite
+
+Se a linha tiver classificação **Red** por 7 dias consecutivos, a Meta reduz imediatamente seu limite.
+
+---
+
+## 🟢 Classificação de Qualidade
+
+Avalia a **reputação da linha**, com base em interações dos últimos 7 dias.  
+Atualizada constantemente no Invenio.
+
+| Status   | Descrição |
+|----------|-----------|
+| ✅ **Green** | Linha saudável, sem restrições |
+| ⚠️ **Yellow** | Linha em alerta. Pode sofrer restrições. Decorre de denúncias ou bloqueios |
+| ❌ **Red** | Baixa qualidade. Alto risco de banimento |
+
+> ⚠️ O Facebook **não revela** os usuários que bloquearam ou denunciaram a linha.
+
+🔗 [Mais informações na documentação oficial da Meta](https://www.facebook.com/business/help/896873687365001)
+
+![Qualidade da linha](https://exemplo.com/imagem6.png)
+
+---
+
+## 🛡️ Boas Práticas para Manter a Qualidade
+
+Para garantir uma boa reputação:
+
+- ✅ Siga a [Política do WhatsApp Business](https://business.whatsapp.com/policy)
+- 🟢 Envie mensagens **somente para contatos que consentiram**
+- ✍️ Personalize o conteúdo e evite mensagens genéricas
+- 🚫 Evite excesso de mensagens
+- 📅 Controle a frequência dos envios com foco em **relevância e clareza**
+
+---
+
+✅ **Com essas orientações, você garante mais segurança, qualidade e continuidade nos envios via WhatsApp com o Invenio.**
+
