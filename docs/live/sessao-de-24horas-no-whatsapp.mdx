@@ -6,7 +6,7 @@ Essa regra foi criada para proteger os usuários contra spam e manter a qualidad
 "
 ---
 
-# 💬 Como funciona a janela de 24 horas
+##  Como funciona a janela de 24 horas
 
 Sempre que um **cliente envia uma mensagem para sua empresa**, ele abre automaticamente uma
 janela de 24 horas de conversação. Durante esse período, você poderá **responder com mensagens
@@ -14,7 +14,7 @@ janela de 24 horas de conversação. Durante esse período, você poderá **resp
 A cada nova mensagem enviada pelo **cliente**, essa janela é **reiniciada**, e o contador de 24 horas 
 começa novamente. Isso permite que a comunicação se mantenha fluida e contínua enquanto houver interação por parte do cliente.
 
-## 🙋 Conversas iniciadas pelo cliente (Inbound)
+##  Conversas iniciadas pelo cliente (Inbound)
 
 Quando a conversa é iniciada de forma **receptiva**, ou seja, **o cliente entra em contato** com a empresa primeiro, as seguintes regras
  se aplicam:
@@ -25,7 +25,7 @@ Quando a conversa é iniciada de forma **receptiva**, ou seja, **o cliente entra
 
 Esse cenário representa o fluxo mais natural e aberto de comunicação, ideal para atendimentos de suporte, dúvidas ou solicitações.
 
-## 🏢 Conversas iniciadas pela empresa (Outbound)
+##  Conversas iniciadas pela empresa (Outbound)
 
 Quando a conversa é iniciada de forma **ativa**, ou seja, **a empresa envia a primeira mensagem**, o funcionamento muda um pouco:
 - 	A empresa só pode iniciar a conversa utilizando ***templates previamente aprovados pelo WhatsApp (HSM).***
@@ -34,20 +34,41 @@ Quando a conversa é iniciada de forma **ativa**, ou seja, **a empresa envia a p
 
 Esse controle garante que a comunicação ativa seja feita com responsabilidade e sempre com consentimento do cliente.
 
+> ⚠️ **Importante**  
+> Caso seja feita uma tentativa de envio de **mensagem livre fora da janela de 24 horas**, a Meta retornará uma mensagem informando que a **sessão não está aberta**, impedindo o disparo da comunicação até que uma nova interação válida ocorra ou um template seja enviado.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/InvenioLive/img1sessao24horas.png" /> 
+
+Manter o controle adequado da sessão de 24 horas é essencial para garantir o bom uso do canal, evitar bloqueios e manter a **qualidade da linha no Meta**. 
+
+## ⁉️ Perguntas Frequentes
+
 <AccordionGroup>
-&nbsp;&nbsp;&nbsp;&nbsp;⚠️ **Importante**  
-<br />
 
+  <Accordion title="O que é a janela de 24 horas do WhatsApp?">
+    É um período de 24 horas que se inicia após o cliente enviar uma mensagem para a empresa. Durante essa janela, a empresa pode responder com mensagens livres, sem necessidade de templates aprovados.
+  </Accordion>
 
-&nbsp;&nbsp;&nbsp;&nbsp;Caso seja feita uma tentativa de envio de **mensagem livre fora da janela de 24 horas**, a Meta retornará uma mensagem informando que a **sessão não está aberta**, impedindo o disparo da comunicação até que uma nova interação válida ocorra ou um template seja enviado.
+  <Accordion title="O que acontece quando o cliente envia uma nova mensagem dentro da janela?">
+    A janela de 24 horas é reiniciada a cada nova mensagem do cliente, garantindo mais 24 horas para que a empresa continue a conversa com mensagens livres.
+  </Accordion>
 
-<br />
+  <Accordion title="A empresa pode iniciar uma conversa a qualquer momento?">
+    Não. Para iniciar uma conversa, a empresa deve usar um template aprovado pelo WhatsApp. Apenas após a resposta do cliente será possível enviar mensagens livres dentro da janela de 24 horas.
+  </Accordion>
+
+  <Accordion title="O que são mensagens livres?">
+    São mensagens de texto que não precisam seguir um modelo (template) pré-aprovado. Elas só podem ser enviadas enquanto a janela de 24 horas estiver aberta.
+  </Accordion>
+
+  <Accordion title="O que acontece se a empresa tentar enviar uma mensagem fora da janela de 24 horas?">
+    A Meta retorna uma mensagem de erro informando que a **sessão não está aberta**, impedindo o envio até que o cliente interaja novamente ou um novo template seja enviado.
+  </Accordion>
+
+  <Accordion title="É possível reabrir a janela de 24 horas?">
+    Sim. A janela é reaberta automaticamente quando o cliente envia uma nova mensagem ou responde a um template enviado pela empresa.
+  </Accordion>
 
 
 </AccordionGroup>
-
-
-
-<img src="" /> 
-
-Manter o controle adequado da sessão de 24 horas é essencial para garantir o bom uso do canal, evitar bloqueios e manter a **qualidade da linha no Meta**. 
