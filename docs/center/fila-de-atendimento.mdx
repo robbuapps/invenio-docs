@@ -118,44 +118,34 @@ Ideal para **altos volumes** e exige configurações específicas:
 
 ## ❓ FAQ (Perguntas Frequentes)
 
-<Accordion type="single" collapsible>
+<AccordionGroup>
 
-<AccordionItem value="visibilidade-na-fila">
-  <AccordionTrigger>Por que um contato não aparece na fila?</AccordionTrigger>
-  <AccordionContent>
-    Apenas contatos com pendência aparecem na fila. Certifique-se de que há uma mensagem não respondida, uma transferência ou movimentação de responsabilidade recente.
-  </AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="prioridade-chat">
-  <AccordionTrigger>O canal Chat sempre terá prioridade?</AccordionTrigger>
-  <AccordionContent>
-    Sim. O Chat deve ter prioridade máxima para garantir atendimento em tempo real a visitantes do site.
-  </AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="kpi-e-pendencia">
-  <AccordionTrigger>Registrar KPI remove pendência?</AccordionTrigger>
-  <AccordionContent>
-    Sim. Ao registrar um evento KPI no contato, a pendência é automaticamente removida da fila.
-  </AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="distribuicao-auto-manual">
-  <AccordionTrigger>Quando usar distribuição automática ou manual?</AccordionTrigger>
-  <AccordionContent>
-    Manual é ideal para pequenos times e controle personalizado. Automática é recomendada para grandes volumes, com regras de prioridade e equilíbrio de carga entre operadores.
-  </AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="fila-vs-idr">
-  <AccordionTrigger>Qual a relação entre fila e IDR?</AccordionTrigger>
-  <AccordionContent>
-    A fila recebe o contato antes da IDR quando ele é transferido pela primeira vez. Isso permite que, eventualmente, ele seja atendido antes de ser totalmente roteado pela IDR.
-  </AccordionContent>
-</AccordionItem>
-
+<Accordion title="Por que um contato não aparece na fila?">
+Apenas contatos com pendência aparecem na fila. Certifique-se de que houve uma mensagem não respondida, uma transferência ou movimentação de responsabilidade recente. Contatos sem pendências são ocultados da fila para manter o foco dos operadores.
 </Accordion>
+
+<Accordion title="O canal Chat sempre terá prioridade?">
+Sim. O canal Chat deve ter prioridade absoluta em relação aos demais, pois o atendimento é em tempo real. Isso garante agilidade ao visitante do site e evita perda de oportunidade de conversão.
+</Accordion>
+
+<Accordion title="Registrar KPI remove a pendência?">
+Sim. Ao registrar um evento de KPI em uma conversa, a pendência é automaticamente removida, sinalizando que o atendimento foi encerrado ou tratado conforme esperado.
+</Accordion>
+
+<Accordion title="Como funciona a prioridade na fila de atendimento?">
+A fila considera a prioridade do canal, depois a do contato e, por fim, a data/hora da mensagem recebida. Esse modelo garante que os atendimentos mais urgentes e importantes apareçam primeiro.
+</Accordion>
+
+<Accordion title="Qual a diferença entre distribuição manual e automática?">
+A distribuição manual exige que o operador clique em "Próximo" para assumir um contato. Já a distribuição automática obedece regras como TMR, número de fidelizações e pendências para distribuir os contatos entre os operadores disponíveis.
+</Accordion>
+
+<Accordion title="O que acontece se um contato não tiver segmento definido?">
+Ele será direcionado à fila do ambiente. Usuários com permissão poderão visualizá-lo e atendê-lo, mesmo fora de uma segmentação específica.
+</Accordion>
+
+</AccordionGroup>
+
 
 ---
 
