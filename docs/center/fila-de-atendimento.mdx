@@ -1,0 +1,163 @@
+---
+title: "Documentação de Atendimento - Fluxo de Contatos e Organização da Fila"
+sidebarTitle: "Fila de Atendimento"
+description: "Entenda como funciona a fila de atendimento, critérios de prioridade e métodos de distribuição no Invenio Live."
+---
+
+## 🧾 Fila de Atendimento
+
+A **fila de atendimento** exibe os contatos pendentes, visualizados tanto no painel de Otimização quanto no **Invenio Live**.
+
+### 🔸 O que gera pendência:
+
+1. **Mensagem não respondida** — Quando um contato não recebe resposta.  
+2. **Transferência rápida** — Contato movido entre usuários ou segmentos.  
+3. **Transferência de responsabilidade** — Quando o responsável pelo contato muda.
+
+### 🟢 O que remove a pendência:
+
+1. **Responder o contato**.  
+2. **Marcar como lida** (LIVE ou Otimização).  
+3. **Registrar KPI evento**.
+
+> ℹ️ **Nota:** Contatos sem pendência não ficam visíveis na fila.  
+Para evitar que entrem em hibernação ou fidelização, finalize a conversa após o atendimento.
+
+---
+
+## 📊 Organização da Fila
+
+A fila é dinâmica e organizada com base em:
+
+- **Prioridade do Contato**  
+- **Data/Hora de Início da Pendência**
+
+### Critérios de Priorização:
+
+- **Prioridade do Contato:**  
+  - Alta > Média > Baixa
+- **Pendência:**  
+  - Contatos mais antigos vêm primeiro.
+
+> ❗A criticidade é apenas uma indicação de urgência, **não altera a posição** do contato na fila.
+
+---
+
+## ⚙️ Fatores que Alteram a Prioridade
+
+1. **Palavras-chave cadastradas**  
+2. **Fluxo do ChatBot** com lógica de alteração  
+3. **Cadastro de Público com prioridade definida**  
+4. **Edição manual do contato**
+
+---
+
+## 🪪 Prioridade de Canais
+
+A fila leva em consideração os seguintes critérios, **em ordem crescente**:
+
+1. Prioridade do Canal  
+2. Prioridade do Contato  
+3. Data de Recebimento da Mensagem
+
+> 💡 Canais como **Chat** devem ter prioridade máxima, já que o cliente está online no momento.
+
+---
+
+## 🔁 Mensageria e Envio à Fila da Operação
+
+### Sem IDR (Identificador de Roteamento):
+
+
+### Com IDR:
+
+Mensagem recebida → Segmento (se houver) → Fila de Operação
+
+Mensagem recebida → IDR do Canal → Fila do Segmento Vinculado
+
+
+> ☝️ Um contato entra na fila apenas quando há uma **pendência de resposta**.
+
+### Comportamentos específicos:
+
+- Primeiro envio move o contato para a fila antes de cair na IDR.
+- Contatos sem segmento vão para a **fila geral**.
+- Contatos podem ser filtrados com:  
+  **Otimização > FILTRO: IDR**
+
+---
+
+## 🧑‍💻 Métodos de Distribuição
+
+### 📍 Distribuição Manual
+
+Usada em ambientes com **baixo volume de atendimento**.  
+- Atendente clica em **"Próximo"**  
+- Fidelização imediata do contato
+
+> ⚙️ Se nenhum método estiver configurado, o sistema usa distribuição manual por padrão.
+
+🔗 [Método de Distribuição](https://docs.robbu.global/docs/live/metodos-de-distribuicao)
+---
+
+### ⚡ Distribuição Automática
+
+Ideal para **altos volumes** e exige configurações específicas:
+
+- Limite máximo de pendências  
+- Fidelizações por canal  
+- Tempo de castigo por atraso
+
+#### Tipos de distribuição preditiva:
+
+1. **Média de Clientes Fidelizados**  
+2. **Média de Clientes Pendentes**  
+3. **Incentivar TMR Baixo** — Priorização por tempo de resposta
+
+---
+
+## ❓ FAQ (Perguntas Frequentes)
+
+<Accordion type="single" collapsible>
+
+<AccordionItem value="visibilidade-na-fila">
+  <AccordionTrigger>Por que um contato não aparece na fila?</AccordionTrigger>
+  <AccordionContent>
+    Apenas contatos com pendência aparecem na fila. Certifique-se de que há uma mensagem não respondida, uma transferência ou movimentação de responsabilidade recente.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="prioridade-chat">
+  <AccordionTrigger>O canal Chat sempre terá prioridade?</AccordionTrigger>
+  <AccordionContent>
+    Sim. O Chat deve ter prioridade máxima para garantir atendimento em tempo real a visitantes do site.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="kpi-e-pendencia">
+  <AccordionTrigger>Registrar KPI remove pendência?</AccordionTrigger>
+  <AccordionContent>
+    Sim. Ao registrar um evento KPI no contato, a pendência é automaticamente removida da fila.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="distribuicao-auto-manual">
+  <AccordionTrigger>Quando usar distribuição automática ou manual?</AccordionTrigger>
+  <AccordionContent>
+    Manual é ideal para pequenos times e controle personalizado. Automática é recomendada para grandes volumes, com regras de prioridade e equilíbrio de carga entre operadores.
+  </AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="fila-vs-idr">
+  <AccordionTrigger>Qual a relação entre fila e IDR?</AccordionTrigger>
+  <AccordionContent>
+    A fila recebe o contato antes da IDR quando ele é transferido pela primeira vez. Isso permite que, eventualmente, ele seja atendido antes de ser totalmente roteado pela IDR.
+  </AccordionContent>
+</AccordionItem>
+
+</Accordion>
+
+---
+
+> 📘 Dica: Use o filtro de IDR para entender melhor onde seus contatos estão dentro do fluxo e otimize o tempo de atendimento.
+
