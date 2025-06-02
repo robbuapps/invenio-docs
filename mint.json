@@ -62,7 +62,9 @@
         "docs/live/adicionar-canal-whatsapp",
         "docs/live/exportacao-de-conversas",
         "docs/live/enviar-mensagem",
-        "docs/live/sessao-de-24horas-no-whatsapp"
+        "docs/live/sessao-de-24horas-no-whatsapp",
+        "docs/live/metodos-de-distribuicao",
+        "docs/live/lista-de-desejos"
       ]
     },
     {
@@ -87,7 +89,8 @@
         "docs/center/como-alterar-imagem-da-linha-whatsapp",
         "docs/center/integracao-invenio-rdstation",
         "docs/center/gestao-frases-prontas",
-        "docs/center/usuarios"
+        "docs/center/usuarios",
+        "docs/center/filtros-de-busca-de-contatos"
       ]
     },
     {
