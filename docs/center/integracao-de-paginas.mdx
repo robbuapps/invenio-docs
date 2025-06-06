@@ -1,0 +1,97 @@
+---
+title: "Integração de Páginas"
+sidebarTitle: "Integração de Páginas"
+description: "Aprenda a configurar páginas integradas no Invenio Center e Live, utilizando links, targets e ações para melhorar seus atendimentos."
+---
+
+## 🌐 Integração de Páginas
+
+Aqui você encontrará informações valiosas para facilitar suas consultas e retornos de informações no dia a dia. Aprenda a integrar páginas de forma simples e prática no **Invenio Center** e **Invenio Live**, aproveitando ao máximo as funcionalidades disponíveis.
+
+---
+
+### 🔧 Como Acessar
+
+1. Acesse o **Invenio Center**
+2. Clique na imagem do seu usuário
+3. Vá até **Configurações**
+
+> <img
+>   src="https://robbublob.blob.core.windows.net/docs/configuracoes.png"
+>   alt="configurações"
+>   style={{ width:"100%" }}
+>   title="Configurações"
+> />
+
+> <img
+>   src="https://robbublob.blob.core.windows.net/docs/integracaopaginas.png"
+>   alt="integração paginas"
+>   style={{ width:"55%" }}
+> />
+
+---
+
+### ➕ Como Criar uma Página Integrada
+
+Ao clicar em **“Adicionar página”**, preencha os seguintes campos:
+
+#### 🏷️ Título do botão
+
+É o nome que será exibido no **Invenio Center** e no **Invenio Live**.
+
+#### 🎯 Target (comportamento da página)
+
+Três opções disponíveis:
+
+- `_blank`: Abre o link ou resultado em uma nova aba ou janela.\
+  **Exemplo**: Você quer consultar o CRM sem sair do atendimento no Invenio Live? Use `_blank` para abrir a página em outra aba e manter o atendimento atual.
+- `_self`: Substitui a aba/página atual pelo conteúdo do link.\
+  **Exemplo**: O cliente precisa de uma documentação? Use `_self` para mostrar a documentação diretamente na mesma aba.
+
+#### ⚙️ Action
+
+A ação define o destino ou comportamento do link, geralmente usado com formulários:
+
+- **Formulários HTML**: Define o destino dos dados enviados.
+- **Frameworks MVC**: Aponta para métodos de backend que processam dados.
+- **Chamada URL**: Link direto para consulta externa.\
+  **Exemplo**: `https://robbu.global/docs/faq-perguntas-frequentes/`
+> ![add pagina](https://robbublob.blob.core.windows.net/docs/addpagina.png)
+---
+
+### 🧪 Como testar o link após a criação?
+
+Você pode validar o link de duas formas:
+
+1. **No Invenio Center**\
+   Clique diretamente na coluna **Chamada URL**.
+
+> ![add pagina](https://robbublob.blob.core.windows.net/docs/minhapagina.png)
+
+2. **No Invenio Live**\
+   Acesse um contato → vá para **Configurações**\
+   O link será exibido após “Manutenção de canais”.
+
+   > ![links paginas](https://robbublob.blob.core.windows.net/docs/linkspaginas.png)
+
+---
+
+## ❓ FAQ
+
+<AccordionGroup>
+  <Accordion title="Posso usar qualquer link na integração de páginas?">
+    Sim, desde que o link esteja acessível externamente e utilize HTTPS para segurança. Verifique também se a página de destino permite abertura em iframe, se aplicável.
+  </Accordion>
+  <Accordion title="Qual a diferença prática entre _blank e _self?">
+    \_blank mantém a aba original aberta e cria uma nova com o link, ideal para não interromper o atendimento. Já \_self substitui o conteúdo da aba atual, útil para redirecionamentos simples.
+  </Accordion>
+  <Accordion title="É possível editar uma página integrada após a criação?">
+    Sim. Basta acessar as configurações, localizar a página e clicar no botão de edição. Você pode alterar qualquer campo, incluindo título, target e URL.
+  </Accordion>
+  <Accordion title="A funcionalidade funciona em dispositivos móveis?">
+    Sim, porém o comportamento do target pode variar dependendo do navegador e sistema operacional. Recomenda-se testar nos principais dispositivos utilizados por sua equipe.
+  </Accordion>
+  <Accordion title="Quantas páginas posso integrar no ambiente?">
+    Não há um limite técnico documentado, mas é recomendável manter uma organização lógica e nomeações claras para facilitar o uso no dia a dia.
+  </Accordion>
+</AccordionGroup>
