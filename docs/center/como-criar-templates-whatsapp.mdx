@@ -1,118 +1,107 @@
 ---
-title: "Como criar templates de WhatsApp"
-sidebarTitle: "Como Criar Templates de WhatsApp"
-description: "Aprenda a criar, configurar e enviar templates de WhatsApp no Invenio Center com uso de variáveis, mídias, botões e muito mais."
+title: "Criação de Templates de WhatsApp"
+sidebarTitle: "Como criar Templates de WhatsApp"
+description: "Aprenda a criar templates de mensagem no WhatsApp utilizando o Invenio Center e aproveite ao máximo os recursos disponíveis."
 ---
 
-## ✨ Como criar templates de WhatsApp no Invenio Center
+## 📲 Como criar templates de WhatsApp no Invenio Center
 
 Agora você pode criar templates de WhatsApp de forma rápida e fácil através do nosso novo construtor.
 
----
+### Acesse o menu de templates
 
-### 📲 Acessando o construtor de templates
+Navegue até:
 
-1. Acesse o menu **Canais**
-2. Selecione **WhatsApp**
-3. Escolha a **WABA** desejada  
-   > ![Imagem 1](imagem1)
+**Canais → WhatsApp → Selecione a WABA desejada**
 
-4. Clique em **“Template”** e depois em **“Criar”**  
-   > ![Imagem 2](imagem2)
+![Tela de seleção da WABA](imagem1)
 
-5. Selecione a **categoria**, o **nome do template** (sem acentos ou espaços) e o **idioma**  
-   > ![Imagem 3](imagem3)
+Clique em **"Template"** e depois em **"Criar"**.
 
-6. Clique em **“Continuar”** no canto superior direito  
-   > ![Imagem 4](imagem4)
+![Botão Criar Template](imagem2)
 
----
+### Preencha as informações iniciais
 
-### 📝 Estrutura do Template
+Escolha a **categoria**, **nome do template** (sem acentos ou espaços) e o **idioma**.
 
-A próxima tela será o cadastro do template em si.  
-**Somente o campo "body" é obrigatório**.
+![Formulário inicial](imagem3)
 
-#### 🧩 Header
+> ⚠️ O nome do template não pode conter acentos ou espaços.
 
-Campo opcional, funciona como um cabeçalho. Você pode escolher entre:
+Clique em **Continuar** para ir à tela de composição da mensagem.
 
-- Texto (até 60 caracteres)
-- Imagem
-- Documento
-- Vídeo  
-> ![Imagem 5](imagem5)
-
-#### 🗒️ Body
-
-Parte principal da mensagem.
-
-- Aceita **texto com variáveis** e **emojis**
-- Máximo de **1.024 caracteres**
-- Não utilize mais de um tipo de formatação ao mesmo tempo (negrito, itálico, tachado)  
-> ![Imagem 6](imagem6)  
-> ![Imagem 7](imagem7)
-
-**Exemplo de uso de variáveis:**  
-`Olá, {{1}}, seu contrato {{2}} foi atualizado com sucesso!`
-
-Para adicionar variáveis:
-- Use o botão **“variável”**, ou
-- Insira manualmente: `{{1}}, {{2}}, {{3}}...`
-
-#### 📌 Footer
-
-Texto pequeno, cinza e com menos destaque.  
-Máximo de **60 caracteres**.  
-> ![Imagem 8](imagem8)
+![Botão Continuar](imagem4)
 
 ---
 
-### 🔘 Botões
+## ✍️ Estrutura do Template
 
-Você pode adicionar botões, caso deseje.  
-Máximo de **20 caracteres** por botão.  
-> ![Imagem 9](imagem9)
+### Header (opcional)
 
-✅ Você pode ver uma prévia da mensagem no canto superior direito.  
-> ![Imagem 10](imagem10)
+Você pode adicionar um cabeçalho com:
 
-#### 📎 Exemplos obrigatórios
+- Texto (até 60 caracteres), ou
+- Mídia: imagem, vídeo ou documento.
 
-Se o template possuir mídia no **header** ou variáveis no **body**, é obrigatório fornecer exemplos.  
-> ![Imagem 11](imagem11)
+![Exemplo de Header](imagem5)
 
 ---
 
-### 💬 Tipos de Botões
+### Body (obrigatório)
 
-#### 1. Quick Reply (Resposta Rápida)
+Este é o corpo principal da mensagem. Pode conter:
 
-- Retorna a resposta do cliente como texto
-- Até **3 botões** por template
-- **Sem emojis, variáveis ou quebras de linha**
-> ![Imagem 12](imagem12)
+- Texto com até **1.024 caracteres**
+- Emojis
+- Variáveis: {{1}}, {{2}}, etc.
+
+![Exemplo de Body](imagem6)
+
+> ⚠️ Não misture múltiplos formatos em uma única palavra (negrito + itálico, por exemplo).
+
+As variáveis servem para personalizar a mensagem com dados como nome, endereço, contrato etc.
+
+![Atenção à formatação](imagem7)
+
+---
+
+### Footer (opcional)
+
+Texto pequeno e discreto (até **60 caracteres**), com cor e tamanho reduzidos.
+
+![Exemplo de Footer](imagem8)
+
+---
+
+### Botões (opcional)
+
+Você pode adicionar botões de dois tipos:
+
+#### 1. Quick Reply (resposta rápida)
+
+Retornam o texto do botão como resposta.
+
+- Máximo de 3 botões por template
+- Máximo de 20 caracteres por botão
+- Não aceita emojis, variáveis ou formatação
+
+![Exemplo de Quick Reply](imagem12)
+
+---
 
 #### 2. Call to Action (CTA)
 
-Direciona o cliente para:
+Botões que direcionam o usuário para:
 
-- Um número de **telefone**
-- Uma **URL**
+- Telefone
+- URL Estática (ex: https://robbu.global)
+- URL Dinâmica (ex: https://youtube.com/{{1}})
 
-##### Tipos de URL:
+> ⚠️ Para URL dinâmica, você deve fornecer um exemplo de preenchimento.
 
-- **Estática**: Exemplo: `https://seusite.com`
-- **Dinâmica**: Exemplo: `https://youtube.com/{{1}}`  
-> ![Imagem 13](imagem13)
+![Exemplo CTA](imagem13)  
+![Exemplo de URL dinâmica](imagem14)
 
-✅ É necessário fornecer um exemplo de URL dinâmica:  
-> ![Imagem 14](imagem14)
-
-
-https://www.youtube.com/
-https://www.youtube.com/{{1}}
-Exemplo: 
 <iframe
   width="560"
   height="315"
@@ -122,8 +111,28 @@ Exemplo:
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 ></iframe>
+> ⚠️ Você só pode usar **um tipo de botão por template**.
 
 ---
+
+## 👀 Visualize sua mensagem
+
+Veja a prévia do seu template no canto superior direito da tela.
+
+![Pré-visualização do Template](imagem10)
+
+Se você usou mídia ou variáveis, não se esqueça de adicionar exemplos:
+
+![Exemplo preenchido](imagem11)
+
+---
+
+## ✅ Finalize o cadastro
+
+Clique em **"Criar template"** e aguarde a aprovação da Meta.
+
+---
+
 ## ❓ FAQ
 
 <AccordionGroup>
@@ -167,4 +176,3 @@ Exemplo:
     Sim. Ao usar variáveis no texto ou mídia no header, a Meta exige que você forneça exemplos práticos para validação do template.
   </Accordion>
 </AccordionGroup>
-
