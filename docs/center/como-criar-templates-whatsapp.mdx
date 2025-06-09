@@ -1,0 +1,160 @@
+---
+title: "Como criar templates de WhatsApp"
+sidebarTitle: "Templates de WhatsApp"
+description: "Aprenda a criar, configurar e enviar templates de WhatsApp no Invenio Center com uso de variáveis, mídias, botões e muito mais."
+---
+
+## ✨ Como criar templates de WhatsApp no Invenio Center
+
+Agora você pode criar templates de WhatsApp de forma rápida e fácil através do nosso novo construtor.
+
+---
+
+### 📲 Acessando o construtor de templates
+
+1. Acesse o menu **Canais**
+2. Selecione **WhatsApp**
+3. Escolha a **WABA** desejada  
+   > ![Imagem 1](imagem1)
+
+4. Clique em **“Template”** e depois em **“Criar”**  
+   > ![Imagem 2](imagem2)
+
+5. Selecione a **categoria**, o **nome do template** (sem acentos ou espaços) e o **idioma**  
+   > ![Imagem 3](imagem3)
+
+6. Clique em **“Continuar”** no canto superior direito  
+   > ![Imagem 4](imagem4)
+
+---
+
+### 📝 Estrutura do Template
+
+A próxima tela será o cadastro do template em si.  
+**Somente o campo "body" é obrigatório**.
+
+#### 🧩 Header
+
+Campo opcional, funciona como um cabeçalho. Você pode escolher entre:
+
+- Texto (até 60 caracteres)
+- Imagem
+- Documento
+- Vídeo  
+> ![Imagem 5](imagem5)
+
+#### 🗒️ Body
+
+Parte principal da mensagem.
+
+- Aceita **texto com variáveis** e **emojis**
+- Máximo de **1.024 caracteres**
+- Não utilize mais de um tipo de formatação ao mesmo tempo (negrito, itálico, tachado)  
+> ![Imagem 6](imagem6)  
+> ![Imagem 7](imagem7)
+
+**Exemplo de uso de variáveis:**  
+`Olá, {{1}}, seu contrato {{2}} foi atualizado com sucesso!`
+
+Para adicionar variáveis:
+- Use o botão **“variável”**, ou
+- Insira manualmente: `{{1}}, {{2}}, {{3}}...`
+
+#### 📌 Footer
+
+Texto pequeno, cinza e com menos destaque.  
+Máximo de **60 caracteres**.  
+> ![Imagem 8](imagem8)
+
+---
+
+### 🔘 Botões
+
+Você pode adicionar botões, caso deseje.  
+Máximo de **20 caracteres** por botão.  
+> ![Imagem 9](imagem9)
+
+✅ Você pode ver uma prévia da mensagem no canto superior direito.  
+> ![Imagem 10](imagem10)
+
+#### 📎 Exemplos obrigatórios
+
+Se o template possuir mídia no **header** ou variáveis no **body**, é obrigatório fornecer exemplos.  
+> ![Imagem 11](imagem11)
+
+---
+
+### 💬 Tipos de Botões
+
+#### 1. Quick Reply (Resposta Rápida)
+
+- Retorna a resposta do cliente como texto
+- Até **3 botões** por template
+- **Sem emojis, variáveis ou quebras de linha**
+> ![Imagem 12](imagem12)
+
+#### 2. Call to Action (CTA)
+
+Direciona o cliente para:
+
+- Um número de **telefone**
+- Uma **URL**
+
+##### Tipos de URL:
+
+- **Estática**: Exemplo: `https://seusite.com`
+- **Dinâmica**: Exemplo: `https://youtube.com/{{1}}`  
+> ![Imagem 13](imagem13)
+
+✅ É necessário fornecer um exemplo de URL dinâmica:  
+> ![Imagem 14](imagem14)
+
+```text
+https://www.youtube.com/
+https://www.youtube.com/{{1}}
+Exemplo: https://www.youtube.com/watch?v=HKAKc8CHkOo
+
+## ❓ FAQ
+
+<AccordionGroup>
+  <Accordion title="Preciso preencher todos os campos do template?">
+    Não. Apenas o campo <strong>body</strong> é obrigatório. Os campos <strong>header</strong>, <strong>footer</strong> e <strong>botões</strong> são opcionais.
+  </Accordion>
+
+  <Accordion title="Posso usar acentos ou espaços no nome do template?">
+    Não. O nome do template deve ser <strong>sem espaços ou acentuação</strong> para que a Meta aceite a criação.
+  </Accordion>
+
+  <Accordion title="Qual o limite de caracteres do body?">
+    O corpo da mensagem (<strong>body</strong>) pode conter até <strong>1.024 caracteres</strong>.
+  </Accordion>
+
+  <Accordion title="Quantas variáveis posso usar em um template?">
+    Não há um limite específico de variáveis, mas o texto completo (com as variáveis) deve respeitar os limites de caracteres dos campos. As variáveis devem ser numeradas sequencialmente como <code>{{1}}, {{2}}, {{3}}</code>, etc.
+  </Accordion>
+
+  <Accordion title="O que acontece se eu usar emojis ou formatações no texto?">
+    Emojis são permitidos apenas no body. Você pode usar negrito, itálico ou tachado, mas <strong>não deve combinar múltiplos formatos na mesma palavra ou frase</strong>.
+  </Accordion>
+
+  <Accordion title="Posso usar mídia no header do template?">
+    Sim. O header pode conter <strong>texto</strong> (até 60 caracteres) ou <strong>mídia</strong> (imagem, vídeo ou documento).
+  </Accordion>
+
+  <Accordion title="Quantos botões posso usar em um template?">
+    Você pode adicionar até <strong>3 botões do tipo resposta rápida (quick reply)</strong>. Já para <strong>botões do tipo call to action (CTA)</strong>, é possível adicionar um botão de telefone ou um de URL (estática ou dinâmica), mas apenas <strong>um tipo de botão por template</strong>.
+  </Accordion>
+
+  <Accordion title="É possível misturar quick reply e call to action no mesmo template?">
+    Não. <strong>Templates não podem ter botões mistos</strong>. Você deve escolher entre quick reply ou call to action.
+  </Accordion>
+
+  <Accordion title="Como funciona a URL dinâmica nos botões CTA?">
+    A URL dinâmica permite que uma parte da URL seja personalizada com uma variável, como em <code>https://youtube.com/{{1}}</code>. Você precisa cadastrar um exemplo ao criar o template.
+  </Accordion>
+
+  <Accordion title="Preciso cadastrar exemplos se usar variáveis ou mídia?">
+    Sim. Ao usar variáveis no texto ou mídia no header, a Meta exige que você forneça exemplos práticos para validação do template.
+  </Accordion>
+</AccordionGroup>
+
