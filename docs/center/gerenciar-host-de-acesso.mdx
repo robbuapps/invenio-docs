@@ -1,0 +1,95 @@
+---
+title: "Gerenciar Host de Acesso"
+sidebarTitle: "Host de Acesso"
+description: "Aprenda como controlar IPs e domínios permitidos para acesso externo no Invenio Center/Live, garantindo segurança e conformidade."
+---
+
+## 🔐 Gerenciar Host de Acesso
+
+Seja bem-vindo ao guia de controle de acessos de IP no **Invenio Center/Live**!  
+Este documento irá te ajudar a **gerenciar os IPs e domínios permitidos** para acesso externo e garantir a segurança da sua empresa.
+
+---
+
+## ⚙️ Passo a passo para cadastrar IPs e domínios
+
+1. Acesse as **Configurações** do Center.  
+   ![Configurações do Center](/imagem1)
+
+2. Selecione a opção **"Gerenciar Hosts de Acesso"**.  
+   ![Gerenciar Hosts de Acesso](/imagem2)
+
+3. Adicione os **IPs e domínios** que deseja permitir o acesso externo.  
+   ![Cadastro de IPs e domínios](/imagem3)
+
+> 💾 Após adicionar, clique em **Salvar** para aplicar as alterações.
+
+---
+
+## 🌐 Garantindo o Acesso Externo
+
+Para garantir que um usuário possa acessar o Invenio de fora da rede configurada:
+
+1. **Verifique se o IP do usuário está cadastrado** em “Gerenciar Hosts de Acesso”.
+
+2. **Habilite a opção "Acesso Externo"** nas configurações do usuário:
+
+   - Pesquise o usuário no menu correspondente.  
+     ![Busca por usuário](/imagem5)
+   
+   - Selecione o usuário com necessidade de acesso externo.  
+     ![Resultado da busca](/imagem6)
+   
+   - Ative a opção **"Acesso Externo"** e salve as alterações.  
+     ![Ativar acesso externo](/imagem7)
+
+---
+
+## 🔒 Importância de bloquear o acesso externo
+
+Bloquear o acesso externo é essencial para:
+
+### ✅ Segurança  
+Ao restringir o acesso externo, você protege os dados sensíveis da empresa contra acessos não autorizados.
+
+### ✅ Controle de Acesso  
+Permite decidir quem pode acessar a plataforma remotamente, aumentando o controle organizacional.
+
+### ✅ Conformidade  
+Auxilia no cumprimento de regulamentações de segurança e proteção de dados (LGPD, ISO etc.).
+
+> ✅ Seguindo essas boas práticas, você garante **mais segurança, rastreabilidade e conformidade** nos acessos da sua empresa ao Invenio.
+
+---
+
+## ❓ FAQ
+
+<AccordionGroup>
+  <Accordion title="O que é o 'Gerenciar Hosts de Acesso'?">
+    É a funcionalidade que permite definir quais IPs ou domínios têm permissão para acessar o Invenio Center/Live de forma externa.
+  </Accordion>
+
+  <Accordion title="Quantos IPs posso cadastrar?">
+    Não há um limite específico de IPs ou domínios. No entanto, recomenda-se cadastrar somente os realmente necessários para manter a segurança.
+  </Accordion>
+
+  <Accordion title="O que acontece se um IP não estiver cadastrado?">
+    Usuários tentando acessar o sistema fora da rede cadastrada terão o acesso **negado**, a menos que tenham o acesso externo habilitado e estejam em um IP permitido.
+  </Accordion>
+
+  <Accordion title="Como sei se um usuário pode acessar de fora da empresa?">
+    Verifique se:
+    - O IP externo está cadastrado.
+    - O campo “Acesso Externo” está ativado no cadastro do usuário.
+  </Accordion>
+
+  <Accordion title="Por que devo bloquear o acesso externo?">
+    Para proteger informações confidenciais e evitar riscos de segurança. A restrição permite controlar quem acessa remotamente a plataforma.
+  </Accordion>
+
+  <Accordion title="Essa configuração afeta o acesso via celular?">
+    Sim. Se o acesso externo não estiver configurado corretamente, o uso fora da rede corporativa (como dados móveis) pode ser bloqueado.
+  </Accordion>
+</AccordionGroup>
+
+
