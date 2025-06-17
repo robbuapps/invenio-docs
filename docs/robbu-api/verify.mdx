@@ -18,6 +18,15 @@ Para usar a API, você deve realizar uma requisição `POST` para o endpoint `/v
 - O **array pode conter até 1000 números** por chamada.
 - Todos os números devem ser **únicos**, ou seja, **não podem haver repetições** no mesmo array.
 
+#### Regras de concorrência
+
+- Não é permitido realizar chamadas simultâneas para este endpoint utilizando o mesmo PrivateToken.  
+- Se uma requisição estiver em andamento para um determinado PrivateToken e outra requisição for feita antes da conclusão da primeira, a segunda será bloqueada e retornará o seguinte status HTTP
+
+```
+423 Locked
+```
+
 ####  Base Url
 ```
 https://api.robbu.global/v1/verify
