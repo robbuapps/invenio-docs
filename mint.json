@@ -104,7 +104,7 @@
 {
       "group": "Carteiro Digital",
       "pages": [
-        "docs/carteiro-digital/carteiro-digital-api"
+       "docs/carteiro-digital/"
         
       ]
     },
@@ -114,6 +114,7 @@
       "pages": [
         "docs/robbu-api/auth",
         "docs/robbu-api/send-message",
+        "docs/carteiro-digital/carteiro-digital-api",
         "docs/robbu-api/verify"
       ]
     },

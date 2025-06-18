@@ -129,7 +129,7 @@ Bearer MEU_TOKEN
 ---
 
 
-## 🔎 Exemplo de Validação por Token
+## Exemplo de Validação por Token
 
 Se o `contactId` for `11122233344`, o sistema enviará a mensagem ao contato e solicitará a confirmação dos 3 primeiros dígitos: `111`. A partir dessa validação, o contato conseguirá acessar o arquivo.
 
@@ -142,23 +142,38 @@ Para Pix:
 
 ## FAQ
 
+:::accordiongroup
+
+:::accordion
 ### 1. Preciso gerar um token para cada requisição?
 Não. O token pode durar até **3333 dias**. Só é necessário renovar se for retornado `"Unauthorized"` pela API.
+:::
 
+:::accordion
 ### 2. Posso enviar mais de um documento?
 Sim. Basta adicionar múltiplos objetos dentro do array `documentCollection`.
+:::
 
+:::accordion
 ### 3. Como faço para converter meu PDF para Base64?
-Você pode usar qualquer ferramenta online de conversão como: https://www.base64-image.de/ ou https://www.browserling.com/tools/file-to-base64
+Você pode usar qualquer ferramenta online de conversão como:
+- https://www.base64-image.de/
+- https://www.browserling.com/tools/file-to-base64
+:::
 
+:::accordion
 ### 4. E se o usuário digitar o token incorretamente?
 A mensagem configurada em `invalidTokenMessage` será exibida.
+:::
 
+:::accordion
 ### 5. Posso enviar Pix usando essa API?
 Sim! Basta preencher o campo `documentValue` e o `documentCode` com o código Pix (ex: QR Code codificado).
+:::
 
----
+:::
 
 > A **API Carteiro Digital** oferece uma solução prática e segura para envio de documentos via WhatsApp, com validação do destinatário e total rastreabilidade.
+
 
 
