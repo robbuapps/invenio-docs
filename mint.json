@@ -101,6 +101,14 @@
         "docs/center/configuracoes-gerais-da conta"
       ]
     },
+{
+      "group": "Carteiro Digital",
+      "pages": [
+        "docs/carteiro-digital/carteiro-digital-api"
+        
+      ]
+    },
+    
     {
       "group": "Robbu APIs",
       "pages": [
