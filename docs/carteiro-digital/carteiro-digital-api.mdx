@@ -143,6 +143,7 @@ Para Pix:
 ## FAQ
 
 <AccordionGroup>
+  
   <Accordion title="Preciso gerar um token para cada requisição?">
     Não. O token pode durar até **3333 dias**. Só é necessário renovar se for retornado `"Unauthorized"` pela API.
   </Accordion>
@@ -151,19 +152,20 @@ Para Pix:
     Sim. Basta adicionar múltiplos objetos dentro do array `documentCollection`.
   </Accordion>
 
-<Accordion title="Como faço para converter meu PDF para Base64?">
+  <Accordion title="Como faço para converter meu PDF para Base64?">
     Você pode usar qualquer ferramenta online de conversão como:
-- https://www.base64-image.de/
-- https://www.browserling.com/tools/file-to-base64
+     https://www.base64-image.de/
+     https://www.browserling.com/tools/file-to-base64
   </Accordion>
 
   <Accordion title="E se o usuário digitar o token incorretamente?">
    A mensagem configurada em `invalidTokenMessage` será exibida.
   </Accordion>
   
-<Accordion title="Posso enviar Pix usando essa API?">
+ <Accordion title="Posso enviar Pix usando essa API?">
    Sim! Basta preencher o campo `documentValue` e o `documentCode` com o código Pix (ex: QR Code codificado).
   </Accordion>
+  
 </AccordionGroup>
 
 
