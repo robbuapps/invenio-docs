@@ -6,18 +6,18 @@ description: "Como alternativa à importação pelo Invenio Center, também é p
 
 A importação de mailings e a criação de campanhas podem ser feitas automaticamente através do protocolo FTP. Este documento detalha o processo de configuração e os padrões necessários para garantir o correto funcionamento da importação via FTP.
 
-## ⚙️ Configurações Gerais
-🛠 **Tipo de Serviço**: Job recorrente para processamento automático. <br />
-⏳**Frequência de Execução**: A cada 2 minutos para garantir a importação contínua dos arquivos.<br />
-🌐**IPs de Saída**: `191.233.248.49` `104.41.0.210`  (Certifique-se de liberar esse IP em seu firewall caso utilize um serviço FTP/SFTP próprio).
+##  Configurações Gerais
+ **Tipo de Serviço**: Job recorrente para processamento automático. <br />
+**Frequência de Execução**: A cada 2 minutos para garantir a importação contínua dos arquivos.<br />
+**IPs de Saída**: `191.233.248.49` `104.41.0.210`  (Certifique-se de liberar esse IP em seu firewall caso utilize um serviço FTP/SFTP próprio).
 
-## 📡 Configuração da Conexão FTP
+##  Configuração da Conexão FTP
 
 Para que a importação ocorra corretamente, é necessário configurar a conexão com o servidor FTP.
 
 <img src="https://i0.wp.com/robbu.global/wp-content/uploads/2022/06/Animacao2.gif?resize=768%2C453&ssl=1" />
 
-### 🔧 Parâmetros de Conexão
+###  Parâmetros de Conexão
 
 1. **Acesse as configurações de FTP na plataforma**:
    - Navegue até: `Configurações > FTP`
@@ -34,11 +34,11 @@ Para que a importação ocorra corretamente, é necessário configurar a conexã
    - Utilize um cliente FTP (exemplo: `FileZilla`) para validar a conexão.
    - Confirme o acesso enviando um arquivo de teste.
 
-## 📜 Regras de Nomenclatura dos Arquivos
+##  Regras de Nomenclatura dos Arquivos
 
 Os arquivos a serem importados devem seguir uma nomenclatura padronizada. Isso é essencial para que o sistema consiga processá-los corretamente.
 
-### 🏷️ Padrão de Nomenclatura
+###  Padrão de Nomenclatura
 
 | Parâmetro                     | Descrição |
 |--------------------------------|-----------|
@@ -65,7 +65,7 @@ Os arquivos a serem importados devem seguir uma nomenclatura padronizada. Isso �
 | `_LEddMMyyHHmm`                | Define data e hora limite para envio, evitando disparos fora do horário desejado. |
 | `_whatsappprospect`            | Campanha via módulo WhatsApp Prospect. Obrigatório informar o template. |
 
-### 📂 Exemplos de Nomenclatura para Importação via FTP
+###  Exemplos de Nomenclatura para Importação via FTP
 
 Aqui estão exemplos práticos de nomenclatura de arquivos para importação de mailings e criação de campanhas via FTP. Utilize essas referências para garantir que seus arquivos sejam processados corretamente pelo sistema. 🚀
 
@@ -97,15 +97,15 @@ Aqui estão exemplos práticos de nomenclatura de arquivos para importação de 
   Importar na carteira `123` e criar uma campanha de e-mail para início imediato, definindo o título `"Aportunidade!!!"` e utilizando a conta `AVISO@COMUNICADO.COM.BR`.
 </ResponseField>
 
-## ⁉️ Perguntas Frequentes
+##  Perguntas Frequentes
 
 <AccordionGroup>
   <Accordion title="Qual o IP de saída do serviço de importação via FTP?">
     Se você estiver utilizando um serviço de FTP/SFTP próprio e sua infraestrutura possuir restrições de acesso, como firewalls ou regras de segurança, entre em contato com a equipe de infraestrutura da sua empresa para garantir que o seguinte IP esteja liberado para conexão:
 
-📌 IPs a serem liberados: `191.233.248.49` `104.41.0.210`
+ IPs a serem liberados: `191.233.248.49` `104.41.0.210`
 
-Isso garantirá que a comunicação entre o seu servidor e o serviço de importação ocorra sem interrupções. 🚀
+Isso garantirá que a comunicação entre o seu servidor e o serviço de importação ocorra sem interrupções. 
   </Accordion>
 </AccordionGroup>
   
