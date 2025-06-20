@@ -4,22 +4,22 @@ Invenio X RD Station'
 description: 'Integração Invenio x RD Station.'
 ---
 
-## 🤝 Integração Invenio x RD Station
+##  Integração Invenio x RD Station
 
 Seguindo a documentação da RD Station, é necessário transformá-la para o **IDR Studio**.
 
-🔗 [Documentação oficial - Obter Tokens de Acesso](https://developers.rdstation.com/reference/obter-tokens-acesso)
+ [Documentação oficial - Obter Tokens de Acesso](https://developers.rdstation.com/reference/obter-tokens-acesso)
 
 ---
 
-### 🔐 Obtenção e Renovação de Token
+###  Obtenção e Renovação de Token
 
 - Obtenha o Token de acesso inicial com base no `code`.
 - Renove o Token usando o `refresh_token` quando necessário.
 
 ---
 
-### 🧩 Mapeamento das Variáveis e Validação do Code
+###  Mapeamento das Variáveis e Validação do Code
 
 - Todas as variáveis devem ser mapeadas corretamente com seus respectivos tipos de conversão.
 - Após o mapeamento:
@@ -41,7 +41,7 @@ alimentar a variável Tokenacesso ou se o Token estiver expirado, renová-lo.
 ![retorno](https://robbublob.blob.core.windows.net/docs/retorno3.png) 
 ---
 
-### 🗃️ Armazenamento do Token
+###  Armazenamento do Token
 
 - Após a renovação ou atualização do Token, ele será enviado para uma variável responsável pelo armazenamento do conteúdo mais recente.
 ![renovação](https://robbublob.blob.core.windows.net/docs/renovacao.png)
@@ -52,7 +52,7 @@ envio ao RD Station. Como as variáveis já estão mapeadas, é só enviar via P
 
 ---
 
-### 📤 Envio para RD Station
+###  Envio para RD Station
 
 - Com o Token atualizado ou renovado:
   - Realize as conversões necessárias.
@@ -60,7 +60,7 @@ envio ao RD Station. Como as variáveis já estão mapeadas, é só enviar via P
 ![envio rdstation](https://robbublob.blob.core.windows.net/docs/enviord.png)
 ---
 
-### 🏷️ Mapeamento de Tags
+###  Mapeamento de Tags
 
 - Mapeie as tags para identificar a origem dos dados.
 - Exemplo: adicionar uma tag indicando que um chat foi iniciado no RD Station.
