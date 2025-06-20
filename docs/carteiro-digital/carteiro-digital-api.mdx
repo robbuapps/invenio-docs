@@ -4,7 +4,7 @@ sidebarTitle: "Carteiro Digital API – Documentos e Pix"
 description: "Integre o envio de documentos e Pix pelo WhatsApp com autenticação segura usando a API Carteiro Digital da Robbu."
 ---
 
-##  Introdução
+## Introdução
 
 A **API Carteiro Digital** permite o envio automatizado de arquivos (como boletos, faturas, PDFs e Pix) via WhatsApp, com autenticação do destinatário.
 Ideal para **comunicações financeiras, contratuais e informativas**, essa integração garante **segurança, rastreabilidade e personalização**.
@@ -30,33 +30,36 @@ Antes de acessar a rota `/digitalpostman`, é necessário gerar um **token de au
 }
 ```
 
-| Campo    | Descrição                                                                 |
-|----------|---------------------------------------------------------------------------|
-| Company  | Nome do ambiente utilizado no login da plataforma                        |
-| Username | Nome do usuário com grupo de acesso "Integração API"                     |
-| Password | Senha do usuário                                                         |
+| Campo    | Descrição                                            |
+| -------- | ---------------------------------------------------- |
+| Company  | Nome do ambiente utilizado no login da plataforma    |
+| Username | Nome do usuário com grupo de acesso "Integração API" |
+| Password | Senha do usuário                                     |
 
 > ⚠️ O token não precisa ser gerado a cada requisição. Ele possui um tempo de expiração (`expires_in`) que, por padrão, pode durar até 3333 dias.
 
 Se a API retornar:
+
 ```json
 {
   "title": "Unauthorized"
 }
 ```
+
 Será necessário renovar o token.
 
 ---
-####  Modelo de Requisição
 
-###  Headers
+#### Modelo de Requisição
 
-<ParamField header="PrivateToken" type="string" placeholder="Teste" required="true">
-29d08afc-a349-42b8-995a-562242999
+### Headers
+
+<ParamField header="PrivateToken" type="string" required="true" placeholder="Teste">
+  29d08afc-a349-42b8-995a-562242999
 </ParamField>
 
-<ParamField header="Authentication" type="string" placeholder="Bearer" required="true">
-Bearer MEU_TOKEN
+<ParamField header="Authentication" type="string" required="true" placeholder="Bearer">
+  Bearer MEU_TOKEN
 </ParamField>
 
 ## Envio de Documento via WhatsApp
@@ -67,6 +70,7 @@ Bearer MEU_TOKEN
 - **URL:** `https://api.robbu.global/v2/digitalpostman`
 
 #### Body Exemplo
+
 ```json
 {
   "senderName": "Robbu",
@@ -88,25 +92,25 @@ Bearer MEU_TOKEN
 
 ### Parâmetros Principais
 
-| Campo                | Tipo    | Obrigatório | Descrição                                                                                  |
-|----------------------|---------|-------------|--------------------------------------------------------------------------------------------|
-| senderName           | String  | Sim         | Nome do remetente (exibido ao destinatário)                                               |
-| contactName          | String  | Sim         | Nome completo do destinatário                                                             |
-| contactId            | String  | Sim         | CPF/CNPJ do destinatário. Usado para autenticação (3 primeiros dígitos)                   |
-| walletCode           | String  | Sim         | Código da carteira cadastrada no Invenio                                                  |
-| contactPhoneNumber   | String  | Sim         | WhatsApp com DDI + DDD (ex: 5511999999999)                                                |
-| invalidTokenMessage  | String  | Sim         | Mensagem para token inválido. Quebras de linha: `\r\n` / Emojis: código decimal           |
-| instructionsMessage  | String  | Sim         | Mensagem de orientação. Suporta formatação, quebras de linha e emojis                    |
-| documentCollection   | Array   | Sim         | Lista de documentos a serem enviados                                                      |
+| Campo               | Tipo   | Obrigatório | Descrição                                                                       |
+| ------------------- | ------ | ----------- | ------------------------------------------------------------------------------- |
+| senderName          | String | Sim         | Nome do remetente (exibido ao destinatário)                                     |
+| contactName         | String | Sim         | Nome completo do destinatário                                                   |
+| contactId           | String | Sim         | CPF/CNPJ do destinatário. Usado para autenticação (3 primeiros dígitos)         |
+| walletCode          | String | Sim         | Código da carteira cadastrada no Invenio                                        |
+| contactPhoneNumber  | String | Sim         | WhatsApp com DDI \+ DDD (ex: 5511999999999)                                     |
+| invalidTokenMessage | String | Sim         | Mensagem para token inválido. Quebras de linha: `\r\n` / Emojis: código decimal |
+| instructionsMessage | String | Sim         | Mensagem de orientação. Suporta formatação, quebras de linha e emojis           |
+| documentCollection  | Array  | Sim         | Lista de documentos a serem enviados                                            |
 
 ### Estrutura do campo `documentCollection`
 
-| Campo            | Tipo    | Obrigatório | Descrição                                                                 |
-|------------------|---------|-------------|---------------------------------------------------------------------------|
-| documentCode     | String  | Sim         | Linha digitável do boleto ou código Pix                                   |
-| documentFileName | String  | Sim         | Nome do arquivo com extensão (ex: boleto.pdf, qrcode.png)                 |
-| documentBase64   | String  | Sim         | Arquivo codificado em Base64 (documento ou imagem)                        |
-| documentValue    | String  | Não         | Valor do documento (obrigatório apenas para Pix)                          |
+| Campo            | Tipo   | Obrigatório | Descrição                                                 |
+| ---------------- | ------ | ----------- | --------------------------------------------------------- |
+| documentCode     | String | Sim         | Linha digitável do boleto ou código Pix                   |
+| documentFileName | String | Sim         | Nome do arquivo com extensão (ex: boleto.pdf, qrcode.png) |
+| documentBase64   | String | Sim         | Arquivo codificado em Base64 (documento ou imagem)        |
+| documentValue    | String | Não         | Valor do documento (obrigatório apenas para Pix)          |
 
 > 💡 Use um encoder online para converter seu arquivo PDF em Base64.
 > O tamanho do arquivo deve respeitar os limites da plataforma.
@@ -115,19 +119,16 @@ Bearer MEU_TOKEN
 
 ## Retornos (Response)
 
-####  HTTP Status Codes
+#### HTTP Status Codes
 
-| **Status** | **Descrição**                                                                          |
-|------------------|----------------------------------------------------------------------------------------|
-| `200`           | Sucesso. A requisição foi processada corretamente.                                     |
-| `400`           | Erro no request. Verifique os parâmetros enviados na requisição.                      |
-| `401`           | Não autorizado. O token de autenticação é inválido ou está ausente.                   |
-| `403`           | Sem permissão. O cliente não possui autorização para acessar este recurso.            |
-| `423`           | Não é permitido realizar chamadas simultâneas para este endpoint utilizando o mesmo PrivateToken.            |
-| `500`           | Erro interno. Entre em contato com o suporte.                    |
+| **Status** | **Descrição**                                                       |
+| ---------- | ------------------------------------------------------------------- |
+| `200`      | Sucesso. A requisição foi processada corretamente.                  |
+| `400`      | Erro no request. Verifique os parâmetros enviados na requisição.    |
+| `401`      | Não autorizado. O token de autenticação é inválido ou está ausente. |
+| `500`      | Erro interno. Entre em contato com o suporte.                       |
 
 ---
-
 
 ## Exemplo de Validação por Token
 
@@ -136,6 +137,7 @@ Se o `contactId` for `11122233344`, o sistema enviará a mensagem ao contato e s
 > 📌 Este processo é igual tanto para documentos quanto para **Pix**. A diferença está na estrutura do `documentCollection`.
 
 Para Pix:
+
 - O campo `documentValue` é obrigatório.
 
 ---
@@ -143,33 +145,24 @@ Para Pix:
 ## FAQ
 
 <AccordionGroup>
-  
   <Accordion title="Preciso gerar um token para cada requisição?">
     Não. O token pode durar até **3333 dias**. Só é necessário renovar se for retornado `"Unauthorized"` pela API.
   </Accordion>
-
   <Accordion title="Posso enviar mais de um documento?">
     Sim. Basta adicionar múltiplos objetos dentro do array `documentCollection`.
   </Accordion>
-
   <Accordion title="Como faço para converter meu PDF para Base64?">
     Você pode usar qualquer ferramenta online de conversão como:
-     - https://www.base64-image.de/
-     - https://www.browserling.com/tools/file-to-base64
-  </Accordion>
 
+    - https://www.base64-image.de/
+    - https://www.browserling.com/tools/file-to-base64
+  </Accordion>
   <Accordion title="E se o usuário digitar o token incorretamente?">
-   A mensagem configurada em `invalidTokenMessage` será exibida.
+    A mensagem configurada em `invalidTokenMessage` será exibida.
   </Accordion>
-  
- <Accordion title="Posso enviar Pix usando essa API?">
-   Sim! Basta preencher o campo `documentValue` e o `documentCode` com o código Pix (ex: QR Code codificado).
+  <Accordion title="Posso enviar Pix usando essa API?">
+    Sim\! Basta preencher o campo `documentValue` e o `documentCode` com o código Pix (ex: QR Code codificado).
   </Accordion>
-  
 </AccordionGroup>
 
-
 > A **API Carteiro Digital** oferece uma solução prática e segura para envio de documentos via WhatsApp, com validação do destinatário e total rastreabilidade.
-
-
-
