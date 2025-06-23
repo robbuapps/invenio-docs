@@ -1,0 +1,114 @@
+---
+title: "Webchat – Manual de Configuração e Implementação"
+description: "Guia completo para configurar, personalizar e implementar o Webchat do Invenio Center em seu site."
+sidebarTitle: "Webchat"
+---
+
+##  Webchat – Manual de Configuração e Implementação
+
+O **Webchat do Invenio Center** é uma ferramenta de atendimento digital em tempo real, desenvolvida para facilitar a comunicação entre empresas e seus clientes por meio de websites institucionais, e-commerces ou portais de serviço.
+
+A solução permite a troca de mensagens instantâneas, com interface personalizável, integração com outros canais (como WhatsApp), e histórico completo das interações realizadas.
+
+Trata-se de uma alternativa eficiente para centralizar atendimentos, agilizar o contato com o cliente e oferecer uma experiência moderna e fluida. Após configurado, o Webchat gera um código pronto para ser adicionado ao site da empresa.
+
+##  Acesso e Configuração
+
+Para acessar a aba WebChat no Invenio Center:
+
+- Navegue até `Canais > WebChat`.
+- A interface exibirá seções configuráveis, com funcionalidades que variam conforme a **versão utilizada**: Versão 2 ou Versão 3.
+
+##  Versão 2 – Configuração Padrão
+Indicada para operações com menor necessidade de personalização. Recursos disponíveis:
+
+- **Exibição automática** com tempo de delay.
+- **Logotipo no cabeçalho**.
+- **Ícone do botão de abertura**.
+- **Delay de exibição** (em segundos).
+- **Autenticação do usuário** (nome, e-mail, telefone ou CPF/CNPJ).
+- **Botão "Finalizar Atendimento"**.
+- **Redirecionamento para WhatsApp**.
+- **Método de segmentação** (padrão ou segmento fixo).
+- **Feedback NPS**, disponível no relatório *WebChat – Net Promoter Score*.
+
+##  Versão 3 – Funcionalidades Avançadas
+Inclui todos os recursos da versão 2, com adições:
+
+- **Avatar personalizado como botão de abertura**.
+- **Notificação sonora**.
+- **Aviso flutuante proativo**.
+
+##  Código JavaScript de Integração
+
+Após configurar, será gerado o código:
+
+```html
+<script src="https://webchatapi.robbu.global/v3/chat.js"></script>
+<script defer="defer">
+  chatRobbu.init("111A111111AA1A11", {
+    open: true,
+    theme: "ruby",
+    wallet_customer_code: "Teste",
+    delay: 2000,
+    user: {
+      wallet_customer_code: "Teste",
+      name: "Nome do usuário",
+      email: "usuario@exemplo.com.br",
+      phone: "11 9999-99999",
+      cpf_cnpj: "000.000.000-00",
+      csrf_token: "Cole seu token aqui"
+    }
+  })
+</script>
+```
+
+### 🔧 Parâmetros configuráveis
+
+- `open`: Webchat aberto automaticamente.
+- `theme`: tema visual.
+- `wallet_customer_code`: carteira associada.
+- `delay`: tempo de exibição em ms.
+- `user`: dados do usuário autenticado.
+
+##  Exibição Manual (HTML)
+
+Para exibir em local específico:
+
+```html
+<div id="chat-robbu-container"></div>
+```
+
+Esse `div` atua como âncora visual do Webchat.
+
+>  **Recomendação**: valide a implementação com sua equipe técnica para garantir compatibilidade com o site.
+
+---
+
+##  FAQ
+
+<AccordionGroup title="Dúvidas Frequentes">
+
+<Accordion title="Qual a diferença entre a Versão 2 e a Versão 3 do Webchat?">
+A Versão 3 possui funcionalidades adicionais como avatar personalizado, aviso flutuante e sons de notificação, enquanto a Versão 2 contém configurações básicas.
+</Accordion>
+
+<Accordion title="Posso integrar o Webchat com outros canais, como WhatsApp?">
+Sim. O Webchat pode conter botões de redirecionamento para WhatsApp, permitindo continuidade do atendimento.
+</Accordion>
+
+<Accordion title="O Webchat pode solicitar dados do cliente antes do atendimento?">
+Sim. É possível configurar autenticação por nome, e-mail, telefone ou CPF/CNPJ antes do atendimento começar.
+</Accordion>
+
+<Accordion title="Consigo controlar o tempo de exibição do Webchat?">
+Sim. Utilize o parâmetro `delay` para definir em milissegundos o tempo antes do Webchat aparecer na página.
+</Accordion>
+
+<Accordion title="É necessário conhecimento técnico para implementar o Webchat?">
+Não. Após configurar pelo Invenio Center, basta copiar o código gerado e inseri-lo no HTML do site, preferencialmente com apoio de um desenvolvedor.
+</Accordion>
+
+</AccordionGroup>
+
+
