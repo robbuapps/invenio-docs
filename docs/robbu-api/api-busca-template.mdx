@@ -1,0 +1,123 @@
+---
+title: "API - Consulta de Templates HSM"
+description: "Documentação técnica sobre a consulta de templates HSM via API no Invenio."
+sidebarTitle: "API Consulta de Templates"
+---
+
+##  API - Consulta de Templates HSM
+
+A API de **Consulta de Templates HSM** do Invenio permite visualizar de forma prática todos os modelos de mensagem estruturada (HSM) cadastrados no ambiente, incluindo aqueles aprovados, pausados ou desabilitados. Essa integração é ideal para equipes que desejam acompanhar e gerenciar seus templates ativos antes de realizar disparos via WhatsApp Business API.
+
+---
+
+##  Autenticação
+Para consumir esta API, é necessário possuir o **token privado da conta** configurada no Invenio. Esse token pode ser localizado ao final da página de configurações da conta dentro do Invenio Center.
+
+![tokens](https://robbublob.blob.core.windows.net/docs/tokens.png)
+
+---
+
+##  Requisição
+**URL de requisição:**
+```http
+http://s.robbu.com.br/wsInvenioAPI.ashx?token={tokenPrivado}&acao=buscartemplates
+```
+
+**Método:** `GET`
+
+![postman](https://robbublob.blob.core.windows.net/docs/postman.png)
+
+### Parâmetros de Consulta
+| Parâmetro       | Obrigatório | Descrição                                                     |
+|----------------|-------------|----------------------------------------------------------------|
+| `tokenPrivado` | Sim         | Token privado da conta, utilizado para autenticação.          |
+| `acao`         | Sim         | Valor fixo: `buscartemplates`. Indica a ação desejada na API. |
+
+---
+
+## 📄 Detalhamento dos Campos da Resposta
+
+| Campo                  | Tipo      | Descrição                                                       |
+|------------------------|-----------|------------------------------------------------------------------|
+| `IdCanal`              | Inteiro   | Identificador do canal (1 – Email, 2 – SMS, 3 – WhatsApp).       |
+| `NomeTemplate`         | String    | Nome do template no Invenio.                                    |
+| `Template`             | String    | Conteúdo da mensagem.                                           |
+| `DataHoraInclusao`     | String    | Data e hora de criação do template.                             |
+| `DataHoraExclusao`     | String    | Data de exclusão (se aplicável).                                |
+| `Broadcast`            | String    | Indica se o template é usado em disparos massivos.              |
+| `NomeTemplateWhatsapp` | String    | Nome do template cadastrado no WhatsApp Business.              |
+| `IdFornecedor`         | Inteiro   | ID interno do fornecedor do canal.                              |
+| `NamespaceWhatsapp`    | String    | Namespace do template.                                          |
+| `Linguagem`            | String    | Código da linguagem utilizada no template.                      |
+| `ProspectOficial`      | Booleano  | Indica se o template é vinculado a número prospect.             |
+| `NomeCliente`          | String    | Nome do ambiente da empresa.                                    |
+| `StatusWhatsapp`       | String    | Status atual no WhatsApp (APPROVED, PAUSED, REJECTED, etc).     |
+| `NomeContaWhatsApp`    | String    | Nome completo da conta do WhatsApp vinculada.                   |
+| `HashTemplateMensagem` | String    | Hash único do conteúdo da mensagem.                             |
+| `HashCarteira`         | String    | Hash da carteira associada.                                     |
+
+---
+
+##  Exemplo de Resposta
+```json
+[
+  {
+    "IdCanal": 3,
+    "NomeTemplate": "continuidade_chamado_robbu_atendimento_01",
+    "Template": "Olá, @primeironome, tudo bem?\n\nPodemos retomar o atendimento de seu chamado?\n\nAguardo seu contato, até logo!",
+    "DataHoraInclusao": "2025-06-01T15:08:36.0866667",
+    "DataHoraExclusao": null,
+    "Broadcast": "N",
+    "NomeTemplateWhatsapp": "continuidade_chamado_robbu_atendimento_01",
+    "IdFornecedor": 41,
+    "NamespaceWhatsapp": null,
+    "Linguagem": "pt_BR",
+    "ProspectOficial": null,
+    "NomeCliente": "ROBBU ATENDIMENTO",
+    "StatusWhatsapp": "APPROVED",
+    "NomeContaWhatsApp": "ROBBU ATENDIMENTO - waba Robbu",
+    "HashTemplateMensagem": "A316D01E1",
+    "HashCarteira": null
+  }
+]
+```
+
+_Imagem 3 – Exemplo de resposta no navegador._
+_Imagem 4 – Exemplo de resposta formatada no Postman._
+
+---
+
+##  Recomendações
+- O endpoint pode ser acessado diretamente pelo navegador, facilitando testes e validações manuais.
+- O retorno da requisição é um array em formato JSON.
+- Para melhor leitura, recomenda-se o uso de ferramentas como Postman ou JSON Formatter.
+
+---
+
+##  FAQ
+
+<AccordionGroup title="Dúvidas Frequentes">
+
+<Accordion title="Consigo usar essa API em ferramentas como o Postman?">
+Sim. Basta colar a URL completa com o token no Postman e realizar uma requisição do tipo GET.
+</Accordion>
+
+<Accordion title="É possível consultar apenas templates aprovados?">
+Não diretamente via API, mas você pode filtrar localmente os resultados com base no campo `StatusWhatsapp`.
+</Accordion>
+
+<Accordion title="Onde encontro o token privado?">
+O token está disponível ao final da página de "Configurações da conta" no Invenio Center.
+</Accordion>
+
+<Accordion title="Essa API também retorna templates desabilitados ou pausados?">
+Sim. Todos os templates cadastrados no ambiente, incluindo os pausados e desabilitados, são listados na resposta.
+</Accordion>
+
+<Accordion title="Qual o melhor formato para salvar os templates após consulta?">
+JSON é ideal para integração e leitura programática. Para relatórios, você pode convertê-los em CSV.
+</Accordion>
+
+</AccordionGroup>
+
+
