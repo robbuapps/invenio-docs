@@ -1,0 +1,112 @@
+---
+title: "API – Update Contact"
+description: "Criação e atualização automatizada de contatos no ambiente Invenio via integração."
+sidebarTitle: "API Update Contact"
+---
+
+##  API Update Contact – Criação e Atualização de Contatos
+
+A **API Update Contact** permite que você crie ou atualize registros de contatos dentro do ambiente **Invenio** de forma simples e automatizada. Esse recurso é essencial para manter a base de dados sempre atualizada, garantindo que o atendimento e os fluxos automáticos da plataforma funcionem com mais eficiência e precisão.
+
+---
+
+##  Autenticação
+
+Para utilizar esta API, é necessário realizar uma autenticação prévia via API de Login.
+
+### Endpoint de Login
+```http
+POST https://api.robbu.global/v1/login
+```
+
+### Exemplo de corpo da requisição:
+```json
+{
+  "Company": "NOME_DA_EMPRESA",
+  "Username": "USUARIO_API",
+  "Password": "SENHAUSUARIO_API"
+}
+```
+
+| Campo     | Descrição                                                                 |
+|-----------|---------------------------------------------------------------------------|
+| Company   | Nome do ambiente utilizado no login da plataforma                        |
+| Username  | Nome do usuário com permissão do grupo de acesso "Integração API"        |
+| Password  | Senha do usuário de integração                                           |
+
+ O token de autenticação tem um tempo de expiração (campo `expires_in`), podendo durar até **3333 dias**. Caso a API retorne `"title": "Unauthorized"`, será necessário renovar o token.
+
+
+---
+
+##  Requisição para Atualização de Contato
+
+### Endpoint
+```http
+POST https://api.robbu.global/v1/login
+```
+
+### Corpo da requisição
+```json
+{
+  "invenioPrivateToken": "SEU_TOKEN_PRIVADO",
+  "name": "João da Silva",
+  "customCode": "cliente_001",
+  "id": "12345678900",
+  "tag": "prioridade_alta",
+  "jokers": ["R$50,00", "Contrato123", "Xpto", "coringa4", "coringa5"],
+  "walletClientCode": "CART001"
+}
+```
+
+
+---
+
+##  Especificação dos Parâmetros
+
+| Campo              | Tipo     | Obrigatório | Descrição                                                                 |
+|--------------------|----------|-------------|---------------------------------------------------------------------------|
+| invenioPrivateToken| String   | Sim         | Token privado obtido em **Invenio Center > Configurações de conta**      |
+| name               | String   | Sim         | Nome completo do contato                                                 |
+| customCode         | String   | Não         | Código personalizado para o contato                                      |
+| id                 | String   | Sim         | CPF ou CNPJ do contato                                                   |
+| tag                | String   | Não         | Tag associada para segmentação/classificação                             |
+| jokers             | Array    | Não         | Lista de até 5 variáveis coringa usadas dinamicamente em templates       |
+| walletClientCode   | String   | Não         | Código da carteira/segmento vinculado ao contato                         |
+
+---
+
+## 📥 Respostas da API
+
+| Código | Descrição                                      |
+|--------|-------------------------------------------------|
+| 200    | Contato atualizado ou inserido com sucesso     |
+| 400    | Erro de validação nos parâmetros da requisição |
+| 401    | Token inválido ou expirado                     |
+| 500    | Erro interno do servidor                       |
+
+---
+
+##  FAQ
+
+<AccordionGroup title="Dúvidas Frequentes">
+
+<Accordion title="É necessário gerar um novo token a cada requisição?">
+Não. O token tem tempo de expiração configurado (até 3333 dias). Gere um novo somente se expirar.
+</Accordion>
+
+<Accordion title="Posso atualizar um contato sem CPF ou CNPJ?">
+Não. O campo `id` é obrigatório e deve conter o CPF ou CNPJ do contato.
+</Accordion>
+
+<Accordion title="Quantas variáveis 'jokers' posso enviar?">
+Até 5 valores no array, que podem ser utilizados dinamicamente em templates personalizados.
+</Accordion>
+
+<Accordion title="Como saber se o contato foi atualizado corretamente?">
+Verifique o código de resposta HTTP. Um retorno `200` indica sucesso.
+</Accordion>
+
+</AccordionGroup>
+
+
