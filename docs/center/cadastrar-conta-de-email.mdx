@@ -1,0 +1,109 @@
+---
+title: "Cadastro e Configuração de Contas de E-mail"
+description: "Aprenda como integrar contas de e-mail no Invenio Center e centralizar o atendimento digital."
+sidebarTitle: "Contas de E-mail"
+---
+
+## Cadastro e Configuração de Contas de E-mail
+
+A funcionalidade de **E-mail** do Invenio Center permite que empresas integrem suas contas diretamente na plataforma, centralizando o atendimento em um só lugar. Essa integração garante que mensagens recebidas possam ser gerenciadas dentro da operação, com histórico completo, rastreabilidade e direcionamento automático por segmento.
+
+## Acessando o Canal de E-mail
+
+Para iniciar o processo de configuração:
+
+1. Acesse o **Invenio Center**.
+2. No menu lateral esquerdo, clique em **Canais**.
+3. Selecione a aba **E-mail** para visualizar todas as conexões já cadastradas.
+
+> <img
+>   src="https://robbublob.blob.core.windows.net/docs/canais.png"
+>   alt="canais email"
+>   style={{ width:"92%" }}
+> />
+
+## Iniciando o Cadastro de uma Nova Conta
+
+Clique em **\+ Adicionar e-mail** e escolha entre:
+
+### Conexão via Office 365 ou Gmail
+
+- Clique em **Conectar com Microsoft** ou **Conectar com Google**.
+- Realize o login com suas credenciais.
+- A conta será conectada automaticamente.
+
+> _Imagem 2 – Botão “\+ Adicionar e-mail”_
+> _Imagem 3 – Opções de conexão com Microsoft e Google_
+
+### Cadastro Manual
+
+Para contas personalizadas ou de outros servidores:
+
+#### Informações Gerais
+
+- **Nome**: Nome interno da conta (ex: Financeiro).
+- **Endereço de e-mail**: E-mail completo.
+- **Segmento**: Vinculação da conta a uma carteira específica.
+
+#### Seleção de Protocolo de Conexão
+
+- **SMTP**: Envio de e-mails (obrigatório).
+- **POP3**: Download local das mensagens.
+- **IMAP**: Sincronização em tempo real com o servidor.
+
+> _Imagem 4 – Cadastro manual parte superior_
+
+#### Credenciais de Acesso
+
+- **Usuário**: Endereço de e-mail para autenticação.
+- **Senha**: Senha da conta.
+- **Host**: Endereço do servidor.
+- **Portas**: Comunicação com o servidor.
+
+| Protocolo        | Porta | Descrição               |
+| ---------------- | ----- | ----------------------- |
+| POP3S            | 995   | Recebimento com SSL/TLS |
+| IMAPS            | 993   | Recebimento com SSL/TLS |
+| SMTPS            | 465   | Envio com SSL           |
+| SMTP TLS         | 587   | Envio com TLS           |
+| SMTP alternativo | 2525  | Alternativa à porta 587 |
+
+> _Imagem 5 – Preenchimento das credenciais de conexão_
+
+## Finalizando o Cadastro
+
+- Clique em **Criar**.
+- O sistema testará a conexão automaticamente.
+- Em caso de sucesso, o status será "Conexão realizada com sucesso".
+- Para ativar a conta: clique nos três pontinhos ao lado e selecione **Ativar**.
+
+> _Imagem 6 – Menu de teste de conexão_
+
+## Benefícios da Integração
+
+- Receber e responder e-mails pela plataforma.
+- Direcionamento automático por segmento.
+- Realização de campanhas.
+- Histórico completo e rastreabilidade.
+
+> **Recomendação de segurança**: Mantenha credenciais protegidas e revise acessos periodicamente.
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Quais protocolos são obrigatórios para configurar e-mail?">
+    O SMTP é obrigatório para envio. POP3 ou IMAP são utilizados para recebimento e podem ser escolhidos conforme a necessidade da operação.
+  </Accordion>
+  <Accordion title="Posso conectar uma conta personalizada (fora do Gmail/Outlook)?">
+    Sim. Use a opção de cadastro manual e insira as credenciais e configurações do servidor manualmente.
+  </Accordion>
+  <Accordion title="Posso conectar mais de uma conta de e-mail?">
+    Sim. O Invenio Center permite múltiplas integrações e a segmentação por carteira ou setor.
+  </Accordion>
+  <Accordion title="Consigo redirecionar e-mails automaticamente?">
+    Sim. É possível definir o segmento de destino ao cadastrar a conta, direcionando os e-mails para as equipes responsáveis.
+  </Accordion>
+  <Accordion title="O que significa o status 'Inativa'?">
+    Após o cadastro, a conta permanece inativa até ser ativada manualmente na listagem de e-mails.
+  </Accordion>
+</AccordionGroup>
