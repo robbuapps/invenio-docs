@@ -106,7 +106,9 @@
         "docs/center/relatorios",
         "docs/center/web-chat",
         "docs/center/configuracoes-gerais-da conta",
-        "docs/center/campanhas-de-email"
+        "docs/center/campanhas-de-email",
+        "docs/center/compatibilidade-de-navegadores"
+
       ]
     },
 {
