@@ -1,0 +1,110 @@
+---
+title: "Como utilizar as variáveis do sistema em sua IDR"
+sidebarTitle: "Variáveis em IDRs"
+description: "Utilize variáveis do sistema para personalizar fluxos automatizados, mensagens e decisões inteligentes dentro das IDRs do Invenio."
+---
+---
+
+ 
+A IDR permite a construção de fluxos automatizados e personalizados para os atendimentos. Dentro desses fluxos, é possível utilizar variáveis do sistema e de base de dados para dinamizar as mensagens, executar condições, armazenar valores ou tomar decisões automatizadas.  
+Essas variáveis são especialmente úteis para personalizar mensagens com nome, CPF, e-mail, entre outros dados do contato, realizar validações com base em respostas da API ou dados externos, navegar entre etapas de forma dinâmica e armazenar dados de interações.
+
+## Como utilizar variáveis em IDRs
+
+As variáveis devem ser inseridas no fluxo utilizando duplas chaves ou @ dependendo da especificação de cada uma.  
+**Exemplo:** Utilize `{{contactfirstname}}` ou `@PrimeiroNome` para retornar o primeiro nome do contato.  
+
+> ⚠️ **Importante:** Variáveis iniciadas com `@` são globais do sistema (com exceção da `@identificadororiginal`), portanto, podem ser utilizadas também no envio de HSM e de forma livre durante o atendimento.
+
+---
+
+## 📌 Variáveis comumente utilizadas
+
+| Variável                               | Tipo                    | Descrição                                 |
+|----------------------------------------|--------------------------|---------------------------------------------|
+| `{{contactname}}` / `@NomePessoa`      | Base de dados / Global   | Nome completo do contato.                  |
+| `{{contactfirstname}}` / `@PrimeiroNome`| Base de dados / Global  | Primeiro nome do contato.                  |
+| `{{contactlastname}}`                  | Base de dados            | Última palavra do nome do contato.         |
+| `{{contactemail}}`                     | Base de dados            | E-mail principal do contato.               |
+| `{{contactid}}` / `@CPFCNPJ`           | Base de dados / Global   | CPF ou CNPJ do contato cadastrado no Invenio. |
+| `{{contactcustomcode}}` / `@ChaveCliente`| Base de dados / Global | Código do cliente no Invenio.              |
+| `{{contactphonenumber}}`              | Base de dados            | Número de telefone do contato.             |
+| `{{contactphonenumberareacode}}`      | Base de dados            | Apenas o DDD do contato.                   |
+| `{{contactphonenumbermain}}`          | Base de dados            | Número sem DDI e DDD.                      |
+| `{{segmentname}}`                      | Base de dados            | Segmento (carteira) atual do contato.      |
+| `{{currentdate}}`                      | Base de dados            | Data atual no formato dd/MM/yyyy.          |
+| `{{internalwhatsappnumber}}`          | Base de dados            | Número do WhatsApp utilizado pelo bot.     |
+| `{{protocol}}`                         | Base de dados            | Número do protocolo de atendimento.        |
+| `{{username}}` / `@NomeUsuario`        | Base de dados / Global   | Nome do operador que enviou a última mensagem. |
+| `{{loyalusername}}`                    | Base de dados            | Nome do operador fidelizado ao contato.    |
+
+---
+
+##  Variáveis Coringa
+
+Essas variáveis são úteis para personalizações temporárias, sendo amplamente utilizadas em campanhas e fluxos automatizados, onde os dados variam de contato para contato.
+
+| Variável                  | Tipo                  | Característica            |
+|---------------------------|------------------------|----------------------------|
+| `{{contactjoker1}}` / `@Coringa1` | Base de dados / Global | Até 300 caracteres.        |
+| `{{contactjoker2}}` / `@Coringa2` | Base de dados / Global | Até 300 caracteres.        |
+| `{{contactjoker3}}` / `@Coringa3` | Base de dados / Global | Até 300 caracteres.        |
+| `{{contactjoker4}}` / `@Coringa4` | Base de dados / Global | Até 300 caracteres.        |
+| `{{contactjoker5}}` / `@Coringa5` | Base de dados / Global | Até 5.000 caracteres.      |
+
+---
+
+##  Variáveis de Localização
+
+| Variável               | Descrição                                           |
+|------------------------|-----------------------------------------------------|
+| `{{longitude/latitude}}` | Coordenadas recebidas pela interação do contato.     |
+
+---
+
+##  Variáveis Técnicas e de Integração
+
+Essas variáveis armazenam respostas de execuções API ou ações do bot.
+
+| Variável               | Descrição                                      |
+|------------------------|-----------------------------------------------|
+| `{{message}}`          | Última mensagem recebida do contato.          |
+| `{{lastapiresponse}}`  | Resposta da última chamada de API.            |
+| `{{lastapistatuscode}}`| Código de status HTTP da última chamada de API.|
+
+---
+
+##  Variáveis para Navegação Dinâmica
+
+| Variável               | Descrição                                                                 |
+|------------------------|--------------------------------------------------------------------------|
+| `@identificadororiginal`| Utilizada para redirecionar o contato para a última etapa de “Aguardar mensagem de resposta”. |
+
+---
+
+> As variáveis da IDR são recursos poderosos para personalização, automação e controle dos fluxos. Elas permitem que o bot adapte as interações ao perfil do cliente, torne a experiência mais fluida e traga mais eficiência para os processos.
+
+---
+
+## ⁉️ Perguntas Frequentes
+
+<AccordionGroup>
+  <Accordion title="O que são variáveis em uma IDR?">
+    São parâmetros dinâmicos que podem ser usados para personalizar mensagens, automatizar decisões e registrar dados durante o atendimento.
+  </Accordion>
+  <Accordion title="Como inserir uma variável no fluxo?">
+    Utilize o formato `{{variavel}}` ou `@Variavel`, conforme especificado para cada tipo.
+  </Accordion>
+  <Accordion title="Qual a diferença entre variáveis globais e de base de dados?">
+    Variáveis globais (prefixadas com `@`) podem ser usadas em qualquer parte do sistema, inclusive em HSMs. Já as de base de dados são exclusivas do contexto da IDR e do contato.
+  </Accordion>
+  <Accordion title="Para que servem as variáveis coringa?">
+    Para armazenar informações personalizadas e temporárias, úteis em campanhas e fluxos com dados variáveis por contato.
+  </Accordion>
+  <Accordion title="Posso usar variáveis de localização ou técnicas em fluxos?">
+    Sim. `{{longitude/latitude}}`, `{{lastapiresponse}}`, entre outras, são úteis para interações com APIs e bots mais avançados.
+  </Accordion>
+  <Accordion title="É possível redirecionar o fluxo com variáveis?">
+    Sim. A variável `@identificadororiginal` permite retornar para uma etapa anterior de “Aguardar mensagem de resposta”.
+  </Accordion>
+</AccordionGroup>
