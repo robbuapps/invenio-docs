@@ -85,26 +85,3 @@ Essas variáveis armazenam respostas de execuções API ou ações do bot.
 > As variáveis da IDR são recursos poderosos para personalização, automação e controle dos fluxos. Elas permitem que o bot adapte as interações ao perfil do cliente, torne a experiência mais fluida e traga mais eficiência para os processos.
 
 ---
-
-## ⁉️ Perguntas Frequentes
-
-<AccordionGroup>
-  <Accordion title="O que são variáveis em uma IDR?">
-    São parâmetros dinâmicos que podem ser usados para personalizar mensagens, automatizar decisões e registrar dados durante o atendimento.
-  </Accordion>
-  <Accordion title="Como inserir uma variável no fluxo?">
-    Utilize o formato `{{variavel}}` ou `@Variavel`, conforme especificado para cada tipo.
-  </Accordion>
-  <Accordion title="Qual a diferença entre variáveis globais e de base de dados?">
-    Variáveis globais (prefixadas com `@`) podem ser usadas em qualquer parte do sistema, inclusive em HSMs. Já as de base de dados são exclusivas do contexto da IDR e do contato.
-  </Accordion>
-  <Accordion title="Para que servem as variáveis coringa?">
-    Para armazenar informações personalizadas e temporárias, úteis em campanhas e fluxos com dados variáveis por contato.
-  </Accordion>
-  <Accordion title="Posso usar variáveis de localização ou técnicas em fluxos?">
-    Sim. `{{longitude/latitude}}`, `{{lastapiresponse}}`, entre outras, são úteis para interações com APIs e bots mais avançados.
-  </Accordion>
-  <Accordion title="É possível redirecionar o fluxo com variáveis?">
-    Sim. A variável `@identificadororiginal` permite retornar para uma etapa anterior de “Aguardar mensagem de resposta”.
-  </Accordion>
-</AccordionGroup>
