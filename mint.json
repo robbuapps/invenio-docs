@@ -70,7 +70,8 @@
         "docs/live/sessao-de-24horas-no-whatsapp",
         "docs/live/metodos-de-distribuicao",
         "docs/live/lista-de-desejos",
-        "docs/live/dados-da-mensagem"
+        "docs/live/dados-da-mensagem",
+        "docs/live/lista-de-transmissao"
       ]
     },
     {
@@ -115,7 +116,8 @@
         "docs/center/dashboard-kpi-eventos",
         "docs/center/variaveis-de-sistema-idr",
         "docs/center/privacidade-e-protecao",
-        "docs/center/whatsapp-business-api"
+        "docs/center/whatsapp-business-api",
+        "docs/center/painel-de-faturas"
 
       ]
     },
