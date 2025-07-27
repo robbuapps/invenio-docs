@@ -4,13 +4,13 @@ description: "Aprenda a acessar, gerar e agendar relatórios no Invenio Center p
 sidebarTitle: "Relatórios"
 ---
 
-##  Relatórios – Invenio Center
+
 
 A seção de **Relatórios** do Invenio Center foi desenvolvida para proporcionar uma visão centralizada e estratégica sobre os dados da operação. É possível gerar, consultar e agendar relatórios que apoiam o monitoramento de atendimentos, KPIs, campanhas e desempenho da equipe.
 
 A interface é intuitiva e conta com modelos prontos, filtros personalizáveis e visualização detalhada de dados como período, canal, status e total de registros.
 
-##  Acesso e Visualização
+## Acesso e Visualização
 
 Ao acessar a aba de Relatórios, duas seções principais estarão disponíveis:
 
@@ -48,7 +48,7 @@ Clique em **+ Gerar relatório** e escolha um modelo. Aplique filtros como perí
 
 ![gerar relatorios](https://robbublob.blob.core.windows.net/docs/gerarrelatorio.png) 
 
-###  Agendamentos e Envio
+### Agendamentos e Envio
 
 É possível agendar relatórios com envio via e-mail ou FTP/SFTP:
 
@@ -60,7 +60,7 @@ Clique em **+ Gerar relatório** e escolha um modelo. Aplique filtros como perí
 
 ![relatorios agendados](https://robbublob.blob.core.windows.net/docs/relatorioagendado.png)
 
-##  Visualização de Relatórios Finalizados
+## Visualização de Relatórios Finalizados
 
 Informações disponíveis:
 - Status
@@ -68,41 +68,81 @@ Informações disponíveis:
 - Usuário
 - Segmento/carteira
 - Canal
-![relatorios finalizado](https://robbublob.blob.core.windows.net/docs/relatoriofinalizado.png)
+
+![relatorios finalizado](https://robbublob.blob.core.windows.net/docs/relatoriofinalizado.png)  
+
 Também é possível pesquisar dentro da tabela e baixar o CSV.
 
-##  Tipos de Relatórios
+## Tipos de Relatórios
 
-Principais relatórios disponíveis:
-- **Contatos atendidos**
-- **KPI – Eventos**
-- **Contatos atendidos por usuário/carteira**
-- **Contatos fidelizados por usuário**
-- **Controle de sessões/pausas**
-- **Campanhas (HSM, SMS, NPS, cancelamentos)**
-- **Extrações de dados (telefones, e-mails, cartões)**
-- **Auditoria (LGPD/GDPR), protocolos**
-- **Telefonia (nível de serviço, TME, taxa de abandono)**
-- **Sessões do WhatsApp**
-- **Status de linhas e templates**
-- **Relatórios operacionais sintéticos**
+### Relatórios de Contatos
+
+1. **Contatos atendidos**: Lista todos os contatos atendidos por usuário ou automação, com base no período definido no filtro.  
+2. **Contatos Atendidos por Usuário**: Detalha a quantidade de contatos atendidos por cada usuário em um período determinado.  
+3. **Contatos Atendidos por Usuário agrupado por carteira**: Apresenta a quantidade de contatos atendidos por cada usuário em um período específico, agrupados por carteira.  
+4. **Contatos Fidelizados por Usuário**: Lista todos os contatos fidelizados por cada usuário com base no momento real da extração.  
+5. **Contatos Recebidos no WebChat**: Extrai todos os dados gerados pelo canal de WebChat, com base no período especificado pelos filtros.  
+6. **Contatos com Agendamentos Pendentes**: Lista todos os contatos com agendamentos pendentes, com base no período definido pelo filtro.  
+7. **Contatos Novos por Data de Inclusão**: Lista todos os contatos novos com base no período de inclusão definido pelo filtro.  
+8. **Contatos Totais**: Lista todos os contatos no período, sejam eles entrantes ou saíntes, com ou sem atendimento, por humano ou bot.  
+
+### Relatórios de KPIs e Desempenho
+
+1. **KPI Eventos**: Lista todos os KPIs de eventos registrados na plataforma, com base no período definido pelo filtro.  
+2. **Fluxo IDR – KPIs**: Apresenta os resultados de todas as KPIs inseridas pela IDR. Usado para gerenciar atendimentos realizados pela IDR e acompanhar contatos atendidos pelos chatbots, com base no período definido.  
+3. **Nível de Serviço (SL)**: Mede o desempenho e a qualidade do serviço prestado aos clientes durante interações telefônicas.  
+4. **Taxa de Abandono**: Indica a porcentagem de chamadas abandonadas pelos clientes antes de serem atendidas por um agente em um DAC (Distribuidor Automático de Chamadas).  
+5. **Tempo Médio para Chamada Abandonada**: Mede o tempo médio que chamadores aguardam antes de abandonar uma chamada em fila de atendimento.  
+6. **Tempo Médio de Espera em Fila**: Representa a média de tempo que chamadores aguardam antes de serem atendidos por um agente.  
+7. **Tempo Médio Falado**: Mede a duração média das interações entre agentes e clientes durante chamadas atendidas.  
+8. **Relatório Analítico de Chamadas Abandonadas**: Analisa chamadas abandonadas para identificar pontos de falha e propor melhorias.  
+
+### Relatórios de Acesso e Sessões
+
+1. **Relatório de Controle de Sessão por Usuário (Login e Logout)**: Lista todos os acessos por usuário em um período específico, incluindo logouts incorretos (registrados após novo login).  
+2. **Controle de Sessões WhatsApp**: Lista todas as sessões de WhatsApp abertas pelo contato ou pela empresa no período definido.  
+3. **Relatório de Status de Linhas WhatsApp**: Lista todas as atualizações de status das linhas no ambiente atual.  
+4. **Relatório de Status de Templates WhatsApp**: Lista todas as atualizações de status dos templates HSM no ambiente atual.  
+
+### Relatórios de Extração de Dados
+
+1. **Extração de Telefones do Contato**: Gera lista de telefones dos contatos com base no período definido, limitado a 10.000 registros.  
+2. **Extração de E-mails do Contato**: Gera lista de e-mails associados aos contatos, limitada a 10.000 registros, com intervalo máximo de 30 dias.  
+3. **Extração de Cartões do Pipeline**: Extrai todos os cartões do Pipeline selecionado.  
+
+### Relatórios de Automação e Campanhas
+
+1. **Envios Ativos de HSM – WhatsApp Business API**: Lista todos os envios ativos de mensagens HSM realizados via WhatsApp Business API, com base no período definido.  
+2. **Campanhas Realizadas**: Lista informações consolidadas das campanhas realizadas, com base no período definido.  
+3. **Envios de HSM por Usuário**: Lista HSMs enviados manualmente por usuários em um período específico.  
+4. **Cancelamento de Subscrição de Campanhas**: Lista pessoas que cancelaram inscrição e não recebem mais campanhas.  
+
+### Relatórios de Auditoria e Compliance
+
+1. **Auditoria (GDPR e LGPD)**: Lista ações dos usuários realizadas dentro das plataformas com base no período definido.  
+
+### Relatórios de Atendimento e Documentação
+
+1. **Carteiro Digital – Envio de Documentos**: Lista documentos enviados por usuários ou automação via API, com base no período definido.  
+2. **Invenio Webchat – Net Promoter Score (NPS)**: Lista classificações, NPS e comentários realizados após atendimento via WebChat.  
+3. **Protocolos de Atendimentos**: Lista todos os protocolos gerados com base no período definido.  
 
 ## 🛠️ Relatórios Customizados
 
 Também é possível solicitar **relatórios customizados** junto ao time comercial, mediante avaliação.
 
- *Importante: solicitações customizadas estão sujeitas a custos adicionais e prazos específicos.*
+*Importante: solicitações customizadas estão sujeitas a custos adicionais e prazos específicos.*
 
 ## 📈 Conclusão
 
 A seção de Relatórios é uma ferramenta estratégica que permite:
 
-- Acompanhar metas
-- Otimizar processos
-- Identificar melhorias
-- Apoiar decisões baseadas em dados reais
+- Acompanhar metas  
+- Otimizar processos  
+- Identificar melhorias  
+- Apoiar decisões baseadas em dados reais  
 
-##  FAQ
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup title="Dúvidas Frequentes">
 
@@ -127,5 +167,3 @@ Sim. Entre em contato com o time comercial para solicitar um relatório customiz
 </Accordion>
 
 </AccordionGroup>
-
-
