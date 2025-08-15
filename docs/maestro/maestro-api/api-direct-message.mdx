@@ -1,23 +1,23 @@
 ---
-title: Direct Message API - Maestro
-sidebarTitle: Direct Message API - Maestro
-description: Envio de mensagens transacionais via E-mail, SMS e WhatsApp usando a infraestrutura do Maestro.
+title: "Direct Message API - Maestro"
+sidebarTitle: "Direct Message API - Maestro"
+description: "Envio de mensagens transacionais via E-mail, SMS e WhatsApp usando a infraestrutura do Maestro."
 ---
 
 ## Cliente
+
 MAESTRO
 
-**Data de criação:** 14/08/2025  
-**Responsável pela Documentação:** Engenharia  
+**Data de criação:** 14/08/2025\
+**Responsável pela Documentação:** Engenharia
 
-
-**Precisa de liberação de IPs do lado do Robbu?** Não  
-**IP’s:** —  
+**Precisa de liberação de IPs do lado do Robbu?** Não\
+**IP’s:** —
 
 ## Informações Gerais
 
-**Versão da API:** V1  
-**Nome da API:** Direct Message API  
+**Versão da API:** V1\
+**Nome da API:** Direct Message API\
 **Canais suportados:** Envio de mensagens sem campanha — E-mail, SMS e WhatsApp
 
 ---
@@ -26,9 +26,9 @@ MAESTRO
 
 A API Direct Message permite o disparo de mensagens transacionais (fora do ciclo de campanhas) utilizando os mesmos recursos de infraestrutura do Maestro, incluindo:
 
-- Motor de regras de validação de mensagem  
-- Serviços e brokers configurados no Maestro  
-- Workers dedicados e filas segregadas por empresa (Service Bus)  
+- Motor de regras de validação de mensagem
+- Serviços e brokers configurados no Maestro
+- Workers dedicados e filas segregadas por empresa (Service Bus)
 
 Este serviço é ideal para integrações automatizadas, como envio de confirmações, alertas, autenticações e notificações em tempo real.
 
@@ -36,16 +36,15 @@ Este serviço é ideal para integrações automatizadas, como envio de confirma�
 
 ## Base URL
 
-**Produção:**  
+**Produção:**
 
-https://api.common.maestro.robbu.global/
----
+## https://api.common.maestro.robbu.global/
 
 ---
 
 ## 🧩 Variáveis de Template
 
-**E-mail e SMS**  
+**E-mail e SMS**\
 Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o template configurado no Maestro:
 
 ```json
@@ -74,3 +73,90 @@ Request Body:
   "template_code": "TEMPLATE_EMAIL_001"
 }
 
+2. Envio de WhatsApp
+
+POST /v1/directmessage/whatsapp
+
+Request Body:
+
+{
+  "recipient_number": "+5511999998888",
+  "whatsapp_sender_number": "+5500000000000",
+  "variables": {
+    "header_key": "1",
+    "header_value": "João Silva",
+    "body": {
+      "1": "CDI-00987",
+      "2": "R. Padre Anchieta, 115. Centro."
+    }
+  },
+  "contact_name": "João Silva",
+  "document_number": "12345678900",
+  "contract_code": "CT-000123",
+  "template_code": "TEMPLATE_WPP_003"
+}
+
+3. Envio de SMS
+
+POST /v1/directmessage/sms
+
+Request Body:
+
+{
+  "recipient_number": "+5511999998888",
+  "free_text": "Texto do SMS (opcional)",
+  "variable_values": {
+    "codigo": "123456",
+    "nome": "João"
+  },
+  "contact_name": "João Silva",
+  "document_number": "12345678900",
+  "contract_code": "CT-00987",
+  "template_code": "TEMPLATE_SMS_002"
+}
+
+```
+## 📬 Respostas
+
+| Código                        | Descrição                                                                         |
+| ----------------------------- | --------------------------------------------------------------------------------- |
+| **200 - OK**                  | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio. |
+| **200 - OK**                  | Mensagem validada, mas não enviada — Não há serviço configurado para o canal.     |
+| **401 - Unauthorized**        | Falha na autenticação.                                                            |
+| **422 - UnprocessableEntity** | Erros de validação — Campos obrigatórios não preenchidos ou dados inválidos.      |
+| **409 - Conflict**            | Erros de validação do Motor de Regras — Lista os motivos de bloqueio.             |
+
+
+## 💡 Boas Práticas
+
+Valide previamente os templates e variáveis definidos no Maestro.
+
+Sempre trate erros 401 e 403 com lógica de fallback ou renovação de token.
+
+Implemente monitoramento e logs para mensurar falhas por canal e acionar novas tentativas ou alertas.
+
+## 🔒 Segurança
+
+Para utilizar o serviço Direct Message, é necessário fornecer um JWT Token no cabeçalho Authorization das requisições POST.
+
+O token deve ser obtido em:
+Configurações > Empresa no Maestro.
+
+Atenção: Ao gerar um novo token para a empresa do usuário logado, o token anterior é automaticamente revogado.
+
+## ❓ FAQ
+
+1. Posso enviar mensagens sem configurar um template no Maestro?
+Não. É obrigatório vincular um template previamente configurado.
+
+2. E se o canal não estiver configurado?
+A API retornará 200 - OK, mas informando que não há serviço de envio para aquele canal.
+
+3. Como renovar o token?
+Acesse Configurações > Empresa e gere um novo token. Lembre-se: o token anterior será revogado.
+
+4. Qual o tempo de processamento da mensagem?
+O envio é feito em tempo real, dependendo da disponibilidade do canal.
+
+5. É possível monitorar erros de envio?
+Sim, utilizando logs e monitoramento de falhas por canal.
