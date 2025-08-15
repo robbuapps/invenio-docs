@@ -1,5 +1,76 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: Direct Message API - Maestro
+sidebarTitle: Direct Message API - Maestro
+description: Envio de mensagens transacionais via E-mail, SMS e WhatsApp usando a infraestrutura do Maestro.
 ---
+
+## Cliente
+MAESTRO
+
+**Data de criação:** 14/08/2025  
+**Responsável pela Documentação:** Engenharia  
+
+
+**Precisa de liberação de IPs do lado do Robbu?** Não  
+**IP’s:** —  
+
+## Informações Gerais
+
+**Versão da API:** V1  
+**Nome da API:** Direct Message API  
+**Canais suportados:** Envio de mensagens sem campanha — E-mail, SMS e WhatsApp
+
+---
+
+## Visão Geral
+
+A API Direct Message permite o disparo de mensagens transacionais (fora do ciclo de campanhas) utilizando os mesmos recursos de infraestrutura do Maestro, incluindo:
+
+- Motor de regras de validação de mensagem  
+- Serviços e brokers configurados no Maestro  
+- Workers dedicados e filas segregadas por empresa (Service Bus)  
+
+Este serviço é ideal para integrações automatizadas, como envio de confirmações, alertas, autenticações e notificações em tempo real.
+
+---
+
+## Base URL
+
+**Produção:**  
+
+https://api.common.maestro.robbu.global/
+---
+
+---
+
+## 🧩 Variáveis de Template
+
+**E-mail e SMS**  
+Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o template configurado no Maestro:
+
+```json
+"variable_values": {
+  "nome": "João Silva",
+  "codigo": "CDI-00987"
+}
+
+Endpoints
+1. Envio de E-mail
+
+POST /v1/directmessage/email
+
+Request Body:
+{
+  "recipient_email": "usuario@dominio.com",
+  "subject": "Assunto do E-mail",
+  "free_text": "Texto livre (opcional)",
+  "variable_values": {
+    "chave1": "valor1",
+    "chave2": "valor2"
+  },
+  "contact_name": "João Silva",
+  "document_number": "12345678900",
+  "contract_code": "CT-98765",
+  "template_code": "TEMPLATE_EMAIL_001"
+}
 
