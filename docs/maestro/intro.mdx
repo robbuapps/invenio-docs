@@ -98,10 +98,77 @@ Todos os usuários cadastrados na plataforma são classificados em um dos seguin
 - Segurança reforçada com SSO corporativo  
 - Gestão de acessos adaptada às diferentes necessidades dos usuários
 
-![add campanha](https://robbublob.blob.core.windows.net/docs/maestro/loginmaestro.png)
+![login maestro](https://robbublob.blob.core.windows.net/docs/maestro/loginmaestro.png)
 
+## 🏗️ Estrutura do Módulo de Login
 
+O módulo de login do **Maestro** foi desenvolvido com base no **codebase do Invenio**, aproveitando sua **robustez e confiabilidade**, mas com **regras e perfis simplificados**, adaptados às necessidades do novo produto.
 
+---
 
+## 🗄️ Bases e Permissionamentos
 
+As bases de dados de usuários e os modelos de permissionamento são configurados para **todos os perfis**, garantindo:
 
+- Autonomia no controle de acesso  
+- Maior flexibilidade na gestão de perfis  
+
+### Perfis de Usuário
+
+- **Gerente do ambiente**  
+- **Assessorias**  
+- **Revisora Myra** ([myrabr.com](https://myrabr.com))  
+
+---
+
+## ⚙️ Abordagem Adotada
+
+Essa arquitetura permite:  
+- Reaproveitamento de **tecnologias já consolidadas**  
+- Estrutura de autenticação **mais enxuta e personalizada** para o Maestro  
+
+## 📑 Menu Lateral e Superior
+
+O **menu lateral e superior** está disponível em todas as telas do Maestro, oferecendo acesso rápido às principais funcionalidades.  
+
+As opções exibidas variam de acordo com o **perfil do usuário**.
+
+---
+
+## 👤 Perfil: Gerente do Ambiente
+
+Usuários com perfil de **Gerente** possuem **acesso completo** às funcionalidades:
+
+- Dashboard  
+- Relatórios  
+- Empresas  
+- Público  
+- Segmentos  
+- Campanhas  
+- Templates  
+- Revisão de templates  
+- Usuários  
+- Configurações (**Acesso completo**)  
+- Ajuda  
+
+---
+
+## 👥 Perfil: Assessoria
+
+Usuários com perfil de **Assessoria** possuem um conjunto de opções reduzido, com permissões limitadas:
+
+- Dashboard  
+- Relatórios  
+- Empresas  
+- Público  
+- Segmentos  
+- Campanhas  
+- Templates  
+- Usuários  
+- Configurações (**Acesso parcial**)  
+- Ajuda  
+
+![entrada maestro](https://robbublob.blob.core.windows.net/docs/maestro/maestro.png)
+
+Menu revisora:
+![revisora](https://robbublob.blob.core.windows.net/docs/maestro/revisora.png)
