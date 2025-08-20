@@ -45,5 +45,111 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 
 ### 3.1 Templates  
 
+{segmentName}{channelName}[{wabaDescription}]_{YYYYMMDD}.csv
 
+- **segmentName**: nome exato do segmento configurado (Maestro/Segmentos).  
+- **channelName**: `email` | `sms` | `whatsapp` (case-insensitive).  
+- **wabaDescription** *(opcional, apenas WhatsApp)*: descrição da WABA.  
+- **YYYYMMDD**: data de referência (ex: `20250531`).  
+
+**Exemplos**  
+- `retail_email_20250510.csv`  
+- `finance_sms_20250101.csv`  
+- `store_whatsapp_MinhaWaba_20250320.csv`  
+
+---
+
+### 3.2 Campanhas  
+
+{segmentName}{channelName}{templateCode}[{whatsappNumber}]{YYYYMMDD}_{HHmm}.csv
+
+- **segmentName**: igual ao acima.  
+- **channelName**: `email` | `sms` | `whatsapp`.  
+- **templateCode**: código do template (ex: `E0001`, `S0123`, `W0456`).  
+- **whatsappNumber** *(obrigatório no WhatsApp)*: número do telefone.  
+- **YYYYMMDD**: data (ex: `20250515`).  
+- **HHmm**: hora de agendamento (24h).  
+
+**Exemplos**  
+- `retail_email_E0001_20250515_0830.csv`  
+- `finance_sms_S0002_20250601_1200.csv`  
+- `store_whatsapp_W0003_5511999999999_20250720_1905.csv`  
+
+---
+
+## 4. Fluxo de Processamento  
+
+1. Upload do `.csv` em `/maestro/templates` ou `/maestro/campaigns`.  
+2. Serviço rotineiro (Azure Container Job, a cada 10 min) executa:  
+   - Garante diretórios `processed` e `error`.  
+   - Varre os arquivos `.csv`.  
+3. Validações:  
+   - Nome segue o padrão.  
+   - Segmento existe e pertence à empresa.  
+   - (Templates-WhatsApp) validação de WABA.  
+   - (Campanhas) Template existe e pertence ao segmento.  
+   - (Campanhas-WhatsApp) número informado existe e pertence à WABA.  
+4. Importa:  
+   - **Templates**: dispara Importação de templates.  
+   - **Campanhas**: cria Público, faz upload do arquivo e cria a campanha.  
+5. Move o `.csv` para:  
+   - `processed` em caso de sucesso.  
+   - `error` em caso de falha.  
+   - Gera `_errorDetail.txt` com mensagem de erro.  
+6. Logs: empresa, segmento, canal, nome do arquivo e motivo da falha.  
+
+---
+
+## 5. Endpoint de Teste (QA)  
+
+### Templates  
+
+```http
+POST /v1/templates/ftp/process
+Authorization: Bearer <token>
+```
+
+### Campanhas
+
+POST /v1/campaigns/ftp/process
+Authorization: Bearer (token)
+- Resposta: 200 OK se o processo percorreu os SFTP.
+- Erros de conexão/validação ficam logados sem interromper o loop.
+
+### Erros comuns
+| Situação                                           | Código de Recurso                                                     |
+| -------------------------------------------------- | --------------------------------------------------------------------- |
+| Nome fora de padrão                                | Core\_\*\_InvalidFileNameFormat                                       |
+| Segmento não encontrado para a empresa             | Core\_\*\_SegmentNotFoundForCompany                                   |
+| Canal inválido                                     | Core\_\*\_InvalidChannel                                              |
+| WABA não encontrado (Templates-WhatsApp)           | Core\_TemplateFtpImport\_WhatsappBusinessAccountNotFoundByDescription |
+| Template não existe (Campanhas)                    | Core\_CampaignFtpImport\_TemplateNotFound                             |
+| Número não encontrado na WABA (Campanhas-WhatsApp) | Core\_CampaignFtpImport\_WhatsappNumberNotFound                       |
+
+
+## FAQ
+
+<AccordionGroup>
+
+<Accordion title="Posso enviar arquivos sem seguir o padrão de nomenclatura?">
+Não. O arquivo será rejeitado e movido para a pasta **error** com um `_errorDetail.txt`.
+</Accordion>
+
+<Accordion title="Preciso recriar os diretórios processed e error manualmente?">
+Não. O sistema os cria automaticamente quando não existirem.
+</Accordion>
+
+<Accordion title="Posso reaproveitar um arquivo já processado?">
+Não. Arquivos em `processed` não são reprocessados. Para enviar novamente, gere um novo `.csv`.
+</Accordion>
+
+<Accordion title="Com que frequência os arquivos são processados?">
+A cada **10 minutos**, via job automático em container.
+</Accordion>
+
+<Accordion title="É possível simular o processo em ambiente de QA?">
+Sim, usando os endpoints `/v1/templates/ftp/process` ou `/v1/campaigns/ftp/process`.
+</Accordion>
+
+</AccordionGroup>
 
