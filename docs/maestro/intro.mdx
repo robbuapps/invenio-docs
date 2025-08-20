@@ -420,11 +420,80 @@ DirectMessage, para realização de ligação com API’s;
 ![token](https://robbublob.blob.core.windows.net/docs/maestro/renovatoken.png)
 Ao Gerar ou renovar um novo token o mesmo tem duração de cópia de 20s ao copiar o mesmo poderá ser feito uso.
 
-### Regras, Regra de Horário enviar campanhas apenas em dia útil e horário comercial, ou janela de data e horário especifica, podendo conferir seus históricos de alteração de regras;
+### Regras, Regra de Horário 
+- Enviar campanhas apenas em dia útil e horário comercial, ou janela de data e horário especifica, podendo conferir seus históricos de alteração de regras;
 ![regras](https://robbublob.blob.core.windows.net/docs/maestro/regras.png)
 
 ### Bloqueio por Feriado
 - Nacionais, estaduais, municipais e isolados
-![bloqueio](https://robbublob.blob.core.windows.net/docs/maestro/bloqueioferiado.png)
+![bloqueio feriado](https://robbublob.blob.core.windows.net/docs/maestro/bloqueioferiado.png)
 
-  
+### Bloqueio por Listas de Restrição
+- Listas de restrição: Procon, só telefone (apenas número), só contato (e-mail, por exemplo), só 
+horário por estado (horario de cada DDD), só limite de disparo (por contato) ou hash
+![bloqueio restricao](https://robbublob.blob.core.windows.net/docs/maestro/bloqlistarestricao.png)
+
+### Bloqueio por Domínio de Email
+- Bloqueio de e-mails com domínio governamental
+![bloqemail](https://robbublob.blob.core.windows.net/docs/maestro/bloqemail.png)
+
+### Controle de Erros
+- Avaliação do % de erros por cada arquivo
+![controleerros](https://robbublob.blob.core.windows.net/docs/maestro/controleerros.png)
+
+## 📡 Integração com Provedores
+
+A integração com **provedores de SMS** permite que sistemas internos (como **CRMs, aplicativos e bots**) enviem mensagens de texto para celulares por meio de **infraestrutura terceirizada**, utilizando APIs fornecidas por empresas como **Myra, Pontal, Zenvia**, entre outros.
+
+Essa comunicação geralmente é feita via **API REST**, autenticada com **tokens de acesso**.  
+Cada provedor pode ter **particularidades no envio, headers e respostas**.
+
+---
+
+## ⚙️ Como Funciona?
+
+1. O provedor fornece um **token de autenticação** (pode ser um **JWT**, **Bearer Token** ou uma **chave fixa**).  
+2. Esse **token** deve ser incluído no **header da requisição HTTP**, validando o sistema como autorizado.  
+3. O sistema envia a mensagem para o **endpoint da API do provedor**.  
+4. O provedor processa e entrega a mensagem ao destinatário.  
+5. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
+
+---
+
+## 🔐 Exemplo de Autenticação (cURL)
+
+```bash
+curl -X POST "https://api.provedor.com/sms/send" \
+  -H "Authorization: Bearer <TOKEN_DE_AUTENTICACAO>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "to": "+5511999999999",
+    "message": "Olá, esta é uma mensagem de teste!"
+  }'
+```
+### Benefícios da Integração
+
+- Automação de fluxos de comunicação com clientes.
+
+- Escalabilidade no envio massivo de SMS.
+
+- Segurança com autenticação baseada em tokens.
+
+- Flexibilidade para uso em diferentes sistemas internos (CRM, bots, aplicativos).
+![integracao](https://robbublob.blob.core.windows.net/docs/maestro/integracaoprovedor.png)
+
+
+## 🆘 Ajuda
+
+A tela de **Ajuda** centraliza os recursos disponíveis para solucionar dúvidas e obter **suporte técnico** na plataforma Maestro.
+
+---
+
+## 📖 Recursos Disponíveis
+- **Documentação Online** → Acesse tutoriais e guias de uso da plataforma.  
+- **FAQs** → Perguntas frequentes organizadas por categorias.  
+- **Suporte Técnico** → Canal direto para abertura de chamados e acompanhamento do status.  
+- **Atalhos Rápidos** → Links para páginas de configuração, relatórios e principais funcionalidades.  
+![ajuda](https://robbublob.blob.core.windows.net/docs/maestro/ajuda.png)
+
+---
