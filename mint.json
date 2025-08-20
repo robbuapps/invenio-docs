@@ -50,14 +50,14 @@
       "group": "Maestro",
       "pages": [
         "docs/maestro/intro",
-         "docs/maestro/carga-ftp"       
+        "docs/maestro/carga-ftp"       
       ]
     },
     
     {
       "group": "Maestro API",
       "pages": [
-        "docs/maestro/maestro-api/api-direct-message"
+        "docs/maestro-api/api-direct-message"
         
       ]
     },
