@@ -146,17 +146,25 @@ Atenção: Ao gerar um novo token para a empresa do usuário logado, o token ant
 
 ## ❓ FAQ
 
-1. Posso enviar mensagens sem configurar um template no Maestro?
-Não. É obrigatório vincular um template previamente configurado.
+<AccordionGroup>
+  <Accordion title="Posso enviar mensagens sem configurar um template no Maestro?">
+    Não. É obrigatório vincular um template previamente configurado.
+  </Accordion>
 
-2. E se o canal não estiver configurado?
-A API retornará 200 - OK, mas informando que não há serviço de envio para aquele canal.
+  <Accordion title="E se o canal não estiver configurado?">
+    A API retornará **200 - OK**, mas informando que não há serviço de envio para aquele canal.
+  </Accordion>
 
-3. Como renovar o token?
-Acesse Configurações > Empresa e gere um novo token. Lembre-se: o token anterior será revogado.
+  <Accordion title="Como renovar o token?">
+    Acesse **Configurações > Empresa** e gere um novo token.  
+    ⚠️ Atenção: o token anterior será revogado.
+  </Accordion>
 
-4. Qual o tempo de processamento da mensagem?
-O envio é feito em tempo real, dependendo da disponibilidade do canal.
+  <Accordion title="Qual o tempo de processamento da mensagem?">
+    O envio é feito em **tempo real**, dependendo da disponibilidade do canal.
+  </Accordion>
 
-5. É possível monitorar erros de envio?
-Sim, utilizando logs e monitoramento de falhas por canal.
+  <Accordion title="É possível monitorar erros de envio?">
+    Sim, utilizando **logs** e monitoramento de falhas por canal.
+  </Accordion>
+</AccordionGroup>
