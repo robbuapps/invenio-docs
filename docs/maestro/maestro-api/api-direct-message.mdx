@@ -42,7 +42,7 @@ Este serviço é ideal para integrações automatizadas, como envio de confirma�
 
 ---
 
-## 🧩 Variáveis de Template
+##  Variáveis de Template
 
 **E-mail e SMS**\
 Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o template configurado no Maestro:
@@ -116,7 +116,7 @@ Request Body:
 }
 
 ```
-## 📬 Respostas
+##  Respostas
 
 | Código                        | Descrição                                                                         |
 | ----------------------------- | --------------------------------------------------------------------------------- |
@@ -127,7 +127,7 @@ Request Body:
 | **409 - Conflict**            | Erros de validação do Motor de Regras — Lista os motivos de bloqueio.             |
 
 
-## 💡 Boas Práticas
+##  Boas Práticas
 
 Valide previamente os templates e variáveis definidos no Maestro.
 
@@ -135,7 +135,7 @@ Sempre trate erros 401 e 403 com lógica de fallback ou renovação de token.
 
 Implemente monitoramento e logs para mensurar falhas por canal e acionar novas tentativas ou alertas.
 
-## 🔒 Segurança
+##  Segurança
 
 Para utilizar o serviço Direct Message, é necessário fornecer um JWT Token no cabeçalho Authorization das requisições POST.
 
@@ -144,7 +144,7 @@ Configurações > Empresa no Maestro.
 
 Atenção: Ao gerar um novo token para a empresa do usuário logado, o token anterior é automaticamente revogado.
 
-## ❓ FAQ
+##  FAQ
 
 <AccordionGroup>
   <Accordion title="Posso enviar mensagens sem configurar um template no Maestro?">
