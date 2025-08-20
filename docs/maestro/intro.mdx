@@ -363,3 +363,48 @@ No recurso **Usuários**, é possível **listar e gerenciar** todos os usuários
 - Controle centralizado de acessos  
 - Facilidade de gestão por empresa  
 - Flexibilidade na administração de perfis e permissões  
+![usuario](https://robbublob.blob.core.windows.net/docs/maestro/usuariomaestro.png)
+
+## ⚙️ Configurações
+
+As **Configurações** estão disponíveis apenas para usuários do tipo **Gerente**.  
+Elas permitem gerenciar preferências relacionadas à **conta**, **empresa** e **templates**.
+
+---
+
+## 🔧 Configurações de Templates
+
+- Definição de regras relacionadas ao **uso e validade** dos modelos disponíveis.  
+- Possibilidade de definir um **tempo de expiração (em dias)** para os templates.  
+  - Após o período definido, o template será considerado **expirado**.  
+  - Templates expirados ainda podem ser **visualizados**, mas não podem ser reutilizados até que sejam **atualizados ou revalidados**.  
+
+> ⚠️ **Atenção:** o sincronismo de expiração de todos os templates ocorre **uma vez ao dia, durante o período noturno**.
+
+---
+
+## 🏢 Configurações da Empresa
+
+### Autenticação
+- Permite definir como os usuários acessam o sistema.  
+- Suporte a **Single Sign-On (SSO)** via Azure AD.  
+- Necessário informar o **ID da aplicação** no Azure Active Directory.  
+- Usuários podem acessar o Maestro com suas **credenciais corporativas**, sem criar novas senhas.  
+
+---
+
+## 📂 Protocolo de Transferência de Arquivos (FTP)
+
+### Habilitação
+- Ao habilitar, o sistema fornece:  
+  - **Nome de usuário**  
+  - **Senha**  
+  - **Porta**  
+  - **Servidor**
+
+Essas credenciais permitem a conexão via **FTP**, facilitando a transferência de arquivos.
+
+### Segurança
+- É fundamental manter as credenciais em segurança.  
+- Garantir o correto uso de **porta** e **endereço do servidor** para estabelecer a conexão.  
+- A proteção desses dados garante a **integridade dos arquivos** durante as transferências.
