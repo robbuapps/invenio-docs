@@ -49,8 +49,8 @@
     {
       "group": "Maestro",
       "pages": [
-        "docs/maestro/intro"
-                
+        "docs/maestro/intro",
+         "docs/maestro/carga-ftp"       
       ]
     },
     
