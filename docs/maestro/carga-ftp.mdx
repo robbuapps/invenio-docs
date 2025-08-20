@@ -44,9 +44,9 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 ## 3. Padrões de Nome de Arquivo  
 
 ### 3.1 Templates  
-
-({segmentName}{channelName}[{wabaDescription}]_{YYYYMMDD}.csv)
-
+```plaintext
+{segmentName}{channelName}[{wabaDescription}]_{YYYYMMDD}.csv
+```
 - **segmentName**: nome exato do segmento configurado (Maestro/Segmentos).  
 - **channelName**: `email` | `sms` | `whatsapp` (case-insensitive).  
 - **wabaDescription** *(opcional, apenas WhatsApp)*: descrição da WABA.  
@@ -61,7 +61,9 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 
 ### 3.2 Campanhas  
 
-({segmentName}{channelName}{templateCode}[{whatsappNumber}]{YYYYMMDD}_{HHmm}.csv)
+```plaintext
+{segmentName}_{channelName}_{templateCode}[_{whatsappNumber}]_{YYYYMMDD}_{HHmm}.csv
+```
 
 - **segmentName**: igual ao acima.  
 - **channelName**: `email` | `sms` | `whatsapp`.  
