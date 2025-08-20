@@ -1,5 +1,49 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: Carga FTP de Templates & Campanhas
+sidebarTitle: Carga FTP
+description: Orientações para importação automática de Templates e Campanhas via SFTP no Robbu Maestro, incluindo padrões de arquivos, diretórios e fluxo de processamento.
 ---
+
+# Carga FTP de Templates & Campanhas  
+
+Esta documentação orienta como usar os serviços automáticos de importação via **SFTP** para **Templates** e **Campanhas** no **Robbu Maestro**.  
+
+---
+
+## 1. Acesso SFTP  
+Cada Empresa possui suas credenciais próprias em:  
+**Maestro › Configurações › Empresa › FtpSettings**
+
+| Parâmetro        | Descrição                                |
+|------------------|------------------------------------------|
+| Servidor         | Endereço do servidor SFTP                |
+| Porta            | Porta para conexão (normalmente 22)      |
+| Nome do usuário  | Usuário usado para conexão               |
+| Senha do usuário | Senha usada para conexão                 |
+
+> ⚠️ Se algum parâmetro estiver em branco ou inválido, a importação daquela empresa será ignorada (um log de *warning* será gerado).
+
+---
+
+## 2. Diretórios  
+
+É preciso existir os diretórios `maestro/templates` e `maestro/campaigns` dentro do servidor FTP.  
+Os diretórios `processed` e `error` são criados automaticamente quando não existirem.  
+
+| Uso                      | Caminho SFTP                   |
+|--------------------------|--------------------------------|
+| Entrada Templates        | `/maestro/templates`           |
+| Processados Templates    | `/maestro/templates/processed` |
+| Erros Templates          | `/maestro/templates/error`     |
+| Entrada Campanhas        | `/maestro/campaigns`           |
+| Processados Campanhas    | `/maestro/campaigns/processed` |
+| Erros Campanhas          | `/maestro/campaigns/error`     |
+
+---
+
+## 3. Padrões de Nome de Arquivo  
+
+### 3.1 Templates  
+
+
 
