@@ -370,14 +370,17 @@ No recurso **Usuários**, é possível **listar e gerenciar** todos os usuários
 As **Configurações** estão disponíveis apenas para usuários do tipo **Gerente**.  
 Elas permitem gerenciar preferências relacionadas à **conta**, **empresa** e **templates**.
 
+![config](https://robbublob.blob.core.windows.net/docs/maestro/configmaestro.png)
 ---
 
-## 🔧 Configurações de Templates
+## 🔧 Conta Configurações de Templates
 
 - Definição de regras relacionadas ao **uso e validade** dos modelos disponíveis.  
 - Possibilidade de definir um **tempo de expiração (em dias)** para os templates.  
   - Após o período definido, o template será considerado **expirado**.  
-  - Templates expirados ainda podem ser **visualizados**, mas não podem ser reutilizados até que sejam **atualizados ou revalidados**.  
+  - Templates expirados ainda podem ser **visualizados**, mas não podem ser reutilizados até que sejam **atualizados ou revalidados**.
+![config conta](https://robbublob.blob.core.windows.net/docs/maestro/configconta.png)
+  
 
 > ⚠️ **Atenção:** o sincronismo de expiração de todos os templates ocorre **uma vez ao dia, durante o período noturno**.
 
@@ -390,6 +393,7 @@ Elas permitem gerenciar preferências relacionadas à **conta**, **empresa** e *
 - Suporte a **Single Sign-On (SSO)** via Azure AD.  
 - Necessário informar o **ID da aplicação** no Azure Active Directory.  
 - Usuários podem acessar o Maestro com suas **credenciais corporativas**, sem criar novas senhas.  
+![config emp](https://robbublob.blob.core.windows.net/docs/maestro/configempresa.png)
 
 ---
 
@@ -408,3 +412,19 @@ Essas credenciais permitem a conexão via **FTP**, facilitando a transferência 
 - É fundamental manter as credenciais em segurança.  
 - Garantir o correto uso de **porta** e **endereço do servidor** para estabelecer a conexão.  
 - A proteção desses dados garante a **integridade dos arquivos** durante as transferências.
+  
+### Integração de Canais – Este tópico trata da geração de Token para realizar a integração com 
+DirectMessage, para realização de ligação com API’s;
+![integracao](https://robbublob.blob.core.windows.net/docs/maestro/integracaocanais.png)
+**Para gerar um token basta clicar em "Renovar token"**
+![token](https://robbublob.blob.core.windows.net/docs/maestro/renovatoken.png)
+Ao Gerar ou renovar um novo token o mesmo tem duração de cópia de 20s ao copiar o mesmo poderá ser feito uso.
+
+### Regras, Regra de Horário enviar campanhas apenas em dia útil e horário comercial, ou janela de data e horário especifica, podendo conferir seus históricos de alteração de regras;
+![regras](https://robbublob.blob.core.windows.net/docs/maestro/regras.png)
+
+### Bloqueio por Feriado
+- Nacionais, estaduais, municipais e isolados
+![bloqueio](https://robbublob.blob.core.windows.net/docs/maestro/bloqueioferiado.png)
+
+  
