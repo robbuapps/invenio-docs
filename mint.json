@@ -39,13 +39,18 @@
   ],
   "navigation": [
     {
+      "group": "Configurações Gerais",
+      "pages": [
+        "docs/configuracoes-gerais/lista-ips"
+      ]
+    },    
+    {
       "group": "Autenticação e Contas",
       "pages": [
         "docs/live/como-acessar-plataforma",
         "docs/accounts/sso"
       ]
-    },
-   
+    },   
     {
       "group": "Maestro",
       "pages": [
