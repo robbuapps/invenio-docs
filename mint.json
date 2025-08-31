@@ -67,55 +67,30 @@
       ]
     },
     {
-  "group": "Live",
-  "pages": [
-    {
-      "title": "Perfil e Configurações",
-      "pages": [
-        "docs/live/meu-perfil"
-      ]
-    },
-    {
-      "title": "Contatos e Interações",
-      "pages": [
-        "docs/live/criar-contato",
-        "docs/live/edicao-de-tags",
-        "docs/live/lista-de-desejos"
-      ]
-    },
-    {
-      "title": "Busca e Filtros",
-      "pages": [
-        "docs/live/busca-mensagem-historico",
-        "docs/live/filtros-e-menus-de-busca",
-        "docs/live/filtro-por-canal"
-      ]
-    },
-    {
-      "title": "Canais de Atendimento",
-      "pages": [
-        "docs/live/adicionar-canal-invenio-live",
-        "docs/live/sessao-de-24horas-no-whatsapp"
-      ]
-    },
-    {
-      "title": "Mensagens e Conversas",
-      "pages": [
-        "docs/live/enviar-mensagem",
-        "docs/live/dados-da-mensagem",
-        "docs/live/exportacao-de-conversas",
-        "docs/live/lista-de-transmissao"
-      ]
-    },
-    {
-      "title": "Agendamento e Distribuição",
-      "pages": [
-        "docs/live/como-criar-agendamento",
-        "docs/live/metodos-de-distribuicao"
-      ]
-    }
-  ]
-}
+    "group": "Live",
+    "pages": [
+      "docs/live/meu-perfil",
+
+      "docs/live/criar-contato",
+      "docs/live/edicao-de-tags",
+      "docs/live/lista-de-desejos",
+
+      "docs/live/busca-mensagem-historico",
+      "docs/live/filtros-e-menus-de-busca",
+      "docs/live/filtro-por-canal",
+
+      "docs/live/adicionar-canal-invenio-live",
+      "docs/live/sessao-de-24horas-no-whatsapp",
+
+      "docs/live/enviar-mensagem",
+      "docs/live/dados-da-mensagem",
+      "docs/live/exportacao-de-conversas",
+      "docs/live/lista-de-transmissao",
+
+      "docs/live/como-criar-agendamento",
+      "docs/live/metodos-de-distribuicao"
+    ]
+  },
 
     {
       "group": "Center",
