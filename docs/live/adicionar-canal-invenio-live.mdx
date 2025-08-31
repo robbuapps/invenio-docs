@@ -1,0 +1,118 @@
+---
+title: "Adicionando canais em um contato"
+sidebarTitle: "Adicionar Canais"
+description: "Aprenda como adicionar e gerenciar canais de E-mail, SMS e WhatsApp em um contato no Invenio Live."
+---
+
+
+Os canais são os meios de comunicação cadastrados no contato para que as mensagens possam ser enviadas e recebidas.  
+No Invenio Live, é possível incluir canais de **E-mail**, **SMS** e **WhatsApp**.
+
+---
+
+## Passo a passo para adicionar um canal
+
+-  **Faça login** no **Invenio Live**.  
+-  **Abra o contato** que deseja editar.  
+-  No menu superior do contato, clique em **“Adicionar canal”**.
+
+<img src="" />
+
+
+-  Na tela de **Manutenção de canais**, escolha:
+   - **“Adicionar canal”**, se o contato ainda não possui nenhum canal cadastrado.
+
+   <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/CanaisAdicionarCanal.png" />  
+
+   - **“Editar canais”**, se já existem canais registrados.
+
+   <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/CanaisEditarCanal.png" />  
+
+   - **“Enviar canais para a lista de restrição ”**, se necessário encaminhar aquele número de **contato** ou **e-mail** para a lista de restrição do Invenio Center.
+   [Acesso a lista de restrição Invenio center](https://inveniocenter.robbu.global/painel/restricoes) 
+
+        <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/CanaisRestricao.png" />  
+
+   Consulte: [Restrições Invenio Center](https://docs.robbu.global/docs/center/restricoes)
+
+-  Na lista de opções, selecione o canal desejado (**E-mail**, **SMS** ou **WhatsApp**).  
+
+    <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/opcoesCanais.png" />
+
+-  Preencha os campos conforme o tipo de canal:  
+
+---
+
+###  Canal de E-mail
+- **E-mail**: informe o endereço eletrônico.  
+- **Responsável**: digite o nome do contato ao qual pertence o e-mail.  
+  > Útil quando o contato principal é uma empresa ou se o e-mail pertence a terceiros, como pai, mãe ou filho.  
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/CanaismodeloEmail.png" />
+
+---
+
+###  Canal de SMS
+- **Número de telefone**: insira o número que deseja cadastrar.  
+- **Responsável**: (opcional) informe o nome do responsável pelo número.  
+  > Recomendado quando o número pertence a terceiros relacionados ao contato.  
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/modeloCanaisSMS.png" />
+
+---
+
+###  Canal de WhatsApp
+1. **Escolha o tipo de canal:** selecione **WhatsApp**.  
+2. **Informe o número de telefone ** que será vinculado ao contato.  
+3. **Configure o canal de saída:** selecione o número de **WhatsApp Business API** disponível para envio de mensagens.  
+   - A lista mostra apenas os números integrados e liberados para seu usuário.  
+4. **Permissão necessária:**  
+   Para adicionar um canal de WhatsApp, seu usuário precisa ter acesso às linhas configuradas.  
+   Vá até **Invenio Center >> Usuários** e marque as linhas em **“Linhas WhatsApp”**.  
+5. **Responsável:** use o campo para indicar a quem pertence o número adicionado (ex.: pai, mãe, filho etc.).  
+
+>  Ao adicionar um novo canal, ele será marcado automaticamente como **canal principal**.  
+> Todas as mensagens enviadas para o contato serão direcionadas a esse canal por padrão.  
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Adicionar Canal Invenio Live/modeloCanaisWhatsapp.png" />
+
+> 🔔 **Importante:**  
+> Para iniciar uma conversa com um contato via WhatsApp Business API, é necessário enviar uma **mensagem de template HSM**, que abrirá a **janela de 24 horas de conversação**.  
+> Consulte a documentação oficial:  
+> [O que é a janela de 24 horas?](https://www.whatsapp.com/business/platform)  
+
+---
+
+## 📎 Links e assuntos relacionados
+
+- [Sessão de 24h no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
+- [O que são canais de atendimento](https://docs.robbu.global/docs/center/canais-atendimento)  
+- [Canal WhatsApp](https://docs.robbu.global/docs/center/canal-whatsapp)  
+- [Prioridade de Canais](https://docs.robbu.global/docs/center/prioridade-de-canais)  
+- [Filtro por Canal](https://docs.robbu.global/docs/live/filtro-por-canal)  
+- [Restrições Invenio Center](https://docs.robbu.global/docs/center/restricoes)
+---
+
+## ❓ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+
+### O que acontece se eu adicionar mais de um canal para o mesmo contato?
+O último canal adicionado será definido automaticamente como **principal**, mas você pode ajustar a prioridade manualmente em *Manutenção de canais*.
+
+### É possível cadastrar mais de um e-mail, número de SMS ou WhatsApp?
+Sim. Um contato pode ter múltiplos canais, desde que cada um seja único.
+
+### O campo "Responsável" é obrigatório?
+Não. Esse campo é opcional, mas útil em casos onde o canal não pertence diretamente ao contato principal.
+
+### Posso alterar o canal principal depois de salvar?
+Sim. Basta acessar **Editar canais** e definir outro canal como principal.
+
+### Preciso de permissão para adicionar um canal de WhatsApp?
+Sim. Seu usuário precisa estar autorizado a utilizar a linha configurada em **Invenio Center >> Usuários**.
+
+### O que acontece se eu cadastrar um canal com dados incorretos?
+Mensagens enviadas para esse canal não serão entregues. Por isso, revise os dados antes de salvar.
+
+</AccordionGroup>
