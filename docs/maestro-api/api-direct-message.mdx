@@ -6,7 +6,7 @@ description: "Envio de mensagens transacionais via E-mail, SMS e WhatsApp usando
 
 ## Cliente
 
-MAESTRO
+### MAESTRO
 
 **Data de criação:** 14/08/2025\
 **Responsável pela Documentação:** Engenharia
@@ -42,7 +42,7 @@ Este serviço é ideal para integrações automatizadas, como envio de confirma�
 
 ---
 
-##  Variáveis de Template
+## Variáveis de Template
 
 **E-mail e SMS**\
 Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o template configurado no Maestro:
@@ -114,20 +114,61 @@ Request Body:
   "contract_code": "CT-00987",
   "template_code": "TEMPLATE_SMS_002"
 }
-
 ```
-##  Respostas
+
+## Respostas
 
 | Código                        | Descrição                                                                         |
 | ----------------------------- | --------------------------------------------------------------------------------- |
-| **200 - OK**                  | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio. |
+| **200 - OK**                  | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio.|
 | **200 - OK**                  | Mensagem validada, mas não enviada — Não há serviço configurado para o canal.     |
 | **401 - Unauthorized**        | Falha na autenticação.                                                            |
 | **422 - UnprocessableEntity** | Erros de validação — Campos obrigatórios não preenchidos ou dados inválidos.      |
 | **409 - Conflict**            | Erros de validação do Motor de Regras — Lista os motivos de bloqueio.             |
 
+- 200 - OK: Indica que a mensagem passou pelas validações do motor de regras e foi enfileirada para ser enviada.
+```json
+{
+  "result": "Mensagem em processamento."
+}
+```
+- 200 - OK:
+```json
+{
+  "result": "Mensagem validada, mas não enviada. Não há serviço de envio de mensagens configurado para esse canal."
+}
+```
+- 401 - Unauthorized: Falha na autenticação
+Não há response
 
-##  Boas Práticas
+- 422 - UnprocessableEntity: Indica que campos da request são obrigatórios e não foram preenchidos, ou contém dados inválidos.
+```json
+ {
+      "message": "Não foi possível enviar a mensagem.",
+      "errors": {
+        "subject": [
+          "O Assunto é obrigatório em mensagens sem Template."
+        ]
+      },
+      "record_errors": [],
+      "conflicts": [],
+      "requestId": "00-6b732c3ed78165728d77ccd4487fc564-07c6e0cee7e9335d-00"
+    }
+  ```
+- 409 - Conflict: Alista todos os erros de validação caso a mensagem seja bloqueada pelo Motor de Regras. Nesse exemplo, o destinatário de email foi barrado por duas regras do motor.
+```json
+{
+      "message": "Erro na validação do Motor de Regras.",
+      "errors": {},
+      "record_errors": [],
+      "conflicts": [
+        "Domínio de e-mail bloqueado na Lista de Restrição",
+        "E-mail bloqueado na Lista de Restrição"
+      ],
+      "requestId": "00-80016a94505f232820c73054f2ee1fa2-12c5228b9f317e12-00"
+    }
+   ``` 
+## Boas Práticas
 
 Valide previamente os templates e variáveis definidos no Maestro.
 
@@ -135,35 +176,31 @@ Sempre trate erros 401 e 403 com lógica de fallback ou renovação de token.
 
 Implemente monitoramento e logs para mensurar falhas por canal e acionar novas tentativas ou alertas.
 
-##  Segurança
+## Segurança
 
 Para utilizar o serviço Direct Message, é necessário fornecer um JWT Token no cabeçalho Authorization das requisições POST.
 
 O token deve ser obtido em:
-Configurações > Empresa no Maestro.
+Configurações \> Empresa no Maestro.
 
 Atenção: Ao gerar um novo token para a empresa do usuário logado, o token anterior é automaticamente revogado.
 
-##  FAQ
+## FAQ
 
 <AccordionGroup>
   <Accordion title="Posso enviar mensagens sem configurar um template no Maestro?">
     Não. É obrigatório vincular um template previamente configurado.
   </Accordion>
-
   <Accordion title="E se o canal não estiver configurado?">
     A API retornará **200 - OK**, mas informando que não há serviço de envio para aquele canal.
   </Accordion>
-
   <Accordion title="Como renovar o token?">
-    Acesse **Configurações > Empresa** e gere um novo token.  
+    Acesse **Configurações \> Empresa** e gere um novo token.\
     ⚠️ Atenção: o token anterior será revogado.
   </Accordion>
-
   <Accordion title="Qual o tempo de processamento da mensagem?">
     O envio é feito em **tempo real**, dependendo da disponibilidade do canal.
   </Accordion>
-
   <Accordion title="É possível monitorar erros de envio?">
     Sim, utilizando **logs** e monitoramento de falhas por canal.
   </Accordion>
