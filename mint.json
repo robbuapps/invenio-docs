@@ -55,7 +55,8 @@
       "group": "Maestro",
       "pages": [
         "docs/maestro/intro",
-        "docs/maestro/carga-ftp"       
+        "docs/maestro/carga-ftp",   
+        "docs/maestro/motor-de-regras" 
       ]
     },
     

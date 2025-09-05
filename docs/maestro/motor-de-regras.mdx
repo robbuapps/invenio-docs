@@ -1,0 +1,87 @@
+---
+title: Manual do Motor de Regras
+sidebarTitle: Motor de Regras
+description: Regras de restrição, bloqueio e controle aplicadas às campanhas no Maestro.
+---
+
+## Manual do Motor de Regras – Maestro
+
+## 1. Configuração Inicial
+
+- O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  
+  **Configurações → Regras**
+
+### Regras aplicadas na criação da campanha
+- Regra de horário  
+- Bloqueio por feriado  
+- Controle de erros  
+
+> ⚠️ Se alguma dessas regras for violada, a campanha não será criada.
+
+### Regras aplicadas após o disparo da campanha
+- Bloqueio por listas de restrição  
+- Bloqueio por domínio de e-mail  
+
+---
+
+## 2. Regras do Motor no Dia a Dia
+
+### Horário e Agendamento
+- Campanhas não podem ser agendadas fora da faixa permitida.  
+- Em dias de feriado configurados, disparos são bloqueados automaticamente.  
+
+### Restrições por DDD e Telefone
+- Campanhas devem ter DDD mapeado corretamente.  
+- Telefones com formatação inválida (ex.: sem `+`) são rejeitados.  
+- Números bloqueados ou em lista restrita não são processados.  
+- Restrições por DDD ou estado impedem disparos para contatos dessas regiões.  
+
+### Domínios e E-mails
+- E-mails de domínios bloqueados ou que constem em blacklist são rejeitados.  
+- Arquivos com contatos duplicados não são aceitos.  
+
+### Controle de Erros
+- Se o percentual de erros ultrapassar o limite configurado, a base é invalidada.  
+- Caso o limite esteja configurado em 0%, nenhuma base deve ser barrada.  
+
+### Limite de Disparos
+- Cada contrato tem um limite diário de disparos.  
+- Se um contato estiver vinculado a mais de um contrato:  
+  - O contrato que ultrapassar o limite será bloqueado.  
+  - O contrato dentro do limite terá o disparo processado normalmente.  
+
+### Templates
+- Templates expirados não ficam disponíveis para uso após a rotina de expiração.  
+- Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.  
+
+### SFTP – Importação de Arquivos
+- Local de upload: `SFTP > maestro > campaigns > Adicionar arquivo aqui`  
+- Nome dos arquivos deve seguir o padrão:  
+
+```plaintext
+{segmentName}_{channelName}_{templateCode}_{YYYYMMDD}_{HHmm}.csv
+```
+Exemplo:
+```
+Paschoalotto_whatsapp_W1666_551131361579_20250603_1530.csv
+```
+A importação será rejeitada se:
+
+- Faltarem colunas obrigatórias no arquivo.
+
+- Colunas forem apagadas.
+
+- O segmento usado não estiver vinculado à assessoria.
+
+- O nome do arquivo estiver fora do padrão.
+
+## 3. Observações Gerais
+
+- Todas as exclusões, alterações e importações devem gerar histórico e rastreabilidade.
+
+- Segmentos só podem ser utilizados por assessorias que tenham vínculo com eles.
+
+- O motor garante que nenhuma regra de restrição, bloqueio ou limite seja ignorada.
+
+FAQ
+<AccordionGroup> <Accordion title="O que acontece se eu tentar criar uma campanha fora do horário permitido?"> A campanha não será criada, pois o motor valida a regra de horário durante a criação. </Accordion> <Accordion title="Campanhas são enviadas em feriados?"> Não. Em dias configurados como feriado, os disparos são bloqueados automaticamente. </Accordion> <Accordion title="E se o percentual de erros da base for maior que o limite configurado?"> A base será invalidada e a campanha não seguirá adiante. </Accordion> <Accordion title="Posso reutilizar templates expirados?"> Não. Templates expirados ficam indisponíveis após a rotina de expiração e não aparecem na lista de seleção. </Accordion> <Accordion title="O que ocorre se o nome do arquivo enviado via SFTP estiver fora do padrão?"> O arquivo será rejeitado e não será processado. </Accordion> </AccordionGroup> ```
