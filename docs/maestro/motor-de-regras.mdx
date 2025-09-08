@@ -14,7 +14,12 @@ description: Regras de restrição, bloqueio e controle aplicadas às campanhas 
 ### Regras aplicadas na criação da campanha
 - Regra de horário  
 - Bloqueio por feriado  
-- Controle de erros  
+- Controle de erros
+   
+### Retorno por motivos de falhas:
+- Excedido o limite de envios diários para esse contato; idem (SMS)
+- Número bloqueado na lista de restrição;
+- Envio bloqueado fora do horário permitido para este código de área;
 
 > ⚠️ Se alguma dessas regras for violada, a campanha não será criada.
 
@@ -39,6 +44,10 @@ description: Regras de restrição, bloqueio e controle aplicadas às campanhas 
 ### Domínios e E-mails
 - E-mails de domínios bloqueados ou que constem em blacklist são rejeitados.  
 - Arquivos com contatos duplicados não são aceitos.  
+### Retorno por motivos de falhas:
+- Domínio de e-mail bloqueado na lista de restrição; (Domínio bloqueado não removido).
+- Domínio proibido removido (exclusão sem registro);
+- E-mail bloqueado na lista de restrição;
 
 ### Controle de Erros
 - Se o percentual de erros ultrapassar o limite configurado, a base é invalidada.  
@@ -74,6 +83,11 @@ A importação será rejeitada se:
 - O segmento usado não estiver vinculado à assessoria.
 
 - O nome do arquivo estiver fora do padrão.
+
+### Retorno por motivos de falhas:
+- Coluna ausente de valor - Importação cancelada/coluna deletada: Existem contatos sem COD_CONTRATO preenchido.
+- Segmento “segmentoErrado” não cadastrado para a empresa “Assessoria XXXXXXXX”;
+- O nome do arquivo “FormatoErradoNomeArquivo.csv” não está no formato válido. Formato esperado: segmento_canal_templateCode_YYYYMMDD.csv
 
 ## 3. Observações Gerais
 
