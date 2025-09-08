@@ -54,17 +54,10 @@
     {
       "group": "Maestro",
       "pages": [
-        "docs/maestro/intro",
+        "docs/maestro/overview",
+        "docs/maestro/motor-de-regras",
         "docs/maestro/carga-ftp",   
-        "docs/maestro/motor-de-regras" 
-      ]
-    },
-    
-    {
-      "group": "Maestro API",
-      "pages": [
-        "docs/maestro-api/api-direct-message"
-        
+        "docs/maestro/api-direct-message"
       ]
     },
     {
