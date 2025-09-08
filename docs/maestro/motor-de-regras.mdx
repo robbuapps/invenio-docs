@@ -20,7 +20,7 @@ Há três tipos primários de regras:
 - Regras aplicadas para cada disparo
 - Regras implícitas
 
-Cada regra pode ser ativada ou desativada.
+Cada regra, com exceção das implícitas, pode ser ativada ou desativada.
 
 ---
 
@@ -76,13 +76,14 @@ Algumas regras não são exibidas no motor de regras mas rodam como validadores 
 #### Segmento válido
 A assessoria só consegue criar templates, criar campanhas e disparar mensagens em segmentos que possui acesso.
 
-### Template aprovados
+#### Template aprovados
 Apenas templates aprovados são válidos para criar campanhas e disparar mensagens.
 
 Se houver broker configurado para o canal utilizado, o template deve estar "Publicado".
 Se não houver broker configurado, a mensagem não será disparada, mas o template será considerado válido e poderá ser utilizado para integrações externas
 
-Templates expirados não ficam disponíveis para uso após a rotina de expiração.  
+Templates expirados não ficam disponíveis para uso após a rotina de expiração.
+
 ---
 
 ## Histórico
