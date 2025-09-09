@@ -121,7 +121,7 @@ Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o
 | Código                        | Descrição                                                                          |
 | ----------------------------- | ---------------------------------------------------------------------------------  |
 | **200 - OK**                  | Mensagem validada, mas não enviada — Não há serviço/broker configurado para o canal|
-| **202 - OK**                  | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio.  |
+| **202 - Accepted**                  | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio.  |
 | **401 - Unauthorized**        | Falha na autenticação.                                                             |
 | **422 - UnprocessableEntity** | Erros de validação — Campos obrigatórios não preenchidos ou dados inválidos.       |
 | **409 - Conflict**            | Erros de validação do Motor de Regras — Lista os motivos de bloqueio.              |
@@ -132,7 +132,7 @@ Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o
   "result": "Mensagem validada, mas não enviada. Não há serviço de envio de mensagens configurado para esse canal."
 }
 ```
-- 202 - OK: Indica que a mensagem passou pelas validações do motor de regras e foi enfileirada para ser enviada.
+- 202 - Accepted: Indica que a mensagem passou pelas validações do motor de regras e foi enfileirada para ser enviada.
 ```json
 {
   "result": "Mensagem em processamento."
