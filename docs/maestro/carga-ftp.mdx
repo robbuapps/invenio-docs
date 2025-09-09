@@ -4,41 +4,44 @@ sidebarTitle: Uso de SFTP
 description: Orientações para importação automática de Templates e Campanhas via SFTP no Robbu Maestro, incluindo padrões de arquivos, diretórios e fluxo de processamento.
 ---
 
-## Carga SFTP de Templates & Campanhas  
+# Carga SFTP de Templates & Campanhas  
 
 Esta documentação orienta como usar os serviços automáticos de importação via **SFTP** para **Templates** e **Campanhas** no **Robbu Maestro**.  
 
 ---
 
-## 1. Acesso SFTP  
-Cada Empresa possui suas credenciais próprias em:  
-**Maestro › Configurações › Empresa › FtpSettings**
+## Configuração
+A configuração de SFTP pode ser feita na seção Configurações > Empresa > Transferência de Arquivos
 
-| Parâmetro        | Descrição                                |
-|------------------|------------------------------------------|
-| Servidor         | Endereço do servidor SFTP                |
-| Porta            | Porta para conexão (normalmente 22)      |
-| Nome do usuário  | Usuário usado para conexão               |
-| Senha do usuário | Senha usada para conexão                 |
+A Gerente de Ambiente pode decidir se as assessorias poderão utilizar um SFTP próprio ou somente o gerenciado pela Robbu.
 
-> ⚠️ Se algum parâmetro estiver em branco ou inválido, a importação daquela empresa será ignorada (um log de *warning* será gerado).
-### Opções de SFTP
+Há duas formas de conectar um servidor SFTP ao Maestro:
 
-A empresa pode escolher entre duas formas de integração via SFTP:
+### SFTP Robbu
+A Robbu disponibiliza um servidor SFTP gerenciado, pronto para uso imediato
+- Ao habilitar, o sistema fornece:  
+  - **Nome de usuário**  
+  - **Senha**  
+  - **Porta**  
+  - **Servidor**
 
-- **SFTP Robbu (padrão):** a Robbu disponibiliza um servidor SFTP gerenciado, pronto para uso imediato.  
-- **SFTP Próprio:** a empresa pode configurar e utilizar seu próprio servidor SFTP, garantindo maior autonomia e controle sobre credenciais e diretórios.
+### SFTP Próprio
+A própria empresa gerencia o seu SFTP.
+
+> ⚠️ **Atenção:** Essa opção deve ser habilitada pela Gerente de Ambiente nas configurações da Conta
+
+> ⚠️ Se algum parâmetro estiver em branco ou inválido, a importação será ignorada
 
 Essa flexibilidade permite que cada empresa defina o modelo mais adequado ao seu nível de governança e requisitos de segurança.
 
-![sftp](https://robbublob.blob.core.windows.net/docs/maestro/sftp.png)
+## Segurança
+- É fundamental manter as credenciais em segurança.  
+- Garantir o correto uso de **porta** e **endereço do servidor** para estabelecer a conexão.  
+- A proteção desses dados garante a **integridade dos arquivos** durante as transferências.
 
----
+## Diretórios  
 
-## 2. Diretórios  
-
-É preciso existir os diretórios `maestro/templates` e `maestro/campaigns` dentro do servidor FTP.  
-Os diretórios `processed` e `error` são criados automaticamente quando não existirem.  
+O Maestro utiliza a seguinte árvore de diretórios dentro do servidor SFTP
 
 | Uso                      | Caminho SFTP                   |
 |--------------------------|--------------------------------|
@@ -49,13 +52,15 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 | Processados Campanhas    | `/maestro/campaigns/processed` |
 | Erros Campanhas          | `/maestro/campaigns/error`     |
 
+> ⚠️ Estes diretórios são criados automaticamente após a conexão do servidor SFTP na tela de configuração, mas pode levar até 10 minutos para que esses diretórios apareçam.
+
 ---
 
-## 3. Padrões de Nome de Arquivo  
+## Padrões de Nome de Arquivo  
 
-### 3.1 Templates  
+### Templates  
 ```plaintext
-{segmentName}{channelName}[{wabaDescription}]_{YYYYMMDD}.csv
+{segmentName}_{channelName}_[{wabaDescription}]_{YYYYMMDD}.csv
 ```
 - **segmentName**: nome exato do segmento configurado (Maestro/Segmentos).  
 - **channelName**: `email` | `sms` | `whatsapp` (case-insensitive).  
@@ -69,7 +74,7 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 
 ---
 
-### 3.2 Campanhas  
+### Campanhas  
 
 ```plaintext
 {segmentName}_{channelName}_{templateCode}[_{whatsappNumber}]_{YYYYMMDD}_{HHmm}.csv
@@ -89,10 +94,10 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 
 ---
 
-## 4. Fluxo de Processamento  
+## Fluxo de Processamento  
 
 1. Upload do `.csv` em `/maestro/templates` ou `/maestro/campaigns`.  
-2. Serviço rotineiro (Azure Container Job, a cada 10 min) executa:  
+2. Serviço rotineiro (a cada 10 min) executa:  
    - Garante diretórios `processed` e `error`.  
    - Varre os arquivos `.csv`.  
 3. Validações:  
@@ -107,37 +112,10 @@ Os diretórios `processed` e `error` são criados automaticamente quando não ex
 5. Move o `.csv` para:  
    - `processed` em caso de sucesso.  
    - `error` em caso de falha.  
-   - Gera `_errorDetail.txt` com mensagem de erro.  
+      - Gera `_errorDetail.txt` com mensagem de erro.  
 6. Logs: empresa, segmento, canal, nome do arquivo e motivo da falha.  
 
 ---
-
-## 5. Endpoint de Teste (QA)  
-
-### Templates  
-
-```http
-POST /v1/templates/ftp/process
-Authorization: Bearer <token>
-```
-
-### Campanhas
-
-POST /v1/campaigns/ftp/process
-Authorization: Bearer (token)
-- Resposta: 200 OK se o processo percorreu os SFTP.
-- Erros de conexão/validação ficam logados sem interromper o loop.
-
-### Erros comuns
-| Situação                                           | Código de Recurso                                                     |
-| -------------------------------------------------- | --------------------------------------------------------------------- |
-| Nome fora de padrão                                | Core\_\*\_InvalidFileNameFormat                                       |
-| Segmento não encontrado para a empresa             | Core\_\*\_SegmentNotFoundForCompany                                   |
-| Canal inválido                                     | Core\_\*\_InvalidChannel                                              |
-| WABA não encontrado (Templates-WhatsApp)           | Core\_TemplateFtpImport\_WhatsappBusinessAccountNotFoundByDescription |
-| Template não existe (Campanhas)                    | Core\_CampaignFtpImport\_TemplateNotFound                             |
-| Número não encontrado na WABA (Campanhas-WhatsApp) | Core\_CampaignFtpImport\_WhatsappNumberNotFound                       |
-
 
 ## FAQ
 

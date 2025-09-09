@@ -275,6 +275,7 @@ Na seção **Usuários**, é possível **listar e gerenciar** todos os usuários
 A seção de Configurações permite gerenciar preferências relacionadas à **conta**, **empresa** e **templates**.
 
 ![config](https://robbublob.blob.core.windows.net/docs/maestro/configmaestro.png)
+
 ---
 
 ###  Conta 
@@ -289,8 +290,7 @@ Templates expirados ainda poderão ser visualizados, mas não estarão disponív
 
 > ⚠️ **Atenção:** o sincronismo de expiração de todos os templates ocorre **uma vez ao dia, durante o período noturno**.
 
-#### SFTP
-A Gerente de Ambiente pode decidir se as assessorias poderão utilizar um SFTP próprio ou somente o gerenciado pela Robbu.
+---
 
 ### Empresa
 
@@ -301,30 +301,9 @@ A Gerente de Ambiente pode decidir se as assessorias poderão utilizar um SFTP p
 - Usuários podem acessar o Maestro com suas **credenciais corporativas**, sem criar novas senhas.  
 ![config emp](https://robbublob.blob.core.windows.net/docs/maestro/configempresa.png)
 
----
-
-#### Protocolo de Transferência de Arquivos Seguro (SFTP)
-A empresa pode escolher entre duas formas de integração via SFTP:
-
-##### SFTP Robbu
-A Robbu disponibiliza um servidor SFTP gerenciado, pronto para uso imediato
-- Ao habilitar, o sistema fornece:  
-  - **Nome de usuário**  
-  - **Senha**  
-  - **Porta**  
-  - **Servidor**
-
-##### SFTP Próprio
-A própria empresa gerencia o seu SFTP.
-
-> ⚠️ **Atenção:** Essa opção deve ser habilitada pela Gerente de Ambiente nas configurações da Conta.
-
-Essa flexibilidade permite que cada empresa defina o modelo mais adequado ao seu nível de governança e requisitos de segurança.
-
-##### Segurança
-- É fundamental manter as credenciais em segurança.  
-- Garantir o correto uso de **porta** e **endereço do servidor** para estabelecer a conexão.  
-- A proteção desses dados garante a **integridade dos arquivos** durante as transferências.
+#### SFTP
+As configurações de SFTP e seus conceitos e definições são explicados aqui:
+[Uso de SFTP](https://docs.robbu.global/docs/maestro/carga-ftp)
 
 #### Token de Integração
 Este token é uma credencial única e confidencial que permite a comunicação segura entre sistemas. 
