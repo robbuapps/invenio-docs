@@ -42,11 +42,11 @@ Este token deve ser passado como HEADER nas chamadas de API como `Bearer {token}
 > Base: https://api.common.maestro.robbu.global/
 
 #### Envio de E-mail
-
+```http
 POST /v1/directmessage/email
-
-```json
+```
 Request Body:
+```json
 {
   "recipient_email": "usuario@dominio.com",
   "subject": "Assunto do E-mail",
@@ -63,9 +63,9 @@ Request Body:
 ````
 
 #### Envio de WhatsApp
-
+```http
 POST /v1/directmessage/whatsapp
-
+````
 Request Body:
 ```json
 {
@@ -86,9 +86,9 @@ Request Body:
 }
 ```
 #### Envio de SMS
-
+```http
 POST /v1/directmessage/sms
-
+```
 Request Body:
 ```json
 {
