@@ -4,8 +4,6 @@ sidebarTitle: "Overview"
 description: "O maestro é um produto Robbu que permite empresas gerenciarem ações de suas empresas associadas, oferecendo recursos como criação e revisão de templates do WhatsApp, criação de campanhas de SMS, e-mail e WhatsApp, além de configurações avançadas de regras para disparo."
 ---
 
-##  Descrição do Produto
-
 **Maestro** é uma plataforma inteligente desenvolvida como um orquestrador de campanhas, capaz de **gerenciar templates** e **coordenar o disparo de mensagens multicanal**, integrando-se diretamente com outros brokers de envio.  
 
 Seu propósito é **centralizar, automatizar e qualificar a comunicação em escala**, otimizando o processo de envio de mensagens.
@@ -15,8 +13,8 @@ Seu propósito é **centralizar, automatizar e qualificar a comunicação em esc
 ##  Principais Funcionalidades
 
 - Centralização e unificação de templates em um único ambiente  
-- Gestão do fluxo de aprovação, com suporte a múltiplos perfis de usuários  
-- Aplicação de regras de envio personalizadas, via **Motor de Regras**  
+- Gestão do fluxo de aprovação de envios e templates
+- Aplicação de regras de envio personalizadas, via **Motor de Regras**
 
 ---
 
@@ -30,15 +28,13 @@ Seu propósito é **centralizar, automatizar e qualificar a comunicação em esc
 
 ##  Como Funciona
 
-O Maestro opera como um **hub** entre:  
+O Maestro opera como um **hub** entre:
+- A empresa que gerencia o ambiente
 - As assessorias responsáveis pelos envios  
 - Os motores de validação  
 - Os brokers de entrega  
 
-A plataforma foi projetada para ser **extensível**, permitindo futura integração com:  
-- Novos validadores  
-- Brokers adicionais  
-- Mecanismos de análise  
+A plataforma foi projetada para ser extensível, permitindo integração futura com novos validadores, brokers e mecanismos de análise.
 
 ---
 
@@ -47,7 +43,7 @@ A plataforma foi projetada para ser **extensível**, permitindo futura integraç
 O Maestro contará com interfaces específicas para diferentes perfis:  
 
 - **Gerentes do ambiente** - Empresa administradora e supervisora do ambiente
-- **Assessorias**  
+- **Assessorias** - Empresa com permissões restritas às campanhas, públicos, segmentos, relatórios e templates da própria empresa.
 - **Revisora** - Empresa responsável pela revisão e aprovação de templates
 
 ---
@@ -228,6 +224,16 @@ Nesta seção é possível:
 
 Os templates são categorizados de acordo com o tipo de canal de disparo.
 ![templatesSMS](https://robbublob.blob.core.windows.net/docs/maestro/templatesms.png)
+
+Os templates podem ter diversos status, como:
+
+- Em criação (apenas e-mail): O template está em desenvolvimento e ainda não foi submetido para revisão
+- Em revisão: O template já foi submetido para revisão da Gerente do Ambiente ou da empresa Revisora e está aguardando análise
+- Aprovado: O template foi aprovado por um revisor, mas ainda não foi publicado no broker
+- Publicado: O template foi aprovado por um revisor e já está disponível para uso no broker
+- Rejeitado: O template foi reprovado por um revisor. O motivo fica disponível para consulta.
+- Expirado: O template expirou devido à configuração de expiração de templates
+- Rejeitado por Meta (apenas Whatsapp): O template **foi aprovado** pelo revisor, mas rejeitado pela Meta
 
 #### Templates Whatsapp
 Novos templates podem ser criados direto no Construtor de Templates do Maestro, ou importados por arquivo CSV. 
