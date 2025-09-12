@@ -1,179 +1,163 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Robbu Docs",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
-  "favicon": "/logo/light.svg",
-  "colors": {
-    "primary": "#007aff",
-    "light": "#007aff",
-    "dark": "#0D9373",
-    "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+    "$schema": "https://mintlify.com/schema.json",
+    "name": "Robbu Docs",
+    "logo": {
+        "dark": "/logo/dark.svg",
+        "light": "/logo/light.svg"
+    },
+    "favicon": "/logo/light.svg",
+    "colors": {
+        "primary": "#007aff",
+        "light": "#007aff",
+        "dark": "#0D9373",
+        "anchors": {
+            "from": "#0D9373",
+            "to": "#07C983"
+        }
+    },
+    "topbarLinks": [
+        {
+            "name": "Suporte",
+            "url": "mailto:help@robbu.global"
+        }
+    ],
+    "topbarCtaButton": {
+        "name": "Dashboard",
+        "url": "https://dashboard.mintlify.com"
+    },
+    "anchors": [
+        {
+            "name": "Institucional",
+            "icon": "book-open-cover",
+            "url": "https://robbu.global"
+        },
+        {
+            "name": "Blog",
+            "icon": "newspaper",
+            "url": "https://robbu.global/blog/"
+        }
+    ],
+    "navigation": [
+        {
+            "group": "Configurações Gerais",
+            "pages": [
+                "docs/configuracoes-gerais/lista-ips"
+            ]
+        },
+        {
+            "group": "Invenio",
+            "pages": [
+                "docs/live/como-acessar-plataforma",
+                "docs/accounts/sso"
+            ]
+        },
+        {
+            "group": "Invenio Live",
+            "pages": [
+                "docs/live/meu-perfil",
+                "docs/live/criar-contato",
+                "docs/live/edicao-de-tags",
+                "docs/live/lista-de-desejos",
+                "docs/live/busca-mensagem-historico",
+                "docs/live/filtros-e-menus-de-busca",
+                "docs/live/filtro-por-canal",
+                "docs/live/adicionar-canal-invenio-live",
+                "docs/live/sessao-de-24horas-no-whatsapp",
+                "docs/live/enviar-mensagem",
+                "docs/live/dados-da-mensagem",
+                "docs/live/exportacao-de-conversas",
+                "docs/live/lista-de-transmissao",
+                "docs/live/como-criar-agendamento",
+                "docs/live/metodos-de-distribuicao"
+            ]
+        },
+        {
+            "group": "Invenio Center",
+            "pages": [
+                "docs/center/canais-atendimento",
+                "docs/center/webhook",
+                "docs/center/carga-ftp",
+                "docs/center/bibliotecas-de-midias",
+                "docs/center/cancelamento-inscricao",
+                "docs/center/segmentos",
+                "docs/center/otimizacao",
+                "docs/center/restricoes",
+                "docs/center/agendamento-relatorio-ftp",
+                "docs/center/criando-campanha-sms",
+                "docs/center/criacao-de-contatos-invenio-center",
+                "docs/center/cadastrar-conta-de-email",
+                "docs/center/campanhas-publico-importacao",
+                "docs/center/campanhas-de-whatsapp",
+                "docs/center/canal-whatsapp",
+                "docs/center/prioridade-de-canais",
+                "docs/center/tipos-de-kpi",
+                "docs/center/fila-de-atendimento",
+                "docs/center/como-habilitar-protocolos-de-atendimento",
+                "docs/center/como-criar-templates-whatsapp",
+                "docs/center/como-alterar-imagem-da-linha-whatsapp",
+                "docs/center/dashboard-analitico",
+                "docs/center/dashboard-operacional",
+                "docs/center/integracao-invenio-rdstation",
+                "docs/center/integracao-de-paginas",
+                "docs/center/gerenciar-host-de-acesso",
+                "docs/center/gestao-frases-prontas",
+                "docs/center/pausas-no-atendimento",
+                "docs/center/usuarios",
+                "docs/center/filtros-de-busca-de-contatos",
+                "docs/center/relatorios",
+                "docs/center/web-chat",
+                "docs/center/configuracoes-gerais-da conta",
+                "docs/center/campanhas-de-email",
+                "docs/center/compatibilidade-de-navegadores",
+                "docs/center/templates-de-email",
+                "docs/center/dashboard-kpi-eventos",
+                "docs/center/variaveis-de-sistema",
+                "docs/center/privacidade-e-protecao",
+                "docs/center/whatsapp-business-api",
+                "docs/center/painel-de-faturas"
+            ]
+        },
+        {
+            "group": "Maestro",
+            "pages": [
+                "docs/maestro/overview",
+                "docs/maestro/motor-de-regras",
+                "docs/maestro/carga-ftp",
+                "docs/maestro/api-direct-message"
+            ]
+        },
+        {
+            "group": "Carteiro Digital",
+            "pages": [
+                "docs/carteiro-digital/carteiro-digital"
+            ]
+        },
+        {
+            "group": "Robbu APIs",
+            "pages": [
+                "docs/robbu-api/auth",
+                "docs/robbu-api/send-message",
+                "docs/carteiro-digital/carteiro-digital-api",
+                "docs/robbu-api/api-busca-template",
+                "docs/robbu-api/api-update-contact",
+                "docs/robbu-api/verify"
+            ]
+        },
+        {
+            "group": "Atualizações",
+            "pages": [
+                "changelog"
+            ]
+        }
+    ],
+    "versions": [
+        {
+            "name": "Portugues",
+            "locale": "pt-BR"
+        }
+    ],
+    "footerSocials": {
+        "instagram": "http://instagram.com/robbu",
+        "linkedin": "https://www.linkedin.com/company/robbu/posts/?feedView=all"
     }
-  },
-  "topbarLinks": [
-    {
-      "name": "Suporte",
-      "url": "mailto:help@robbu.global"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
-  "anchors": [
-    {
-      "name": "Institucional",
-      "icon": "book-open-cover",
-      "url": "https://robbu.global"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://robbu.global/blog/"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Configurações Gerais",
-      "pages": [
-        "docs/configuracoes-gerais/lista-ips"
-      ]
-    },    
-    {
-      "group": "Autenticação e Contas",
-      "pages": [
-        "docs/live/como-acessar-plataforma",
-        "docs/accounts/sso"
-      ]
-    },   
-    {
-      "group": "Maestro",
-      "pages": [
-        "docs/maestro/intro",
-        "docs/maestro/carga-ftp",   
-        "docs/maestro/motor-de-regras" 
-      ]
-    },
-    
-    {
-      "group": "Maestro API",
-      "pages": [
-        "docs/maestro-api/api-direct-message"
-        
-      ]
-    },
-    {
-    "group": "Live",
-    "pages": [
-      "docs/live/meu-perfil",
-
-      "docs/live/criar-contato",
-      "docs/live/edicao-de-tags",
-      "docs/live/lista-de-desejos",
-
-      "docs/live/busca-mensagem-historico",
-      "docs/live/filtros-e-menus-de-busca",
-      "docs/live/filtro-por-canal",
-
-      "docs/live/adicionar-canal-invenio-live",
-      "docs/live/sessao-de-24horas-no-whatsapp",
-
-      "docs/live/enviar-mensagem",
-      "docs/live/dados-da-mensagem",
-      "docs/live/exportacao-de-conversas",
-      "docs/live/lista-de-transmissao",
-
-      "docs/live/como-criar-agendamento",
-      "docs/live/metodos-de-distribuicao"
-    ]
-  },
-
-    {
-      "group": "Center",
-      "pages": [
-        "docs/center/canais-atendimento",
-        "docs/center/webhook",
-        "docs/center/carga-ftp",
-        "docs/center/bibliotecas-de-midias",
-        "docs/center/cancelamento-inscricao",
-        "docs/center/segmentos",
-        "docs/center/otimizacao",
-        "docs/center/restricoes",
-        "docs/center/agendamento-relatorio-ftp",
-        "docs/center/criando-campanha-sms",
-        "docs/center/criacao-de-contatos-invenio-center",
-        "docs/center/cadastrar-conta-de-email",
-        "docs/center/campanhas-publico-importacao",
-        "docs/center/campanhas-de-whatsapp",
-        "docs/center/canal-whatsapp",
-        "docs/center/prioridade-de-canais",
-        "docs/center/tipos-de-kpi",
-        "docs/center/fila-de-atendimento",
-        "docs/center/como-habilitar-protocolos-de-atendimento",
-        "docs/center/como-criar-templates-whatsapp",
-        "docs/center/como-alterar-imagem-da-linha-whatsapp",
-        "docs/center/dashboard-analitico",
-        "docs/center/dashboard-operacional",
-        "docs/center/integracao-invenio-rdstation",
-        "docs/center/integracao-de-paginas",
-        "docs/center/gerenciar-host-de-acesso",
-        "docs/center/gestao-frases-prontas",
-        "docs/center/pausas-no-atendimento",
-        "docs/center/usuarios",
-        "docs/center/filtros-de-busca-de-contatos",
-        "docs/center/relatorios",
-        "docs/center/web-chat",
-        "docs/center/configuracoes-gerais-da conta",
-        "docs/center/campanhas-de-email",
-        "docs/center/compatibilidade-de-navegadores",
-        "docs/center/templates-de-email",
-        "docs/center/dashboard-kpi-eventos",
-        "docs/center/variaveis-de-sistema",
-        "docs/center/privacidade-e-protecao",
-        "docs/center/whatsapp-business-api",
-        "docs/center/painel-de-faturas"
-
-      ]
-    },
-{
-      "group": "Carteiro Digital",
-      "pages": [
-       "docs/carteiro-digital/carteiro-digital"
-        
-      ]
-    },
-    
-    {
-      "group": "Robbu APIs",
-      "pages": [
-        "docs/robbu-api/auth",
-        "docs/robbu-api/send-message",
-        "docs/carteiro-digital/carteiro-digital-api",
-        "docs/robbu-api/api-busca-template",
-        "docs/robbu-api/api-update-contact",
-        "docs/robbu-api/verify"
-      ]
-    },
-    {
-      "group": "Atualizações",
-      "pages": [
-        "changelog"
-      ]
-    }    
-  ],
-  "versions": [
-    {
-      "name": "Portugues",
-      "locale": "pt-BR"
-    }
-  ],
-  "footerSocials": {
-    "instagram": "http://instagram.com/robbu",
-    "linkedin": "https://www.linkedin.com/company/robbu/posts/?feedView=all"
-  }
 }

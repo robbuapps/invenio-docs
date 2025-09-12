@@ -4,84 +4,111 @@ sidebarTitle: Motor de Regras
 description: Regras de restrição, bloqueio e controle aplicadas às campanhas no Maestro.
 ---
 
-## Manual do Motor de Regras – Maestro
+# Motor de Regras – Maestro
+O motor de regras é um mecanismo do Maestro para gerenciar e supervisionar os disparos feitos pelas assessorias.
+A Gerente do Ambiente pode configurar diversas regras dentro deste motor e essas regras serão verificadas durante campanhas, disparos por API ou upload de público por SFTP.
 
-## 1. Configuração Inicial
+## Configuração Inicial
 
 - O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  
   **Configurações → Regras**
 
-### Regras aplicadas na criação da campanha
-- Regra de horário  
-- Bloqueio por feriado  
-- Controle de erros  
+## Tipos de regras
+Há três tipos primários de regras:
 
-> ⚠️ Se alguma dessas regras for violada, a campanha não será criada.
+- Regras aplicadas na criação da campanha
+- Regras aplicadas para cada disparo
+- Regras implícitas
 
-### Regras aplicadas após o disparo da campanha
-- Bloqueio por listas de restrição  
-- Bloqueio por domínio de e-mail  
+Cada regra, com exceção das implícitas, pode ser ativada ou desativada.
 
 ---
 
-## 2. Regras do Motor no Dia a Dia
+### Regras aplicadas na criação da campanha
+Essas regras são aplicadas antes de se enfileirar as mensagens para disparo e podem impedir a criação de uma campanha
 
-### Horário e Agendamento
-- Campanhas não podem ser agendadas fora da faixa permitida.  
-- Em dias de feriado configurados, disparos são bloqueados automaticamente.  
+#### Regra de horário
+- Campanhas não podem ser agendadas fora da faixa permitida
+- Disparos não podem acontecer fora da faixa permitida
 
-### Restrições por DDD e Telefone
-- Campanhas devem ter DDD mapeado corretamente.  
-- Telefones com formatação inválida (ex.: sem `+`) são rejeitados.  
-- Números bloqueados ou em lista restrita não são processados.  
-- Restrições por DDD ou estado impedem disparos para contatos dessas regiões.  
+A configuração pode ser por horário comercial (das 08:00 às 18:00) ou por intervalo de datas e horários específicos
 
-### Domínios e E-mails
-- E-mails de domínios bloqueados ou que constem em blacklist são rejeitados.  
-- Arquivos com contatos duplicados não são aceitos.  
+#### Bloqueio por feriado
+Em dias de feriado configurados, campanhas e disparos são bloqueados automaticamente
 
-### Controle de Erros
-- Se o percentual de erros ultrapassar o limite configurado, a base é invalidada.  
-- Caso o limite esteja configurado em 0%, nenhuma base deve ser barrada.  
+#### Controle de Erros
+Se o percentual de erros no arquivo da campanha ultrapassar o limite configurado, a base inteira é invalidada e nenhum disparo é efetuado.
 
-### Limite de Disparos
-- Cada contrato tem um limite diário de disparos.  
-- Se um contato estiver vinculado a mais de um contrato:  
-  - O contrato que ultrapassar o limite será bloqueado.  
-  - O contrato dentro do limite terá o disparo processado normalmente.  
+- Caso o limite esteja configurado em 0%, nenhuma base será invalidada por esta regra, mesmo ela estando ativa.
 
-### Templates
-- Templates expirados não ficam disponíveis para uso após a rotina de expiração.  
-- Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.  
+> ⚠️ Se alguma dessas regras for violada, a campanha não será criada.
 
-### SFTP – Importação de Arquivos
-- Local de upload: `SFTP > maestro > campaigns > Adicionar arquivo aqui`  
-- Nome dos arquivos deve seguir o padrão:  
+---
 
-```plaintext
-{segmentName}_{channelName}_{templateCode}_{YYYYMMDD}_{HHmm}.csv
-```
-Exemplo:
-```
-Paschoalotto_whatsapp_W1666_551131361579_20250603_1530.csv
-```
-A importação será rejeitada se:
+### Regras aplicadas para cada disparo
+Essas regras são verificadas para cada disparo (linha do CSV ou chamada de API)
 
-- Faltarem colunas obrigatórias no arquivo.
+#### Bloqueio por listas de restrição
+Essa regra funciona tanto como uma lista de restrição para números ou e-mails fornecidos, quanto como um limitador de disparos por DDD ou por quantidade de disparos por contato.
 
-- Colunas forem apagadas.
+Números ou e-mails bloqueados em lista de restrição não serão processados para disparo.
 
-- O segmento usado não estiver vinculado à assessoria.
+Restrições por DDD impedem disparos para contatos dessas regiões fora do horário definido.
 
-- O nome do arquivo estiver fora do padrão.
+> ⚠️ Arquivos com contatos duplicados serão rejeitados pelo motor para posterior ajuste
 
-## 3. Observações Gerais
+##### Limite diários de disparos por contato
+O código do cliente vinculado ao contato será utilizado para aplicar o bloqueio de disparos.
+Caso o limite diário definido já tenha sido atingido para o código verificado. 
+Deixe este campo vazio para não aplicar limite de disparos diários.
 
-- Todas as exclusões, alterações e importações devem gerar histórico e rastreabilidade.
+- Cada contrato tem um limite diário de disparos.
 
-- Segmentos só podem ser utilizados por assessorias que tenham vínculo com eles.
+Se um contato estiver vinculado a mais de um contrato:
+- O contrato que ultrapassar o limite será bloqueado.
+- O contrato dentro do limite terá o disparo processado normalmente.
 
-- O motor garante que nenhuma regra de restrição, bloqueio ou limite seja ignorada.
+---
+
+### Regras implícitas
+Algumas regras não são exibidas no motor de regras mas rodam como validadores de disparos e campanhas no Maestro:
+
+#### Segmento válido
+A assessoria só consegue criar templates, criar campanhas e disparar mensagens em segmentos que possui acesso.
+
+#### Template aprovados
+Apenas templates aprovados são válidos para criar campanhas e disparar mensagens.
+
+Se houver broker configurado para o canal utilizado, o template deve estar "Publicado".
+Se não houver broker configurado, a mensagem não será disparada, mas o template será considerado válido e poderá ser utilizado para integrações externas
+
+Templates expirados não ficam disponíveis para uso após a rotina de expiração.
+
+---
+
+## Histórico
+
+No botão histórico de cada regra é possível ver as alterações que cada regra teve com o tempo, incluindo o usuário que realizou a alteração e qual foi a alteração.
 
 FAQ
-<AccordionGroup> <Accordion title="O que acontece se eu tentar criar uma campanha fora do horário permitido?"> A campanha não será criada, pois o motor valida a regra de horário durante a criação. </Accordion> <Accordion title="Campanhas são enviadas em feriados?"> Não. Em dias configurados como feriado, os disparos são bloqueados automaticamente. </Accordion> <Accordion title="E se o percentual de erros da base for maior que o limite configurado?"> A base será invalidada e a campanha não seguirá adiante. </Accordion> <Accordion title="Posso reutilizar templates expirados?"> Não. Templates expirados ficam indisponíveis após a rotina de expiração e não aparecem na lista de seleção. </Accordion> <Accordion title="O que ocorre se o nome do arquivo enviado via SFTP estiver fora do padrão?"> O arquivo será rejeitado e não será processado. </Accordion> </AccordionGroup> ```
+<AccordionGroup>
+    <Accordion title="O que acontece se eu tentar criar uma campanha fora do horário permitido?">
+        A campanha não será criada, pois o motor valida a regra de horário durante a criação.
+    </Accordion>
+    
+    <Accordion title="Campanhas são enviadas em feriados?">
+        Não. Em dias configurados como feriado, os disparos são bloqueados automaticamente.
+    </Accordion>
+    
+    <Accordion title="E se o percentual de erros da base for maior que o limite configurado?">
+        A base será invalidada e a campanha não seguirá adiante.
+    </Accordion>
+    
+    <Accordion title="Posso reutilizar templates expirados?">
+        Não. Templates expirados ficam indisponíveis após a rotina de expiração e não aparecem na lista de seleção.
+    </Accordion>
+    
+    <Accordion title="O que ocorre se o nome do arquivo enviado via SFTP estiver fora do padrão?">
+        O arquivo será rejeitado e não será processado.
+    </Accordion>
+</AccordionGroup>

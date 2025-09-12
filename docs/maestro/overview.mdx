@@ -1,0 +1,337 @@
+---
+title: "Maestro - Overview"
+sidebarTitle: "Overview"
+description: "O Maestro é um produto Robbu que permite empresas gerenciarem ações de suas empresas associadas, oferecendo recursos como criação e revisão de templates do WhatsApp, criação de campanhas de SMS, e-mail e WhatsApp, além de configurações avançadas de regras para disparo."
+---
+
+**Maestro** é uma plataforma inteligente desenvolvida como um orquestrador de campanhas, capaz de **gerenciar templates** e **coordenar o disparo de mensagens multicanal**, integrando-se diretamente com outros brokers de envio.  
+
+Seu propósito é **centralizar, automatizar e qualificar a comunicação em escala**, otimizando o processo de envio de mensagens.
+
+---
+
+##  Principais Funcionalidades
+
+- Centralização e unificação de templates em um único ambiente  
+- Gestão do fluxo de aprovação de envios e templates
+- Aplicação de regras de envio personalizadas, via **Motor de Regras**
+
+---
+
+##  Canais Compatíveis
+
+- WhatsApp  
+- E-mail  
+- SMS  
+
+---
+
+##  Como Funciona
+
+O Maestro opera como um **hub** entre:
+- A empresa que gerencia o ambiente
+- As assessorias responsáveis pelos envios  
+- Os motores de validação  
+- Os brokers de entrega  
+
+A plataforma foi projetada para ser extensível, permitindo integração futura com novos validadores, brokers e mecanismos de análise.
+
+---
+
+##  Perfis de Uso
+
+O Maestro contará com interfaces específicas para diferentes perfis:  
+
+- **Gerentes do ambiente** - Empresa administradora e supervisora do ambiente
+- **Assessorias** - Empresa com permissões restritas às campanhas, públicos, segmentos, relatórios e templates da própria empresa.
+- **Revisora** - Empresa responsável pela revisão e aprovação de templates
+
+---
+
+##  Tela de Login
+
+A tela de login do Maestro é responsável pelo **gerenciamento de acesso e autenticação de usuários**, oferecendo dois mecanismos complementares:
+- Login por e-mail e senha
+- Login com SSO (Single Sign-On)
+
+---
+
+### SSO (Single Sign-On)
+
+A autenticação pode ser configurada para permitir **login via credenciais corporativas**.  
+
+- Permite integração com **Azure Active Directory (Azure AD)**.  
+- É necessário inserir o **ID da aplicação** no Azure AD, que identifica o sistema dentro do diretório.  
+- Usuários podem acessar o sistema **sem criar novas senhas**, utilizando suas credenciais da organização.  
+
+Essa configuração proporciona **maior segurança e praticidade**.
+
+Para que o SSO seja efetivado, deve-se liberar a URL `https://api.maestro.robbu.global/v1/auth/login/sso/callback` em seu aplicativo de SSO para que o retorno possa ser validado
+
+O login SSO valida usuários cadastrados dentro da plataforma Maestro, verifique se o usuário que irá realizar o login por SSO já está cadastrado na tela de usuários.
+
+---
+
+##  Menu Lateral
+
+O **menu lateral e superior** está disponível em todas as telas do Maestro, oferecendo acesso rápido às principais funcionalidades.  
+
+As opções exibidas variam de acordo com o **perfil da empresa do usuário**.
+
+---
+
+###  Perfil: Gerente do Ambiente
+
+A empresa com perfil de **Gerente** possue **acesso completo** às funcionalidades, permitindo a supervisão de todas as atividades dentro do ambiente.
+
+---
+
+###  Perfil: Assessoria
+
+Empresas com perfil de **Assessoria** possuem um conjunto de opções reduzido, com permissões limitadas e dados referentes ao seu próprio escopo:
+
+- Dashboard  
+- Relatórios  
+- Público  
+- Segmentos  
+- Campanhas  
+- Templates  
+- Usuários  
+- Configurações
+- Ajuda  
+
+### Perfil: Revisora
+
+Empresas com perfil **Revisora** visualizam apenas o que é referente à revisão e aprovação de templates.
+
+- Empresas
+- Revisão de templates
+- Usuários
+
+## Dashboard
+A tela de dashboard está disponível exclusivamente para usuários dos tipos Gerente e Assessoria. 
+Ela exibe informações sobre o número de contatos e permite a visualização e análise de dados 
+através de filtros, incluindo:
+
+- Empresa
+- Canal
+- Segmento
+- Data Inicial
+- Data Final
+
+Esses filtros proporcionam uma análise detalhada e personalizada dos dados
+![Dash filtro](https://robbublob.blob.core.windows.net/docs/maestro/DashFiltroMaestro.png)
+
+### Analise de Campanha:
+
+![analise campanha](https://robbublob.blob.core.windows.net/docs/maestro/analisecamp.png)
+
+##  Relatórios
+
+Ao acessar a seção de **Relatórios**, o usuário terá a opção de **Criar Relatório** a partir dos seguintes modelos:
+
+- **Campanhas**  
+- **Status de Template**  
+![criar relatorio](https://robbublob.blob.core.windows.net/docs/maestro/criarrelatorio.png)
+---
+
+### Filtros Disponíveis
+
+Na criação dos relatórios, podem ser aplicados os seguintes filtros:
+
+- **Template**  
+- **Criado em**  
+- **Empresas**  
+- **Segmentos**
+
+---
+
+## Empresas
+
+Na tela **Empresas**, o usuário pode:  
+- Visualizar a lista de empresas cadastradas  
+- A gerente do ambiente pode criar novas empresas
+
+Essa funcionalidade centraliza a gestão de **empresas** que farão parte das estratégias de comunicação dentro do Maestro.
+![criar empresas](https://robbublob.blob.core.windows.net/docs/maestro/criarempresa.png)
+
+##  Público
+
+A **importação de público** é um recurso que será utilizado como ponto de partida para campanhas massificada
+
+Esse recurso garante maior agilidade na preparação de campanhas e na gestão contínua da base de público.
+
+Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se necessário.
+
+![importar publico](https://robbublob.blob.core.windows.net/docs/maestro/importpublico.png)
+
+O layout padrão do arquivo mailing possuí as seguintes colunas: 
+
+```
+TIPO_REGISTRO, VALOR_REGISTRO, NOME_CLIENTE, PRIORIDADE, CPF_CNPJ, COD_CONTRATO
+```
+
+Para utilizar variáveis dinâmica crie-as após a última coluna do arquivo.
+Tudo que estiver após a coluna COD_CONTRATO são campos adicionado manualmente pelo usuário como no exemplo abaixo.
+
+```
+TIPO_REGISTRO, VALOR_REGISTRO, NOME_CLIENTE, PRIORIDADE, CPF_CNPJ, COD_CONTRATO, VAR1, VAR2, VAR3
+```
+
+---
+
+##  Segmentos
+
+Os **segmentos** têm como propósito:
+
+- **Organizar os assuntos**, vinculando os contatos ao grupo de envio correto  
+- **Restringir o acesso dos operadores** apenas aos segmentos atribuídos  
+
+Na seção **Segmentos**, o usuário pode:
+
+- Visualizar os segmentos já cadastrados  
+- Criar novos segmentos  
+- Editar ou remover segmentos existentes  
+
+Ao criar um Segmento, a Gerente de Ambiente pode incluir as assessorias que terão acesso à este segmento no `dropdown` "Empresas"
+![addsegmentos](https://robbublob.blob.core.windows.net/docs/maestro/addsegmentos.png)
+
+## Campanhas
+O menu de Campanhas traz as opções de realizar campanhas por (Whatsapp, E-mail e SMS)
+Opções de campanha:
+![campanha](https://robbublob.blob.core.windows.net/docs/maestro/campanha.png)
+
+### Exemplo de Criação de campanha Whatsapp
+
+![addcampanha](https://robbublob.blob.core.windows.net/docs/maestro/addcampanhamaestro.png)
+![novacampanha](https://robbublob.blob.core.windows.net/docs/maestro/novacampanhamaestro.png)
+
+---
+
+##  Templates
+
+Na seção **Templates**, temos três possibilidades distintas de criação de templates de mensagem:
+
+- **WhatsApp**  
+- **E-mail**  
+- **SMS**  
+
+Nesta seção é possível:  
+
+- Criar novos templates para diferentes canais  
+- Consultar o status de todos os templates criados  
+- Acompanhar o fluxo de aprovação (quando aplicável)  
+
+Os templates são categorizados de acordo com o tipo de canal de disparo.
+![templatesSMS](https://robbublob.blob.core.windows.net/docs/maestro/templatesms.png)
+
+Os templates podem ter diversos status, como:
+
+- Em criação (apenas e-mail): O template está em desenvolvimento e ainda não foi submetido para revisão
+- Em revisão: O template já foi submetido para revisão da Gerente do Ambiente ou da empresa Revisora e está aguardando análise
+- Aprovado: O template foi aprovado por um revisor, mas ainda não foi publicado no broker
+- Publicado: O template foi aprovado por um revisor e já está disponível para uso no broker
+- Rejeitado: O template foi reprovado por um revisor. O motivo fica disponível para consulta.
+- Expirado: O template expirou devido à configuração de expiração de templates
+- Rejeitado por Meta (apenas Whatsapp): O template **foi aprovado** pelo revisor, mas rejeitado pela Meta
+
+#### Templates Whatsapp
+Novos templates podem ser criados direto no Construtor de Templates do Maestro, ou importados por arquivo CSV. 
+No caso de importação, caso o arquivo não corresponda ao padrão esperado, a plataforma irá retornar um arquivo com o motivo do erro.
+![importar csv](https://robbublob.blob.core.windows.net/docs/maestro/importarcsv.png)
+
+O modelo pode ser baixado ao se clicar no botão "Baixar modelo", na modal de "Importar CSV" conforme imagem acima.
+
+#### Criar templates pela tela:
+![add template](https://robbublob.blob.core.windows.net/docs/maestro/addtemplatemaestro.png)
+![criar template](https://robbublob.blob.core.windows.net/docs/maestro/criartemplatemaestro.png)
+
+#### Exemplo de template Whatsapp
+![exemplo](https://robbublob.blob.core.windows.net/docs/maestro/exemplotemplate.png)
+
+---
+
+##  Revisão de Templates
+
+Na seção de **Revisão de Templates** é possível:
+
+- Visualizar todas as templates criadas  
+- Filtrar templates por **canal** e por **status**  
+- Exportar a lista de templates no formato **CSV**  
+
+Essa funcionalidade permite acompanhar o processo de aprovação e manter controle sobre o ciclo de vida de cada template.  
+![revisao template](https://robbublob.blob.core.windows.net/docs/maestro/revisaotemplate.png)
+![csv](https://robbublob.blob.core.windows.net/docs/maestro/csvrevisao.png)
+
+Apenas a Gerente de Ambiente e as empresas com perfil "Revisora" tem acesso à esta seção.
+Nesta seção, pode-se visualizar todos os templates já enviados para revisão e também já aprovados ou reprovados.
+
+Templates com status "Em criação" não são exibidos nesta seção.
+
+---
+
+##  Usuários
+
+Na seção **Usuários**, é possível **listar e gerenciar** todos os usuários cadastrados na plataforma Maestro
+
+---
+
+##  Configurações
+
+A seção de Configurações permite gerenciar preferências relacionadas ao **ambiente**, **empresa** e **templates**.
+
+![config](https://robbublob.blob.core.windows.net/docs/maestro/configmaestro.png)
+
+---
+
+###  Ambiente 
+
+#### Configurações de Templates
+
+A configuração de templates permite definir regras relacionadas ao uso e validade dos modelos disponíveis no sistema. 
+É possível estabelecer um tempo de expiração para os templates, garantindo que conteúdos desatualizados não sejam utilizados. 
+Para isso, defina o período de validade (em dias), após o qual o template será considerado expirado. 
+Templates expirados ainda poderão ser visualizados, mas não estarão disponíveis para novas utilizações até que sejam atualizados ou revalidados.
+![config conta](https://robbublob.blob.core.windows.net/docs/maestro/configconta.png)
+
+> ⚠️ **Atenção:** o sincronismo de expiração de todos os templates ocorre **uma vez ao dia, durante o período noturno**.
+
+---
+
+### Empresa
+
+#### Autenticação
+- Permite definir como os usuários acessam o sistema.  
+- Suporte a **Single Sign-On (SSO)** via Azure AD.  
+- Necessário informar o **ID da aplicação** no Azure Active Directory.  
+- Usuários podem acessar o Maestro com suas **credenciais corporativas**, sem criar novas senhas.  
+![config emp](https://robbublob.blob.core.windows.net/docs/maestro/configempresa.png)
+
+#### SFTP
+As configurações de SFTP e seus conceitos e definições são explicados aqui:
+[Uso de SFTP](https://docs.robbu.global/docs/maestro/carga-ftp)
+
+#### Token de Integração
+Este token é uma credencial única e confidencial que permite a comunicação segura entre sistemas. 
+Ele funciona como uma chave de autenticação para autorizar e validar as requisições realizadas durante a integração com nossa plataforma utilizando nossa API.
+
+![integracao](https://robbublob.blob.core.windows.net/docs/maestro/integracaocanais.png)
+
+> ⚠️ **Atenção:** Ao clicar em "Renovar token", o token anterior será invalidado.
+
+### Regras
+
+As configurações do motor de regras e seus conceitos e definições são explicados aqui:
+[Motor de Regras](https://docs.robbu.global/docs/maestro/motor-de-regras)
+
+### Integração com provedores
+Esta seção permite que cada assessoria integre os seus provedores.
+Nesta seção também, a Gerente de Ambiente pode visualizar os provedores que cada assessoria usa, sem a possibilidade de visualizar as credenciais.
+
+####  Como Funciona?
+
+1. O provedor fornece um **token de autenticação** (pode ser um **JWT**, **Bearer Token** ou uma **chave fixa**).  
+2. Esse **token** deve ser incluído na configuração deste provedor
+3. O sistema envia a mensagem para o **endpoint da API do provedor**.  
+4. O provedor processa e entrega a mensagem ao destinatário.  
+5. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
