@@ -32,6 +32,30 @@ A comunicação ocorre por meio do envio de blocos JSON para o endpoint configur
 
 ---
 
+## Em qual linguagem utilizar a integração com o webhook da Invenio?
+
+Não há uma restrição a uma linguagem específica. Os webhooks do Invenio são baseados no protocolo HTTP, o que significa que podem ser implementados em qualquer linguagem capaz de:
+
+- Receber requisições HTTP (ter um endpoint/rota exposta);
+
+- Processar os dados recebidos (geralmente em JSON ou XML).
+
+**Exemplos de uso por linguagem**
+
+- JavaScript / Node.js → frameworks como Express;
+
+- Python → Flask, Django ou FastAPI;
+
+- C# (.NET) → ASP.NET Core;
+
+- Java → Spring Boot;
+
+- PHP → Laravel, Symfony ou mesmo nativo via $_POST;
+
+- Go, Ruby, Rust, Elixir, entre outras → qualquer linguagem que ofereça suporte a HTTP.
+
+> **Em resumo:** a integração via webhook da Invenio é flexível e universal. Se a linguagem escolhida suporta servidor web/HTTP, você poderá utilizá-la sem restrições.
+
 ## Requisitos de Infraestrutura
 
 Para ambientes de produção, recomenda-se a seguinte configuração mínima para o servidor endpoint:
@@ -132,6 +156,98 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 **Enumeração – MessageChannel**  
 `1` E-mail · `2` SMS · `3` WhatsApp · `4` Chat · `5` Facebook · `6` Telegram · `7` Voz · `8` Instagram · `9` Viber
 
+<Accordion title="Modelo JSON - Mensagem de entrada (Incoming)">
+
+   ```
+   "message": {
+		"receivedAt": "2020-01-31T02:01:03",
+		"direction": "incoming",
+		"id": 13232322244444,
+		"channel": 3,
+		"text": "Olá, teste whats!",
+		"source": {
+			"countryCode": 55,
+			"phoneNumber": 11999999992
+		},
+		"destination": {
+			"countryCode": 55,
+			"phoneNumber": 11944497777
+		},
+		"location": {
+			"latitude": -23.5535317,
+			"longitude": -46.6631181
+		},
+		"file": {
+			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
+			"name": "robbu",
+			"extension": "pdf"
+		},
+		"contact": {
+			"robbuid": 11111111111,
+			"name": "TESTE ROBBU",
+			"customCode": "1372511",
+			"id": "00000000000",
+			"mainWhatsapp": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainSMS": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainEmail": "teste@robbu.global"
+		}
+	}
+  ```
+</Accordion>
+<Accordion title="Modelo JSON - Mensagem de saída (Outgoing)">
+  You can put any content in here, including other components, like code:
+
+   ```
+   "message": {
+		"sentAt": "2020-01-31T02:05:21.2900000",
+		"direction": "outgoing",
+		"id": 1323232224455555,
+		"channel": 3,
+		"type": "",
+		"text": "Teste envio whats!",
+		"campaignId": 1234,
+		"source": {
+			"countryCode": 55,
+			"phoneNumber": 11944497777,
+			"sender": ""
+		},
+		"destination": {
+			"countryCode": 55,
+			"phoneNumber": 11999999992
+		},
+		"file": {
+			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
+			"name": "robbu",
+			"extension": "pdf"
+		},
+		"contact": {
+			"robbuid": 11111111111,
+			"name": "TESTE ROBBU",
+			"customCode": "1372511",
+			"id": "00000000000",
+			"mainWhatsapp": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainSMS": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainEmail": "teste@robbu.global",
+			"queue": {
+				"waitingSince": "2021-03-08 12:00:00",
+				"firstAnswerAt": "2021-03-08 11:30:00"
+			}
+		}
+	}
+  ```
+</Accordion>
 ---
 
 ### Status
@@ -150,6 +266,22 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 | `MessageStatusErrorMessage` | Descrição do erro da mensagem | `String` |
 | `ContactStatusRobbuId` | ID do status do contato na Robbu | `Long` |
 
+<Accordion title="Modelo JSON - Status">
+
+   ```
+   "status": {
+		"message": {
+			"id": 1323232224455555,
+			"source": {
+				"sender": "User1"
+			},
+			"sentToProviderAt": "2020-01-31T15:50:39.9312405",
+			"deliveredAt": "2020-01-31T15:51:52.9707831",
+			"readAt": "2020-01-31T15:53:14.6399299"
+		}
+	}
+  ```
+</Accordion>
 ---
 
 ### Event (KPI Evento)
@@ -183,6 +315,37 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 | `ContactLastAnswearAt` | Última mensagem enviada ao contato pela operação | `Datetime` |
 | `ContactLastIncomingMessageAt` | Última mensagem recebida do contato | `Datetime` |
 
+<Accordion title="Exemplo JSON - KPI Evento">
+
+   ```
+   "event": {
+		"createdAt": "2020-01-31T02:05:21.0566667",
+		"id": 13232322244599998,
+		"description": "[CR] Saudacao Final",
+		"note": "Saudacao Final",
+		"customCode": "298",
+		"finalized": false,
+		"sender": "",
+		"type": "Neutro",
+		"contact": {
+			"robbuid": 11111111111,
+			"name": "TESTE ROBBU",
+			"customCode": "1372511",
+			"id": "00000000000",
+			"mainWhatsapp": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainSMS": {
+				"countryCode": 55,
+				"phoneNumber": 11999999992
+			},
+			"mainEmail": "teste@robbu.global"
+		}
+	}
+
+  ```
+</Accordion>
 ---
 
 ### Campaign (Campanha)
@@ -221,6 +384,50 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 **CampaignStatusCode**  
 `C` Cancelada · `E` Não enviada · `F` Finalizada · `I` Iniciada · `P` Aguardando processamento
 
+<Accordion title="Modelo JSON - Campanha">
+
+   ```
+   "campaign": {
+		"createdAt": "2020-01-27T22:01:12.2766667",
+		"createdBy": "User Robbu",
+		"id": 994545,
+		"channel": 1,
+		"startAt": "2020-01-27T21:59:00",
+		"size": 3102,
+		"message": "<html><body>Envio campanha email!<\/body><\/html>",
+		"hoursToDiscard": 0,
+		"type": {
+			"code": "EM",
+			"description": "EMAIL"
+		},
+		"splitSend": {
+			"percentage": 100.00,
+			"minutes": 0
+		},
+		"mailing": {
+			"description": "disparo_email",
+			"importedAt": "2020-01-27T21:54:16.5500000",
+			"importedBy": "User Robbu",
+			"size": 3102,
+			"walletClientCode": "1000"
+		}
+	}
+  ```
+</Accordion>
+<Accordion title="Modelo JSON - Status campanha">
+
+   ```
+   "status": {
+		"campaign": {
+			"id": 994545,
+			"totalSent": 91,
+			"lastSentAt": "2020-01-31T16:10:12.0633333",
+			"statusCode": "F"
+		}
+	}
+  
+  ```
+</Accordion>
 ---
 
 ### Template
@@ -236,6 +443,22 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 | `Category` | Categoria na Meta [Utility; Marketing; Service; Authentication] | `String` |
 | `Language` | Idioma do template | `String` |
 
+
+<Accordion title="Modelo JSON - Template">
+
+   ```
+    "template": {
+      "id": 53129216,
+      "name": "bv_atualizar_informacoes_020",
+      "event": "updated",
+      "eventAt": "2025-02-28T12:10:24.2981975Z",
+      "status": "APPROVED",
+      "quality": "UNKNOWN",
+      "category": "MARKETING",
+      "language": "pt_BR"
+}
+  ```
+</Accordion>
 ---
 
 ### Protocol (Protocolo)
@@ -328,6 +551,24 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 | `BroadCastLimitPerDay` | Limite diário de envios (Meta) | `Int` |
 | `CanSendHsm` | Linha habilitada para envio de HSM | `Bool` |
 
+<Accordion title="Modelo JSON - Número WhatsApp">
+
+   ```
+  "whatsappNumber": {
+    "event": "updated",
+    "eventAt": "2025-02-26T19:18:48.5888674+00:00",
+    "id": 1234567,
+    "walletId": 7654321,
+    "status": "YELLOW",
+    "countryCode": "55",
+    "areaCode": "11",
+    "phoneNumber": "11111111",
+    "isActive": true,
+    "broadcastLimitPerDay": 1000,
+    "canSendHsm": true
+  }
+  ```
+</Accordion>
 ---
 
 ## Exemplo Prático de Funcionamento da Integração com Webhook
