@@ -19,20 +19,53 @@ Para que a importação ocorra corretamente, é necessário configurar a conexã
 
 ###  Parâmetros de Conexão
 
-1. **Acesse as configurações de FTP na plataforma**:
-   - Navegue até: `Configurações > FTP`
-   - Registre as credenciais fornecidas pela equipe de suporte.
+ Acesse as configurações de FTP na plataforma:
 
-2. **Preencha os seguintes campos:**
+[Acesse a página de configurações](https://inveniocenter.robbu.global/painel/configuracoes)
+
+   - Navegue até: `Configurações > FTP`
+  
+ Preencha os seguintes campos:
+
    - **Servidor**: Endereço do servidor FTP (exemplo: `ftp.robbu.com.br`).
    - **Usuário**: Nome de usuário para autenticação.
    - **Senha**: Senha de acesso.
-   - **Porta**: Padrão `21` para conexões FTP normais.
-   - **Modo de criptografia**: Utilize `'Explícito'` para maior segurança.
+   - **Porta**: `FTP → porta padrão 21` ou `SFTP → porta padrão 22`
+   - **Modo de criptografia**: A escolha depende das exigências do servidor utilizado. O tipo mais comum é **Use Explícito**.
 
-3. **Testando a Conexão**
+>⚠️ **Atenção**:
+>
+> Ao configurar, não inclua `https://` no início da URL. Informe apenas o endereço do servidor (exemplo: ftp.seudominio.com).
+>
+>  Não utilize **IPs privados** como host.  
+>  Exemplos a evitar:  
+> - `10.x.x.x`  
+> - `172.16.x.x` até `172.31.x.x`  
+> - `192.168.x.x`  
+
+
+Caso sua empresa não possua um servidor FTP, ao acessar `Configurações >> Conta >> Gerenciar >> FTP`
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_12.png" />
+
+ Habilite o botão  **Habilitar transferência de arquivos** 
+
+<img src="https://robbublob.blob.core.windows.net/docs/ftp_13.png" />
+
+> ⚠️ **Atenção**  
+> O servidor disponibilizado pela **Invenio** é do tipo **SFTP**.  
+> Portanto, inclua no início da URL o prefixo `sftp://`.  
+>
+> **Exemplo:**  
+> `sftp://sarobbuinveniosftp.xyz.core.windows.net`  
+>
+> A porta utilizada para conexão é a **22**.
+
+**Testando a Conexão**
    - Utilize um cliente FTP (exemplo: `FileZilla`) para validar a conexão.
    - Confirme o acesso enviando um arquivo de teste.
+
+
 
 ##  Regras de Nomenclatura dos Arquivos
 
@@ -59,15 +92,15 @@ Os arquivos a serem importados devem seguir uma nomenclatura padronizada. Isso �
 | `_teXXXXXXXXXXXXXXXX`          | Título do e-mail a ser utilizado na campanha. |
 | `_iDDMMYYHHMM`                 | Define a data (`DDMMYY`) e hora (`HHMM`) específicas para o início da campanha. |
 | `_q88999`                      | Define envio parcelado: `88%` de envio por lote e `999` minutos de intervalo entre disparos. |
-| `_x999`                        | Descarta clientes com qualquer contato receptivo nos últimos `999` horas. |
+| `_x999`                        | Descarta clientes com qualquer contato receptivo nas últimas `999` horas. <br /><span style={{ fontSize: '0.8em', opacity: 0.85, display: 'block' }}>⚠️ <strong>Atenção:</strong> A nomenclatura deste parâmetro deve ser definida antes da inclusão do parâmetro <code>_nt</code>, que corresponde ao nome do template.</span> |
 | `_limpartag`                   | Substitui todas as tags das pessoas no arquivo pela nova tag definida. |
 | `_removercarteiras`            | Remove os contatos das demais carteiras, mantendo apenas a carteira do arquivo. |
 | `_LEddMMyyHHmm`                | Define data e hora limite para envio, evitando disparos fora do horário desejado. |
-| `_whatsappprospect`            | Campanha via módulo WhatsApp Prospect. Obrigatório informar o template. |
+| `_whatsappprospect`            | Campanha via módulo WhatsApp Prospect. Obrigatório informar o template. <br /><span style={{ fontSize: '0.8em', opacity: 0.85, display: 'block' }}>❗<strong>Observação:</strong> Utilize _whatsappprospect apenas quando houver números prospects, caso contrário, ocorrerá falha. Nesta situação, utilize o parâmetro <code>_whatsappexclusivo</code> junto com a especificação do número pelo parâmetro <code>_nw</code> .</span> |
 
 ###  Exemplos de Nomenclatura para Importação via FTP
 
-Aqui estão exemplos práticos de nomenclatura de arquivos para importação de mailings e criação de campanhas via FTP. Utilize essas referências para garantir que seus arquivos sejam processados corretamente pelo sistema. 🚀
+Aqui estão exemplos práticos de nomenclatura de arquivos para importação de mailings e criação de campanhas via FTP. Utilize essas referências para garantir que seus arquivos sejam processados corretamente pelo sistema. 
 
 <ResponseField name="mailing_101117_1.csv" type="string">
   Apenas importar sem especificar carteira (o arquivo deve estar em uma pasta com o nome da carteira).
@@ -96,6 +129,15 @@ Aqui estão exemplos práticos de nomenclatura de arquivos para importação de 
 <ResponseField name="mailing_101117_1_c123_email_teAportunidade!!!_ceAVISO@COMUNICADO.COM.BR.csv" type="string">
   Importar na carteira `123` e criar uma campanha de e-mail para início imediato, definindo o título `"Aportunidade!!!"` e utilizando a conta `AVISO@COMUNICADO.COM.BR`.
 </ResponseField>
+
+---
+
+## 🔗 Links e assuntos relacionados
+
+- [Agendamento de relatório por FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)  
+- [Configurações gerais da conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
+
+---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
