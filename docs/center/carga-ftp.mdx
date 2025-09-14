@@ -44,28 +44,32 @@ Para que a importação ocorra corretamente, é necessário configurar a conexã
 > - `192.168.x.x`  
 
 
-Caso sua empresa não possua um servidor FTP, ao acessar `Configurações >> Conta >> Gerenciar >> FTP`
+**Caso sua empresa não possua um servidor FTP, acesse:**
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_12.png" />
+ `Configurações >> Conta >> Gerenciar >> FTP` 
 
- Habilite o botão  **Habilitar transferência de arquivos** 
+ [Acesse a página de configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_13.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
+
+Habilite o botão **Habilitar transferência de arquivos**
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
 
 > ⚠️ **Atenção**  
-> O servidor disponibilizado pela **Invenio** é do tipo **SFTP**.  
-> Portanto, inclua no início da URL o prefixo `sftp://`.  
->
-> **Exemplo:**  
-> `sftp://sarobbuinveniosftp.xyz.core.windows.net`  
->
+> O servidor disponibilizado pela **Invenio** é do tipo **SFTP**. Portanto, inclua no início da URL o prefixo `sftp://`.  
+> **Exemplo:** `sftp://sarobbuinveniosftp.xyz.core.windows.net`  
 > A porta utilizada para conexão é a **22**.
 
-**Testando a Conexão**
-   - Utilize um cliente FTP (exemplo: `FileZilla`) para validar a conexão.
-   - Confirme o acesso enviando um arquivo de teste.
+### Teste de conexão
 
+ - Utilize um cliente FTP (exemplo: `FileZilla` ou `WinSCP`) para validar a conexão.
+ - Confirme o acesso enviando um arquivo de teste.
 
+>❗**Observação**: Ao incluir os dados do servidor em `Configurações > FTP`, o sistema exibe imediatamente se a conexão foi bem-sucedida ou não.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosucesso.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosemsucesso.png" />
 
 ##  Regras de Nomenclatura dos Arquivos
 
@@ -142,12 +146,82 @@ Aqui estão exemplos práticos de nomenclatura de arquivos para importação de 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Qual o IP de saída do serviço de importação via FTP?">
-    Se você estiver utilizando um serviço de FTP/SFTP próprio e sua infraestrutura possuir restrições de acesso, como firewalls ou regras de segurança, entre em contato com a equipe de infraestrutura da sua empresa para garantir que o seguinte IP esteja liberado para conexão:
+  <Accordion title="Com qual frequência os arquivos são processados pela carga via FTP?">
+    O job de importação roda de forma recorrente a cada <b>2 minutos</b>, garantindo a ingestão contínua dos arquivos válidos enviados ao servidor.
+  </Accordion>
 
- IPs a serem liberados: `191.233.248.49` `104.41.0.210`
+  <Accordion title="Quais IPs de saída preciso liberar no meu firewall?">
+    Libere os IPs <code>191.233.248.49</code> e <code>104.41.0.210</code> se você utiliza servidor próprio (FTP/SFTP). Sem essa liberação, a conexão pode falhar.
+  </Accordion>
 
-Isso garantirá que a comunicação entre o seu servidor e o serviço de importação ocorra sem interrupções. 
+  <Accordion title="O que devo preencher nas configurações de conexão FTP/SFTP?">
+    Informe <b>Servidor</b> (sem <code>https://</code>), <b>Usuário</b>, <b>Senha</b>, <b>Porta</b> (FTP 21 / SFTP 22) e o <b>modo de criptografia</b> exigido pelo seu servidor (geralmente <i>Use Explícito</i> para FTP). Evite usar <b>IPs privados</b> como host.
+  </Accordion>
+
+  <Accordion title="Não tenho servidor próprio. Posso usar o SFTP da Invenio?">
+    Sim. Em <b>Configurações &gt;&gt; Conta &gt;&gt; Gerenciar &gt;&gt; FTP</b>, habilite <b>Transferência de arquivos</b> e utilize o endpoint SFTP fornecido com prefixo <code>sftp://</code> e porta <b>22</b>.
+  </Accordion>
+
+  <Accordion title="Como valido a conexão antes de enviar arquivos reais?">
+    Faça um teste com clientes como <b>FileZilla</b> ou <b>WinSCP</b>. Na própria tela <b>Configurações &gt; FTP</b>, o sistema indica se a conexão foi bem-sucedida após salvar.
+  </Accordion>
+
+  <Accordion title="Qual formato de arquivo é aceito para a importação?">
+    Utilize arquivos <b>.csv</b> (separados por delimitador padrão). Os exemplos de nomenclatura desta documentação consideram <code>.csv</code>.
+  </Accordion>
+
+  <Accordion title="O sistema só importa mailings com qual data no nome do arquivo?">
+    Apenas os arquivos cujo nome contém a data do <b>dia corrente</b> no padrão <code>_DDMMYY</code> são importados no dia.
+  </Accordion>
+
+  <Accordion title="Como funciona a sequência no nome do arquivo (ex.: _999)?">
+    Representa a ordem do arquivo no dia. <b>Não</b> pode haver dois arquivos com a <b>mesma sequência</b> no mesmo dia.
+  </Accordion>
+
+  <Accordion title="Onde informo a carteira se não usar o parâmetro _cXXXXXXXX?">
+    Se o sufixo <code>_cXXXXXXXX</code> não for informado, coloque o arquivo dentro de uma <b>pasta cujo nome é a carteira</b>.
+  </Accordion>
+
+  <Accordion title="Para que serve o parâmetro _h no nome do arquivo?">
+    O sufixo <code>_h</code> indica que o mailing deve passar por <b>higienização</b> durante a importação.
+  </Accordion>
+
+  <Accordion title="Como agendar o início da campanha a partir do arquivo?">
+    Use <code>_iDDMMYYHHMM</code> para definir <b>data e hora</b> específicas de início (ex.: <code>_i0102180820</code> para 01/02/18 08:20).
+  </Accordion>
+
+  <Accordion title="Como fracionar o envio da campanha em lotes?">
+    Use <code>_q88999</code> para enviar <b>88%</b> por lote com intervalo de <b>999</b> minutos entre disparos.
+  </Accordion>
+
+  <Accordion title="Como evitar disparos para quem interagiu recentemente?">
+    Utilize <code>_x999</code> para <b>descartar</b> contatos com interação nas últimas <b>999 horas</b>. Observação: posicione <code>_x</code> antes de <code>_nt</code>.
+  </Accordion>
+
+  <Accordion title="Como defino o template e o número do WhatsApp Oficial?">
+    Para WhatsApp Oficial:  
+    • <code>_ntNOME_DO_TEMPLATE</code> define o <b>template</b>.  
+    • <code>_nw11998877665</code> define o <b>número exclusivo</b> remetente.  
+    Escolha entre <code>_whatsappexclusivo</code> (exclusivo) ou <code>_whatsappcompartilhado</code>.
+  </Accordion>
+
+  <Accordion title="Quando devo usar o parâmetro _whatsappprospect?">
+    Use <code>_whatsappprospect</code> apenas quando houver <b>números prospects</b>. Caso contrário, utilize <code>_whatsappexclusivo</code> com <code>_nw</code>.
+  </Accordion>
+
+  <Accordion title="Como configurar campanhas de e-mail a partir do nome do arquivo?">
+    Inclua <code>_email</code> para disparar e-mail, <code>_ceCONTA@DOMINIO</code> para definir a <b>conta remetente</b> e <code>_teTÍTULO</code> para o <b>assunto</b>.
+  </Accordion>
+
+  <Accordion title="Posso definir um limite de envio para não disparar fora de horário?">
+    Sim. Use <code>_LEddMMyyHHmm</code> para limitar o <b>prazo máximo</b> de envio (data/hora limite).
+  </Accordion>
+
+  <Accordion title="Qual criptografia devo escolher no FTP?">
+    Depende do seu servidor. O mais comum é <b>Explícito (TLS)</b> em FTP. Para SFTP (porta 22), a sessão já é segura por padrão via SSH.
+  </Accordion>
+
+  <Accordion title="O que fazer se a conexão falhar mesmo com as credenciais corretas?">
+    Verifique: liberação dos <b>IPs</b>, porta/protocolo corretos (21 FTP / 22 SFTP), host sem <code>https://</code>, ausência de <b>IP privado</b>, e valide via <b>FileZilla</b> ou <b>WinSCP</b>.
   </Accordion>
 </AccordionGroup>
-  

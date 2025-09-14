@@ -12,7 +12,7 @@ Para criar um agendamento acesse `Invenio Center >> Relatórios >> Agendamentos`
 
 Ao acessar a aba de **Agendamentos**  clique em **Gerar Relatório**.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_1.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relatorioftp2.png" />
 
 Escolha o formato de relatório desejado.
 
@@ -35,7 +35,13 @@ Defina os parâmetros do relatório, como:
 - O sistema permitirá definir o **dia e horário** de envio do relatório.
 - **Escolha o método de entrega:** selecione `FTP` ou, se necessário, `E-mail`. Ao habilitar a opção de e-mail, o arquivo também será enviado diretamente para sua caixa de entrada.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_5.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/emailouFTP.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relagpreenchimentoemail.png" />
+
+>❗**Atenção**: É recomendável preencher a **data de início**, que define a partir de quando o relatório será gerado.
+> Caso exista um limite para essa geração, também será necessário informar a **data de término**.
+> Se não houver prazo definido para encerramento, o campo de data de término pode permanecer em branco.
+> Para interromper a geração programada do relatório a qualquer momento, basta desabilitar a opção **“Agendamento ativo”**.
 
 ## Configuração e preenchimento de campos do servidor
 
@@ -64,15 +70,23 @@ Para envio via FTP, ative a opção **Enviar relatório por FTP** e configure os
 | `Port`      | Utilize a porta `443`                                                          |
 | `Protocol`  | Selecione o protocolo **S3**                                                   |
 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/s3.png" />
+
+
 ---
 
-Caso sua empresa não possua um servidor FTP, ao acessar `Configurações >> Conta >> Gerenciar >> FTP`
+**Caso sua empresa não possua um servidor FTP, acesse:**
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_12.png" />
+ `Configurações >> Conta >> Gerenciar >> FTP` 
+
+ [Acesse a página de configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
 
 Habilite o botão **Habilitar transferência de arquivos**
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_13.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
 
 > ⚠️ **Atenção**  
 > O servidor disponibilizado pela **Invenio** é do tipo **SFTP**. Portanto, inclua no início da URL o prefixo `sftp://`.  
@@ -85,11 +99,11 @@ Habilite o botão **Habilitar transferência de arquivos**
 
 Para facilitar a gestão dos arquivos, recomendamos a criação de um **diretório exclusivo** para os relatórios.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_8.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/winCsp1.png" />
 
 No campo **Server**, inclua o nome do servidor + **diretório raiz** onde o arquivo será armazenado.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_9.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/preechimentoftprelatorios.png" />
 
 > ⚠️ **Importante**  
 > Se o servidor for **SFTP**, verifique se o protocolo correto está selecionado na configuração do relatório.
@@ -100,11 +114,9 @@ No campo **Server**, inclua o nome do servidor + **diretório raiz** onde o arqu
 - Clique em **Agendar Relatório** para concluir o processo.
 - O relatório será enviado para o diretório **relatórios** do servidor configurado.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_10.png" />
-
 Caso a geração não seja bem-sucedida, o arquivo será redirecionado para o diretório **descartados**.
 
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_11.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/descartados.png" />
 
 > ❗ **Observação**  
 > O Invenio possui um limite de criação de **oito relatórios agendados** e o formato gerado é **CSV**.
