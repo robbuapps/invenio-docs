@@ -45,12 +45,12 @@ O Maestro utiliza a seguinte árvore de diretórios dentro do servidor SFTP
 
 | Uso                      | Caminho SFTP                   |
 |--------------------------|--------------------------------|
-| Entrada Templates        | `/maestro/templates`           |
-| Processados Templates    | `/maestro/templates/processed` |
-| Erros Templates          | `/maestro/templates/error`     |
-| Entrada Campanhas        | `/maestro/campaigns`           |
-| Processados Campanhas    | `/maestro/campaigns/processed` |
-| Erros Campanhas          | `/maestro/campaigns/error`     |
+| Templates a serem importados        | `/maestro/templates`           |
+| Campanhas a serem importadas        | `/maestro/campaigns`           |
+
+Dentro de cada um dos diretórios acima, duas pastas serão criadas:
+`/processed` para identificar os objetos importados com sucesso
+`/error` para identificar importações que não aconteceram e sinalizar qual foi o erro encontrado
 
 > ⚠️ Estes diretórios são criados automaticamente após a conexão do servidor SFTP na tela de configuração, mas pode levar até 10 minutos para que esses diretórios apareçam.
 
@@ -94,27 +94,42 @@ O Maestro utiliza a seguinte árvore de diretórios dentro do servidor SFTP
 
 ---
 
-## Fluxo de Processamento  
+## Fluxo de Processamento
 
-1. Upload do `.csv` em `/maestro/templates` ou `/maestro/campaigns`.  
+### Templates
+1. Upload do `.csv` em `/maestro/templates`
 2. Serviço rotineiro (a cada 10 min) executa:  
    - Garante diretórios `processed` e `error`.  
    - Varre os arquivos `.csv`.  
 3. Validações:  
-   - Nome segue o padrão.  
-   - Segmento existe e pertence à empresa.  
-   - (Templates-WhatsApp) validação de WABA.  
-   - (Campanhas) Template existe e pertence ao segmento.  
-   - (Campanhas-WhatsApp) número informado existe e pertence à WABA.  
-4. Importa:  
-   - **Templates**: dispara Importação de templates.  
-   - **Campanhas**: cria Público, faz upload do arquivo e cria a campanha.  
+   - Nome do arquivo segue o padrão?
+   - Segmento existe e assessoria possui permissão de acesso?
+4. Importação:
+   - Cria os templates já com status `Em Revisão`
 5. Move o `.csv` para:  
-   - `processed` em caso de sucesso.  
+   - `processed` em caso de sucesso.
    - `error` em caso de falha.  
-      - Gera `_errorDetail.txt` com mensagem de erro.  
-6. Logs: empresa, segmento, canal, nome do arquivo e motivo da falha.  
+      - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro.  
 
+
+### Campanhas
+1. Upload do `.csv` em `/maestro/campaigns`
+2. Serviço rotineiro (a cada 10 min) executa:  
+   - Garante diretórios `processed` e `error`.  
+   - Varre os arquivos `.csv`.  
+3. Validações:
+   - Nome do arquivo segue o padrão?
+   - Segmentos existem e assessoria possui permissão de acesso?
+   - Templates estão aprovados?
+   - Regras do motor de regras estão válidas?
+4. Importação:
+   - Roda as validações
+   - Adiciona colunas `Valid` (true, false) e `Reason` (string) ao final do arquivo
+   - Há provedor para o canal configurado?
+      - Se não, apenas move o arquivo .csv com as novas colunas para a pasta `/processed`
+      - Se sim, cria os disparos e depois move o arquivo .csv com as novas colunas para a pasta `/processed
+5. Se houver falha no arquivo inteiro
+   - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro na pasta `/error`
 ---
 
 ## FAQ
