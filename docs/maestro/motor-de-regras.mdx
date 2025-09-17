@@ -41,6 +41,11 @@ Se o percentual de erros no arquivo da campanha ultrapassar o limite configurado
 
 - Caso o limite esteja configurado em 0%, nenhuma base será invalidada por esta regra, mesmo ela estando ativa.
 
+### Retorno por motivos de falhas:
+- Excedido o limite de envios diários para esse contato; idem (SMS)
+- Número bloqueado na lista de restrição;
+- Envio bloqueado fora do horário permitido para este código de área;
+
 > ⚠️ Se alguma dessas regras for violada, a campanha não será criada.
 
 ---
@@ -51,11 +56,22 @@ Essas regras são verificadas para cada disparo (linha do CSV ou chamada de API)
 #### Bloqueio por listas de restrição
 Essa regra funciona tanto como uma lista de restrição para números ou e-mails fornecidos, quanto como um limitador de disparos por DDD ou por quantidade de disparos por contato.
 
-Números ou e-mails bloqueados em lista de restrição não serão processados para disparo.
+- Números ou e-mails bloqueados em lista de restrição não serão processados para disparo.
 
-Restrições por DDD impedem disparos para contatos dessas regiões fora do horário definido.
+- Restrições por DDD impedem disparos para contatos dessas regiões fora do horário definido.
 
 > ⚠️ Arquivos com contatos duplicados serão rejeitados pelo motor para posterior ajuste
+
+### Regras do Motor no Dia a Dia
+#### Horário e Agendamento
+- Campanhas não podem ser agendadas fora da faixa permitida.
+- Em dias de feriado configurados, disparos são bloqueados automaticamente.
+#### Restrições por DDD e Telefone
+- Campanhas devem ter DDD mapeado corretamente.
+- Telefones com formatação inválida (ex.: sem “+”) são rejeitados.
+- Números bloqueados ou em lista restrita não são processados.
+- Restrições por DDD ou estado impedem disparos para contatos dessas regiões.
+
 
 #### Limite diários de disparos por contato
 O código do cliente vinculado ao contato será utilizado para aplicar o bloqueio de disparos.
@@ -68,7 +84,23 @@ Se um contato estiver vinculado a mais de um contrato:
 - O contrato que ultrapassar o limite será bloqueado.
 - O contrato dentro do limite terá o disparo processado normalmente.
 
+### Domínios e E-mails
+- E-mails de domínios bloqueados ou que constem em blacklist são rejeitados.
+- Arquivos com contatos duplicados não são aceitos.
+#### Retorno por motivos de falhas:
+- Domínio de e-mail bloqueado na lista de restrição; (Domínio bloqueado não removido).
+- Domínio proibido removido (exclusão sem registro);
+- E-mail bloqueado na lista de restrição;
 ---
+#### Controle de Erros
+- Se o percentual de erros ultrapassar o limite configurado, a base é invalidada.
+- Caso o limite esteja configurado em 0%, nenhuma base deve ser barrada.
+#### Limite de Disparos
+- Cada contrato tem um limite diário de disparos.
+- Se um contato estiver vinculado a mais de um contrato:
+- contrato que ultrapassar o limite será bloqueado.
+- contrato dentro do limite terá o disparo processado normalmente.
+
 
 ### Regras implícitas
 Algumas regras não são exibidas no motor de regras mas rodam como validadores de disparos e campanhas no Maestro:
@@ -83,8 +115,28 @@ Se houver broker configurado para o canal utilizado, o template deve estar "Publ
 Se não houver broker configurado, a mensagem não será disparada, mas o template será considerado válido e poderá ser utilizado para integrações externas
 
 Templates expirados não ficam disponíveis para uso após a rotina de expiração.
+Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.
 
 ---
+
+### SFTP – Importação de Arquivos
+- Local de upload: SFTP > maestro > campaigns > Adicionar arquivo aqui.
+- Nome dos arquivos deve seguir o padrão:
+
+```plaintext
+{segmentName}{channelName}{templateCode}{YYYYMMDD}_{HHmm}.csv
+```
+#### Exemplo: Paschoalotto_whatsapp_W1666_551131361579_20250603_1530.csv
+A importação será rejeitada se:
+- Faltarem colunas obrigatórias no arquivo.
+- Colunas forem apagadas.
+- O segmento usado não estiver vinculado à assessoria.
+- O nome do arquivo estiver fora do padrão.
+
+### Retornos de erros:
+- Coluna ausente de valor - Importação cancelada/coluna deletada: Existem contatos sem COD_CONTRATO preenchido.
+- Segmento “segmentoErrado” não cadastrado para a empresa “Assessoria XXXXXXXX”;
+- O nome do arquivo “FormatoErradoNomeArquivo.csv” não está no formato válido. Formato esperado: segmento_canal_templateCode_YYYYMMDD.csv
 
 ## Histórico
 
