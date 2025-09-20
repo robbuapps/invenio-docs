@@ -1,14 +1,82 @@
 ---
-title: "Send Message"
+title: "API Send Message"
 sidebarTitle: "Send Message"
 description: "Este documento traz as especificações técnicas para chamada da API SendMessage que faz disparos de mensagens via Invenio, independente do canal."
 ---
 
-### Request
+A API SendMessage é o recurso que permite disparar mensagens pela plataforma Invenio de forma unificada, 
+independentemente do canal utilizado. Com ela, sua empresa pode enviar mensagens por WhatsApp, SMS e E-mail, incluindo o uso de templates HSM, textos livres e arquivos.
+Esse endpoint foi desenvolvido para facilitar a automação da comunicação, tornando possível integrar outros sistemas ao Invenio e centralizar a gestão de envios.
 
-#### Base URL
+---
 
-`https://api.robbu.global/v1`
+## Autenticação
+
+Antes de realizar o envio de mensagens pela API, é necessário obter um token de acesso (access_token). Esse token é solicitado na rota de
+login e deve ser utilizado na chamada da API SendMessage como um Bearer Token, funcionando como a autorização para que o disparo seja concluído
+com sucesso.
+
+> ⚠️ **Importante**:
+> Caso o token não seja informado, ou esteja expirado, a API retornará o erro **401 Unauthorized** impedindo o envio da mensagem.
+
+O  usuário utilizado na requisição de login precisa ser do tipo **API**, garantindo a segurança e o correto funcionamento da integração.
+
+[Acesse a documentação sobre Usuários](https://docs.robbu.global/docs/center/usuarios)
+
+
+## Endpoint de Login
+
+Para realizar a autenticação preencha a requisição conforme o exemplo abaixo:
+
+**Método:**  `POST`
+
+**URL:** `https://api.robbu.global/v1/login`
+
+
+  **Company** ➜ `Nome da empresa no Invenio Center`
+
+  **Username** ➜ `Nome do usuário API`
+  
+  **Password** ➜ `Senha do usuário API`
+
+**Body:**
+```
+    {
+  "Company": "#####",
+  "Username": "#####",
+  "Password": "#####"
+    }
+
+```
+
+**Exemplo de response:**
+
+```
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5...",
+  "expires_in": 287971200,
+  "refresh_token": "",
+  "token_type": "bearer"
+}
+
+```
+
+Não é necessário gerar um novo token a cada envio. O campo **expires_in** define sua validade em segundos e, por padrão, pode ser considerado válido por até 3333 dias. É importante lembrar que, caso a rota de login seja
+ executada novamente, o token anterior será invalidado. Por isso, a recomendação é armazená-lo e solicitar um novo apenas quando a requisição de envio retornar **401 Unauthorized**.
+
+---
+
+## Endpoint de Envio de Mensagens
+
+Com o token em mãos, basta utilizar a rota de envio para realizar o disparo das mensagens.
+
+**Método:** `POST`
+
+**URL:** `https://api.robbu.global/v1/sendmessage`
+
+O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: Bearer {access_token}`
+
+**Exemplo de request (completo)**
 
 ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
 {
@@ -30,12 +98,12 @@ description: "Este documento traz as especificações técnicas para chamada da 
   ],
   "source": {
     "countryCode": 55,
-    "phoneNumber": 1112345678,
+    "phoneNumber": 11999999999,
     "prospect": false
   },
   "destination": {
     "countryCode": 55,
-    "phoneNumber": 11992568547,
+    "phoneNumber": 1199999999,
     "email": ""
   },
   "discardSettings": {
@@ -45,7 +113,7 @@ description: "Este documento traz as especificações técnicas para chamada da 
   "contact": {
     "name": "Ana da Silva",
     "customCode": "5150",
-    "id": "85695874563",
+    "id": "78905678908",
     "tag": "nometag",
     "jokers": [
       "coringa1",
@@ -70,44 +138,175 @@ description: "Este documento traz as especificações técnicas para chamada da 
 }
 ```
 
-#### Parâmetros da Requisição
+## Detalhamento dos Campos
 
-| Parâmetro                   | Tipo            | Obrigatório | Descrição                                                                                         | Exemplo                                 |
-|-----------------------------|-----------------|-------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
-| `invenioPrivateToken`       | `String`        | Sim         | Token privado para autenticação.                                                                 | `xxxxxx-xxxxxxx-xxxxxxxx-xxxxxxxx`     |
-| `text`                      | `String`        | Sim         | O texto da mensagem que será enviado. Ignorado se o template HSM estiver preenchido.             | `olá usuário`                          |
-| `emailSubject`              | `String`        | Não         | O título do e-mail (considerando que o canal utilizado será o e-mail).                           | `(vazio)`                              |
-| `channel`                   | `Inteiro`       | Sim         | Canal de envio da mensagem (1 – Email, 2 – SMS, 3 – WhatsApp).                                   | `3`                                    |
-| `templateName`              | `String`        | Sim         | Nome do template HSM criado e aprovado junto ao Facebook.                                        | `template1`                            |
-| `attendantUserName`         | `String`        | Não         | Nome do usuário no Invenio para fidelização de fila de login específico.                         | `Usuário 1`                            |
-| `templateParameters`        | `Array`         | Não         | Parâmetros para personalização do template.                                                     | Veja abaixo                             |
-| ├─ `parameterName`          | `String`        | Sim         | Nome da variável no template dinâmico.                                                           | `PrimeiroNome`                         |
-| ├─ `parameterValue`         | `String`        | Sim         | Valor da variável no template dinâmico.                                                          | `Nome alternativo`                     |
-| `source`                    | `Objeto`        | Sim         | Dados de origem da mensagem.                                                                    | Veja abaixo                             |
-| ├─ `countryCode`            | `Inteiro`       | Sim         | Código do país do número que enviará a mensagem.                                                 | `55`                                   |
-| ├─ `phoneNumber`            | `Inteiro`       | Sim         | Número de telefone que enviará a mensagem (DDD + número).                                        | `1112345678`                           |
-| ├─ `prospect`               | `Booleano`      | Não         | Indica se a mensagem será enviada por um número de prospect integrado ao Invenio.                | `false`                                |
-| `destination`               | `Objeto`        | Sim         | Dados de destino da mensagem.                                                                   | Veja abaixo                             |
-| ├─ `countryCode`            | `Inteiro`       | Sim         | Código do país do telefone que receberá a mensagem.                                              | `55`                                   |
-| ├─ `phoneNumber`            | `Inteiro`       | Sim         | Número de telefone que receberá a mensagem (DDD + número).                                       | `11992568547`                          |
-| ├─ `email`                  | `String`        | Não         | E-mail que receberá a mensagem.                                                                  | `(vazio)`                              |
-| `discardSettings`           | `Objeto`        | Não         | Configurações para descartar mensagens.                                                         | Veja abaixo                             |
-| ├─ `recentContactLastHours` | `Inteiro`       | Não         | Ignora o envio da mensagem se houve contato nas últimas X horas.                                 | `0`                                    |
-| ├─ `inAttendance`           | `Booleano`      | Não         | Ignora o envio da mensagem se o cliente estiver fidelizado com um operador.                      | `true`                                 |
-| `contact`                   | `Objeto`        | Sim         | Informações do contato que receberá a mensagem.                                                 | Veja abaixo                             |
-| ├─ `name`                   | `String`        | Sim         | Nome do contato que receberá a mensagem.                                                         | `Ana da Silva`                         |
-| ├─ `customCode`             | `String`        | Sim         | Código do cliente utilizado para o contato.                                                     | `5150`                                 |
-| ├─ `id`                     | `String`        | Sim         | CPF ou CNPJ do contato que receberá a mensagem.                                                  | `85695874563`                          |
-| ├─ `tag`                    | `String`        | Não         | Hashtag associada ao contato que receberá a mensagem.                                            | `nometag`                              |
-| ├─ `jokers`                 | `Array`         | Não         | Valores coringa para templates HSM aprovados no Facebook.                                        | `["coringa1", "coringa2", "coringa3"]` |
-| `walletClientCode`          | `String`        | Sim         | Código do segmento cadastrado pelo cliente dentro do Invenio.                                    | `CodDefault`                           |
-| `updateIfExists`            | `Booleano`      | Não         | Indica se o contato será atualizado caso já esteja cadastrado no Invenio.                        | `true`                                 |
-| `voiceSettings`             | `Objeto`        | Sim         | Configurações de chamada de voz.                                                                | Veja abaixo                             |
-| ├─ `callId`                 | `String`        | Sim         | ID da chamada de voz. Necessário em fluxos voltados a esse tipo de canal.                        | `123123`                               |
-| `files`                     | `Array`         | Sim         | Arquivos anexados à mensagem.                                                                   | Veja abaixo                             |
-| ├─ `address`                | `String`        | Sim         | URL da mídia a ser enviada.                                                                      | `https://exemplo.com/arquivo.pdf`      |
-| ├─ `base64`                 | `String`        | Sim         | Código Base64 da mídia a ser enviada.                                                            | `...u5y3i4y5iu345yu345yu345y5y4...`    |
-| ├─ `name`                   | `String`        | Sim         | Nome do arquivo a ser enviado.                                                                   | `seuboleto.pdf`                        |
+###  Parâmetros da Requisição SendMessage
+
+| **Campo**             | **Descrição** |
+|------------------------|---------------|
+| **InvenioPrivateToken** | Obtido no ambiente administrativo do Invenio Center em `Configurações > Conta`. **Obrigatório** para que a chamada seja aceita. |
+| **Text** | Conteúdo da mensagem em texto livre. Ignorado quando o envio utiliza **template HSM**. Só pode ser usado em contatos com janela de 24h aberta ([saiba mais](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)). |
+| **EmailSubject** | Usado apenas em mensagens enviadas por **e-mail**, deve ser preenchido com o título do e-mail. |
+| **Channel** | Define o canal de envio: `1 = E-mail`, `2 = SMS`, `3 = WhatsApp`. |
+| **TemplateName** | Quando o envio é feito via **HSM**, deve ser preenchido com o nome do template. |
+| **TemplateParameters** | Personalização dos templates com variáveis dinâmicas. Veja abaixo. |
+| **Source** | Informações da **origem** da mensagem (linha de disparo). Veja abaixo. |
+| **Destination** | Informações do **destinatário** da mensagem. Veja abaixo. |
+| **DiscardSettings** | Evita disparos desnecessários quando já houve contato recente ou atendimento ativo. Veja abaixo. |
+| **Contact** | Dados adicionais do contato que podem ser atualizados no disparo. Veja abaixo. |
+| **WalletClientCode** | Código cliente do segmento definido no Invenio, garantindo vínculo com a carteira escolhida. |
+| **UpdateIfExists** | Define se as informações do contato devem ser atualizadas (`true` ou `false`). |
+| **VoiceSettings** | Deve ser preenchido com o **Call ID de voz** nos fluxos do canal de voz. |
+| **Files** | Permite o envio de arquivos anexados. Veja abaixo. |
+
+---
+
+###  TemplateParameters (Parâmetros de template)
+
+| **Campo**         | **Descrição** |
+|-------------------|---------------|
+| **ParameterName** | Nome da variável conforme definido no template. |
+| **ParameterValue** | Valor que substituirá a variável no envio. |
+
+---
+
+###  Source (Origem da Mensagem)
+
+| **Campo**       | **Descrição** |
+|-----------------|---------------|
+| **CountryCode** | Código do país da linha de origem. |
+| **PhoneNumber** | Número de telefone (com DDD) da linha que realizará o disparo. |
+| **Prospect** | Define a aleatorização das linhas prospect. <br/>- `false`: a mensagem sairá exatamente da linha configurada. <br/>- `true`: pode ser enviada por outra linha prospect elegível. <br/> [Saiba mais sobre aleatorização](https://docs.robbu.global/docs/center/canal-whatsapp#aleatoriza%C3%A7%C3%A3o-inteligente). |
+
+---
+
+###  Destination (Destino da Mensagem)
+
+| **Campo**       | **Descrição** |
+|-----------------|---------------|
+| **CountryCode** | Código do país do contato que receberá a mensagem. |
+| **PhoneNumber** | Número de telefone (com DDD) do contato destinatário. |
+| **Email**       | Endereço de e-mail do destinatário (quando o canal for e-mail). |
+
+---
+
+###  DiscardSettings (Descartes)
+
+| **Campo**              | **Descrição** |
+|------------------------|---------------|
+| **RecentContactLastHours** | Quantidade de horas a considerar para descartar o envio. |
+| **InAttendance** | `true`: descarta contatos em atendimento. <br/> `false`: envia mesmo que o contato esteja em atendimento. |
+
+---
+
+###  Contact (Contato)
+
+| **Campo**       | **Descrição** |
+|-----------------|---------------|
+| **Name**        | Atualiza o nome do contato no Invenio. |
+| **CustomCode**  | Código personalizado usado pela empresa para categorizar contatos. |
+| **Id**          | Atualiza o CPF/CNPJ do contato. |
+| **Tag**         | Categoriza contatos para facilitar a busca ([saiba mais](https://docs.robbu.global/docs/live/edicao-de-tags)). |
+| **Jokers**      | Coringas dinâmicos utilizados no disparo. <br/>- `Joker 1 a 4`: até 300 caracteres. <br/>- `Joker 5`: até 3000 caracteres. |
+
+---
+
+###  Files (Anexos)
+
+| **Campo**  | **Descrição** |
+|------------|---------------|
+| **Address** | URL da mídia a ser enviada. |
+| **Base64**  | Código em base64 da mídia. |
+| **Name**    | Nome do arquivo com extensão (ex.: `boleto.pdf`). |
+
+> ℹ️ **Observação**:  
+> - Em **templates (HSM)** só é permitido **1 arquivo por disparo**.  
+> - Em **mensagens livres**, é possível enviar múltiplos arquivos (ex.: ZIP).  
+> - Apesar de permitido, o envio em ZIP pode não ser compatível com todos os modelos de celulares.  
+
+
+---
+
+## Responses API Send Message
+
+Ao realizar uma chamada à API, diferentes códigos de status podem ser retornados, indicando o resultado do disparo. A seguir, listamos os principais responses que podem ser encontrados, juntamente com seu significado, para auxiliar no monitoramento e tratamento de respostas:
+
+
+| **Código** | **Descrição**                                                                 |
+|------------|-------------------------------------------------------------------------------|
+| **200 OK** | Mensagem enviada corretamente.                                                |
+| **400 Bad Request** | Preenchimento incorreto ou incompleto de parâmetros.                  |
+| **401 Unauthorized** | Token inválido ou expirado.                                          |
+| **404 Not Found** | URL incorreta.                                                          |
+| **500 Internal Server Error** | Erro interno da API.                                        |
+
+> ℹ️ **Observação**: É importante observar que a API não retorna mensagens de erro detalhadas em casos de falha de envio nos canais externos (como erros da Meta). Nesses casos, a validação deve ser feita diretamente no **Invenio Center**, onde estão disponíveis os logs e relatórios de entrega.
+
+
+## Exemplos de Requisições
+
+- Preenchimento com parâmetros de templates
+- Envio de texto livre com múltiplos arquivos
+- Envio de HSM com arquivo zipado
+- Envio de e-mail
+- Envio de carrossel
+- Envio de template de autenticação
+
+
+---
+
+## 🔗 Links e assuntos relacionados  
+
+- [Configurações Gerais da Conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
+- [Usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios)  
+- [Filtros de Busca de Contatos](https://docs.robbu.global/docs/center/filtros-de-busca-de-contatos)  
+- [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)  
+- [Templates de E-mail](https://docs.robbu.global/docs/center/templates-de-email)  
+- [Como Criar Templates no WhatsApp](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)  
+- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
+- [Sessão de 24h no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
+- [Filtros e Menus de Busca no Invenio Live](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
+- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="A autenticação precisa ser feita em todos os envios?">
+    Não. O token obtido na rota de login possui validade definida no campo expires_in. Ele deve ser reutilizado até expirar, solicitando um novo apenas quando houver retorno **401 Unauthorized**.
+  </Accordion>
+
+  <Accordion title="O campo text pode ser usado em qualquer envio?">
+    Não. Esse campo é ignorado em envios que utilizam **template HSM** e só pode ser usado para contatos que estejam dentro da **janela de 24 horas aberta no WhatsApp**.
+  </Accordion>
+
+  <Accordion title="Quantos arquivos posso enviar em um único disparo?">
+    - Em **templates HSM**: apenas **1 arquivo** é permitido.  
+    - Em **mensagens livres**: múltiplos arquivos podem ser enviados, incluindo ZIP (com ressalva de compatibilidade em alguns dispositivos).
+  </Accordion>
+
+  <Accordion title="O que acontece se eu executar novamente a rota de login?">
+    O token anterior será automaticamente **invalidado**. Apenas o último token gerado será válido para as requisições.
+  </Accordion>
+
+  <Accordion title="Como funciona o parâmetro `discardSettings`?">
+    Ele evita envios duplicados ou desnecessários:  
+    - `recentContactLastHours`: define em quantas horas o envio deve ser descartado se já houver interação anterior.  
+    - `InAttendance`: quando configurado como `true`, impede disparo para contatos que já estão em atendimento.
+  </Accordion>
+
+  <Accordion title="É possível atualizar dados do contato durante o envio?">
+    Sim. O objeto **Contact** permite atualizar informações como **nome, documento, tags e coringas**, além de definir se os dados devem ser sobrescritos (`updateIfExists`).
+  </Accordion>
+
+  <Accordion title="Onde verificar erros de envio detalhados?">
+    A API retorna apenas status gerais (200, 400, 401, etc.).  
+    Para detalhes sobre falhas em canais externos (como a Meta/WhatsApp), é necessário consultar os **logs e relatórios de entrega** diretamente no **Invenio Center**.
+  </Accordion>
+</AccordionGroup>
+
+
 
 
 
