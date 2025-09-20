@@ -245,9 +245,140 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
 
 ## Exemplos de Requisições
 
-- Preenchimento com parâmetros de templates
-- Envio de texto livre com múltiplos arquivos
-- Envio de HSM com arquivo zipado
+
+<Accordion title="Preenchimento com parâmetros de templates">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  {
+    "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+    "text": "",
+    "emailSubject": "",
+    "channel": 3,
+    "templateName": "comercial_av",
+    "attendantUserName": "",
+    "templateParameters": [
+        {
+            "parameterName": "Cliente",
+            "parameterValue": "Roberto"
+        },
+        {
+            "parameterName": "Site",
+            "parameterValue": "www.sitecs.com.br"
+        }
+    ],
+    "source": {
+        "countryCode": 55,
+        "phoneNumber": 11999999999,
+        "prospect": false
+    },
+    "destination": {
+        "countryCode": 55,
+        "phoneNumber": 11999999999,
+        "email": ""
+    },
+    "discardSettings": {
+        "recentContactLastHours": 0,
+        "InAttendance": false
+    },
+    "contact": {
+        "name": "",
+        "customCode": "",
+        "id": "",
+        "tag": "",
+        "jokers": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "walletClientCode": "comercial",
+        "updateIfExists": true
+    }
+}
+  ```
+**Template configurado no Invenio Center**
+
+<img src="https://robbublob.blob.core.windows.net/docs/sendmessage/templatesendmessage.png" />
+<img src="https://robbublob.blob.core.windows.net/docs/sendmessage/sendmessagetemplateedit.png" />
+
+</Accordion>
+
+<Accordion title="Envio de texto livre com dois arquivos">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+    "invenioPrivateToken": "c8881dhjg0a-1c13-4407hj4-a26d-8dty8i7t8gg7g",
+    "text": "Segue os arquivos do ultimo evento",
+    "emailSubject": "",
+    "channel": 3,
+    "templateName": "",
+    "attendantUserName": "Operador",
+    "templateParameters": [
+        {
+            "parameterName": "",
+            "parameterValue": ""
+        },
+        {
+            "parameterName": "",
+            "parameterValue": ""
+        }
+    ],
+    "source": {
+        "countryCode": 55,
+        "phoneNumber": 11999999999,
+        "prospect": false
+    },
+    "destination": {
+        "countryCode": 55,
+        "phoneNumber": 11999999999,
+        "email": ""
+    },
+    "discardSettings": {
+        "recentContactLastHours": 0,
+        "InAttendance": false
+    },
+    "contact": {
+        "name": "Cliente",
+        "customCode": "",
+        "id": "2133125456725",
+        "tag": "",
+        "jokers": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "walletClientCode": "financeiro",
+        "updateIfExists": true
+    },
+    "files": [
+    {
+      "address": "",
+      "base64": "JVBERi0xLjMKJcTl8uXrp....",
+      "name": "seuboleto.pdf"
+
+    },
+    
+    {
+      "address": "",
+      "base64": "aoijdpisjapsijjsjjsker03nfdikds.....",
+      "name": "seuboleto2.pdf"
+    }
+  
+  ]
+  
+}
+  ```
+**Arquivos recebidos em uma conversa**
+
+<img src="https://robbublob.blob.core.windows.net/docs/sendmessage/exemplo2arquivoswpp.png" />
+
+</Accordion>
+
+- Envio com preenchimento de coringas
 - Envio de e-mail
 - Envio de carrossel
 - Envio de template de autenticação
