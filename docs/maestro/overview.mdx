@@ -128,13 +128,13 @@ Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se n
 
 O layout padrão do arquivo de importação possuí as seguintes colunas: 
 
-```
+```csv
 TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE
 ```
 
 Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
 
-###  Colunas do Template
+### Colunas do Template
 
 * **TIPO_REGISTRO \[OBRIGATÓRIO]**: Valores possíveis: `TELEFONE` ou `EMAIL`.
   * Um contato pode ter múltiplas linhas (um canal por linha).
@@ -186,19 +186,23 @@ Os números exibidos aqui são vinculados ao segmento da campanha ou são númer
 
 Após escolher o número, agora escolha o template de mensagem relacionado ao número de saída.
 Se houver variáveis no template, preencha-as com o nome das colunas do seu CSV de público:
+```
 {{Var1}}
 {{Var2}}
 {{Var3}}
 ...
+```
 
 ### Campanhas Email ou SMS
 Selecione o template que será utilizado no envio dos emails ou SMS.
 
 Se houver variáveis no template, preencha-as com o nome das colunas do seu CSV de público:
+```
 {{Var1}}
 {{Var2}}
 {{Var3}}
 ...
+```
 
 ---
 
