@@ -1,12 +1,12 @@
 ---
 title: "Maestro - Overview"
 sidebarTitle: "Overview"
-description: "O Maestro é um produto Robbu que permite empresas gerenciarem ações de suas empresas associadas, oferecendo recursos como criação e revisão de templates do WhatsApp, criação de campanhas de SMS, e-mail e WhatsApp, além de configurações avançadas de regras para disparo."
+description: "O Maestro é um produto Robbu que permite empresas gerenciarem ações de suas empresas associadas, oferecendo recursos como criação e revisão de templates, criação de campanhas, disparos avulsos, além de configurações avançadas de regras para disparo."
 ---
 
 **Maestro** é uma plataforma inteligente desenvolvida como um orquestrador de campanhas, capaz de **gerenciar templates** e **coordenar o disparo de mensagens multicanal**, integrando-se diretamente com outros brokers de envio.  
 
-Seu propósito é **centralizar, automatizar e qualificar a comunicação em escala**, otimizando o processo de envio de mensagens.
+Seu propósito é **centralizar, automatizar e qualificar a comunicação em massa**, otimizando o processo de envio de mensagens.
 
 ---
 
@@ -31,8 +31,8 @@ Seu propósito é **centralizar, automatizar e qualificar a comunicação em esc
 O Maestro opera como um **hub** entre:
 - A empresa que gerencia o ambiente
 - As assessorias responsáveis pelos envios  
-- Os motores de validação  
-- Os brokers de entrega  
+- Os motores de validação de regras  
+- Os brokers de envio  
 
 A plataforma foi projetada para ser extensível, permitindo integração futura com novos validadores, brokers e mecanismos de análise.
 
@@ -40,9 +40,9 @@ A plataforma foi projetada para ser extensível, permitindo integração futura 
 
 ##  Perfis de Uso
 
-O Maestro contará com interfaces específicas para diferentes perfis:  
+O Maestro conta com interfaces específicas para diferentes perfis:  
 
-- **Gerentes do ambiente** - Empresa administradora e supervisora do ambiente
+- **Gerente do ambiente** - Empresa administradora e supervisora do ambiente
 - **Assessorias** - Empresa com permissões restritas às campanhas, públicos, segmentos, relatórios e templates da própria empresa.
 - **Revisora** - Empresa responsável pela revisão e aprovação de templates
 
@@ -60,15 +60,20 @@ A tela de login do Maestro é responsável pelo **gerenciamento de acesso e aute
 
 A autenticação pode ser configurada para permitir **login via credenciais corporativas**.  
 
-- Permite integração com **Azure Active Directory (Azure AD)**.  
-- É necessário inserir o **ID da aplicação** no Azure AD, que identifica o sistema dentro do diretório.  
-- Usuários podem acessar o sistema **sem criar novas senhas**, utilizando suas credenciais da organização.  
+Atualmente o Maestro possui integração com os seguintes motores de SSO:
+- **Microsoft Entra ID (Azure AD)**.  
+
+Para utilizar o SSO, acesse Configurações > Empresa e adicione o ID da aplicação do Microsoft Entra ID (Azure AD) no campo designado.
+
+Dessa forma, usuários podem acessar o sistema **sem criar novas senhas**, utilizando suas credenciais da organização.
 
 Essa configuração proporciona **maior segurança e praticidade**.
 
 Para que o SSO seja efetivado, deve-se liberar a URL `https://api.maestro.robbu.global/v1/auth/login/sso/callback` em seu aplicativo de SSO para que o retorno possa ser validado
 
 O login SSO valida usuários cadastrados dentro da plataforma Maestro, verifique se o usuário que irá realizar o login por SSO já está cadastrado na tela de usuários.
+
+Você também pode configurar para permitir que usuários acessem a plataforma utilizando apenas o SSO.
 
 ---
 
@@ -108,6 +113,113 @@ Empresas com perfil **Revisora** visualizam apenas o que é referente à revisã
 - Revisão de templates
 - Usuários
 
+---
+
+##  Público
+Esta seção permite que você importe contatos para que sejam utilizados em campanhas.
+
+Essa importação será utilizada como ponto de partida para campanhas massificada
+
+Esse recurso garante maior agilidade na preparação de campanhas e na gestão contínua da base de público.
+
+Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se necessário.
+
+![importar publico](https://robbublob.blob.core.windows.net/docs/maestro/importpublico.png)
+
+O layout padrão do arquivo de importação possuí as seguintes colunas: 
+
+```
+TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE
+```
+
+Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
+
+###  Colunas do Template
+
+* **TIPO_REGISTRO \[OBRIGATÓRIO]**: Valores possíveis: `TELEFONE` ou `EMAIL`.
+  * Um contato pode ter múltiplas linhas (um canal por linha).
+
+* **VALOR_REGISTRO \[OBRIGATÓRIO]**:
+  * Insira o registro do destinatário, como o seu número de telefone com DDD ou e-mail.
+
+* **CPF_CNPJ \[OBRIGATÓRIO]**:
+  * Importante para evitar homônimos e permitir integrações externas.
+
+* **COD_CONTRATO \[OBRIGATÓRIO]**:
+  * Identificador interno da empresa (ex: número de contrato).
+
+* **NOME_CLIENTE \[OPCIONAL]**:
+  * Recomendado para facilitar localização e interação.
+
+* **PRIORIDADE \[OPCIONAL]**:
+  * Defina entre: `BAIXA`, `MEDIA` ou `ALTA`
+  * Impacta a ordenação de envio
+
+Para utilizar variáveis dinâmicas em templates, crie-as após a última coluna do arquivo.
+Tudo que estiver após a última coluna do modelo são campos adicionados manualmente pelo usuário como no exemplo abaixo.
+
+```
+TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE, VAR1, VAR2, VAR3
+```
+
+---
+
+## Campanhas
+O menu de Campanhas traz as opções de realizar campanhas por canal Whatsapp, E-mail ou SMS
+
+![campanha](https://robbublob.blob.core.windows.net/docs/maestro/campanha.png)
+
+Para criar uma campanha nesta seção, escolha o canal desejado e clique em "Criar campanha".
+
+![addcampanha](https://robbublob.blob.core.windows.net/docs/maestro/addcampanhamaestro.png)
+![novacampanha](https://robbublob.blob.core.windows.net/docs/maestro/novacampanhamaestro.png)
+
+Informe um nome descritivo para esta campanha, escolha o segmento e o público importado associado a este segmento (que deve ter sido previamente importado na seção "Público").
+
+Escolha uma data e hora de início dos disparos.
+
+Em "Fluxo de envio" você pode fracionar os envios por intervalo em minutos e percentual de envios por intervalo.
+
+### Campanhas WhatsApp
+Em remetente, escolha o número de saída.
+Os números exibidos aqui são vinculados ao segmento da campanha ou são números que permitem envios de qualquer segmento.
+
+Após escolher o número, agora escolha o template de mensagem relacionado ao número de saída.
+Se houver variáveis no template, preencha-as com o nome das colunas do seu CSV de público:
+{{Var1}}
+{{Var2}}
+{{Var3}}
+...
+
+### Campanhas Email ou SMS
+Selecione o template que será utilizado no envio dos emails ou SMS.
+
+Se houver variáveis no template, preencha-as com o nome das colunas do seu CSV de público:
+{{Var1}}
+{{Var2}}
+{{Var3}}
+...
+
+---
+
+##  Segmentos
+
+Os **segmentos** têm como propósito:
+
+- **Organizar os assuntos**, vinculando os contatos ao grupo de envio correto  
+- **Restringir o acesso das assessorias** apenas aos segmentos atribuídos  
+
+Na seção **Segmentos**, a Gerente do Ambiente pode:
+
+- Visualizar os segmentos já cadastrados  
+- Criar novos segmentos  
+- Editar ou remover segmentos existentes  
+
+Ao criar um Segmento, a Gerente do Ambiente pode incluir as assessorias que terão acesso à este segmento no `dropdown` "Empresas"
+![addsegmentos](https://robbublob.blob.core.windows.net/docs/maestro/addsegmentos.png)
+
+---
+
 ## Dashboard
 A tela de dashboard está disponível exclusivamente para usuários dos tipos Gerente e Assessoria. 
 Ela exibe informações sobre o número de contatos e permite a visualização e análise de dados 
@@ -146,68 +258,6 @@ Na criação dos relatórios, podem ser aplicados os seguintes filtros:
 
 ---
 
-## Empresas
-
-Na tela **Empresas**, o usuário que tem este acesso pode:  
-- Visualizar a lista de empresas cadastradas  
-- A gerente do ambiente pode criar novas empresas
-
-Essa funcionalidade centraliza a gestão de **empresas** que farão parte das estratégias de comunicação dentro do Maestro.
-![criar empresas](https://robbublob.blob.core.windows.net/docs/maestro/criarempresa.png)
-
-##  Público
-
-A **importação de público** é um recurso que será utilizado como ponto de partida para campanhas massificada
-
-Esse recurso garante maior agilidade na preparação de campanhas e na gestão contínua da base de público.
-
-Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se necessário.
-
-![importar publico](https://robbublob.blob.core.windows.net/docs/maestro/importpublico.png)
-
-O layout padrão do arquivo mailing possuí as seguintes colunas: 
-
-```
-TIPO_REGISTRO, VALOR_REGISTRO, NOME_CLIENTE, PRIORIDADE, CPF_CNPJ, COD_CONTRATO
-```
-
-Para utilizar variáveis dinâmica crie-as após a última coluna do arquivo.
-Tudo que estiver após a coluna COD_CONTRATO são campos adicionado manualmente pelo usuário como no exemplo abaixo.
-
-```
-TIPO_REGISTRO, VALOR_REGISTRO, NOME_CLIENTE, PRIORIDADE, CPF_CNPJ, COD_CONTRATO, VAR1, VAR2, VAR3
-```
-
----
-
-##  Segmentos
-
-Os **segmentos** têm como propósito:
-
-- **Organizar os assuntos**, vinculando os contatos ao grupo de envio correto  
-- **Restringir o acesso dos operadores** apenas aos segmentos atribuídos  
-
-Na seção **Segmentos**, o usuário pode:
-
-- Visualizar os segmentos já cadastrados  
-- Criar novos segmentos  
-- Editar ou remover segmentos existentes  
-
-Ao criar um Segmento, a Gerente de Ambiente pode incluir as assessorias que terão acesso à este segmento no `dropdown` "Empresas"
-![addsegmentos](https://robbublob.blob.core.windows.net/docs/maestro/addsegmentos.png)
-
-## Campanhas
-O menu de Campanhas traz as opções de realizar campanhas por (Whatsapp, E-mail e SMS)
-Opções de campanha:
-![campanha](https://robbublob.blob.core.windows.net/docs/maestro/campanha.png)
-
-### Exemplo de Criação de campanha Whatsapp
-
-![addcampanha](https://robbublob.blob.core.windows.net/docs/maestro/addcampanhamaestro.png)
-![novacampanha](https://robbublob.blob.core.windows.net/docs/maestro/novacampanhamaestro.png)
-
----
-
 ##  Templates
 
 Na seção **Templates**, temos três possibilidades distintas de criação de templates de mensagem:
@@ -218,7 +268,7 @@ Na seção **Templates**, temos três possibilidades distintas de criação de t
 
 Nesta seção é possível:  
 
-- Criar novos templates para diferentes canais  
+- Criar novos templates
 - Consultar o status de todos os templates criados  
 - Acompanhar o fluxo de aprovação (quando aplicável)  
 
@@ -235,23 +285,137 @@ Os templates podem ter diversos status, como:
 - Expirado: O template expirou devido à configuração de expiração de templates
 - Rejeitado por Meta: O template **foi aprovado** pelo revisor, mas rejeitado pela Meta. Este status existe apenas no canal Whatsapp.
 
-#### Templates Whatsapp
-Novos templates Whatsapp podem ser criados direto no Construtor de Templates do Maestro, ou importados por arquivo CSV.
+Novos templates podem ser criados diretamente no Construtor de Templates do Maestro, ou importados por arquivo CSV.
 
-##### Construtor de templates
 ![add template](https://robbublob.blob.core.windows.net/docs/maestro/addtemplatemaestro.png)
 ![criar template](https://robbublob.blob.core.windows.net/docs/maestro/criartemplatemaestro.png)
 
 No caso de importação, caso o arquivo não corresponda ao padrão esperado, a plataforma irá retornar um arquivo com o motivo do erro.
 ![importar csv](https://robbublob.blob.core.windows.net/docs/maestro/importarcsv.png)
 
-O modelo pode ser baixado ao se clicar no botão "Baixar modelo", na modal de "Importar CSV" conforme imagem acima.
+O modelo atualizado do arquivo de importação pode ser encontrado em Importar CSV > Baixar modelo
 
-#### Criar templates pela tela:
+### Construtor de Templates
 
+#### WhatsApp
 
-#### Exemplo de template Whatsapp
 ![exemplo](https://robbublob.blob.core.windows.net/docs/maestro/exemplotemplate.png)
+
+Escolha a **categoria**, **nome do template** e o **idioma**.
+> ⚠️ O nome do template não pode conter acentos ou espaços.
+
+- Estrutura do Template
+
+Você pode selecionar um Workspace do Whatsapp para criar este template diretamente em seu cadastro na Meta, após a aprovação interna deste template.
+
+Você deve selecionar um segmento para vincular este template.
+
+- Header (opcional)
+
+Você pode adicionar um cabeçalho com:
+
+    - Texto (até 60 caracteres), ou
+    - Mídia: imagem, vídeo ou documento.
+
+Para adicionar uma variável no cabeçalho, clique no botão "Variável".
+> ⚠️ O cabeçalho do template pode conter somente uma única variável
+
+- Corpo (obrigatório)
+
+Este é o corpo principal da mensagem. Pode conter:
+
+    - Texto com até **1.024 caracteres**
+    - Emojis
+    - Variáveis: `{{Var1}}`, `{{Var2}}`, etc. (clicando no botão "Variável")
+
+> ⚠️ Não misture múltiplos formatos em uma única palavra (negrito + itálico, por exemplo).
+
+As variáveis servem para personalizar a mensagem com dados como nome, endereço, contrato etc.
+
+- Rodapé (opcional)
+
+Texto pequeno e discreto (até **60 caracteres**), com cor e tamanho reduzidos.
+
+- Botões (opcional)
+
+Você pode adicionar botões dois tipos:
+    - Resposta rápida
+        Retornam o texto do botão como resposta.
+        - Máximo de 3 botões por template
+        - Máximo de 20 caracteres por botão
+        - Não aceita emojis, variáveis ou formatação
+        ![Exemplo de Quick Reply](https://robbublob.blob.core.windows.net/docs/botoes.png)
+    - Botão de ação
+        - Visitar website
+        - Ligar através do WhatsApp
+        - Ligar para número de telefone
+        - Copiar código
+
+>  Para URL dinâmica, você deve fornecer um exemplo de preenchimento.
+
+![Exemplo CTA](https://robbublob.blob.core.windows.net/docs/resprapida.png)  
+![Exemplo de URL dinâmica](https://robbublob.blob.core.windows.net/docs/urldinamica.png)
+
+> ⚠️ Você só pode usar **um tipo de botão por template**.
+
+- Visualize sua mensagem
+
+Veja a prévia do seu template no canto superior direito da tela.
+
+![Pré-visualização do Template](https://robbublob.blob.core.windows.net/docs/template5.png)
+
+-Finalize o cadastro
+
+Clique em **"Criar template"** e aguarde o fluxo de aprovação.
+
+#### E-mail
+Ao clicar em **"Criar Template"** e selecionar o segmento, será exibida uma tela com duas opções de criação:  
+
+**HTML:** Permite inserir seu próprio código HTML, com total liberdade de design. Indicado para profissionais com domínio técnico que buscam maior controle criativo.  
+**Padrão:** Permite construir e-mails visualmente, sem a necessidade de conhecimento técnico em HTML. Ideal para usuários que buscam praticidade e rapidez.  
+
+- Estrutura do Construtor
+    - Configurações Gerais
+        Nesta aba, você poderá:  
+        - Definir o nome do template;  
+        - Especificar o assunto do e-mail;  
+        - Informar um e-mail para teste, que será usado no envio do preview do template.  
+
+No editor visual, você poderá montar o conteúdo do seu e-mail de forma modular:
+
+**Layout**  
+- Escolha a divisão do layout em colunas (de 1 até 4 colunas);  
+- Combine diferentes seções com divisões variadas de colunas, conforme a necessidade do conteúdo.
+
+**Componentes**  
+**Texto:** Arraste o componente de texto para uma das colunas e clique para **editar**. Você poderá configurar:  
+- Negrito, itálico, sublinhado, links e alinhamentos;  
+- Cores de fundo e de texto;  
+- Bordas arredondadas, padding e tamanho da fonte.
+
+**Imagem:** Arraste o componente de imagem para uma das colunas e editar. Você poderá configurar:  
+- Upload da imagem;  
+- Descrição e link;  
+- Cor de fundo, largura, padding, alinhamento e bordas.
+
+Para remover um conteúdo de coluna, utilize o **ícone vermelho** de exclusão localizado à **esquerda** da coluna.
+
+**Estilos Globais**  
+Configure o estilo padrão de todo o e-mail:  
+- Cor de fundo do corpo e conteúdo;  
+- Fonte e tamanho;  
+- Cores de texto e links;  
+- Padding do corpo do e-mail.  
+
+Você pode adicionar variáveis predefinidas na aba "Variáveis"
+
+- Criação via HTML
+
+Se você optar por utilizar código HTML, a plataforma abrirá dois painéis:  
+- Um campo para colar ou escrever seu código HTML personalizado;  
+- Um preview visual ao lado direito com a renderização do seu template.  
+
+> **As Configurações Gerais e Tags continuam disponíveis nesta modalidade.**  
 
 ---
 
@@ -271,6 +435,17 @@ Apenas a Gerente de Ambiente e as empresas com perfil "Revisora" tem acesso à e
 Nesta seção, pode-se visualizar todos os templates já enviados para revisão e também já aprovados ou reprovados.
 
 Templates com status "Em criação" não são exibidos nesta seção.
+
+---
+
+## Empresas
+
+Na tela **Empresas**, o usuário pode:  
+- Visualizar a lista de empresas cadastradas  
+- A Gerente do Ambiente pode criar novas empresas
+
+Essa funcionalidade centraliza a gestão de **empresas** que farão parte das estratégias de comunicação dentro do Maestro.
+![criar empresas](https://robbublob.blob.core.windows.net/docs/maestro/criarempresa.png)
 
 ---
 
