@@ -124,7 +124,7 @@ Esse recurso garante maior agilidade na preparação de campanhas e na gestão c
 
 Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se necessário.
 
-
+![importar publico](https://robbublob.blob.core.windows.net/docs/maestro/importpublico.png)
 
 O layout padrão do arquivo de importação possuí as seguintes colunas: 
 
@@ -167,10 +167,12 @@ TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE,
 ## Campanhas
 O menu de Campanhas traz as opções de realizar campanhas por canal Whatsapp, E-mail ou SMS
 
-
+![campanha](https://robbublob.blob.core.windows.net/docs/maestro/campanha.png)
 
 Para criar uma campanha nesta seção, escolha o canal desejado e clique em "Criar campanha".
 
+![addcampanha](https://robbublob.blob.core.windows.net/docs/maestro/addcampanhamaestro.png)
+![novacampanha](https://robbublob.blob.core.windows.net/docs/maestro/novacampanhamaestro.png)
 
 Informe um nome descritivo para esta campanha, escolha o segmento e o público importado associado a este segmento (que deve ter sido previamente importado na seção "Público").
 
@@ -214,7 +216,7 @@ Na seção **Segmentos**, a Gerente do Ambiente pode:
 - Editar ou remover segmentos existentes  
 
 Ao criar um Segmento, a Gerente do Ambiente pode incluir as assessorias que terão acesso à este segmento no `dropdown` "Empresas"
-
+![addsegmentos](https://robbublob.blob.core.windows.net/docs/maestro/addsegmentos.png)
 
 ---
 
@@ -230,11 +232,11 @@ através de filtros, incluindo:
 - Data Final
 
 Esses filtros proporcionam uma análise detalhada e personalizada dos dados
-
+![Dash filtro](https://robbublob.blob.core.windows.net/docs/maestro/DashFiltroMaestro.png)
 
 ### Análise de Campanha
 
-
+![analise campanha](https://robbublob.blob.core.windows.net/docs/maestro/analisecamp.png)
 
 ##  Relatórios
 
@@ -242,7 +244,7 @@ Ao acessar a seção de **Relatórios**, o usuário terá a opção de **Criar R
 
 - **Campanhas**  
 - **Status de Template**  
-
+![criar relatorio](https://robbublob.blob.core.windows.net/docs/maestro/criarrelatorio.png)
 ---
 
 ### Filtros Disponíveis
@@ -271,7 +273,7 @@ Nesta seção é possível:
 - Acompanhar o fluxo de aprovação (quando aplicável)  
 
 Os templates são categorizados de acordo com o tipo de canal de disparo.
-
+![templatesSMS](https://robbublob.blob.core.windows.net/docs/maestro/templatesms.png)
 
 Os templates podem ter diversos status, como:
 
@@ -285,9 +287,11 @@ Os templates podem ter diversos status, como:
 
 Novos templates podem ser criados diretamente no Construtor de Templates do Maestro, ou importados por arquivo CSV.
 
+![add template](https://robbublob.blob.core.windows.net/docs/maestro/addtemplatemaestro.png)
+![criar template](https://robbublob.blob.core.windows.net/docs/maestro/criartemplatemaestro.png)
 
 No caso de importação, caso o arquivo não corresponda ao padrão esperado, a plataforma irá retornar um arquivo com o motivo do erro.
-
+![importar csv](https://robbublob.blob.core.windows.net/docs/maestro/importarcsv.png)
 
 O modelo atualizado do arquivo de importação pode ser encontrado em Importar CSV > Baixar modelo
 
@@ -295,7 +299,7 @@ O modelo atualizado do arquivo de importação pode ser encontrado em Importar C
 
 #### WhatsApp
 
-
+![exemplo](https://robbublob.blob.core.windows.net/docs/maestro/exemplotemplate.png)
 
 Escolha a **categoria**, **nome do template** e o **idioma**.
 > ⚠️ O nome do template não pode conter acentos ou espaços.
@@ -306,55 +310,59 @@ Você pode selecionar um Workspace do Whatsapp para criar este template diretame
 
 Você deve selecionar um segmento para vincular este template.
 
-- Header (opcional)
+**Header (opcional)**
 
 Você pode adicionar um cabeçalho com:
 
-    - Texto (até 60 caracteres), ou
-    - Mídia: imagem, vídeo ou documento.
+- Texto (até 60 caracteres), ou
+- Mídia: imagem, vídeo ou documento.
 
 Para adicionar uma variável no cabeçalho, clique no botão "Variável".
 > ⚠️ O cabeçalho do template pode conter somente uma única variável
 
-- Corpo (obrigatório)
+**Corpo (obrigatório)**
 
 Este é o corpo principal da mensagem. Pode conter:
 
-    - Texto com até **1.024 caracteres**
-    - Emojis
-    - Variáveis: `{{Var1}}`, `{{Var2}}`, etc. (clicando no botão "Variável")
+- Texto com até **1.024 caracteres**
+- Emojis
+- Variáveis: `{{Var1}}`, `{{Var2}}`, etc. (clicando no botão "Variável")
 
 > ⚠️ Não misture múltiplos formatos em uma única palavra (negrito + itálico, por exemplo).
 
 As variáveis servem para personalizar a mensagem com dados como nome, endereço, contrato etc.
 
-- Rodapé (opcional)
+**Rodapé (opcional)**
 
 Texto pequeno e discreto (até **60 caracteres**), com cor e tamanho reduzidos.
 
-- Botões (opcional)
+**Botões (opcional)**
 
 Você pode adicionar botões dois tipos:
-    - Resposta rápida
-        Retornam o texto do botão como resposta.
-        - Máximo de 3 botões por template
-        - Máximo de 20 caracteres por botão
-        - Não aceita emojis, variáveis ou formatação
-    - Botão de ação
-        - Visitar website
-        - Ligar através do WhatsApp
-        - Ligar para número de telefone
-        - Copiar código
+- Resposta rápida
+    Retornam o texto do botão como resposta.
+    - Máximo de 3 botões por template
+    - Máximo de 20 caracteres por botão
+    - Não aceita emojis, variáveis ou formatação
+    ![Exemplo de Quick Reply](https://robbublob.blob.core.windows.net/docs/botoes.png)
+- Botão de ação
+    - Visitar website
+    - Ligar através do WhatsApp
+    - Ligar para número de telefone
+    - Copiar código
 
 >  Para URL dinâmica, você deve fornecer um exemplo de preenchimento.
 
+![Exemplo CTA](https://robbublob.blob.core.windows.net/docs/resprapida.png)  
+![Exemplo de URL dinâmica](https://robbublob.blob.core.windows.net/docs/urldinamica.png)
+
 > ⚠️ Você só pode usar **um tipo de botão por template**.
 
-- Visualize sua mensagem
+**Visualize sua mensagem**
 
 Veja a prévia do seu template no canto superior direito da tela.
 
-- Finalize o cadastro
+**Finalize o cadastro**
 
 Clique em **"Criar template"** e aguarde o fluxo de aprovação.
 
@@ -418,7 +426,8 @@ Na seção de **Revisão de Templates** é possível:
 - Exportar a lista de templates no formato **CSV**  
 
 Essa funcionalidade permite acompanhar o processo de aprovação e manter controle sobre o ciclo de vida de cada template.  
-
+![revisao template](https://robbublob.blob.core.windows.net/docs/maestro/revisaotemplate.png)
+![csv](https://robbublob.blob.core.windows.net/docs/maestro/csvrevisao.png)
 
 Apenas a Gerente de Ambiente e as empresas com perfil "Revisora" tem acesso à esta seção.
 Nesta seção, pode-se visualizar todos os templates já enviados para revisão e também já aprovados ou reprovados.
@@ -434,7 +443,7 @@ Na tela **Empresas**, o usuário pode:
 - A Gerente do Ambiente pode criar novas empresas
 
 Essa funcionalidade centraliza a gestão de **empresas** que farão parte das estratégias de comunicação dentro do Maestro.
-
+![criar empresas](https://robbublob.blob.core.windows.net/docs/maestro/criarempresa.png)
 
 ---
 
@@ -448,7 +457,7 @@ Na seção **Usuários**, é possível **listar e gerenciar** todos os usuários
 
 A seção de Configurações permite gerenciar preferências relacionadas ao **ambiente**, **empresa** e **templates**.
 
-
+![config](https://robbublob.blob.core.windows.net/docs/maestro/configmaestro.png)
 
 ---
 
@@ -460,7 +469,7 @@ A configuração de templates permite definir regras relacionadas ao uso e valid
 É possível estabelecer um tempo de expiração para os templates, garantindo que conteúdos desatualizados não sejam utilizados. 
 Para isso, defina o período de validade (em dias), após o qual o template será considerado expirado. 
 Templates expirados ainda poderão ser visualizados, mas não estarão disponíveis para novas utilizações até que sejam atualizados ou revalidados.
-
+![config conta](https://robbublob.blob.core.windows.net/docs/maestro/configconta.png)
 
 > ⚠️ **Atenção:** o sincronismo de expiração de todos os templates ocorre **uma vez ao dia, durante o período noturno**.
 
@@ -473,7 +482,7 @@ Templates expirados ainda poderão ser visualizados, mas não estarão disponív
 - Suporte a **Single Sign-On (SSO)** via Azure AD.  
 - Necessário informar o **ID da aplicação** no Azure Active Directory.  
 - Usuários podem acessar o Maestro com suas **credenciais corporativas**, sem criar novas senhas.  
-
+![config emp](https://robbublob.blob.core.windows.net/docs/maestro/configempresa.png)
 
 #### SFTP
 As configurações de SFTP e seus conceitos e definições são explicados aqui:
@@ -483,7 +492,7 @@ As configurações de SFTP e seus conceitos e definições são explicados aqui:
 Este token é uma credencial única e confidencial que permite a comunicação segura entre sistemas. 
 Ele funciona como uma chave de autenticação para autorizar e validar as requisições realizadas durante a integração com nossa plataforma utilizando nossa API.
 
-
+![integracao](https://robbublob.blob.core.windows.net/docs/maestro/integracaocanais.png)
 
 > ⚠️ **Atenção:** Ao clicar em "Renovar token", o token anterior será invalidado.
 
