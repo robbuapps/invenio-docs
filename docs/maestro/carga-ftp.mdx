@@ -4,7 +4,7 @@ sidebarTitle: Uso de SFTP
 description: Orientações para importação automática de Templates e Campanhas via SFTP no Robbu Maestro, incluindo padrões de arquivos, diretórios e fluxo de processamento.
 ---
 
-# Carga SFTP de Templates & Campanhas  
+# Carga SFTP de Templates e Campanhas  
 
 Esta documentação orienta como usar os serviços automáticos de importação via **SFTP** para **Templates** e **Campanhas** no **Robbu Maestro**.  
 
@@ -20,10 +20,10 @@ Há duas formas de conectar um servidor SFTP ao Maestro:
 ### SFTP Robbu
 A Robbu disponibiliza um servidor SFTP gerenciado, pronto para uso imediato
 - Ao habilitar, o sistema fornece:  
+  - **Servidor**
+  - **Porta**  
   - **Nome de usuário**  
   - **Senha**  
-  - **Porta**  
-  - **Servidor**
 
 ### SFTP Próprio
 A própria empresa gerencia o seu SFTP.
@@ -43,10 +43,10 @@ Essa flexibilidade permite que cada empresa defina o modelo mais adequado ao seu
 
 O Maestro utiliza a seguinte árvore de diretórios dentro do servidor SFTP
 
-| Uso                      | Caminho SFTP                   |
-|--------------------------|--------------------------------|
-| Templates a serem importados        | `/maestro/templates`           |
-| Campanhas a serem importadas        | `/maestro/campaigns`           |
+| Uso                          | Caminho SFTP         |
+|------------------------------|----------------------|
+| Templates a serem importados | `/maestro/templates` |
+| Campanhas a serem importadas | `/maestro/campaigns` |
 
 Dentro de cada um dos diretórios acima, duas pastas serão criadas:
 `/processed` para identificar os objetos importados com sucesso
@@ -56,80 +56,175 @@ Dentro de cada um dos diretórios acima, duas pastas serão criadas:
 
 ---
 
-## Padrões de Nome de Arquivo  
+## Passo a passo
 
-### Templates  
+### Importar Campanhas  
+
+Siga as instruções abaixo para importar uma campanha para o Maestro usando o SFTP
+
+#### Nome do arquivo
+O **nome do arquivo** deve seguir a seguinte nomenclatura:
 ```plaintext
-{segmentName}_{channelName}_[{wabaDescription}]_{YYYYMMDD}.csv
+MULTICANAL_{DATA:yyyyMMdd}_{HORA:HHmm}.csv
 ```
-- **segmentName**: nome exato do segmento configurado (Maestro/Segmentos).  
-- **channelName**: `email` | `sms` | `whatsapp` (case-insensitive).  
-- **wabaDescription** *(opcional, apenas WhatsApp)*: descrição da WABA.  
-- **YYYYMMDD**: data de referência (ex: `20250531`).  
+- **yyyyMMdd**: data (ex: `20250101`).  
+- **HHmm**: hora de agendamento (24h, ex: `1123`).  
+
+**Exemplo:**  
+- `MULTICANAL_20250901_1456.csv`  
+
+#### Colunas do arquivo
+As colunas abaixo são possíveis no arquivo
+```plaintext
+TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,NOME_ARQUIVO_ANEXO,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20
+```
+Descrição dos campos:
+| Campo                 | Obrigatório            | Descrição                                                       |
+| --------------------- | ---------------------- | --------------------------------------------------------------- |
+| **TIPO_DE_REGISTRO**  | ✅                     | Tipo de contato (`TELEFONE` ou `EMAIL`).                      |
+| **VALOR_DO_REGISTRO** | ✅                     | Valor do contato (número com DDD ou e-mail).                            |
+| **CANAL**             | ✅                     | Canal da mensagem: `whatsapp`, `email` ou `sms`.                |
+| **CODIGO_TEMPLATE**   | ✅                     | Código do template aprovado no Maestro (ex.: `W0003`, `E0001`). |
+| **SEGMENTO**          | ✅                     | Nome do segmento cadastrado no Maestro.                         |
+| **CPF_CNPJ**          | ✅                     | Documento do cliente (para validações ou relatórios).           |
+| **COD_CONTRATO**      | ✅                     | Código do contrato do cliente.                                  |
+| **REMETENTE**         | ⚠️ apenas WhatsApp     | Número de envio no WhatsApp ou remetente configurado.           |
+| **DATA_HORA_DISPARO** | ❌                     | Data e hora de disparo no formato `yyyy-MM-dd HH:mm:ss`.        |
+| **NOME_CLIENTE**      | ❌                     | Nome do cliente para referência.                                |
+| **NOME_ARQUIVO_ANEXO**| ❌                     | Arquivo inserido na mesma pasta do CSV no SFTP para ser adicionado como anexo em e-mail|
+| **Var1...Var20**      | ❌                     | Variáveis dinâmicas que alimentam os placeholders do template.  |
+
+> ⚠️ Não é necessário que os campos estejam na ordem sugerida, mas os nomes das colunas devem ser exatamente como estão nesta documentação
+
+#### Exemplo
+
+```csv
+TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20
+TELEFONE,+5511988887777,whatsapp,W0003,Varejo,12345678900,CT-98765,+5511999998888,2025-09-01 14:56:00,João Silva,Promoção de Inverno,10%,Cupom123,Loja Centro,Campanha Primavera,Segunda Onda,Lote A,Segmento VIP,Teste A/B,Link Personalizado,CTA1,CTA2,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6
+EMAIL,cliente@dominio.com,email,E0001,Financeiro,98765432100,CT-12345,,2025-09-01 15:10:00,Maria Souza,Fatura 07/2025,R$350,00,Vencimento 10/09/2025,Linha Digitável,https://pagamento.com/123,Segunda Via,Campanha Agosto,Cliente Ouro,Instruções,CTA Pagamento,CTA Suporte,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8
+TELEFONE,+5511977776666,sms,S0002,Atacado,11223344556,CT-45678,,2025-09-01 15:30:00,Carlos Lima,Código 123456,Validade 5min,Campanha Primavera,Lote B,Segmento Prata,Teste B,Link Resgate,CTA SMS,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8,Obs9,Obs10
+```
+
+#### Fluxo de processamento
+1. Faça upload do arquivo `.csv` em `/maestro/campaigns`
+2. Um serviço rotineiro roda a cada 10 minutos e executa:  
+   - Cria diretórios `processed` e `error` se não existirem.  
+   - Busca arquivos `.csv` ainda não importados  
+3. Durante a importação, algumas validações são executadas:
+   - Nome do arquivo segue o padrão?
+   - Cada linha do CSV cumpre as regras do ambiente?
+      - Segmentos existem e assessoria possui permissão de acesso?
+      - Templates estão aprovados?
+      - Horários de saída são válidos?
+4. Importação:
+   - Cria um arquivo `{nome original}_exceptions.csv` com todos os contatos que não foram processados pois quebraram regras.
+      - Este arquivo contém a cópia da linha original com uma coluna adicional `REASON` exibindo o porquê do contato não ter sido processado
+   - Há provedor para o canal configurado?
+      - Se não, apenas cria um arquivo `{nome original}_created.csv` na pasta `/processed` com todos os contatos que foram processados
+      - Se sim, cria os disparos e depois cria um arquivo `{nome original}_created.csv` na pasta `/processed` com todos os contatos que foram processados
+   - Os arquivos de anexos (se houver) são movidos para a pasta `/recycle_bin` e serão destruídos no dia seguinte à importação
+5. Se houver falha no arquivo inteiro
+   - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro na pasta `/error`
+
+### Importar templates
+Siga as instruções abaixo para importar templates para o Maestro usando o SFTP
+
+#### Nome do arquivo
+O **nome do arquivo** deve seguir a seguinte nomenclatura:
+
+```plaintext
+{nome do segmento}_{canal}_[{nome da WABA}]_{data}.csv
+```
+- **nome do segmento**: nome exato do segmento configurado (Maestro/Segmentos).  
+- **canal**: `email` | `sms` | `whatsapp` (case-insensitive).  
+- **nome da WABA** *(opcional, apenas WhatsApp)*: descrição da WABA.  
+- **data**: data de referência com formato yyyyMMdd (ex: `20250531`).  
 
 **Exemplos**  
 - `retail_email_20250510.csv`  
 - `finance_sms_20250101.csv`  
 - `store_whatsapp_MinhaWaba_20250320.csv`  
 
----
+#### Colunas do arquivo
+As colunas abaixo são possíveis no arquivo:
 
-### Campanhas  
-
+**Templates WhatsApp:**
 ```plaintext
-{segmentName}_{channelName}_{templateCode}[_{whatsappNumber}]_{YYYYMMDD}_{HHmm}.csv
+TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT
 ```
 
-- **segmentName**: igual ao acima.  
-- **channelName**: `email` | `sms` | `whatsapp`.  
-- **templateCode**: código do template (ex: `E0001`, `S0123`, `W0456`).  
-- **whatsappNumber** *(obrigatório no WhatsApp)*: número do telefone.  
-- **YYYYMMDD**: data (ex: `20250515`).  
-- **HHmm**: hora de agendamento (24h).  
+| Campo               | Obrigatório | Descrição                                                     |
+| ------------------- | ----------- | ------------------------------------------------------------- |
+| **TEMPLATE_NAME**   | ✅           | Nome único do template (sem espaços, usar `_` se necessário). |
+| **LANGUAGE**        | ✅           | Idioma no formato `pt_BR`, `en_US`, etc.                      |
+| **CATEGORY**        | ✅           | Categoria: `MARKETING`, `UTILITY`, `AUTHENTICATION`         |
+| **HEADER_TEXT**     | ❌           | Texto do cabeçalho (opcional).                                |
+| **BODY_TEXT**       | ✅           | Texto do corpo da mensagem.                                   |
+| **FOOTER_TEXT**     | ❌           | Texto do rodapé (opcional).                                   |
+| **REPLYBUTTON_1**   | ❌           | Texto do botão de resposta rápida 1.                          |
+| **REPLYBUTTON_2**   | ❌           | Texto do botão de resposta rápida 2.                          |
+| **REPLYBUTTON_3**   | ❌           | Texto do botão de resposta rápida 3.                          |
+| **URL_BUTTON**      | ❌           | URL do botão de ação (se existir).                            |
+| **URL_BUTTON_TEXT** | ❌           | Texto exibido no botão de URL.                                |
 
-**Exemplos**  
-- `retail_email_E0001_20250515_0830.csv`  
-- `finance_sms_S0002_20250601_1200.csv`  
-- `store_whatsapp_W0003_5511999999999_20250720_1905.csv`  
+Exemplo:
+```csv
+TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT
+exemplo_template,pt_BR,MARKETING,Cabeçalho Exemplo,Texto do Corpo,Rodapé Exemplo,Sim,Não,Não receber,,
+fatura_atrasada,en_US,UTILITY,Invoice Reminder,"Hello {{Var1}}, your invoice {{Var2}} is overdue.","Contact support if already paid",Pay Now,Ignore,Talk to Agent,https://pay.example.com,Pay Securely
+codigo_otp,pt_BR,AUTHENTICATION,,Seu código de acesso é {{Var1}},Este código expira em 5 minutos,,,,,
+```
 
----
+**Templates de E-mail:**
+```plaintext
+TEMPLATE_NAME,SUBJECT,BODY_HTML
+```
+| Campo             | Obrigatório | Descrição                                                  |
+| ----------------- | ----------- | ---------------------------------------------------------- |
+| **TEMPLATE_NAME** | ✅           | Nome único do template (sem espaços, usar `_` se preciso). |
+| **SUBJECT**       | ✅           | Assunto do e-mail.                                         |
+| **BODY_HTML**     | ✅           | Conteúdo do corpo em HTML (inline).                        |
 
-## Fluxo de Processamento
+Exemplo:
+```csv
+TEMPLATE_NAME,SUBJECT,BODY_HTML
+ExemploTemplate,ExemploAssunto,<html><body><h1>Teste</h1><p>Corpo do e-mail</p></body></html>
+BoasVindas,Seja bem-vindo!,<html><body><h1>Olá {{1}}</h1><p>Obrigado por se cadastrar em nossa plataforma.</p></body></html>
+FaturaAtrasada,Lembrete de pagamento,<html><body><p>Olá {{1}},</p><p>Sua fatura {{2}} está em aberto.</p><p><a href="https://pagamento.exemplo.com/{{2}}">Clique aqui para pagar</a></p></body></html>
+```
 
-### Templates
-1. Upload do `.csv` em `/maestro/templates`
-2. Serviço rotineiro (a cada 10 min) executa:  
-   - Garante diretórios `processed` e `error`.  
-   - Varre os arquivos `.csv`.  
-3. Validações:  
+**Templates de SMS:**
+```plaintext
+TEMPLATE_NAME,TEXT_BODY
+```
+| Campo             | Obrigatório | Descrição                                                              |
+| ----------------- | ----------- | ---------------------------------------------------------------------- |
+| **TEMPLATE_NAME** | ✅           | Nome único do template (sem espaços, usar `_` se preciso).             |
+| **TEXT_BODY**     | ✅           | Texto do corpo do SMS, pode conter variáveis dinâmicas (ex.: `{{1}}`). |
+
+Exemplo:
+```csv
+TEMPLATE_NAME,TEXT_BODY
+ExemploTemplate,ExemploTexto
+BoasVindasSMS,Olá {{1}}, bem-vindo(a) à nossa plataforma!
+CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.
+```
+
+#### Fluxo de processamento
+1. Faça upload do `.csv` em `/maestro/templates`
+2. Um serviço rotineiro roda a cada 10 minutos e executa:  
+   - Cria diretórios `processed` e `error` se não existirem.  
+   - Busca arquivos `.csv` ainda não importados  
+3. Durante a importação, algumas validações são executadas:
    - Nome do arquivo segue o padrão?
    - Segmento existe e assessoria possui permissão de acesso?
 4. Importação:
    - Cria os templates já com status `Em Revisão`
 5. Move o `.csv` para:  
-   - `processed` em caso de sucesso.
-   - `error` em caso de falha.  
+   - `/processed` em caso de sucesso.
+   - `/error` em caso de falha.  
       - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro.  
 
-
-### Campanhas
-1. Upload do `.csv` em `/maestro/campaigns`
-2. Serviço rotineiro (a cada 10 min) executa:  
-   - Garante diretórios `processed` e `error`.  
-   - Varre os arquivos `.csv`.  
-3. Validações:
-   - Nome do arquivo segue o padrão?
-   - Segmentos existem e assessoria possui permissão de acesso?
-   - Templates estão aprovados?
-   - Regras do motor de regras estão válidas?
-4. Importação:
-   - Roda as validações
-   - Adiciona colunas `Valid` (true, false) e `Reason` (string) ao final do arquivo
-   - Há provedor para o canal configurado?
-      - Se não, apenas move o arquivo .csv com as novas colunas para a pasta `/processed`
-      - Se sim, cria os disparos e depois move o arquivo .csv com as novas colunas para a pasta `/processed
-5. Se houver falha no arquivo inteiro
-   - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro na pasta `/error`
 ---
 
 ## FAQ
@@ -149,11 +244,7 @@ Não. Arquivos em `processed` não são reprocessados. Para enviar novamente, ge
 </Accordion>
 
 <Accordion title="Com que frequência os arquivos são processados?">
-A cada **10 minutos**, via job automático em container.
-</Accordion>
-
-<Accordion title="É possível simular o processo em ambiente de QA?">
-Sim, usando os endpoints `/v1/templates/ftp/process` ou `/v1/campaigns/ftp/process`.
+A cada **10 minutos**, via rotina automática.
 </Accordion>
 
 </AccordionGroup>
