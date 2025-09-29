@@ -1,10 +1,10 @@
 ---
-title: Brokers de envio de mensagens
-sidebarTitle: Configuração de brokers (provedores)
+title: Integração com provedores
+sidebarTitle: Integração com provedores (brokers)
 description: Esta seção permite que cada assessoria integre os seus provedores. Nesta seção também, a Gerente de Ambiente pode visualizar os provedores que cada assessoria usa, sem a possibilidade de visualizar as credenciais.
 ---
 
-## Brokers (Provedores)
+## Provedores (_brokers_)
 O Maestro suporta vários _brokers_ de terceiros para realizar o envio das mensagens.
 
 Atualmente, os brokers disponíveis são:
@@ -19,11 +19,12 @@ Atualmente, os brokers disponíveis são:
 
 ## Como configurar
 
-1. O provedor fornece um **token de autenticação** (pode ser um **JWT**, **Bearer Token** ou uma **chave fixa**).  
-2. Esse **token** deve ser incluído na configuração deste provedor
-3. O sistema envia a mensagem para o **endpoint da API do provedor**.
-4. O provedor processa e entrega a mensagem ao destinatário.
-5. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
+1. Acesse **Configurações > Integração com provedores**
+2. O provedor fornece um **token de autenticação** (pode ser um **JWT**, **Bearer Token** ou uma **chave fixa**) ou **usuário e senha**.
+3. Essas credenciais devem ser incluídas na configuração deste provedor
+4. O sistema envia a mensagem para o **endpoint da API do provedor**.
+5. O provedor processa e entrega a mensagem ao destinatário.
+6. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
 
 > ⚠️ ATENÇÃO: Se o seu _broker_ exige que uma URL de Webhook seja adicionada para que o Maestro receba as atualizações de status das mensagens, insira a URL a seguir como URL de Webhook:
 

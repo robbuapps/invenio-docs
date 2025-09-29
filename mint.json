@@ -130,6 +130,7 @@
             "group": "Maestro",
             "pages": [
                 "docs/maestro/overview",
+                "docs/maestro/brokers",
                 "docs/maestro/motor-de-regras",
                 "docs/maestro/carga-ftp",
                 "docs/maestro/api-direct-message",
