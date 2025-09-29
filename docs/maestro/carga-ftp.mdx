@@ -49,7 +49,7 @@ O Maestro utiliza a seguinte árvore de diretórios dentro do servidor SFTP
 | Campanhas a serem importadas | `/maestro/campaigns` |
 
 Dentro de cada um dos diretórios acima, duas pastas serão criadas:
-`/processed` para identificar os objetos importados com sucesso
+`/processed` para identificar os arquivos importados com sucesso
 `/error` para identificar importações que não aconteceram e sinalizar qual foi o erro encontrado
 
 > ⚠️ Estes diretórios são criados automaticamente após a conexão do servidor SFTP na tela de configuração, mas pode levar até 10 minutos para que esses diretórios apareçam.
@@ -117,12 +117,12 @@ TELEFONE,+5511977776666,sms,S0002,Atacado,11223344556,CT-45678,,2025-09-01 15:30
       - Templates estão aprovados?
       - Horários de saída são válidos?
 4. Importação:
-   - Cria um arquivo `{nome original}_exceptions.csv` com todos os contatos que não foram processados pois quebraram regras.
-      - Este arquivo contém a cópia da linha original com uma coluna adicional `REASON` exibindo o porquê do contato não ter sido processado
+   - Cria um arquivo `{nome original}_EXCEPTIONS.csv` com todos os contatos que não foram processados pois quebraram regras.
+      - Este arquivo contém a cópia da linha original com uma coluna adicional `Motivo Falha` exibindo o porquê do contato não ter sido processado
    - Há provedor para o canal configurado?
       - Se não, apenas cria um arquivo `{nome original}_created.csv` na pasta `/processed` com todos os contatos que foram processados
-      - Se sim, cria os disparos e depois cria um arquivo `{nome original}_created.csv` na pasta `/processed` com todos os contatos que foram processados
-   - Os arquivos de anexos (se houver) são movidos para a pasta `/recycle_bin` e serão destruídos no dia seguinte à importação
+      - Se sim, cria os disparos e depois cria um arquivo `{nome original}_VALIDATED.csv` na pasta `/processed` com todos os contatos que foram processados
+   - Os arquivos de anexos (se houver) são destruídos após o envio
 5. Se houver falha no arquivo inteiro
    - Gera `{nome do arquivo original}_errorDetail.txt` com mensagem de erro na pasta `/error`
 
