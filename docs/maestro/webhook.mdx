@@ -26,55 +26,9 @@ description: Os Webhooks permitem que o Maestro envie notificações em tempo re
 Quando um evento for disparado, o Maestro enviará uma requisição **HTTP POST** para a URL configurada.
 
 Os seguintes eventos são enviados para o Webhook:
-- Mensagens disparadas
 - Atualização do status de mensagens
 
-### Exemplos
-
-#### Mensagens disparadas
-```json
-{
-    "event_id": "01998719-3597-77dd-9a8f-40779b001e17",
-    "category": "message",
-    "type": "message_sent",
-    "timestamp": "2025-09-26T17:36:40.34399Z",
-    "details": {
-        "message_id": "01998718-d71d-7e7a-b1cd-0004ea177487",
-        "company": {
-            "id": "01950065-a1ec-75f1-a253-75458b2e10d1",
-            "description": "Assessoria Global"
-        },
-        "channel": {
-            "id": 2,
-            "description": "Sms",
-            "source": null
-        },
-        "contact": {
-            "contract_code": "CTX0008",
-            "document_number": "20329332090",
-            "raw_phone_number": "5515981700308"
-        },
-        "status": {
-            "id": 1,
-            "description": "Enqueued",
-            "timestamp": "0001-01-01T00:00:00",
-            "reason": null
-        },
-        "campaign": {
-            "id": "01998718-cb08-78ca-bb65-8e536e21416f",
-            "description": "multicanal_20250925_1440"
-        },
-        "template": {
-            "id": "019986ba-a006-71ce-b51f-46cf9ccab831",
-            "description": "smsMulticanal",
-            "code": "S5499"
-        },
-        "custom_fields": null
-    }
-}
-```
-
-#### Atualização do status de mensagens
+### Atualização do status de mensagens
 ```json
 {
     "event_id": "01998719-3597-77dd-9a8f-40779b001e17",
@@ -96,6 +50,10 @@ Os seguintes eventos são enviados para o Webhook:
             "contract_code": "CTX0008",
             "document_number": "20329332090",
             "raw_phone_number": "5515981700308"
+        },
+        "segment": {
+            "id": "019986ba-a006-71ce-b51f-46cf9ccab831",
+            "description": "Segmento_Teste"
         },
         "status": {
             "id": 3,
@@ -131,3 +89,9 @@ Os seguintes eventos são enviados para o Webhook:
     }
 }
 ```
+
+#### Objetos
+| Objeto              | Descrição                          |
+|-----------------------|------------------------------------|
+| `details.channel.id`  | 1 - Email <br> 2 - SMS <br> 3 - Whatsapp |
+| `details.status.id`   | 1 - Queued <br> 2 - Sent <br> 3 - Delivered <br> 4 - Failed <br> 5 - Read |

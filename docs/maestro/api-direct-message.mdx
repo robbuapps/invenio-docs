@@ -163,6 +163,34 @@ Não há response
     }
 ``` 
 
+## Callback
+
+Você pode adicionar uma URL de Callback e também campos customizados para que sejam enviados nessa URL de Callback a partir do disparo da API Direct Message.
+
+Para isso, você deve adicionar o objeto `callback_details`, conforme exemplo abaixo:
+
+```json
+{
+  "recipient_number": "+5511999998888",
+  "variable_values": {
+    "Var1": "123456",
+    "Var2": "João"
+  },
+  "document_number": "12345678900",
+  "contract_code": "CT-00987",
+  "template_code": "TEMPLATE_SMS_002",
+  "callback_details": {
+    "url": "https://minhaurl.com.br/meu_endpoint_de_callback",
+    "custom_fields": {
+      "additionalProp1": "string",
+      "additionalProp2": "string",
+      "additionalProp3": "string",
+      //...
+    }
+  }
+}
+```
+
 ## Boas Práticas
 
 Valide previamente os templates e variáveis definidos no Maestro.
