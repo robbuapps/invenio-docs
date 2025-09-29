@@ -10,15 +10,15 @@ A Gerente do Ambiente pode configurar diversas regras dentro deste motor e essas
 
 ## Configuração Inicial
 
-- O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Configurações → Regras**
+- O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Configurações > Regras**
 
 ## Tipos de regras
 Há dois tipos primários de regras:
 
 - Regras implícitas
+    - Estas regras validam conceitos do sistema e não podem ser desativadas
 - Regras customizáveis
-
-Cada regra, com exceção das implícitas, pode ser ativada ou desativada.
+    - Cada regra customizável pode ser ativada ou desativada.
 
 ---
 
@@ -38,6 +38,7 @@ Templates expirados não ficam disponíveis para uso após a rotina de expiraç�
 Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.
 
 #### DDD e Telefone
+Quando o disparo é efetuado para um telefone (WhatsApp ou SMS):
 - Campanhas devem ter DDD mapeado corretamente.
 - Telefones com formatação inválida serão rejeitados.
 
