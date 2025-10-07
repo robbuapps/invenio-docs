@@ -2,6 +2,27 @@
 title: "Changelog"
 mode: "center"
 ---
+
+<Update label="Agosto 2025 - 2.0.89" description="Invenio Live e Center.">
+
+##  Tratamento de debounce no Invenio Center: 
+Center > Menu do Usuário> Configurações > Conta > Tempo de espera (segundos) para tratar mensagens entrantes
+O Invenio Center passa a suportar o tratamento de debounce condicional no motor de atendimento IDR. 
+
+### O que é debounce? 
+É um recurso que define um tempo de espera (em segundos) para que várias mensagens enviadas em sequência sejam entendidas como uma única entrada. Isso evita duplicidade e garante mais fluidez no atendimento. Como funciona agora Linhas atualizadas (nova versão da IDR) 
+
+O tempo de espera é aplicado conforme a configuração da linha. Exemplo: se o tempo estiver configurado em 3 segundos, duas mensagens enviadas dentro desse intervalo serão agrupadas e tratadas como uma só. 
+
+Linhas antigas (versão anterior da IDR) O recurso não é aplicado. Todas as mensagens continuam sendo processadas individualmente, preservando o comportamento atual. 
+
+Diferença por tipo de canal Canais online: 3 segundos Canais offline: 10 segundos Benefícios Atendimento mais estável e organizado Ajuste flexível por canal Compatibilidade com linhas que ainda utilizam o modelo antigo Gostaria de ativar esta funcionalidade agora? 
+
+Entre em contato com o seu gerente de contas para solicitar a habilitação. Caso já utilize a IDR na versão V1, será necessário migrar para a versão V2 como parte do processo de ativação.
+
+</Update> 
+
+
 <Update label="Julho 2025 - 2.0.88" description="Invenio Live e Center.">
  
 ## Exibição de qualidade e status operacional de números WhatsApp
