@@ -1,0 +1,98 @@
+---
+title: Webhook de eventos
+sidebarTitle: Webhook de eventos
+description: Os Webhooks permitem que o Maestro envie notificações em tempo real para uma URL definida pelo cliente, sempre que determinados eventos ocorrerem. Dessa forma, sua aplicação pode reagir automaticamente sem a necessidade de consultas periódicas à API.
+---
+
+## Criando um Webhook
+
+1. Acesse **Configurações > Empresa** e role até a opção "Webhook"
+2. Clique em **Adicionar Webhook**.  
+3. Insira a **URL de acesso** da sua aplicação, que será responsável por receber os eventos.  
+   - Exemplo:  
+     ```
+     https://meuservidor.com/webhook/maestro
+     ```
+4. (Opcional) Adicione **headers personalizados** para autenticação ou identificação.  
+   - Cada header é definido no formato **Chave/Valor**.  
+   - Exemplo:
+     ```
+     Chave: Authorization
+     Valor: Bearer SEU_TOKEN_AQUI
+     ```
+
+## Estrutura de Requisição
+
+Quando um evento for disparado, o Maestro enviará uma requisição **HTTP POST** para a URL configurada.
+
+Os seguintes eventos são enviados para o Webhook:
+- Atualização do status de mensagens
+
+
+### Atualização do status de mensagens
+```json
+{
+    "event_id": "01998719-3597-77dd-9a8f-40779b001e17",
+    "category": "message",
+    "type": "message_status",
+    "timestamp": "2025-09-26T17:36:40.34399Z",
+    "details": {
+        "message_id": "01998718-d71d-7e7a-b1cd-0004ea177487",
+        "company": {
+            "id": "01950065-a1ec-75f1-a253-75458b2e10d1",
+            "description": "Assessoria Global"
+        },
+        "channel": {
+            "id": 2,
+            "description": "Sms",
+            "source": null
+        },
+        "contact": {
+            "contract_code": "CTX0008",
+            "document_number": "20329332090",
+            "raw_phone_number": "5515981700308"
+        },
+        "segment": {
+            "id": "019986ba-a006-71ce-b51f-46cf9ccab831",
+            "description": "Segmento_Teste"
+        },
+        "status": {
+            "id": 3,
+            "description": "Delivered",
+            "timestamp": "0001-01-01T00:00:00",
+            "reason": null
+        },
+        "campaign": {
+            "id": "01998718-cb08-78ca-bb65-8e536e21416f",
+            "description": "multicanal_20250925_1440"
+        },
+        "template": {
+            "id": "019986ba-a006-71ce-b51f-46cf9ccab831",
+            "description": "smsMulticanal",
+            "code": "S5499"
+        },
+        "provider": {
+            "id": 1,
+            "description": "Pontal",
+            "details": {
+                "type": "api_message",
+                "id": "8175123191",
+                "to": "15981700308",
+                "message": "Ola Lucas Vizza 01! Somos a Robbu em parceria com BV.",
+                "schedule": "2025-09-26T17:36:16Z",
+                "reference": null,
+                "vars": null,
+                "status": "2",
+                "statusDescription": "Queued"
+            }
+        },
+        "custom_fields": null
+    }
+}
+```
+
+#### Objetos
+| Objeto              | Descrição                          |
+|-----------------------|------------------------------------|
+| `details.channel.id`  | 1 - Email <br /> 2 - SMS <br /> 3 - Whatsapp |
+| `details.status.id`   | 1 - Queued <br /> 2 - Sent <br /> 3 - Delivered <br /> 4 - Failed <br /> 5 - Read |

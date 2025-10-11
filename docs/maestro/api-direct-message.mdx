@@ -49,13 +49,10 @@ Request Body:
 ```json
 {
   "recipient_email": "usuario@dominio.com",
-  "subject": "Assunto do E-mail",
-  "free_text": "Texto livre (opcional)",
   "variable_values": {
-    "chave1": "valor1",
-    "chave2": "valor2"
+    "Var1": "valor1",
+    "Var2": "valor2"
   },
-  "contact_name": "João Silva",
   "document_number": "12345678900",
   "contract_code": "CT-98765",
   "template_code": "TEMPLATE_EMAIL_001"
@@ -72,14 +69,13 @@ Request Body:
   "recipient_number": "+5511999998888",
   "whatsapp_sender_number": "+5500000000000",
   "variables": {
-    "header_key": "1",
+    "header_key": "Var3",
     "header_value": "João Silva",
     "body": {
-      "1": "CDI-00987",
-      "2": "R. Padre Anchieta, 115. Centro."
+      "Var1": "CDI-00987",
+      "Var2": "R. Padre Anchieta, 115. Centro."
     }
   },
-  "contact_name": "João Silva",
   "document_number": "12345678900",
   "contract_code": "CT-000123",
   "template_code": "TEMPLATE_WPP_003"
@@ -93,12 +89,10 @@ Request Body:
 ```json
 {
   "recipient_number": "+5511999998888",
-  "free_text": "Texto do SMS (opcional)",
   "variable_values": {
-    "codigo": "123456",
-    "nome": "João"
+    "Var1": "123456",
+    "Var2": "João"
   },
-  "contact_name": "João Silva",
   "document_number": "12345678900",
   "contract_code": "CT-00987",
   "template_code": "TEMPLATE_SMS_002"
@@ -111,8 +105,8 @@ Request Body:
 Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o template configurado no Maestro:
 ```json
 "variable_values": {
-  "nome": "João Silva",
-  "codigo": "CDI-00987"
+  "Var1": "João Silva",
+  "Var2": "CDI-00987"
 }
 ```
 
@@ -146,8 +140,8 @@ Não há response
  {
       "message": "Não foi possível enviar a mensagem.",
       "errors": {
-        "subject": [
-          "O Assunto é obrigatório em mensagens sem Template."
+        "contract_code": [
+          "O código do contrato é obrigatório."
         ]
       },
       "record_errors": [],
@@ -168,6 +162,34 @@ Não há response
       "requestId": "00-80016a94505f232820c73054f2ee1fa2-12c5228b9f317e12-00"
     }
 ``` 
+
+## Callback
+
+Você pode adicionar uma URL de Callback e também campos customizados para que sejam enviados nessa URL de Callback a partir do disparo da API Direct Message.
+
+Para isso, você deve adicionar o objeto `callback_details`, conforme exemplo abaixo:
+
+```json
+{
+  "recipient_number": "+5511999998888",
+  "variable_values": {
+    "Var1": "123456",
+    "Var2": "João"
+  },
+  "document_number": "12345678900",
+  "contract_code": "CT-00987",
+  "template_code": "TEMPLATE_SMS_002",
+  "callback_details": {
+    "url": "https://minhaurl.com.br/meu_endpoint_de_callback",
+    "custom_fields": {
+      "additionalProp1": "string",
+      "additionalProp2": "string",
+      "additionalProp3": "string",
+      //...
+    }
+  }
+}
+```
 
 ## Boas Práticas
 
@@ -192,8 +214,5 @@ Implemente monitoramento e logs para mensurar falhas por canal e acionar novas t
   </Accordion>
   <Accordion title="Qual o tempo de processamento da mensagem?">
     O envio é feito em **tempo real**, dependendo da disponibilidade do canal.
-  </Accordion>
-  <Accordion title="É possível monitorar erros de envio?">
-    Sim, utilizando **logs** e monitoramento de falhas por canal.
   </Accordion>
 </AccordionGroup>
