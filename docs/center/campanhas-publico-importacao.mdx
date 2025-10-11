@@ -1,131 +1,189 @@
 ---
-title: "Importação de Público e Campanhas"
-sidebarTitle: "Importação de Público e Campanhas"
+title: "Importação de Público"
+sidebarTitle: "Importação de Público"
 description: "A importação de público é um recurso que pode ser utilizado tanto como ponto de partida para uma campanha massificada (WhatsApp, e-mail ou SMS) quanto para atualização da sua base de contatos e clientes."
 ---
 
-##  Campanhas – Público e Importação
 
-A importação de público é um recurso que pode ser utilizado tanto como ponto de partida para uma campanha massificada (WhatsApp, e-mail ou SMS), quanto para atualização da base de contatos e clientes. 🎯
 
-### Atualização da Base
+A importação de público é um recurso que pode ser utilizado para: 
 
-Ao inserir uma base de clientes:
+-  Inserção de novos contatos no ambiente através de bases feitas no excel, em formato .csv para realizar campanhas massivas (WhatsApp, E-mail ou SMS); 
 
-* O sistema garante que, ao enviar uma nova mensagem por canais especificados, o cliente já terá seu cadastro preenchido com as informações fornecidas.
-* Facilita o trabalho de:
+-  Atualização da base de contatos e clientes. 
 
-  * Agentes de atendimento
-  * Fluxos de automação via IDR
+ 
 
-###  Público para Campanha
+### Localização da importação de público no Invenio Center
 
-* Toda base importada pode ser utilizada em campanhas massificadas (pontuais ou recorrentes).
-![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub.png)
+Acesse: `Invenio Center > Engajar > Público.`
 
-###  Acesso à Importação
+[Clique aqui para acessar diretamente ao painél de público no Invenio Center](https://inveniocenter.robbu.global/painel/publico)
 
-1. Selecione a primeira opção do menu **Engajar**.
-2. Na tela seguinte, são exibidos todos os públicos previamente importados.
-3. Clique em **Layout** no canto inferior esquerdo para baixar o template `.csv`.
-![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub1.png)
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Publico/publico1.png" />
 
-###  Estrutura do Arquivo CSV
-![engajar publico](https://robbublob.blob.core.windows.net/docs/engajarpub2.png) 
-####  Colunas do Template
+---
 
-* **Tipo de Registro \[OBRIGATÓRIO]**: Valores possíveis: `TELEFONE` ou `EMAIL`.
 
-  * Um contato pode ter múltiplas linhas (um canal por linha).
+## Importando o público
 
-* **Valor do Registro \[OBRIGATÓRIO]**:
+É possível inserir novos contatos ou atualizar os já existentes em sua base de clientes no ambiente. 
 
-  * Insira o canal (número de telefone com DDD ou e-mail).
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Publico/publico2.png" />
 
-* **Mensagem**:
 
-  * Usado em campanhas SMS para pré-determinar o conteúdo.
-  * Não obrigatório.
+### Layout
 
-* **Nome Cliente**:
+Você terá disponível o modelo do arquivo excel com o formato `.csv` para criação ou atualização da sua base, essa base também é conhecida como **mailing**. 
 
-  * Recomendado para facilitar localização e interação.
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Publico/planilha.png" />
 
-* **CPFCNPJ**:
 
-  * Importante para evitar homônimos e permitir integrações externas.
+### Estrutura do Arquivo
 
-* **CODCLIENTE**:
+**Colunas do Mailing**
 
-  * Identificador interno da empresa (ex: número de contrato).
+| Campo | Descrição |
+|--------|------------|
+| `Tipo de Registro` | **[OBRIGATÓRIO]** Define o tipo de canal do cliente. Somente há duas opções possíveis: `"TELEFONE"` ou `"EMAIL"`. |
+| `Valor do Registro` | **[OBRIGATÓRIO]** Insira o conteúdo do canal do cliente (número de telefone ou endereço de e-mail). Para telefones, adicionar na mesma célula, **sem espaços**, no formato `DDD+Telefone`. |
+| `Mensagem` | Utilizado para campanhas de SMS, caso queira definir uma mensagem pré-determinada no público. Não é obrigatório — também pode ser escrita no momento da composição da campanha. |
+| `Nome Cliente` | Campo não obrigatório, mas recomendado para facilitar a identificação e interação do cliente dentro da plataforma. |
+| `CPFCNPJ` | Campo não obrigatório, mas **de extrema importância** para evitar homônimos e possibilitar integrações externas utilizando este dado como identificador único. |
+| `CODCLIENTE` | Identificador próprio da empresa (exemplo: número de contrato, código interno do contato, etc). |
+| `TAG` | Facilita a localização de contatos e públicos em relatórios, filas de atendimento e buscas internas. Pode ser preenchida livremente pela empresa. |
+| `CORINGA 1` | Campo customizável utilizado para personalização de mensagens, templates e atendimentos. **Até 300 caracteres.** |
+| `CORINGA 2` | Campo customizável utilizado para personalização de mensagens, templates e atendimentos. **Até 300 caracteres.** |
+| `CORINGA 3` | Campo customizável utilizado para personalização de mensagens, templates e atendimentos. **Até 300 caracteres.** |
+| `CORINGA 4` | Campo customizável utilizado para personalização de mensagens, templates e atendimentos. **Até 300 caracteres.** |
+| `CORINGA 5` | Campo customizável utilizado para textos maiores, podendo conter **até 3000 caracteres.** |
+| `PRIORIDADE` | Define a prioridade do contato nas filas de atendimento. Valores aceitos: **BAIXA**, **MÉDIA** ou **ALTA**. Contatos com maior prioridade são atendidos antes dos demais. |
 
-* **TAG**:
 
-  * Facilita relatórios e buscas.
+ **Exemplo de uso dos Coringas:**
 
-* **CORINGA (1 a 5)**:
+> Suponha que o campo `CORINGA 1` tenha sido preenchido com o nome da empresa.  
+> A mensagem personalizada poderia ser redigida da seguinte forma:  
+> **"Olá, falamos da empresa @coringa1"**
 
-  * Campos de personalização de mensagens.
-  * Exemplo de uso:
+**Considerações sobre Mensagens SMS**
 
-    ```
-    "Olá, @PrimeiroNome, teremos neste sábado uma promoção especial em um endereço perto de você: @Coringa1"
-    ```
-  * **Coringas 1 a 4**: Até 300 caracteres cada
-  * **Coringa 5**: Até 3000 caracteres
+> - Limite de 160 caracteres por envio
+> - Caracteres especiais (\n, ^, {}, \[], \~, |, €) contam como 2 caracteres
+> - Se excedido, será cobrado como dois envios
 
-* **PRIORIDADE**:
-
-  * Defina entre: `BAIXA`, `MEDIA` ou `ALTA`
-  * Impacta a fila de atendimento
 
 ###  Regras para Importação Bem-Sucedida
 
-* Não alterar quantidade de colunas
-* Não deixar colunas obrigatórias vazias
-* Não usar fórmulas nas células
-* Não adicionar abas
-* Não inserir conteúdo fora das colunas do layout
+> * Não alterar quantidade de colunas
+> * Não deixar colunas obrigatórias vazias
+> * Não usar fórmulas nas células
+> * Não adicionar abas
+> * Não inserir conteúdo fora das colunas do layout
 
-###  Considerações sobre Mensagens SMS
+---
 
-* Limite de 160 caracteres por envio
-* Caracteres especiais (\n, ^, {}, \[], \~, |, €) contam como 2 caracteres
-* Se excedido, será cobrado como dois envios
+###  Processo de Importação de público no Invenio Center
 
-###  Processo de Importação no Invenio Center
+Para realizar a importação do seu público basta seguir o passo a passo 	abaixo:
 
-1. Salve o arquivo
-2. Clique em **Importar Público**
-3. Preencha os seguintes campos na nova janela:
-![importar publico](https://robbublob.blob.core.windows.net/docs/importarpub.png) 
-   * **Descrição**: Nome do público
-   * **Segmento**: Segmento de destino
-   * **Arquivo**: Selecione o arquivo preparado
-   * **Autorização de Processamento**: Escolha de acordo com a política da empresa
-![importar publico](https://robbublob.blob.core.windows.net/docs/importarpub1.png) 
+ **Descrição**: Defina o nome do público
+ **Segmento**: Selecione o segmento que aquele público faz parte
+ **Arquivo**: Faça o upload do aquivo preenchido
 
-###  Recursos Avançados
 
-  Invenio Verify
+**Autorização de processamento - LGPD e GDPR**
+
+ Escolha a opção que mais se adequa a autorização que sua empresa possui para lidar com estes dados sensíveis 
+
+| Base Legal | Descrição |
+|-------------|------------|
+| `Consentimento` | Quando uma pessoa consente com o tratamento de seus dados de forma livre, inequívoca e informada. |
+| `Legítimo interesse` | Quando a empresa possui interesse legítimo para o processamento e utilização dos dados dentro das expectativas da pessoa, não sendo necessário obter consentimento. |
+| `Contrato pré-existente` | Quando os dados pessoais são processados por obrigação contratual ou para a validação e início de vigência de um acordo. |
+| `Obrigação Legal, Processo Judicial ou Proteção ao crédito` | Quando o tratamento de dados pessoais é justificável por Lei. |
+| `Interesse vital ou Tutela da saúde` | Quando o tratamento de dados pessoais é feito com o intuito de proteger a vida, seja do titular do dado ou de outra pessoa. |
+| `Interesse público` | Quando o tratamento de dados pessoais é resguardado pelo interesse público ou por necessidade de uma autoridade oficial. |
+| `Não sei dizer / Não possuo Base Legal` | Quando não é possível identificar ou não há base legal definida para o tratamento dos dados. |
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Publico/autorizacao.png" />
+
+**Verificar e importar público não cadastrado no site Não Perturbe:**
+ Ao habilitar esta opção será feita uma checagem com contatos cadastrados na plataforma Não Perturbe, sendo que contatos localizados não serão importados	 
+
+**Manter Apenas Neste Segmento:**
+ Remove possíveis segmentos anteriores que o contato possui antes desta importação 
+
+**Limpar tags e campos dinâmicos do mailing:**
+ Remove possíveis tags de localização atribuídos ao contato antes desta importação.
+
+
+  **Invenio Verify**
 
 * Valida se o telefone teve interação anterior
 * Atualiza dados ou descarta a linha
 * **Não valida** previamente a disponibilidade de WhatsApp
 * A confirmação vem por callback da API da Meta após o envio
 
-> Para contratação, contate seu agente comercial 📞🤝
+> Para contratação, contate seu agente comercial.
 
-  Verificar site Não Perturbe
 
-* Checa contatos na lista do site Não Perturbe
-* Contatos encontrados são descartados
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Publico/publico3.png" />
 
-  Manter Apenas Neste Segmento
+## 🔗 Links e assuntos relacionados  
 
-* Remove outros segmentos vinculados ao contato
+- [Campanhas de WhatsApp](https://docs.robbu.global/docs/center/campanhas-de-whatsapp)  
+- [Campanhas de E-mail](https://docs.robbu.global/docs/center/campanhas-de-email)  
+- [Criação de Campanhas SMS](https://docs.robbu.global/docs/center/criando-campanha-sms)  
+- [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)  
 
-  Limpar Tag de Localização
+---
 
-* Remove tags de localização anteriores
-  
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="Qual o formato correto do arquivo para importação?">
+    O arquivo deve ser do tipo **.csv**, seguindo o layout padrão disponível no painel do Invenio Center. É importante manter a mesma quantidade e ordem de colunas para evitar falhas no upload.
+  </Accordion>
+
+  <Accordion title="É possível atualizar contatos existentes durante a importação?">
+    Sim. O processo de importação também pode **atualizar contatos já cadastrados**, desde que os dados enviados correspondam aos campos existentes no ambiente.
+  </Accordion>
+
+  <Accordion title="O campo 'Tipo de Registro' aceita quais valores?">
+    Apenas dois valores são aceitos: **'TELEFONE'** e **'EMAIL'**.  
+    O preenchimento incorreto impede que o contato seja reconhecido durante a importação.
+  </Accordion>
+
+  <Accordion title="Como deve ser preenchido o número de telefone?">
+    O número deve ser inserido **sem espaços**, no formato `DDD+Telefone`.  
+    Exemplo: `11999999999`.
+  </Accordion>
+
+  <Accordion title="O que acontece se eu ultrapassar o limite de 160 caracteres no SMS?">
+    O envio será **dividido em duas partes**, sendo cobrado como dois envios.  
+    Além disso, caracteres especiais contam como dois espaços, reduzindo o limite total.
+  </Accordion>
+
+  <Accordion title="Qual a função dos campos Coringas?">
+    Os **Coringas** permitem personalizar mensagens e templates, substituindo variáveis dinâmicas com informações específicas de cada contato, como nome da empresa, data ou produto.
+  </Accordion>
+
+  <Accordion title="Posso remover informações anteriores dos contatos ao importar?">
+    Sim. As opções **“Limpar tags e campos dinâmicos”** e **“Manter apenas neste segmento”** permitem redefinir dados anteriores, mantendo o controle sobre o histórico e segmentação.
+  </Accordion>
+
+  <Accordion title="O que é o Invenio Verify?">
+    É um recurso que **valida e atualiza contatos** com base em interações anteriores.  
+    Ele não verifica previamente a disponibilidade de WhatsApp; essa confirmação ocorre por callback após o envio.
+  </Accordion>
+
+  <Accordion title="Como funciona a verificação com o site 'Não Perturbe'?">
+    Ao ativar a opção **Verificar e importar público não cadastrado no site Não Perturbe**, o sistema faz uma checagem automática e **descarta contatos** que estejam na lista de bloqueio.
+  </Accordion>
+
+  <Accordion title="Qual base legal devo selecionar durante a importação?">
+    A base legal depende da relação da empresa com os dados processados.  
+    As opções seguem as diretrizes da **LGPD e GDPR**, incluindo **Consentimento**, **Legítimo Interesse**, **Contrato Pré-existente**, entre outras.
+  </Accordion>
+</AccordionGroup>
