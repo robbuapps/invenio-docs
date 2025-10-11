@@ -4,27 +4,27 @@ description: "Aprenda como integrar contas de e-mail no Invenio Center e central
 sidebarTitle: "Contas de E-mail"
 ---
 
-## Cadastro e Configuração de Contas de E-mail
+
 
 A funcionalidade de **E-mail** do Invenio Center permite que empresas integrem suas contas diretamente na plataforma, centralizando o atendimento em um só lugar. Essa integração garante que mensagens recebidas possam ser gerenciadas dentro da operação, com histórico completo, rastreabilidade e direcionamento automático por segmento.
 
 ## Acessando o Canal de E-mail
 
-Para iniciar o processo de configuração:
+Para iniciar o processo de configuração acesse: `Invenio Center > Canais > E-mail`
 
-1. Acesse o **Invenio Center**.
-2. No menu lateral esquerdo, clique em **Canais**.
-3. Selecione a aba **E-mail** para visualizar todas as conexões já cadastradas.
+[Clique aqui para acessar diretamente o canal de e-mail no Invenio Center](https://inveniocenter.robbu.com.br/painel/canais/emails)
 
-> <img
->   src="https://robbublob.blob.core.windows.net/docs/canais.png"
->   alt="canais email"
->   style={{ width:"92%" }}
-> />
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/canalEmail1.png" />
+
+---
+
 
 ## Iniciando o Cadastro de uma Nova Conta
 
 Clique em **\+ Adicionar e-mail** e escolha entre:
+
+![add email](https://robbublob.blob.core.windows.net/docs/changelog/addemail.png) 
+
 
 ### Conexão via Office 365 ou Gmail
 
@@ -32,13 +32,14 @@ Clique em **\+ Adicionar e-mail** e escolha entre:
 - Realize o login com suas credenciais.
 - A conta será conectada automaticamente.
 
-> ![add email](https://robbublob.blob.core.windows.net/docs/changelog/addemail.png) 
+![add email](https://robbublob.blob.core.windows.net/docs/changelog/addemail1.png) 
+
+---
+
 
 ### Cadastro Manual
 
 Para contas personalizadas ou de outros servidores:
-
-#### Informações Gerais
 
 - **Nome**: Nome interno da conta (ex: Financeiro).
 - **Endereço de e-mail**: E-mail completo.
@@ -50,15 +51,6 @@ Para contas personalizadas ou de outros servidores:
 - **POP3**: Download local das mensagens.
 - **IMAP**: Sincronização em tempo real com o servidor.
 
-> ![add email](https://robbublob.blob.core.windows.net/docs/changelog/addemail1.png) 
-
-#### Credenciais de Acesso
-
-- **Usuário**: Endereço de e-mail para autenticação.
-- **Senha**: Senha da conta.
-- **Host**: Endereço do servidor.
-- **Portas**: Comunicação com o servidor.
-
 | Protocolo        | Porta | Descrição               |
 | ---------------- | ----- | ----------------------- |
 | POP3S            | 995   | Recebimento com SSL/TLS |
@@ -68,14 +60,46 @@ Para contas personalizadas ou de outros servidores:
 | SMTP alternativo | 2525  | Alternativa à porta 587 |
 
 
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/SMTP.png" />
+
+#### Credenciais de Acesso
+
+- **Usuário**: Endereço de e-mail para autenticação.
+- **Senha**: Senha da conta.
+- **Host**: Endereço do servidor.
+- **Portas**: Comunicação com o servidor.
+
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/SMTP2.png" />
+
+---
+
 ## Finalizando o Cadastro
 
 - Clique em **Criar**.
 - O sistema testará a conexão automaticamente.
 - Em caso de sucesso, o status será "Conexão realizada com sucesso".
-- Para ativar a conta: clique nos três pontinhos ao lado e selecione **Ativar**.
+- Para ativar a conta: clique nos três pontinhos ao lado direito:
 
-> _Imagem 6 – Menu de teste de conexão_
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/EmailAtivado1.png" />
+
+**Neste menu, estão disponíveis três opções**
+
+> **Editar configurações:**
+> permite ajustar informações como a carteira associada, o nome e a conta de e-mail.
+
+> **Alterar status:**
+> possibilita alternar entre os status ativo e inativo.
+
+> **Deletar conta:** 
+> opção para excluir a conta de e-mail do ambiente.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/EditarAlterarDeletar.png" />
+
+---
 
 ## Benefícios da Integração
 
@@ -86,22 +110,78 @@ Para contas personalizadas ou de outros servidores:
 
 > **Recomendação de segurança**: Mantenha credenciais protegidas e revise acessos periodicamente.
 
+> **Observação**: Vale ressaltar que a integração do e-mail só será efetiva se ele
+> estiver conectado exclusivamente na Robbu, não podendo estar vinculado a outras plataformas e nem logado em algum aparelho celular ou computador. 
+
+
+## 🔗 Links e assuntos relacionados  
+
+- [Templates de E-mail](https://docs.robbu.global/docs/center/templates-de-email)  
+- [Campanhas de E-mail](https://docs.robbu.global/docs/center/campanhas-de-email)  
+- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
+- [Cancelamento de Inscrição (Opt-out)](https://docs.robbu.global/docs/center/cancelamento-inscricao)  
+- [Restrições de Envio e Segurança](https://docs.robbu.global/docs/center/restricoes)  
+- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
+
+---
+
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Quais protocolos são obrigatórios para configurar e-mail?">
-    O SMTP é obrigatório para envio. POP3 ou IMAP são utilizados para recebimento e podem ser escolhidos conforme a necessidade da operação.
+  <Accordion title="Qual protocolo é obrigatório para o envio de e-mails?">
+    O **SMTP** é obrigatório, pois é o protocolo responsável pelo **envio de mensagens**.  
+    Para o recebimento, você pode optar entre **POP3** (download local) ou **IMAP** (sincronização em tempo real).
   </Accordion>
-  <Accordion title="Posso conectar uma conta personalizada (fora do Gmail/Outlook)?">
-    Sim. Use a opção de cadastro manual e insira as credenciais e configurações do servidor manualmente.
+
+  <Accordion title="Qual a diferença entre POP3 e IMAP?">
+    - **POP3**: baixa os e-mails para o Invenio, sem mantê-los sincronizados com o servidor.  
+    - **IMAP**: mantém sincronização completa entre o servidor e o Invenio, refletindo alterações em ambos os lados.
   </Accordion>
-  <Accordion title="Posso conectar mais de uma conta de e-mail?">
-    Sim. O Invenio Center permite múltiplas integrações e a segmentação por carteira ou setor.
+
+  <Accordion title="Posso conectar contas personalizadas além de Gmail ou Outlook?">
+    Sim. Basta escolher a opção de **Cadastro Manual** e informar manualmente os dados do servidor, portas e credenciais.
   </Accordion>
-  <Accordion title="Consigo redirecionar e-mails automaticamente?">
-    Sim. É possível definir o segmento de destino ao cadastrar a conta, direcionando os e-mails para as equipes responsáveis.
+
+  <Accordion title="Como ativar uma conta de e-mail após o cadastro?">
+    Após criar a conta, clique nos **três pontinhos** na listagem e selecione **Ativar**.  
+    O status mudará para “Conexão realizada com sucesso”, indicando que o canal está pronto para uso.
   </Accordion>
-  <Accordion title="O que significa o status 'Inativa'?">
-    Após o cadastro, a conta permanece inativa até ser ativada manualmente na listagem de e-mails.
+
+  <Accordion title="Posso conectar mais de uma conta de e-mail ao mesmo ambiente?">
+    Sim. O Invenio Center permite **múltiplas contas integradas**, facilitando a divisão por **carteiras, segmentos ou setores** distintos.
+  </Accordion>
+
+  <Accordion title="Como funciona o direcionamento de e-mails por segmento?">
+    Durante o cadastro, você pode associar a conta de e-mail a um **segmento específico**, garantindo que todas as mensagens recebidas sejam automaticamente **encaminhadas para a equipe responsável**.
+  </Accordion>
+
+  <Accordion title="O que significa o status 'Inativa' em uma conta de e-mail?">
+    Após o cadastro, a conta permanece **inativa** até ser **ativada manualmente**.  
+    Enquanto inativa, ela não enviará nem receberá mensagens.
+  </Accordion>
+
+  <Accordion title="Posso editar ou remover uma conta de e-mail depois de criada?">
+    Sim. No menu lateral da conta é possível **editar as configurações**, **alterar o status** (ativo/inativo) ou **deletar** definitivamente a conta.
+  </Accordion>
+
+  <Accordion title="Por que a integração precisa ser exclusiva com a Robbu?">
+    A integração com o Invenio exige que a conta esteja **vinculada apenas à Robbu**, sem login ativo em outros dispositivos ou plataformas.  
+    Isso garante **estabilidade, segurança e rastreabilidade** total do canal.
+  </Accordion>
+
+  <Accordion title="Quais são as boas práticas de segurança para contas de e-mail?">
+    - Revise as credenciais periodicamente.  
+    - Use autenticação segura (SSL/TLS).  
+    - Evite compartilhar logins entre usuários.  
+    - Mantenha a conta ativa apenas na Robbu.  
+    - Monitore o status e a conectividade regularmente.
+  </Accordion>
+
+  <Accordion title="O que fazer se a conexão falhar ao cadastrar o e-mail?">
+    Verifique se:
+    - As **credenciais** (usuário e senha) estão corretas.  
+    - As **portas e protocolos** estão configurados conforme o provedor.  
+    - O **servidor aceita conexões externas**.  
+    Após corrigir, clique em **Testar Conexão** novamente.
   </Accordion>
 </AccordionGroup>
