@@ -55,7 +55,8 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-98765",
-  "template_code": "TEMPLATE_EMAIL_001"
+  "template_code": "TEMPLATE_EMAIL_001",
+  "segment": "Cartao Credito"
 }
 ````
 
@@ -78,7 +79,8 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-000123",
-  "template_code": "TEMPLATE_WPP_003"
+  "template_code": "TEMPLATE_WPP_003",
+  "segment": "Cartao Credito"
 }
 ```
 #### Envio de SMS
@@ -95,7 +97,8 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-00987",
-  "template_code": "TEMPLATE_SMS_002"
+  "template_code": "TEMPLATE_SMS_002",
+  "segment": "Cartao Credito"
 }
 ```
 
@@ -179,6 +182,7 @@ Para isso, você deve adicionar o objeto `callback_details`, conforme exemplo ab
   "document_number": "12345678900",
   "contract_code": "CT-00987",
   "template_code": "TEMPLATE_SMS_002",
+  "segment": "Cartao Credito"
   "callback_details": {
     "url": "https://minhaurl.com.br/meu_endpoint_de_callback",
     "custom_fields": {
