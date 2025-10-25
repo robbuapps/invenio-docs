@@ -1,101 +1,239 @@
 ---
-title: "Criando uma Campanha – SMS"
-sidebarTitle: "Criando uma Campanha - SMS"
-description: "Aprenda a configurar e disparar campanhas de SMS no Invenio Center, desde a escolha do público até o envio da mensagem."
+title: "Campanhas de SMS"
+sidebarTitle: "Campanhas de SMS"
+description: "A funcionalidade de Campanhas SMS da Invenio possibilita o envio em massa e programado de mensagens de texto, facilitando a comunicação rápida e direcionada com seus contatos. Essa ferramenta é indicada para marketing, alertas, cobranças e demais notificações que demandam automação e organização. Com uma interface prática e intuitiva, a criação e execução das campanhas ocorre
+de forma estruturada, garantindo controle sobre a segmentação do público, personalização das mensagens e monitoramento de desempenho em tempo real."
 ---
 
-##  Criando uma Campanha – SMS
 
-O primeiro passo para criar qualquer campanha é **importar um público**.  
-Se você ainda não fez isso, comece por aqui:  
-👉 [Importação de público](https://docs.robbu.global/docs/center/campanhas-publico-importacao)
+> O primeiro passo para criar qualquer campanha é a **importação de um público**.
+>
+>Saiba mais sobre este processo em nossa documentação oficial:  
+>[Importação de público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)
 
 ---
 
 ##  Iniciando uma campanha SMS
 
-Após importar seu público, siga os passos abaixo para criar uma nova campanha:
+Após importar seu público, no Invenio Center acesse:  `Converter > Campanhas > SMS > + Criar campanha`
 
-1. Acesse a seção **Campanhas** no Invenio Center.
-2. Escolha o tipo de campanha: **SMS**.
+[Acesse diretamente a pagina de campanhas de SMS no Invenio Center](https://inveniocenter.robbu.global/painel/campanhas/sms)
 
-![frases](https://robbublob.blob.core.windows.net/docs/createcampanhaanime.gif) 
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/menu1SMS.png" />
 
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/menu2SMS.png" />
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/CriarCampanha.png" />
 ---
 
-##  Campos obrigatórios para configurar sua campanha
+### Campos obrigatórios para criação de uma nova campanha
 
-Aqui estão os campos que devem ser preenchidos:
 
-###  Descrição da Campanha
+**Descrição da Campanha**
 - Nome interno para identificação e relatórios.
 - Visível apenas para fins administrativos.
 
-###  Alvo da Campanha
-- Selecione o **público previamente importado**.
-- Lembre-se: cada público está vinculado a um **segmento específico**.
 
-###  Início da Campanha
+**Alvo da Campanha**
+- Selecione o `público previamente importado`.
+- Lembre-se: cada público está vinculado a um `segmento específico`.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/Descricao&Alvo2.png" />
+
+
+**Início da Campanha**
 - Programe o horário desejado para o início dos envios.
-- Para envio **imediato**, mantenha a data/hora atual.
-- Use a opção **"Hora limite para envio"** para definir um horário de corte. A campanha será encerrada após esse limite.
+- Para envio `imediato`, mantenha a data/hora atual.
+- Use a opção `"Hora limite para envio"` para definir um horário de corte. A campanha será encerrada após esse limite.
 
-###  Fluxo de Envio
-- Envie sua campanha de forma **parcelada**.
+**Fluxo de Envio**
+- Envie sua campanha de forma `parcelada`.
 - Defina a porcentagem (%) do público a ser enviada a cada intervalo de minutos.
 
-###  Contatos em Atendimento
-- Habilite esta opção para **excluir** da campanha os contatos que:
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/Inicio&FluxoEnvio2.png" />
+
+**Contatos em Atendimento**
+- Habilite esta opção para `excluir` da campanha os contatos que:
   - Estão atualmente em atendimento.
-  - Tiveram **interação recente** registrada durante o intervalo da campanha.
+  - Tiveram `interação recente` registrada durante o intervalo da campanha.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/ContatosEmAtendimento2.png" />
+
+**Short Code (código curto)**
+
+> Um `short code` é um número curto (5 ou 6 dígitos) utilizado para envio e recebimento de SMS corporativos.  
+> Ele é fornecido pela operadora e `não é possível escolher um número específico` para envio.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/ShortCode.png" />
+
+
+**Mensagem da Campanha**
+
+A mensagem da campanha é o conteúdo que será enviado
+aos contatos e pode ser definida de diferentes formas, conforme sua necessidade. Você pode definir a mensagem da campanha:
+
+`1- Usando a mensagem do público:`
+ Se o público importado já contém uma mensagem, você pode optar por utilizá-la no disparo. Você também pode editar ou adicionar uma mensagem
+diretamente no cadastro do público antes do envio.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/mailingmodelo.png" />
+
+
+`2- Criando uma nova mensagem no momento da campanha:`
+Caso não tenha definido uma mensagem no público, selecione a opção “Criar nova mensagem para a campanha” e digite o texto desejado. 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/criandoMensagemSMS.png" /> 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/SMS.jpeg" />
+
+> ⚠️ **Importante:**<br />
+> Os sistemas de envio de SMS operam utilizando uma codificação de 7 bits por caractere, o que permite que uma mensagem de até 160 caracteres seja enviada em um único SMS.<br />
+> Contudo, caracteres especiais, como símbolos e letras acentuadas, são tratados como caracteres estendidos, o que aumenta a quantidade de bits necessários para representá-los.<br />
+> Esse aumento pode resultar na redução do limite total de caracteres para menos de 160 por mensagem.<br />
+> Caso o limite seja excedido, o envio poderá falhar, e a mensagem poderá ser fracionada, gerando cobrança correspondente a mais de um SMS. No entanto, se surgir uma dúvida sobre discrepâncias na cobrança de ações de SMS, é importante verificar se a mensagem continha caracteres especiais ou símbolos que possam ter causado a fragmentação do envio.
+
+
+
+##  Finalizando a campanha
+
+Após revisar todos os campos, clique em “Criar” para registrar sua campanha. Se o horário de envio for igual ao momento atual, a campanha será iniciada imediatamente. 
 
 ---
 
-##  Short Code (código curto)
+## Painel de campanhas criadas
 
-> Um **short code** é um número curto (5 ou 6 dígitos) utilizado para envio e recebimento de SMS corporativos.  
-> Ele é fornecido pela operadora e **não é possível escolher um número específico** para envio.
+Na tela inicial, além da opção de criar novas campanhas, você também pode consultar informações sobre campanhas já realizadas, como horário, data de criação, conclusão, início de envio e quantidade de mensagens processadas.
+
+Nos três pontinhos à direita de cada campanha, há um menu de opções que permite acessar as estatísticas da campanha e baixar a planilha com os dados de envio.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/painelCampanhasCriadas.png" /> 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/Menu3pontinhos.png" /> 
+---
+
+## Estatísticas da campanha
+
+Acompanhe o desempenho da sua campanha de SMS em tempo real para garantir a máxima eficiência das ações. A seção de estatísticas fornece informações detalhadas sobre o envio e o engajamento do público, permitindo ajustes estratégicos quando necessário.
+
+**Informações de envio:**
+
+ Exibe o total de contatos, quantos SMS foram enviados, quantos ainda estão pendentes e o número de falhas durante a campanha. 
+
+**Retorno por período:**
+
+ Permite acompanhar a quantidade de respostas ou interações geradas por hora, ajudando a analisar o comportamento do público ao longo do tempo. O cálculo considera todos os retornos do público engajado, independentemente do canal de entrada. 
+
+**Retorno por evento:**
+
+ Mostra a quantidade de eventos registrados por atendentes e chatbots para o público engajado, permitindo monitorar a efetividade de ações específicas e identificar oportunidades de melhoria. 
+ 
+ <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/estatistica.png" /> 
+
+ ---
+
+ ## Relatório de Campanha (Download)
+
+Ao selecionar a opção `Download`, o  **Invenio Center** também disponibiliza um **relatório em formato Excel (.csv)** com informações detalhadas sobre o desempenho das campanhas de SMS.  
+Os dados disponíveis no arquivo permitem acompanhar todo o ciclo de envio e entrega das mensagens.  
+
+| Campo | Descrição |
+|--------|------------|
+| **NomePessoa** | Nome do destinatário da mensagem. |
+| **CpfCnpj** | Documento cadastrado do cliente. |
+| **CodPessoaCliente** | Código identificador interno do cliente. |
+| **DDDTelefone** | DDD do número de destino. |
+| **NumeroTelefone** | Número completo de destino. |
+| **EnderecoEmail** | E-mail vinculado ao contato (quando aplicável). |
+| **DataHoraSolicitacao** | Data e hora em que o envio foi solicitado. |
+| **DataHoraEnvio** | Data e hora em que o envio foi processado pela plataforma. |
+| **Mensagem** | Conteúdo do SMS enviado. |
+| **SituacaoEntrega** | Status de entrega da mensagem (enviada, entregue, falha, etc.). |
+| **QtdMensagens** | Quantidade de mensagens enviadas por contato. |
+
+
+ <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhaSMS/planilha2.png" /> 
+
+
+> 💡 **Observação:**  
+> Esse relatório pode ser exportado diretamente na tela de campanhas, permitindo análises mais detalhadas de performance, taxas de entrega e possíveis falhas nos envios.
+
+> Nos relatórios disponíveis na plataforma Invenio Center, é possível exportar os relatórios **Relatório Envio SMS** e **Campanhas Realizadas.** <br/>
+>O Relatório Envio SMS apresenta informações detalhadas sobre cada mensagem enviada, incluindo dados de envio, entrega e desempenho. <br/>
+>Já o Relatório de Campanhas Realizadas permite filtrar campanhas por período e canal, com a opção de visualizar especificamente as enviadas por SMS. <br/>
+> Para mais detalhes, acesse: [Documentação Relatórios - Invenio Center](https://docs.robbu.global/docs/center/relatorios)
+
 
 ---
 
-##  Mensagem da Campanha
+## 🔗 Links Relacionados  
 
-Caso você **não tenha definido uma mensagem** no público importado, poderá:
-
-- Selecionar a opção **"Criar nova mensagem para a campanha"** e digitar a mensagem desejada agora.
-
- **Dica:** Lembre-se do limite de 160 caracteres para SMS e evite caracteres especiais que ocupam mais espaço.
+- [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)  
+- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
+- [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)  
+- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
 
 ---
-##  Configurações da Campanha
 
-###  Descrição da Campanha
+## ⁉️ Perguntas Frequentes (FAQ)  
 
-- Nome interno da campanha.
-- Usado apenas para controle e relatórios.
+<AccordionGroup>
 
-###  Alvo da Campanha
+  <Accordion title="Como criar uma campanha de SMS no Invenio Center?">  
+  Acesse o menu `Converter > Campanhas > SMS > + Criar campanha`. <br/>  
+  Em seguida, defina um nome para a campanha, selecione o público previamente importado, configure o horário de envio e crie a mensagem desejada.  
+  </Accordion>  
 
-- Escolha o **público importado**.
-- Cada público está atrelado a um **segmento específico**.
+  <Accordion title="Posso enviar a campanha imediatamente após a criação?">  
+  Sim. <br/>  
+  Se a data e o horário definidos para o início da campanha forem iguais ao momento atual, o envio será iniciado automaticamente após a criação.  
+  </Accordion>  
 
->  **Atenção:** Não é possível reutilizar públicos entre segmentos diferentes.
+  <Accordion title="É possível agendar campanhas de SMS para uma data futura?">  
+  Sim. <br/>  
+  Durante a criação da campanha, basta definir a data e o horário desejados no campo **Início da Campanha**.  
+  A plataforma executará o envio automaticamente no momento programado.  
+  </Accordion>  
 
-###  Início e Limite da Campanha
+  <Accordion title="O que é o Short Code utilizado nas campanhas?">  
+  O Short Code é um número curto (geralmente de 5 ou 6 dígitos) fornecido pela operadora para envio e recebimento de SMS corporativos. <br/>  
+  Ele é exclusivo da operadora e não pode ser personalizado.  
+  </Accordion>  
 
-- Programe um horário de início, ou envie imediatamente mantendo a hora atual.
-- Defina a **hora limite** para encerrar os envios.
+  <Accordion title="Como posso garantir que minha mensagem não será fracionada em mais de um SMS?">  
+  Utilize apenas caracteres simples (sem acentuação ou símbolos especiais). <br/>  
+  O limite padrão é de **160 caracteres** por SMS, mas o uso de caracteres especiais pode reduzir esse limite, ocasionando o fracionamento e cobrança de mais de uma mensagem.  
+  </Accordion>  
 
+  <Accordion title="O que significa a opção 'Contatos em Atendimento'?">  
+  Essa opção impede o envio de mensagens para contatos que estão em atendimento ativo ou que tiveram interação recente, <br/>  
+  evitando duplicidade ou comunicações durante conversas em andamento.  
+  </Accordion>  
 
-##  Finalizando
+  <Accordion title="Como posso acompanhar o desempenho das campanhas?">  
+  No painel de campanhas, acesse o menu de opções (ícone de três pontinhos) e selecione **Estatísticas da campanha**. <br/>  
+  Nessa seção, você poderá acompanhar dados de envio, falhas, respostas e eventos de retorno em tempo real.  
+  </Accordion>  
 
-Após revisar todos os campos:
+  <Accordion title="É possível exportar os resultados da campanha?">  
+  Sim. <br/>  
+  O Invenio Center disponibiliza a exportação do **Relatório Envio SMS** no formato `.csv`, contendo dados de envio, entrega, mensagens e interações. <br/>  
+  Essa opção está disponível diretamente na tela de campanhas.  
+  </Accordion>  
 
-- Clique em **"Criar"** para registrar sua campanha.
-- Se o horário de envio for igual ao horário atual, o envio será iniciado **imediatamente**.
+  <Accordion title="O relatório de campanha mostra quem respondeu à mensagem?">  
+  Sim. <br/>  
+  A área de **Retorno por período** e **Retorno por evento** nas estatísticas exibe as interações e respostas do público engajado ao longo do tempo.  
+  </Accordion>  
 
-```md
- Exemplo:
-- Início: 09:00
-- Hora limite: 12:00
-→ A campanha será interrompida às 12h, mesmo se nem todos os contatos tiverem recebido.
+  <Accordion title="Qual a diferença entre 'Mensagem do Público' e 'Criar nova mensagem'?">  
+  A **Mensagem do Público** é aquela já definida no momento da importação do público. <br/>  
+  Caso queira definir um novo texto, basta selecionar **Criar nova mensagem para a campanha** e inserir o conteúdo desejado diretamente na tela de criação da campanha.  
+  </Accordion>  
+
+  <Accordion title="Onde posso verificar o status das mensagens enviadas?">  
+  No relatório exportável da campanha, o campo **SituaçãoEntrega** indica o status de cada mensagem (enviada, entregue, pendente ou falha).  
+  </Accordion>  
+
+</AccordionGroup>
