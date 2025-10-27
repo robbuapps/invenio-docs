@@ -1,0 +1,243 @@
+---
+title: "API de Usuário"
+sidebarTitle: "v1/User"
+description: "A API de Usuário permite consultar e atualizar informações de usuários vinculados a uma conta autenticada. É utilizada para gerenciar perfis, status, idioma e dados de contato dos usuários em ambientes Robbu."
+---
+
+## Introdução
+A API de Usuário oferece endpoints para **consulta e atualização de informações de usuários** em uma conta autenticada.  
+Com ela, é possível obter dados como nome, e-mail, idioma, status e redes sociais, além de realizar atualizações em perfis existentes.  
+Para utilizar este serviço, é necessário possuir um ambiente ativo na Robbu e acesso ao **PrivateToken** e **AccessToken** da sua conta.
+
+## Integração
+
+A API de Usuário possui dois endpoints principais:
+
+1. `GET /v1/User` — Lista os usuários vinculados ao cliente autenticado.  
+2. `PUT /v1/User/{idHash}` — Atualiza os dados de um usuário específico.
+
+####  Base Url
+```
+https://api.robbu.global/v1/User
+```
+
+####  Autenticação
+Para acessar os endpoints da API, são necessários dois tipos de token de autenticação:
+
+1. **PrivateToken:** Token privado fornecido pela Robbu, disponível no Invenio Center.  
+2. **Authorization:** Token de acesso no formato `Bearer`, obtido via rota de login.
+
+Ambos devem ser incluídos como cabeçalhos na requisição HTTP.
+
+<Tip>Clique <a href="https://inveniocenter.robbu.global/painel/configuracoes/conta" target="_blank">aqui</a> para obter o Private Token do seu ambiente.</Tip>
+
+---
+
+## Endpoint - Listar Usuários
+
+### Descrição
+Retorna uma lista de usuários vinculados à conta autenticada.
+
+### Endpoint
+```
+GET https://api.robbu.global/v1/User?page={numero_pagina}
+```
+
+#### Headers
+
+<ParamField header="PrivateToken" type="string" placeholder="seu_token_privado" required="true">
+Token privado do cliente, obtido no painel do Invenio Center.
+</ParamField>
+
+<ParamField header="Authorization" type="string" placeholder="Bearer SEU_ACCESS_TOKEN" required="true">
+Token de autenticação no formato Bearer.
+</ParamField>
+
+#### Exemplo de Requisição
+
+<CodeGroup>
+
+```bash Curl
+curl --location 'https://api.robbu.global/v1/User?page=1' --header 'PrivateToken: seu_token_privado' --header 'Authorization: Bearer SEU_ACCESS_TOKEN'
+```
+
+```csharp C# HttpClient
+var client = new HttpClient();
+var request = new HttpRequestMessage(HttpMethod.Get, "https://api.robbu.global/v1/User?page=1");
+request.Headers.Add("PrivateToken", "seu_token_privado");
+request.Headers.Add("Authorization", "Bearer SEU_ACCESS_TOKEN");
+var response = await client.SendAsync(request);
+Console.WriteLine(await response.Content.ReadAsStringAsync());
+```
+
+```js JavaScript XHR
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://api.robbu.global/v1/User?page=1");
+xhr.setRequestHeader("PrivateToken", "seu_token_privado");
+xhr.setRequestHeader("Authorization", "Bearer SEU_ACCESS_TOKEN");
+xhr.send();
+```
+
+</CodeGroup>
+
+#### Exemplo de Resposta
+
+```json response.json
+{
+  "id": "abc123hash",
+  "username": "joaosilva",
+  "name": "João Silva",
+  "email": "joao@empresa.com"
+}
+```
+
+#### HTTP Status Codes
+
+| **Status** | **Descrição** |
+|-------------|----------------|
+| `200` | Sucesso. Lista de usuários retornada. |
+| `400` | Erro no request. Verifique os parâmetros enviados. |
+| `401` | Não autorizado. PrivateToken ou AccessToken inválido ou ausente. |
+| `404` | Endpoint incorreto. |
+
+---
+
+## Endpoint - Atualizar Usuário
+
+### Descrição
+Atualiza as informações de um usuário existente, identificando-o por seu `idHash`.
+
+### Endpoint
+```
+PUT https://api.robbu.global/v1/User/{idHash}
+```
+
+#### Headers
+
+<ParamField header="PrivateToken" type="string" placeholder="seu_token_privado" required="true">
+Token privado do cliente.
+</ParamField>
+
+<ParamField header="Authorization" type="string" placeholder="Bearer SEU_ACCESS_TOKEN" required="true">
+Token de autenticação Bearer.
+</ParamField>
+
+<ParamField header="Content-Type" type="string" placeholder="application/json" required="true">
+Define o formato JSON no corpo da requisição.
+</ParamField>
+
+#### Body
+
+<ParamField body="user_name" type="string" required>
+Nome completo do usuário.
+</ParamField>
+
+<ParamField body="name" type="string" required>
+Login do usuário.
+</ParamField>
+
+<ParamField body="email" type="string" required>
+Endereço de e-mail do usuário.
+</ParamField>
+
+<ParamField body="language" type="string" required>
+Idioma do ambiente. Valores aceitos: `en`, `pt_br`, `pt_pt`, `es`, `fr`.
+</ParamField>
+
+<ParamField body="Instagram" type="string">
+Instagram do usuário.
+</ParamField>
+
+<ParamField body="phone_WhatsApp" type="string">
+Número do WhatsApp em formato internacional (+55...).
+</ParamField>
+
+<ParamField body="status" type="string" required>
+Status do usuário. Valores aceitos: `S` (Ativo), `N` (Inativo).
+</ParamField>
+
+#### Exemplo de Requisição
+
+<CodeGroup>
+
+```bash Curl
+curl --location 'https://api.robbu.global/v1/User/abc123hash' --header 'Content-Type: application/json' --header 'PrivateToken: seu_token_privado' --header 'Authorization: Bearer SEU_ACCESS_TOKEN' --data '{
+  "user_name": "joaosilva",
+  "name": "João da Silva",
+  "email": "joao@empresa.com",
+  "language": "pt_br",
+  "Instagram": "@joaosilva",
+  "phone_WhatsApp": "+5511999999999",
+  "status": "S"
+}'
+```
+
+```csharp C# HttpClient
+var client = new HttpClient();
+var request = new HttpRequestMessage(HttpMethod.Put, "https://api.robbu.global/v1/User/abc123hash");
+request.Headers.Add("PrivateToken", "seu_token_privado");
+request.Headers.Add("Authorization", "Bearer SEU_ACCESS_TOKEN");
+var content = new StringContent("{\n  \"user_name\": \"joaosilva\",\n  \"name\": \"João da Silva\",\n  \"email\": \"joao@empresa.com\",\n  \"language\": \"pt_br\",\n  \"Instagram\": \"@joaosilva\",\n  \"phone_WhatsApp\": \"+5511999999999\",\n  \"status\": \"S\"\n}", null, "application/json");
+request.Content = content;
+var response = await client.SendAsync(request);
+Console.WriteLine(await response.Content.ReadAsStringAsync());
+```
+
+</CodeGroup>
+
+#### Exemplo de Resposta
+
+```json response.json
+{
+  "success": true,
+  "message": "Usuário atualizado com sucesso"
+}
+```
+
+#### HTTP Status Codes
+
+| **Status** | **Descrição** |
+|-------------|----------------|
+| `200` | Sucesso. Atualização concluída. |
+| `400` | Erro nos dados enviados. |
+| `401` | PrivateToken ou AccessToken inválido. |
+| `404` | Usuário não encontrado. |
+
+---
+
+## Regras de Negócio
+
+- Usuários internos da Robbu (`robbu dev`, `robbu suporte`, `robbu cs`, `robbu voice`) **não podem ser modificados**.  
+- Se o número de WhatsApp informado já estiver vinculado a outro usuário, será retornado erro.  
+- Caso o `idHash` informado seja inválido, será retornada a mensagem:  
+  `Não foi possível localizar o usuário. Por favor, verifique se o ID informado é válido.`
+- Caso o `name` informado já exista, será retornado erro:  
+  `Já existe um usuário com este Login.`
+- Caso o `PrivateToken` seja inválido, será retornado erro:  
+  `Revise as informações de autenticação. O Private Token informado é inválido.`
+
+---
+
+## Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="O que é a API de Usuário?">
+    É o serviço que permite consultar e atualizar informações dos usuários vinculados à sua conta Robbu, incluindo dados de perfil e status.
+  </Accordion>
+
+  <Accordion title="Posso atualizar qualquer usuário?">
+    Não. Usuários internos da Robbu (como suporte e CS) não podem ser alterados.
+  </Accordion>
+
+  <Accordion title="Onde encontro o meu PrivateToken?">
+    O PrivateToken está disponível no Invenio Center, em <strong>Configurações > Conta</strong>.
+  </Accordion>
+
+  <Accordion title="O token expira?">
+    Sim. O AccessToken possui tempo de expiração definido em segundos no campo <code>expires_in</code>. Você deve renová-lo via rota de login quando necessário.
+  </Accordion>
+
+  <Accordion title="Posso alterar o e-mail de um usuário existente?">
+    Sim, desde que o e-mail não esteja vinculado a outro usuário ativo no mesmo ambiente.
+  </Accordion>
+</AccordionGroup>
