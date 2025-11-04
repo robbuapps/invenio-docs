@@ -67,8 +67,8 @@ POST /v1/directmessage/whatsapp
 Request Body:
 ```json
 {
-  "recipient_number": "+5511999998888",
-  "whatsapp_sender_number": "+5500000000000",
+  "recipient_number": "5511999998888",
+  "whatsapp_sender_number": "5500000000000",
   "variables": {
     "header_key": "Var3",
     "header_value": "João Silva",
@@ -90,7 +90,7 @@ POST /v1/directmessage/sms
 Request Body:
 ```json
 {
-  "recipient_number": "+5511999998888",
+  "recipient_number": "5511999998888",
   "variable_values": {
     "Var1": "123456",
     "Var2": "João"
@@ -174,7 +174,7 @@ Para isso, você deve adicionar o objeto `callback_details`, conforme exemplo ab
 
 ```json
 {
-  "recipient_number": "+5511999998888",
+  "recipient_number": "5511999998888",
   "variable_values": {
     "Var1": "123456",
     "Var2": "João"
