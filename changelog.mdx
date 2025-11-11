@@ -5,6 +5,20 @@ mode: "center"
 
 <Update label="Novembro 2025 - 2.0.91" description="Invenio Live e Center.">
   
+## Análise Antivírus em Tempo Real para Mensagens Recebidas.
+Para reforçar a segurança do ambiente, o Invenio agora realiza uma verificação antivírus automática em todos os arquivos recebidos.
+Antes de serem armazenados ou exibidos, os anexos passam por uma análise via ClamAV, garantindo que nenhum conteúdo infectado seja processado ou disponibilizado para download.
+
+Se um arquivo for identificado como suspeito:
+
+- Ele será bloqueado automaticamente;
+
+- O sistema impedirá o download e exibirá uma mensagem informando que o arquivo está infectado;
+
+- Um evento de sistema será registrado para monitoramento de segurança.
+
+Essa atualização assegura que apenas arquivos limpos sigam no fluxo de mensagens, protegendo operadores, clientes e dados corporativos.
+
 ## Atualização no Flow: experiência mais prática para os operadores
 
 Atualização no Flow: experiência mais prática para os operadores
