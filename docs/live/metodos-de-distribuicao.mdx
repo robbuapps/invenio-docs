@@ -58,13 +58,19 @@ Configurações interligadas com esse método de distribuição:
 ## Tipos de Distribuição Preditiva:
 
 ### Média de Clientes Fidelizados
-Mantém a média de contatos fidelizados por usuário e distribui os contatos pendentes igualmente entre os usuários.
+Mantém a média de contatos fidelizados por usuário e prioriza a distribuição para operadores com menor número de clientes fidelizados.
 
 ### Média de Clientes Pendentes
-Distribui os contatos de forma igualitária com base na quantidade de contatos pendentes de cada usuário.
+Distribui os contatos favorecendo operadores com menos contatos pendentes em atendimento.
 
 ### Incentivar TMR (Tempo Médio de Resposta) Baixo
 A distribuição é feita de maneira a priorizar usuários com o menor TMR, ou seja, os que respondem mais rapidamente.
+
+
+> ⚠️ **Observação**: <br/>
+> A distribuição preditiva só é realizada automaticamente para operadores que possuem perfil de `Atendente`.<br/>
+> Operadores do tipo `Supervisor`, podem atender contatos normalmente, porém não recebem os contatos de forma automática.<br/>
+> Nesses casos, quando o contato precisa ser direcionado a um operador que não seja perfil tipo `Atendente`, o encaminhamento deve ser feito manualmente, seja pelo Invenio Live ou pelo Invenio Center, garantindo que o atendimento seja iniciado corretamente.
 
 ---
 

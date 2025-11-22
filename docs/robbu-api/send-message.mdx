@@ -16,7 +16,7 @@ Antes de realizar o envio de mensagens pela API, é necessário obter um token d
 login e deve ser utilizado na chamada da API SendMessage como um Bearer Token, funcionando como a autorização para que o disparo seja concluído
 com sucesso.
 
-> ⚠️ **Importante**:
+> ⚠️ **Importante**:<br/>
 > Caso o token não seja informado, ou esteja expirado, a API retornará o erro **401 Unauthorized** impedindo o envio da mensagem.
 
 O  usuário utilizado na requisição de login precisa ser do tipo **API**, garantindo a segurança e o correto funcionamento da integração.
@@ -148,6 +148,7 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 | **Text** | Conteúdo da mensagem em texto livre. Ignorado quando o envio utiliza **template HSM**. Só pode ser usado em contatos com janela de 24h aberta ([saiba mais](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)). |
 | **EmailSubject** | Usado apenas em mensagens enviadas por **e-mail**, deve ser preenchido com o título do e-mail. |
 | **Channel** | Define o canal de envio: `1 = E-mail`, `2 = SMS`, `3 = WhatsApp`. |
+| **attendantUserName** | Se preenchido, irá definir qual usuário estará fidelizado ao contato. |
 | **TemplateName** | Quando o envio é feito via **HSM**, deve ser preenchido com o nome do template. |
 | **TemplateParameters** | Personalização dos templates com variáveis dinâmicas. Veja abaixo. |
 | **Source** | Informações da **origem** da mensagem (linha de disparo). Veja abaixo. |
@@ -158,6 +159,12 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 | **UpdateIfExists** | Define se as informações do contato devem ser atualizadas (`true` ou `false`). |
 | **VoiceSettings** | Deve ser preenchido com o **Call ID de voz** nos fluxos do canal de voz. |
 | **Files** | Permite o envio de arquivos anexados. Veja abaixo. |
+
+> ⚠️ **Importante**:<br/>
+>
+> O parâmetro `text` é responsável pelo envio de mensagens livres aos contatos. Mesmo em cenários em que ele não é utilizado, como no disparo de templates por exemplo, esse campo é obrigatório e não deve ser removido do body da requisição.<br/>
+> Para esses cenários ele deve permanecer presente, ainda que vazio. Caso o parâmetro seja excluído, a API retornará o erro:<br/>
+>**"message": "Object reference not set to an instance of an object."**
 
 ---
 
@@ -197,6 +204,17 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 | **RecentContactLastHours** | Quantidade de horas a considerar para descartar o envio. |
 | **InAttendance** | `true`: descarta contatos em atendimento. <br/> `false`: envia mesmo que o contato esteja em atendimento. |
 
+
+> ⚠️ **Importante**:<br/>
+>
+> Os parâmetros `DiscardSettings` e `attendantUserName` possuem uma relação direta e devem ser configurados de forma alinhada para evitar bloqueios no envio de mensagens. A condição de descarte definida em `DiscardSettings`, especificamente o parâmetro `InAttendance`, atua como uma barreira de envio sempre que o sistema identifica que aquele contato está fidelizado a um operador em um determinado período de tempo.<br/>
+>
+> Por sua vez, o parâmetro `attendantUserName` é justamente o responsável por realizar essa fidelização do contato a um operador específico. Ou seja, ao definir um nome de operador em `attendantUserName`, o contato passa a ser reconhecido como estando em operação/atendimento.<br/>
+>
+> Dessa forma, sempre que `attendantUserName` for utilizado, é necessário garantir que, na configuração de `DiscardSettings`, o parâmetro `InAttendance` seja marcada como **false**. Caso essa condição permaneça como **true**, o envio será bloqueado e a API retornará o erro:<br/>
+> 
+> **message not sent: contact in attendance**
+
 ---
 
 ###  Contact (Contato)
@@ -219,7 +237,7 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 | **Base64**  | Código em base64 da mídia. |
 | **Name**    | Nome do arquivo com extensão (ex.: `boleto.pdf`). |
 
-> ℹ️ **Observação**:  
+> ℹ️ **Observação**: <br/> 
 > - Em **templates (HSM)** só é permitido **1 arquivo por disparo**.  
 > - Em **mensagens livres**, é possível enviar múltiplos arquivos (ex.: ZIP).  
 > - Apesar de permitido, o envio em ZIP pode não ser compatível com todos os modelos de celulares.  
@@ -240,7 +258,7 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
 | **404 Not Found** | URL incorreta.                                                          |
 | **500 Internal Server Error** | Erro interno da API.                                        |
 
-> ℹ️ **Observação**: É importante observar que a API não retorna mensagens de erro detalhadas em casos de falha de envio nos canais externos (como erros da Meta). Nesses casos, a validação deve ser feita diretamente no **Invenio Center**, onde estão disponíveis os logs e relatórios de entrega.
+> ℹ️ **Observação**:<br/> É importante observar que a API não retorna mensagens de erro detalhadas em casos de falha de envio nos canais externos (como erros da Meta). Nesses casos, a validação deve ser feita diretamente no **Invenio Center**, onde estão disponíveis os logs e relatórios de entrega.
 
 
 ## Exemplos de Requisições
