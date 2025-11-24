@@ -1,17 +1,16 @@
 ---
 title: "Métodos de distribuição"
 sidebarTitle: "Métodos de distribuição"
-description: "No Invenio Center, a distribuição dos atendimentos pode ser feita de maneira ***manual*** ou ***automática***. É uma funcionalidade que organiza a forma como os contatos são encaminhados 
-aos atendentes. Ela existe para garantir agilidade, equilíbrio na carga de trabalho da equipe e eficiência no tempo de resposta, adaptando-se tanto a operações simples quanto a estruturas mais complexas."
+description: "No Invenio Center, a distribuição dos atendimentos pode ser realizada de maneira manual ou automática. É um mecanismo corporativo que organiza como os contatos são encaminhados aos operadores, garantindo fluidez operacional, equilíbrio de cargas e eficiência no tempo de resposta."
 ---
 
 ## Acesso às configurações de distribuição de contatos
 
-Para acessar o painel de configurações do seu ambiente, siga o caminho:
+Para acessar o painel de configurações do ambiente:
 
 `Menu superior do usuário >> Configurações >> Gerenciar`
 
-[Acesse direto a configurações gerais da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+[Acesse direto as configurações gerais da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/distribuição/configcontadistribuicao.png" />
 
@@ -19,15 +18,15 @@ Para acessar o painel de configurações do seu ambiente, siga o caminho:
 
 ## Método de Distribuição por Segmento
 
-A plataforma permite definir um método de distribuição específico para cada segmento.
+É possível definir um método de distribuição específico para cada segmento.
 
-Para configurar acesse: `Invenio Center >> Recursos >> Segmentos`
+Para configurar:  
+`Invenio Center >> Recursos >> Segmentos`
 
-[Acesse direto ao painel de segmentos](https://inveniocenter.robbu.global/painel/segmentos)
+[Acesse direto o painel de segmentos](https://inveniocenter.robbu.global/painel/segmentos)
 
-Ao selecionar o segmento desejado, você pode **desabilitar** a utilização das configurações gerais da conta e escolher o método de distribuição que será aplicado exclusivamente àquele segmento.
-
-Dessa forma, todos os contatos atribuídos ao segmento seguirão as regras definidas diretamente em suas configurações, independentemente dos parâmetros gerais da conta.
+Ao selecionar o segmento desejado, você pode **desabilitar** o uso das configurações gerais e aplicar um método exclusivo.  
+Todos os contatos direcionados ao segmento seguirão apenas as regras ali configuradas.
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/distribuição/segmentosDistribuição.png" />
 
@@ -35,27 +34,44 @@ Dessa forma, todos os contatos atribuídos ao segmento seguirão as regras defin
 
 ## Distribuição Manual
 
-Usada para contas com **menor volume de atendimentos simultâneos** ou **trabalhos pontuais**. O usuário controla suas próprias responsabilidades.  
-Para utilizar essa funcionalidade, o atendente deve clicar no botão **Próximo**. Ao fazer isso, o contato é automaticamente **fidelizado ao atendente** que realizou a ação.  
+Indicada para operações com **baixo volume simultâneo** ou ações específicas.  
+Nesse formato, o próprio atendente aciona o botão **Próximo** para receber um novo contato, que fica **fidelizado** ao operador.
 
-Caso nenhuma configuração específica esteja habilitada no ambiente, o sistema adota **por padrão o modo manual**, preenchendo essa opção automaticamente.
+Caso nenhuma configuração especial esteja habilitada, o sistema adota **por padrão o modo manual**.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/distribuição/botaoProximo.png" />
 
 ---
 
 ## Distribuição Preditiva
 
-A **Distribuição Preditiva** foi desenvolvida para oferecer maior eficiência na gestão de grandes volumes de atendimento. Ela permite que os contatos sejam encaminhados de forma estratégica e automatizada, priorizando a agilidade e o aproveitamento inteligente da força de trabalho disponível. 
+A **Distribuição Preditiva** foi projetada para maximizar eficiência em ambientes de alto volume, automatizando o envio de contatos para os operadores mais adequados conforme critérios inteligentes predefinidos.
 
-Configurações interligadas com esse método de distribuição:
+### Configurações interligadas com esse método de distribuição
 
-- Limite máximo de pendência.
-- Quantidade máxima de contatos fidelizados.
-- Quantidade de contatos fidelizados em canais online/offline.
-- Tempo de castigo por atraso no atendimento.
+As regras abaixo influenciam diretamente o comportamento da distribuição automática:
+
+**Limite máximo de pendência**
+
+Quando o operador atinge o limite configurado de pendências, **não receberá novos contatos** até que esse número diminua.
+
+**Quantidade máxima de contatos fidelizados**
+
+Ao atingir o limite de fidelizações, o operador deixa de receber novos contatos até reduzir sua quantidade de fidelizados atual.
+
+**Quantidade de contatos fidelizados (online/offline)**
+
+Controla o volume de fidelizados de acordo com o status do operador.  
+Se o limite for atingido, **novas distribuições são bloqueadas** até que o cenário seja normalizado.
+
+**Tempo de castigo por atraso no atendimento**
+
+Caso o operador ultrapasse o tempo definido em *Tempo máximo de resposta de operadores logados*, ele entra em período de penalidade. Durante esse intervalo, **não recebe novos contatos**.
 
 ---
 
-## Tipos de Distribuição Preditiva:
+## Tipos de Distribuição Preditiva
 
 ### Média de Clientes Fidelizados
 Mantém a média de contatos fidelizados por usuário e prioriza a distribuição para operadores com menor número de clientes fidelizados.
@@ -67,38 +83,29 @@ Distribui os contatos favorecendo operadores com menos contatos pendentes em ate
 A distribuição é feita de maneira a priorizar usuários com o menor TMR, ou seja, os que respondem mais rapidamente.
 
 
-> ⚠️ **Observação**: <br/>
-> A distribuição preditiva só é realizada automaticamente para operadores que possuem perfil de `Atendente`.<br/>
-> Operadores do tipo `Supervisor`, podem atender contatos normalmente, porém não recebem os contatos de forma automática.<br/>
-> Nesses casos, quando o contato precisa ser direcionado a um operador que não seja perfil tipo `Atendente`, o encaminhamento deve ser feito manualmente, seja pelo Invenio Live ou pelo Invenio Center, garantindo que o atendimento seja iniciado corretamente.
+> ⚠️ **Observação**  
+> Apenas operadores com perfil **Atendente** recebem contatos automaticamente.  
+> Perfis **Supervisor** podem atender contatos, mas não entram na fila automática.
 
 ---
 
 ## Regras de Distribuição de Contatos
 
-### Contatos sem interação
-Quando um contato permanece sem interação por mais de 1 hora e 30 minutos, ele deixa de ser considerado para distribuição automática imediata.  
-A partir desse ponto, ele passa a ser elegível apenas por meio da **otimização da fila**, ou seja, será redistribuído com base em regras de balanceamento do sistema.  
+### **Contatos sem interação**
+Após **1h30min sem interação**, o contato deixa de ser elegível para distribuição imediata e passa a seguir apenas a **Otimização da Fila**.
 
-Esse intervalo de 1h30 foi definido para garantir foco em atendimentos ativos, evitando a sobrecarga da fila com conversas paradas.
+### **Regra de segmento**
+O sistema prioriza redistribuir o contato para o **último segmento associado**, garantindo continuidade.
 
-### Regra de segmento
-Dentro da lógica da Distribuição Preditiva, existe uma regra específica relacionada aos segmentos de atendimento.  
-Nessa configuração, o contato será sempre redistribuído para o **último segmento** ao qual esteve associado. Isso ajuda a manter a continuidade do atendimento dentro da equipe responsável.
+### **Alteração de segmento em contatos fidelizados**
+Se um contato fidelizado tiver seu segmento alterado, ele retorna automaticamente à fila — **somente quando o Modo de Transferência Rápida estiver ativo**.
 
-### Alteração de segmento em contatos fidelizados
-Quando um contato fidelizado tem seu segmento alterado, ele será automaticamente retornado à fila para redistribuição.  
-Essa ação garante que o contato seja encaminhado ao time correto, de acordo com a nova segmentação.
-
-> ⚠️ **Importante:** Esse comportamento só ocorre quando o **Modo de Transferência Rápida** está habilitado no ambiente.
-
-[Acesse a documentação de configurações gerais da conta para saber mais sobre transferência rápida](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta#modo-de-transfer%C3%AAncia-r%C3%A1pida)
+[Acesse a documentação sobre transferência rápida](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta#modo-de-transfer%C3%AAncia-r%C3%A1pida)
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/distribuição/img2distribuicao.png" />
 
-Ao acontecer, o sistema registra no histórico de fidelização a seguinte mensagem:  
-**Atendente (nome do atendente) abandonou o atendimento.**
-
+Registro no histórico:  
+**Atendente (nome) abandonou o atendimento.**
 
 ---
 
@@ -107,40 +114,55 @@ Ao acontecer, o sistema registra no histórico de fidelização a seguinte mensa
 - [Configurações Gerais da Conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
 - [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)  
 - [Filtros de Busca de Contatos](https://docs.robbu.global/docs/center/filtros-de-busca-de-contatos)  
-- [Otimização da Fila](https://docs.robbu.global/docs/center/otimizacao)  
+- [Otimização da Fila](https://docs.robbu.global/docs/center/otimizacao)
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
+
   <Accordion title="O que é distribuição automática de atendimentos?">
-    É o recurso que direciona contatos entre atendentes de forma estratégica, com base em critérios predefinidos. Pode funcionar de forma **manual** (controle direto do atendente) ou **preditiva** (automática e inteligente).
+    É o recurso que permite que os atendimentos sejam distribuídos de forma **automática e estratégica** entre os operadores, com base em critérios previamente configurados, como pendências, fidelizações e TMR.
   </Accordion>
-  <Accordion title="Quando devo usar a distribuição manual?">
-    Indicada para contas com **baixo volume de atendimentos simultâneos** ou para **ações pontuais**. Nesse modelo, o atendente precisa clicar em **Próximo** para receber novos contatos.
+
+  <Accordion title="Minha distribuição é automática, porém os usuários estão conseguindo puxar atendimentos. O que pode ser?">
+    O método de distribuição pode variar conforme o **segmento** ao qual o contato pertence.  
+    É importante verificar se o operador atende algum segmento configurado com **distribuição manual**, o que permite que ele utilize o botão **Próximo**, mesmo que a conta esteja em modo automático.
   </Accordion>
-  <Accordion title="Como funciona a fidelização de contatos na distribuição manual?">
-    Ao clicar em **Próximo**, o contato é automaticamente **fidelizado** ao atendente. Ele permanece sob responsabilidade desse atendente até uma nova redistribuição.
+
+  <Accordion title="Quando usar a distribuição manual?">
+    Ideal para ambientes com **menor demanda simultânea** ou para operações específicas. O operador solicita manualmente cada contato pelo botão **Próximo**.
   </Accordion>
+
+  <Accordion title="Como funciona a fidelização na distribuição manual?">
+    Ao clicar em **Próximo**, o contato é fidelizado ao operador até nova redistribuição.
+  </Accordion>
+
   <Accordion title="O que é Distribuição Preditiva?">
-    É um modo automático que distribui atendimentos com base em regras como limite de pendências, quantidade de fidelizados e **Tempo Médio de Resposta (TMR)**, priorizando agilidade e produtividade.
+    É um modo automático que distribui contatos com base em regras avançadas como pendências, fidelizações e desempenho de TMR, otimizando a produtividade da equipe.
   </Accordion>
-  <Accordion title="Quais são os tipos de Distribuição Preditiva disponíveis?">
-    - **Média de Clientes Fidelizados:** Equilibra atendimentos considerando os contatos já fidelizados.  
-    - **Média de Clientes Pendentes:** Distribui conforme os atendimentos em aberto.  
-    - **Incentivar TMR Baixo:** Dá prioridade a atendentes com respostas mais rápidas.
+
+  <Accordion title="Quais são os tipos de Distribuição Preditiva?">
+    - **Média de Clientes Fidelizados**  
+    - **Média de Clientes Pendentes**  
+    - **Incentivar TMR Baixo**
   </Accordion>
+
   <Accordion title="O que acontece com contatos sem interação por mais de 1h30?">
-    Esses contatos saem da fila de distribuição imediata e passam a ser tratados apenas pela **otimização da fila**, evitando que interações paradas impactem a fluidez do atendimento.
+    Eles deixam de entrar na distribuição imediata e seguem apenas pela **otimização da fila**.
   </Accordion>
-  <Accordion title="Como funciona a regra de segmento na redistribuição de contatos?">
-    O sistema redistribui o contato, sempre que possível, para o **último segmento** em que esteve, preservando a continuidade do atendimento.
+
+  <Accordion title="Como funciona a regra de segmento?">
+    O sistema tenta redistribuir o contato para o **último segmento** vinculado.
   </Accordion>
-  <Accordion title="O que acontece se o segmento de um contato fidelizado for alterado?">
-    Se o **Modo de Transferência Rápida** estiver ativado, o contato volta automaticamente para a fila e é redirecionado para o segmento correto, garantindo que o time responsável continue o atendimento.
+
+  <Accordion title="O que ocorre ao alterar o segmento de um contato fidelizado?">
+    Com o Modo de Transferência Rápida ativado, o contato retorna para a fila e é redistribuído para o segmento correto.
   </Accordion>
+
   <Accordion title="Posso configurar métodos de distribuição diferentes por segmento?">
-    Sim. É possível desabilitar as configurações gerais da conta em um segmento específico e aplicar um **método de distribuição exclusivo**, garantindo regras personalizadas para cada grupo de atendimento.
+    Sim. Segmentos podem utilizar configurações independentes das regras gerais da conta.
   </Accordion>
+
 </AccordionGroup>
