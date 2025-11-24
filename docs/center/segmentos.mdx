@@ -4,115 +4,268 @@ sidebarTitle: "Segmentos"
 description: "Os segmentos têm como propósito organizar o espaço de trabalho, vinculando os contatos ao grupo de atendimento correto, além de restringir o acesso dos operadores aos segmentos atribuídos."
 ---
 
-#  1. Criação de Segmentos
 
-Os segmentos, ou carteiras, podem ser criados e configurados por usuários com permissão de **Administrador** ou **Supervisor** através de **Recursos** na aba **Segmentos** da Invenio Center, selecionando a opção **Adicionar segmento**.
+Para acessar aos segmentos, siga o caminho: `Invenio Center > Recursos > Segmentos`
 
-## 1.1. Inativação de Segmento
 
-- Segmentos podem ser inativados, mas não excluídos.
-- Para inativar um segmento, acesse a opção **Editar** dentro do segmento desejado. Em seguida, clique na seta do campo **Situação** e selecione a opção **Inativo**.
-- Quando um segmento está inativo e um contato vinculado a ele entra em atendimento, o contato será enviado para a fila sem segmentação, **caso não haja ação na IDR que vincule o contato a outro segmento**.
-- Antes de inativar um segmento, é necessário verificar se não há vínculos desse segmento nas IDRs ativas do ambiente.
+Na tela inicial de segmentos, você pode filtrar por um segmento específico ou adicionar um novo segmento. Ao buscar um segmento, é possível visualizá-lo, editá-lo ou inativá-lo.
 
----
+Para acessar essas opções, basta clicar nos três pontos ao lado direito do segmento. 
 
-#  2. Configurações de Segmento
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/segmentos1.png" /> 
 
-## 2.1. Código Cliente
 
-- O Código Cliente é um identificador único para cada segmento.
-- A duplicidade do código pode gerar erros nos disparos via Carteiro Digital.
-- O código pode ser utilizado na API **Send Message** para definir o segmento ao qual o contato será atribuído.
+Os campos utilizados para edição e criação de segmentos são os mesmos, garantindo consistência e facilidade de uso. 
+A seguir, apresentamos um detalhamento completo de cada campo, para que você possa compreender melhor suas funcionalidades.
 
-## 2.2. Tempo Máximo de Permanência na IDR
+## Criação de Segmentos
 
-- Define o tempo máximo que um contato pode permanecer sem interação no ChatBot. Isso inclui tanto a falta de resposta da IDR quanto do contato.
-- O tempo pode ser definido de maneira global (para toda a conta) ou individualmente em cada segmento. O tempo mais curto entre as configurações será utilizado para o contato.
-- Quando o contato atingir o tempo máximo de permanência, a plataforma executa uma das seguintes ações:
-  - Enviar o contato para a fila de operação.
-  - Finalizar o atendimento.
-  - Enviar o contato para uma etapa específica da IDR.
 
-> **Caso a opção de enviar para uma etapa específica da IDR seja escolhida, é necessário definir a IDR e a etapa exata que o contato seguirá.**
+Os segmentos, ou carteiras, podem ser criados e configurados por usuários com permissão de **Administrador** ou **Supervisor**, selecionando a opção `+ Adicionar segmento`.
 
-## 2.3. Termos de IDR (Separados por vírgula)
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/adcSegmento.png" /> 
 
-- Termos configurados neste campo são usados para identificar e vincular o segmento a contatos com base nas mensagens enviadas.
-
-**Comportamento:**
-- A mensagem do contato é comparada com os termos do segmento até uma correspondência ser encontrada.
-- Se não houver correspondência, o resultado será **False** e o contato ficará **sem segmento**.
-- Cada segmento deve ter seus termos separados por vírgula, **sem espaços**. Para termos compostos, utilize o espaço entre as palavras.
-
-  **Exemplo:** `negociar,negociação,proposta,acordo`
 
 ---
 
-# 🛠️ 3. Configurações de Atendimento por Segmento
+## Configurações de Segmentos
 
-Essas configurações podem ser aplicadas tanto a nível de conta quanto de segmento individual. As configurações no segmento **sobrescrevem** as da conta quando habilitadas.
+### Nome do Segmento 
 
-## 3.1. Quantidade Máxima de Fidelizados por Atendente
+O Nome do Segmento é o campo utilizado para identificar e organizar os segmentos dentro da plataforma. Ele deve ser definido de forma clara e objetiva, representando o propósito ou o público daquele agrupamento de contatos. 
 
-- **Quantidade Máxima de contatos fidelizados:** Limita a quantidade de contatos fidelizados que um atendente pode receber por segmento, com base na distribuição automática. 
-- Se o atendente estiver em um segmento com distribuição manual, ele poderá puxar novos contatos. Nesse caso, as fidelizações mais antigas são desfeitas, e os novos contatos são enviados para a fila.
-- É importante lembrar que, para que esse parâmetro seja utilizado de forma efetiva, devemos deixar a opção **Manter a quantidade máxima de fidelizados** ativa nas configurações da conta.
+> Recomenda-se adotar uma nomenclatura padronizada, que facilite a busca e o entendimento por toda a equipe.  
+ 
+### Código Cliente 
+
+O Código Cliente é um **identificador único** atribuído a cada segmento, garantindo que ele seja reconhecido de forma exclusiva dentro da plataforma. É importante evitar duplicidades, pois códigos repetidos podem causar falhas nos disparos realizados por algumas aplicações como o **Carteiro Digital** e **API Send Message**. Além disso, o código também pode ser utilizado na API Send Message, permitindo definir diretamente o segmento ao qual um contato será vinculado. 
+
+### Situação 
+
+O campo **Situação** define se o segmento está `ativo` ou `inativo` dentro da plataforma. Por padrão, todo novo segmento é criado como ativo, permitindo seu uso imediato em atendimentos e configurações. No entanto, caso o segmento ainda não esteja pronto para utilização, é possível mantê-lo como inativo até que todas as definições estejam concluídas.  
+
+
+
+### Visível no Chat 
+
+A opção **Visível no Chat** está relacionada ao uso do WebChat. Quando essa configuração é habilitada, o segmento passa a ser exibido na lista de seleção apresentada aos contatos durante a interação inicial no WebChat. Assim, se nenhum segmento for previamente atribuído, o próprio contato poderá escolher a qual segmento deseja se vincular. Apenas os segmentos marcados como visíveis no chat serão exibidos nessa lista, permitindo ao administrador controlar quais opções estarão disponíveis ao público. 
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/visivelChat.png" /> 
+
+
+---
+
+## Configurações de IDR 
+
+### Tempo Máximo de Permanência na IDR 
+
+O Tempo Máximo de Permanência na IDR determina por quanto tempo um contato pode permanecer sem interação no ChatBot, seja por falta de resposta do próprio contato ou da IDR. Esse tempo pode ser configurado de maneira global, aplicando-se a toda a conta, ou individualmente, em cada segmento. Quando há duas configurações diferentes, **prevalece sempre o tempo mais curto entre elas**. 
+
+Ao atingir o tempo máximo de permanência, a plataforma executa automaticamente uma das seguintes ações: 
+- Enviar o contato para a fila de operação
+- Finalizar o atendimento
+- Redirecionar o contato para uma etapa específica da IDR.
+
+> Caso essa última opção seja escolhida, é necessário definir qual IDR e qual etapa o contato deve seguir. 
+
+### Termos de IDR (Separados por vírgula) 
+
+Os Termos de IDR configurados neste campo são utilizados para identificar e associar contatos a um segmento com base nas mensagens enviadas. A plataforma compara o conteúdo da mensagem recebida com os termos cadastrados no segmento até encontrar uma correspondência. Caso nenhuma correspondência seja identificada, o resultado será `False`, e o contato permanecerá sem segmentação. 
+
+> Para que essa vinculação funcione corretamente, é necessário que a IDR contenha a ação **“Vincular segmento ao contato (Identificar por mensagem do contato)”**. Essa configuração permite que o sistema identifique automaticamente o segmento desejado a partir da mensagem enviada pelo contato, relacionando-o aos termos previamente mapeados no segmento. 
+
+> Cada termo deve ser separado por vírgula, sem espaços entre eles. No caso de expressões compostas, o espaço entre as palavras deve ser mantido normalmente. 
+> **Exemplo:** negociar,negociação,proposta,acordo 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/IDRtempoMaximoSemInteracao.png" /> 
+ 
+---
+
+
+### Bloquear Envio de Arquivos por Extensão 
+
+A configuração **Bloquear Envio de Arquivos por Extensão**  permite restringir o envio de arquivos durante o atendimento, definindo quais extensões não serão aceitas. Dessa forma, é possível limitar o envio apenas aos tipos de arquivo realmente necessários para o processo de atendimento, como `.pdf`, `.mp4`, `.png`, `.jpg`, entre outros. Essa funcionalidade contribui para a segurança do ambiente e garante maior controle sobre os arquivos compartilhados entre atendentes e contatos. 
+
+### Limite para o Tamanho de Envio no Live 
+
+O campo Limite para o Tamanho de Envio no Live define o tamanho máximo permitido para os arquivos enviados pelos operadores durante o atendimento. O limite pode ser especificado em `kilobytes (KB)` ou `megabytes (MB)`, permitindo ajustar a capacidade de envio nas configurações do segmento ou respeitar o que for estabelecido nas configurações gerais da conta,  conforme a necessidade do atendimento e as políticas internas de uso. 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/ArquivoSegmento.png" /> 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/Arquivos&Distribuição.png" /> 
+
+
+---
+
+## Configurações de atendimento 
+
+As configurações de atendimento podem ser aplicadas tanto a nível de conta quanto individualmente por segmento. Quando habilitadas no segmento, essas configurações sobrescrevem as definições globais da conta. 
+ 
+
+### Quantidade Máxima de Fidelizados por Atendente 
+
+A Quantidade Máxima de Fidelizados por Atendente define o limite de contatos fidelizados que cada atendente pode receber dentro de um segmento, considerando a distribuição automática. 
+
+Nos casos em que o segmento utiliza distribuição manual, o atendente pode puxar novos contatos manualmente. Quando isso ocorre, as fidelizações mais antigas são automaticamente desfeitas, e os novos contatos são direcionados para o operador. 
+
+Para que esse parâmetro funcione corretamente, é indispensável manter a opção **“Manter a quantidade máxima de fidelizados”**  ativa nas configurações da conta.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/qtdFidelizadosSeg.png" /> 
+
+---
+
+## Métodos de Distribuição 
+
+A opção Método de Distribuição determina como os contatos serão distribuídos entre os atendentes dentro de um segmento.  
+
+Existem dois principais métodos disponíveis: **Distribuição Manual** e **Distribuição Preditiva**. 
+
+Na Distribuição Manual, o próprio atendente gerencia seus atendimentos, clicando no botão **Próximo** para receber o próximo contato disponível, que é automaticamente fidelizado a ele. Esse modelo é indicado para contas com menor volume de atendimentos simultâneos ou para operações pontuais, onde o controle individual é mais eficiente. 
+
+Já a Distribuição Preditiva é voltada para operações de maior escala, automatizando o encaminhamento dos contatos de forma estratégica, com base em critérios de desempenho e disponibilidade. Esse método considera parâmetros  como **limite máximo de pendências**, **quantidade de contatos fidelizados** , **tempo médio de resposta (TMR)** e **tempo de castigo por atraso**, buscando equilibrar a carga de trabalho e otimizar o desempenho da equipe. 
+
+**Dentro da Distribuição Preditiva, existem três tipos principais de lógica:**
+
+**Média de Clientes Fidelizados**: `Mantém a média de contatos fidelizados por usuário e prioriza a distribuição para operadores com menor número de clientes fidelizados.`
+
+**Média de Clientes Pendentes**: `Distribui os contatos favorecendo operadores com menos contatos pendentes em atendimento.`
+
+**Incentivar TMR Baixo** : `Direciona os novos contatos para atendentes com menor tempo médio de resposta, estimulando agilidade.`
+
+> Para mais detalhes sobre os tipos de distribuição e suas configurações avançadas, consulte a documentação completa sobre: [Métodos de distribuição - Invenio Center](https://docs.robbu.global/docs/live/metodos-de-distribuicao)
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/DistribuiçãoSegmentos.png" /> 
+
+ 
+ 
+---
+
+##  Inativação de Segmento
+
+Os segmentos podem ser inativados, mas não excluídos. Para realizar a inativação, acesse a opção **Editar** no segmento desejado, clique na seta do campo **Situação** e selecione **Inativo**. 
+
+Uma outra opção possível é inativar diretamente pela página principal de segmentos, clicando nos três pontos ao lado direito do segmento e escolhendo a opção **Inativar**. 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/inativar1.png" /> 
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/inativar2.png" /> 
+
+> ⚠️  **Importante**: <br/>
+> - Quando um segmento estiver inativo e um contato vinculado a ele entrar em atendimento, o contato será direcionado para a fila sem segmentação, caso não exista nenhuma ação configurada na IDR que o associe a outro segmento. <br/>
+> - Como boa prática, recomenda-se realizar a importação de um mailing atualizado antes da inativação, garantindo que os contatos sejam devidamente realocados em segmentos ativos. <br/>
+> - Por fim, é essencial verificar se o segmento não está vinculado a IDRs ativas no ambiente. Caso esteja, é necessário remover essa ação antes de prosseguir, a fim de evitar que contatos sejam direcionados a um segmento que já não está ativo. 
+ 
+
+---
+
+## 🔗 Links e assuntos relacionados
+
+- [Métodos de Distribuição (Invenio Live)](https://docs.robbu.global/docs/live/metodos-de-distribuicao)
+- [Criação de Contatos no Invenio Center](https://docs.robbu.global/docs/center/criacao-de-contatos-invenio-center)
+- [Fila de Atendimento](https://docs.robbu.global/docs/center/fila-de-atendimento)
+- [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)
+- [API Send Message](https://docs.robbu.global/docs/robbu-api/send-message)
+
+---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="O que são os segmentos e qual é sua função?">
-    Os segmentos são grupos que organizam o espaço de trabalho, vinculando contatos ao grupo de atendimento correto e restringindo o acesso dos operadores aos segmentos atribuídos.
+
+  <Accordion title="O que são segmentos e qual é sua finalidade na plataforma?">
+    Os segmentos são agrupamentos utilizados para organizar o espaço de trabalho, vinculando cada contato ao grupo de atendimento correto.  
+    Além disso, também restringem o acesso dos operadores aos grupos (segmentos) aos quais estão autorizados, garantindo governança e controle operacional.
   </Accordion>
 
-  <Accordion title="Quem pode criar segmentos?">
-    Somente usuários com permissão de **Administrador** ou **Supervisor** podem criar e configurar segmentos.
+  <Accordion title="Quem pode criar ou editar um segmento?">
+    Apenas usuários com permissão de **Administrador** ou **Supervisor** podem criar, configurar ou editar segmentos no Invenio Center.
   </Accordion>
 
-  <Accordion title="Como criar um segmento?">
-    Para criar um segmento, acesse a aba **Segmentos** na Invenio Center, dentro de **Recursos**, e selecione a opção **Adicionar segmento**.
+  <Accordion title="Como acessar a área de segmentos?">
+    Para acessar os segmentos, siga o caminho:  
+    **Invenio Center > Recursos > Segmentos**.
+  </Accordion>
+
+  <Accordion title="O que é o Código Cliente e por que ele é importante?">
+    O Código Cliente é um **identificador único** de cada segmento.  
+    Ele evita duplicidades, impede falhas nos disparos do **Carteiro Digital** e da **API Send Message**, e pode ser utilizado diretamente na API para direcionar o contato a um segmento específico.
+  </Accordion>
+
+  <Accordion title="O que significa a opção 'Visível no Chat'?">
+    Essa opção determina se o segmento será exibido para o contato no WebChat.  
+    Quando habilitada, o segmento aparece na lista inicial de seleção, permitindo que o próprio usuário defina a qual grupo deseja se vincular.
+  </Accordion>
+
+  <Accordion title="Como funciona o Tempo Máximo de Permanência na IDR?">
+    Esse campo define quanto tempo um contato pode permanecer sem interação no ChatBot.  
+    Ao atingir o tempo configurado, o sistema pode:  
+    - Enviar o contato para a fila de operação;  
+    - Finalizar o atendimento;  
+    - Redirecionar para uma etapa específica da IDR.  
+    Caso existam tempos diferentes entre conta e segmento, **sempre prevalece o menor**.
+  </Accordion>
+
+  <Accordion title="O que são Termos de IDR e como configurá-los?">
+    Os termos são palavras ou expressões usadas para identificar o segmento a partir da mensagem enviada pelo contato.  
+    Devem ser separados por vírgula, sem espaços, e podem ser expressões compostas.  
+    Exemplo: `negociar,negociação,proposta,acordo`  
+    Se não houver correspondência, o resultado será **False**, e o contato ficará sem segmentação.
+  </Accordion>
+
+  <Accordion title="O que acontece se o contato enviar uma mensagem que não corresponde aos Termos de IDR?">
+    Quando não há correspondência, o sistema retorna **False** e o contato permanece **sem segmento**, até que outra ação de IDR o direcione a um grupo específico.
+  </Accordion>
+
+  <Accordion title="O que significa bloquear envio de arquivos por extensão?">
+    Essa funcionalidade impede que operadores ou contatos enviem arquivos com determinadas extensões durante o atendimento.  
+    Ajuda no controle de segurança e evita recebimento de arquivos fora do padrão necessário, como `.zip`, `.exe` ou outros formatos restritos.
+  </Accordion>
+
+  <Accordion title="Para que serve o limite de tamanho de envio no Live?">
+    O limite define o tamanho máximo permitido para arquivos enviados pelos operadores.  
+    Pode ser configurado por segmento ou seguir os padrões definidos nas configurações globais da conta.
+  </Accordion>
+
+  <Accordion title="Como funciona a Quantidade Máxima de Fidelizados por Atendente?">
+    Esse parâmetro estabelece o limite de contatos fidelizados que um atendente pode manter dentro de um segmento.  
+    Em distribuição manual, caso o atendente puxe novos contatos, as fidelizações mais antigas são desfeitas automaticamente.
+  </Accordion>
+
+  <Accordion title="Por que é importante manter a opção 'Manter a quantidade máxima de fidelizados' ativa?">
+    Essa configuração garante que o limite de fidelizações seja respeitado pela plataforma.  
+    Sem ela, a limitação configurada por segmento não será aplicada corretamente.
+  </Accordion>
+
+  <Accordion title="Quais são os métodos de distribuição disponíveis?">
+    Existem dois métodos principais:  
+    - **Distribuição Manual**: o operador clica em **Próximo** para receber contatos.  
+    - **Distribuição Preditiva**: o sistema distribui automaticamente considerando critérios como pendências, TMR e fidelizações.  
+    A distribuição preditiva possui três lógicas:  
+    - *Média de Clientes Fidelizados*  
+    - *Média de Clientes Pendentes*  
+    - *Incentivar TMR Baixo*
+  </Accordion>
+
+  <Accordion title="O que acontece quando um segmento é inativado?">
+    Um segmento inativo não pode ser utilizado para novos atendimentos.  
+    Contatos vinculados a ele serão enviados para a fila sem segmentação, a menos que a IDR possua ações específicas para realocá-los.  
+    Antes de inativar, recomenda-se:  
+    - Importar um mailing atualizado;  
+    - Garantir que o segmento não esteja vinculado a IDRs ativas.
   </Accordion>
 
   <Accordion title="É possível excluir um segmento?">
-    Não, os segmentos não podem ser excluídos, mas podem ser inativados.
+    Não. Segmentos não podem ser excluídos, apenas inativados.  
+    Essa abordagem evita perda de histórico e garante integridade nos fluxos de atendimento.
   </Accordion>
 
   <Accordion title="Como inativar um segmento?">
-    Para inativar um segmento, clique em **Editar** dentro do segmento desejado, depois selecione **Inativo** no campo **Situação**.
+    A inativação pode ser feita de duas formas:  
+    - Acessando **Editar** no segmento e mudando o campo Situação para **Inativo**;  
+    - Diretamente na listagem de segmentos, clicando nos três pontos e selecionando **Inativar**.
   </Accordion>
 
-  <Accordion title="O que acontece quando um segmento é inativo?">
-    Quando um segmento é inativo, os contatos vinculados a ele serão enviados para a fila sem segmentação, a menos que haja uma ação na IDR que vincule o contato a outro segmento.
-  </Accordion>
-
-  <Accordion title="O que é o Código Cliente e como ele é utilizado?">
-    O Código Cliente é um identificador único para cada segmento. Ele é usado na API **Send Message** para atribuir contatos a um segmento e evita a duplicidade que pode gerar erros nos disparos via Carteiro Digital.
-  </Accordion>
-
-  <Accordion title="O que é o Tempo Máximo de Permanência na IDR e como funciona?">
-    O **Tempo Máximo de Permanência** define o tempo que um contato pode permanecer sem interação no ChatBot, tanto por falta de resposta da IDR quanto do contato. Ao atingir o tempo, a plataforma pode: enviar o contato para a fila de operação, finalizar o atendimento ou enviar o contato para uma etapa específica da IDR.
-  </Accordion>
-
-  <Accordion title="Como configurar os Termos de IDR em um segmento?">
-    Os termos são usados para vincular um segmento a contatos com base nas mensagens enviadas. Devem ser separados por vírgula, sem espaços, e podem ser compostos (por exemplo, `negociar,negociação,proposta,acordo`).
-  </Accordion>
-
-  <Accordion title="O que acontece se não houver correspondência entre os termos de IDR e a mensagem do contato?">
-    Se não houver correspondência, o resultado será **False** e o contato ficará **sem segmento**.
-  </Accordion>
-
-  <Accordion title="Como configurar a quantidade máxima de fidelizados por atendente?">
-    Esse parâmetro limita a quantidade de contatos fidelizados que um atendente pode receber por segmento. Se o atendente estiver em um segmento com distribuição manual, ele poderá puxar novos contatos, desfazendo as fidelizações mais antigas.
-  </Accordion>
-
-  <Accordion title="O que acontece quando a configuração de **Quantidade Máxima de Fidelizados** está ativa?">
-    Quando essa configuração está ativa, é importante manter a opção **Manter a quantidade máxima de fidelizados** nas configurações da conta para que a limitação seja aplicada corretamente.
-  </Accordion>
-
-  <Accordion title="Como a configuração de segmento influencia o atendimento?">
-    As configurações de atendimento podem ser aplicadas tanto a nível de conta quanto de segmento individual, sendo que as configurações no segmento **sobrescrevem** as da conta quando habilitadas.
-  </Accordion>
 </AccordionGroup>
 
 
