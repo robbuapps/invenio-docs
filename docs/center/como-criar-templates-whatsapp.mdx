@@ -4,164 +4,455 @@ sidebarTitle: "Como criar Templates de WhatsApp"
 description: "Aprenda a criar templates de mensagem no WhatsApp utilizando o Invenio Center e aproveite ao máximo os recursos disponíveis."
 ---
 
-### Acesse o menu de templates
+
+## O que são Templates de WhatsApp 
+
+Os templates de WhatsApp são mensagens **pré-aprovadas** pela Meta utilizadas para iniciar conversas com clientes fora da janela de 24 horas de atendimento ou para o envio de notificações automáticas. Eles permitem que empresas mantenham uma comunicação profissional
+ e padronizada, garantindo conformidade com as políticas da plataforma. Esses modelos podem incluir variáveis personalizáveis, como nome, data ou número de pedido, tornando a comunicação mais dinâmica e direcionada.
+
+
+> Acesse e saiba mais: <br/>
+> [Documentação oficial da Meta - Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines?locale=pt_BR)
+> <br/>
+> [Sessão de 24 Horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)
+> <br/>
+> [Campanhas Whatsapp](https://docs.robbu.global/docs/center/campanhas-de-whatsapp)
+
+---
+
+
+### Acesso ao Painel de Templates
 
 Navegue até:
 
-**Canais → WhatsApp → Selecione a WABA desejada**
+`Recursos > Canais > WhatsApp > Selecione a WABA desejada`
 
-![Tela de seleção da WABA](https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png)
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/RecursosCanaisWhatsapp.png" />
 
-Clique em **"Template"** e depois em **"Criar"**.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/wabas.png" />
+
+Selecione a opção `Templates > + Criar template`
 
 ![Botão Criar Template](https://robbublob.blob.core.windows.net/docs/changelog/templates.png)
 ![Botão Criar Template](https://robbublob.blob.core.windows.net/docs/changelog/criartemplate.png)
 
+
+> 🚨 **Importante:**  
+> Caso o botão **“Criar Template”** não esteja visível, será necessário ajustar as permissões associadas ao perfil do usuário.  
+><br/>
+> **Caminho:**  
+> `Invenio Center > Meu Perfil > Editar > Permissões de Página > Habilitar permissões relacionadas a Template`
+><br/>
+> Se a habilitação precisar ser aplicada ao perfil de outro usuário sem vínculo direto ao seu, acesse a aba **“Usuários”** no Invenio Center e siga o mesmo procedimento para o perfil correspondente.
+
+---
+
 ### Preencha as informações iniciais
 
-Escolha a **categoria**, **nome do template** (sem acentos ou espaços) e o **idioma**.
+Escolha a **Categoria**, **Nome do template** e o **Idioma**.
 
-![Formulário inicial](https://robbublob.blob.core.windows.net/docs/criartemplate2.png)
 
->  O nome do template não pode conter acentos ou espaços.
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/paginainicialtemplates.png" />
 
----
 
-##  Estrutura do Template
+## Nome e Idioma do Template
 
-### Header (opcional)
+Após definir a categoria, é necessário configurar o **Nome** e o **Idioma** do template. Observe as seguintes orientações:
 
-Você pode adicionar um cabeçalho com:
-
-- Texto (até 60 caracteres), ou
-- Mídia: imagem, vídeo ou documento.
-
-![Exemplo de Header](https://robbublob.blob.core.windows.net/docs/criartemplate3.png)
+> 🚨 **Importante:** <br/>
+> - O nome do template **não pode conter acentos ou espaços**. Utilize apenas letras, números e underscores (`_`) quando necessário.
+> - O idioma deve ser selecionado conforme o perfil do público-alvo, garantindo que a mensagem seja exibida corretamente aos destinatários.
+> - Recomenda-se  que **cada template seja criado com um nome único**, garantindo boas práticas de governança e facilitando a localização e utilização dentro da plataforma.
 
 ---
 
-### Corpo (obrigatório)
 
-Este é o corpo principal da mensagem. Pode conter:
+## Categoria do Template
 
-- Texto com até **1.024 caracteres**
-- Emojis
-- Variáveis: `{{1}}`, `{{2}}`, etc.
+Inicialmente, é necessário selecionar a categoria do template que será criado.  **WhatsApp Business API** classifica os templates em três categorias principais, cada uma direcionada a um propósito específico:
 
+### Marketing
+Mensagens orientadas a promoções, ofertas, lançamentos de produtos ou campanhas publicitárias.
 
-![Exemplo de Body](https://robbublob.blob.core.windows.net/docs/body.png)
+### Utilidade
+Mensagens de caráter informativo ou transacional, como confirmações de pedidos, atualizações de status, lembretes e notificações de serviços.
 
->  Não misture múltiplos formatos em uma única palavra (negrito + itálico, por exemplo).
+### Autenticação
+Mensagens utilizadas para verificação de identidade, autenticação de login ou recuperação de senha.
 
-As variáveis servem para personalizar a mensagem com dados como nome, endereço, contrato etc.
-
----
-
-### Rodapé (opcional)
-
-Texto pequeno e discreto (até **60 caracteres**), com cor e tamanho reduzidos.
-
-![Exemplo de Footer](https://robbublob.blob.core.windows.net/docs/rodape.png)
+> ⚠️ **Observação:** <br/>
+A escolha correta da categoria é essencial para garantir conformidade com as diretrizes da Meta e evitar rejeições. O conteúdo do template deve estar alinhado à finalidade declarada.
 
 ---
 
-### Botões (opcional)
+## Tipo de Template
 
-Você pode adicionar botões de dois tipos:
+Após definir a categoria do template, para as categorias **Marketing** e **Utilidade**, você precisará escolher também o tipo de template que deseja criar. Existem duas opções disponíveis:
 
-#### 1. Quick Reply (resposta rápida)
+### Customizado
+Permite criar mensagens adaptadas às necessidades específicas da sua empresa, ideais para ofertas promocionais, anúncios e campanhas de engajamento. Este tipo de template oferece maior flexibilidade na personalização do conteúdo, aumentando o reconhecimento da marca e a interação com os clientes.
 
-Retornam o texto do botão como resposta.
+### Carrossel
+É um template mais estruturado que permite incluir até 10 itens, podendo conter imagens, títulos, descrições e botões. O formato carrossel é indicado para apresentar múltiplas opções de produtos ou serviços de forma visualmente atraente, proporcionando uma experiência mais interativa e dinâmica para o usuário.
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/detalhesCategoria.png" />
+
+
+> ⚠️ **Observação:** <br/>
+Escolher corretamente o tipo de template garante que a mensagem seja entregue de forma eficaz e de acordo com o objetivo da sua comunicação.
+
+
+---
+
+## Como Criar um Template Customizado
+
+Os templates customizados permitem criar mensagens adaptadas às necessidades da sua empresa, oferecendo flexibilidade para campanhas promocionais, anúncios e comunicações com os clientes. Ao criar um template, você poderá personalizar **Cabeçalho**, **Corpo**, **Rodapé** e **Botões**, seguindo as diretrizes da Meta para aprovação.
+
+
+
+## Cabeçalho (opcional)
+
+O cabeçalho é a primeira parte do template e pode ser usado para destacar informações importantes ou elementos visuais que chamem atenção do usuário. Ele pode conter:
+
+- Texto simples (até 60 caracteres)
+- Imagem
+- Documento
+- Vídeo
+- Localização
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/cabecalho.png" />
+
+> O cabeçalho certo ajuda a contextualizar a mensagem e aumenta a efetividade da comunicação.
+
+
+## Corpo da Mensagem
+
+É fundamental que o texto do corpo do template respeite as especificações da Meta, garantindo que a mensagem seja aprovada e exibida corretamente aos usuários. O corpo da mensagem é onde você cria a comunicação principal com os clientes e deve ser claro, objetivo e direcionado à ação que deseja que o usuário realize.
+
+### Algumas regras importantes a serem observadas:
+
+- O texto deve estar no idioma selecionado durante a criação do template.
+- O limite máximo de caracteres é 1024.
+- É possível incluir variáveis (`{{1}}`, `{{2}}`, `{{3}}`) para personalização dinâmica. Para isso, basta clicar no botão `“Variável”` e fornecer um exemplo de preenchimento. Para garantir que a variável foi criada corretamente, verifique: 
+
+  > - Se na pré-visualização do template a variável aparece sombreada em cinza claro.  
+  > - Se foi solicitado um exemplo de preenchimento para a variável.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/corpodamensagem.png" />
+
+- Por padrão da Meta, o corpo do template **não pode iniciar ou finalizar** com uma variável.
+- O texto pode ser formatado com negrito, itálico, tachado ou monospace, e também é permitido o uso de emojis.
+- Mantenha o texto com tamanho adequado para facilitar a leitura em dispositivos móveis.
+- Devemos respeitar a ordem de preenchimento dos campos.
+
+> Seguindo essas orientações, sua mensagem ficará clara, interativa e em conformidade com as políticas da Meta, garantindo uma comunicação eficiente e profissional.
+
+
+---
+
+## Rodapé (opcional)
+
+O rodapé permite incluir informações adicionais de forma discreta, como avisos legais ou instruções rápidas:
+
+- Texto pequeno e discreto, até 60 caracteres.
+
+O texto do rodapé aparece ao final da mensagem em tonalidade mais clara, mantendo o foco no corpo da mensagem.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/rodape.png" />
+
+---
+
+## Botões (opcional)
+
+Os templates customizados permitem incluir botões interativos para facilitar a ação do usuário. É possível mesclar botões de resposta rápida e botões de ação em um mesmo template, respeitando os limites de cada tipo.
+
+###  Botões de resposta rápida
+
+Os botões de resposta rápida retornam o texto do botão como resposta automática ao usuário e são ideais para ações simples e objetivas dentro da conversa.
 
 - Máximo de 3 botões por template
-- Máximo de 20 caracteres por botão
+- Título do botão: até 25 caracteres
 - Não aceita emojis, variáveis ou formatação
 
-![Exemplo de Quick Reply](https://robbublob.blob.core.windows.net/docs/botoes.png)
+
+### Botões de ação
+
+Os botões de ação direcionam o usuário para uma ação externa e podem ser classificados em quatro tipos:
+
+### Visitar Website
+
+- Título do botão: até 25 caracteres  
+- Pode ser configurado com URL estática ou URL dinâmica  
+  - **URL Estática** (ex: https://robbu.global)  
+  - **URL Dinâmica** (ex: https://youtube.com/{{1}})  
+- Limite: até 2 botões de visitar website por template  
+
+### Ligar via WhatsApp
+
+- Permite personalizar o título do botão (até 25 caracteres)  
+- Direciona diretamente para uma ligação WhatsApp  
+
+### Ligar via telefone
+
+- Permite personalizar o título do botão (até 25 caracteres)  
+- É necessário informar o número de telefone (até 20 dígitos) para a chamada  
+- Apenas 1 botão de ligação por template  
+
+### Copiar código de oferta
+
+- O título do botão é padrão: **“Copiar código”**  
+- Permite adicionar um exemplo de código com até 15 caracteres  
+- Apenas 1 botão de copiar código por template  
+
+Além dos limites específicos de cada tipo de botão, é importante destacar que um template customizado permite, no máximo, **três botões no total**. Não é possível ultrapassar esse limite, mesmo mesclando botões de resposta rápida e botões de ação.
+
+Essa estrutura garante que cada botão seja configurado corretamente, respeitando os limites e características específicos de cada tipo, aumentando a efetividade da interação e mantendo a conformidade com as políticas da Meta.
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/botoes.png" />
 
 ---
 
-#### 2. Call to Action (CTA)
+## Pré-visualização do Template
 
-Botões que direcionam o usuário para:
+Antes de finalizar a criação do template, você pode visualizar como sua mensagem será exibida para o usuário final. A pré-visualização, disponível no lado direito da tela, atualiza automaticamente todas as alterações feitas no corpo da mensagem, mídias, rodapé e botões, permitindo que você confira em tempo real o resultado final.
 
-- Telefone
-- URL Estática (ex: https://robbu.global)
-- URL Dinâmica (ex: https://youtube.com/{{1}})
+Dessa forma, é possível verificar se todas as variáveis estão funcionando corretamente e garantir que o template esteja configurado de forma clara e precisa antes do envio.
 
->  Para URL dinâmica, você deve fornecer um exemplo de preenchimento.
 
-![Exemplo CTA](https://robbublob.blob.core.windows.net/docs/resprapida.png)  
-![Exemplo de URL dinâmica](https://robbublob.blob.core.windows.net/docs/urldinamica.png)
 
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/HKAKc8CHkOo"
-  title="YouTube video player"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/previsualizacao.png" /> 
 
->  Você só pode usar **um tipo de botão por template**.
+
+
+Após concluir todas as configurações do template, clique em **“Criar template”** para enviar o modelo à Meta. Aguarde a aprovação antes de começar a enviar as mensagens aos clientes. Caso o template seja rejeitado, revise os campos, ajuste o conteúdo conforme as diretrizes da plataforma e envie novamente, garantindo que todas as regras da Meta sejam atendidas.
+
+
 
 ---
 
-##  Visualize sua mensagem
+## Como Criar um Template de Carrossel
 
-Veja a prévia do seu template no canto superior direito da tela.
+O template de carrossel permite criar uma sequência de cartões interativos que o usuário pode deslizar entre as várias opções inseridas dentro de uma mesma mensagem. Ele é ideal para promoções, catálogos, produtos ou qualquer conteúdo que possa ser apresentado em formato de cartões, oferecendo uma experiência mais dinâmica para o usuário.
 
-![Pré-visualização do Template](https://robbublob.blob.core.windows.net/docs/template5.png)
+
+
+## Corpo do Carrossel
+
+O template de carrossel também possui um corpo de mensagem inicial, que funciona da mesma forma que o corpo de templates customizados. Ou seja, você pode criar o texto principal da mensagem respeitando as especificações da Meta, como idioma, limite de caracteres, variáveis, formatação de texto (negrito, itálico, tachado, monospace) e uso de emojis. Para mais detalhes, consulte a seção de Corpo da Mensagem do template customizado. (linkar)
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/corpocarrossel.png" /> 
+
+
+## Cartões do Carrossel
+
+Cada carrossel pode conter de **1 a 10 cartões**, e cada cartão deve conter:
+
+### Imagem
+Exemplo da imagem que será exibida no cartão.
+
+### Mensagem do corpo do cartão
+Até **160 caracteres**, seguindo as mesmas regras de formatação do corpo principal.
+
+### Botões  
+Cada cartão deve ter **no mínimo 1 botão e no máximo 2**, sendo permitidos apenas os seguintes tipos:
+
+- **Botão customizado**  
+- **Botão “Visitar Website”** (estático ou dinâmico, conforme explicado no guia de Botões (link))
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/carrossel1.png" /> 
+
+Não é possível criar um cartão sem botão, e nenhuma outra opção de botão é permitida dentro do template de carrossel.
+
+O conjunto de cartões forma a experiência interativa do carrossel, permitindo que o usuário deslize entre as opções, visualizando imagens, mensagens e botões de ação de maneira clara e objetiva.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/carrossel2.png" /> 
+
+
+
+Após configurar o corpo da mensagem e todos os cartões do carrossel, visualize o template na pré-visualização, garantindo que textos, imagens, botões e variáveis estejam corretos e funcionando como esperado. Com tudo conferido, clique em **“Criar template”** para enviar o modelo à Meta. Aguarde a aprovação antes de iniciar o envio das mensagens aos usuários. Caso o template seja rejeitado, revise os campos, ajuste o conteúdo conforme as diretrizes da plataforma e envie novamente.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/finalizaCarrossel.png" /> 
+
+
 
 ---
 
-##  Finalize o cadastro
+## Como Criar um Template de Autenticação
 
-Clique em **"Criar template"** e aguarde a aprovação da Meta.
+O template de autenticação possui uma estrutura própria e fixa, projetada para envio de códigos de verificação de forma segura e eficiente. Ele permite algumas configurações específicas que devem ser observadas durante a criação.
+
+
+
+## Corpo da Mensagem
+
+O corpo do template contém uma variável padrão que deve ser preenchida com o código de verificação. Você pode optar por adicionar uma recomendação de segurança ao final da mensagem, que exibirá o texto: **“Para sua segurança, não compartilhe este código”.**  
+Caso essa opção não seja selecionada, a mensagem exibirá apenas: `"Seu código de verificação é {{1}}"`.
+
+
+
+## Botão de Copiar Código
+
+Todo template de autenticação possui um botão de ação que permite ao usuário copiar o código de verificação. As opções desse botão incluem:
+
+- **Texto do botão:** Personalizável até 25 caracteres. Caso não deseje personalizar, por padrão a plataforma irá preencher esse botão com o texto **“Copiar código”**.
+- **Tempo de expiração do código:** O campo é opcional, se configurado, o código só poderá ser copiado dentro do período definido; após o tempo expirado, o botão desaparece e uma mensagem é exibida informando que o código expirou.  
+  Ao ativar essa opção, um alerta será exibido informando que o código expira em **“x minutos”**.
+
+
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/autenticacao1.png" /> 
+
+
+
+
+## Configurações Avançadas
+
+Na aba de configurações avançadas, é possível definir um período de validade personalizado para o envio do template. Isso significa que, caso o envio da mensagem falhe, a Meta tentará novas tentativas dentro do período definido.
+
+Por exemplo, se você configurar **10 minutos**, e a mensagem não for entregue nesse intervalo, o envio será cancelado e o template será desconsiderado.
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/autenticacao2.png" />
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/autenticacao3.png" />
+
+
+Após configurar todas as opções do template de autenticação, visualize a mensagem na pré-visualização para conferir se o código, o botão e as recomendações de segurança estão corretos. Com tudo conferido, clique em **“Criar template”** e aguarde a aprovação da Meta.
+
+A criação correta do template garante que ele seja enviado de forma segura, personalizada e confiável, assegurando que os códigos de verificação cheguem corretamente aos usuários.
+
+
+## Finalização
+
+> ⚠️ **Observação:** <br/>
+> Após a finalização dos templates, carrossel e templates de autenticação, o status de qualidade permanecerá como `UNKNOWN (PENDING)` até que a Meta conclua a validação e formalize a aprovação.
+> Após aprovado, o status de qualidade será atualizado para `UNKNOWN (APPROVED)`.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/menu.png" />
+
+Ao clicar no menu de **três pontinhos** localizado ao lado do template, são disponibilizadas as seguintes ações:
+
+**Editar:** permite ajustar o conteúdo com as variáveis do sistema, configurações e propriedades do template já criado, mantendo sua estrutura principal e possibilitando o envio correto.
+
+**Histórico do status:** exibe o registro completo de alterações de status do template, incluindo datas, mudanças de qualidade e aprovações.
+
+**Vincular números:** habilita a associação do template a números específicos, garantindo sua utilização nos fluxos autorizados.
+
+**Vincular segmentos:** possibilita relacionar o template a segmentos previamente configurados na plataforma, facilitando o direcionamento estratégico do envio.
+
+**Deletar:**  remove o template da plataforma de forma definitiva, sendo uma ação irreversível que deve ser utilizada com cautela.
+
+
+# Boas práticas obrigatórias após a aprovação do template
+
+É fundamental que, após a criação e aprovação do template, sejam executadas configurações adicionais antes de iniciar qualquer envio. Essas ações garantem conformidade técnica, evitam falhas de processamento e asseguram o uso adequado dentro da plataforma.
+
+## **Editar**
+Utilize esta opção quando o template tiver sido criado com variáveis no corpo da mensagem.  
+Após a aprovação pela Meta, as variáveis serão apresentadas no formato `{{1}}`, `{{2}}`, etc.
+
+Nesse momento, é necessário substituir essas marcações pelos parâmetros internos reconhecidos pelo **Invenio Center**, garantindo total compatibilidade com o ambiente de envio.
+
+**Exemplo**: `@primeironome`, `@coringa1`
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/editaTemplate.png" />
+
+Acesse e saiba mais:
+[Variáveis de Sistema - Invenio Center](https://docs.robbu.global/docs/center/variaveis-de-sistema)
+
+> ⚠️**Atenção:** <br/>  
+Caso essa etapa não seja realizada, o envio do template falhará e a Meta retornará o erro:  
+**“Number of parameters does not match the expected number of params”**
+
+
+
+## **Vincular Números**
+Após a aprovação do template, é indispensável definir quais números estarão autorizados a utilizá-lo. Essa configuração habilita:
+
+- A exibição do template para envio manual como **HSM** no **Invenio Live**  
+- A disponibilização correta do template durante a criação de campanhas, permitindo sua utilização apenas pelos números devidamente vinculados
+
+Essa etapa reforça o controle operacional e evita inconsistências no uso do template na plataforma.
+
+
+<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/vinculaNumero.png" />
 
 ---
 
-## ⁉️ Perguntas Frequentes (FAQ)
+
+## 🔗 Links Relacionados
+
+- [Variáveis de Sistema no Invenio Center](https://docs.robbu.global/docs/center/variaveis-de-sistema)  
+- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
+- [Canal WhatsApp no Invenio Center](https://docs.robbu.global/docs/center/canal-whatsapp)  
+- [Campanhas de WhatsApp](https://docs.robbu.global/docs/center/campanhas-de-whatsapp)  
+- [Importação de Público](https://docs.robbu.global/docs/center/publico-importacao)  
+- [Gerenciamento de Usuários](https://docs.robbu.global/docs/center/usuarios)  
+- [Sessão de 24 horas do WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
+
+---
+
+## ❓ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Preciso preencher todos os campos do template?">
-    Não. Apenas o campo <strong>body</strong> é obrigatório. Os campos <strong>header</strong>, <strong>footer</strong> e <strong>botões</strong> são opcionais.
+
+  <Accordion title="Por que meu botão 'Criar Template' não aparece no Invenio Center?">
+   Isso ocorre quando as permissões do perfil do usuário não permitem a criação de templates. Basta acessar **Meu Perfil > Editar > Permissões de Página** e habilitar as permissões relacionadas a Templates. Caso o ajuste seja para outro usuário, configure dentro da aba **Usuarios**.  
   </Accordion>
 
-  <Accordion title="Posso usar acentos ou espaços no nome do template?">
-    Não. O nome do template deve ser <strong>sem espaços ou acentuação</strong> para que a Meta aceite a criação.
+  <Accordion title="Posso criar um template com emojis ou formatação?">
+   Sim. O WhatsApp permite uso de **negrito, itálico, tachado, monospace** e emojis no corpo da mensagem, desde que o conteúdo esteja alinhado às diretrizes da Meta.  
   </Accordion>
 
-  <Accordion title="Qual o limite de caracteres do body?">
-    O corpo da mensagem (<strong>body</strong>) pode conter até <strong>1.024 caracteres</strong>.
+  <Accordion title="Qual o limite de variáveis no corpo do template?">
+   O corpo pode incluir múltiplas variáveis como `{{1}}`, `{{2}}`, `{{3}}`, desde que sigam as regras:  
+   - Não podem iniciar nem finalizar o texto  
+   - Sempre precisam de exemplo de preenchimento  
+   - Devem estar no idioma configurado no template  
   </Accordion>
 
-  <Accordion title="Quantas variáveis posso usar em um template?">
-    Não há um limite específico de variáveis, mas o texto completo (com as variáveis) deve respeitar os limites de caracteres dos campos. As variáveis devem ser numeradas sequencialmente como `{{1}}`, `{{2}}`, `{{3}}`, etc.
+  <Accordion title="Por que meu template foi recusado pela Meta?">
+   Normalmente ocorre por desalinhamento entre conteúdo e categoria escolhida (Marketing, Utilidade ou Autenticação), uso incorreto de variáveis, ou falta de clareza na intenção da mensagem. Ajustar o texto para corresponder ao propósito correto geralmente resolve.  
   </Accordion>
 
-  <Accordion title="O que acontece se eu usar emojis ou formatações no texto?">
-    Emojis são permitidos apenas no body. Você pode usar negrito, itálico ou tachado, mas <strong>não deve combinar múltiplos formatos na mesma palavra ou frase</strong>.
+  <Accordion title="Quantos botões posso usar em templates customizados?">
+   É possível utilizar até **3 botões de resposta rápida** e até **2 botões de website**.  
+   Botões de **ligação telefônica** e **WhatsApp** também podem ser adicionados, respeitando o limite de 1 botão de ligação por template.  
   </Accordion>
 
-  <Accordion title="Posso usar mídia no header do template?">
-    Sim. O header pode conter <strong>texto</strong> (até 60 caracteres) ou <strong>mídia</strong> (imagem, vídeo ou documento).
+  <Accordion title="Preciso usar variáveis do Invenio Center dentro do template aprovado pela Meta?">
+   Sim. Após a aprovação da Meta, os placeholders como `{{1}}` devem ser substituídos pelas variáveis internas do Invenio Center para garantir que o envio funcione corretamente nas automações.  
   </Accordion>
 
-  <Accordion title="Quantos botões posso usar em um template?">
-    Você pode adicionar até <strong>3 botões do tipo resposta rápida (quick reply)</strong>. Já para <strong>botões do tipo call to action (CTA)</strong>, é possível adicionar um botão de telefone ou um de URL (estática ou dinâmica), mas apenas <strong>um tipo de botão por template</strong>.
+  <Accordion title="Templates de Autenticação podem conter imagens?">
+   Não. Templates de autenticação seguem uma estrutura fixa, sem suporte para mídias no cabeçalho.  
   </Accordion>
 
-  <Accordion title="É possível misturar quick reply e call to action no mesmo template?">
-    Não. <strong>Templates não podem ter botões mistos</strong>. Você deve escolher entre quick reply ou call to action.
+  <Accordion title="Qual a diferença entre template customizado e carrossel?">
+   Templates customizados oferecem flexibilidade de texto e botões.  
+   Já templates em carrossel permitem até **10 cards**, cada um com imagem, título, descrição e botões — ideal para vitrines e catálogos interativos.  
   </Accordion>
 
-  <Accordion title="Como funciona a URL dinâmica nos botões CTA?">
-    A URL dinâmica permite que uma parte da URL seja personalizada com uma variável, como em `https://youtube.com/{{1}}`. Você precisa cadastrar um exemplo ao criar o template.
+  <Accordion title="Como funciona o envio de templates fora da janela de 24 horas?">
+   Os templates são a única forma de iniciar conversas fora da janela de **24 horas**. Após o envio, se o cliente responder, a sessão é reaberta e passa a funcionar como mensagem padrão.  
   </Accordion>
 
-  <Accordion title="Preciso cadastrar exemplos se usar variáveis ou mídia?">
-    Sim. Ao usar variáveis no texto ou mídia no header, a Meta exige que você forneça exemplos práticos para validação do template.
-  </Accordion>
 </AccordionGroup>
+
+---
