@@ -281,7 +281,7 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
         },
         {
             "parameterName": "Site",
-            "parameterValue": "www.sitecs.com.br"
+            "parameterValue": "https://docs.robbu.global/"
         }
     ],
     "source": {
@@ -396,11 +396,268 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
 
 </Accordion>
 
-- Envio com preenchimento de coringas
-- Envio de e-mail
-- Envio de carrossel
-- Envio de template de autenticação
 
+<Accordion title="Envio com preenchimento de coringas">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+  "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+  "text": "",
+  "emailSubject": "",
+  "channel": 3,
+  "templateName": "comercial_av",
+  "attendantUserName": "",
+  "templateParameters": [
+  ],
+  "source": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "destination": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "email": ""
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "Roberto",
+          "https://docs.robbu.global/",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "comercial",
+      "updateIfExists": false
+  }
+} 
+
+  ```
+**Prenchimento em disparo no Invenio Center**
+
+<img src="https://robbublob.blob.core.windows.net/docs/API/sendMessageRequisicaoCoringas.png" />
+
+</Accordion>
+
+
+<Accordion title="Envio para e-mail">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+  "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+  "text": "Caro @primeironome, hoje é dia de oferta especial. Acesse https://docs.robbu.global/ e saiba mais.",
+  "emailSubject": "Oferta Especial!!",
+  "channel": 1,
+  "templateName": "",
+  "attendantUserName": "",
+  "templateParameters": [
+  ],
+  "source": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "destination": {
+      "email": "help@robbu.global"
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "",
+          "",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "Teste",
+      "updateIfExists": false
+  }
+}
+
+  ```
+> ⚠️**Observação**:<br/>
+ O envio será realizado pelo e-mail já configurado em `Canais` no Invenio Center. <br/>
+> Acesse e saiba mais: [Contas de E-mail - Invenio Center](https://docs.robbu.global/docs/center/cadastrar-conta-de-email)
+
+</Accordion>
+
+
+<Accordion title="Envio de Carrossel">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+  "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+  "text": "",
+  "emailSubject": "",
+  "channel": 3,
+  "templateName": "carrosseloferta",
+  "attendantUserName": "",
+  "templateParameters": [
+ {
+            "parameterName": "1",
+            "parameterValue": "https://storage.robbu.global/v2/file/ECCFA721E503DB489CB5E2E09CC6A2D1.jpeg"
+        },
+        {
+            "parameterName": "2",
+            "parameterValue": "https://storage.robbu.global/v2/file/ECCFA721E503DB489CB5E2E09CC6A2D1.jpeg"
+        }
+  ],
+  "source": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "destination": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "email": ""
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "",
+          "",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "comercial",
+      "updateIfExists": false
+  }
+}
+
+  ```
+> ⚠️**Observação**:<br/>
+> No modelo de carrossel, a nomenclatura atribuída aos parâmetros não interfere no comportamento do componente, podendo ser definida livremente. As imagens serão preenchidas conforme a ordem em que forem inseridas. Já os valores dos parâmetros devem ser adicionados por meio da URL correspondente. Na seção de `Mídias` no Invenio Center, é possível copiar essa URL, sendo necessário incluir a extensão do arquivo ao final para garantir o correto processamento do recurso.
+> Acesse e saiba mais: [Biblioteca de Mídias - Invenio Center](https://docs.robbu.global/docs/center/bibliotecas-de-midias)
+
+<img src="https://robbublob.blob.core.windows.net/docs/API/midiasSend.png" /> 
+
+</Accordion>
+
+<Accordion title="Envio de Template de Autenticação">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+  "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+  "text": "",
+  "emailSubject": "",
+  "channel": 3,
+  "templateName": "codigoverificacao",
+  "attendantUserName": "",
+  "templateParameters": [
+ {
+            "parameterName": "Code",
+            "parameterValue": "xyzp42"
+        }
+  ],
+  "source": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "destination": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "email": ""
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "",
+          "",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "comercial",
+      "updateIfExists": false
+  }
+}
+
+  ```
+> ⚠️**Observação**:<br/>
+> Nesse caso, a única exigência é a utilização da variável `@Code` no botão, seja em um template de autenticação ou em um template tradicional que utilize a função de copiar e colar. No corpo do texto, é possível utilizar outras variáveis — como coringas, por exemplo — conforme sua preferência, sem impacto no funcionamento.
+
+<img src="https://robbublob.blob.core.windows.net/docs/API/AutenticaSend.png" /> 
+
+</Accordion>
+
+<Accordion title="Envio de SMS">
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+  
+    {
+  "invenioPrivateToken": "af5addfsdf52-a5dfsc-44fdf6-80bc-eda1d2af8",
+  "text": "Caro @primeironome, hoje é dia de oferta especial. Acesse https://docs.robbu.global/ e saiba mais.",
+  "emailSubject": "",
+  "channel": 2,
+  "templateName": "",
+  "attendantUserName": "",
+  "templateParameters": [
+  ],
+  "destination": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "",
+          "",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "Teste",
+      "updateIfExists": false
+  }
+}
+
+  ```
+
+</Accordion>
 
 ---
 
