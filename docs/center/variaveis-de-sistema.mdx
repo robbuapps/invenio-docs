@@ -1,42 +1,48 @@
 ---
-title: "Como utilizar as variáveis do sistema em sua IDR"
-sidebarTitle: "Variáveis em IDRs"
-description: "Utilize variáveis do sistema para personalizar fluxos automatizados, mensagens e decisões inteligentes dentro das IDRs do Invenio."
----
+title: "Variaveis de Sistema"
+sidebarTitle: "Variaveis de Sistema"
+description: "Utilize variáveis de sistema para personalizar mensagens, fluxos automatizados e tomadas de decisão inteligentes dentro das IDRs no Invenio, além de aplicá-las na criação de templates e no uso em campanhas ou envios manuais de HSM, garantindo maior flexibilidade e aderência ao contexto operacional."
 ---
 
- 
-A IDR permite a construção de fluxos automatizados e personalizados para os atendimentos. Dentro desses fluxos, é possível utilizar variáveis do sistema e de base de dados para dinamizar as mensagens, executar condições, armazenar valores ou tomar decisões automatizadas.  
-Essas variáveis são especialmente úteis para personalizar mensagens com nome, CPF, e-mail, entre outros dados do contato, realizar validações com base em respostas da API ou dados externos, navegar entre etapas de forma dinâmica e armazenar dados de interações.
 
-## Como utilizar variáveis em IDRs
+## Como utilizar variáveis
 
 As variáveis devem ser inseridas no fluxo utilizando duplas chaves ou @ dependendo da especificação de cada uma.  
 **Exemplo:** Utilize `{{contactfirstname}}` ou `@PrimeiroNome` para retornar o primeiro nome do contato.  
 
-> ⚠️ **Importante:** Variáveis iniciadas com `@` são globais do sistema (com exceção da `@identificadororiginal`), portanto, podem ser utilizadas também no envio de HSM e de forma livre durante o atendimento.
+> ⚠️ **Importante:** <br/>
+> Variáveis iniciadas com `@` são **globais do sistema**, o que significa que podem ser utilizadas no fluxo de IDR (chatbot), na criação de templates para campanhas, disparos de mensagens via API e em envios manuais de HSM — com exceção da variável `@identificadororiginal` utilizada apenas em fluxos de IDR.
+> <br/>
+> Já as variáveis do tipo **Base de Dados** possuem uso restrito ao fluxo de IDR (chatbot), não sendo aplicáveis em templates, campanhas ou HSM.
 
 ---
 
-## 📌 Variáveis comumente utilizadas
+## Variáveis comumente utilizadas
 
-| Variável                               | Tipo                    | Descrição                                 |
-|----------------------------------------|--------------------------|---------------------------------------------|
-| `{{contactname}}` / `@NomePessoa`      | Base de dados / Global   | Nome completo do contato.                  |
-| `{{contactfirstname}}` / `@PrimeiroNome`| Base de dados / Global  | Primeiro nome do contato.                  |
-| `{{contactlastname}}`                  | Base de dados            | Última palavra do nome do contato.         |
-| `{{contactemail}}`                     | Base de dados            | E-mail principal do contato.               |
-| `{{contactid}}` / `@CPFCNPJ`           | Base de dados / Global   | CPF ou CNPJ do contato cadastrado no Invenio. |
-| `{{contactcustomcode}}` / `@ChaveCliente`| Base de dados / Global | Código do cliente no Invenio.              |
-| `{{contactphonenumber}}`              | Base de dados            | Número de telefone do contato.             |
-| `{{contactphonenumberareacode}}`      | Base de dados            | Apenas o DDD do contato.                   |
-| `{{contactphonenumbermain}}`          | Base de dados            | Número sem DDI e DDD.                      |
-| `{{segmentname}}`                      | Base de dados            | Segmento (carteira) atual do contato.      |
-| `{{currentdate}}`                      | Base de dados            | Data atual no formato dd/MM/yyyy.          |
-| `{{internalwhatsappnumber}}`          | Base de dados            | Número do WhatsApp utilizado pelo bot.     |
-| `{{protocol}}`                         | Base de dados            | Número do protocolo de atendimento.        |
-| `{{username}}` / `@NomeUsuario`        | Base de dados / Global   | Nome do operador que enviou a última mensagem. |
-| `{{loyalusername}}`                    | Base de dados            | Nome do operador fidelizado ao contato.    |
+| Variável                                 | Tipo                    | Descrição                                                            |
+|-------------------------------------------|--------------------------|------------------------------------------------------------------------|
+| `{{contactname}}` / `@NomePessoa`        | Base de dados / Global   | Nome completo do contato.                                             |
+| `{{contactfirstname}}` / `@PrimeiroNome` | Base de dados / Global   | Primeiro nome do contato.                                             |
+| `{{contactlastname}}`                    | Base de dados            | Última palavra do nome do contato.                                    |
+| `{{contactemail}}`                       | Base de dados            | E-mail principal do contato.                                          |
+| `{{contactid}}` / `@CPFCNPJ`             | Base de dados / Global   | CPF ou CNPJ do contato cadastrado no Invenio.                         |
+| `{{contactcustomcode}}` / `@ChaveCliente`| Base de dados / Global   | Código do cliente no Invenio.                                         |
+| `{{contactphonenumber}}`                 | Base de dados            | Número de telefone do contato.                                        |
+| `{{contactphonenumberareacode}}`         | Base de dados            | Apenas o DDD do contato.                                              |
+| `{{contactphonenumbermain}}`             | Base de dados            | Número sem DDI e DDD.                                                 |
+| `{{segmentname}}`                        | Base de dados            | Segmento (carteira) atual do contato.                                 |
+| `{{currentdate}}`                        | Base de dados            | Data atual no formato dd/MM/yyyy.                                     |
+| `{{internalwhatsappnumber}}`             | Base de dados            | Número do WhatsApp utilizado pelo bot.                                |
+| `{{protocol}}`                           | Base de dados            | Número do protocolo de atendimento.                                   |
+| `{{username}}` / `@NomeUsuario`          | Base de dados / Global   | Nome do operador que enviou a última mensagem.                        |
+| `{{loyalusername}}`                      | Base de dados            | Nome do operador fidelizado ao contato.                               |
+| `{{currentdatetime}}`                    | Base de dados            | Data atual no formato dd/MM/yyyy HH:mm:ss:ff.                         |
+| `{{currenttime}}`                        | Base de dados            | Data atual no formato HH:mm:ss:ff.                                    |
+| `{{currenthour}}`                        | Base de dados            | Data atual no formato HH:mm.                                          |
+| `{{currentdateformat}}`                  | Base de dados            | Data atual formatada de acordo com o CodPais do cliente.              |
+| `{{lastloyalusername}}`                  | Base de dados            | Retorna o nome do último atendente.                                   |
+| `{{lastsentmessage}}`                    | Base de dados            | Retorna a última mensagem enviada.                                    |
+| `{{fileurl}}`                             | Base de dados            | Retorna a URL do arquivo baixado.                                     |
 
 ---
 
@@ -56,9 +62,10 @@ Essas variáveis são úteis para personalizações temporárias, sendo amplamen
 
 ##  Variáveis de Localização
 
-| Variável               | Descrição                                           |
-|------------------------|-----------------------------------------------------|
-| `{{longitude/latitude}}` | Coordenadas recebidas pela interação do contato.     |
+| Variável               | Tipo          | Descrição                                           |
+|------------------------|---------------|-----------------------------------------------------|
+| `{{longitude/latitude}}` | Base de dados | Coordenadas recebidas pela interação do contato.     |
+
 
 ---
 
@@ -66,45 +73,62 @@ Essas variáveis são úteis para personalizações temporárias, sendo amplamen
 
 Essas variáveis armazenam respostas de execuções API ou ações do bot.
 
-| Variável               | Descrição                                      |
-|------------------------|-----------------------------------------------|
-| `{{message}}`          | Última mensagem recebida do contato.          |
-| `{{lastapiresponse}}`  | Resposta da última chamada de API.            |
-| `{{lastapistatuscode}}`| Código de status HTTP da última chamada de API.|
+| Variável                 | Tipo         | Descrição                                           |
+|--------------------------|--------------|-------------------------------------------------------|
+| `{{message}}`            | Base de dados| Última mensagem recebida do contato.                 |
+| `{{lastapiresponse}}`    | Base de dados| Resposta da última chamada de API.                   |
+| `{{lastapistatuscode}}`  | Base de dados| Código de status HTTP da última chamada de API.      |
+
 
 ---
 
 ##  Variáveis para Navegação Dinâmica
 
-| Variável               | Descrição                                                                 |
-|------------------------|--------------------------------------------------------------------------|
-| `@identificadororiginal`| Utilizada para redirecionar o contato para a última etapa de “Aguardar mensagem de resposta”. |
+| Variável                   | Tipo         | Descrição                                                                                 |
+|----------------------------|--------------|-------------------------------------------------------------------------------------------|
+| `@identificadororiginal`   | Base de dados| Utilizada para redirecionar o contato para a última etapa de “Aguardar mensagem de resposta”. |
+
 
 ---
 
-> As variáveis da IDR são recursos poderosos para personalização, automação e controle dos fluxos. Elas permitem que o bot adapte as interações ao perfil do cliente, torne a experiência mais fluida e traga mais eficiência para os processos.
+> As variáveis são recursos poderosos para personalização, automação e controle dos fluxos. Elas permitem que o bot adapte as interações ao perfil do cliente, torne a experiência mais fluida e traga mais eficiência para os processos.
+
+---
+
+## 🔗 Links e Assuntos Relacionados
+
+- [Como criar templates WhatsApp](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)
+- [Público e Importação](https://docs.robbu.global/docs/center/publico-importacao)
+- [Campanhas de WhatsApp](https://docs.robbu.global/docs/center/campanhas-de-whatsapp)
+- [Campanhas de E-mail](https://docs.robbu.global/docs/center/campanhas-de-email)
+- [Criando campanha SMS](https://docs.robbu.global/docs/center/criando-campanha-sms)
+- [Enviar mensagem pela Live API](https://docs.robbu.global/docs/live/enviar-mensagem)
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="O que são variáveis em uma IDR?">
-    São parâmetros dinâmicos que podem ser usados para personalizar mensagens, automatizar decisões e registrar dados durante o atendimento.
+  <Accordion title="O que são variáveis no Invenio Center?">
+    São parâmetros dinâmicos utilizados para personalizar mensagens, conduzir decisões do bot e registrar informações durante o atendimento, garantindo uma comunicação contextual e mais eficiente.
   </Accordion>
-  <Accordion title="Como inserir uma variável no fluxo?">
-    Utilize o formato `{{variavel}}` ou `@Variavel`, conforme especificado para cada tipo.
+  <Accordion title="Qual formato devo usar para inserir variáveis?">
+    Utilize `{{variavel}}` para variáveis de base de dados e `@Variavel` para variáveis globais. Cada tipo possui regras e contextos próprios de utilização.
   </Accordion>
-  <Accordion title="Qual a diferença entre variáveis globais e de base de dados?">
-    Variáveis globais (prefixadas com `@`) podem ser usadas em qualquer parte do sistema, inclusive em HSMs. Já as de base de dados são exclusivas do contexto da IDR e do contato.
+  <Accordion title="O que diferencia variáveis globais de variáveis de Base de Dados?">
+    Variáveis globais (com `@`) funcionam em qualquer módulo: IDR, templates, campanhas, HSM e API.  
+    Variáveis de Base de Dados são específicas do fluxo de IDR e dependem do contato ativo.
   </Accordion>
   <Accordion title="Para que servem as variáveis coringa?">
-    Para armazenar informações personalizadas e temporárias, úteis em campanhas e fluxos com dados variáveis por contato.
+    Elas permitem armazenar informações personalizadas e temporárias, amplamente usadas em campanhas, automações e interações variáveis entre contatos.
   </Accordion>
-  <Accordion title="Posso usar variáveis de localização ou técnicas em fluxos?">
-    Sim. `{{longitude/latitude}}`, `{{lastapiresponse}}`, entre outras, são úteis para interações com APIs e bots mais avançados.
+  <Accordion title="Posso utilizar variáveis técnicas em fluxos?">
+    Sim. Variáveis como `{{lastapiresponse}}` ou `{{lastapistatuscode}}` são essenciais para processos integrados e lógicas condicionais baseadas em respostas de API.
   </Accordion>
-  <Accordion title="É possível redirecionar o fluxo com variáveis?">
-    Sim. A variável `@identificadororiginal` permite retornar para uma etapa anterior de “Aguardar mensagem de resposta”. 
+  <Accordion title="Quando devo utilizar a variável @identificadororiginal?">
+    Ela é usada para redirecionar o contato à etapa anterior de “Aguardar mensagem de resposta”, permitindo navegação mais fluida em fluxos dinâmicos.
+  </Accordion>
+  <Accordion title="É possível usar variáveis em templates de WhatsApp?">
+    Sim. Variáveis globais podem ser utilizadas em templates de WhatsApp, campanhas e HSMs. Variáveis de Base de Dados não são aplicáveis nesses contextos.
   </Accordion>
 </AccordionGroup>
