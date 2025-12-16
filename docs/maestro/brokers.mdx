@@ -1,27 +1,30 @@
 ---
-title: Integração com provedores
-sidebarTitle: Integração com provedores (brokers)
-description: Esta seção permite que cada assessoria integre os seus provedores. Nesta seção também, a Gerente de Ambiente pode visualizar os provedores que cada assessoria usa, sem a possibilidade de visualizar as credenciais.
+title: "Integração com provedores"
+sidebarTitle: "Integração com provedores (brokers)"
+description: "Esta seção permite que cada assessoria integre os seus provedores. Nesta seção também, a Gerente de Ambiente pode visualizar os provedores que cada assessoria usa, sem a possibilidade de visualizar as credenciais."
 ---
 
 ## Provedores (_brokers_)
+
 O Maestro suporta vários _brokers_ de terceiros para realizar o envio das mensagens.
 
 Atualmente, os brokers disponíveis são:
+
 - E-mail:
-    - RobbuMail
-    - SendGrid
+  - RobbuMail
+  - SendGrid
 - SMS:
-    - Classe A
-    - Pontal
+  - Classe A
+  - Pontal
 - WhatsApp:
-    - Positus
+  - Positus
 
 ## Como configurar
 
-1. Acesse **Configurações > Integração com provedores**
+1. Acesse **Configurações \> Integração com provedores**
 2. O provedor fornece um **token de autenticação** (pode ser um **JWT**, **Bearer Token** ou uma **chave fixa**) ou **usuário e senha**.
 3. Essas credenciais devem ser incluídas na configuração deste provedor
+4. Caso seu provedor ofereça alguma configuração personalizada, defina a opção desejada.
 4. O sistema envia a mensagem para o **endpoint da API do provedor**.
 5. O provedor processa e entrega a mensagem ao destinatário.
 6. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
@@ -31,3 +34,23 @@ Atualmente, os brokers disponíveis são:
 ```url
 https://api.common.maestro.robbu.global/v1/messages/events
 ```
+
+- Configurações Personalizadas
+- Pontal - Concatenar mensagens com mais de 160 caracteres; Se esta opção estiver marcada e sua conta Pontal não tiver esse serviço habilitado, a Pontal rejeitará todos os envios de mensagens de SMS.
+
+## Envio de SMS Concatenado no Maestro
+
+O **Maestro** passa a permitir o envio automático de **SMS concatenados** quando o conteúdo da mensagem ultrapassar o limite de **160 caracteres**. Com essa melhoria, mensagens mais longas deixam de ser bloqueadas e passam a ser enviadas em múltiplas partes, de forma transparente para a operação.
+
+A cobrança seguirá sendo **proporcional ao número de segmentos enviados**, prática já adotada na operação da Pontal e conhecida pelas assessorias.
+
+### Benefícios
+
+- Permite o envio de mensagens com mais de 160 caracteres sem erro.
+- Elimina falhas de envio causadas pelo limite atual de caracteres.
+- Garante previsibilidade operacional e de custos.
+- Alinha o comportamento do Maestro a fluxos já utilizados na operação.
+
+Essa funcionalidade torna o envio de SMS mais flexível e confiável, especialmente em comunicações que exigem textos mais completos.
+
+![](https://robbublob.blob.core.windows.net/docs/maestro/maestroconcat160.png)
