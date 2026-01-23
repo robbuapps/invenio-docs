@@ -1,108 +1,193 @@
 ---
 title: "Agendamentos no Invenio Live"
 sidebarTitle: "Agendamentos"
-description: "Saiba como utilizar o recurso de Agendamentos para organizar retornos e melhorar o relacionamento com o cliente."
+description: "Aprenda a criar e gerenciar agendamentos de retorno para organizar interações futuras, melhorar o relacionamento com clientes e aumentar a eficiência do atendimento."
 ---
 
-##  Agendamentos no Invenio Live
+## O que são Agendamentos
 
 O recurso de **Agendamentos** do Invenio Live permite que operadores programem **retornos de atendimento** para contatos específicos, garantindo que a interação seja retomada no momento ideal.
 
-Esse agendamento pode ser utilizado para:
-- Retornos programados
-- Acompanhamento de demandas
-- Envio de mensagens proativas
+**Principais usos:**
+- Retornos programados para dar continuidade a atendimentos
+- Acompanhamento de demandas e solicitações em andamento
+- Envio de mensagens proativas em horários estratégicos
 - Qualquer situação que exija um contato posterior em horário específico
 
-O operador recebe **lembretes com data, hora e motivo**, promovendo mais organização, eficiência e previsibilidade no relacionamento com o cliente.
+<Note>
+O operador recebe **lembretes automáticos com data, hora e motivo** do agendamento, promovendo mais organização, eficiência e previsibilidade no relacionamento com o cliente.
+</Note>
 
 ---
 
-##  Como criar um agendamento
+## Permissão Necessária
 
-Para que o agendamento seja realizado, o usuário precisa ter a permissão **Atualizar pessoa** habilitada em seu perfil.
-Siga o caminho abaixo para ativar essa opção:
+<Warning>
+Para criar agendamentos, você precisa da permissão **"Atualizar pessoa"** habilitada em seu perfil.
 
-`Usuários > Editar > Habilitar a opção “Atualizar pessoa” > Salvar`
+**Configure a permissão em:** **Invenio Center > Usuários > Editar > Seção "Permissões" > Marcar "Atualizar pessoa" > Salvar**
+</Warning>
 
-[Clique aqui para acessar diretamente a aba de usuários](https://inveniocenter.robbu.global/painel/usuarios)
+<Tip>
+Acesso direto: [Gerenciar usuários no Invenio Center](https://inveniocenter.robbu.global/painel/usuarios)
+</Tip>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/agendamentoAtualPessoa.png" /> 
-
-### Passo a passo:
-
-A criação de agendamentos é feita a partir da opção **Editar**, localizada na tela do contato.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/agendamento2Editar.png" />
-
-- Acesse o contato desejado no Invenio Live e clique em **Editar**.
-- Na seção **Retorno Agendado**, preencha:
-   - **Data e horário** em que o lembrete deve ser enviado.
-   - **Motivo do agendamento**, explicando o objetivo da interação.
-- Clique em **Salvar**.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/AgendamentoAg.png" />
-
-> **❗Atenção**  
-> Ao agendar um retorno, o contato é automaticamente desvinculado (desfidelizado) do operador responsável no momento.
+<Frame caption="Tela de edição de permissões de usuário com opção 'Atualizar pessoa' habilitada">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/agendamentoAtualPessoa.png" />
+</Frame>
 
 ---
 
-##  Tela de Agendamentos Pendentes
+## Como Criar um Agendamento
 
-Todos os agendamentos criados ficam listados na aba **Agendamentos Pendentes**, localizada no menu lateral do Invenio Live.
-
-Nesse painel é possível:
-
--  Visualizar todos os agendamentos, com data e horário.
--  Editar agendamentos já cadastrados.
--  Excluir agendamentos que não são mais necessários.
-
-Essa interface centraliza os compromissos programados, oferecendo uma gestão proativa e organizada.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/AgendamentoPendente.png" />
+<Steps>
+  <Step title="Acessar o contato e abrir edição">
+    No **Invenio Live**, localize o contato desejado na lista de contatos e clique no botão **"Editar"** (ícone de lápis) ao lado do nome do contato.
+    
+    **Caminho:** **Invenio Live > Lista de Contatos > Selecionar contato > Clicar botão "Editar"**
+    
+    <Frame caption="Botão 'Editar' na tela de detalhes do contato para acessar opções de agendamento">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/agendamento2Editar.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Preencher dados do agendamento">
+    Na tela de edição do contato, localize a seção **"Retorno Agendado"** e preencha:
+    
+    - **Data e horário:** Defina quando o lembrete deve ser enviado
+    - **Motivo do agendamento:** Descreva o objetivo da interação (ex: "Retornar com proposta comercial", "Acompanhar solicitação de suporte")
+    
+    <Frame caption="Formulário de agendamento com campos de data, horário e motivo do retorno">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/AgendamentoAg.png" />
+    </Frame>
+    
+    <Tip>
+    Seja específico no motivo do agendamento para facilitar a retomada do atendimento no momento programado.
+    </Tip>
+  </Step>
+  
+  <Step title="Salvar o agendamento">
+    Após preencher todos os campos, clique no botão **"Salvar"** no rodapé da tela.
+    
+    <Check>
+    Agendamento criado com sucesso! Você receberá uma notificação quando o horário programado se aproximar.
+    </Check>
+    
+    <Warning>
+    **Importante:** Ao criar um agendamento, o contato é **automaticamente desvinculado (desfidelizado)** do operador responsável no momento. Isso permite que qualquer operador disponível possa atender quando o agendamento for acionado.
+    </Warning>
+  </Step>
+</Steps>
 
 ---
 
-##  Política de Exclusão de Agendamentos
+## Tela de Agendamentos Pendentes
 
-Para garantir **controle total** por parte do operador:
+Todos os agendamentos criados ficam listados na aba **"Agendamentos Pendentes"**, acessível pelo menu lateral do Invenio Live.
 
-- Os agendamentos **não são excluídos automaticamente** após o atendimento.
-- A exclusão deve ser feita **manualmente**.
-- Mesmo após o contato ser atendido, o agendamento continuará listado até ser excluído.
+**Caminho:** **Invenio Live > Menu lateral esquerdo > "Agendamentos Pendentes"**
 
-Essa política assegura **autonomia total sobre a agenda** do operador.
+**Neste painel você pode:**
+- 📋 Visualizar todos os agendamentos com data, horário e motivo
+- ✏️ Editar agendamentos já cadastrados (data, hora ou motivo)
+- 🗑️ Excluir agendamentos que não são mais necessários
+
+<Frame caption="Painel de Agendamentos Pendentes com lista de retornos programados e opções de edição e exclusão">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/AgendamentoPendente.png" />
+</Frame>
+
+<Note>
+Essa interface centraliza todos os compromissos programados, oferecendo uma gestão proativa e organizada da sua agenda de atendimento.
+</Note>
 
 ---
 
-##  Notificações de Agendamento
+## Política de Exclusão de Agendamentos
+
+Para garantir **controle total** por parte do operador sobre sua agenda:
+
+✅ **Exclusão manual:** Os agendamentos **não são excluídos automaticamente** após o atendimento
+
+✅ **Autonomia completa:** O operador decide quando remover cada agendamento
+
+✅ **Permanência garantida:** Mesmo após o contato ser atendido, o agendamento continuará listado até ser excluído manualmente
+
+<Note>
+Essa política assegura que você tenha **autonomia total** sobre sua agenda e possa revisar compromissos concluídos antes de removê-los.
+</Note>
+
+<Tip>
+**Boa prática:** Após concluir um atendimento agendado, revise o resultado e só então exclua o agendamento da lista. Isso permite manter histórico temporário de retornos realizados.
+</Tip>
+
+---
+
+## Notificações de Agendamento
 
 O sistema envia **notificações automáticas** sempre que um agendamento estiver próximo do horário programado.
 
-A notificação contém:
+**A notificação contém:**
+- 📅 Data e horário do agendamento
+- 📝 Motivo/descrição do retorno
+- 👤 Dados do contato
+- 🚀 Botão **"Iniciar Conversa"** para facilitar a retomada imediata
 
--  Detalhes do compromisso
--  Um botão **"Iniciar Conversa"**, facilitando a retomada
+**Segurança de fidelização:**  
+Se o contato estiver vinculado (fidelizado) a outro operador no momento da retomada, o sistema **exibe um alerta** antes de permitir o atendimento, mantendo a integridade da gestão de atendimentos.
 
-Se o contato estiver vinculado a outro operador no momento da retomada, o sistema **exibe um alerta**, mantendo a segurança.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/lembreteDeAgendamento.png" />
-
----
-
-##  Redirecionamento e Fidelização
-
-Ao clicar em um agendamento, o sistema **redireciona automaticamente** o operador para a tela de atendimento do contato correspondente.
+<Frame caption="Notificação de lembrete de agendamento com botão para iniciar conversa imediatamente">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/agendamentos/lembreteDeAgendamento.png" />
+</Frame>
 
 ---
 
-## 🔗 Links e Assuntos Relacionados
+## Redirecionamento Automático
 
-- [Como enviar mensagens no Invenio Live](https://docs.robbu.global/docs/live/enviar-mensagem)  
-- [Filtros e menus de busca](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
-- [Sessão de 24 horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
-- [Gestão de usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios)  
+Ao clicar em um agendamento na lista de **Agendamentos Pendentes** ou no botão **"Iniciar Conversa"** da notificação, o sistema **redireciona automaticamente** o operador para a tela de atendimento do contato correspondente.
+
+**Caminho:** **Agendamentos Pendentes > Clicar em agendamento > Redirecionamento automático para tela de conversa**
+
+<Tip>
+Isso agiliza o fluxo de trabalho, eliminando a necessidade de buscar manualmente o contato na lista.
+</Tip>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Enviar Mensagens" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Como enviar mensagens no Invenio Live
+  </Card>
+  
+  <Card 
+    title="Filtros e Busca" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Utilize filtros e menus de busca para organizar contatos
+  </Card>
+  
+  <Card 
+    title="Sessão de 24 Horas" 
+    icon="clock" 
+    href="https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp"
+  >
+    Entenda a janela de atendimento do WhatsApp
+  </Card>
+  
+  <Card 
+    title="Gerenciar Usuários" 
+    icon="users-gear" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Configure permissões de usuários no Invenio Center
+  </Card>
+</CardGroup>
 
 ---
 
@@ -110,39 +195,100 @@ Ao clicar em um agendamento, o sistema **redireciona automaticamente** o operado
 
 <AccordionGroup>
   <Accordion title="O agendamento exclui automaticamente após o atendimento?">
-    Não. O operador deve excluir manualmente o agendamento mesmo após concluir o atendimento, garantindo controle total sobre seus compromissos.
+    **Não.** Os agendamentos **não são excluídos automaticamente** mesmo após concluir o atendimento.
+    
+    **Como excluir:**
+    
+    O operador deve excluir manualmente o agendamento acessando:
+    
+    **Invenio Live > Menu lateral > "Agendamentos Pendentes" > Localizar agendamento > Clicar botão de exclusão (ícone de lixeira)**
+    
+    Essa política garante controle total sobre seus compromissos e permite revisar agendamentos concluídos antes de removê-los.
   </Accordion>
 
   <Accordion title="Onde vejo todos os agendamentos que criei?">
-    Na aba **Agendamentos Pendentes**, localizada no menu lateral do Invenio Live.
+    Todos os agendamentos ficam centralizados na aba **"Agendamentos Pendentes"**.
+    
+    **Caminho de acesso:** **Invenio Live > Menu lateral esquerdo > "Agendamentos Pendentes"**
+    
+    Nesta tela você verá:
+    - Lista completa de agendamentos
+    - Data e horário de cada retorno
+    - Motivo/descrição do agendamento
+    - Nome do contato
+    - Opções para editar ou excluir
   </Accordion>
 
   <Accordion title="Posso editar um agendamento depois de criado?">
-    Sim. Os agendamentos podem ser editados a qualquer momento acessando a aba de pendentes.
+    **Sim.** Os agendamentos podem ser editados a qualquer momento.
+    
+    **Como editar:**
+    
+    **Invenio Live > Menu lateral > "Agendamentos Pendentes" > Localizar agendamento > Clicar botão de edição (ícone de lápis) > Alterar data/hora/motivo > Salvar**
+    
+    Você pode modificar:
+    - Data do agendamento
+    - Horário do lembrete
+    - Motivo/descrição do retorno
   </Accordion>
 
   <Accordion title="Recebo algum aviso quando estiver perto do horário agendado?">
-    Sim. O sistema envia uma **notificação automática com um botão “Iniciar Conversa”** quando o horário do agendamento estiver próximo.
+    **Sim.** O sistema envia uma **notificação automática** quando o horário do agendamento estiver próximo.
+    
+    **A notificação inclui:**
+    - Data e horário programados
+    - Motivo do agendamento
+    - Dados do contato
+    - Botão **"Iniciar Conversa"** para retomar o atendimento imediatamente
+    
+    <Tip>
+    Certifique-se de que as notificações do navegador estão habilitadas para não perder lembretes importantes.
+    </Tip>
   </Accordion>
 
   <Accordion title="O que acontece se outro operador já estiver atendendo o cliente?">
-    O sistema exibe um **alerta visual** informando que o contato está sendo atendido por outro operador.
+    O sistema possui uma **proteção de fidelização** que exibe um **alerta visual** informando que o contato está sendo atendido por outro operador.
+    
+    **Comportamento:**
+    - Você verá uma notificação/alerta indicando que o contato está fidelizado a outro operador
+    - O sistema solicita confirmação antes de permitir que você assuma o atendimento
+    - Isso evita conflitos e garante melhor experiência ao cliente
   </Accordion>
 
   <Accordion title="Preciso usar esse recurso apenas para retornos?">
-    Não. Ele pode ser usado para qualquer situação que requeira um contato posterior — inclusive mensagens proativas e acompanhamentos.
+    **Não.** O recurso de agendamentos é flexível e pode ser usado para diversas finalidades:
+    
+    **Casos de uso:**
+    - ✅ Retornos de atendimentos pendentes
+    - ✅ Acompanhamento de solicitações em andamento
+    - ✅ Mensagens proativas (ofertas, novidades, lembretes)
+    - ✅ Follow-up pós-venda
+    - ✅ Cobranças programadas
+    - ✅ Pesquisas de satisfação
+    - ✅ Qualquer interação que necessite contato futuro em horário específico
   </Accordion>
 
   <Accordion title="Quais são os principais benefícios do uso dos agendamentos?">
-    O recurso de agendamentos oferece diversas vantagens, tais como:
-
-    - Organização personalizada da agenda de atendimento;
-
-    - Redução da dependência de planilhas ou lembretes externos;
-
-    - Maior previsibilidade e controle sobre os retornos;
-
-    - Atendimento mais humanizado e oportuno, garantindo melhor experiência ao cliente.
+    O recurso de agendamentos oferece diversas vantagens para operadores e equipes:
+    
+    **Organização:**
+    - 📋 Agenda centralizada de todos os retornos programados
+    - 🎯 Visualização clara de compromissos futuros
+    - ⏰ Lembretes automáticos para não esquecer atendimentos
+    
+    **Eficiência:**
+    - 🚫 Redução da dependência de planilhas ou lembretes externos
+    - ⚡ Redirecionamento automático para tela de atendimento
+    - 🔔 Notificações proativas quando o horário se aproxima
+    
+    **Controle:**
+    - ✅ Maior previsibilidade sobre retornos
+    - 🎛️ Gestão manual de exclusão (autonomia total)
+    - 👥 Alerta de conflitos de fidelização
+    
+    **Experiência do Cliente:**
+    - ❤️ Atendimento mais humanizado e oportuno
+    - ⏱️ Retornos no momento certo
+    - 🤝 Melhor percepção de comprometimento e profissionalismo
   </Accordion>
 </AccordionGroup>
-

@@ -1,52 +1,132 @@
 ---
-title: "Criação de um novo contato no Invenio Live"
+title: "Criação de um Novo Contato no Invenio Live"
 sidebarTitle: "Novo Contato"
-description: "Aprenda a criar um novo contato no Invenio Live, resolver problemas de exibição na lista e lidar com contatos duplicados."
+description: "Aprenda a criar um novo contato no Invenio Live, configurar permissões necessárias, preencher dados e adicionar canais de comunicação."
 ---
 
-## Permissão necessária
+## Permissão Necessária
 
-Para adicionar um novo contato, você precisa da permissão adequada. Esta permissão pode ser habilitada no **Invenio Center** seguindo o caminho:  
-`"Usuários > Editar > Habilitar a opção “Adicionar Contato” > Salvar`.
+<Warning>
+Para criar um novo contato no Invenio Live, você precisa da permissão **"Adicionar Contato"** habilitada.
 
-[Clique aqui para acessar diretamente a aba de usuários](https://inveniocenter.robbu.global/painel/usuarios)
+**Configure a permissão em:** **Invenio Center > Usuários > Editar > Seção "Permissões" > Marcar "Adicionar Contato" > Salvar**
+</Warning>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/AdcPessoa.png" />
+<Tip>
+Acesso direto: [Gerenciar usuários no Invenio Center](https://inveniocenter.robbu.global/painel/usuarios)
+</Tip>
 
----
-
-## Passos para criar um novo contato  
-
-- Faça login no **Invenio Live**.  
-- Na tela principal, clique no botão **"Novo Contato"**.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/botao+NovoContato.png" />
-
-- Preencha os dados do contato, incluindo: `Código do contato, Nome completo, CPF ou CNPJ, Usuário responsável, Prioridade e Segmento`.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/CadastrarNovoContato1.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/CadastrarNovoContato2.png" />
-
->📌 **Observação:**  
-> - O campo Segmento (Carteira) é o único de preenchimento obrigatório.  
-> - Após a criação, o novo contato permanecerá fidelizado ao usuário responsável definido no momento do cadastro.  
-
-- Clique em **"Cadastrar"**.  
-
-Após o cadastro, você poderá adicionar um ou mais **canais de comunicação** ao contato.
-
-[Clique aqui para acessar diretamente a documentação sobre "Adicionar canais"](https://docs.robbu.global/docs/live/adicionar-canal-invenio-live)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/adcCanal.png" />
+<Frame caption="Tela de edição de permissões de usuário no Invenio Center com opção 'Adicionar Contato'">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/AdcPessoa.png" />
+</Frame>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Como Criar um Novo Contato
 
-- [Adicionar canais ao contato](https://docs.robbu.global/docs/live/adicionar-canal-invenio-live)  
-- [Filtros e menus de busca](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
-- [Como enviar mensagens](https://docs.robbu.global/docs/live/enviar-mensagem)  
-- [Gerenciar usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios)  
+<Steps>
+  <Step title="Fazer login no Invenio Live">
+    Acesse o **Invenio Live** e faça login com suas credenciais.
+  </Step>
+  
+  <Step title="Clicar em Novo Contato">
+    Na tela principal do Invenio Live, clique no botão **"Novo Contato"** localizado no canto superior direito.
+    
+    <Frame caption="Botão 'Novo Contato' na interface principal do Invenio Live">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/botao+NovoContato.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Preencher dados do contato">
+    No formulário exibido, preencha os campos com as informações do novo contato:
+    
+    **Campos disponíveis:**
+    - **Código do contato** (opcional)
+    - **Nome completo** (opcional)
+    - **CPF ou CNPJ** (opcional)
+    - **Usuário responsável** (opcional)
+    - **Prioridade** (opcional)
+    - **Segmento (Carteira)** (obrigatório) *
+    
+    <Frame caption="Formulário de cadastro de novo contato - Parte 1 com dados principais">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/CadastrarNovoContato1.png" />
+    </Frame>
+    
+    <Frame caption="Formulário de cadastro de novo contato - Parte 2 com campos adicionais">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/CadastrarNovoContato2.png" />
+    </Frame>
+    
+    <Note>
+    **Campo obrigatório:** Apenas o campo **Segmento (Carteira)** é de preenchimento obrigatório. Todos os demais campos podem ser preenchidos conforme a necessidade.
+    </Note>
+    
+    <Tip>
+    Antes de cadastrar, utilize o **campo de busca** na lista de contatos para verificar se o contato já existe, evitando duplicidade.
+    </Tip>
+  </Step>
+  
+  <Step title="Confirmar cadastro">
+    Após preencher as informações necessárias, clique no botão **"Cadastrar"** no rodapé do formulário.
+    
+    <Check>
+    Contato criado com sucesso! O novo contato já está disponível na sua lista.
+    </Check>
+    
+    <Note>
+    **Fidelização:** Após o cadastro, o contato permanecerá automaticamente vinculado (fidelizado) ao **usuário responsável** definido no momento da criação.
+    </Note>
+  </Step>
+  
+  <Step title="Adicionar canais de comunicação">
+    Após criar o contato, você pode adicionar um ou mais **canais de comunicação** (WhatsApp, e-mail, telefone, etc.).
+    
+    <Frame caption="Interface de adição de canais de comunicação ao contato">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Novo Contato/adcCanal.png" />
+    </Frame>
+    
+    <Tip>
+    Consulte o guia completo: [Adicionar canais ao contato](https://docs.robbu.global/docs/live/adicionar-canal-invenio-live)
+    </Tip>
+  </Step>
+</Steps>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Adicionar Canais" 
+    icon="plus" 
+    href="https://docs.robbu.global/docs/live/adicionar-canal-invenio-live"
+  >
+    Aprenda a adicionar canais de comunicação aos contatos
+  </Card>
+  
+  <Card 
+    title="Filtros e Busca" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Utilize filtros e menus para encontrar contatos
+  </Card>
+  
+  <Card 
+    title="Enviar Mensagens" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Guia de envio de mensagens no Invenio Live
+  </Card>
+  
+  <Card 
+    title="Gerenciar Usuários" 
+    icon="users-gear" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Configure permissões de usuários no Invenio Center
+  </Card>
+</CardGroup>
 
 ---
 
@@ -54,21 +134,56 @@ Após o cadastro, você poderá adicionar um ou mais **canais de comunicação**
 
 <AccordionGroup>
   <Accordion title="Por que o contato que cadastrei não aparece na minha lista?">
-    O contato só será exibido se você for o <b>usuário responsável</b> por ele. Caso contrário, ele ficará visível apenas para o operador ao qual foi atribuído.
+    O contato só será exibido na sua lista se você for o **usuário responsável** definido no momento do cadastro.
+    
+    **Como verificar:**
+    
+    Se você não for o responsável, o contato ficará visível apenas para o operador ao qual foi atribuído. Para visualizar todos os contatos, utilize os filtros de busca:
+    
+    **Invenio Live > Campo de busca (topo) > Pesquisar por nome ou código do contato**
+    
+    Ou ajuste o filtro de usuário responsável para exibir contatos de outros operadores (se você tiver permissão de visualização).
   </Accordion>
 
   <Accordion title="O que fazer se um contato for cadastrado duplicado?">
-    Antes de cadastrar, utilize o <b>campo de busca</b> para verificar se o contato já existe. Se ainda assim houver duplicidade, o sistema pode <b>unificar automaticamente os contatos duplicados</b>, desde que essa opção esteja habilitada no Invenio Center.
+    **Prevenção:**
+    
+    Antes de cadastrar um novo contato, sempre utilize o **campo de busca** no topo da lista de contatos:
+    
+    **Invenio Live > Campo de busca > Digitar nome, CPF, CNPJ ou telefone**
+    
+    **Caso já tenha duplicado:**
+    
+    Se um contato for cadastrado em duplicidade, o sistema pode **unificar automaticamente os contatos duplicados**, desde que essa opção esteja habilitada no Invenio Center.
+    
+    <Tip>
+    Para habilitar a unificação automática, entre em contato com o administrador do sistema ou acesse: **Invenio Center > Configurações > Contatos > "Unificar contatos duplicados"**
+    </Tip>
   </Accordion>
 
   <Accordion title="Quais campos são obrigatórios ao criar um novo contato?">
-    O único campo de preenchimento obrigatório é o <b>Segmento (Carteira)</b>. Todos os demais campos podem ser preenchidos conforme a necessidade do atendimento.
+    O único campo de preenchimento **obrigatório** é o **Segmento (Carteira)**.
+    
+    **Campos opcionais:**
+    - Código do contato
+    - Nome completo
+    - CPF ou CNPJ
+    - Usuário responsável
+    - Prioridade
+    
+    Todos os campos opcionais podem ser preenchidos posteriormente editando o contato.
   </Accordion>
 
   <Accordion title="O contato permanece vinculado a qual usuário após o cadastro?">
-    Depois de cadastrado, o contato permanecerá <b>fidelizado ao usuário responsável</b> informado no momento da criação.
+    Depois de cadastrado, o contato permanecerá **fidelizado ao usuário responsável** informado no campo "Usuário responsável" no momento da criação.
+    
+    **Isso significa que:**
+    - O contato aparecerá na lista de contatos do usuário responsável
+    - Apenas o usuário responsável (ou usuários com permissões superiores) poderá visualizar e interagir com esse contato
+    - A fidelização pode ser alterada posteriormente editando o contato e modificando o campo "Usuário responsável"
+    
+    <Note>
+    Se o campo "Usuário responsável" não for preenchido no cadastro, o contato ficará vinculado ao usuário que realizou o cadastro.
+    </Note>
   </Accordion>
 </AccordionGroup>
-
-
----
