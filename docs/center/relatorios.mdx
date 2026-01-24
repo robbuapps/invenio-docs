@@ -1,5 +1,5 @@
 ---
-title: "Relatórios – Invenio Center"
+title: "Relatórios"
 description: "Aprenda a acessar, gerar e agendar relatórios no Invenio Center para melhorar sua operação."
 sidebarTitle: "Relatórios"
 ---
@@ -14,7 +14,13 @@ A interface é intuitiva e conta com modelos prontos, filtros personalizáveis e
 
 ## Acesso e Visualização
 
-Ao acessar a aba de Relatórios, duas seções principais estarão disponíveis:
+Para acessar os relatórios, navegue até: `Invenio Center > Analisar > Relatórios`
+
+[Invenio Center - Relatórios](https://inveniocenter.robbu.global/painel/relatorios)
+
+<img src="https://storage.robbu.global/v2/file/C1B058E419FE84E3649C103F3F41918E" /> 
+
+Na tela principal, duas seções principais estarão disponíveis:
 
 - **Relatórios**: lista os relatórios já gerados ou em processamento.
 - **Agendamentos**: mostra os relatórios programados para execução automática.
@@ -23,7 +29,7 @@ Também é possível alternar entre:
 - **Todos os relatórios**: exibe todos disponíveis no ambiente.
 - **Meus relatórios**: exibe apenas os do usuário logado.
 
-![relatorios](https://robbublob.blob.core.windows.net/docs/relatorios.png) 
+![relatorios](https://storage.robbu.global/v2/file/54CCA55563A510FA3BBC2304ADB66B52) 
 
 Cada relatório mostra:
 - Nome
@@ -38,44 +44,60 @@ Alguns relatórios, como **KPI - Eventos**, incluem:
 - Canal utilizado
 - Tipo de evento
 
-Menu de ações:
-- Download em CSV
-- Visualizar na plataforma
-
-![baixar relatorio](https://robbublob.blob.core.windows.net/docs/opcaorelatorio.png) 
 
 ---
 
-## ⚙️ Geração de Relatórios
+## Geração de Relatórios
 
-Clique em **+ Gerar relatório** e escolha um modelo. Aplique filtros como período, segmento, canal, evento ou usuário. Clique em **Gerar relatório** para confirmar.
+Selecione a opção **+ Gerar relatório** e escolha um modelo. Aplique filtros como período, segmento, canal, evento ou usuário.
+Após a escolha clique novamente em **Gerar relatório** para confirmar a geração.
 
-![gerar relatorios](https://robbublob.blob.core.windows.net/docs/gerarrelatorio.png) 
+![gerar relatorios](https://storage.robbu.global/v2/file/0922AD1BFE162486F35B99CAE7A3BD6F) 
+
+## Visualização do relatório gerado
+
+Após a criação do relatório, ao clicar no ícone de três pontos localizado à direita do item, será exibida a opção de visualização do relatório.
+
+![baixar relatorio](https://storage.robbu.global/v2/file/A59426B5CD2C85ED7A9C03D22940DB88) 
+
+## A plataforma disponibiliza duas formas de visualização:
+
+### Visualização no Invenio Center:
+Exibe o relatório diretamente na tela, com limitação de até 100 linhas por relatório, além de contar com campo de pesquisa para facilitar a consulta das informações.
+
+### Download em CSV:
+Permite realizar o download do relatório em formato CSV, garantindo acesso a todas as linhas geradas, sem limitação de quantidade, possibilitando análises mais completas em ferramentas externas.
+
+![baixar relatorio](https://storage.robbu.global/v2/file/3D21FD22B041191F7D85DE198F884221) 
+
+> Escolha do formato de visualização deve considerar o volume de dados e a necessidade de análise, garantindo eficiência operacional no consumo das informações.
+
+
 
 ### Agendamentos e Envio
 
-É possível agendar relatórios com envio via e-mail ou FTP/SFTP:
+É possível agendar relatórios com envio programado por e-mail ou FTP/SFTP. 
 
-- **Servidor (host)**
-- **Usuário/senha**
-- **Porta**: 21 (FTP) ou 22 (SFTP)
-- **Criptografia**: FTPES, FTPS, FTP simples, ou sem criptografia
-- **Protocolo**: FTP, FTPS ou SFTP
+Acesse [Invenio Center - Relatório FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
+para saber mais detalhes.
 
-![relatorios agendados](https://robbublob.blob.core.windows.net/docs/relatorioagendado.png)
+A plataforma também permite o acesso centralizado aos relatórios agendados, incluindo tanto todos os agendamentos disponíveis quanto aqueles criados exclusivamente por você, por meio da opção “Meus agendamentos”.
 
-## Visualização de Relatórios Finalizados
+![relatorios agendados](https://storage.robbu.global/v2/file/AEF82F18D1C977CD2A14853C5585EF36)
 
-Informações disponíveis:
-- Status
-- Período
-- Usuário
-- Segmento/carteira
-- Canal
+**Envio por e-mail**
 
-![relatorios finalizado](https://robbublob.blob.core.windows.net/docs/relatoriofinalizado.png)  
+Para realizar o envio do relatório agendado por e-mail, basta selecionar essa opção ao final da criação ou edição do relatório. Em seguida, informe os endereços de e-mail que deverão receber o relatório agendado e confirme a criação ou atualização.
 
-Também é possível pesquisar dentro da tabela e baixar o CSV.
+<img src="https://storage.robbu.global/v2/file/C46C7F77528C772DE4F630D7543C798A" /> 
+
+**Edição e exclusão**
+
+Ao selecionar o ícone de três pontos, localizado à direita do relatório já gerado, serão exibidas as opções para editá-lo ou excluí-lo.
+
+<img src="https://storage.robbu.global/v2/file/AEF82F18D1C977CD953C3CAA8BB3A2C9" /> 
+
+> Essas ações permitem a manutenção e o ajuste contínuo dos relatórios agendados, garantindo alinhamento com as necessidades operacionais e evitando a permanência de registros obsoletos.
 
 ---
 
@@ -136,45 +158,76 @@ Também é possível pesquisar dentro da tabela e baixar o CSV.
 
 ---
 
-## 🛠️ Relatórios Customizados
+## Relatórios Customizados
 
 Também é possível solicitar **relatórios customizados** junto ao time comercial, mediante avaliação.
 
-*Importante: solicitações customizadas estão sujeitas a custos adicionais e prazos específicos.*
+> Importante: solicitações customizadas estão sujeitas a custos adicionais e prazos específicos.
 
-## 📈 Conclusão
 
-A seção de Relatórios é uma ferramenta estratégica que permite:
+---
+Links e Assuntos Relacionados
 
-- Acompanhar metas  
-- Otimizar processos  
-- Identificar melhorias  
-- Apoiar decisões baseadas em dados reais  
+https://docs.robbu.global/docs/center/agendamento-relatorio-ftp
+
+https://docs.robbu.global/docs/center/tipos-de-kpi
+
+
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
-<AccordionGroup title="Dúvidas Frequentes">
+<AccordionGroup>
+  <Accordion title="O que são os Relatórios do Invenio Center?">
+    Os relatórios do Invenio Center são recursos analíticos que permitem consolidar, visualizar e extrair dados operacionais da plataforma, oferecendo uma visão estratégica sobre atendimentos, campanhas, KPIs, acessos e desempenho da operação.
+  </Accordion>
 
-<Accordion title="Consigo agendar um relatório para ser enviado automaticamente?">
-Sim. Você pode definir data, horário, e escolher entre e-mail ou FTP/SFTP como forma de entrega.
-</Accordion>
+  <Accordion title="Quais são os principais benefícios de utilizar os relatórios?">
+    Os relatórios permitem acompanhamento de metas, otimização de processos, identificação de gargalos operacionais, monitoramento de performance da equipe e tomada de decisões baseada em dados reais e confiáveis.
+  </Accordion>
 
-<Accordion title="É possível gerar um relatório com dados de um segmento específico?">
-Sim. Durante a configuração, aplique o filtro de segmento desejado antes de gerar.
-</Accordion>
+  <Accordion title="Quem pode acessar e gerar relatórios na plataforma?">
+    O acesso aos relatórios depende do perfil de permissão configurado no ambiente. Usuários autorizados conseguem visualizar, gerar, baixar e agendar relatórios conforme as regras definidas pela operação.
+  </Accordion>
 
-<Accordion title="O sistema envia algum alerta caso um relatório falhe?">
-Não há alertas automáticos, mas o status "Falha" será exibido na lista de relatórios para acompanhamento manual.
-</Accordion>
+  <Accordion title="Consigo aplicar filtros personalizados nos relatórios?">
+    Sim. Durante a geração, é possível aplicar filtros como período, segmento, canal, carteira, usuário, evento e status, garantindo relatórios mais precisos e alinhados à necessidade de análise.
+  </Accordion>
 
-<Accordion title="Como sei quais relatórios estão em andamento?">
-A aba "Relatórios" exibe o status atual, incluindo "Em processamento".
-</Accordion>
+  <Accordion title="Posso visualizar o relatório diretamente na plataforma?">
+    Sim. A visualização no Invenio Center permite consultar até 100 linhas por relatório, além de contar com campo de busca para facilitar a análise rápida das informações.
+  </Accordion>
 
-<Accordion title="Preciso de um relatório com um formato específico. Isso é possível?">
-Sim. Entre em contato com o time comercial para solicitar um relatório customizado.
-</Accordion>
+  <Accordion title="Qual a vantagem de baixar o relatório em CSV?">
+    O download em CSV permite acesso a todos os registros gerados, sem limitação de linhas, possibilitando análises avançadas em ferramentas externas como Excel, Power BI ou sistemas internos.
+  </Accordion>
 
+  <Accordion title="É possível agendar relatórios para envio automático?">
+    Sim. Os relatórios podem ser agendados para envio automático por e-mail ou FTP/SFTP, garantindo recorrência, previsibilidade e eficiência no consumo das informações.
+  </Accordion>
+
+  <Accordion title="Consigo gerenciar meus relatórios e agendamentos?">
+    Sim. A plataforma disponibiliza as abas “Relatórios”, “Agendamentos” e “Meus relatórios”, permitindo controle total sobre relatórios gerados, em processamento ou programados.
+  </Accordion>
+
+  <Accordion title="Quais tipos de relatórios estão disponíveis no Invenio Center?">
+    Estão disponíveis relatórios de contatos, KPIs e desempenho, acesso e sessões, extração de dados, automação e campanhas, auditoria e compliance, além de relatórios de atendimento e documentação.
+  </Accordion>
+
+  <Accordion title="Os relatórios auxiliam em auditoria e compliance?">
+    Sim. Relatórios como Auditoria (GDPR e LGPD), controle de sessões e histórico de ações garantem rastreabilidade, segurança da informação e conformidade com normas regulatórias.
+  </Accordion>
+
+  <Accordion title="É possível solicitar relatórios customizados?">
+    Sim. Relatórios customizados podem ser solicitados junto ao time comercial, mediante avaliação técnica, custos adicionais e prazos específicos.
+  </Accordion>
+
+  <Accordion title="O que significa o status 'Falha' em um relatório?">
+    O status “Falha” indica que o relatório não foi concluído corretamente. Nesses casos, recomenda-se revisar filtros, período selecionado ou gerar novamente o relatório.
+  </Accordion>
+
+  <Accordion title="Os relatórios impactam diretamente a performance da operação?">
+    Sim. O uso contínuo dos relatórios contribui para melhoria de performance, ajuste de estratégias, aumento da produtividade da equipe e maior controle da operação como um todo.
+  </Accordion>
 </AccordionGroup>
