@@ -1,36 +1,86 @@
 ---
 title: "Como habilitar Protocolos de Atendimento"
-sidebarTitle: "Como Habilitar Protocolos de Atendimento"
+sidebarTitle: "Protocolos de Atendimento"
 description: "Aprenda a ativar protocolos de atendimento únicos no Invenio Center e personalizar a mensagem enviada aos clientes."
 ---
 
-##  Como habilitar Protocolos de Atendimento
 
-Para habilitar protocolos únicos em cada atendimento efetuado em seu ambiente, siga os passos abaixo:
+Para habilitar protocolos de atendimento, acesse:
 
-### 1. Acesse as Configurações Gerais
+`Invenio Center > Configurações > Conta > Gerenciar > Protocolo de Atendimento`
 
-No menu lateral, vá até as configurações do ambiente:
+[Invenio Center - Configurações gerais da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
 
- ![configuracoes](https://robbublob.blob.core.windows.net/docs/configuracoes.png)
+<img src="https://storage.robbu.global/v2/file/BED75C7BF597086D389E507F8D0ADC66" /> 
 
- ![conta](https://robbublob.blob.core.windows.net/docs/conta.png)
 
-### 2. Localize a opção “Protocolo de Atendimento”
-
-Desça a barra de rolagem até encontrar a opção:
-
-![protocolo atendimento](https://robbublob.blob.core.windows.net/docs/protocoloatend.png)
-
-### 3. Habilite a funcionalidade
+## Habilite a funcionalidade
 
 Ative a opção **“Protocolo de Atendimento”** para permitir que cada atendimento gere automaticamente um número de protocolo exclusivo.
 
-### 4. Personalize a mensagem automática
+Após a configuração, o protocolo será exibido automaticamente nas conversas com os clientes. Ele pode aparecer tanto como um evento registrado no atendimento, quanto como uma mensagem
+personalizada enviada diretamente ao cliente, caso você tenha configurado a frase automática.
+Essa visualização permite acompanhar de forma prática e organizada todos os atendimentos que estão sendo realizados, garantindo rastreabilidade e padronização.
+
+### Personalize a mensagem automática
 
 Você poderá definir uma **frase personalizada** que será enviada automaticamente ao cliente no momento da criação do protocolo.
 
+<img src="https://storage.robbu.global/v2/file/C2ADD9C94561D2819BA98B505FC4423C" /> 
+
+<img src="https://storage.robbu.global/v2/file/BED75C7BF597086DDAB20F6038FFE685" /> 
+
+<img src="https://storage.robbu.global/v2/file/82D0B5001312F7E11324CCB204AA0C82" /> 
+
+
 >  Utilize a variável `{{PROTOCOL}}` na mensagem para inserir automaticamente o número do protocolo.
+
+---
+
+## Relatórios de Protocolos de Atendimento 
+
+Por se tratar de um dado único, o protocolo de atendimento pode ser utilizado como chave de referência para diversos relatórios disponíveis no Invenio Center. Além disso, existe um relatório
+próprio chamado Relatório de Protocolos de Atendimento, que permite analisar detalhadamente cada atendimento registrado. 
+
+O relatório traz os seguintes dados: 
+
+- Número do protocolo 
+
+- Canal em que o protocolo foi iniciado 
+
+- Carteira e segmento inicial e final 
+
+- Data e hora de início e fim do protocolo 
+
+- Status do atendimento (finalizado ou não) 
+
+- Participação do bot e interação do cliente 
+
+- Nome e telefone do contato, código cliente e identificadores únicos 
+
+- Evento que finalizou o protocolo (código e descrição) 
+
+- Usuário(s) que atenderam e que finalizaram o protocolo 
+
+- Tempo médio de atendimento, tempo no chatbot, tempo médio de primeira resposta da operação 
+
+- Tempo médio em fila, tempo médio de resposta do cliente e tempo médio de resposta da operação 
+
+> Esses dados permitem monitorar, analisar e otimizar os atendimentos, garantindo uma visão completa da operação e ajudando a identificar oportunidades de melhoria e padrões de comportamento dos clientes. <br/>
+> Para mais informações, acesse: [Invenio Center - Relatórios](https://docs.robbu.global/docs/center/relatorios)
+
+---
+
+## Links e Assuntos Relacionados
+
+https://docs.robbu.global/docs/center/relatorios
+
+https://docs.robbu.global/docs/center/fila-de-atendimento
+
+https://docs.robbu.global/docs/live/enviar-mensagem
+
+https://docs.robbu.global/docs/live/dados-da-mensagem
+
 
 ---
 
@@ -38,24 +88,30 @@ Você poderá definir uma **frase personalizada** que será enviada automaticame
 
 <AccordionGroup>
   <Accordion title="O que é um Protocolo de Atendimento?">
-    É um identificador único gerado automaticamente para cada atendimento iniciado, que facilita o rastreio e acompanhamento das interações.
+    É um identificador único gerado automaticamente para cada atendimento iniciado, permitindo o rastreio, organização e acompanhamento das interações realizadas com o cliente.
+  </Accordion>
+
+  <Accordion title="Quais são os principais benefícios dos Protocolos de Atendimento?">
+    Os protocolos garantem maior rastreabilidade, padronização da operação, transparência para o cliente e suporte à análise de indicadores e relatórios operacionais.
   </Accordion>
 
   <Accordion title="A mensagem com o número do protocolo é obrigatória?">
-    Não. O envio da mensagem é opcional, mas recomendado para manter o cliente informado e oferecer mais transparência.
+    Não. O envio da mensagem é opcional, porém recomendado, pois mantém o cliente informado e facilita referências futuras ao atendimento.
   </Accordion>
 
-  <Accordion title="Posso alterar a frase com {{PROTOCOL}} depois?">
-    Sim. A frase pode ser editada a qualquer momento nas configurações do ambiente, sem afetar protocolos já gerados.
-  </Accordion>
-
-  <Accordion title="É possível desabilitar o protocolo de atendimento após ativá-lo?">
-    Sim. Basta desmarcar a opção nas configurações gerais do ambiente para que a funcionalidade pare de gerar novos protocolos.
+  <Accordion title="O número do protocolo é exibido automaticamente na conversa?">
+    Sim. Após a ativação, o protocolo é exibido automaticamente no atendimento, seja como evento registrado ou como mensagem enviada ao cliente, conforme a configuração definida.
   </Accordion>
 
   <Accordion title="O número do protocolo é único mesmo entre canais diferentes?">
     Sim. Cada protocolo é exclusivo e vinculado a uma interação específica, independentemente do canal utilizado.
   </Accordion>
+
+  <Accordion title="Os protocolos podem ser utilizados em relatórios?">
+    Sim. O protocolo pode ser usado como chave de referência em diversos relatórios do Invenio Center, incluindo o Relatório de Protocolos de Atendimento.
+  </Accordion>
+
+  <Accordion title="É possível desabilitar o protocolo de atendimento após ativá-lo?">
+    Sim. Basta desmarcar a opção nas configurações gerais do ambiente para que a funcionalidade deixe de gerar novos protocolos.
+  </Accordion>
 </AccordionGroup>
-
-
