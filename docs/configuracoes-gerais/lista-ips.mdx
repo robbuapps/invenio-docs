@@ -94,3 +94,131 @@ Abaixo está a lista **organizada de forma simplificada**, agrupando IPs iguais 
 - Em serviços que compartilham IPs (como InvenioIdr V1, OutputStream e Jobs), a liberação é **única** para todos eles.  
 - Em caso de dúvida, a recomendação é **liberar todos os IPs listados nesta documentação**, garantindo total compatibilidade com a plataforma Robbu.  
 - Esta lista pode ser atualizada conforme a evolução da infraestrutura.  
+
+---
+## Links e Assuntos Relacionados
+
+https://docs.robbu.global/docs/center/webhook
+
+https://docs.robbu.global/docs/center/agendamento-relatorio-ftp
+
+https://docs.robbu.global/docs/center/carga-ftp
+
+https://docs.robbu.global/docs/live/como-acessar-plataforma
+
+---
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+
+  <Accordion title="O que é a liberação de IPs da Robbu?">
+    A liberação de IPs da Robbu é o processo de permitir que os servidores da Robbu se comuniquem com o ambiente do cliente, como firewalls, servidores, APIs ou serviços de FTP/SFTP.  
+    Essa liberação é essencial para garantir o funcionamento correto das integrações.
+  </Accordion>
+
+  <Accordion title="Quando é necessário realizar a liberação de IPs?">
+    A liberação de IPs é necessária sempre que:
+    - Houver integrações via **API**, **webhook** ou **FTP/SFTP**;
+    - O ambiente do cliente possuir **firewall restritivo**;
+    - Os serviços da Robbu não conseguirem se comunicar com sistemas internos do cliente.
+  </Accordion>
+
+  <Accordion title="Quais serviços da Robbu exigem liberação de IPs?">
+    Os principais serviços que exigem liberação de IPs são:
+    - **Invenio IDR** (V1 e V2);
+    - **OutputStream** (Webhooks);
+    - **Invenio Jobs** (V1 e V2);
+    - **Invenio Center** (integrações via FTP);
+    - **InvenioCustom** (integrações dedicadas).
+  </Accordion>
+
+  <Accordion title="Qual IP deve ser liberado para o Invenio IDR V2 (Motor Novo)?">
+    Para o **Invenio IDR V2**, é necessário liberar exclusivamente o seguinte IP:
+    
+    - `191.232.253.7`
+  </Accordion>
+
+  <Accordion title="Quais IPs são utilizados pelo Invenio IDR V1, OutputStream e Invenio Jobs?">
+    Esses serviços compartilham a mesma faixa de IPs:
+    
+    - `104.41.15.44`  
+    - `104.41.14.184`  
+    - `104.41.13.132`  
+    - `104.41.12.97`  
+    - `20.201.81.246`  
+    - `104.41.56.229`  
+    - `104.41.30.250`  
+    - `20.206.191.81`  
+    - `191.235.52.58`  
+    - `191.235.52.65`  
+    - `191.235.52.78`  
+    - `191.235.52.195`  
+    - `191.235.52.245`  
+    - `191.235.53.35`  
+    - `191.235.53.57`  
+    - `191.235.53.74`  
+    - `191.235.53.158`  
+    - `191.235.54.48`  
+    - `191.235.54.59`  
+    - `104.41.13.179`
+  </Accordion>
+
+  <Accordion title="Quais IPs são utilizados para integração via FTP?">
+    Para integrações via FTP/SFTP, os IPs variam conforme o serviço:
+    
+    **Invenio Center (teste de conexão FTP/SFTP):**
+    - `104.41.0.210`
+    
+    **Invenio Jobs (leitura e exportação de arquivos):**
+    - Utiliza a mesma lista de IPs do **Invenio IDR V1**.
+  </Accordion>
+
+  <Accordion title="O que é o InvenioCustom e quais IPs ele utiliza?">
+    O **InvenioCustom** é utilizado para integrações especiais com APIs de clientes, como SOAP, WCF ou orquestrações dedicadas.
+    
+    IPs utilizados:
+    
+    - `191.232.35.72`  
+    - `191.232.32.84`  
+    - `191.232.32.44`  
+    - `191.232.35.210`  
+    - `20.201.96.229`  
+    - `191.232.188.192`  
+    - `191.232.188.212`  
+    - `191.232.191.181`  
+    - `191.232.188.193`  
+    - `191.232.188.213`  
+    - `191.232.71.41`  
+    - `191.232.71.105`  
+    - `191.232.71.108`  
+    - `191.232.71.131`  
+    - `20.226.184.21`  
+    - `20.226.184.66`  
+    - `191.235.52.172`  
+    - `191.235.53.17`  
+    - `191.235.53.224`  
+    - `191.235.54.38`  
+    - `191.235.54.171`  
+    - `191.235.54.213`  
+    - `191.234.146.160`  
+    - `191.232.38.77`
+  </Accordion>
+
+  <Accordion title="Se utilizo mais de um serviço da Robbu, preciso liberar todos os IPs?">
+    Sim. É necessário liberar a combinação de IPs correspondente a todos os serviços da Robbu que estejam sendo utilizados no ambiente.
+  </Accordion>
+
+  <Accordion title="Ao liberar os IPs do Invenio IDR V1, outros serviços passam a funcionar automaticamente?">
+    Sim. Os serviços **OutputStream**, **Invenio Jobs** e **Invenio Jobs V2** compartilham os mesmos IPs utilizados pelo Invenio IDR V1.
+  </Accordion>
+
+  <Accordion title="O que fazer em caso de dúvida sobre quais IPs liberar?">
+    Em caso de dúvida, recomenda-se liberar **todos os IPs listados nesta documentação**, garantindo total compatibilidade com a plataforma Robbu.
+  </Accordion>
+
+  <Accordion title="A lista de IPs pode sofrer alterações?">
+    Sim. A lista de IPs pode ser atualizada conforme a evolução da infraestrutura da Robbu.  
+    Por isso, recomenda-se revisitar esta documentação periodicamente.
+  </Accordion>
+
+</AccordionGroup>
