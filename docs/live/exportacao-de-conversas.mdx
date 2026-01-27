@@ -1,85 +1,281 @@
 ---
 title: "Exportação de Conversas"
 sidebarTitle: "Exportar Conversas"
-description: "Saiba como exportar conversas no Invenio Live para fins de auditoria, análise ou armazenamento."
+description: "Exporte conversas do Invenio Live para fins de auditoria, análise ou armazenamento em formatos TXT e PDF."
 ---
 
-O **Invenio Live** permite que os atendentes exportem conversas específicas de forma simples e rápida.
+O **Invenio Live** permite que atendentes e supervisores exportem conversas específicas de forma simples e rápida.
 
-Essa funcionalidade é ideal para:
+**Casos de uso:**
 
-- Auditorias  
-- Análises de atendimentos  
-- Armazenamento de históricos  
-- Envio de informações a terceiros  
-
----
-
-##  Como Exportar uma Conversa
-
-Siga o passo a passo abaixo para exportar uma conversa:
-
-- Acesse o **Invenio Live** com seu login.  
-- Localize e **abra a conversa desejada**.  
-- Clique no ícone de gerenciamento  
-   > (Representado por **três pontos** ou uma **engrenagem**, no canto superior da direito da tela).  
-- Selecione a opção **“Exportar conversa”**.
-
-![Acessando o menu de exportação](https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportaConversaEngrenagem.png)
-![Acessando o menu de exportação](https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportarConversa.png)
-
-- Escolha o **período da conversa** a ser exportado.  
-   > Você pode filtrar pelas **datas de início e fim**.
-
-![Seleção do período para exportação](https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportaConversa2.png)
-
-- Confirme a exportação.
+- 📋 **Auditorias:** Comprovação de atendimentos e conformidade
+- 📊 **Análises:** Avaliação de qualidade e desempenho
+- 💾 **Armazenamento:** Backup de históricos importantes
+- 📤 **Compartilhamento:** Envio de informações a terceiros ou departamentos
 
 ---
 
-##  Arquivo Gerado
+## Como Exportar uma Conversa
 
-Após a confirmação, o sistema irá gerar um arquivo com o histórico da conversa do período selecionado.
-
-- O arquivo estará disponível para **download**
-- Os arquivos são entregues em **formato `.zip`**, contendo:
-  - `.txt` (texto simples)
-  - `.pdf` (visualização estruturada)
-
-> ⚠️ **Importante**  
-> - O conteúdo exportado respeita os filtros de data selecionados  
-> - Arquivos `.pdf` são úteis para **compartilhamentos oficiais** e documentações  
+<Steps>
+  <Step title="Acessar a plataforma">
+    Faça login no **Invenio Live** com seu usuário e senha.
+  </Step>
+  
+  <Step title="Abrir a conversa">
+    Localize e **abra a conversa desejada** na lista lateral de conversas.
+  </Step>
+  
+  <Step title="Acessar menu de exportação">
+    Clique no **ícone de gerenciamento** no canto superior direito da tela.
+    
+    Este ícone é representado por **três pontos (⋮)** ou uma **engrenagem (⚙️)**.
+    
+    <Frame caption="Acesso ao menu de gerenciamento da conversa">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportaConversaEngrenagem.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Selecionar exportação">
+    No menu que abrir, selecione a opção **"Exportar conversa"**.
+    
+    <Frame caption="Opção de exportar conversa no menu de gerenciamento">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportarConversa.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Definir período">
+    Escolha o **período da conversa** a ser exportado.
+    
+    **Opções disponíveis:**
+    - 📅 **Data de início:** Primeira mensagem a incluir
+    - 📅 **Data de fim:** Última mensagem a incluir
+    - ♾️ **Sem filtro:** Todo o histórico disponível será exportado
+    
+    <Frame caption="Seleção do período para exportação de conversas">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Exporta%20Conversa/ExportaConversa2.png" />
+    </Frame>
+    
+    <Note>
+    **Período não definido:** Caso não sejam informadas as datas de início e fim, **todo o histórico disponível** da conversa será exportado.
+    </Note>
+  </Step>
+  
+  <Step title="Confirmar e baixar">
+    Confirme a exportação.
+    
+    O sistema irá **gerar o arquivo** com o histórico da conversa do período selecionado.
+    
+    O arquivo estará disponível para **download imediato**.
+    
+    <Check>
+    **Exportação concluída!** O arquivo está pronto para download.
+    </Check>
+  </Step>
+</Steps>
 
 ---
 
->  **Dica:** Utilize essa funcionalidade para montar históricos detalhados e responder auditorias com rapidez e segurança.  
+## Formato do Arquivo Gerado
+
+Após a confirmação, o sistema gera um arquivo compactado com o histórico da conversa.
+
+**Características do arquivo:**
+
+- 📦 **Formato:** `.zip` (arquivo compactado)
+- 📄 **Conteúdo:** 2 arquivos dentro do `.zip`
+  - `.txt` → Texto simples (fácil leitura e processamento)
+  - `.pdf` → Visualização estruturada (ideal para compartilhamento oficial)
+
+**Estrutura da exportação:**
+
+```
+conversa_[nome-contato]_[data].zip
+├── conversa_[nome-contato]_[data].txt
+└── conversa_[nome-contato]_[data].pdf
+```
+
+<Tip>
+**Quando usar cada formato:**
+
+- **TXT:** Ideal para análises automatizadas, importação em planilhas, ou processamento por scripts
+- **PDF:** Recomendado para compartilhamentos oficiais, documentações formais e apresentações
+</Tip>
+
+<Warning>
+**Pontos importantes:**
+
+- ✅ O conteúdo exportado **respeita os filtros de data** selecionados
+- ⏱️ O arquivo gerado fica disponível para **download imediato**
+- 💾 Recomendamos **baixar logo após a geração** para evitar perda
+- 📊 Arquivos PDF são úteis para **compartilhamentos oficiais** e documentações
+</Warning>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Boas Práticas
 
-- [Como enviar mensagens](https://docs.robbu.global/docs/live/enviar-mensagem)  
-- [Filtros e menus de busca](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
-- [Dados da mensagem](https://docs.robbu.global/docs/live/dados-da-mensagem)  
-- [Busca no histórico de mensagens](https://docs.robbu.global/docs/live/busca-mensagem-historico)  
+<Tip>
+**Utilize essa funcionalidade para:**
+
+- 📋 Montar históricos detalhados antes de auditorias
+- 🚀 Responder solicitações de compliance com rapidez
+- 🔒 Garantir backup de conversas críticas
+- 📤 Compartilhar evidências de atendimento com segurança
+</Tip>
 
 ---
 
-## ❓ Perguntas Frequentes (FAQ)
+## Links Relacionados
 
-**1. Quais formatos estão disponíveis na exportação?**  
-As conversas são exportadas em `.zip`, contendo arquivos em `.txt` e `.pdf`.
+<CardGroup cols={2}>
+  <Card 
+    title="Enviar Mensagens" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Como enviar mensagens
+  </Card>
+  
+  <Card 
+    title="Filtros e Busca" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Organizar conversas
+  </Card>
+  
+  <Card 
+    title="Dados da Mensagem" 
+    icon="circle-info" 
+    href="https://docs.robbu.global/docs/live/dados-da-mensagem"
+  >
+    Rastreamento de envios
+  </Card>
+  
+  <Card 
+    title="Buscar no Histórico" 
+    icon="clock-rotate-left" 
+    href="https://docs.robbu.global/docs/live/busca-mensagem-historico"
+  >
+    Busca de mensagens antigas
+  </Card>
+</CardGroup>
 
-**2. É possível exportar mais de uma conversa ao mesmo tempo?**  
-Não. A exportação é realizada individualmente, conversa por conversa.
+---
 
-**3. O que acontece se eu não definir um período?**  
-Caso não seja definido um intervalo de datas, todo o histórico disponível da conversa será exportado.
+## ⁉️ Perguntas Frequentes (FAQ)
 
-**4. O arquivo gerado fica disponível por quanto tempo?**  
-O arquivo gerado fica disponível para download imediato após a exportação. Recomendamos realizar o download logo após a geração.
+<AccordionGroup>
+  <Accordion title="📁 Quais formatos estão disponíveis na exportação?">
+    **Formato do arquivo gerado:** `.zip` (arquivo compactado)
+    
+    **Conteúdo do arquivo `.zip`:**
+    
+    1. **`.txt`** (Texto simples)
+       - ✅ Fácil leitura em qualquer editor de texto
+       - ✅ Compatível com análises automatizadas
+       - ✅ Pode ser importado em planilhas Excel/Google Sheets
+    
+    2. **`.pdf`** (Documento formatado)
+       - ✅ Visualização estruturada e profissional
+       - ✅ Ideal para compartilhamentos oficiais
+       - ✅ Mantém formatação original da conversa
+       - ✅ Adequado para documentações e auditorias
+    
+    **Ambos os formatos** contêm o mesmo conteúdo, apenas com apresentações diferentes.
+  </Accordion>
 
-**5. O que fazer se a exportação não funcionar?**  
-Verifique sua conexão com a internet e tente novamente. Se o erro persistir, entre em contato com o suporte técnico.
+  <Accordion title="🔢 É possível exportar mais de uma conversa ao mesmo tempo?">
+    **Não.** A exportação é realizada **individualmente**, conversa por conversa.
+    
+    **Processo para exportar múltiplas conversas:**
+    1. **Selecione** a primeira conversa
+    2. **Exporte** seguindo o procedimento completo
+    3. **Repita** o processo para cada conversa adicional
+    
+    **Caminho para cada exportação:**
+    **Invenio Live > Selecionar Conversa > Ícone de Gerenciamento (⚙️) > "Exportar conversa" > Definir Período > Confirmar**
+    
+    <Tip>
+    **Dica de produtividade:** Se precisar exportar múltiplas conversas com frequência, considere usar filtros de data similares para agilizar o processo.
+    </Tip>
+  </Accordion>
 
+  <Accordion title="📅 O que acontece se eu não definir um período?">
+    **Todo o histórico disponível** da conversa será exportado.
+    
+    **Comportamento padrão (sem filtro de data):**
+    - ✅ **Início:** Primeira mensagem registrada na conversa
+    - ✅ **Fim:** Última mensagem até o momento da exportação
+    - ⏱️ **Resultado:** Histórico completo desde o início da conversa
+    
+    **Quando definir período:**
+    - 📊 Análises de períodos específicos (trimestre, mês, semana)
+    - 🎯 Auditorias focadas em datas determinadas
+    - 💾 Redução do tamanho do arquivo (apenas período relevante)
+    
+    **Quando NÃO definir período:**
+    - 📋 Backup completo da conversa
+    - 🔍 Investigações sem escopo temporal definido
+    - 📤 Compartilhamento de todo histórico com terceiros
+  </Accordion>
 
+  <Accordion title="⏰ O arquivo gerado fica disponível por quanto tempo?">
+    **O arquivo fica disponível para download imediato** após a geração.
+    
+    **Recomendações importantes:**
+    
+    - ⚡ **Baixe imediatamente** após a exportação
+    - 💾 **Não há armazenamento permanente** do arquivo no servidor
+    - 🔄 Se não baixar, será necessário **gerar novamente**
+    
+    **Procedimento recomendado:**
+    1. Gere a exportação
+    2. **Baixe imediatamente** o arquivo `.zip`
+    3. Armazene em local seguro (nuvem, servidor, backup local)
+    4. Verifique a integridade do arquivo baixado
+    
+    <Warning>
+    **Atenção:** Não há garantia de que o arquivo permaneça disponível após o fechamento da sessão ou navegador. Sempre **baixe imediatamente**.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="❌ O que fazer se a exportação não funcionar?">
+    **Possíveis causas e soluções:**
+    
+    **1. Problema de conexão**
+    - ⚠️ **Causa:** Internet instável ou lenta
+    - ✅ **Solução:** Verifique sua conexão e tente novamente
+    
+    **2. Erro técnico persistente**
+    - ⚠️ **Causa:** Problema no servidor ou sistema
+    - ✅ **Solução:** Entre em contato com o suporte técnico Robbu
+    
+    **Caminho de tentativa:**
+    1. **Verificar internet** → Testar conexão
+    2. **Contatar suporte** → Se erro persistir
+    
+    **Suporte:** help@robbu.global
+  </Accordion>
+
+  <Accordion title="🔒 Os dados exportados são seguros?">
+    **Sim.** A exportação mantém os padrões de segurança da plataforma.
+    
+    **Medidas de segurança:**
+    - ✅ Acesso restrito por **perfis de usuário**
+    - ✅ Registro de **auditoria** de quem exportou
+    - ✅ Arquivo gerado apenas para o **usuário logado**
+    - ✅ Conteúdo **não compartilhado** automaticamente
+    
+    **Responsabilidades do usuário:**
+    - 🔐 **Armazenar** o arquivo `.zip` em local seguro
+    - 🚫 **Não compartilhar** informações sensíveis sem autorização
+    - 📋 **Seguir** políticas LGPD e de privacidade da empresa
+    - 🗑️ **Deletar** exportações após uso quando não mais necessárias
+    
+    <Note>
+    **Conformidade:** A exportação de conversas deve seguir as políticas internas de privacidade e proteção de dados da sua empresa, especialmente em relação à LGPD.
+    </Note>
+  </Accordion>
+</AccordionGroup>

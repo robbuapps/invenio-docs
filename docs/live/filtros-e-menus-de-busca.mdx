@@ -1,143 +1,259 @@
 ---
 title: "Filtros e Menus de Busca"
-description: "Utilização de menus, filtros e ordenações na Invenio Live para otimizar o atendimento."
 sidebarTitle: "Filtros e Busca"
+description: "Domine os menus de navegação, filtros de busca e opções de ordenação do Invenio Live para otimizar a gestão de atendimentos."
 ---
 
-O **Invenio Live** disponibiliza recursos que otimizam a gestão de atendimentos em tempo real, proporcionando ao operador uma experiência mais prática e eficiente.
-
-**Entre esses recursos, destacam-se:**
-
-- Menus de visualização.
-- Filtros de busca.
-- Opções de ordenação.
-
-Essas funcionalidades permitem localizar contatos com facilidade, acompanhar agendamentos e organizar os atendimentos de acordo com as necessidades da operação.
-
-O uso adequado desses recursos contribui para melhorar o desempenho dos atendimentos e garante maior assertividade nas interações com os clientes.
+O **Invenio Live** oferece recursos poderosos de filtros e navegação que permitem localizar contatos rapidamente, acompanhar agendamentos e organizar atendimentos de acordo com as necessidades da operação.
 
 ---
 
-##  Menus de Navegação
+## Menus de Navegação
 
-Abaixo, listamos os principais menus disponíveis no Invenio Live, com suas respectivas funcionalidades:
+O Invenio Live disponibiliza diferentes visualizações para facilitar o acesso aos contatos, cada uma com uma finalidade específica:
 
-- **Agendamentos Pendentes**: `Exibe todos os agendamentos futuros atribuídos ao usuário logado.`
-- **Contatos Pendentes**: `Mostra os contatos pendentes de resposta que estão fidelizados ao usuário ou em sua barra de favoritos.`
-- **Contatos Pendentes de Primeira Resposta**: `Lista geral dos contatos que ainda não receberam a primeira resposta da operação. Essencial para identificar gargalos no atendimento inicial.`
-- **Lista Geral**: `Exibe todos os contatos cadastrados na plataforma, independentemente da fidelização.`
-- **Meus Contatos**: `Lista os contatos fidelizados ao usuário logado.`
-- **Responsável**: `Permite filtrar contatos com base no operador responsável ou por fila de atendimento.`
-- **Chatbots**: `Apresenta contatos em atendimento por fluxos de Chatbots (IDR).`
-
-> ⚠️ **Importante**  
-> Disponível apenas para usuários com permissão habilitada via **Invenio Center**:  
-> `Acesse usuários > Editar Usuário > Habilitar opção "Visualizar lista geral de contatos"`.
-
-<img src="https://robbublob.blob.core.windows.net/docs/visualizarcontatos.png"/>
-
----
-
-##  Filtros de Busca
-
-A maioria dos menus (exceto *Responsável* e *Chatbots*) permite o uso de filtros adicionais:
-
-- **CPF ou CNPJ**
-- **Tag**
-- **Código**
-- **Protocolo**
-- **Telefone**
-- **E-mail**
-- **Nome**
-- **Último evento**
-
-Esses filtros ajudam a encontrar rapidamente o contato desejado, trazendo resultados mais precisos.
-
-![filtro busca](https://robbublob.blob.core.windows.net/docs/filtrosdebusca.png)
-
-> ⚠️**Importante**  
-> A exibição deste menu irá sofrer variações conforme o grupo de acesso do usuário e algumas limitações devido à 
-> configuração de privacidade de dados disponível no Invenio Center.  
-> [Acesse a documentação sobre privacidade de dados](https://docs.robbu.global/docs/center/privacidade-e-protecao)
-
----
-
-##  Filtros de Ordenação
-
-Além dos filtros de busca, o sistema permite que você organize os contatos conforme diferentes critérios, de forma crescente ou decrescente:
-
-- **Ordenação padrão**
-- **Últimas mensagens não respondidas**
-- **Nome (ordem alfabética)**
-- **Chats online**
-- **Prioridade (Alta, Média, Baixa)**
-- **Criticidade do contato**
-- **Mensagens pendentes**
-
-![filtro ordenacao](https://robbublob.blob.core.windows.net/docs/filtroordenacao.png)
-
----
-
-## Indicadores de mensagens
-
-**Contador de mensagens pendentes**  
-Exibe a quantidade de mensagens que o contato está pendente de resposta.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/mensagenspendentes1.png" />
-
-**Contador de tempo da última mensagem**  
-Indica quanto tempo se passou desde o recebimento da última mensagem do contato.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/tempodependencia.png" />
-
-**Data e hora da última mensagem**  
-Mostra a data e o horário em que a última mensagem foi enviada pelo contato.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/datahorapendencia.png" />
+<Tabs>
+  <Tab title="Agendamentos">
+    **Agendamentos Pendentes**
+    
+    Exibe todos os agendamentos futuros atribuídos ao usuário logado, permitindo acompanhar retornos programados.
+    
+    **Caminho:** **Invenio Live > Menu Lateral > Agendamentos Pendentes**
+  </Tab>
+  
+  <Tab title="Contatos Pendentes">
+    **Contatos Pendentes**
+    
+    Mostra os contatos pendentes de resposta que estão **fidelizados ao usuário** ou em sua **barra de favoritos**.
+    
+    **Contatos Pendentes de Primeira Resposta**
+    
+    Lista geral dos contatos que ainda não receberam a primeira resposta da operação. Essencial para identificar gargalos no atendimento inicial.
+    
+    **Caminho:** **Invenio Live > Menu Lateral > Contatos Pendentes / Primeira Resposta**
+  </Tab>
+  
+  <Tab title="Listas Gerais">
+    **Lista Geral**
+    
+    Exibe **todos os contatos** cadastrados na plataforma, independentemente da fidelização.
+    
+    <Warning>
+    **Permissão necessária:** Disponível apenas para usuários com permissão habilitada.
+    
+    **Caminho para habilitar:** **Invenio Center > Usuários > Editar Usuário > Marcar "Visualizar lista geral de contatos" > Salvar**
+    </Warning>
+    
+    <Frame caption="Opção de permissão para visualizar lista geral de contatos">
+      <img src="https://robbublob.blob.core.windows.net/docs/visualizarcontatos.png" />
+    </Frame>
+    
+    **Meus Contatos**
+    
+    Lista apenas os contatos **fidelizados ao usuário logado**.
+    
+    **Caminho:** **Invenio Live > Menu Lateral > Meus Contatos / Lista Geral**
+  </Tab>
+  
+  <Tab title="Outros">
+    **Responsável**
+    
+    Permite filtrar contatos com base no **operador responsável** ou por **fila de atendimento**.
+    
+    **Chatbots**
+    
+    Apresenta contatos em atendimento por **fluxos de Chatbots (IDR)**.
+    
+    **Caminho:** **Invenio Live > Menu Lateral > Responsável / Chatbots**
+  </Tab>
+</Tabs>
 
 ---
 
-A combinação dos menus de navegação, filtros de busca, opções de ordenação e indicadores de mensagens torna o **Invenio Live** uma plataforma altamente personalizável, capaz de se adaptar à rotina de diferentes operações.
+## Filtros de Busca
 
-Aproveite esses recursos para ganhar agilidade, melhorar sua organização e garantir um atendimento mais eficiente e assertivo.
+A maioria dos menus (exceto *Responsável* e *Chatbots*) permite o uso de filtros adicionais para refinar os resultados:
+
+**Filtros disponíveis:**
+- 📋 **CPF ou CNPJ**
+- 🏷️ **Tag**
+- 🔢 **Código**
+- 📄 **Protocolo**
+- 📱 **Telefone**
+- ✉️ **E-mail**
+- 👤 **Nome**
+- ⏱️ **Último evento**
+
+<Frame caption="Menu de filtros de busca com múltiplas opções de pesquisa">
+  <img src="https://robbublob.blob.core.windows.net/docs/filtrosdebusca.png" />
+</Frame>
+
+<Note>
+**Privacidade de dados:** A exibição deste menu pode sofrer variações conforme o **grupo de acesso** do usuário e **configurações de privacidade** disponíveis no Invenio Center.
+
+Saiba mais em: [Privacidade e Proteção de Dados](https://docs.robbu.global/docs/center/privacidade-e-protecao)
+</Note>
 
 ---
 
-## 🔗 Links e Assuntos Relacionados
+## Filtros de Ordenação
 
-- [Privacidade e proteção de dados no Invenio Center](https://docs.robbu.global/docs/center/privacidade-e-protecao)  
-- [Gestão de usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios)  
-- [Canais de atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
-- [Como criar um agendamento no Invenio Live](https://docs.robbu.global/docs/live/como-criar-agendamento)
-- [Filtro por canais](https://docs.robbu.global/docs/live/filtro-por-canal)
-- [Busca de mensagem no historico](https://docs.robbu.global/docs/live/busca-mensagem-historico)
+Organize os contatos conforme diferentes critérios, de forma crescente ou decrescente:
+
+**Opções de ordenação:**
+- 🔄 **Ordenação padrão**
+- 💬 **Últimas mensagens não respondidas**
+- 🔤 **Nome (ordem alfabética)**
+- 🟢 **Chats online**
+- ⚠️ **Prioridade (Alta, Média, Baixa)**
+- 🚨 **Criticidade do contato**
+- 📊 **Mensagens pendentes**
+
+<Frame caption="Menu de ordenação de contatos com múltiplos critérios">
+  <img src="https://robbublob.blob.core.windows.net/docs/filtroordenacao.png" />
+</Frame>
+
+---
+
+## Indicadores de Mensagens
+
+O Invenio Live exibe indicadores visuais que facilitam a priorização de atendimentos:
+
+<Tabs>
+  <Tab title="Contador de Mensagens">
+    **Mensagens Pendentes**
+    
+    Exibe a **quantidade de mensagens** que o contato está pendente de resposta.
+    
+    <Frame caption="Contador numérico de mensagens pendentes de resposta">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/mensagenspendentes1.png" />
+    </Frame>
+  </Tab>
+  
+  <Tab title="Tempo Decorrido">
+    **Tempo da Última Mensagem**
+    
+    Indica **quanto tempo se passou** desde o recebimento da última mensagem do contato (ex: "5m", "2h", "3d").
+    
+    <Frame caption="Indicador de tempo decorrido desde a última mensagem">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/tempodependencia.png" />
+    </Frame>
+  </Tab>
+  
+  <Tab title="Data e Hora">
+    **Data/Hora da Última Mensagem**
+    
+    Mostra a **data e horário exatos** em que a última mensagem foi enviada pelo contato.
+    
+    <Frame caption="Registro de data e hora da última interação do contato">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/filtros e buscas/datahorapendencia.png" />
+    </Frame>
+  </Tab>
+</Tabs>
+
+<Tip>
+**Melhor prática:** Combine filtros de busca + ordenação + indicadores para criar visualizações personalizadas que atendam às necessidades específicas da sua operação.
+</Tip>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={3}>
+  <Card 
+    title="Filtro por Canal" 
+    icon="filter" 
+    href="https://docs.robbu.global/docs/live/filtro-por-canal"
+  >
+    Filtre mensagens por canal de comunicação
+  </Card>
+  
+  <Card 
+    title="Busca de Mensagens" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/busca-mensagem-historico"
+  >
+    Localize mensagens específicas no histórico
+  </Card>
+  
+  <Card 
+    title="Criar Agendamento" 
+    icon="calendar" 
+    href="https://docs.robbu.global/docs/live/como-criar-agendamento"
+  >
+    Agende retornos futuros de atendimento
+  </Card>
+  
+  <Card 
+    title="Privacidade de Dados" 
+    icon="shield" 
+    href="https://docs.robbu.global/docs/center/privacidade-e-protecao"
+  >
+    Configurações de privacidade no Center
+  </Card>
+  
+  <Card 
+    title="Gestão de Usuários" 
+    icon="users" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Gerenciamento de permissões de usuários
+  </Card>
+  
+  <Card 
+    title="Canais de Atendimento" 
+    icon="headset" 
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Configuração de canais no Center
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
-<AccordionGroup title="Dúvidas Frequentes">
+<AccordionGroup>
+  <Accordion title="Todos os operadores conseguem ver a Lista Geral de Contatos?">
+    **Não.** Apenas operadores com permissão habilitada no Invenio Center conseguem acessar esse menu.
+    
+    **Para habilitar a permissão:**
+    
+    **Caminho:** **Invenio Center > Usuários > Editar Usuário > Marcar "Visualizar lista geral de contatos" > Salvar**
+  </Accordion>
 
-<Accordion title="Todos os operadores conseguem ver a Lista Geral de Contatos?">
-Não. Apenas operadores com permissão habilitada no Invenio Center conseguem acessar esse menu.
-</Accordion>
+  <Accordion title="Posso usar mais de um filtro de busca ao mesmo tempo?">
+    **Não.** No entanto, os filtros podem ser **combinados** com as ordenações para refinar ainda mais os resultados.
+    
+    Por exemplo, você pode filtrar por:
+    - Nome + Prioridade
+    - Telefone + Última mensagem não respondida
+    - E-mail + Criticidade
+  </Accordion>
 
-<Accordion title="Posso usar mais de um filtro de busca ao mesmo tempo?">
-Sim. Os filtros podem ser combinados para refinar ainda mais os resultados.
-</Accordion>
+  <Accordion title="O que significa um contato estar 'fidelizado' a um operador?">
+    **Fidelização** significa que aquele contato está **vinculado diretamente** a um operador específico, sendo atendido prioritariamente por ele.
+    
+    Isso garante continuidade no atendimento e melhora a experiência do cliente, evitando que diferentes operadores atendam o mesmo contato sem contexto.
+  </Accordion>
 
-<Accordion title="O que significa um contato estar 'fidelizado' a um operador?">
-Significa que aquele contato está vinculado diretamente a um operador específico, sendo atendido por ele.
-</Accordion>
+  <Accordion title="A ordenação por 'Prioridade' é automática?">
+    **Não.** A prioridade deve ser **definida manualmente** pelo operador ou administrador no momento da edição do contato.
+    
+    **Caminho:** **Invenio Live ou Center > Editar Contato > Campo "Prioridade" > Selecionar (Alta/Média/Baixa) > Salvar**
+  </Accordion>
 
-<Accordion title="A ordenação por 'Prioridade' é automática?">
-Não. A prioridade deve ser definida manualmente pelo operador ou administrador no momento da edição do contato.
-</Accordion>
-
-<Accordion title="Consigo ver apenas meus agendamentos?">
-Sim. A aba "Agendamentos Pendentes" mostra apenas os agendamentos atribuídos ao usuário logado.
-</Accordion>
-
+  <Accordion title="Consigo ver apenas meus agendamentos?">
+    **Sim.** A aba **"Agendamentos Pendentes"** mostra apenas os agendamentos atribuídos ao **usuário logado**.
+    
+    **Caminho:** **Invenio Live > Menu Lateral > Agendamentos Pendentes**
+  </Accordion>
+  
+  <Accordion title="Quais menus permitem o uso de filtros de busca?">
+    **A maioria dos menus** permite filtros, **exceto**:
+    - Responsável
+    - Chatbots
+    
+    Todos os demais (Agendamentos, Contatos Pendentes, Lista Geral, Meus Contatos, etc.) suportam filtros de busca avançados.
+  </Accordion>
 </AccordionGroup>
-
-

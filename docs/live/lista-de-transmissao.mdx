@@ -1,108 +1,347 @@
 ---
 title: "Lista de Transmissão"
-description: A Lista de Transmissão do Invenio Live é uma funcionalidade que permite o envio simultâneo de uma mesma mensagem para diversos contatos, facilitando a comunicação em massa e otimizando o tempo dos operadores. É ideal para manter os clientes informados, principalmente em situações de sobrecarga no atendimento, enviando atualizações rápidas e personalizadas de forma prática.
----
----
-
-## Regras de uso por perfil
-
-A utilização da lista de transmissão respeita o perfil de acesso do usuário:
-
-- Usuários com perfil **Atendente**: podem enviar mensagens apenas para **contatos fidelizados**;
-- **Supervisores e Administradores**: têm acesso à lista de contatos exibida conforme a permissão do ambiente.
-
-> ⚠️ **Atenção**  
-> A lista de transmissão não permite o envio de mensagens via template (HSM).  
-> Isso significa que contatos com a janela de 24 horas encerrada no WhatsApp não receberão a mensagem.
-
+sidebarTitle: "Lista de Transmissão"
+description: "Envie a mesma mensagem simultaneamente para vários contatos do Invenio Live, otimizando comunicações em massa e economizando tempo."
 ---
 
-## Como criar uma lista de transmissão
+A **Lista de Transmissão** do Invenio Live é uma funcionalidade que permite o **envio simultâneo** de uma mesma mensagem para diversos contatos.
 
-1. **Acesse o Invenio Live**  
-   [Clique aqui para acessar o Invenio Live](https://invenio.robbu.global/painel/)
+**Benefícios:**
 
-2. **Adicione contatos à lista**  
-   Clique com o botão direito do mouse sobre um contato que deseja incluir. Após isso, um menu será exibido, selecione a opção **“Adicionar à transmissão”**.
+- ⚡ **Agilidade:** Envio rápido de mensagens e atualizações para múltiplos contatos
+- 🎯 **Controle:** Organização eficiente, especialmente em situações de grande demanda
+- 📝 **Padronização:** Comunicação consistente com possibilidade de personalização
+- ⏱️ **Economia de tempo:** Otimização do fluxo de trabalho da equipe
 
-    <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListaDeTransmissao1.1.png" />
+**Casos de uso comuns:**
 
-3. **Visualize os contatos selecionados**  
-   Após adicionar, o contato aparecerá na lista de transmissão a qual está localizada na barra superior da tela. Você pode repetir o processo e incluir quantos contatos desejar.
-
-4. **Acesse o menu da lista**  
-   Clique no botão superior indicado (ao lado do botão de menu de usuários no Invenio Live) e selecione a opção **“Lista de transmissão”**.
-
-   <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListaDeTransmissao2.png" />
+- 📢 Comunicados gerais a clientes
+- ⚠️ Avisos de manutenção ou interrupções
+- 📦 Atualizações de status de pedidos
+- 🎉 Promoções e campanhas
 
 ---
 
-## Enviando a mensagem
+## Regras de Uso por Perfil
+**Permissões por perfil de usuário:**
 
-Na tela de envio, digite sua mensagem no campo indicado e clique no botão de envio (**ícone de seta**).  
-A mensagem será enviada individualmente a todos os contatos da lista, respeitando o último canal de interação com cada um.
+- 👤 **Atendentes:** Podem enviar mensagens apenas para **contatos fidelizados** (contatos atribuídos a eles)
+- 👥 **Supervisores e Administradores:** Têm acesso à **lista completa de contatos** conforme permissão do ambiente
 
-Você pode enriquecer suas mensagens com:
-- Emojis  
-- Variáveis de sistema como `@PrimeiroNome`, `@Coringa1`, entre outras.
+<Warning>
+**Limitação importante:**
 
-[Acesse a documentação de variáveis de sistema](https://docs.robbu.global/docs/center/variaveis-de-sistema-idr)
+A lista de transmissão **não permite o envio de templates (HSM)**.
 
-Isso torna o conteúdo mais próximo, pessoal e eficaz!
+**Consequência:** Contatos com a **janela de 24 horas encerrada no WhatsApp** não receberão a mensagem.
 
- <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListadeTransmissao4.4.png" />
+**Solução:** Para esses casos, utilize templates HSM diretamente na conversa individual.
 
----
-
-## Como remover um contato da lista
-
-Caso queira remover algum contato da lista antes de enviar a mensagem:
-- Clique no **ícone de três pontos** ao lado do nome do contato;
-- Selecione a opção **“Remover”**.
-
-O contato será retirado da lista imediatamente.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListadeTransmissão5.5.png" />
+Consulte: [Sessão de 24 Horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)
+</Warning>
 
 ---
 
-## 🔗 Links e Assuntos Relacionados
+## Como Criar uma Lista de Transmissão
 
-- [Como enviar mensagens no Invenio Live](https://docs.robbu.global/docs/live/enviar-mensagem)  
-- [Sessão de 24 horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
-- [Variáveis de sistema no Invenio Center](https://docs.robbu.global/docs/center/variaveis-de-sistema)  
+<Steps>
+  <Step title="Acessar o Invenio Live">
+    Faça login no [Invenio Live](https://invenio.robbu.global/painel/).
+  </Step>
+  
+  <Step title="Adicionar contatos à lista">
+    **Para cada contato** que deseja incluir na transmissão:
+    
+    1. Clique com o **botão direito do mouse** sobre o contato na lista lateral
+    2. Um menu contextual será exibido
+    3. Selecione a opção **"Adicionar à transmissão"**
+    
+    <Frame caption="Menu contextual com opção 'Adicionar à transmissão'">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListaDeTransmissao1.1.png" />
+    </Frame>
+    
+    <Tip>
+    **Repetir o processo:** Você pode **adicionar quantos contatos desejar** repetindo este passo para cada um.
+    </Tip>
+  </Step>
+  
+  <Step title="Visualizar contatos selecionados">
+    Após adicionar, cada contato aparecerá na **lista de transmissão** localizada na **barra superior** da tela.
+    
+    **Contador:** O número de contatos adicionados é exibido no ícone da lista.
+  </Step>
+  
+  <Step title="Acessar o menu da lista">
+    1. Clique no **botão superior** (ao lado do menu de usuários no Invenio Live)
+    2. Selecione a opção **"Lista de transmissão"**
+    
+    <Frame caption="Acesso ao menu da Lista de Transmissão na barra superior">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListaDeTransmissao2.png" />
+    </Frame>
+  </Step>
+</Steps>
 
 ---
 
-## ⁉️Perguntas Frequentes (FAQ)
+## Enviando a Mensagem
+
+<Steps>
+  <Step title="Escrever a mensagem">
+    Na tela de envio da lista de transmissão, digite sua mensagem no **campo indicado**.
+    
+    **Recursos de personalização:**
+    
+    - 😊 **Emojis:** Torne a mensagem mais amigável e expressiva
+    - 🔧 **Variáveis de sistema:** Use variáveis como:
+      - `@PrimeiroNome` → Nome do contato
+      - `@Coringa1`, `@Coringa2` → Campos customizados
+      - E outras variáveis disponíveis
+    
+    <Tip>
+    **Personalização automática:** As variáveis serão substituídas automaticamente pelos dados de cada contato individual.
+    
+    **Exemplo:**
+    - Mensagem: "Olá @PrimeiroNome, temos uma novidade para você!"
+    - Resultado para João: "Olá João, temos uma novidade para você!"
+    - Resultado para Maria: "Olá Maria, temos uma novidade para você!"
+    
+    Consulte: [Variáveis de Sistema](https://docs.robbu.global/docs/center/variaveis-de-sistema)
+    </Tip>
+    
+    <Frame caption="Interface de envio com campo de mensagem e lista de contatos">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListadeTransmissao4.4.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Enviar para todos">
+    Clique no botão de envio (**ícone de seta**).
+    
+    **Comportamento do envio:**
+    - ✅ A mensagem será enviada **individualmente** a todos os contatos da lista
+    - 📱 Cada mensagem respeitará o **último canal de interação** de cada contato (WhatsApp, E-mail, SMS)
+    - 👤 Os contatos **não veem uns aos outros** (não é um grupo)
+    - 🔐 Privacidade é mantida (envios individuais)
+    
+    <Check>
+    **Envio concluído!** Todas as mensagens foram enviadas individualmente para os contatos da lista.
+    </Check>
+  </Step>
+</Steps>
+
+<Note>
+**Comportamento de canais:**
+
+A mensagem é enviada através do **último canal** em que o contato interagiu:
+- Se a última conversa foi no WhatsApp → Enviado via WhatsApp
+- Se foi por E-mail → Enviado via E-mail
+- Se foi por SMS → Enviado via SMS
+
+Isso garante que o contato receba a mensagem no canal preferido dele.
+</Note>
+
+---
+
+## Como Remover um Contato da Lista
+
+Se precisar remover algum contato **antes de enviar** a mensagem:
+
+<Steps>
+  <Step title="Localizar o contato">
+    Encontre o contato na lista de transmissão (barra superior ou tela de envio).
+  </Step>
+  
+  <Step title="Abrir opções">
+    Clique no **ícone de três pontos (⋮)** ao lado do nome do contato.
+  </Step>
+  
+  <Step title="Remover">
+    Selecione a opção **"Remover"**.
+    
+    O contato será **retirado da lista imediatamente**.
+    
+    <Frame caption="Menu de opções com botão 'Remover' contato da lista">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Lista de transmissão/ListadeTransmissão5.5.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Enviar Mensagens" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Como enviar mensagens individuais
+  </Card>
+  
+  <Card 
+    title="Sessão de 24 Horas" 
+    icon="clock" 
+    href="https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp"
+  >
+    Janela de mensagens no WhatsApp
+  </Card>
+  
+  <Card 
+    title="Variáveis de Sistema" 
+    icon="code" 
+    href="https://docs.robbu.global/docs/center/variaveis-de-sistema"
+  >
+    Personalização com variáveis
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-<Accordion title= "Quais são os principais benefícios da Lista de Transmissão?">
-  A Lista de Transmissão oferece diversos benefícios, como: 
-
-    - Agilidade no envio de mensagens e atualizações; 
-    - Maior controle e organização, principalmente em situações de grande demanda; 
-    - Comunicação padronizada, mas com possibilidade de personalização; 
-    - Economia de tempo e otimização do fluxo de trabalho da equipe. 
+  <Accordion title="✨ Quais são os principais benefícios da Lista de Transmissão?">
+    **Benefícios principais:**
+    
+    - ⚡ **Agilidade:** Envio rápido de mensagens e atualizações para múltiplos contatos simultaneamente
+    - 🎯 **Controle e organização:** Especialmente útil em situações de grande demanda ou sobrecarga
+    - 📝 **Comunicação padronizada:** Garante consistência na mensagem, mas com possibilidade de personalização via variáveis
+    - ⏱️ **Economia de tempo:** Otimização significativa do fluxo de trabalho da equipe de atendimento
+    - 🔄 **Escalabilidade:** Capacidade de alcançar muitos contatos com poucos cliques
+    
+    **Casos de uso comuns:**
+    - Avisos de manutenção programada
+    - Comunicados sobre mudanças de horário
+    - Promoções e ofertas especiais
+    - Atualizações de status de serviços
   </Accordion>
 
-  <Accordion title="A Lista de Transmissão permite o envio de templates (HSM)?">
-    Não. A lista não permite o envio de templates. Contatos com a janela de 24 horas encerrada no WhatsApp não receberão a mensagem.
+  <Accordion title="📋 A Lista de Transmissão permite o envio de templates (HSM)?">
+    **Não.** A lista de transmissão **não permite** o envio de templates HSM.
+    
+    **Consequências:**
+    
+    - ❌ Contatos com a **janela de 24 horas encerrada** no WhatsApp **não receberão** a mensagem
+    - ✅ Apenas contatos com a **janela ativa** receberão mensagens no WhatsApp
+    
+    **Solução alternativa para contatos com janela fechada:**
+    
+    1. **Envio individual com template:** Acesse a conversa individual do contato
+    2. **Caminho:** **Invenio Live > Selecionar Contato > Ícone de Balão de Fala > Selecionar Template HSM > Enviar**
+    3. Aguarde a resposta do contato para abrir a janela de 24h
+    
+    <Note>
+    **Recomendação:** Para comunicações em massa no WhatsApp com contatos inativos, utilize campanhas via **Invenio Center** que suportam templates HSM.
+    </Note>
+    
+    Consulte: [Sessão de 24 Horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)
   </Accordion>
 
-  <Accordion title="Posso adicionar quantos contatos desejar na lista?">
-    Sim, você pode adicionar quantos contatos desejar, respeitando os limites operacionais do ambiente.
+  <Accordion title="🔢 Posso adicionar quantos contatos desejar na lista?">
+    **Sim**, você pode adicionar quantos contatos desejar.
+    
+    **Considerações:**
+    
+    - ✅ **Sem limite fixo** de contatos na interface
+    - ⚙️ **Limites operacionais:** Respeite os limites do ambiente (configurados pelo administrador)
+    - 📊 **Performance:** Listas muito grandes podem demorar mais para processar
+    
+    **Boas práticas:**
+    
+    - 🎯 Segmente por necessidade (não adicione contatos desnecessários)
+    - 📋 Para envios muito grandes (milhares), considere usar campanhas via Invenio Center
+    - ✅ Verifique que todos os contatos têm a janela de 24h ativa (WhatsApp)
+    
+    **Caminho para adicionar:**
+    **Invenio Live > Botão Direito no Contato > "Adicionar à transmissão"** (repetir para cada contato)
   </Accordion>
 
-  <Accordion title="As mensagens são enviadas em grupo?">
-    Não. Cada mensagem é enviada individualmente, respeitando o último canal de interação com cada contato.
+  <Accordion title="👥 As mensagens são enviadas em grupo?">
+    **Não.** Cada mensagem é enviada **individualmente**.
+    
+    **Comportamento detalhado:**
+    
+    - 📤 **Envio individual:** Cada contato recebe a mensagem como se fosse enviada apenas para ele
+    - 🔒 **Privacidade:** Os contatos **não veem uns aos outros**
+    - 👤 **Não é um grupo:** Não há criação de grupos no WhatsApp ou outros canais
+    - 📱 **Canal respeitado:** Cada mensagem é enviada pelo **último canal** de interação de cada contato
+    
+    **Vantagens:**
+    
+    - ✅ Mais pessoal e profissional
+    - ✅ Privacidade mantida
+    - ✅ Conformidade com políticas de mensagens comerciais
+    - ✅ Permite personalização via variáveis
+    
+    **Exemplo:**
+    - João recebe via WhatsApp: "Olá João, ..."
+    - Maria recebe via E-mail: "Olá Maria, ..."
+    - Ambos pensam que receberam mensagem individual
   </Accordion>
 
-  <Accordion title="Posso usar variáveis para personalizar as mensagens?">
-    Sim. É possível usar variáveis como `@PrimeiroNome`, `@Coringa1`, além de emojis, para deixar a mensagem mais personalizada.
+  <Accordion title="🔧 Posso usar variáveis para personalizar as mensagens?">
+    **Sim!** É totalmente possível e **recomendado**.
+    
+    **Variáveis disponíveis:**
+    
+    - `@PrimeiroNome` → Nome do contato
+    - `@NomeCompleto` → Nome completo do contato
+    - `@Email` → E-mail do contato
+    - `@Telefone` → Telefone do contato
+    - `@Coringa1`, `@Coringa2`, `@Coringa3` → Campos customizados
+    - E outras variáveis configuradas
+    
+    **Recursos adicionais:**
+    
+    - 😊 **Emojis:** Adicione para tornar mais amigável
+    - 🔗 **Links:** Inclua URLs encurtadas ou completas
+    - 📝 **Formatação:** Use quebras de linha para melhor leitura
+    
+    **Exemplo prático:**
+    
+    ```
+    Olá @PrimeiroNome! 😊
+    
+    Seu pedido #@Coringa1 foi atualizado.
+    
+    Status: Em transporte
+    Previsão: @Coringa2
+    
+    Qualquer dúvida, estamos à disposição!
+    ```
+    
+    **Resultado para cada contato:**
+    - João vê: "Olá João! ... #12345 ... Previsão: 15/02/2026"
+    - Maria vê: "Olá Maria! ... #67890 ... Previsão: 16/02/2026"
+    
+    Consulte: [Variáveis de Sistema](https://docs.robbu.global/docs/center/variaveis-de-sistema)
   </Accordion>
 
-  <Accordion title="Quem pode utilizar a Lista de Transmissão?">
-    Usuários com perfil **Atendente** podem enviar mensagens para contatos fidelizados, enquanto **Supervisores e Administradores** têm acesso à lista completa conforme a permissão do ambiente.
+  <Accordion title="👤 Quem pode utilizar a Lista de Transmissão?">
+    **Todos os perfis podem utilizar**, mas com **permissões diferentes**.
+    
+    **Regras por perfil:**
+    
+    **1. Atendentes** 👤
+    - ✅ Podem usar a Lista de Transmissão
+    - ⚠️ **Limitação:** Apenas para **contatos fidelizados** (atribuídos a eles)
+    - ❌ **Não veem:** Contatos de outros atendentes
+    
+    **2. Supervisores** 👥
+    - ✅ Acesso à **lista completa** de contatos da equipe
+    - ✅ Podem enviar para contatos de qualquer atendente
+    - ✅ Conforme permissões configuradas no ambiente
+    
+    **3. Administradores** ⚙️
+    - ✅ Acesso **total** a todos os contatos
+    - ✅ Sem restrições de fidelização
+    - ✅ Controle completo
+    
+    **Como verificar seu perfil:**
+    **Invenio Live > Menu do Usuário (canto superior direito) > Meu Perfil**
+    
+    <Note>
+    **Configuração de permissões:** As permissões específicas são definidas pelo administrador em **Invenio Center > Usuários > Editar Usuário > Permissões**.
+    </Note>
   </Accordion>
 </AccordionGroup>

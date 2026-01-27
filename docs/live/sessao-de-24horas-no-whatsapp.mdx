@@ -1,92 +1,224 @@
 ---
 title: "Sessão de 24 Horas no WhatsApp"
 sidebarTitle: "Sessão de 24 Horas no WhatsApp"
-description: "O WhatsApp utiliza um modelo chamado **janela de 24 horas** para controlar as interações entre empresas e clientes. Essa janela é o período em que a empresa pode se comunicar livremente com o cliente, **sem a necessidade de usar modelos de mensagens pré-aprovados (templates)**.
+description: "Entenda como funciona a janela de 24 horas do WhatsApp Business API, suas regras para conversas inbound e outbound, e como manter o controle adequado das sessões."
+---
+
+O WhatsApp utiliza um modelo chamado **janela de 24 horas** para controlar as interações entre empresas e clientes. Essa janela é o período em que a empresa pode se comunicar livremente com o cliente, **sem a necessidade de usar modelos de mensagens pré-aprovados (templates)**.
+
 Essa regra foi criada para proteger os usuários contra spam e manter a qualidade da experiência dentro da plataforma.
-"
----
-
-##  Como funciona a janela de 24 horas
-
-Sempre que um **cliente envia uma mensagem para sua empresa**, ele abre automaticamente uma
-janela de 24 horas de conversação. Durante esse período, você poderá **responder com mensagens
- de texto livre**, ou seja, sem necessidade de templates.
-A cada nova mensagem enviada pelo **cliente**, essa janela é **reiniciada**, e o contador de 24 horas 
-começa novamente. Isso permite que a comunicação se mantenha fluida e contínua enquanto houver interação por parte do cliente.
-
-> ⚠️ **Atenção**  
-> Este conceito existe apenas para o canal de whatsapp.
----
-
-##  Conversas iniciadas pelo cliente (Inbound)
-
-Quando a conversa é iniciada de forma **receptiva**, ou seja, **o cliente entra em contato** com a empresa primeiro, as seguintes regras
- se aplicam:
-
--	A conversa pode ser iniciada a **qualquer momento** pelo cliente.
--	A partir do momento da primeira mensagem, a empresa pode responder com **mensagens livres durante 24 horas**.
--	Se o cliente enviar uma nova mensagem dentro desse período, a janela se reinicia, liberando mais 24 horas para interação.
-
-Esse cenário representa o fluxo mais natural e aberto de comunicação, ideal para atendimentos de suporte, dúvidas ou solicitações.
-
-##  Conversas iniciadas pela empresa (Outbound)
-
-Quando a conversa é iniciada de forma **ativa**, ou seja, **a empresa envia a primeira mensagem**, o funcionamento muda um pouco:
-- 	A empresa só pode iniciar a conversa utilizando ***templates previamente aprovados pelo WhatsApp (HSM).***
--	Após o envio do template, é necessário **aguardar que o cliente responda** para que a janela de 24 horas com mensagens livres seja aberta.
--	Caso o cliente não responda dentro das 24 horas seguintes, a conversa será **encerrada automaticamente**, e só poderá ser retomada com o envio de um **novo template**.
-
-Esse controle garante que a comunicação ativa seja feita com responsabilidade e sempre com consentimento do cliente.
-
-O Invenio Center disponibiliza o relatório **Controle de Sessões WhatsApp**, cujo lista todas as sessões de WhatsApp abertas pelo contato ou pela empresa no período definido.
-
-[Clique aqui para acessar diretamente a aba de relatórios](https://inveniocenter.robbu.global/painel/relatorios)
-
-> ⚠️ **Importante**  
-> Caso seja feita uma tentativa de envio de **mensagem livre fora da janela de 24 horas**, a Meta retornará uma mensagem informando que a **sessão não está aberta**, impedindo o disparo da comunicação até que uma nova interação válida ocorra ou um template seja enviado.
-
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/img1sessao24horas.png" /> 
-
-Manter o controle adequado da sessão de 24 horas é essencial para garantir o bom uso do canal, evitar bloqueios e manter a **qualidade da linha no Meta**. 
 
 ---
 
-## 🔗 Links e assuntos relacionados  
+## Como Funciona a Janela de 24 Horas
 
-- [Filtros e buscas](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
-- [Canal WhatsApp](https://docs.robbu.global/docs/center/canal-whatsapp)  
-- [Prioridades de canais](https://docs.robbu.global/docs/center/prioridade-de-canais)  
-- [Relatórios](https://docs.robbu.global/docs/center/relatorios)  
+Sempre que um **cliente envia uma mensagem para sua empresa**, ele abre automaticamente uma **janela de 24 horas de conversação**.
+
+**Comportamento da janela:**
+
+- ✅ Durante esse período, você pode **responder com mensagens de texto livre** (sem necessidade de templates)
+- 🔄 A cada **nova mensagem enviada pelo cliente**, a janela é **reiniciada**
+- ⏱️ O contador de 24 horas começa novamente após cada interação do cliente
+- 💬 A comunicação se mantém fluida e contínua enquanto houver interação
+
+<Warning>
+**Importante:** Este conceito existe **apenas para o canal de WhatsApp** através da WhatsApp Business API.
+
+Outros canais (E-mail, SMS) não possuem essa limitação de janela de conversação.
+</Warning>
+
+---
+
+## Tipos de Conversação
+
+<Tabs>
+  <Tab title="Inbound (Cliente Inicia)" icon="message">
+    ### Conversas Iniciadas pelo Cliente
+    
+    Quando a conversa é iniciada de forma **receptiva** (o cliente entra em contato primeiro):
+    
+    **Regras aplicáveis:**
+    
+    - 📲 **Início:** A conversa pode ser iniciada a **qualquer momento** pelo cliente
+    - 💬 **Resposta:** A empresa pode responder com **mensagens livres durante 24 horas**
+    - 🔄 **Renovação:** Se o cliente enviar nova mensagem dentro desse período, a janela se reinicia
+    - ⏳ **Duração:** Mais 24 horas são liberadas para interação a cada mensagem do cliente
+    
+    <Tip>
+    **Cenário ideal:** Este fluxo é o mais natural e aberto para comunicação, perfeito para:
+    - Atendimentos de suporte
+    - Esclarecimento de dúvidas
+    - Solicitações de informações
+    - Follow-up de pedidos
+    </Tip>
+  </Tab>
+  
+  <Tab title="Outbound (Empresa Inicia)" icon="paper-plane">
+    ### Conversas Iniciadas pela Empresa
+    
+    Quando a conversa é iniciada de forma **ativa** (a empresa envia a primeira mensagem):
+    
+    **Regras aplicáveis:**
+    
+    - 📋 **Requisito:** A empresa **só pode** iniciar a conversa usando **templates previamente aprovados pelo WhatsApp (HSM)**
+    - ⏳ **Aguardo:** Após envio do template, é necessário **aguardar que o cliente responda**
+    - ✅ **Abertura:** A janela de 24 horas com mensagens livres **só abre após a resposta do cliente**
+    
+    <Note>
+    **Controle de qualidade:** Esse mecanismo garante que a comunicação ativa seja feita com responsabilidade e sempre com **consentimento implícito** do cliente através da resposta.
+    </Note>
+  </Tab>
+</Tabs>
+
+---
+
+## Relatório de Controle de Sessões
+
+O **Invenio Center** disponibiliza o relatório **Controle de Sessões WhatsApp**, que lista todas as sessões abertas pelo contato ou pela empresa no período definido.
+
+<Tip>
+**Acesso direto:** [Relatórios do Invenio Center](https://inveniocenter.robbu.global/painel/relatorios)
+
+O relatório permite monitorar:
+- Sessões ativas e encerradas
+- Origem da conversa (cliente ou empresa)
+- Duração das sessões
+- Status de templates enviados
+</Tip>
+
+---
+
+## Erro de Sessão Não Aberta
+
+<Warning>
+**Tentativa de envio fora da janela:**
+
+Se você tentar enviar uma **mensagem livre fora da janela de 24 horas**, a Meta retornará uma mensagem informando que a **sessão não está aberta**.
+
+Isso **impede o disparo** da comunicação até que:
+- Uma nova interação válida ocorra (cliente envie mensagem)
+- Um template aprovado seja enviado
+</Warning>
+
+<Frame caption="Mensagem de erro da Meta quando a sessão de 24 horas não está aberta">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/img1sessao24horas.png" />
+</Frame>
+
+<Check>
+**Boas práticas:** Manter o controle adequado da sessão de 24 horas é essencial para:
+- Garantir o bom uso do canal
+- Evitar bloqueios de envio
+- Manter a **qualidade da linha no Meta**
+- Preservar a reputação do número de WhatsApp Business
+</Check>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Filtros e Busca" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Organização e busca de conversas
+  </Card>
+  
+  <Card 
+    title="Canal WhatsApp" 
+    icon="whatsapp" 
+    href="https://docs.robbu.global/docs/center/canal-whatsapp"
+  >
+    Configuração do canal no Center
+  </Card>
+  
+  <Card 
+    title="Prioridade de Canais" 
+    icon="layer-group" 
+    href="https://docs.robbu.global/docs/center/prioridade-de-canais"
+  >
+    Gestão de prioridade de envio
+  </Card>
+  
+  <Card 
+    title="Relatórios" 
+    icon="chart-line" 
+    href="https://docs.robbu.global/docs/center/relatorios"
+  >
+    Análise de sessões e métricas
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-
-  <Accordion title="O que é a janela de 24 horas do WhatsApp?">
-    É um período de 24 horas que se inicia após o cliente enviar uma mensagem para a empresa. Durante essa janela, a empresa pode responder com mensagens livres, sem necessidade de templates aprovados.
-  </Accordion>
-
-  <Accordion title="O que acontece quando o cliente envia uma nova mensagem dentro da janela?">
-    A janela de 24 horas é reiniciada a cada nova mensagem do cliente, garantindo mais 24 horas para que a empresa continue a conversa com mensagens livres.
+    <Accordion title="O que acontece quando o cliente envia uma nova mensagem dentro da janela?">
+    **A janela de 24 horas é reiniciada automaticamente** a cada nova mensagem do cliente.
+    
+    **Exemplo prático:**
+    1. Cliente envia mensagem às 10h → Janela abre até 10h do dia seguinte
+    2. Cliente envia nova mensagem às 14h → Janela reinicia até 14h do dia seguinte
+    3. Este ciclo continua **enquanto houver interação** do cliente
+    
+    Isso garante que conversas ativas permaneçam abertas para mensagens livres.
   </Accordion>
 
   <Accordion title="A empresa pode iniciar uma conversa a qualquer momento?">
-    Não. Para iniciar uma conversa, a empresa deve usar um template aprovado pelo WhatsApp. Apenas após a resposta do cliente será possível enviar mensagens livres dentro da janela de 24 horas.
+    **Não diretamente.** Para iniciar uma conversa, a empresa deve seguir o fluxo:
+    1. **Enviar template aprovado** pelo WhatsApp (HSM)
+    2. **Aguardar resposta** do cliente
+    3. **Após resposta:** Janela de 24h abre para mensagens livres
+    
+    **Caminho no Invenio Live:** **Invenio Live > Selecionar Contato > Botão de Frases Prontas > Escolher Template HSM > Enviar**
+    
+    <Tip>
+    Templates devem ser criados e aprovados previamente no **Invenio Center > Templates de WhatsApp**
+    </Tip>
   </Accordion>
 
   <Accordion title="O que são mensagens livres?">
-    São mensagens de texto que não precisam seguir um modelo (template) pré-aprovado. Elas só podem ser enviadas enquanto a janela de 24 horas estiver aberta.
+    **Mensagens livres** são mensagens de texto que:
+    - ✅ **Não precisam** seguir um modelo (template) pré-aprovado
+    - ✅ Podem ter **qualquer conteúdo** (dentro das políticas do WhatsApp)
+    - ✅ Permitem **personalização total** da comunicação
+    - ❌ **Só podem ser enviadas** enquanto a janela de 24 horas estiver aberta
+    
+    **Exemplos de mensagens livres:**
+    - "Conseguiu resolver o problema que mencionou?"
+    - "Aqui está o link do boleto: [link]"
   </Accordion>
 
   <Accordion title="O que acontece se a empresa tentar enviar uma mensagem fora da janela de 24 horas?">
-    A Meta retorna uma mensagem de erro informando que a **sessão não está aberta**, impedindo o envio até que o cliente interaja novamente ou um novo template seja enviado.
+    **A Meta retorna um erro** informando que a **"sessão não está aberta"**.
+    
+    **Consequências:**
+    - ❌ A mensagem **não é enviada**
+    - ⚠️ O sistema **bloqueia o disparo**
+    - 📋 É necessário **enviar um template** para reabrir a comunicação
+    
+    **Alternativas quando a janela está fechada:**
+    1. Aguardar o cliente enviar uma nova mensagem
+    2. Enviar um **template HSM** aprovado para reiniciar a conversa
   </Accordion>
 
   <Accordion title="É possível reabrir a janela de 24 horas?">
-    Sim. A janela é reaberta automaticamente quando o cliente envia uma nova mensagem ou responde a um template enviado pela empresa.
+    **Sim.** A janela pode ser reaberta de **duas formas**:
+    
+    **1. Iniciativa do cliente (automática):**
+    - Cliente envia uma nova mensagem
+    - Janela abre automaticamente
+    - Empresa pode responder com mensagens livres
+    
+    **2. Iniciativa da empresa (via template):**
+    - Empresa envia um **template HSM** aprovado
+    - Cliente **responde** ao template
+    - Janela de 24h é aberta após a resposta
+    
+    <Note>
+    **Importante:** No segundo caso, a janela **só abre após a resposta do cliente** ao template. O simples envio do template não é suficiente.
+    </Note>
   </Accordion>
-
 </AccordionGroup>

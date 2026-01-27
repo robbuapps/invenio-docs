@@ -1,0 +1,483 @@
+---
+title: "Acessando a Plataforma"
+sidebarTitle: "Acessando a plataforma Invenio"
+description: "Acesse as plataformas Robbu com as URLs corretas de acordo com seu perfil: Invenio Center para Administradores/Supervisores e Invenio Live para Atendentes."
+---
+
+O acesso à plataforma Robbu é realizado por meio de **URLs específicas**, definidas de acordo com o **perfil de permissão** atribuído a cada usuário.
+
+**Perfis disponíveis:**
+
+- 🔑 **Administrador:** Acesso completo ao sistema
+- 👥 **Supervisor:** Gestão de equipe e operação
+- 💬 **Atendente:** Atendimento direto aos clientes
+
+Cada perfil assegura uma experiência de uso alinhada às responsabilidades de cada função.
+
+---
+
+## URLs de Acesso por Perfil
+
+<Tabs>
+  <Tab title="Invenio Center" icon="gear">
+    ### Invenio Center
+    
+    **Perfis com acesso:**
+    - ✅ **Administrador**
+    - ✅ **Supervisor**
+    - ❌ **Atendente** (não tem acesso)
+    
+    **URL de acesso:**
+    
+    ```
+    https://accounts.robbu.global/
+    ```
+    
+    <Tip>
+    **Acesso direto:** [Invenio Center - Accounts](https://accounts.robbu.global/)
+    </Tip>
+    
+    **Funcionalidades disponíveis:**
+    - ⚙️ Configurações gerais da conta
+    - 👥 Gestão de usuários e permissões
+    - 📊 Relatórios e métricas
+    - 🔧 Configuração de canais
+    - 📋 Templates de mensagens
+    - 🎯 Segmentos e tags
+    
+    <Warning>
+    **Restrição:** Apenas perfis **Administrador** ou **Supervisor** conseguem acessar o ambiente através da URL `accounts.robbu.global`.
+    
+    Atendentes que tentarem acessar essa URL receberão erro de permissão.
+    </Warning>
+  </Tab>
+  
+  <Tab title="Invenio Live" icon="headset">
+    ### Invenio Live
+    
+    **Perfis com acesso:**
+    - ✅ **Atendente**
+    - ✅ **Supervisor**
+    - ✅ **Administrador**
+    
+    **URL de acesso:**
+    
+    ```
+    https://invenio.robbu.global/painel/
+    ```
+    
+    <Tip>
+    **Acesso direto:** [Invenio Live - Atendimento](https://invenio.robbu.global/painel/)
+    </Tip>
+    
+    **Funcionalidades disponíveis:**
+    - 💬 Atendimento em tempo real
+    - 📱 Envio de mensagens (texto, áudio, anexos)
+    - 🔍 Busca e filtros de conversas
+    - 📊 Visualização de métricas pessoais
+    - 🏷️ Edição de tags
+    - 📋 Lista de transmissão
+    
+    <Note>
+    **Acesso universal:** Todos os perfis podem acessar o Invenio Live, mas **Atendentes** têm funcionalidades limitadas (sem acesso a configurações administrativas).
+    </Note>
+  </Tab>
+</Tabs>
+
+---
+
+## Primeiro Acesso - Credenciais
+
+Ao concluir a contratação, você receberá as credenciais de acesso para o primeiro login na plataforma.
+
+<Steps>
+  <Step title="Receber credenciais">
+    Após a **formalização da contratação**, o time de ativação da Robbu fornecerá:
+    
+    **1. Nome da Empresa** 🏢
+    - Corresponde ao **identificador do ambiente** contratado
+    - Exemplo: `minhaempresa` ou `empresa-teste`
+    - Fornecido pelo time de ativação
+    
+    **2. Nome do Usuário** 👤
+    - Login de acesso pessoal
+    - Enviado após o **provisionamento** do ambiente
+    - Exemplo: `joao.silva` ou `admin@empresa.com`
+    
+    **3. Senha Inicial** 🔐
+    - Senha temporária vinculada ao usuário
+    - Disponibilizada junto com o nome de usuário
+    - **Deve ser alterada** no primeiro acesso
+  </Step>
+  
+  <Step title="Realizar primeiro login">
+    1. Acesse a **URL correta** conforme seu perfil:
+       - **Admin/Supervisor:** `https://accounts.robbu.global/`
+       - **Atendente:** `https://invenio.robbu.global/painel/`
+    
+    2. Preencha os campos:
+       - **Nome da empresa**
+       - **Nome do usuário**
+       - **Senha inicial**
+    
+    3. Clique em **"Entrar"**
+    
+    <Frame caption="Tela de login com campos de Nome da Empresa, Usuário e Senha">
+      <img src="https://storage.robbu.global/v2/file/FD491673F91540953D4482F314C4C99E" />
+    </Frame>
+  </Step>
+  
+  <Step title="Alterar senha (recomendado)">
+    **Segurança:** É **fortemente recomendado** alterar a senha no primeiro acesso.
+    
+    **Como alterar:**
+    1. Acesse: **Invenio Live > Menu do Usuário > Meu Perfil > Seção "Senha"**
+    2. Digite a **senha atual** (senha inicial fornecida)
+    3. Digite a **nova senha** (mínimo 8 caracteres)
+    4. Confirme a nova senha
+    5. Clique em **"Salvar"**
+    
+    <Check>
+    **Boa prática:** Alterne sua senha periodicamente e nunca compartilhe com terceiros.
+    </Check>
+    
+    Consulte: [Meu Perfil - Senha](https://docs.robbu.global/docs/live/meu-perfil#senha)
+  </Step>
+</Steps>
+
+---
+
+## Resumo de Acesso por Perfil
+
+| Perfil | Invenio Center | Invenio Live |
+|--------|----------------|--------------|
+| 🔑 **Administrador** | ✅ Acesso completo | ✅ Acesso completo |
+| 👥 **Supervisor** | ✅ Acesso completo | ✅ Acesso com recursos de gestão |
+| 💬 **Atendente** | ❌ Sem acesso | ✅ Acesso apenas para atendimento |
+
+<Note>
+**Importante:** O mesmo login (Nome da Empresa + Usuário + Senha) funciona para ambas as plataformas, mas o **acesso é restrito** conforme permissões do perfil.
+</Note>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Meu Perfil" 
+    icon="user" 
+    href="https://docs.robbu.global/docs/live/meu-perfil"
+  >
+    Gerenciar dados pessoais e senha
+  </Card>
+  
+  <Card 
+    title="Gestão de Usuários" 
+    icon="users" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Criar e gerenciar usuários
+  </Card>
+  
+  <Card 
+    title="Enviar Mensagens" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Como enviar mensagens
+  </Card>
+  
+  <Card 
+    title="Canais de Atendimento" 
+    icon="network-wired" 
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Configurar canais
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="🔐 Como acesso a plataforma Robbu pela primeira vez?">
+    **Primeiro acesso:**
+    
+    1. **Receber credenciais** do time de ativação da Robbu:
+       - Nome da empresa
+       - Nome de usuário
+       - Senha inicial
+    
+    2. **Identificar seu perfil:**
+       - **Administrador ou Supervisor:** Use `https://accounts.robbu.global/`
+       - **Atendente:** Use `https://invenio.robbu.global/painel/`
+    
+    3. **Fazer login:**
+       - Preencha os 3 campos (Empresa, Usuário, Senha)
+       - Clique em "Entrar"
+    
+    4. **Alterar senha (recomendado):**
+       - **Caminho:** **Invenio Live > Menu do Usuário (canto superior direito) > Meu Perfil > Seção "Senha" > Alterar Senha**
+    
+    <Tip>
+    As credenciais são enviadas por e-mail após o provisionamento do ambiente, geralmente dentro de 24-48h após a contratação.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="🔧 Qual URL deve ser utilizada por Administradores e Supervisores?">
+    **URL para Admin/Supervisor:**
+    
+    ```
+    https://accounts.robbu.global/
+    ```
+    
+    **Recursos disponíveis:**
+    
+    - ⚙️ **Configurações gerais** da conta
+    - 👥 **Gestão de usuários** (criar, editar, remover)
+    - 📊 **Relatórios** completos
+    - 🔧 **Configuração de canais** (WhatsApp, E-mail, SMS, etc.)
+    - 📋 **Templates de mensagens HSM**
+    - 🎯 **Segmentos e tags**
+    - 💬 **Frases prontas**
+    - 📈 **Dashboards** e métricas
+    
+    **Características:**
+    
+    - ✅ Interface administrativa completa
+    - ✅ Acesso a todas as configurações
+    - ✅ Também pode acessar o Invenio Live para atendimento
+    
+    <Note>
+    **Importante:** Mesmo Administradores precisam acessar o **Invenio Live** (`invenio.robbu.global/painel/`) para realizar atendimentos em tempo real.
+    </Note>
+  </Accordion>
+
+  <Accordion title="💬 Qual URL deve ser utilizada por Atendentes?">
+    **URL para Atendentes:**
+    
+    ```
+    https://invenio.robbu.global/painel/
+    ```
+    
+    **Recursos disponíveis:**
+    
+    - 💬 **Atendimento em tempo real** de clientes
+    - 📱 **Envio de mensagens** (texto, áudio, anexos)
+    - 🔍 **Busca** e filtros de conversas
+    - 📊 **Métricas pessoais** (TMR, quantidade de atendimentos)
+    - 🏷️ **Edição de tags** em conversas
+    - 📋 **Lista de transmissão** (envio em massa)
+    - 🎤 **Gravação de áudio**
+    - 📎 **Envio de anexos**
+    
+    **Restrições:**
+    
+    - ❌ **Não acessa** configurações administrativas
+    - ❌ **Não gerencia** outros usuários
+    - ❌ **Não cria** templates HSM (apenas usa os existentes)
+    - ❌ **Não acessa** Invenio Center (`accounts.robbu.global`)
+    
+    **Foco:** Atendentes têm acesso **apenas** às ferramentas necessárias para **atender clientes** eficientemente.
+  </Accordion>
+
+  <Accordion title="📝 Quais informações são necessárias para realizar o login?">
+    **Três informações obrigatórias:**
+    
+    **1. Nome da Empresa** 🏢
+    - Identificador do **ambiente contratado**
+    - Fornecido pelo time de ativação da Robbu
+    - Exemplo: `minhaempresa`, `empresateste`
+    - **Importante:** Geralmente é o nome da sua empresa em formato slug (minúsculas, sem espaços)
+    
+    **2. Nome do Usuário** 👤
+    - Login pessoal do usuário
+    - Fornecido após **provisionamento** do ambiente
+    - Pode ser: e-mail, username, ou código
+    - Exemplo: `joao.silva`, `admin@empresa.com`
+    
+    **3. Senha** 🔐
+    - Senha inicial vinculada ao usuário
+    - Fornecida junto com o nome de usuário
+    - **Recomendação:** Altere no primeiro acesso
+    
+    **Onde encontrar:**
+    - Todas as informações são enviadas por **e-mail** pelo time de ativação da Robbu após a contratação
+    - Se não recebeu, entre em contato: **suporte@robbu.global**
+  </Accordion>
+
+  <Accordion title="🏢 O que é o Nome da Empresa utilizado no login?">
+    **Nome da Empresa** é o **identificador único** do seu ambiente na plataforma Robbu.
+    
+    **Características:**
+    
+    - 🏢 Corresponde ao **ambiente contratado**
+    - 🔑 É único para cada cliente
+    - 📧 Fornecido pelo **time de ativação** após contratação
+    - 🔤 Geralmente em formato **slug** (letras minúsculas, sem espaços ou caracteres especiais)
+    
+    **Exemplos:**
+    - Empresa: "Minha Empresa Ltda" → Nome da Empresa: `minhaempresa`
+    - Empresa: "Empresa Teste S.A." → Nome da Empresa: `empresateste`
+    - Empresa: "ABC Comunicações" → Nome da Empresa: `abccomunicacoes`
+    
+    **Função:**
+    - Identifica qual **ambiente/tenant** você está acessando
+    - Garante **isolamento** entre diferentes clientes
+    - Permite múltiplos ambientes (produção, homologação, etc.)
+    
+    <Warning>
+    **Sensível a maiúsculas/minúsculas:** Digite exatamente como foi fornecido. Geralmente é tudo em **minúsculas**.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="📅 Quando recebo meu nome de usuário e senha de acesso?">
+    **Linha do tempo de recebimento:**
+    
+    **1. Contratação** 📝
+    - Você formaliza a contratação com a Robbu
+    
+    **2. Provisionamento** ⚙️
+    - Time técnico provisiona seu ambiente
+    - Configuração de infraestrutura e recursos
+    - **Tempo estimado:** 24 a 48 horas úteis
+    
+    **3. Ativação** ✅
+    - Ambiente liberado para uso
+    - Time de ativação cria usuário administrador inicial
+    
+    **4. Envio de credenciais** 📧
+    - **E-mail** enviado com:
+      - Nome da Empresa
+      - Nome de Usuário
+      - Senha inicial
+      - URLs de acesso
+    
+    **Se não recebeu:**
+    
+    - ⏱️ Aguarde até 48h úteis após a contratação
+    - 📧 Verifique sua caixa de spam/lixo eletrônico
+    - 📞 Entre em contato: **suporte@robbu.global** ou **help@robbu.global**
+    
+    <Note>
+    **Contato do responsável:** As credenciais são enviadas para o e-mail do responsável informado no momento da contratação.
+    </Note>
+  </Accordion>
+
+  <Accordion title="🔐 É obrigatório alterar a senha no primeiro acesso?">
+    **Não é obrigatório**, mas é **fortemente recomendado**.
+    
+    **Por que alterar:**
+    
+    - 🔒 **Segurança:** Senha inicial pode ter sido enviada por e-mail (não criptografado)
+    - 👤 **Personalização:** Escolha uma senha que você lembre facilmente
+    - 🛡️ **Governança:** Prática recomendada de segurança corporativa
+    - ✅ **Conformidade:** Alinhamento com políticas de segurança
+    
+    **Boas práticas para senha:**
+    
+    - ✅ Mínimo **8 caracteres**
+    - ✅ Combine letras **maiúsculas** e **minúsculas**
+    - ✅ Inclua **números**
+    - ✅ Use **caracteres especiais** (@, #, $, etc.)
+    - ❌ Evite informações pessoais óbvias (nome, data de nascimento)
+    - ❌ Não reutilize senhas de outros sistemas
+    
+    **Como alterar:**
+    
+    **Caminho:** **Invenio Live > Menu do Usuário (canto superior direito) > Meu Perfil > Seção "Senha" > Preencher "Senha Atual", "Nova Senha", "Confirmar Senha" > Salvar**
+    
+    Consulte: [Meu Perfil - Senha](https://docs.robbu.global/docs/live/meu-perfil#senha)
+  </Accordion>
+
+  <Accordion title="🔑 Como posso alterar minha senha após o primeiro login?">
+    **Processo de alteração de senha:**
+    
+    <Steps>
+      <Step title="Acessar Meu Perfil">
+        **Caminho:** **Invenio Live > Menu do Usuário (ícone no canto superior direito) > "Meu Perfil"**
+      </Step>
+      
+      <Step title="Localizar seção Senha">
+        Role a página até encontrar a seção **"Senha"**
+      </Step>
+      
+      <Step title="Preencher campos">
+        - **Senha atual:** Digite sua senha atual
+        - **Nova senha:** Digite a nova senha desejada (mínimo 8 caracteres)
+        - **Confirmar senha:** Digite novamente a nova senha
+      </Step>
+      
+      <Step title="Salvar alteração">
+        Clique no botão **"Salvar"** ou **"Alterar Senha"**
+        
+        Você verá uma mensagem de confirmação: "Senha alterada com sucesso!"
+      </Step>
+    </Steps>
+    
+    **Requisitos da nova senha:**
+    - Mínimo 8 caracteres
+    - Diferente da senha atual
+    
+    **Após alteração:**
+    - ✅ Use a **nova senha** em próximos logins
+    - ✅ A senha antiga **não funciona mais**
+    - ✅ Alterar senha **não desloga** você automaticamente
+    
+    Consulte: [Documentação completa - Meu Perfil](https://docs.robbu.global/docs/live/meu-perfil#senha)
+  </Accordion>
+
+  <Accordion title="🔄 O mesmo login permite acessar o Invenio Center e o Invenio Live?">
+    **Resposta:** Depende do seu **perfil de permissão**.
+    
+    **Credenciais (sempre as mesmas):**
+    - ✅ **Nome da Empresa:** Mesmo para ambas plataformas
+    - ✅ **Nome de Usuário:** Mesmo para ambas plataformas
+    - ✅ **Senha:** Mesma para ambas plataformas
+    
+    **Acesso por perfil:**
+    
+    **Administrador** 🔑
+    - ✅ **Invenio Center** (`accounts.robbu.global`) → Acesso completo
+    - ✅ **Invenio Live** (`invenio.robbu.global/painel/`) → Acesso completo
+    - 📝 **Uso:** Mesmas credenciais em ambas URLs
+    
+    **Supervisor** 👥
+    - ✅ **Invenio Center** (`accounts.robbu.global`) → Acesso completo
+    - ✅ **Invenio Live** (`invenio.robbu.global/painel/`) → Acesso com recursos de gestão
+    - 📝 **Uso:** Mesmas credenciais em ambas URLs
+    
+    **Atendente** 💬
+    - ❌ **Invenio Center** (`accounts.robbu.global`) → **Sem acesso** (erro de permissão)
+    - ✅ **Invenio Live** (`invenio.robbu.global/painel/`) → Acesso apenas para atendimento
+    - 📝 **Uso:** Mesmas credenciais, mas só funciona no Invenio Live
+    
+    **Resumo:**
+    - 🔑 **Credenciais:** Sempre as mesmas
+    - 🚪 **Acesso:** Segmentado por perfil
+    - ⚠️ **Erro:** Atendente que tentar acessar `accounts.robbu.global` verá mensagem de permissão negada
+  </Accordion>
+
+  <Accordion title="📚 Onde encontro mais informações relacionadas ao acesso e uso da plataforma?">
+    **Documentações complementares:**
+    
+    **Gestão de Conta e Perfil:**
+    - 👤 [Meu Perfil](https://docs.robbu.global/docs/live/meu-perfil) - Gerenciar dados pessoais e senha
+    - 👥 [Gestão de Usuários](https://docs.robbu.global/docs/center/usuarios) - Criar e gerenciar usuários
+    
+    **Atendimento:**
+    - 💬 [Enviar Mensagens](https://docs.robbu.global/docs/live/enviar-mensagem) - Guia completo de envio
+    - 📱 [Canais de Atendimento](https://docs.robbu.global/docs/center/canais-atendimento) - Configurar WhatsApp, E-mail, SMS
+    
+    **Configurações:**
+    - ⚙️ [Configurações Gerais](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta) - Configurações do ambiente
+    - 🎯 [Segmentos](https://docs.robbu.global/docs/center/segmentos) - Organização por segmentos
+    
+    **Suporte:**
+    - 📧 E-mail: **suporte@robbu.global** ou **help@robbu.global**
+    - 📞 Telefone: Consulte o contrato para número de suporte
+    - 🌐 Portal: [docs.robbu.global](https://docs.robbu.global)
+  </Accordion>
+</AccordionGroup>

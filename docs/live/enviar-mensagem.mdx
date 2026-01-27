@@ -1,175 +1,399 @@
 ---
 title: "Envio de Mensagens"
 sidebarTitle: "Envio de Mensagens"
-description: "Aprenda como enviar mensagens de texto, áudio, templates HSM e anexos através da plataforma Invenio Live."
+description: "Aprenda a enviar mensagens de texto, áudio, templates HSM e anexos através da plataforma Invenio Live com todos os recursos disponíveis."
 ---
 
 O envio de mensagens pode ser realizado por qualquer usuário com perfil de acesso **Atendente** ou **Supervisor**.
 
-Para enviar uma mensagem, o contato precisa ter um ou mais **canais atrelados**.  
+<Warning>
+**Requisito:** Para enviar uma mensagem, o contato precisa ter um ou mais **canais atrelados**.
+
 Consulte: [O que são canais de atendimento](https://docs.robbu.global/docs/center/canais-atendimento)
+</Warning>
 
 ---
 
-## Faça login no Invenio Live
+## Como Enviar Mensagens
 
-Acesse sua conta na plataforma **Invenio Live** com seu login e senha.  
-
-Consulte: [Como acessar a plataforma](https://docs.robbu.global/docs/live/como-acessar-plataforma)
-
----
-
-## Abrir um contato
-
-Selecione o contato com o qual deseja interagir na lista lateral de conversas. Caso o seu contato ainda não tenha sido registrado, é necessário criar um contato novo.  
-
-Consulte: [Como criar um novo contato Invenio Live](https://docs.robbu.global/docs/live/criar-contato)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagensMeucontato.png" />
-
----
-
-## Envio de mensagem de texto
-
-Digite ou transcreva sua mensagem na barra inferior onde está indicado “Digite uma mensagem...” e, em seguida, clique no botão **Enviar mensagem** (ícone de seta localizado no canto inferior direito, próximo ao botão de anexo).
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagem1.png" />
-
-Você também pode utilizar **emojis** para aumentar a empatia e engajamento da conversa.  
-
-> **Exemplo de emojis:**  
-> 😄😋😏😍😘  
-> 😎 *Os emojis são imagens facilmente reconhecíveis e ajudam a transmitir emoções associadas à sua mensagem.*  
-
-> ⚠️ **Importante**  
-> Também é possível enviar a mensagem utilizando a tecla **Enter** do teclado. Nesse caso, é necessário manter o cursor sempre ao final da frase. Caso o cursor esteja posicionado no meio do texto, ao pressionar Enter haverá uma quebra de linha no ponto em que ele estiver (o que não ocorre quando o envio é feito pelo botão da plataforma).
-
----
-
-## Envio de Anexo (Documentos, Imagens e Áudios)
-
-Você pode anexar arquivos ao clicar no ícone de clipe de papel 📎.  
-Tipos de anexos suportados:
-
-- Documentos (PDF, DOCX, etc.)
-- Imagens (JPG, PNG, etc.)
-- Áudios e vídeos
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarMensagemanexo.png" />
-
-### Comportamento por canal:
-
-- **WhatsApp**: Arquivos são enviados como mídia.  
-- **E-Mail**: Arquivos são enviados como **anexo**.  
-- **SMS**: Arquivos são enviados como **shortened link**.  
-- **Voz**: *Não é possível enviar arquivos.*  
-- **Outros canais**: Arquivos são enviados como **mídia**, respeitando a especificação de cada aplicativo.  
-
-> ⚠️ **Atenção**  
-> Vale lembrar que, para a Invenio Live, a mídia precisa vir diretamente do computador do operador e não da biblioteca de mídias da Invenio.
+<Steps>
+  <Step title="Acessar a plataforma">
+    Faça login no **Invenio Live** com seu usuário e senha.
+    
+    Consulte: [Como acessar a plataforma](https://docs.robbu.global/docs/live/como-acessar-plataforma)
+  </Step>
+  
+  <Step title="Selecionar o contato">
+    Na **lista lateral de conversas**, selecione o contato com o qual deseja interagir.
+    
+    <Note>
+    Caso o contato ainda não esteja registrado, é necessário criar um contato novo.
+    
+    Consulte: [Como criar um novo contato Invenio Live](https://docs.robbu.global/docs/live/criar-contato)
+    </Note>
+    
+    <Frame caption="Lista de conversas com seleção de contato no Invenio Live">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagensMeucontato.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Escolher tipo de mensagem">
+    Escolha entre os diferentes tipos de mensagem disponíveis:
+    
+    - 💬 **Texto livre** (durante janela de 24h no WhatsApp)
+    - 📎 **Anexos** (documentos, imagens, vídeos)
+    - 🎤 **Áudio gravado**
+    - 📋 **Template HSM** (para WhatsApp fora da janela de 24h)
+    
+    Veja detalhes de cada tipo nas abas abaixo.
+  </Step>
+</Steps>
 
 ---
 
-## Gravar uma mensagem de áudio
+## Tipos de Envio
 
-O operador pode enviar áudios para o contato utilizando o ícone do microfone localizado no canto inferior direito da conversa. Após clicar, basta gravar seu áudio e clicar no ícone ✅ para enviá-lo ou no ícone ❌ para descartá-lo.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala3.png" />
-
-> ⚠️ **Importante**  
-> É importante lembrar que, para que esse recurso opere corretamente, o navegador/página web precisa estar com a **permissão de microfone ativa**.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/Enciarmensagempermissaogoogle.png" />
-
-### Reconhecimento de fala para texto
-
-Caso o operador deseje converter seu áudio em texto antes de enviar para o contato, basta clicar duas vezes no ícone de “Gravar mensagem áudio” para ativar o recurso.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala1.png" />
-
-> ⚠️ **Importante**  
-> Lembre-se de que a fala será reconhecida enquanto o ícone estiver em azul. Assim que o reconhecimento for encerrado, a plataforma realizará automaticamente a transcrição.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala2.png" />
-
-Para utilizar novamente o recurso de áudio, basta clicar duas vezes no botão de reconhecimento de fala.  
+<Tabs>
+  <Tab title="Mensagem de Texto" icon="message">
+    ### Envio de Mensagem de Texto
+    
+    **Como enviar:**
+    1. Digite ou transcreva sua mensagem na barra inferior onde está indicado **"Digite uma mensagem..."**
+    2. Clique no botão **"Enviar mensagem"** (ícone de seta no canto inferior direito)
+    
+    <Frame caption="Interface de digitação e envio de mensagem de texto">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagem1.png" />
+    </Frame>
+    
+    **Recursos disponíveis:**
+    
+    - ✅ **Emojis:** Aumente a empatia e engajamento da conversa
+      - Exemplo: 😄 😋 😏 😍 😘 😎
+      - Os emojis são imagens facilmente reconhecíveis que ajudam a transmitir emoções
+    
+    - ⌨️ **Atalho Enter:** Pressione Enter para enviar rapidamente
+    
+    <Warning>
+    **Atenção ao usar a tecla Enter:**
+    
+    A tecla Enter envia a mensagem **apenas se o cursor estiver ao final** da frase.
+    
+    Se o cursor estiver **no meio do texto**, o Enter criará uma **quebra de linha** (isso não ocorre ao enviar pelo botão da plataforma).
+    </Warning>
+  </Tab>
+  
+  <Tab title="Anexos" icon="paperclip">
+    ### Envio de Anexos
+    
+    Você pode anexar arquivos clicando no **ícone de clipe de papel** 📎.
+    
+    **Tipos de anexos suportados:**
+    
+    - 📄 **Documentos** (PDF, DOCX, XLSX, etc.)
+    - 🖼️ **Imagens** (JPG, PNG, GIF, etc.)
+    - 🎥 **Vídeos** (MP4, AVI, MOV, etc.)
+    - 🎵 **Áudios** (MP3, WAV, etc.)
+    
+    <Frame caption="Interface de envio de anexos no Invenio Live">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarMensagemanexo.png" />
+    </Frame>
+    
+    **Comportamento por canal:**
+    
+    | Canal | Formato de Envio |
+    |-------|------------------|
+    | 📱 **WhatsApp** | Enviado como **mídia** |
+    | 📧 **E-mail** | Enviado como **anexo** |
+    | 💬 **SMS** | Enviado como **shortened link** |
+    | 📞 **Voz** | ❌ **Não é possível** enviar arquivos |
+    | 🌐 **Outros canais** | Enviado como **mídia** (respeitando especificação de cada app) |
+    
+    <Warning>
+    **Origem da mídia:** Para o Invenio Live, a mídia precisa vir **diretamente do computador do operador**, não da biblioteca de mídias do Invenio Center.
+    </Warning>
+  </Tab>
+  
+  <Tab title="Áudio" icon="microphone">
+    ### Gravar Mensagem de Áudio
+    
+    **Como gravar:**
+    1. Clique no **ícone do microfone** localizado no canto inferior direito
+    2. Grave seu áudio
+    3. Clique no ícone ✅ para **enviar** ou ❌ para **descartar**
+    
+    <Frame caption="Interface de gravação de áudio no Invenio Live">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala3.png" />
+    </Frame>
+    
+    <Warning>
+    **Permissão de microfone necessária:**
+    
+    Para que esse recurso opere corretamente, o **navegador/página web** precisa estar com a **permissão de microfone ativa**.
+    
+    Verifique as configurações do seu navegador e autorize o acesso ao microfone para o site do Invenio Live.
+    </Warning>
+    
+    <Frame caption="Permissão de microfone no navegador Google Chrome">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/Enciarmensagempermissaogoogle.png" />
+    </Frame>
+    
+    ---
+    
+    ### Reconhecimento de Fala para Texto
+    
+    Converta seu áudio em texto antes de enviar para o contato.
+    
+    **Como usar:**
+    1. **Clique duas vezes** no ícone "Gravar mensagem áudio" para ativar
+    2. Fale enquanto o ícone estiver **em azul**
+    3. Quando encerrar, a plataforma **transcreve automaticamente**
+    4. Para voltar ao modo áudio, clique **duas vezes** novamente
+    
+    <Frame caption="Ativação do reconhecimento de fala para texto">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala1.png" />
+    </Frame>
+    
+    <Tip>
+    **Indicador visual:** A fala será reconhecida **enquanto o ícone estiver azul**. Assim que o reconhecimento for encerrado, a transcrição aparece automaticamente no campo de texto.
+    </Tip>
+    
+    <Frame caption="Processo de transcrição de fala para texto">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/enviarmensagemReconhecimentoFala2.png" />
+    </Frame>
+  </Tab>
+  
+  <Tab title="Template HSM" icon="file-lines">
+    ### Envio de Template HSM WhatsApp
+    
+    Para canais do **WhatsApp**, caso a **janela de 24h** esteja fechada, é necessário enviar uma mensagem **HSM** (template aprovado).
+    
+    **Como enviar:**
+    1. Clique no **ícone de balão de fala** ao lado do botão de envio de áudio
+    2. Na parte inferior da tela, acesse todos os **templates cadastrados** na linha e segmento do contato
+    3. Selecione o template desejado
+    
+    <Frame caption="Acesso aos templates HSM no Invenio Live">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemhsm2.png" />
+    </Frame>
+    
+    <Frame caption="Lista de templates disponíveis para envio">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviamensagemTemplates.png" />
+    </Frame>
+    
+    <Warning>
+    **Requisitos para envio de template:**
+    
+    - ✅ O template precisa ter **permissão de envio** para a linha e segmento do contato
+    - ✅ A linha precisa estar **habilitada no seu perfil** de usuário
+    - ✅ Todas as **variáveis do template** devem estar preenchidas no perfil do contato
+    </Warning>
+    
+    ---
+    
+    ### Gerenciar Variáveis do Template
+    
+    Antes de enviar um template HSM, verifique se as variáveis (coringas) estão preenchidas.
+    
+    <Steps>
+      <Step title="Acessar perfil do contato">
+        Clique no **ícone do contato** localizado na parte superior do Invenio Live.
+        
+        <Frame caption="Acesso ao perfil do contato para editar variáveis">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemModificaCoringaPerfil.png" />
+        </Frame>
+      </Step>
+      
+      <Step title="Editar coringas">
+        Ao final da página, na seção **"Coringas"**, você pode incluir ou editar o conteúdo das variáveis.
+        
+        1. Selecione a variável Coringa desejada
+        2. Clique em **"+ Modificar coringa"**
+        
+        <Frame caption="Seleção de coringa para edição">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemIconeModificarcoringa2.png" />
+        </Frame>
+      </Step>
+      
+      <Step title="Atualizar valor">
+        Uma janela será aberta para você digitar o **novo conteúdo** da variável.
+        
+        <Frame caption="Tela de edição do valor da variável coringa">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/telaCoringamodificado.png" />
+        </Frame>
+      </Step>
+      
+      <Step title="Enviar template">
+        Após salvar a alteração, prossiga com o envio do **HSM** desejado.
+        
+        <Frame caption="Template HSM enviado com sucesso">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/templateEnviado.png" />
+        </Frame>
+        
+        <Check>
+        **Sucesso!** O template foi enviado com as variáveis personalizadas para o contato.
+        </Check>
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ---
 
-## Envio de mensagem de template HSM WhatsApp
+## Dica Extra: Frases Prontas
 
-Para os canais do WhatsApp, caso a janela de 24h de atendimento esteja fechada, será necessário realizar o envio de uma mensagem **HSM**.  
-Para isso, clique no ícone de balão de fala, localizado ao lado do botão de envio de áudio. Em seguida, na parte inferior da tela, você terá acesso a todos os templates cadastrados na linha e no segmento em que o contato se encontra.
+<Tip>
+**Agilize o atendimento** utilizando **frases prontas** e **templates de mensagens**.
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemhsm2.png" />
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviamensagemTemplates.png" />
-
-> ⚠️ **Atenção**  
-> - O template desejado precisa ter permissão de envio para a linha e segmento do contato.  
-> - A linha precisa estar habilitada no seu perfil de usuário.  
-> - Antes do envio, verifique se todas as variáveis do template estão devidamente preenchidas no perfil do contato.  
-
-### Verificando variáveis no perfil do contato
-- Clique no ícone do contato, localizado na parte superior do Invenio Live.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemModificaCoringaPerfil.png" />
-
-- Ao final da página, na seção Coringas, você poderá incluir ou editar o conteúdo das variáveis coringas para que sejam exibidas corretamente no HSM a ser enviado.
-
-- Selecione a variável Coringa desejada e clique na opção `+ Modificar coringa`.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/EnviarMensagemIconeModificarcoringa2.png" />
-
-- Será aberta uma janela para que você digite o novo conteúdo da variável.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/telaCoringamodificado.png" />
-
-- Após salvar a alteração, prossiga com o envio do **HSM** desejado.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/Enviar Mensagem/templateEnviado.png" />
-
----
-
-## Dica extra: Frases prontas e templates
-
-Você pode utilizar **frases prontas** e **templates de mensagens** para agilizar o atendimento. Basta acessar o menu ao lado do campo de digitação.  
+Acesse o menu ao lado do campo de digitação para selecionar frases salvas.
 
 Consulte: [Gestão de frases prontas](https://docs.robbu.global/docs/center/gestao-frases-prontas)
+</Tip>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Links Relacionados
 
-- [Gestão de frases prontas](https://docs.robbu.global/docs/center/gestao-frases-prontas)  
-- [Gestão de usuários](https://docs.robbu.global/docs/center/usuarios)  
-- [Canais de atendimento](https://docs.robbu.global/docs/center/canais-atendimento)  
-- [Como acessar a plataforma](https://docs.robbu.global/docs/live/como-acessar-plataforma)  
-- [Como criar templates WhatsApp](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)  
+<CardGroup cols={2}>
+  <Card 
+    title="Gestão de Frases Prontas" 
+    icon="comments" 
+    href="https://docs.robbu.global/docs/center/gestao-frases-prontas"
+  >
+    Configure mensagens rápidas
+  </Card>
+  
+  <Card 
+    title="Gestão de Usuários" 
+    icon="users" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Permissões de perfil
+  </Card>
+  
+  <Card 
+    title="Canais de Atendimento" 
+    icon="network-wired" 
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Configuração de canais
+  </Card>
+  
+  <Card 
+    title="Como Acessar Plataforma" 
+    icon="right-to-bracket" 
+    href="https://docs.robbu.global/docs/live/como-acessar-plataforma"
+  >
+    Login e acesso inicial
+  </Card>
+  
+  <Card 
+    title="Templates WhatsApp" 
+    icon="whatsapp" 
+    href="https://docs.robbu.global/docs/center/como-criar-templates-whatsapp"
+  >
+    Criar templates HSM
+  </Card>
+  
+  <Card 
+    title="Novo Contato" 
+    icon="user-plus" 
+    href="https://docs.robbu.global/docs/live/criar-contato"
+  >
+    Adicionar contatos
+  </Card>
+</CardGroup>
 
 ---
 
-## ❓ Perguntas Frequentes (FAQ)
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Posso enviar arquivos pelo canal de voz?">
-    Não. O canal de voz não permite envio de anexos, apenas mensagens de áudio gravadas diretamente pelo operador.
+  <Accordion title="❓ Posso enviar arquivos pelo canal de voz?">
+    **Não.** O canal de voz **não permite envio de anexos**.
+    
+    **Recursos disponíveis no canal de voz:**
+    - ✅ Mensagens de áudio gravadas diretamente pelo operador
+    - ❌ Não suporta arquivos (documentos, imagens, vídeos)
+    
+    Para enviar arquivos, utilize outros canais como WhatsApp, E-mail ou SMS.
   </Accordion>
-  <Accordion title="O que acontece se eu enviar uma mensagem fora da janela de 24h do WhatsApp?">
-    Será necessário utilizar um template HSM aprovado previamente, caso contrário a mensagem não será entregue ao contato.
+
+  <Accordion title="⏱️ O que acontece se eu enviar uma mensagem fora da janela de 24h do WhatsApp?">
+    **Mensagens livres não serão entregues** fora da janela de 24 horas.
+    
+    **Solução:**
+    1. Use um **template HSM** previamente aprovado
+    2. **Acesso:** **Invenio Live > Contato > Ícone de Balão de Fala > Selecionar Template > Enviar**
+    3. Aguarde o cliente **responder** para abrir a janela de 24h
+    
+    <Tip>
+    Templates HSM devem ser criados em: **Invenio Center > Templates de WhatsApp**
+    </Tip>
+    
+    Consulte: [Sessão de 24 Horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)
   </Accordion>
-  <Accordion title="Quais tipos de arquivo são suportados como anexo?">
-    Documentos (PDF, DOCX), imagens (JPG, PNG), áudios e vídeos, respeitando o limite e formato suportado por cada canal.
+
+  <Accordion title="📎 Quais tipos de arquivo são suportados como anexo?">
+    **Formatos suportados:**
+    
+    - 📄 **Documentos:** PDF, DOCX, XLSX, TXT, etc.
+    - 🖼️ **Imagens:** JPG, PNG, GIF, BMP, etc.
+    - 🎥 **Vídeos:** MP4, AVI, MOV, MKV, etc.
+    - 🎵 **Áudios:** MP3, WAV, OGG, etc.
+    
+    **Observações:**
+    - Respeite o **limite de tamanho** suportado por cada canal
+    - Alguns formatos podem **não ser aceitos** dependendo do canal
+    - Arquivos devem vir do **computador do operador**, não da biblioteca de mídias
   </Accordion>
-  <Accordion title="Posso usar a tecla Enter para enviar mensagens?">
-    Sim. Mas é necessário que o cursor esteja no final da mensagem. Se estiver no meio do texto, o Enter apenas criará uma nova linha.
+
+  <Accordion title="⌨️ Posso usar a tecla Enter para enviar mensagens?">
+    **Sim**, mas com atenção ao comportamento.
+    
+    **Como funciona:**
+    
+    ✅ **Cursor no final do texto:** Pressionar Enter **envia a mensagem**
+    
+    ⚠️ **Cursor no meio do texto:** Pressionar Enter cria uma **quebra de linha** (nova linha)
+    
+    <Tip>
+    **Alternativa segura:** Use sempre o **botão "Enviar"** (ícone de seta) para evitar envios acidentais ou quebras de linha indesejadas.
+    </Tip>
   </Accordion>
-  <Accordion title="É possível reutilizar frases prontas?">
-    Sim. Basta acessar o menu ao lado do campo de digitação e selecionar uma frase ou template salvo.
+
+  <Accordion title="💬 É possível reutilizar frases prontas?">
+    **Sim!** Frases prontas agilizam o atendimento.
+    
+    **Como usar:**
+    1. **Acesso:** **Invenio Live > Campo de Digitação > Menu ao Lado > Selecionar Frase Pronta**
+    2. A frase será inserida automaticamente no campo de mensagem
+    3. Você pode **editar** antes de enviar
+    
+    **Configurar frases prontas:**
+    - **Caminho:** **Invenio Center > Gestão de Frases Prontas > Adicionar Nova Frase**
+    
+    Consulte: [Gestão de frases prontas](https://docs.robbu.global/docs/center/gestao-frases-prontas)
   </Accordion>
-  <Accordion title="Por que não consigo enviar um áudio?">
-    Esse erro pode ocorrer caso o navegador não tenha permissão para utilizar o microfone.  
-    Verifique as configurações do seu browser e habilite a permissão para o site da plataforma.
+
+  <Accordion title="🎤 Por que não consigo enviar um áudio?">
+    **Problema:** Erro ao gravar ou enviar áudio.
+    
+    **Causa mais comum:** Navegador **sem permissão** para acessar o microfone.
+    
+    **Solução:**
+    1. Verifique as **configurações do navegador**
+    2. Procure por **"Permissões do site"** ou **"Configurações de privacidade"**
+    3. Localize o site do **Invenio Live**
+    4. **Habilite** a permissão de **microfone**
+    5. **Recarregue** a página
+    
+    **Navegadores comuns:**
+    - **Chrome:** Ícone de cadeado na barra de endereço > Configurações do site > Microfone > Permitir
+    - **Firefox:** Ícone de cadeado > Permissões > Microfone > Permitir
+    - **Edge:** Ícone de cadeado > Permissões para este site > Microfone > Permitir
+    
+    <Note>
+    Após habilitar a permissão, teste novamente clicando no ícone do microfone no Invenio Live.
+    </Note>
   </Accordion>
 </AccordionGroup>
-

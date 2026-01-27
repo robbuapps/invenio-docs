@@ -1,66 +1,294 @@
 ---
 title: "Dados da Mensagem"
 sidebarTitle: "Dados da Mensagem"
-description: "Visualize o ciclo completo de envio das mensagens no Invenio Live, desde a solicitação até a confirmação de leitura, com total clareza e rastreabilidade."
+description: "Visualize o ciclo completo de envio das mensagens no Invenio Live, desde a solicitação até a confirmação de leitura, com rastreabilidade em tempo real."
 ---
 
-A tela de visualização dos Dados da Mensagem do Invenio Live foi criada para oferecer mais clareza e controle sobre o ciclo de envio das
- mensagens enviadas na plataforma. Por meio desse recurso, operadores e supervisores conseguem visualizar, em tempo real, o status detalhado de cada mensagem, desde o momento da 
-solicitação até a confirmação de entrega ao destinatário final.  
-Essa ferramenta é especialmente útil para acompanhar o desempenho das interações, identificar possíveis falhas e garantir que a comunicação com o cliente
-esteja fluindo como esperado.
+A tela de visualização dos **Dados da Mensagem** do Invenio Live oferece clareza e controle total sobre o ciclo de envio das mensagens enviadas na plataforma.
 
-## Como acessar
+Por meio desse recurso, **operadores e supervisores** conseguem visualizar, em tempo real, o status detalhado de cada mensagem, desde o momento da solicitação até a confirmação de entrega ao destinatário final.
 
-Para poder acessar a esse detalhamento, é necessário escolher a mensagem que deseja visualizar.  
-Ao lado esquerdo da mensagem escolhida, vai estar localizado um botão com formato de **3 pontos**. Ao clicar nele irá abrir um menu
-lateral com os detalhes de envio.
+**Benefícios:**
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-live/dadosmensagem1.png"/> 
-
-Por meio desta funcionalidade, é possível rastrear cada etapa da entrega da mensagem, incluindo:
-
-• **Solicitação:** Momento em que a plataforma registra o pedido de envio da mensagem.  
-• **Envio:** Indica o momento em que a mensagem é efetivamente encaminhada ao canal.  
-• **Confirmação:** Confirmação de que o contato recebeu a mensagem com sucesso.  
-• **Confirmação de Leitura:** Registro do instante em que o destinatário visualizou a mensagem.
-
-> 📌 **Atenção:** A confirmação de leitura aparece apenas para o canal do **WhatsApp** se o contato tiver essa configuração **habilitada** 
+- 📊 Acompanhar o desempenho das interações
+- 🔍 Identificar possíveis falhas no envio
+- ✅ Garantir que a comunicação está fluindo como esperado
+- 📈 Analisar métricas de entrega e leitura
 
 ---
 
-## 🔗 Links e assuntos relacionados  
+## Como Acessar os Dados da Mensagem
 
-- [Enviar Mensagem](https://docs.robbu.global/docs/live/enviar-mensagem)  
-- [Filtros e buscas](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)  
-- [Busca de mensagem no histórico](https://docs.robbu.global/docs/live/busca-mensagem-historico)  
+<Steps>
+  <Step title="Selecionar a mensagem">
+    Escolha a mensagem que deseja visualizar no histórico de conversas.
+  </Step>
+  
+  <Step title="Abrir menu de detalhes">
+    Ao lado **esquerdo da mensagem**, clique no botão com formato de **3 pontos (⋮)**.
+    
+    Um menu lateral será aberto com os detalhes completos de envio.
+    
+    <Frame caption="Menu de 3 pontos para acessar dados detalhados da mensagem">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-live/dadosmensagem1.png"/>
+    </Frame>
+  </Step>
+</Steps>
+
+---
+
+## Etapas do Ciclo de Envio
+
+Por meio desta funcionalidade, é possível rastrear **cada etapa da entrega** da mensagem:
+
+<Tabs>
+  <Tab title="Solicitação" icon="paper-plane">
+    ### 📤 Solicitação
+    
+    **Momento** em que a plataforma **registra o pedido** de envio da mensagem.
+    
+    **Indica:**
+    - ✅ A mensagem foi criada no sistema
+    - ✅ O envio foi solicitado ao canal
+    - ⏳ Aguardando processamento
+  </Tab>
+  
+  <Tab title="Envio" icon="rocket">
+    ### 🚀 Envio
+    
+    **Indica** o momento em que a mensagem é **efetivamente encaminhada ao canal**.
+    
+    **Significa:**
+    - ✅ A plataforma Robbu enviou a mensagem
+    - ✅ Canal (WhatsApp, E-mail, SMS) recebeu a solicitação
+    - ⏳ Aguardando entrega ao destinatário
+  </Tab>
+  
+  <Tab title="Confirmação" icon="check">
+    ### ✅ Confirmação
+    
+    **Confirmação** de que o **contato recebeu a mensagem** com sucesso.
+    
+    **Indica:**
+    - ✅ A mensagem foi entregue ao dispositivo do destinatário
+    - ✅ O canal confirmou a entrega
+    - 📱 Mensagem disponível para leitura
+  </Tab>
+  
+  <Tab title="Leitura" icon="check-double">
+    ### 👁️ Confirmação de Leitura
+    
+    **Registro** do instante em que o **destinatário visualizou** a mensagem.
+    
+    **Indica:**
+    - ✅ O contato abriu e leu a mensagem
+    - ✅ Interação confirmada
+    
+    <Warning>
+    **Disponibilidade limitada:**
+    
+    A confirmação de leitura aparece **apenas para o canal WhatsApp** e **somente se** o contato tiver essa configuração **habilitada** nas configurações de privacidade.
+    
+    Outros canais (E-mail, SMS) não fornecem confirmação de leitura.
+    </Warning>
+  </Tab>
+</Tabs>
+
+---
+
+## Diferença entre Envio e Confirmação
+
+<Note>
+**Importante entender a diferença:**
+
+**Envio ≠ Confirmação**
+
+- **Envio:** Indica que a **Robbu enviou** a mensagem ao canal (WhatsApp, Meta, operadora de SMS, etc.)
+- **Confirmação:** Indica que o **destinatário recebeu** a mensagem no dispositivo dele
+
+**Exemplo prático:**
+
+Se uma mensagem consta como **"Enviada"** mas **não "Confirmada"**, significa que:
+1. ✅ A Robbu processou e enviou com sucesso
+2. ⏳ Mas o canal intermediário (operadora, Meta) **ainda não confirmou** a entrega ao destinatário final
+3. ⚠️ Pode haver bloqueio por parte da operadora ou Meta
+
+Sempre verifique ambas as datas/horas (envio **e** confirmação) para garantir entrega completa.
+</Note>
+
+---
+
+## Identificando Falhas de Envio
+
+<Tip>
+**Diagnóstico de problemas:** A visualização detalhada permite identificar **onde houve interrupção** no ciclo da mensagem.
+
+**Cenários comuns:**
+
+1. **Solicitação → ❌ Sem envio:**
+   - Problema na plataforma ou configuração
+   - Verifique permissões e status do canal
+
+2. **Envio → ❌ Sem confirmação:**
+   - Bloqueio por parte da operadora (SMS)
+   - Violação de políticas da Meta (WhatsApp)
+   - Número inválido ou bloqueado
+
+3. **Confirmação → ❌ Sem leitura (WhatsApp):**
+   - Contato desabilitou confirmação de leitura
+   - Mensagem não foi aberta ainda
+</Tip>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Enviar Mensagem" 
+    icon="paper-plane" 
+    href="https://docs.robbu.global/docs/live/enviar-mensagem"
+  >
+    Como enviar mensagens
+  </Card>
+  
+  <Card 
+    title="Filtros e Busca" 
+    icon="magnifying-glass" 
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Organização de conversas
+  </Card>
+  
+  <Card 
+    title="Buscar no Histórico" 
+    icon="clock-rotate-left" 
+    href="https://docs.robbu.global/docs/live/busca-mensagem-historico"
+  >
+    Busca de mensagens antigas
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Onde posso visualizar os dados da mensagem no Invenio Live?">
-    Ao lado esquerdo da mensagem desejada, clique nos três pontos para abrir o menu lateral com os detalhes de envio.
+  <Accordion title="📍 Onde posso visualizar os dados da mensagem no Invenio Live?">
+    **Caminho:** **Invenio Live > Conversa > Mensagem Desejada > Botão de 3 Pontos (⋮) > Dados da Mensagem**
+    
+    **Passo a passo:**
+    1. Abra a conversa no Invenio Live
+    2. Localize a mensagem que deseja rastrear
+    3. Ao **lado esquerdo** da mensagem, clique nos **três pontos (⋮)**
+    4. O menu lateral será aberto automaticamente com os detalhes
+    
+    <Tip>
+    Esse recurso está disponível para **todas as mensagens** enviadas através do Invenio Live, independente do canal.
+    </Tip>
   </Accordion>
 
-  <Accordion title="Quais são as etapas exibidas nos dados da mensagem?">
-    São exibidas as seguintes etapas: Solicitação, Envio, Confirmação e, se aplicável, Confirmação de Leitura.
+  <Accordion title="📊 Quais são as etapas exibidas nos dados da mensagem?">
+    **Etapas do ciclo de envio:**
+    
+    1. **📤 Solicitação:** Plataforma registra o pedido de envio
+    2. **🚀 Envio:** Mensagem é encaminhada ao canal (WhatsApp, SMS, E-mail)
+    3. **✅ Confirmação:** Contato recebeu a mensagem no dispositivo
+    4. **👁️ Confirmação de Leitura:** Destinatário visualizou a mensagem (apenas WhatsApp)
+    
+    **Cada etapa possui:**
+    - ⏰ Data e hora exatas
+    - ✅ Status (sucesso/pendente/falha)
+    - 📋 Detalhes técnicos quando aplicável
   </Accordion>
 
-  <Accordion title="A confirmação de leitura está disponível para todos os canais?">
-    Não. A confirmação de leitura está disponível apenas para o canal do WhatsApp e depende da configuração habilitada pelo contato.
+  <Accordion title="👁️ A confirmação de leitura está disponível para todos os canais?">
+    **Não.** A confirmação de leitura possui **disponibilidade limitada**.
+    
+    **Canais que fornecem confirmação de leitura:**
+    
+    - ✅ **WhatsApp** (se o contato tiver habilitado nas configurações de privacidade)
+    
+    **Canais que NÃO fornecem confirmação de leitura:**
+    
+    - ❌ **E-mail:** Não há confirmação padrão de leitura
+    - ❌ **SMS:** Operadoras não retornam confirmação de leitura
+    - ❌ **Voz:** Não aplicável
+    
+    <Note>
+    **Configuração do contato:** Mesmo no WhatsApp, se o contato desabilitou a **confirmação de leitura** nas configurações de privacidade do app, essa informação **não será exibida**.
+    </Note>
   </Accordion>
 
-  <Accordion title="Essa funcionalidade é em tempo real?">
-    Sim. Os dados de envio são atualizados em tempo real, permitindo que operadores e supervisores acompanhem cada interação conforme ela acontece.
+  <Accordion title="⏱️ Essa funcionalidade é em tempo real?">
+    **Sim!** Os dados de envio são **atualizados em tempo real**.
+    
+    **Vantagens:**
+    - 🔄 Acompanhamento **imediato** de cada interação
+    - 📊 Operadores e supervisores veem o status **conforme acontece**
+    - ⚡ Não é necessário recarregar a página
+    - 🚨 Identificação **rápida** de falhas
+    
+    **Como funciona:**
+    1. Operador envia mensagem
+    2. Sistema atualiza **"Solicitação"** instantaneamente
+    3. Assim que o canal processa, **"Envio"** é atualizado
+    4. Quando o destinatário recebe, **"Confirmação"** aparece
+    5. Se aplicável, **"Leitura"** é registrada quando ocorre
   </Accordion>
 
-  <Accordion title="É possível identificar falhas no envio da mensagem com esse recurso?">
-    Sim. A visualização detalhada permite identificar onde houve interrupção no ciclo da mensagem, facilitando diagnósticos e tratativas.
+  <Accordion title="🔍 É possível identificar falhas no envio da mensagem com esse recurso?">
+    **Sim!** A visualização detalhada permite identificar **exatamente onde houve interrupção** no ciclo.
+    
+    **Diagnóstico facilitado:**
+    
+    **Cenário 1: Falha entre Solicitação → Envio**
+    - ⚠️ **Causa provável:** Problema na plataforma ou configuração incorreta
+    - ✅ **Solução:** Verificar permissões de usuário e status do canal
+    
+    **Cenário 2: Falha entre Envio → Confirmação**
+    - ⚠️ **Causa provável:** Bloqueio por operadora (SMS) ou Meta (WhatsApp)
+    - ✅ **Solução:** Revisar conteúdo da mensagem e conformidade com políticas
+    
+    **Cenário 3: Confirmação OK → Sem Leitura (WhatsApp)**
+    - ⚠️ **Causa provável:** Contato desabilitou confirmação de leitura ou não abriu ainda
+    - ✅ **Solução:** Normal, não é uma falha
+    
+    **Caminho para verificar:** **Invenio Live > Mensagem > 3 Pontos (⋮) > Dados da Mensagem**
   </Accordion>
 
-  <Accordion title="Na plataforma consta como enviado mas eu ainda não recebi a mensagem.">
-    A confirmação de envio nos sinaliza que por parte da Robbu a mensagem foi enviada com sucesso, no entanto, dependendo do canal do contato, pode haver alguma interrupção no processo. Casos de SMS, por exemplo, a própria operadora pode barrar o recebimento da mensagem pelo cliente final caso considere que fira as suas diretrizes. O mesmo ocorre com o WhatsApp, porém, especificamente para esse canal, a Meta nos retorna um parecer sobre o motivo da falha no envio. Deste modo, para garantir que o contato de fato recebeu a mensagem, precisamos verificar não apenas a data/hora de envio, mas principalmente a de confirmação de entrega.
+  <Accordion title="❓ Na plataforma consta como enviado mas eu ainda não recebi a mensagem">
+    **Situação:** Mensagem marcada como "Enviada" mas sem "Confirmação" de entrega.
+    
+    **Explicação:**
+    
+    A confirmação de **"Envio"** significa que:
+    - ✅ **Por parte da Robbu**, a mensagem foi enviada com **sucesso**
+    - ✅ O sistema processou e encaminhou ao canal (WhatsApp, SMS, E-mail)
+    
+    **Porém**, dependendo do canal, pode haver **interrupção** no processo:
+    
+    **📱 SMS:**
+    - A **própria operadora** pode barrar o recebimento
+    - Motivo: Mensagem considerada **spam** ou violação de diretrizes
+    - A Robbu não tem controle sobre essa decisão
+    
+    **💬 WhatsApp:**
+    - A **Meta** pode bloquear a entrega
+    - **Diferencial:** A Meta **retorna um parecer** sobre o motivo da falha
+    - Acesse os dados da mensagem para ver o feedback da Meta
+    
+    **📧 E-mail:**
+    - Pode cair em **spam** ou ser bloqueado pelo servidor de destino
+    
+    **✅ Como garantir entrega real:**
+    
+    Verifique **ambas** as confirmações:
+    1. ⏰ **Data/hora de envio:** Robbu processou
+    2. ⏰ **Data/hora de confirmação:** Destinatário recebeu
+    
+    **Caminho:** **Invenio Live > Mensagem > 3 Pontos (⋮) > Dados da Mensagem > Verificar "Confirmação"**
+    
+    Se houver apenas "Envio" sem "Confirmação", a mensagem **não chegou** ao destinatário final.
   </Accordion>
 </AccordionGroup>
