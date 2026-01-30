@@ -1,151 +1,654 @@
 ---
-title: "Single-Sign On"
+title: "Single Sign-On (SSO)"
 sidebarTitle: "Single-Sign On"
-description: "A plataforma Invenio by Robbu atualmente suporta autenticação Single Sign-On (SSO) com provedores de identidade que utilizam os protocolos SAML 2.0 e OpenID Connect, incluindo Microsoft Entra ID, JumpCloud e Active Directory Federado via SAML. Essa integração permite que seus usuários acessem o Invenio com suas credenciais corporativas, promovendo segurança e praticidade."
+description: "Configure autenticação SSO no Invenio com Microsoft Entra ID (OpenID Connect), JumpCloud ou Active Directory Federado (SAML 2.0) para acesso seguro com credenciais corporativas."
 ---
 
-## Visão Geral
+A funcionalidade de **Single Sign-On (SSO)** permite que os usuários autentiquem-se na plataforma Invenio utilizando suas **credenciais corporativas** já existentes, eliminando a necessidade de múltiplas senhas.
 
-A funcionalidade de **Single Sign-On (SSO)** permite que os usuários autentiquem-se na plataforma Invenio utilizando suas **credenciais corporativas** já existentes. Atualmente, suportamos :
+**Benefícios do SSO:**
 
-- **Microsoft Entra ID** (via OpenID Connect)
-- **JumpCloud** (via SAML 2.0)
-- **Active Directory Federado (ADFS)** (via SAML 2.0)
+- 🔐 **Segurança:** Autenticação centralizada e controlada
+- 🚀 **Praticidade:** Login único para múltiplos sistemas
+- 👥 **Gestão simplificada:** Controle de acesso centralizado
+- ✅ **Conformidade:** Alinhamento com políticas corporativas
 
 ---
 
-## Integração com Microsoft Entra ID (OpenID Connect)
+## Provedores Suportados
 
-Essa opção utiliza o protocolo OpenID Connect (OIDC), baseado em OAuth2. Abaixo estão os passos para configurar:
+A plataforma Invenio by Robbu atualmente suporta autenticação SSO com os seguintes provedores de identidade:
 
-### Etapas de Configuração
+<Tabs>
+  <Tab title="Microsoft Entra ID" icon="microsoft">
+    ### Microsoft Entra ID
+    
+    **Protocolo:** OpenID Connect (OIDC)
+    
+    **Baseado em:** OAuth 2.0
+    
+    **Ideal para:** Organizações que já utilizam Azure Active Directory
+  </Tab>
+  
+  <Tab title="JumpCloud" icon="cloud">
+    ### JumpCloud
+    
+    **Protocolo:** SAML 2.0
+    
+    **Ideal para:** Empresas que usam JumpCloud como diretório central
+  </Tab>
+  
+  <Tab title="ADFS" icon="server">
+    ### Active Directory Federado (ADFS)
+    
+    **Protocolo:** SAML 2.0
+    
+    **Ideal para:** Organizações on-premise com infraestrutura Windows Server
+  </Tab>
+</Tabs>
+
+---
+
+## Integração com Microsoft Entra ID
+
+A integração com **Microsoft Entra ID** (anteriormente Azure AD) utiliza o protocolo **OpenID Connect (OIDC)**, baseado em OAuth 2.0.
 
 <Steps>
-  <Step title="Criando um Aplicativo no Microsoft Entra ID">
+  <Step title="Criar aplicativo no Microsoft Entra ID">
     1. Acesse o [Portal do Azure](https://portal.azure.com)
-    2. Vá até o menu **Microsoft Entra ID**
-    3. Clique em **App registrations**
-    4. Clique em **New Registration**
+    2. Navegue até o menu **Microsoft Entra ID**
+    3. Clique em **App registrations** (Registros de aplicativo)
+    4. Clique em **New Registration** (Novo registro)
+    
+    <Tip>
+    **Acesso direto:** No portal do Azure, use a barra de pesquisa e digite "Microsoft Entra ID" para acesso rápido.
+    </Tip>
   </Step>
-
-  <Step title="Configurando o Aplicativo">
-    1. Defina um nome para o aplicativo. Ex: `Invenio SSO`
-    2. Selecione **Accounts in this organizational directory only (Single tenant)**
-    3. Em **Redirect URI**, selecione **Web** e insira:
-    ```
-    https://api.invenio.common.robbu.global/v1/login/sso/authentication
-    ```
-    4. Clique em **Register**
+  
+  <Step title="Configurar o aplicativo">
+    **Preencha as informações:**
+    
+    1. **Name (Nome):** `Invenio SSO` (ou nome de sua preferência)
+    
+    2. **Supported account types:**
+       - Selecione: **Accounts in this organizational directory only (Single tenant)**
+       - Isso garante que apenas usuários da sua organização possam autenticar
+    
+    3. **Redirect URI:**
+       - Tipo: **Web**
+       - URL:
+       ```
+       https://api.invenio.common.robbu.global/v1/login/sso/authentication
+       ```
+    
+    4. Clique em **Register** (Registrar)
+    
+    <Warning>
+    **URL exata:** A Redirect URI deve ser **exatamente** como fornecida acima. Qualquer diferença impedirá a autenticação.
+    </Warning>
   </Step>
-
-  <Step title="Habilitando ID Tokens">
-    1. Vá para **Authentication**
-    2. Marque os checkboxes:
-      - ✅ Access tokens
-      - ✅ ID tokens
+  
+  <Step title="Habilitar ID Tokens">
+    1. No aplicativo criado, vá para o menu **Authentication** (Autenticação)
+    2. Na seção **Implicit grant and hybrid flows**, marque os checkboxes:
+       - ✅ **Access tokens** (recommended)
+       - ✅ **ID tokens** (recommended)
+    3. Clique em **Save** (Salvar)
+    
+    <Note>
+    **Necessário:** Esses tokens são essenciais para o fluxo de autenticação OpenID Connect funcionar corretamente.
+    </Note>
   </Step>
-
-  <Step title="Obtendo o Application ID">
-    1. Acesse o menu **Overview**
-    2. Copie o valor de **Application (client) ID**
+  
+  <Step title="Obter Application ID">
+    1. Acesse o menu **Overview** (Visão geral) do aplicativo
+    2. Localize e copie o valor de **Application (client) ID**
+    3. **Envie** esse ID para a equipe técnica da Robbu
+    
+    <Check>
+    **Formato do ID:** UUID (exemplo: `a1b2c3d4-e5f6-7890-abcd-ef1234567890`)
+    </Check>
+  </Step>
+  
+  <Step title="Finalizar com a Robbu">
+    Compartilhe as seguintes informações com a equipe técnica da Robbu:
+    
+    - ✅ **Application (client) ID**
+    - ✅ **Tenant ID** (encontrado também no Overview)
+    - ✅ **Redirect URI** configurada
+    
+    A equipe Robbu finalizará a configuração no backend do Invenio.
   </Step>
 </Steps>
 
 ---
 
-## Integração com JumpCloud (SAML 2.0)
+## Integração com JumpCloud
 
-A plataforma suporta autenticação com JumpCloud utilizando SAML 2.0. Siga as etapas abaixo para configurar:
-
-### Etapas de Configuração
+A plataforma suporta autenticação com **JumpCloud** utilizando o protocolo **SAML 2.0**.
 
 <Steps>
-  <Step title="Criando Aplicação SAML no JumpCloud">
+  <Step title="Criar aplicação SAML no JumpCloud">
     1. Acesse o [Console do JumpCloud](https://console.jumpcloud.com/)
-    2. Vá para **User Authentication > SSO**
-    3. Clique em **+** para adicionar uma nova aplicação SAML
+    2. No menu lateral, vá para **User Authentication > SSO**
+    3. Clique no botão **+** (Add) para adicionar uma nova aplicação SAML
+    4. Selecione **Custom SAML App**
+    
+    <Tip>
+    **Navegação:** Você também pode usar a barra de pesquisa no topo e digitar "SSO" para acesso rápido.
+    </Tip>
   </Step>
-
-  <Step title="Preenchendo Dados da Aplicação">
-    1. **Display Label**: Invenio Robbu
-    2. **SP Entity ID**: 
-    ```
-    https://api.invenio.common.robbu.global/v1/login/sso/metadata
-    ```
-    3. **ACS URL**: 
-    ```
-    https://api.invenio.common.robbu.global/v1/login/sso/acs
-    ```
-    4. **IdP Entity ID**: fornecido automaticamente pelo JumpCloud
+  
+  <Step title="Preencher dados da aplicação">
+    **Configure os campos obrigatórios:**
+    
+    1. **Display Label:** `Invenio Robbu` (ou nome de sua preferência)
+    
+    2. **SP Entity ID:**
+       ```
+       https://api.invenio.common.robbu.global/v1/login/sso/metadata
+       ```
+    
+    3. **ACS URL (Assertion Consumer Service URL):**
+       ```
+       https://api.invenio.common.robbu.global/v1/login/sso/acs
+       ```
+    
+    4. **IdP Entity ID:** Fornecido automaticamente pelo JumpCloud (não precisa alterar)
+    
+    <Warning>
+    **URLs exatas:** As URLs de SP Entity ID e ACS devem ser **exatamente** como fornecidas. Qualquer diferença causará falha na autenticação.
+    </Warning>
   </Step>
-
-  <Step title="Atribuindo Usuários e Salvando">
-    1. Atribua os usuários ou grupos que poderão usar o SSO
-    2. Salve a configuração
-    3. Compartilhe os metadados SAML (XML) com o time da Robbu
+  
+  <Step title="Configurar atributos (opcional)">
+    **Mapeamento de atributos SAML:**
+    
+    Configure os seguintes atributos para melhor integração:
+    
+    - **email:** `email`
+    - **firstname:** `firstname`
+    - **lastname:** `lastname`
+    
+    <Note>
+    Esses atributos permitem que o Invenio importe automaticamente dados dos usuários.
+    </Note>
+  </Step>
+  
+  <Step title="Atribuir usuários e grupos">
+    1. Na aba **User Groups**, atribua os **usuários** ou **grupos** que poderão usar o SSO
+    2. Apenas usuários/grupos atribuídos conseguirão autenticar via SSO
+    3. Clique em **Save** (Salvar)
+  </Step>
+  
+  <Step title="Exportar metadados SAML">
+    1. Após salvar, acesse a aba **SSO** da aplicação criada
+    2. Localize a opção **IDP Certificate Valid** ou **Export Metadata**
+    3. Faça o download do arquivo **XML de metadados SAML**
+    4. **Envie** esse arquivo XML para a equipe técnica da Robbu
+    
+    <Check>
+    **Arquivo necessário:** O XML de metadados contém todas as informações necessárias para a Robbu configurar a integração (certificados, endpoints, etc.).
+    </Check>
   </Step>
 </Steps>
 
 ---
 
-## Integração com Active Directory Federado (ADFS via SAML 2.0)
+## Integração com Active Directory Federado (ADFS)
 
-O ADFS pode ser configurado como Provedor de Identidade SAML para autenticar usuários do Invenio.
-
-### Etapas de Configuração
+O **ADFS** pode ser configurado como Provedor de Identidade SAML para autenticar usuários do Invenio em ambientes on-premise.
 
 <Steps>
-  <Step title="Criando Relying Party Trust no ADFS">
-    1. Acesse o **ADFS Management**
-    2. Vá para **Relying Party Trusts** > **Add Relying Party Trust**
-    3. Escolha a opção **Enter data manually**
-    4. Nomeie como `Invenio Robbu`
+  <Step title="Criar Relying Party Trust no ADFS">
+    1. Acesse o **ADFS Management Console**
+    2. No menu lateral, vá para **Relying Party Trusts**
+    3. Clique com botão direito e selecione **Add Relying Party Trust**
+    4. No wizard, escolha a opção **Enter data about the relying party manually**
+    5. Clique em **Next** (Avançar)
+    6. **Display name:** `Invenio Robbu` (ou nome de sua preferência)
+    7. Clique em **Next**
+    
+    <Note>
+    **Wizard:** O assistente guiará você por várias etapas. Mantenha as configurações padrão quando não especificado.
+    </Note>
   </Step>
-
-  <Step title="Configurando os Endpoints">
-    1. **SAML Assertion Consumer Service (ACS) URL**:
+  
+  <Step title="Configurar endpoints SAML">
+    **Configure os endpoints necessários:**
+    
+    1. Na etapa de configuração de endpoints, adicione:
+    
+    **SAML Assertion Consumer Service (ACS) URL:**
     ```
     https://api.invenio.common.robbu.global/v1/login/sso/acs
     ```
-    2. **Entity ID**:
+    - Tipo: **SAML Assertion Consumer**
+    - Binding: **POST**
+    - Index: **0** (ou próximo disponível)
+    
+    2. **Relying party trust identifier (Entity ID):**
     ```
     https://api.invenio.common.robbu.global/v1/login/sso/metadata
     ```
+    
+    <Warning>
+    **URLs exatas:** Use as URLs exatamente como fornecidas para garantir compatibilidade com o Invenio.
+    </Warning>
   </Step>
-
-  <Step title="Configurando as Claims">
-    Adicione as seguintes regras de emissão:
-    - `Name ID`: E-mail
-    - `email`: E-mail
-    - `given_name`: Nome
-    - `family_name`: Sobrenome
+  
+  <Step title="Configurar Claim Rules (regras de emissão)">
+    **Adicione as seguintes regras de emissão de claims:**
+    
+    1. Clique em **Edit Claim Issuance Policy** após criar o Relying Party Trust
+    2. Adicione as seguintes regras:
+    
+    **Regra 1: Name ID**
+    - Claim rule template: **Transform an Incoming Claim**
+    - Incoming claim type: **E-Mail Address**
+    - Outgoing claim type: **Name ID**
+    - Outgoing name ID format: **Email**
+    
+    **Regra 2: Email**
+    - Claim rule template: **Send LDAP Attributes as Claims**
+    - Attribute store: **Active Directory**
+    - LDAP Attribute: **E-Mail-Addresses**
+    - Outgoing claim type: **email**
+    
+    **Regra 3: Given Name**
+    - LDAP Attribute: **Given-Name**
+    - Outgoing claim type: **given_name**
+    
+    **Regra 4: Family Name**
+    - LDAP Attribute: **Surname**
+    - Outgoing claim type: **family_name**
+    
+    <Note>
+    **Opcional mas recomendado:** Essas claims permitem que o Invenio importe automaticamente nome e sobrenome dos usuários.
+    </Note>
   </Step>
-
-  <Step title="Exportando Metadados">
-    Exporte os metadados do ADFS e envie para o time da Robbu para integração.
+  
+  <Step title="Exportar metadados SAML">
+    1. No ADFS Management, vá para **Service > Endpoints**
+    2. Localize o endpoint **Federation Metadata**
+    3. Copie a URL (geralmente: `https://seu-adfs.dominio.com/FederationMetadata/2007-06/FederationMetadata.xml`)
+    4. Faça o download do XML ou compartilhe a URL com a equipe Robbu
+    
+    **Alternativa:** Exporte o XML diretamente:
+    - Clique com botão direito no Relying Party Trust criado
+    - Selecione **Properties**
+    - Vá para a aba **Monitoring**
+    - Use a opção de export
+    
+    <Check>
+    **Envio:** Compartilhe o XML de metadados ou a URL pública com a equipe técnica da Robbu para finalizar a integração.
+    </Check>
   </Step>
 </Steps>
 
 ---
 
-## Perguntas Frequentes
+## Finalização da Integração
+
+Após configurar o provedor de identidade (Microsoft Entra ID, JumpCloud ou ADFS), você deve:
+
+<Steps>
+  <Step title="Enviar informações para a Robbu">
+    **Compartilhe com a equipe técnica da Robbu:**
+    
+    **Para Microsoft Entra ID (OpenID Connect):**
+    - ✅ Application (client) ID
+    - ✅ Tenant ID
+    - ✅ Directory (tenant) name
+    
+    **Para JumpCloud ou ADFS (SAML 2.0):**
+    - ✅ Arquivo XML de metadados SAML
+    - ✅ Ou URL pública dos metadados
+    
+    **Contato:** Entre em contato via e-mail **suporte@robbu.global** ou abra um ticket no portal de suporte.
+  </Step>
+  
+  <Step title="Aguardar configuração pela Robbu">
+    A equipe técnica da Robbu irá:
+    1. Configurar o SSO no backend do Invenio
+    2. Testar a integração
+    3. Notificar quando estiver pronto para uso
+    
+    **Tempo estimado:** 1-2 dias úteis
+  </Step>
+  
+  <Step title="Testar o SSO">
+    1. Acesse a URL de login do Invenio:
+       - `https://accounts.robbu.global/` (Invenio Center)
+       - `https://invenio.robbu.global/painel/` (Invenio Live)
+    
+    2. Clique no botão **"Login com SSO"** ou similar
+    
+    3. Escolha seu provedor de identidade (se houver múltiplos)
+    
+    4. Você será redirecionado para fazer login com suas credenciais corporativas
+    
+    5. Após autenticação bem-sucedida, será redirecionado de volta ao Invenio
+    
+    <Check>
+    **Sucesso!** Se conseguiu acessar o Invenio sem usar senha local, o SSO está funcionando corretamente.
+    </Check>
+  </Step>
+</Steps>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Acessando a Plataforma" 
+    icon="right-to-bracket" 
+    href="https://docs.robbu.global/docs/accounts/como-acessar-plataforma"
+  >
+    Como fazer login no Invenio
+  </Card>
+  
+  <Card 
+    title="Gestão de Usuários" 
+    icon="users" 
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Criar e gerenciar usuários
+  </Card>
+  
+  <Card 
+    title="Meu Perfil" 
+    icon="user" 
+    href="https://docs.robbu.global/docs/live/meu-perfil"
+  >
+    Gerenciar dados pessoais
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="O que é Single Sign-On (SSO)?">
-    O SSO permite que os usuários acessem a plataforma Invenio utilizando suas credenciais corporativas, eliminando a necessidade de múltiplas senhas e promovendo segurança e conveniência.
+  <Accordion title="🔐 O que é Single Sign-On (SSO)?">
+    **Single Sign-On (SSO)** é um sistema de autenticação que permite aos usuários acessarem múltiplas aplicações com **uma única credencial corporativa**.
+    
+    **Como funciona:**
+    
+    1. Usuário tenta acessar o Invenio
+    2. É redirecionado para o provedor de identidade corporativo (Microsoft Entra ID, JumpCloud, ADFS)
+    3. Faz login com credenciais corporativas (se ainda não estiver autenticado)
+    4. É redirecionado de volta ao Invenio **automaticamente autenticado**
+    
+    **Benefícios:**
+    
+    - 🔐 **Segurança:** Autenticação centralizada e controlada pelo TI da empresa
+    - 🚀 **Praticidade:** Login único para múltiplos sistemas (Invenio, e-mail, CRM, etc.)
+    - 👥 **Gestão simplificada:** Desativação de acesso centralizada (ao desativar no AD, perde acesso a tudo)
+    - ✅ **Conformidade:** Alinhamento com políticas de segurança corporativas (MFA, rotação de senha, etc.)
+    - ❌ **Sem senhas adicionais:** Elimina necessidade de lembrar múltiplas senhas
+    
+    **Exemplo prático:**
+    
+    João trabalha na empresa XYZ que usa Microsoft Entra ID. Quando ele tenta acessar o Invenio, é redirecionado para o login Microsoft, faz login uma vez, e depois acessa automaticamente o Invenio sem precisar de outra senha.
   </Accordion>
 
-  <Accordion title="Quais protocolos são suportados?">
-    Atualmente, suportamos:
-    - **OpenID Connect** para Microsoft Entra ID
-    - **SAML 2.0** para JumpCloud e Active Directory Federado (ADFS)
+  <Accordion title="📋 Quais protocolos são suportados?">
+    **A plataforma Invenio suporta dois protocolos de autenticação:**
+    
+    **1. OpenID Connect (OIDC)** 🔵
+    
+    - **Baseado em:** OAuth 2.0
+    - **Usado por:** Microsoft Entra ID (Azure AD)
+    - **Características:**
+      - Moderno e amplamente adotado
+      - Suporta autenticação e autorização
+      - Baseado em JSON Web Tokens (JWT)
+    
+    **2. SAML 2.0** 🔶
+    
+    - **Baseado em:** XML
+    - **Usado por:** JumpCloud, ADFS (Active Directory Federation Services)
+    - **Características:**
+      - Padrão estabelecido em ambientes corporativos
+      - Muito utilizado em infraestruturas on-premise
+      - Baseado em asserções XML
+    
+    **Provedores suportados atualmente:**
+    
+    | Provedor | Protocolo | Ambiente |
+    |----------|-----------|----------|
+    | **Microsoft Entra ID** | OpenID Connect | Cloud |
+    | **JumpCloud** | SAML 2.0 | Cloud |
+    | **ADFS** | SAML 2.0 | On-premise |
+    
+    <Note>
+    **Outros provedores:** Se seu provedor IdP suporta SAML 2.0 ou OpenID Connect mas não está listado, entre em contato com a Robbu para verificar compatibilidade.
+    </Note>
   </Accordion>
 
-  <Accordion title="A Robbu fornece suporte durante a configuração?">
-    Sim. Nossa equipe de suporte está disponível para ajudar em qualquer etapa da integração com seu provedor de identidade.
+  <Accordion title="🤝 A Robbu fornece suporte durante a configuração?">
+    **Sim!** A equipe de suporte da Robbu está disponível para ajudar em **qualquer etapa** da integração.
+    
+    **Suporte oferecido:**
+    
+    **1. Orientação técnica** 📚
+    - Explicação dos passos de configuração
+    - Esclarecimento de dúvidas sobre protocolos (SAML, OIDC)
+    - Recomendações de boas práticas
+    
+    **2. Troubleshooting** 🔧
+    - Diagnóstico de problemas de autenticação
+    - Análise de logs de erro
+    - Validação de configurações
+    
+    **3. Configuração no backend** ⚙️
+    - Configuração do SSO no sistema Invenio
+    - Testes de integração
+    - Validação da autenticação
+    
+    **Como obter suporte:**
+    
+    - 📧 **E-mail:** suporte@robbu.global ou help@robbu.global
+    - 🎫 **Portal de suporte:** Abra um ticket detalhando sua necessidade
+    - 📞 **Telefone:** Consulte seu contrato para número direto
+    
+    **Informações úteis para fornecer:**
+    - Provedor de identidade que está configurando (Entra ID, JumpCloud, ADFS)
+    - Capturas de tela das configurações
+    - Mensagens de erro completas (se aplicável)
+    - XML de metadados SAML (se aplicável)
+    
+    <Tip>
+    **Agendamento:** Para integrações complexas, é possível agendar uma sessão de suporte dedicada com a equipe técnica.
+    </Tip>
   </Accordion>
 
-  <Accordion title="É necessário enviar algo para a Robbu após configurar o IdP?">
-    Sim. Após a criação da aplicação no seu IdP (JumpCloud, ADFS ou Entra ID), você deve compartilhar os **metadados SAML (XML)** ou as configurações de client ID/redirection URL com nossa equipe técnica.
+  <Accordion title="📤 É necessário enviar algo para a Robbu após configurar o IdP?">
+    **Sim, é essencial** enviar informações de configuração para a Robbu após criar a aplicação no seu provedor de identidade.
+    
+    **O que enviar depende do provedor:**
+    
+    **Para Microsoft Entra ID (OpenID Connect)** 🔵
+    
+    Envie as seguintes informações:
+    - ✅ **Application (client) ID** (UUID da aplicação)
+    - ✅ **Tenant ID** (UUID do diretório)
+    - ✅ **Directory (tenant) name** (exemplo: `minhaempresa.onmicrosoft.com`)
+    
+    **Onde encontrar:**
+    **Portal do Azure > Microsoft Entra ID > App registrations > Seu App > Overview**
+    
+    **Para JumpCloud (SAML 2.0)** 🔶
+    
+    Envie o arquivo:
+    - ✅ **XML de metadados SAML** (arquivo .xml)
+    
+    **Onde encontrar:**
+    **JumpCloud Console > SSO > Sua aplicação > Aba SSO > Opção "Export Metadata"**
+    
+    **Para ADFS (SAML 2.0)** 🔶
+    
+    Envie:
+    - ✅ **XML de metadados SAML** (arquivo .xml)
+    - ✅ Ou **URL pública** dos metadados (ex: `https://adfs.suaempresa.com/FederationMetadata/2007-06/FederationMetadata.xml`)
+    
+    **Onde encontrar:**
+    **ADFS Management > Service > Endpoints > Federation Metadata**
+    
+    **Como enviar:**
+    
+    1. **E-mail:** Anexe os arquivos ou cole as informações em e-mail para **suporte@robbu.global**
+    2. **Ticket:** Abra um ticket no portal de suporte e faça upload dos arquivos
+    3. **Assunto sugerido:** "Configuração SSO - [Nome da Empresa] - [Provedor]"
+    
+    **Prazo de processamento:**
+    - A equipe Robbu processará em até **1-2 dias úteis**
+    - Você receberá confirmação quando o SSO estiver ativo
+    
+    <Warning>
+    **Segurança:** Os metadados SAML e IDs de aplicação não contêm senhas, mas devem ser enviados de forma segura (e-mail corporativo ou portal protegido).
+    </Warning>
+  </Accordion>
+
+  <Accordion title="👥 Todos os usuários precisam usar SSO ou é opcional?">
+    **Você pode escolher:** SSO pode ser **obrigatório** ou **opcional** conforme a configuração.
+    
+    **Cenário 1: SSO Opcional (Recomendado para transição)** 🔀
+    
+    - ✅ Usuários podem escolher fazer login com SSO **ou** senha local
+    - ✅ Tela de login oferece ambas opções
+    - ✅ Ideal durante período de transição
+    - ✅ Permite que usuários externos (sem acesso ao IdP) ainda façam login
+    
+    **Cenário 2: SSO Obrigatório** 🔒
+    
+    - ✅ Todos os usuários **devem** usar SSO
+    - ❌ Login com senha local é desabilitado
+    - ✅ Maior segurança e controle centralizado
+    - ⚠️ Usuários externos não conseguem acessar (a menos que adicionados no IdP)
+    
+    **Como definir:**
+    
+    A configuração é feita pela equipe Robbu durante a ativação do SSO. Informe sua preferência ao enviar os dados de configuração.
+    
+    **Caminho para trocar depois:**
+    **Entre em contato com suporte@robbu.global** para solicitar mudança entre os modos.
+    
+    <Tip>
+    **Boa prática:** Comece com SSO opcional para testar e treinar usuários, depois migre para obrigatório quando todos estiverem familiarizados.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="🔄 O que acontece se um usuário for desativado no Active Directory?">
+    **O acesso ao Invenio é revogado automaticamente.**
+    
+    **Fluxo de desativação:**
+    
+    1. **Administrador desativa** usuário no provedor de identidade (AD, Entra ID, JumpCloud)
+    2. **Usuário tenta acessar** o Invenio via SSO
+    3. **Provedor nega** a autenticação (usuário não está ativo)
+    4. **Invenio não permite login** (sem autenticação válida do provedor)
+    
+    **Benefícios de segurança:**
+    
+    - 🔒 **Revogação imediata:** Ao desativar no AD, acesso é bloqueado instantaneamente
+    - ✅ **Centralizado:** Não precisa desativar em cada sistema individualmente
+    - 🚫 **Sem acesso residual:** Ex-funcionários perdem acesso automaticamente
+    
+    **Observação importante:**
+    
+    Se o usuário tiver **senha local** no Invenio (em modo SSO opcional), ele ainda poderá fazer login com essa senha mesmo estando desativado no AD.
+    
+    **Solução:** Para garantir revogação total:
+    1. Use **SSO obrigatório** (sem opção de senha local)
+    2. Ou desative o usuário **tanto no AD quanto no Invenio Center**
+    
+    **Caminho para desativar no Invenio:**
+    **Invenio Center > Usuários > Selecionar Usuário > Editar > Desmarcar "Ativo" > Salvar**
+  </Accordion>
+
+  <Accordion title="🔧 Como faço para testar se o SSO está funcionando?">
+    **Processo de teste completo:**
+    
+    <Steps>
+      <Step title="Confirmar ativação">
+        Aguarde confirmação da equipe Robbu de que o SSO foi ativado no backend.
+      </Step>
+      
+      <Step title="Acessar URL de login">
+        Acesse uma das URLs do Invenio:
+        - **Invenio Center:** `https://accounts.robbu.global/`
+        - **Invenio Live:** `https://invenio.robbu.global/painel/`
+      </Step>
+      
+      <Step title="Localizar opção SSO">
+        Na tela de login, procure por:
+        - Botão **"Login com SSO"**
+        - Ou **"Login com Microsoft"** / **"Login Corporativo"**
+        - Ou link **"Autenticar com [seu provedor]"**
+        
+        (O texto exato depende da configuração)
+      </Step>
+      
+      <Step title="Clicar e autenticar">
+        1. Clique no botão/link de SSO
+        2. Você será **redirecionado** para o provedor de identidade
+        3. Faça login com suas **credenciais corporativas**
+        4. Autorize o acesso se solicitado (primeira vez)
+      </Step>
+      
+      <Step title="Verificar acesso">
+        Você deve ser **redirecionado automaticamente** de volta ao Invenio e estar **logado**.
+        
+        **Sinais de sucesso:**
+        - ✅ Acesso concedido sem pedir senha do Invenio
+        - ✅ Nome e e-mail corretos exibidos no perfil
+        - ✅ Permissões corretas aplicadas
+      </Step>
+    </Steps>
+    
+    **Testes adicionais recomendados:**
+    
+    - 🔄 **Logout e login novamente** → Deve redirecionar direto (sem pedir senha novamente se sessão ativa no IdP)
+    - 👥 **Testar com usuários de diferentes perfis** (Admin, Supervisor, Atendente) → Todos devem conseguir
+    - 🚪 **Testar após logout do IdP** → Deve pedir credenciais novamente
+    
+    **Problemas comuns e soluções:**
+    
+    - ❌ **Não aparece botão SSO:** SSO ainda não foi ativado ou configurado pela Robbu
+    - ❌ **Erro de redirect_uri:** URL de redirecionamento configurada incorretamente no IdP
+    - ❌ **Erro de permissão:** Usuário não foi atribuído à aplicação SSO no IdP
+    - ❌ **Loop infinito:** Problema com tokens ou metadados – contate suporte
+  </Accordion>
+
+  <Accordion title="💰 Há custo adicional para usar SSO no Invenio?">
+    **Depende do seu plano de contratação.**
+    
+    **Consulte seu contrato** ou entre em contato com o time comercial da Robbu para confirmar se SSO está incluído ou se há custo adicional.
+    
+    **Cenários comuns:**
+    
+    **Planos Enterprise:** 💼
+    - ✅ SSO geralmente **incluído** sem custo adicional
+    - ✅ Faz parte dos recursos de segurança avançada
+    
+    **Planos Standard/Básicos:** 📦
+    - ⚠️ SSO pode ser um **add-on** com custo adicional
+    - ⚠️ Ou pode exigir upgrade de plano
+    
+    **Como verificar:**
+    
+    - 📧 Entre em contato: **comercial@robbu.global** ou **vendas@robbu.global**
+    - 📄 Consulte a seção de "Recursos Incluídos" no seu contrato
+    - 💬 Fale com seu Account Manager
+    
+    **Custos do provedor de identidade:**
+    
+    Além do Invenio, considere custos do próprio IdP:
+    - **Microsoft Entra ID:** Incluído no Microsoft 365, mas recursos avançados podem exigir Entra ID P1/P2
+    - **JumpCloud:** Planos pagos conforme número de usuários
+    - **ADFS:** Requer infraestrutura Windows Server (licenças e servidores)
   </Accordion>
 </AccordionGroup>

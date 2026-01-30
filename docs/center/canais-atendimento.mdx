@@ -1,199 +1,944 @@
 ---
 title: "Canais de Atendimento"
 sidebarTitle: "Canais de Atendimento"
-description: "Saiba quais são os canais de atendimento disponíveis e como utilizá-los de forma eficiente para melhorar a comunicação com seus clientes."
+description: "Configure e gerencie canais de comunicação no Invenio: WhatsApp, Email, SMS, WebChat, Telegram, Facebook, Voz e mais. Aprenda sobre prioridades, inbound/outbound e opt-in."
 ---
 
-## O que são canais de atendimento
+Uma **comunicação eficiente** é determinante para o sucesso de qualquer negócio. Escolher os **canais de atendimento** mais adequados é essencial para atender plenamente as demandas do seu público e construir um relacionamento de longo prazo.
 
-Uma comunicação eficiente é determinante para o sucesso de qualquer negócio. Escolher os canais de atendimento mais adequados é essencial para atender plenamente as demandas do seu público e construir um relacionamento de longo prazo.
+**Canais disponíveis no Invenio:**
 
-Agora, você pode atender seus clientes através das principais redes sociais e plataformas de comunicação:
-
-- **WebChat**
-- **E-mail**
-- **SMS**
-- **Facebook**
-- **WhatsApp**
-- **Telegram**
-- **Voz**
+- 💬 **WhatsApp Business API**
+- 📧 **E-mail**
+- 📱 **SMS**
+- 🌐 **WebChat**
+- 📘 **Facebook**
+- ✈️ **Telegram**
+- 💬 **Google RCS**
+- 📞 **Voz**
+- 🎥 **Vídeo**
+- 📝 **Formulários**
+- 💬 **Viber**
 
 ---
 
-## Painel de canais no Invenio Center
+## Painel de Canais
 
-**Acesse:** `Recursos >> Canais`
+<Steps>
+  <Step title="Acessar painel de canais">
+    No **Invenio Center**, acesse: **Recursos > Canais**
+    
+    <Tip>
+    **Acesso direto:** [Canais Invenio Center](https://inveniocenter.robbu.global/painel/canais)
+    </Tip>
+    
+    <Frame caption="Painel de canais no Invenio Center com lista de canais disponíveis">
+      <img src="https://robbublob.blob.core.windows.net/docs/canais.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Selecionar e configurar canal">
+    Nesta janela, você pode:
+    - 📋 **Visualizar** todos os canais disponíveis
+    - ⚙️ **Configurar** cada canal individualmente
+    - 🔧 **Editar** configurações existentes
+    - 📊 **Gerenciar** prioridades
+    
+    Basta **selecionar o canal desejado** para realizar a configuração.
+  </Step>
+</Steps>
 
-Nesta janela, você poderá visualizar todos os canais disponíveis. Basta selecionar o desejado para realizar a configuração.
+---
 
-[Acesse: Canais Invenio Center](https://inveniocenter.robbu.global/painel/canais)
+## Tipos de Canais
 
-![Modo lista](https://robbublob.blob.core.windows.net/docs/canais.png)
+<Tabs>
+  <Tab title="Inbound (Receptivo)" icon="inbox">
+    ### Canais Inbound (Receptivo)
+    
+    Os canais **inbound** são canais de **entrada**, onde o **cliente inicia** o contato primeiro.
+    
+    **Características:**
+    
+    - 📥 **Cliente inicia:** Comunicação parte do cliente
+    - 🎯 **Receptivo:** Empresa aguarda contato
+    - ✅ **Sem opt-in inicial:** Cliente já manifestou interesse ao entrar em contato
+    - 💡 **Inbound Marketing:** Atração natural através de conteúdo relevante
+    
+    **Canais inbound disponíveis:**
+    
+    - 💬 **WhatsApp Business API** → Cliente envia primeira mensagem
+    - 📘 **Facebook** → Cliente envia mensagem na página
+    - 🌐 **WebChat** → Cliente inicia chat no site
+    - 💬 **Google RCS** → Cliente inicia conversa
+    - 💬 **Viber** → Cliente envia primeira mensagem
+    - 📧 **E-mail** → Cliente envia e-mail
+    - ✈️ **Telegram** → Cliente inicia conversa
+    - 📱 **SMS** → Cliente envia SMS (raro)
+    - 📝 **Formulários** → Cliente preenche formulário
+    - 📞 **Voz** → Cliente liga
+    - 🎥 **Vídeo** → Cliente inicia chamada
+    
+    **Vantagens:**
+    
+    - ✅ Cliente já está engajado
+    - ✅ Maior probabilidade de conversão
+    - ✅ Interesse genuíno demonstrado
+    - ✅ Menos restrições legais
+  </Tab>
+  
+  <Tab title="Outbound (Ativo)" icon="paper-plane">
+    ### Canais Outbound (Ativo)
+    
+    Os canais **outbound** são canais de **saída**, onde a **empresa inicia** o contato com o cliente.
+    
+    **Características:**
+    
+    - 📤 **Empresa inicia:** Comunicação parte da empresa
+    - 🎯 **Ativo:** Empresa busca o cliente
+    - ⚠️ **Requer opt-in:** Necessário consentimento prévio do cliente
+    - 📢 **Outbound Marketing:** Abordagem tradicional com propagandas e notificações
+    
+    **Canais outbound disponíveis:**
+    
+    - 💬 **WhatsApp Business API** → Templates HSM aprovados
+    - 📧 **E-mail** → Campanhas e notificações
+    - 📞 **Voz** → Ligações ativas (telemarketing)
+    - 📱 **SMS** → Mensagens de texto
+    - 💬 **Google RCS** → Mensagens rich media
+    
+    **Requisitos obrigatórios:**
+    
+    - ✅ **Opt-in do cliente:** Consentimento explícito
+    - ✅ **Conformidade com LGPD:** Respeitar legislação
+    - ✅ **Qualidade das mensagens:** Conteúdo relevante
+    - ✅ **Opt-out disponível:** Cliente pode cancelar
+    
+    <Warning>
+    **LGPD e Opt-in obrigatórios:**
+    
+    Antes de enviar mensagens outbound, você **deve** obter consentimento explícito do cliente (opt-in). Enviar mensagens não solicitadas pode resultar em:
+    
+    - ❌ Multas por violação da LGPD
+    - ❌ Bloqueio de conta no WhatsApp
+    - ❌ Denúncias e reclamações
+    - ❌ Danos à reputação da marca
+    </Warning>
+  </Tab>
+</Tabs>
+
+<Note>
+**Diferença prática:**
+
+- **Inbound Marketing:** Busca atrair o cliente com conteúdo relevante para que ele chegue ao seu produto de forma natural (blog, SEO, redes sociais).
+- **Outbound Marketing:** Abordagem tradicional utilizando propagandas físicas e digitais para atingir o público-alvo (TV, banners, cold calling).
+</Note>
 
 ---
 
 ## Prioridade de Canais
 
-O Invenio Center permite o gerenciamento da prioridade dos canais de atendimento, impactando diretamente a forma como os atendimentos são distribuídos no Invenio Live. Isso possibilita que sua equipe ofereça um atendimento mais eficiente e ágil, garantindo que os contatos mais importantes sejam atendidos primeiro.
+O Invenio Center permite o **gerenciamento da prioridade** dos canais de atendimento, impactando diretamente a forma como os atendimentos são distribuídos no Invenio Live.
 
-**Configuração de prioridade de canais:**
+**Benefícios:**
 
-**Acesse:** `Configurações >> Prioridade dos canais >> Gerenciar` ou `Recursos >> Canais >> Prioridades de canal`
+- ⚡ **Atendimento mais eficiente:** Contatos importantes primeiro
+- 🎯 **Alinhamento estratégico:** Priorize canais conforme seu negócio
+- 📊 **Otimização de recursos:** Equipe focada no que importa
+- ⏱️ **Redução de tempo de espera:** Canais críticos atendidos rapidamente
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/configPrioridadeGerenciar.png" />
+---
 
+### Configurar Prioridade
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/PrioridadeCanais.png" />
+<Steps>
+  <Step title="Acessar configuração de prioridade">
+    **Caminho 1:** **Invenio Center > Configurações > Prioridade dos canais > Gerenciar**
+    
+    **Caminho 2:** **Invenio Center > Recursos > Canais > Prioridades de canal**
+    
+    <Frame caption="Menu de configurações - Prioridade de canais">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/configPrioridadeGerenciar.png" />
+    </Frame>
+    
+    <Frame caption="Painel de gerenciamento de prioridades">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/PrioridadeCanais.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Definir pontuação de prioridade">
+    Cada canal pode receber uma **pontuação de 1 a 100**:
+    
+    - **Maior número (100):** Maior prioridade na fila
+    - **Menor número (1):** Menor prioridade na fila
+    
+    **Exemplo de configuração:**
+    
+    - 🌐 **WebChat:** 100 (prioridade máxima - cliente ativo no site)
+    - 💬 **WhatsApp:** 80 (alta prioridade)
+    - 📞 **Voz:** 70 (alta prioridade)
+    - 📧 **E-mail:** 50 (prioridade média)
+    - 📘 **Facebook:** 40 (prioridade moderada)
+    - 📱 **SMS:** 30 (prioridade baixa)
+    
+    <Frame caption="Configuração de pontuação por canal">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/prioridadecanaispainel.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Salvar configuração">
+    Após definir as pontuações, clique em **"Salvar"**.
+    
+    As configurações refletem **imediatamente** na fila do Invenio Live.
+  </Step>
+</Steps>
 
+---
 
-Cada canal de atendimento, como WhatsApp, e-mail, chat, entre outros, pode ser configurado com um nível de prioridade, permitindo que o fluxo de atendimento seja ajustado de acordo com as necessidades do seu negócio.
+### Critérios de Ordenação na Fila
 
-### Configuração de Prioridade
+A ordenação dos atendimentos no **Invenio Live** segue os seguintes critérios (em ordem de prioridade):
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/prioridadecanaispainel.png" />
+**1. Prioridade do Canal** 🎯
+- Configurada no Invenio Center (1-100)
+- Canal com maior pontuação fica primeiro
 
+**2. Prioridade do Contato** 👤
+- Regras específicas para clientes VIP ou segmentos
+- Pode sobrescrever prioridade do canal
 
-No Invenio Center, cada canal pode receber uma pontuação de prioridade de 1 a 100, onde:
+**3. Data e Hora de Recebimento** ⏱️
+- Ordem crescente (FIFO - First In, First Out)
+- Mensagens mais antigas ficam à frente
+- Garante que ninguém fique muito tempo esperando
 
-- **Maior número**:  Maior prioridade na fila de atendimento.  
-- **Menor número**:  Menor prioridade na fila de atendimento.
+**Exemplo prático:**
 
-Essa configuração reflete diretamente na fila do Invenio Live, garantindo que os atendimentos sigam uma ordem estratégica.
+Se dois contatos chegarem simultaneamente:
+- Contato A: WhatsApp (prioridade 80), recebido às 10:00
+- Contato B: E-mail (prioridade 50), recebido às 9:50
 
-### Critérios de Ordenação na Fila do Invenio Live
+**Resultado:** Contato A fica primeiro (prioridade 80 > 50), mesmo tendo chegado depois.
 
-A ordenação dos atendimentos no Invenio Live segue os seguintes critérios:
+---
 
-- Prioridade do canal (configurada no Invenio Center).
-- Prioridade do contato (caso existam regras específicas para determinados clientes ou segmentos).
-- Data e hora de recebimento da mensagem (ordem crescente – as mensagens mais antigas ficam à frente).
+### Priorização Especial: WebChat
 
-### Priorização do Canal de Chat
+<Warning>
+**WebChat tem prioridade absoluta:**
 
-O canal de Chat recebe prioridade absoluta no atendimento. Como os clientes que utilizam esse canal estão ativos no site, é essencial que recebam uma resposta o mais rápido possível.
+O canal de **WebChat** recebe **prioridade automática e absoluta** no atendimento.
 
-> ⚠️ **Observação**:  
-> Destaque visual no Invenio Live: quando houver atendimentos prioritários na fila, o botão “Próximo” será exibido na cor vermelha, sinalizando urgência.
+**Por quê:**
+- ✅ Cliente está **ativo no site agora**
+- ✅ Possibilidade de **conversão imediata**
+- ✅ Risco de **perder o cliente** se não for atendido rapidamente
+- ✅ Demonstra **alto interesse** (mais que canais assíncronos)
+
+**Indicador visual:**
+
+Quando houver atendimentos **prioritários** (WebChat ou contatos VIP) na fila, o botão **"Próximo"** no Invenio Live será exibido na **cor vermelha**, sinalizando urgência.
+</Warning>
+
+---
 
 ### Agendamentos Pendentes
-Os atendimentos agendados também são levados em consideração na fila do Invenio Live. Esses agendamentos recebem prioridade automaticamente 5 minutos antes do horário programado, garantindo que o atendimento ocorra no momento correto.
 
-**Prioridade na distribuição de contatos**
+Os atendimentos **agendados** também são considerados na fila do Invenio Live.
 
-A configuração de prioridade feita no Invenio Center influencia diretamente:
+**Como funciona:**
 
-- Na ordem dos contatos da fila na distribuição manual, deixando o canal ou contato de maior prioridade para ser atendido primeiro. 
- 
-- No algoritmo de distribuição preditiva, otimizando a alocação dos contatos para os operadores, garantindo um fluxo mais eficiente.
+- 📅 Contato agendado para um horário específico
+- ⏰ **5 minutos antes** do horário agendado, ele recebe **prioridade automática**
+- 🔝 Sobe para o topo da fila
+- ✅ Garante que o atendimento ocorra no momento correto
 
----
+**Exemplo:**
 
-## Canais Inbound
-
-Os canais inbound são canais de entrada, onde o cliente deve entrar em contato primeiro, iniciando a comunicação de forma **receptiva**.
-
- **WhatsApp Business API**  
- **Facebook**  
- **WebChat**  
- **Google RCS**  
- **Viber**  
- **E-mail**  
- **Telegram**  
- **SMS**  
- **Formulários**  
- **Voz**  
- **Vídeo**  
-
-## Canais Outbound
-
-Os canais outbound são canais de saída, onde sua empresa pode entrar em contato com o cliente, iniciando a comunicação de forma **ativa**.  
-É fundamental obter o **opt-in** do cliente antes de enviar mensagens ativas ou notificações.
-
- **WhatsApp Business API**  
- **E-mail**  
- **Voz**  
- **SMS**  
- **Google RCS**  
-
-> **Inbound vs. Outbound**  
-> - **Inbound Marketing** busca atrair o cliente com conteúdo relevante para que ele chegue ao seu produto de forma natural.  
-> - **Outbound Marketing** é mais tradicional, utilizando propagandas físicas e digitais para atingir o público-alvo.
+Agendamento para 14:00 → Às 13:55, o contato recebe prioridade máxima e vai para o topo da fila.
 
 ---
 
-## O que é opt-in?
+## Opt-In: O que é e por que importa
 
-**Opt-in** é o processo pelo qual um usuário concede autorização explícita para receber comunicações, participar de campanhas ou ter seus dados tratados por uma empresa. Em outras palavras, é o “sim” formal do cliente — seja clicando em um checkbox, preenchendo um formulário ou respondendo afirmativamente em um canal como e-mail, SMS ou WhatsApp.
+**Opt-in** é o processo pelo qual um usuário concede **autorização explícita** para receber comunicações.
 
-<Accordion title="Artigos relevantes da LGPD">
+**Em outras palavras:**
 
-**Art. 7º, inciso I** — Define consentimento como uma das hipóteses de tratamento de dados pessoais.  
+É o **"sim" formal** do cliente para:
+- ✅ Receber mensagens da empresa
+- ✅ Participar de campanhas
+- ✅ Ter seus dados tratados
 
-**Art. 8º** — Trata especificamente do “Consentimento do Titular de Dados Pessoais”. Determina que o consentimento deve ser livre, informado, inequívoco e por finalidade determinada; pode ser revogado a qualquer momento; e o controlador tem o ônus de provar que o consentimento foi obtido conforme a lei.  
+**Como obter opt-in:**
 
-**Definição em Art. 5º, inc. XII** — Define o que é “consentimento”: “manifestação livre, informada e inequívoca pela qual o titular concorda com o tratamento de seus dados pessoais para uma finalidade determinada.”  
+- ✅ Checkbox em formulário
+- ✅ Aceite em landing page
+- ✅ Resposta afirmativa por e-mail/SMS/WhatsApp
+- ✅ Assinatura de newsletter
+- ✅ Participação em promoção/sorteio
+
+<Accordion title="📜 Artigos relevantes da LGPD">
+
+**Art. 7º, inciso I** — Define **consentimento** como uma das hipóteses de tratamento de dados pessoais.
+
+**Art. 8º** — Trata especificamente do **"Consentimento do Titular de Dados Pessoais"**:
+- Deve ser **livre, informado, inequívoco** e por **finalidade determinada**
+- Pode ser **revogado a qualquer momento**
+- O controlador tem o **ônus de provar** que o consentimento foi obtido conforme a lei
+
+**Definição em Art. 5º, inc. XII** — Define o que é "consentimento":
+
+> "Manifestação livre, informada e inequívoca pela qual o titular concorda com o tratamento de seus dados pessoais para uma finalidade determinada."
 
 </Accordion>
 
-[Veja também: Lei de Proteção de Dados Pessoais](https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-publicacaooriginal-156212-pl.html?utm_source=chatgpt.com)  
+**Links de referência:**
 
-[Veja também: planalto.gov - LEI Nº 13.709, DE 14 DE AGOSTO DE 2018](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm?utm_source=chatgpt.com)  
-
----
-
-### Receber aceitação para o WhatsApp
-
-As empresas que utilizam o WhatsApp Business devem obter aceitação prévia antes de enviar mensagens para pessoas na plataforma. Essa aceitação pode ser ampla (não precisa ser exclusiva para o WhatsApp), desde que cumpra as leis locais. Para isso, é necessário que o usuário forneça o número de celular e consinta em receber mensagens ou ligações de uma empresa específica.
-
-**Requisitos principais**
-
-- Informar claramente que a pessoa está aceitando receber comunicações.  
-- Exibir o nome da empresa de forma visível.  
-- Cumprir toda a legislação aplicável.  
-
-**Qualidade da comunicação**
-
-O WhatsApp prioriza conversas relevantes e de alta qualidade. Usuários podem:  
-
-- Bloquear ou denunciar empresas.  
-- Cancelar o recebimento de mensagens.  
-
-> ⚠️ **Atenção**: Se a qualidade for baixa de forma contínua, o WhatsApp pode aplicar limitações de volume ou adotar medidas adicionais de monitoramento.
-
-[Veja também: O Opt-In e o WhatsApp](https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in/)  
+- [Lei de Proteção de Dados Pessoais](https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-publicacaooriginal-156212-pl.html)
+- [planalto.gov - LEI Nº 13.709/2018](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm)
 
 ---
 
-## 🔗 Links Relacionados
+### Opt-In para WhatsApp Business API
 
-- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
-- [Adicionar Canal no Invenio Live](https://docs.robbu.global/docs/live/adicionar-canal-invenio-live)  
-- [Canal WhatsApp no Invenio Center](https://docs.robbu.global/docs/center/canal-whatsapp)  
-- [Configurações Gerais da Conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
-- [Privacidade e Proteção de Dados](https://docs.robbu.global/docs/center/privacidade-e-protecao)  
+As empresas que utilizam o **WhatsApp Business API** devem obter **aceitação prévia** antes de enviar mensagens.
+
+**Requisitos de opt-in:**
+
+✅ **Informar claramente** que a pessoa está aceitando receber comunicações
+✅ **Exibir o nome da empresa** de forma visível
+✅ **Cumprir toda a legislação** aplicável (LGPD, Lei do Spam, etc.)
+
+**O opt-in pode ser amplo:**
+
+- ✅ Não precisa ser **exclusivo para o WhatsApp**
+- ✅ Pode ser um consentimento geral para "receber comunicações"
+- ⚠️ Mas deve mencionar que pode incluir WhatsApp
+
+**Exemplo de opt-in válido:**
+
+> ✅ "Aceito receber comunicações, ofertas e notificações da Empresa XYZ por e-mail, SMS, WhatsApp ou outros canais."
+
+**Exemplo de opt-in inválido:**
+
+> ❌ "Aceito os termos de uso." (muito genérico, não menciona comunicações)
+
+---
+
+### Qualidade da Comunicação no WhatsApp
+
+O WhatsApp prioriza **conversas relevantes e de alta qualidade**.
+
+**Usuários podem:**
+
+- 🚫 **Bloquear** a empresa
+- ⚠️ **Denunciar** mensagens como spam
+- ❌ **Cancelar** o recebimento de mensagens
+
+**Consequências de baixa qualidade:**
+
+<Warning>
+**Ação do WhatsApp:**
+
+Se a qualidade for **baixa de forma contínua**, o WhatsApp pode:
+
+- ⚠️ **Limitar o volume** de mensagens enviadas
+- 📉 **Reduzir a taxa** de disparo (rate limit)
+- 🔍 **Monitoramento adicional**
+- ⛔ **Bloqueio temporário** ou **permanente** da linha/conta
+
+**Métrica de qualidade:**
+
+Baseada na taxa de:
+- Mensagens **lidas** vs **não lidas**
+- **Respostas** dos usuários
+- **Bloqueios** e **denúncias**
+</Warning>
+
+**Como manter qualidade alta:**
+
+- ✅ Envie apenas mensagens **relevantes**
+- ✅ **Respeite** o opt-in
+- ✅ Permita **opt-out** fácil
+- ✅ Personalize as mensagens
+- ✅ Evite spam e mensagens genéricas
+
+Consulte: [O Opt-In e o WhatsApp](https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in/)
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="Filtro por Canal" 
+    icon="filter" 
+    href="https://docs.robbu.global/docs/live/filtro-por-canal"
+  >
+    Filtrar conversas por canal no Invenio Live
+  </Card>
+  
+  <Card 
+    title="Adicionar Canal" 
+    icon="plus" 
+    href="https://docs.robbu.global/docs/live/adicionar-canal-invenio-live"
+  >
+    Como adicionar novo canal no Invenio Live
+  </Card>
+  
+  <Card 
+    title="Canal WhatsApp" 
+    icon="whatsapp" 
+    href="https://docs.robbu.global/docs/center/canal-whatsapp"
+  >
+    Configuração específica do WhatsApp
+  </Card>
+  
+  <Card 
+    title="Configurações Gerais" 
+    icon="gear" 
+    href="https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta"
+  >
+    Configurações gerais da conta
+  </Card>
+  
+  <Card 
+    title="Privacidade e Proteção" 
+    icon="shield" 
+    href="https://docs.robbu.global/docs/center/privacidade-e-protecao"
+  >
+    Políticas de privacidade e LGPD
+  </Card>
+</CardGroup>
 
 ---
 
 ## ❓ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Qual a diferença entre canais inbound e outbound?">
-   Os canais inbound são iniciados pelo cliente (ex: WhatsApp, WebChat, E-mail), enquanto os outbound são iniciados pela empresa (ex: SMS, voz ativa, notificações no WhatsApp).  
+  <Accordion title="📥📤 Qual a diferença entre canais inbound e outbound?">
+    **Diferença fundamental:**
+    
+    **Canais Inbound (Receptivo)** 📥
+    
+    - **Quem inicia:** Cliente inicia o contato
+    - **Fluxo:** Cliente → Empresa
+    - **Exemplos:**
+      - Cliente envia mensagem no WhatsApp
+      - Cliente preenche formulário no site
+      - Cliente liga para o suporte
+      - Cliente envia e-mail
+    - **Opt-in:** Não requer opt-in inicial (cliente já manifestou interesse)
+    - **Marketing:** Inbound Marketing (atração orgânica)
+    
+    **Canais Outbound (Ativo)** 📤
+    
+    - **Quem inicia:** Empresa inicia o contato
+    - **Fluxo:** Empresa → Cliente
+    - **Exemplos:**
+      - Empresa envia template HSM no WhatsApp
+      - Empresa faz ligação de telemarketing
+      - Empresa envia campanha de SMS
+      - Empresa envia newsletter por e-mail
+    - **Opt-in:** **Requer opt-in obrigatório** (consentimento prévio)
+    - **Marketing:** Outbound Marketing (abordagem ativa)
+    
+    **Canais que podem ser ambos:**
+    
+    Alguns canais funcionam nos **dois sentidos**:
+    
+    - 💬 **WhatsApp:** Inbound (cliente envia primeira mensagem) + Outbound (templates HSM)
+    - 📧 **E-mail:** Inbound (cliente envia e-mail) + Outbound (campanhas)
+    - 📞 **Voz:** Inbound (cliente liga) + Outbound (ligações ativas)
+    - 📱 **SMS:** Inbound (cliente envia SMS) + Outbound (campanhas)
+    
+    **Exemplo prático:**
+    
+    - **Inbound:** Cliente vê anúncio no Google, acha interessante, entra no site e inicia chat → Empresa responde
+    - **Outbound:** Empresa tem lista de contatos com opt-in, envia campanha de ofertas via WhatsApp HSM → Cliente pode responder ou ignorar
   </Accordion>
 
-  <Accordion title="Como definir prioridade entre canais no Invenio Center?">
-   Cada canal pode receber uma pontuação de 1 a 100. Quanto maior a pontuação, maior será a prioridade do canal na fila de atendimento do Invenio Live.  
+  <Accordion title="🎯 Como definir prioridade entre canais no Invenio Center?">
+    **Processo completo de configuração:**
+    
+    <Steps>
+      <Step title="Acessar menu de prioridades">
+        **Caminho:** **Invenio Center > Configurações > Prioridade dos canais > Gerenciar**
+        
+        Ou: **Invenio Center > Recursos > Canais > Prioridades de canal**
+      </Step>
+      
+      <Step title="Definir pontuação (1-100)">
+        Cada canal pode receber uma pontuação:
+        
+        - **100:** Prioridade máxima
+        - **50:** Prioridade média
+        - **1:** Prioridade mínima
+        
+        **Recomendações por canal:**
+        
+        - 🌐 **WebChat:** 90-100 (cliente ativo no site)
+        - 💬 **WhatsApp:** 70-90 (canal rápido e preferido)
+        - 📞 **Voz:** 60-80 (síncrono, não pode esperar)
+        - 📧 **E-mail:** 40-60 (assíncrono, pode aguardar)
+        - 📘 **Facebook:** 30-50 (menos urgente)
+        - 📱 **SMS:** 20-40 (geralmente notificações)
+      </Step>
+      
+      <Step title="Considerar estratégia de negócio">
+        Ajuste as prioridades conforme:
+        
+        - 💰 **Valor do cliente:** Canal preferido de clientes VIP
+        - 🎯 **Taxa de conversão:** Canal com maior conversão
+        - ⏱️ **SLA:** Tempos de resposta comprometidos
+        - 📊 **Volume:** Balancear entre volume e urgência
+      </Step>
+      
+      <Step title="Salvar e testar">
+        1. Clique em **"Salvar"**
+        2. Acesse o **Invenio Live**
+        3. Abra a fila de atendimentos
+        4. Verifique se a ordem está correta
+        
+        **Teste:** Envie mensagens de teste em diferentes canais e veja qual aparece primeiro na fila.
+      </Step>
+    </Steps>
+    
+    **Impacto da prioridade:**
+    
+    - ✅ **Distribuição manual:** Afeta ordem no botão "Próximo"
+    - ✅ **Distribuição preditiva:** Influencia algoritmo de alocação
+    - ✅ **Indicador visual:** Botão vermelho para prioridades altas
+    
+    **Caminho para verificar ordem na fila:**
+    **Invenio Live > Aba "Fila" ou "Pendentes" > Visualizar ordem dos contatos**
   </Accordion>
 
-  <Accordion title="O que acontece se a qualidade de comunicação no WhatsApp for baixa?">
-   O WhatsApp pode limitar o volume de mensagens enviadas ou aplicar medidas adicionais, como monitoramento e até bloqueio temporário da linha.  
+  <Accordion title="⚠️ O que acontece se a qualidade de comunicação no WhatsApp for baixa?">
+    **Sistema de qualidade do WhatsApp:**
+    
+    O WhatsApp monitora a **qualidade das mensagens** enviadas pelas empresas usando métricas como:
+    
+    - 📊 **Taxa de leitura:** % de mensagens lidas
+    - 💬 **Taxa de resposta:** % de usuários que respondem
+    - 🚫 **Taxa de bloqueio:** % de usuários que bloqueiam
+    - ⚠️ **Taxa de denúncia:** % de mensagens denunciadas como spam
+    
+    **Consequências de baixa qualidade:**
+    
+    **Nível 1: Alerta** ⚠️
+    - Status amarelo no Meta Business Manager
+    - Aviso de que a qualidade está caindo
+    - Ainda pode enviar normalmente
+    
+    **Nível 2: Limitação de Volume** 📉
+    - Status vermelho no Meta Business Manager
+    - **Redução drástica** do limite de envio
+    - Exemplo: De 100.000 mensagens/dia para 1.000/dia
+    
+    **Nível 3: Restrição Severa** 🚫
+    - Limite mínimo (geralmente 250-1.000 mensagens/dia)
+    - Monitoramento contínuo
+    - Dificuldade para aumentar limite novamente
+    
+    **Nível 4: Bloqueio** ⛔
+    - Conta/linha bloqueada temporariamente
+    - Ou bloqueio permanente em casos graves
+    - Perda do número de WhatsApp
+    
+    **Como evitar baixa qualidade:**
+    
+    ✅ **Envie apenas mensagens relevantes** para o destinatário
+    ✅ **Respeite o opt-in** (não compre listas de contatos)
+    ✅ **Personalize mensagens** (use nome, contexto)
+    ✅ **Evite spam** (não envie múltiplas mensagens seguidas)
+    ✅ **Permita opt-out fácil** (botão "Não quero mais receber")
+    ✅ **Monitore métricas** no Meta Business Manager
+    ✅ **Responda rapidamente** quando cliente responder
+    
+    **Como recuperar qualidade:**
+    
+    1. **Pare envios em massa** temporariamente
+    2. **Revise templates HSM** (melhore conteúdo)
+    3. **Limpe lista de contatos** (remova inativos)
+    4. **Envie apenas para engajados** inicialmente
+    5. **Monitore diariamente** até status verde retornar
+    6. **Aumente volume gradualmente** após recuperar
+    
+    **Caminho para monitorar qualidade:**
+    **Meta Business Manager > Seu número de WhatsApp > Insights > "Aba Quality Rating"**
   </Accordion>
 
-  <Accordion title="Preciso de opt-in separado para WhatsApp?">
-   Não é necessário que o opt-in seja exclusivo para o WhatsApp, mas a empresa deve cumprir a legislação local e deixar claro que o cliente aceitou receber comunicações.  
+  <Accordion title="✅ Preciso de opt-in separado para WhatsApp?">
+    **Resposta curta:** Não é necessário opt-in **exclusivo**, mas precisa ser **explícito** e **abrangente**.
+    
+    **Explicação detalhada:**
+    
+    **Opt-in pode ser amplo:**
+    
+    ✅ Não precisa dizer especificamente "Aceito receber mensagens no WhatsApp"
+    ✅ Pode ser um consentimento geral para "comunicações" ou "mensagens"
+    ✅ Mas deve deixar **claro** que pode incluir diferentes canais
+    
+    **Exemplo de opt-in VÁLIDO (amplo):**
+    
+    > ✅ "Autorizo a Empresa XYZ a me enviar comunicações, ofertas e notificações por e-mail, SMS, WhatsApp ou outros canais digitais."
+    
+    **Exemplo de opt-in VÁLIDO (específico):**
+    
+    > ✅ "Aceito receber mensagens da Empresa XYZ no WhatsApp número (XX) XXXXX-XXXX para atendimento, ofertas e atualizações."
+    
+    **Exemplo de opt-in INVÁLIDO:**
+    
+    > ❌ "Aceito os termos de uso." (genérico demais, não menciona comunicações)
+    > ❌ "Li a política de privacidade." (não é consentimento ativo)
+    > ❌ Checkbox pré-marcado (não é consentimento livre)
+    
+    **Requisitos legais (LGPD e WhatsApp):**
+    
+    **1. Deve ser explícito** 📝
+    - Usuário deve **ativamente** consentir
+    - Checkbox **desmarcado** por padrão
+    - Linguagem clara e direta
+    
+    **2. Deve informar a finalidade** 🎯
+    - Para que as mensagens serão usadas
+    - Exemplo: "Ofertas", "Atendimento", "Notificações"
+    
+    **3. Deve mencionar o responsável** 🏢
+    - Nome da empresa claramente visível
+    - Usuário deve saber quem vai enviar mensagens
+    
+    **4. Deve ser revogável** 🚪
+    - Cliente pode cancelar a qualquer momento
+    - Processo de opt-out deve ser simples
+    
+    **5. Deve cumprir legislação local** ⚖️
+    - LGPD no Brasil
+    - Lei do Spam (Lei 12.965/2014)
+    - Políticas do WhatsApp
+    
+    **Como obter opt-in válido:**
+    
+    - ✅ Formulário de cadastro com checkbox específico
+    - ✅ Landing page de promoção com aceite explícito
+    - ✅ Campanha de SMS/e-mail pedindo confirmação
+    - ✅ Cliente envia "SIM" ou "ACEITO" em resposta
+    
+    **O que NÃO é opt-in:**
+    
+    - ❌ Comprar lista de contatos de terceiros
+    - ❌ Adicionar todos os contatos do banco de dados
+    - ❌ Inferir consentimento (ex: "se não responder em 48h, consideramos aceito")
+    
+    **Documentação do WhatsApp:**
+    [Getting Opt-In - WhatsApp Business Platform](https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in/)
   </Accordion>
 
-  <Accordion title="É possível configurar regras diferentes por segmento de clientes?">
-   Sim. Além da prioridade do canal, o Invenio Center permite configurar prioridades específicas por contato ou segmento, ajustando o fluxo de atendimento conforme sua estratégia.  
+  <Accordion title="🎯 É possível configurar regras diferentes por segmento de clientes?">
+    **Sim!** O Invenio Center permite configurações **granulares** por segmento.
+    
+    **Níveis de priorização:**
+    
+    **1. Prioridade Global (Canal)** 🌐
+    - Configuração geral do canal
+    - Aplica-se a **todos os contatos** daquele canal
+    - **Caminho:** **Invenio Center > Configurações > Prioridade dos canais**
+    
+    **2. Prioridade por Contato** 👤
+    - Prioridade específica de um contato individual
+    - Sobrescreve prioridade do canal
+    - **Caminho:** **Invenio Center > Contatos > Editar Contato > Campo "Prioridade"**
+    
+    **3. Prioridade por Segmento** 🎯
+    - Prioridade aplicada a um grupo de contatos
+    - Baseada em regras de segmentação
+    - **Caminho:** **Invenio Center > Recursos > Segmentos > Criar/Editar Segmento**
+    
+    **Exemplo de configuração estratégica:**
+    
+    **Segmento VIP** ⭐
+    - Clientes com alto ticket médio
+    - Prioridade: **100** (máxima)
+    - Resultado: **Sempre** no topo da fila
+    
+    **Segmento Standard** 📊
+    - Clientes regulares
+    - Prioridade: **50** (média)
+    - Resultado: **Prioridade normal**
+    
+    **Segmento Trial** 🆓
+    - Clientes em período de teste
+    - Prioridade: **30** (baixa)
+    - Resultado: **Atendidos após outros**
+    
+    **Como as prioridades se combinam:**
+    
+    A **ordem de precedência** é:
+    
+    1. **Prioridade do Contato** (individual) → Mais específico
+    2. **Prioridade do Segmento** → Menos específico
+    3. **Prioridade do Canal** → Mais genérico
+    
+    **Exemplo prático:**
+    
+    - Contato João:
+      - Canal: WhatsApp (prioridade 80)
+      - Segmento: VIP (prioridade 100)
+      - Contato: Sem prioridade individual
+      - **Resultado:** Prioridade **100** (usa do segmento, que sobrescreve canal)
+    
+    - Contato Maria:
+      - Canal: E-mail (prioridade 50)
+      - Segmento: Standard (prioridade 50)
+      - Contato: Prioridade individual **90**
+      - **Resultado:** Prioridade **90** (individual sobrescreve tudo)
+    
+    **Outros recursos por segmento:**
+    
+    Além de prioridade, você pode configurar:
+    
+    - 📋 **Distribuição:** Manual ou automática
+    - 🎯 **Direcionamento:** Operadores específicos
+    - ⏱️ **SLA:** Tempos de resposta diferentes
+    - 🏷️ **Tags:** Automáticas por segmento
+    - 📊 **Relatórios:** Separados por segmento
+    
+    **Caminho completo para configurar:**
+    
+    **Invenio Center > Recursos > Segmentos > Criar Novo Segmento > Definir regras (Tags, Canal, Origem, etc.) > Configurar Prioridade > Salvar**
+    
+    Consulte: [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)
+  </Accordion>
+
+  <Accordion title="🌐 O que é exatamente o WebChat e por que tem prioridade absoluta?">
+    **O que é WebChat:**
+    
+    **WebChat** é um canal de atendimento que permite que **clientes conversem em tempo real** diretamente no **seu site**.
+    
+    **Características:**
+    
+    - 💬 **Widget no site:** Botão flutuante geralmente no canto inferior direito
+   - ⚡ **Tempo real:** Conversa síncrona (como WhatsApp Web)
+    - 🌐 **Sem app extra:** Cliente não precisa instalar nada
+    - 👤 **Cliente ativo:** Pessoa está navegando no site agora
+    
+    **Por que tem prioridade absoluta:**
+    
+    **1. Cliente está ativo agora** ⏰
+    - Está navegando no seu site **neste momento**
+    - Pode estar na página de checkout
+    - Está prestes a tomar uma decisão (comprar ou sair)
+    
+    **2. Janela de oportunidade curta** ⏱️
+    - Se não atender rápido, cliente **fecha a aba**
+    - Perda imediata de oportunidade de venda
+    - Frustração do cliente
+    
+    **3. Alta intenção de compra** 💰
+    - Cliente iniciou chat porque tem **dúvida ou interesse**
+    - Maior probabilidade de conversão que canais assíncronos
+    - Pode estar comparando com concorrência
+    
+    **4. Síncrono vs Assíncrono** 🔄
+    - **WebChat:** Síncrono (cliente espera resposta imediata)
+    - **E-mail/SMS:** Assíncrono (cliente não espera resposta imediata)
+    
+    **Comparação com outros canais:**
+    
+    | Canal | Tipo | Cliente espera resposta | Prioridade |
+    |-------|------|------------------------|------------|
+    | 🌐 **WebChat** | Síncrono | Sim, imediatamente | **Absoluta** |
+    | 📞 **Voz** | Síncrono | Sim, imediatamente | **Muito Alta** |
+    | 💬 **WhatsApp** | Semi-síncrono | Sim, mas aguarda minutos | **Alta** |
+    | 📧 **E-mail** | Assíncrono | Não, aguarda horas/dias | **Média/Baixa** |
+    
+    **Indicador visual no Invenio Live:**
+    
+    Quando há contatos de **WebChat** (ou outros prioritários) na fila:
+    - 🔴 Botão **"Próximo"** fica **vermelho**
+    - ⚠️ Alerta visual de urgência
+    - 🔔 Pode ter notificação sonora (dependendo da configuração)
+    
+    **Configuração:** A prioridade absoluta do WebChat é **automática** e não pode ser desativada (por design, para proteger conversões).
+  </Accordion>
+
+  <Accordion title="📅 Como funcionam os agendamentos pendentes na fila?">
+    **Sistema de agendamentos:**
+    
+    O Invenio permite **agendar atendimentos** para horários específicos no futuro.
+    
+    **Como criar agendamento:**
+    
+    **Caminho:** **Invenio Live > Conversa com cliente > Botão "Agendar" ou Menu > "Agendar Retorno" > Definir data/hora > Salvar**
+    
+    **Comportamento na fila:**
+    
+    **Antes do horário agendado:**
+    - Contato **não aparece** na fila de atendimento
+    - Fica em status "Agendado"
+    - Operadores não veem até a hora chegar
+    
+    **5 minutos antes do horário:**
+    - Contato recebe **prioridade automática**
+    - **Sobe para o topo** da fila
+    - Sobrescreve prioridades de canal/segmento
+    - Garante que será atendido no horário combinado
+    
+    **Na hora exata:**
+    - Contato está no topo ou já foi atendido
+    - Se não for atendido, permanece prioritário
+    
+    **Exemplo prático:**
+    
+    - Agendamento: **14:00**
+    - Às **13:55**: Contato sobe para o topo da fila
+    - Operador vê contato marcado como "Agendamento" com hora
+    - Operador atende por volta das 14:00 conforme prometido
+    
+    **Vantagens:**
+    
+    - ✅ **Compromisso cumprido:** Cliente recebe callback no horário
+    - ✅ **Organização:** Operador sabe que tem agendamento
+    - ✅ **Satisfação:** Cliente não precisa esperar na fila
+    - ✅ **Automação:** Sistema garante priorização automática
+    
+    **Cenários de uso:**
+    
+    - 📞 **Retorno de ligação:** "Vou ligar para você às 15h"
+    - 💬 **Follow-up:** "Entro em contato amanhã às 10h"
+    - 📋 **Reunião:** "Nossa reunião é sexta às 14h"
+    
+    **Caminho para ver agendamentos:**
+    **Invenio Live > Filtro "Agendados"** ou **Invenio Center > Relatórios > Agendamentos Pendentes**
+  </Accordion>
+
+  <Accordion title="🔧 Posso ter múltiplos números de WhatsApp configurados?">
+    **Sim!** O Invenio suporta **múltiplos números de WhatsApp** na mesma conta.
+    
+    **Cenários comuns:**
+    
+    **1. Diferentes departamentos** 🏢
+    - WhatsApp 1: Vendas
+    - WhatsApp 2: Suporte
+    - WhatsApp 3: Financeiro
+    
+    **2. Diferentes regiões** 🌎
+    - WhatsApp 1: São Paulo (11)
+    - WhatsApp 2: Rio de Janeiro (21)
+    - WhatsApp 3: Belo Horizonte (31)
+    
+    **3. Diferentes marcas** 🏷️
+    - WhatsApp 1: Marca A
+    - WhatsApp 2: Marca B
+    - WhatsApp 3: Marca C
+    
+    **Como adicionar múltiplos WhatsApp:**
+    
+    **Caminho:** **Invenio Center > Recursos > Canais > Adicionar Novo > Selecionar "WhatsApp" > Preencher dados > Salvar**
+    
+    **Cada número aparece como canal separado:**
+    
+    - No Invenio Live, você vê de qual número veio a mensagem
+    - Pode filtrar por número específico
+    - Pode configurar prioridades diferentes para cada número
+    - Pode direcionar para equipes diferentes
+    
+    **Diferenciação na prática:**
+    
+    No Invenio Live, ao receber mensagem:
+    - **Nome do contato:** João Silva
+    - **Canal:** WhatsApp - Vendas (11) 99999-9999
+    - Ou: WhatsApp - Suporte (21) 98888-8888
+    
+    **Configurações independentes:**
+    
+    Cada número pode ter:
+    - ✅ **Prioridade diferente:** Vendas (90), Suporte (70)
+    - ✅ **Segmentação diferente:** Direcionar para equipes específicas
+    - ✅ **Templates diferentes:** Biblioteca HSM por número
+    - ✅ **Horários diferentes:** Horário de atendimento por número
+    
+    **Limitações técnicas:**
+    
+    - Cada número precisa de aprovação separada do Meta/Facebook
+    - Cada número precisa de um Business Manager
+    - Custos podem variar por número de linhas
+    
+    Consulte: [Canal WhatsApp](https://docs.robbu.global/docs/center/canal-whatsapp)
+  </Accordion>
+
+  <Accordion title="💾 O opt-in do cliente precisa ser armazenado? Por quanto tempo?">
+    **Sim, é obrigatório armazenar evidências de opt-in.**
+    
+    **Requisitos legais (LGPD):**
+    
+    **Art. 8º, § 2º da LGPD:**
+    
+    > "O controlador deverá **guardar provas** da obtenção do consentimento."
+    
+    Isso significa que você **deve ter evidência** de que o cliente consentiu.
+    
+    **O que armazenar:**
+    
+    ✅ **Data e hora** do consentimento
+    ✅ **Texto exato** do opt-in mostrado ao cliente
+    ✅ **IP** do cliente (se online)
+    ✅ **Canal** usado (site, app, formulário)
+    ✅ **Versão** dos termos/política aceita
+    ✅ **Identificador** do cliente (e-mail, telefone, CPF)
+    
+    **Exemplo de registro:**
+    
+    ```json
+    {
+      "cliente_id": "12345",
+      "nome": "João Silva",
+      "telefone": "+5511999999999",
+      "data_opt_in": "2024-01-15T14:30:00Z",
+      "ip": "192.168.1.100",
+      "canal": "Landing Page - Promoção Verão",
+      "texto_consentimento": "Aceito receber comunicações da Empresa XYZ por WhatsApp, e-mail e SMS.",
+      "versao_termos": "v2.1",
+      "metodo": "Checkbox marcado manualmente"
+    }
+    ```
+    
+    **Por quanto tempo armazenar:**
+    
+    **Enquanto durar o tratamento de dados:**
+    
+    - ✅ Enquanto o cliente estiver **ativo** (recebendo mensagens)
+    - ✅ Após opt-out, mantenha por prazo legal (geralmente **5 anos**)
+    - ✅ Para fins de **defesa legal** (caso cliente alegue que não consentiu)
+    
+    **Prazo recomendado:**
+    
+    - **Mínimo:** 2 anos após fim do relacionamento
+    - **Recomendado:** 5 anos (prazo prescricional geral)
+    - **Máximo:** Indefinidamente, desde que justificável
+    
+    **Como armazenar no Invenio:**
+    
+    O Invenio **registra automaticamente** quando cliente:
+    - Responde pela primeira vez no WhatsApp (opt-in implícito)
+    - É importado com campo "Aceita comunicações" = Sim
+    
+    **Boas práticas:**
+    
+    ✅ **Double opt-in:** Confirmar e-mail/número antes de enviar
+    ✅ **Logs auditáveis:** Sistema deve registrar automaticamente
+    ✅ **Backup seguro:** Proteger contra perda de dados
+    ✅ **Acesso controlado:** Apenas DPO/compliance pode visualizar
+    
+    **Onde armazenar:**
+    
+    - **CRM/Invenio:** Campos customizados do contato
+    - **Banco de dados dedicado:** Tabela de consentimentos
+    - **Sistema de compliance:** Ferramentas especializadas em LGPD
+    
+    **Caminho no Invenio:**
+    **Invenio Center > Contatos > Editar Cliente > Aba "Histórico" ou "Consentimentos"** (se configurado)
   </Accordion>
 </AccordionGroup>
