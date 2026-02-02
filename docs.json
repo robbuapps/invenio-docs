@@ -1,0 +1,161 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "name": "Robbu Docs",
+    "theme": "mint",
+    "logo": {
+        "dark": "/logo/dark.svg",
+        "light": "/logo/light.svg"
+    },
+    "favicon": "/logo/light.svg",
+    "colors": {
+        "primary": "#007aff",
+        "light": "#007aff",
+        "dark": "#0D9373"
+    },
+    "navigation": {
+        "groups": [
+            {
+                "group": "Acesso",
+                "pages": [
+                    "docs/accounts/como-acessar-plataforma",
+                    "docs/accounts/sso"
+                ]
+            },
+            {
+                "group": "Configurações Gerais",
+                "pages": [
+                    "docs/configuracoes-gerais/lista-ips"
+                ]
+            },
+            {
+                "group": "Invenio Live",
+                "pages": [
+                    "docs/live/adicionar-canal-invenio-live",
+                    "docs/live/como-criar-agendamento",
+                    "docs/live/busca-mensagem-historico",
+                    "docs/live/dados-da-mensagem",
+                    "docs/live/edicao-de-tags",
+                    "docs/live/enviar-mensagem",
+                    "docs/live/exportacao-de-conversas",
+                    "docs/live/filtro-por-canal",
+                    "docs/live/filtros-e-menus-de-busca",
+                    "docs/live/lista-de-desejos",
+                    "docs/live/lista-de-transmissao",
+                    "docs/live/metodos-de-distribuicao",
+                    "docs/live/meu-perfil",
+                    "docs/live/criar-contato",
+                    "docs/live/sessao-de-24horas-no-whatsapp"
+                ]
+            },
+            {
+                "group": "Invenio Center",
+                "pages": [
+                    "docs/center/campanhas-de-email",
+                    "docs/center/campanhas-de-whatsapp",
+                    "docs/center/criando-campanha-sms",
+                    "docs/center/cancelamento-inscricao",
+                    "docs/center/canais-atendimento",
+                    "docs/center/canal-whatsapp",
+                    "docs/center/como-criar-templates-whatsapp",
+                    "docs/center/configuracoes-gerais-da conta",
+                    "docs/center/cadastrar-conta-de-email",
+                    "docs/center/criacao-de-contatos-invenio-center",
+                    "docs/center/dashboard-analitico",
+                    "docs/center/dashboard-kpi-eventos",
+                    "docs/center/dashboard-operacional",
+                    "docs/center/fila-de-atendimento",
+                    "docs/center/filtros-de-busca-de-contatos",
+                    "docs/center/gerenciar-host-de-acesso",
+                    "docs/center/gestao-frases-prontas",
+                    "docs/center/publico-importacao",
+                    "docs/center/carga-ftp",
+                    "docs/center/integracao-de-paginas",
+                    "docs/center/bibliotecas-de-midias",
+                    "docs/center/otimizacao",
+                    "docs/center/painel-de-faturas",
+                    "docs/center/pausas-no-atendimento",
+                    "docs/center/privacidade-e-protecao",
+                    "docs/center/como-habilitar-protocolos-de-atendimento",
+                    "docs/center/agendamento-relatorio-ftp",
+                    "docs/center/relatorios",
+                    "docs/center/restricoes",
+                    "docs/center/segmentos",
+                    "docs/center/templates-de-email",
+                    "docs/center/tipos-de-kpi",
+                    "docs/center/usuarios",
+                    "docs/center/variaveis-de-sistema",
+                    "docs/center/web-chat",
+                    "docs/center/webhook",
+                    "docs/center/whatsapp-business-api"
+                ]
+            },
+            {
+                "group": "Maestro",
+                "pages": [
+                    "docs/maestro/api-direct-message",
+                    "docs/maestro/brokers",
+                    "docs/maestro/motor-de-regras",
+                    "docs/maestro/overview",
+                    "docs/maestro/carga-ftp",
+                    "docs/maestro/webhook"
+                ]
+            },
+            {
+                "group": "Carteiro Digital",
+                "pages": [
+                    "docs/carteiro-digital/carteiro-digital"
+                ]
+            },
+            {
+                "group": "Robbu APIs",
+                "pages": [
+                    "docs/robbu-api/api-update-contact",
+                    "docs/robbu-api/api-busca-template",
+                    "docs/robbu-api/auth",
+                    "docs/carteiro-digital/carteiro-digital-api",
+                    "docs/robbu-api/verify",
+                    "docs/robbu-api/send-message"
+                ]
+            },
+            {
+                "group": "Atualizações",
+                "pages": [
+                    "changelog"
+                ]
+            }
+        ],
+        "global": {
+            "anchors": [
+                {
+                    "anchor": "Institucional",
+                    "icon": "book-open-cover",
+                    "href": "https://robbu.global"
+                },
+                {
+                    "anchor": "Blog",
+                    "icon": "newspaper",
+                    "href": "https://robbu.global/blog/"
+                }
+            ]
+        }
+    },
+    "navbar": {
+        "links": [
+            {
+                "label": "Suporte",
+                "href": "mailto:help@robbu.global"
+            }
+        ],
+        "primary": {
+            "type": "button",
+            "label": "Dashboard",
+            "href": "https://dashboard.mintlify.com"
+        }
+    },
+    "footer": {
+        "socials": {
+            "instagram": "https://instagram.com/robbu",
+            "linkedin": "https://www.linkedin.com/company/robbu/posts/?feedView=all"
+        }
+    }
+}

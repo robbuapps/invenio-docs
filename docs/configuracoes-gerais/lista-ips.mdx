@@ -1,224 +1,744 @@
 ---
 title: "Liberação de IPs Robbu"
 sidebarTitle: "IPs Robbu"
-description: "Para garantir o correto funcionamento das integrações com a Robbu, alguns IPs precisam estar liberados no firewall ou servidor do cliente.  
-Abaixo está a lista **organizada de forma simplificada**, agrupando IPs iguais e destacando os serviços que os utilizam."
+description: "Lista completa de endereços IP da Robbu que precisam ser liberados no firewall para garantir o funcionamento de integrações, webhooks, FTP e serviços customizados."
 ---
 
-## Invenio IDR, OutputStream (Webhook), Invenio Jobs
+Para garantir o correto funcionamento das integrações com a Robbu, alguns **endereços IP** precisam estar **liberados no firewall** ou servidor do cliente.
 
-- **Motor Novo (V2):**  
-  - 191.232.253.7  
+**Por que liberar IPs:**
 
-- **Motor Antigo (V1), OutputStream, Invenio Jobs e Invenio Jobs V2:**  
-  *(todos esses serviços utilizam a mesma faixa de IPs abaixo)*  
-  - 104.41.15.44  
-  - 104.41.14.184  
-  - 104.41.13.132  
-  - 104.41.12.97  
-  - 20.201.81.246  
-  - 104.41.56.229  
-  - 104.41.30.250  
-  - 20.206.191.81  
-  - 191.235.52.58  
-  - 191.235.52.65  
-  - 191.235.52.78  
-  - 191.235.52.195  
-  - 191.235.52.245  
-  - 191.235.53.35  
-  - 191.235.53.57  
-  - 191.235.53.74  
-  - 191.235.53.158  
-  - 191.235.54.48  
-  - 191.235.54.59  
-  - 104.41.13.179  
+- 🔗 **Integrações:** Comunicação com APIs externas
+- 📡 **Webhooks:** Envio de eventos em tempo real
+- 📁 **FTP/SFTP:** Leitura e envio de arquivos
+- 🔧 **Serviços customizados:** Integrações dedicadas
+
+Esta documentação organiza os IPs de forma simplificada, agrupando IPs compartilhados e destacando os serviços que os utilizam.
 
 ---
 
-## FTP
+## IPs por Serviço
 
-- **Invenio Center (Utilizado para testar a conexão com o FTP/SFTP do cliente antes de ser salvo no ambiente):**  
-  - 104.41.0.210  
-
-- **Invenio Jobs (Leitura de arquivos de mailing no FTP do cliente):**  
-  - Usa a mesma lista de IPs do **InvenioIdr V1**  
-
-- **Invenio Jobs V2 (Exportação de relatórios para o FTP do cliente):**  
-  - Usa a mesma lista de IPs do **InvenioIdr V1**  
+<Tabs>
+  <Tab title="Invenio IDR" icon="engine">
+    ### Invenio IDR (Motor de Regras)
+    
+    **Motor Novo (V2)** 🆕
+    
+    O Invenio IDR V2 utiliza um IP dedicado:
+    
+    ```
+    191.232.253.7
+    ```
+    
+    **Motor Antigo (V1)** 🔄
+    
+    O Invenio IDR V1 compartilha IPs com OutputStream e Invenio Jobs:
+    
+    ```
+    104.41.15.44
+    104.41.14.184
+    104.41.13.132
+    104.41.12.97
+    20.201.81.246
+    104.41.56.229
+    104.41.30.250
+    20.206.191.81
+    191.235.52.58
+    191.235.52.65
+    191.235.52.78
+    191.235.52.195
+    191.235.52.245
+    191.235.53.35
+    191.235.53.57
+    191.235.53.74
+    191.235.53.158
+    191.235.54.48
+    191.235.54.59
+    104.41.13.179
+    ```
+    
+    **Total:** 20 IPs compartilhados
+    
+    <Note>
+    **Compartilhamento:** Esses 20 IPs são usados por **Invenio IDR V1**, **OutputStream (Webhooks)**, **Invenio Jobs** e **Invenio Jobs V2**. Liberando-os uma vez, todos esses serviços funcionam.
+    </Note>
+  </Tab>
+  
+  <Tab title="OutputStream (Webhook)" icon="webhook">
+    ### OutputStream (Webhooks)
+    
+    O serviço **OutputStream** é responsável por enviar eventos via webhook para sistemas externos.
+    
+    **IPs utilizados:**
+    
+    ```
+    104.41.15.44
+    104.41.14.184
+    104.41.13.132
+    104.41.12.97
+    20.201.81.246
+    104.41.56.229
+    104.41.30.250
+    20.206.191.81
+    191.235.52.58
+    191.235.52.65
+    191.235.52.78
+    191.235.52.195
+    191.235.52.245
+    191.235.53.35
+    191.235.53.57
+    191.235.53.74
+    191.235.53.158
+    191.235.54.48
+    191.235.54.59
+    104.41.13.179
+    ```
+    
+    <Tip>
+    **Mesmos IPs:** O OutputStream usa **exatamente os mesmos IPs** do Invenio IDR V1. Se você já liberou para o IDR V1, os webhooks já funcionarão.
+    </Tip>
+    
+    Consulte: [Documentação de Webhook](https://docs.robbu.global/docs/center/webhook)
+  </Tab>
+  
+  <Tab title="Invenio Jobs" icon="calendar">
+    ### Invenio Jobs (V1 e V2)
+    
+    Os serviços **Invenio Jobs** e **Invenio Jobs V2** realizam:
+    - 📥 Leitura de arquivos de mailing no FTP do cliente
+    - 📤 Exportação de relatórios para o FTP do cliente
+    
+    **IPs utilizados:**
+    
+    ```
+    104.41.15.44
+    104.41.14.184
+    104.41.13.132
+    104.41.12.97
+    20.201.81.246
+    104.41.56.229
+    104.41.30.250
+    20.206.191.81
+    191.235.52.58
+    191.235.52.65
+    191.235.52.78
+    191.235.52.195
+    191.235.52.245
+    191.235.53.35
+    191.235.53.57
+    191.235.53.74
+    191.235.53.158
+    191.235.54.48
+    191.235.54.59
+    104.41.13.179
+    ```
+    
+    <Note>
+    **IPs compartilhados:** Jobs usa os mesmos IPs do **Invenio IDR V1** e **OutputStream**.
+    </Note>
+    
+    Consulte: 
+    - [Agendamento Relatório FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
+    - [Carga FTP](https://docs.robbu.global/docs/center/carga-ftp)
+  </Tab>
+  
+  <Tab title="FTP / SFTP" icon="folder">
+    ### Integração FTP/SFTP
+    
+    **Invenio Center (Teste de Conexão)** 🔍
+    
+    Utilizado para **testar a conexão** com o FTP/SFTP do cliente antes de salvar no ambiente:
+    
+    ```
+    104.41.0.210
+    ```
+    
+    **Invenio Jobs (Leitura de Arquivos)** 📥
+    
+    Para leitura de arquivos de mailing no FTP do cliente, utiliza:
+    - **Mesma lista de IPs** do **Invenio IDR V1** (20 IPs listados na aba correspondente)
+    
+    **Invenio Jobs V2 (Exportação de Relatórios)** 📤
+    
+    Para exportação de relatórios para o FTP do cliente, utiliza:
+    - **Mesma lista de IPs** do **Invenio IDR V1** (20 IPs listados na aba correspondente)
+    
+    <Warning>
+    **Liberação necessária:**
+    
+    Para funcionalidades de FTP, libere:
+    - **`104.41.0.210`** (teste de conexão)
+    - **20 IPs do Invenio IDR V1** (leitura e exportação)
+    </Warning>
+  </Tab>
+  
+  <Tab title="InvenioCustom" icon="code">
+    ### InvenioCustom (Integrações Dedicadas)
+    
+    **Serviços customizados** que realizam integrações especiais com APIs de clientes, como:
+    - 🔧 SOAP
+    - 🔧 WCF (Windows Communication Foundation)
+    - 🔧 Orquestrações dedicadas
+    
+    **IPs utilizados (24 IPs dedicados):**
+    
+    ```
+    191.232.35.72
+    191.232.32.84
+    191.232.32.44
+    191.232.35.210
+    20.201.96.229
+    191.232.188.192
+    191.232.188.212
+    191.232.191.181
+    191.232.188.193
+    191.232.188.213
+    191.232.71.41
+    191.232.71.105
+    191.232.71.108
+    191.232.71.131
+    20.226.184.21
+    20.226.184.66
+    191.235.52.172
+    191.235.53.17
+    191.235.53.224
+    191.235.54.38
+    191.235.54.171
+    191.235.54.213
+    191.234.146.160
+    191.232.38.77
+    ```
+    
+    <Note>
+    **IPs exclusivos:** Esses 24 IPs são utilizados **exclusivamente** pelo InvenioCustom e não são compartilhados com outros serviços.
+    </Note>
+  </Tab>
+</Tabs>
 
 ---
 
-## InvenioCustom
+## Resumo Rápido por Serviço
 
-> Serviços que realizam integrações especiais com APIs de clientes (ex.: SOAP, WCF ou orquestrações dedicadas).
+| Serviço | Quantidade de IPs | Observação |
+|---------|-------------------|------------|
+| **Invenio IDR V2** | 1 IP | Exclusivo do motor novo |
+| **Invenio IDR V1** | 20 IPs | Compartilhados com OutputStream e Jobs |
+| **OutputStream (Webhook)** | 20 IPs | Mesmos IPs do IDR V1 |
+| **Invenio Jobs (V1 e V2)** | 20 IPs | Mesmos IPs do IDR V1 |
+| **Invenio Center (FTP Test)** | 1 IP | Teste de conexão FTP |
+| **InvenioCustom** | 24 IPs | Exclusivos para integrações dedicadas |
 
-- 191.232.35.72  
-- 191.232.32.84  
-- 191.232.32.44  
-- 191.232.35.210  
-- 20.201.96.229  
-- 191.232.188.192  
-- 191.232.188.212  
-- 191.232.191.181  
-- 191.232.188.193  
-- 191.232.188.213  
-- 191.232.71.41  
-- 191.232.71.105  
-- 191.232.71.108  
-- 191.232.71.131  
-- 20.226.184.21  
-- 20.226.184.66  
-- 191.235.52.172  
-- 191.235.53.17  
-- 191.235.53.224  
-- 191.235.54.38  
-- 191.235.54.171  
-- 191.235.54.213  
-- 191.234.146.160  
-- 191.232.38.77  
+<Tip>
+**Otimização:** Como vários serviços compartilham IPs, você pode liberar apenas:
+
+- **1 IP** para IDR V2 (`191.232.253.7`)
+- **20 IPs** para IDR V1/OutputStream/Jobs (lista comum)
+- **1 IP** para teste FTP (`104.41.0.210`)
+- **24 IPs** para InvenioCustom (se usar integrações dedicadas)
+
+**Total:** 46 IPs únicos para cobertura completa.
+</Tip>
 
 ---
 
-## Resumo Simplificado
+## Como Liberar IPs no Firewall
 
-- **InvenioIdr V2 (Motor Novo):** 1 IP único  
-- **InvenioIdr V1 (Motor da IDR antigo), OutputStream (Serviço que gera eventos do Webhook), Invenio Jobs e Jobs V2:** 20 IPs compartilhados  
-- **Invenio Center (Validação de acesso ao FTP do cliente):** 1 IP único  
-- **InvenioCustom:** 24 IPs dedicados  
+<Steps>
+  <Step title="Identificar serviços usados">
+    Determine quais serviços da Robbu seu ambiente utiliza:
+    
+    - ✅ Invenio IDR (V1 ou V2)?
+    - ✅ Webhooks (OutputStream)?
+    - ✅ Jobs (importação/exportação)?
+    - ✅ Integração FTP/SFTP?
+    - ✅ Integrações customizadas?
+  </Step>
+  
+  <Step title="Copiar lista de IPs correspondente">
+    Com base nos serviços identificados, copie as listas de IPs das abas acima.
+    
+    **Dica:** Se houver dúvida, libere **todos os IPs** documentados para garantir compatibilidade total.
+  </Step>
+  
+  <Step title="Configurar firewall">
+    Configure seu firewall, WAF ou lista de ACL para **permitir tráfego de entrada** dos IPs da Robbu.
+    
+    **Configurações recomendadas:**
+    
+    - **Protocolo:** TCP
+    - **Portas:** Conforme serviço (ex: 443 para HTTPS, 21/22 para FTP/SFTP)
+    - **Direção:** Inbound (entrada)
+    - **Ação:** Permitir (Allow)
+    
+    <Warning>
+    **Importante:** Configure as regras como **"Source Address"** ou **"Source IP"**, não como destino.
+    </Warning>
+  </Step>
+  
+  <Step title="Testar conectividade">
+    Após liberar os IPs:
+    
+    1. Teste a integração específica (webhook, FTP, API)
+    2. Verifique logs do firewall se houver falhas
+    3. Confirme que não há bloqueios residuais
+    
+    <Check>
+    **Validação:** Entre em contato com o suporte Robbu para confirmar que a conectividade está funcionando corretamente.
+    </Check>
+  </Step>
+</Steps>
 
 ---
 
-# Observações
+## Observações Importantes
 
-- Para clientes que utilizam **múltiplos serviços**, basta liberar a **lista combinada dos IPs** de cada grupo acima.  
-- Em serviços que compartilham IPs (como InvenioIdr V1, OutputStream e Jobs), a liberação é **única** para todos eles.  
-- Em caso de dúvida, a recomendação é **liberar todos os IPs listados nesta documentação**, garantindo total compatibilidade com a plataforma Robbu.  
-- Esta lista pode ser atualizada conforme a evolução da infraestrutura.  
+<Note>
+**Considerações gerais:**
+
+- 📋 Para clientes que utilizam **múltiplos serviços**, basta liberar a **lista combinada dos IPs** de cada grupo
+- ♻️ Serviços que **compartilham IPs** (IDR V1, OutputStream, Jobs) requerem liberação **única**
+- ✅ Em caso de dúvida, recomenda-se **liberar todos os IPs** listados para garantir total compatibilidade
+- 🔄 Esta lista **pode ser atualizada** conforme evolução da infraestrutura Robbu
+- 📅 **Revise periodicamente** esta documentação para mudanças
+</Note>
+
+<Warning>
+**Segurança:**
+
+Liberar IPs no firewall é seguro **quando feito corretamente**:
+
+- ✅ Libere **apenas** nas portas necessárias (não todas)
+- ✅ Documente as regras criadas
+- ✅ Revise periodicamente a lista
+- ✅ Use em conjunto com autenticação forte (tokens, certificados)
+</Warning>
 
 ---
-## Links e Assuntos Relacionados
 
-https://docs.robbu.global/docs/center/webhook
+## Links Relacionados
 
-https://docs.robbu.global/docs/center/agendamento-relatorio-ftp
-
-https://docs.robbu.global/docs/center/carga-ftp
-
-https://docs.robbu.global/docs/live/como-acessar-plataforma
+<CardGroup cols={2}>
+  <Card 
+    title="Webhook" 
+    icon="webhook" 
+    href="https://docs.robbu.global/docs/center/webhook"
+  >
+    Configurar webhooks
+  </Card>
+  
+  <Card 
+    title="Agendamento Relatório FTP" 
+    icon="calendar" 
+    href="https://docs.robbu.global/docs/center/agendamento-relatorio-ftp"
+  >
+    Exportar relatórios via FTP
+  </Card>
+  
+  <Card 
+    title="Carga FTP" 
+    icon="upload" 
+    href="https://docs.robbu.global/docs/center/carga-ftp"
+  >
+    Importar dados via FTP
+  </Card>
+  
+  <Card 
+    title="Como Acessar Plataforma" 
+    icon="right-to-bracket" 
+    href="https://docs.robbu.global/docs/live/como-acessar-plataforma"
+  >
+    Login no Invenio
+  </Card>
+</CardGroup>
 
 ---
+
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-
-  <Accordion title="O que é a liberação de IPs da Robbu?">
-    A liberação de IPs da Robbu é o processo de permitir que os servidores da Robbu se comuniquem com o ambiente do cliente, como firewalls, servidores, APIs ou serviços de FTP/SFTP.  
-    Essa liberação é essencial para garantir o funcionamento correto das integrações.
-  </Accordion>
-
-  <Accordion title="Quando é necessário realizar a liberação de IPs?">
-    A liberação de IPs é necessária sempre que:
-    - Houver integrações via **API**, **webhook** ou **FTP/SFTP**;
-    - O ambiente do cliente possuir **firewall restritivo**;
-    - Os serviços da Robbu não conseguirem se comunicar com sistemas internos do cliente.
-  </Accordion>
-
-  <Accordion title="Quais serviços da Robbu exigem liberação de IPs?">
-    Os principais serviços que exigem liberação de IPs são:
-    - **Invenio IDR** (V1 e V2);
-    - **OutputStream** (Webhooks);
-    - **Invenio Jobs** (V1 e V2);
-    - **Invenio Center** (integrações via FTP);
-    - **InvenioCustom** (integrações dedicadas).
-  </Accordion>
-
-  <Accordion title="Qual IP deve ser liberado para o Invenio IDR V2 (Motor Novo)?">
-    Para o **Invenio IDR V2**, é necessário liberar exclusivamente o seguinte IP:
+  <Accordion title="🔐 O que é a liberação de IPs da Robbu?">
+    **Liberação de IPs** é o processo de **permitir** que os servidores da Robbu se comuniquem com o ambiente do cliente.
     
-    - `191.232.253.7`
+    **Envolve:**
+    
+    - 🛡️ **Firewall:** Adicionar IPs à lista de permissões (allowlist/whitelist)
+    - 🌐 **WAF:** Configurar Web Application Firewall para aceitar tráfego
+    - 🔧 **ACL:** Ajustar Access Control Lists em servidores
+    
+    **Por que é necessário:**
+    
+    Muitos ambientes corporativos possuem **firewalls restritivos** que bloqueiam conexões de IPs desconhecidos por padrão. Para que serviços da Robbu funcionem, é preciso **explicitamente permitir** nossos IPs.
+    
+    **Analogia:** É como adicionar um contato à lista VIP de um condomínio - sem isso, a portaria (firewall) não deixa entrar.
   </Accordion>
 
-  <Accordion title="Quais IPs são utilizados pelo Invenio IDR V1, OutputStream e Invenio Jobs?">
-    Esses serviços compartilham a mesma faixa de IPs:
+  <Accordion title="⏱️ Quando é necessário realizar a liberação de IPs?">
+    **A liberação é necessária sempre que:**
     
-    - `104.41.15.44`  
-    - `104.41.14.184`  
-    - `104.41.13.132`  
-    - `104.41.12.97`  
-    - `20.201.81.246`  
-    - `104.41.56.229`  
-    - `104.41.30.250`  
-    - `20.206.191.81`  
-    - `191.235.52.58`  
-    - `191.235.52.65`  
-    - `191.235.52.78`  
-    - `191.235.52.195`  
-    - `191.235.52.245`  
-    - `191.235.53.35`  
-    - `191.235.53.57`  
-    - `191.235.53.74`  
-    - `191.235.53.158`  
-    - `191.235.54.48`  
-    - `191.235.54.59`  
-    - `104.41.13.179`
+    **1. Integrações via API** 🔗
+    - Robbu precisa chamar APIs no seu ambiente
+    - Seu servidor API tem firewall
+    
+    **2. Webhooks (OutputStream)** 📡
+    - Robbu envia eventos para um endpoint seu
+    - Seu servidor que recebe webhooks tem firewall
+    
+    **3. Integrações FTP/SFTP** 📁
+    - Robbu acessa seu servidor FTP para ler/escrever arquivos
+    - Seu servidor FTP tem restrições de IP
+    
+    **4. Firewalls restritivos** 🛡️
+    - Política de "deny by default" (bloqueia tudo por padrão)
+    - Apenas IPs autorizados são permitidos
+    
+    **5. Comunicação falha** ❌
+    - Serviços da Robbu não conseguem alcançar sistemas internos
+    - Logs mostram "connection refused" ou "timeout"
+    
+    **Como saber se preciso liberar:**
+    - Teste a integração → Se falhar com erro de rede, provavelmente é firewall
+    - Consulte sua equipe de TI/infra sobre políticas de firewall
   </Accordion>
 
-  <Accordion title="Quais IPs são utilizados para integração via FTP?">
-    Para integrações via FTP/SFTP, os IPs variam conforme o serviço:
+  <Accordion title="📋 Quais serviços da Robbu exigem liberação de IPs?">
+    **Principais serviços que requerem liberação:**
     
-    **Invenio Center (teste de conexão FTP/SFTP):**
-    - `104.41.0.210`
+    **1. Invenio IDR (V1 e V2)** 🔧
+    - **Função:** Motor de regras que processa e roteia mensagens
+    - **Precisa acessar:** APIs externas, CRMs, ERPs
+    - **IPs:** 1 IP (V2) ou 20 IPs (V1)
     
-    **Invenio Jobs (leitura e exportação de arquivos):**
-    - Utiliza a mesma lista de IPs do **Invenio IDR V1**.
+    **2. OutputStream (Webhooks)** 📡
+    - **Função:** Envia eventos em tempo real para sistemas externos
+    - **Precisa acessar:** Seu endpoint de webhook
+    - **IPs:** 20 IPs (mesmos do IDR V1)
+    
+    **3. Invenio Jobs (V1 e V2)** 📅
+    - **Função:** Processa jobs agendados (importação/exportação)
+    - **Precisa acessar:** Servidor FTP/SFTP do cliente
+    - **IPs:** 20 IPs (mesmos do IDR V1)
+    
+    **4. Invenio Center** 🌐
+    - **Função:** Interface administrativa, teste de conexões FTP
+    - **Precisa acessar:** Servidor FTP para validar credenciais
+    - **IPs:** 1 IP dedicado (`104.41.0.210`)
+    
+    **5. InvenioCustom** 🔧
+    - **Função:** Integrações dedicadas (SOAP, WCF, orquestrações)
+    - **Precisa acessar:** APIs/serviços específicos do cliente
+    - **IPs:** 24 IPs exclusivos
+    
+    **Resumo:**
+    - Se usa **qualquer integração** com sistemas externos → Precisa liberar IPs
+    - Se usa **apenas** Invenio Live/Center sem integrações → Pode não precisar
   </Accordion>
 
-  <Accordion title="O que é o InvenioCustom e quais IPs ele utiliza?">
-    O **InvenioCustom** é utilizado para integrações especiais com APIs de clientes, como SOAP, WCF ou orquestrações dedicadas.
+  <Accordion title="🆕 Qual IP deve ser liberado para o Invenio IDR V2 (Motor Novo)?">
+    **Para o Invenio IDR V2**, é necessário liberar **exclusivamente** o seguinte IP:
+    
+    ```
+    191.232.253.7
+    ```
+    
+    **Características do IDR V2:**
+    
+    - 🎯 **IP único e dedicado:** Não compartilha com outros serviços
+    - 🚀 **Motor moderno:** Nova arquitetura com melhor performance
+    - ✅ **Simplificação:** Apenas 1 IP para gerenciar
+    
+    **Como configurar no firewall:**
+    
+    ```bash
+    # Exemplo (iptables Linux)
+    iptables -A INPUT -s 191.232.253.7 -p tcp --dport 443 -j ACCEPT
+    ```
+    
+    ```powershell
+    # Exemplo (Windows Firewall)
+    New-NetFirewallRule -DisplayName "Robbu IDR V2" -Direction Inbound -RemoteAddress 191.232.253.7 -Action Allow
+    ```
+    
+    <Note>
+    **IDR V1 vs V2:** Se seu ambiente usa IDR V1, ignore o IP do V2. Se migrou para V2, você pode **remover** os 20 IPs do V1 e manter apenas este.
+    </Note>
+  </Accordion>
+
+  <Accordion title="🔄 Quais IPs são utilizados pelo Invenio IDR V1, OutputStream e Invenio Jobs?">
+    **Esses serviços compartilham a mesma faixa de 20 IPs:**
+    
+    ```
+    104.41.15.44
+    104.41.14.184
+    104.41.13.132
+    104.41.12.97
+    20.201.81.246
+    104.41.56.229
+    104.41.30.250
+    20.206.191.81
+    191.235.52.58
+    191.235.52.65
+    191.235.52.78
+    191.235.52.195
+    191.235.52.245
+    191.235.53.35
+    191.235.53.57
+    191.235.53.74
+    191.235.53.158
+    191.235.54.48
+    191.235.54.59
+    104.41.13.179
+    ```
+    
+    **Serviços que usam esses IPs:**
+    
+    - ✅ **Invenio IDR V1:** Motor de regras (versão legada)
+    - ✅ **OutputStream:** Envio de webhooks
+    - ✅ **Invenio Jobs:** Leitura de FTP
+    - ✅ **Invenio Jobs V2:** Exportação para FTP
+    
+    **Vantagem do compartilhamento:**
+    
+    Liberando esses 20 IPs **uma única vez**, você habilita **4 serviços** automaticamente. Não precisa liberar separadamente para cada um.
+    
+    <Tip>
+    **Configuração bulk:** Muitos firewalls permitem criar um "grupo de IPs" ou "IP set" para facilitar o gerenciamento de múltiplos endereços.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="📁 Quais IPs são utilizados para integração via FTP?">
+    **Para integrações FTP/SFTP, os IPs variam conforme o serviço:**
+    
+    **Invenio Center (Teste de Conexão)** 🔍
+    
+   IP utilizado:
+    ```
+    104.41.0.210
+    ```
+    
+    **Função:** Quando você configura credenciais FTP no Invenio Center, este IP testa a conectividade antes de salvar.
+    
+    **Invenio Jobs (Leitura de Arquivos de Mailing)** 📥
     
     IPs utilizados:
+    - **Mesma lista de 20 IPs** do Invenio IDR V1 (listados acima)
     
-    - `191.232.35.72`  
-    - `191.232.32.84`  
-    - `191.232.32.44`  
-    - `191.232.35.210`  
-    - `20.201.96.229`  
-    - `191.232.188.192`  
-    - `191.232.188.212`  
-    - `191.232.191.181`  
-    - `191.232.188.193`  
-    - `191.232.188.213`  
-    - `191.232.71.41`  
-    - `191.232.71.105`  
-    - `191.232.71.108`  
-    - `191.232.71.131`  
-    - `20.226.184.21`  
-    - `20.226.184.66`  
-    - `191.235.52.172`  
-    - `191.235.53.17`  
-    - `191.235.53.224`  
-    - `191.235.54.38`  
-    - `191.235.54.171`  
-    - `191.235.54.213`  
-    - `191.234.146.160`  
-    - `191.232.38.77`
+    **Função:** Lê arquivos CSV/TXT do seu FTP para campanhas de mailing.
+    
+    **Invenio Jobs V2 (Exportação de Relatórios)** 📤
+    
+    IPs utiliza:
+    - **Mesma lista de 20 IPs** do Invenio IDR V1 (listados acima)
+    
+    **Função:** Exporta relatórios gerados automaticamente para seu servidor FTP.
+    
+    **Resumo para FTP:**
+    
+    Libere **21 IPs no total**:
+    - `104.41.0.210` (teste)
+    - 20 IPs do IDR V1 (leitura/exportação)
+    
+    **Portas necessárias:**
+    - **FTP:** Porta 21 (padrão)
+    - **SFTP:** Porta 22 (padrão)
+    - **FTPS:** Porta 990 ou 21 (TLS explícito)
+    
+    Consulte:
+    - [Agendamento Relatório FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
+    - [Carga FTP](https://docs.robbu.global/docs/center/carga-ftp)
   </Accordion>
 
-  <Accordion title="Se utilizo mais de um serviço da Robbu, preciso liberar todos os IPs?">
-    Sim. É necessário liberar a combinação de IPs correspondente a todos os serviços da Robbu que estejam sendo utilizados no ambiente.
+  <Accordion title="🔧 O que é o InvenioCustom e quais IPs ele utiliza?">
+    **InvenioCustom** é um serviço utilizado para **integrações especiais** e dedicadas com APIs de clientes.
+    
+    **Casos de uso:**
+    
+    - 🔧 **SOAP:** Web services SOAP legados
+    - 🔧 **WCF:** Windows Communication Foundation
+    - 🔧 **Orquestrações:** Fluxos customizados específicos
+    - 🔧 **APIs proprietárias:** Protocolos não-padrão
+    
+    **24 IPs exclusivos utilizados:**
+    
+    ```
+    191.232.35.72
+    191.232.32.84
+    191.232.32.44
+    191.232.35.210
+    20.201.96.229
+    191.232.188.192
+    191.232.188.212
+    191.232.191.181
+    191.232.188.193
+    191.232.188.213
+    191.232.71.41
+    191.232.71.105
+    191.232.71.108
+    191.232.71.131
+    20.226.184.21
+    20.226.184.66
+    191.235.52.172
+    191.235.53.17
+    191.235.53.224
+    191.235.54.38
+    191.235.54.171
+    191.235.54.213
+    191.234.146.160
+    191.232.38.77
+    ```
+    
+    **Quando liberar esses IPs:**
+    
+    - ✅ Se a Robbu desenvolveu uma **integração customizada** para você
+    - ✅ Se usa **orquestrações dedicadas** no contrato
+    - ❌ Se usa apenas serviços padrão (IDR, Jobs, webhooks), **não precisa**
+    
+    <Note>
+    **Dúvida?** Entre em contato com seu gerente de conta ou suporte técnico da Robbu para confirmar se seu ambiente utiliza InvenioCustom.
+    </Note>
   </Accordion>
 
-  <Accordion title="Ao liberar os IPs do Invenio IDR V1, outros serviços passam a funcionar automaticamente?">
-    Sim. Os serviços **OutputStream**, **Invenio Jobs** e **Invenio Jobs V2** compartilham os mesmos IPs utilizados pelo Invenio IDR V1.
+  <Accordion title="♻️ Se utilizo mais de um serviço da Robbu, preciso liberar todos os IPs?">
+    **Sim**, mas otimizadamente!
+    
+    **Devido ao compartilhamento de IPs**, você não precisa multiplicar. Veja:
+    
+    **Exemplo 1: Cliente usa IDR V1 + Webhooks + Jobs**
+    
+    ❌ **Errado:** Liberar 20 IPs para IDR + 20 para Webhooks + 20 para Jobs = 60 liberações
+    
+    ✅ **Correto:** Liberar apenas **20 IPs** (são os mesmos para os 3 serviços)
+    
+    **Exemplo 2: Cliente usa IDR V2 + Webhooks + FTP**
+    
+    Libere:
+    - 1 IP do IDR V2 (`191.232.253.7`)
+    - 20 IPs do Webhooks/Jobs (para webhooks e FTP)
+    - 1 IP do FTP test (`104.41.0.210`)
+    
+    **Total:** 22 IPs únicos (não 42!)
+    
+    **Exemplo 3: Cliente usa tudo (IDR V1, Webhooks, Jobs, FTP, Custom)**
+    
+    Libere:
+    - 20 IPs compartilhados (IDR V1/Webhooks/Jobs)
+    - 1 IP FTP test
+    - 24 IPs InvenioCustom
+    
+    **Total:** 45 IPs únicos
+    
+    <Tip>
+    **Dica prática:** Copie a lista completa deste documento e cole no seu sistema de firewall. O firewall automaticamente eliminará duplicatas.
+    </Tip>
   </Accordion>
 
-  <Accordion title="O que fazer em caso de dúvida sobre quais IPs liberar?">
-    Em caso de dúvida, recomenda-se liberar **todos os IPs listados nesta documentação**, garantindo total compatibilidade com a plataforma Robbu.
+  <Accordion title="✅ Ao liberar os IPs do Invenio IDR V1, outros serviços passam a funcionar automaticamente?">
+    **Sim!** Ao liberar os 20 IPs do Invenio IDR V1, os seguintes serviços **automaticamente** passam a funcionar:
+    
+    **Serviços habilitados:**
+    
+    - ✅ **OutputStream (Webhooks):** Envia eventos para seu endpoint
+    - ✅ **Invenio Jobs:** Lê arquivos do seu FTP
+    - ✅ **Invenio Jobs V2:** Exporta relatórios para seu FTP
+    
+    **Por quê:**
+    
+    Esses serviços rodam na **mesma infraestrutura** e utilizam os **mesmos IPs de saída** (source IPs).
+    
+    **Vantagem:**
+    
+    - 📉 **Menos trabalho:** Configure uma vez, habilite 4 serviços
+    - 🔧 **Manutenção simples:** Atualizar 1 lista em vez de 4
+    - ✅ **Consistência:** Não há risco de esquecer IPs de algum serviço
+    
+    **O que NÃO está incluído:**
+    
+    - ❌ **IDR V2:** Usa IP diferente (`191.232.253.7`)
+    - ❌ **FTP test:** Usa IP diferente (`104.41.0.210`)
+    - ❌ **InvenioCustom:** Usa 24 IPs diferentes
+    
+    <Check>
+    **Validação:** Após liberar os 20 IPs, teste webhooks, jobs e acesso FTP. Todos devem funcionar sem liberar mais nada (exceto se usar FTP test ou Custom).
+    </Check>
   </Accordion>
 
-  <Accordion title="A lista de IPs pode sofrer alterações?">
-    Sim. A lista de IPs pode ser atualizada conforme a evolução da infraestrutura da Robbu.  
-    Por isso, recomenda-se revisitar esta documentação periodicamente.
+  <Accordion title="❓ O que fazer em caso de dúvida sobre quais IPs liberar?">
+    **Recomendação oficial:** Em caso de dúvida, libere **todos os IPs listados** nesta documentação.
+    
+    **Por quê fazer isso:**
+    
+    - ✅ **Garantia total:** 100% de compatibilidade com todos os serviços
+    - ✅ **Prova de futuro:** Se novos serviços forem ativados, já estarão funcionando
+    - ✅ **Menos troubleshooting:** Evita diagnósticos demorados
+    - ✅ **Simplicidade:** Não precisa entender cada serviço em detalhes
+    
+    **Total de IPs únicos:**
+    - **Invenio IDR V2:** 1 IP
+    - **Invenio IDR V1/OutputStream/Jobs:** 20 IPs
+    - **FTP test:** 1 IP
+    - **InvenioCustom:** 24 IPs
+    
+    **Total geral:** 46 IPs únicos
+    
+    **Como fazer:**
+    
+    1. Copie **todas as listas** deste documento
+    2. Cole no seu sistema de firewall (remova duplicatas se necessário)
+    3. Configure para **permitir** (allow/accept) nas portas relevantes
+    
+    **Portas comuns:**
+    - 443 (HTTPS) - Webhooks, APIs
+    - 21/22 (FTP/SFTP) - Transferência de arquivos
+    - 80 (HTTP) - Se APIs não usam HTTPS
+    
+    <Warning>
+    **Segurança:** Liberar IPs não compromete segurança **quando feito corretamente**:
+    - Use em conjunto com **autenticação** (tokens, chaves)
+    - Limite a **portas específicas** (não libere TODAS as portas)
+    - **Documente** o que foi liberado e por quê
+    </Warning>
+    
+    **Ainda com dúvida?**
+    
+    Entre em contato: **suporte@robbu.global** ou **help@robbu.global**
   </Accordion>
 
+  <Accordion title="🔄 A lista de IPs pode sofrer alterações?">
+    **Sim**, a lista de IPs **pode ser atualizada** conforme a evolução da infraestrutura da Robbu.
+    
+    **Quando isso acontece:**
+    
+    - 🏗️ **Expansão de infraestrutura:** Novos servidores em novas regiões
+    - 🔧 **Mudanças tecnológicas:** Migração para novos datacenters
+    - 📈 **Crescimento:** Escalonamento de recursos
+    - 🔐 **Segurança:** Rotação de recursos por boas práticas
+    
+    **Como você será avisado:**
+    
+    - 📧 **E-mail:** Notificação com antecedência (geralmente 30 dias)
+    - 📄 **Documentação:** Atualização desta página
+    - 🎫 **Service Desk:** Comunicado oficial via portal
+    
+    **Boa prática:**
+    
+    - 📅 **Revise periodicamente:** Verifique este documento a cada trimestre
+    - 🔔 **Monitore comunicações:** Atente para e-mails da Robbu
+    - 📋 **Documente internamente:** Mantenha registro de quando liberou/atualizou IPs
+    
+    **Como atualizar:**
+    
+    1. Verifique a data de última atualização no topo deste documento
+    2. Compare com sua configuração atual
+    3. Adicione novos IPs ao firewall
+    4. Após período de transição, remova IPs antigos (se comunicado)
+    
+    <Tip>
+    **Histórico de mudanças:** A Robbu mantém um período de transição onde **ambos** IPs antigos e novos funcionam, permitindo migração sem interrupção de serviço.
+    </Tip>
+    
+    **URL deste documento:**
+    https://docs.robbu.global/docs/configuracoes-gerais/lista-ips
+    
+    → Salve nos favoritos para consulta rápida!
+  </Accordion>
 </AccordionGroup>
