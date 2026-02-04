@@ -97,7 +97,8 @@
                     "docs/maestro/motor-de-regras",
                     "docs/maestro/api-direct-message",
                     "docs/maestro/carga-ftp",
-                    "docs/maestro/webhook"
+                    "docs/maestro/webhook",
+                    "docs/maestro/regras-de-uso-sistema"
                 ]
             },
             {
