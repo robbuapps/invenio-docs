@@ -96,6 +96,119 @@ O campo Limite para o Tamanho de Envio no Live define o tamanho máximo permitid
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/segmentos/Arquivos&Distribuição.png" /> 
 
+### Bloqueio de recebimento de arquivos por extensão
+
+A funcionalidade **Bloquear recebimento de arquivos por extensão** permite impedir automaticamente o recebimento de arquivos com extensões consideradas indesejadas ou inseguras.
+
+O bloqueio:
+
+- Se aplica a **todos os canais**
+- Mantém a mensagem registrada na conversa
+- Impede o download do conteúdo
+- Pode ser configurado no nível da **Conta** ou do **Segmento**
+- Respeita hierarquia de prioridade (**Segmento > Conta**)
+
+---
+
+### Como funciona a hierarquia
+
+A regra aplicada no recebimento do arquivo segue esta ordem:
+
+1. Se o **segmento possuir configuração própria**, ela será aplicada.
+2. Caso contrário, será utilizada a **configuração definida na conta**.
+
+> A configuração do segmento sempre sobrescreve a da conta quando existir.
+
+---
+### Configuração no nível da Conta
+
+Define uma política padrão para todos os segmentos que não possuam regra específica.
+
+## Caminho
+
+`Configurações da Conta → Bloqueio de arquivos de entrada`
+
+### Como configurar
+
+- Selecione as extensões que deseja bloquear.
+- Utilize o campo de busca para localizar extensões específicas.
+- Utilize:
+  - **Marcar todos**
+  - **Desmarcar todos**
+
+As extensões selecionadas passam a ser a **regra padrão da conta**.
+
+<img src="https://robbublob.blob.core.windows.net/docs/nivelconta.png" /> 
+
+---
+
+### Configuração no nível do Segmento
+
+Permite sobrescrever a política da conta quando necessário.
+
+### Caminho
+
+`Segmentos → Selecionar segmento → Bloqueio de arquivos de entrada`
+
+### Toggle: Usar configurações gerais da conta
+
+### Toggle ativado
+- O segmento utiliza automaticamente as regras definidas na conta.
+- A lista de extensões não é exibida.
+
+### Toggle desativado
+- A lista de extensões é exibida.
+- O administrador pode definir regras próprias para o segmento.
+
+> Se o toggle estiver desativado e nenhuma extensão estiver selecionada, o segmento permitirá o recebimento de qualquer tipo de arquivo.
+
+> A configuração da conta só será considerada quando o toggle estiver ativado.
+<img src="https://robbublob.blob.core.windows.net/docs/segmentoconta.png" /> 
+
+---
+### Comportamento no recebimento do arquivo
+
+Quando um contato envia um arquivo:
+
+1. O sistema identifica o segmento da conversa.
+2. Aplica a regra do segmento (se existir).
+3. Caso não exista regra no segmento, aplica a regra da conta.
+4. Se a extensão estiver bloqueada:
+   - O arquivo não é armazenado.
+   - O download não é permitido.
+   - A mensagem permanece registrada na conversa.
+
+---
+### Exibição no histórico da conversa
+
+Quando um arquivo é bloqueado:
+
+- O bloco do arquivo aparece normalmente na timeline.
+- O nome do arquivo é substituído por:
+---
+Bloqueado automaticamente
+- O botão de download não é exibido.
+- Ao passar o mouse sobre o texto, é exibido o motivo do bloqueio.
+- Não é possível visualizar ou reenviar o conteúdo.
+
+---
+
+### Monitoramento (KPI)
+
+Sempre que um arquivo for bloqueado:
+
+- Um KPI é gerado automaticamente.
+- O registro contém:
+  - ID da mensagem
+  - Extensão bloqueada
+- O evento é registrado independentemente do canal.
+
+**Título do KPI:**
+Arquivo bloqueado automaticamente
+
+- Isso garante rastreabilidade e auditoria dos bloqueios realizados.
+<img src="https://robbublob.blob.core.windows.net/docs/bloqueadoauto.png" /> 
+
 
 ---
 
