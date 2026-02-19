@@ -1,145 +1,175 @@
 ---
 title: "Invenio Webhook"
 sidebarTitle: "Webhook"
-description: "A integração via Webhook é um recurso que possibilita a comunicação em tempo quase real entre o Invenio Center, o Invenio Live e sistemas externos. Com ela, eventos importantes são enviados automaticamente para o endpoint configurado pelo cliente, permitindo que sua operação registre, trate e analise dados de forma ágil e integrada.
-Esse mecanismo é amplamente utilizado para automatizar processos, centralizar informações e garantir que gestores tenham acesso imediato a atualizações críticas da operação.
-"
+description: "Integre o Invenio Center com sistemas externos via Webhook HTTP: receba eventos de mensagens, KPIs, campanhas, templates, protocolos e mais em tempo real no formato JSON."
+mode: "wide"
 ---
 
----
+A integração via **Webhook** permite comunicação em tempo quase real entre o Invenio Center, o Invenio Live e sistemas externos. Eventos importantes são enviados automaticamente para o endpoint configurado, permitindo que sua operação registre, trate e analise dados de forma ágil e integrada.
 
-## Eventos Disponíveis na Integração
-O Webhook pode enviar diferentes tipos de eventos, cobrindo desde mensagens até dados de configuração. Entre os principais, estão:
-
-- **Mensagens enviadas** e atualização de status de entrega;
-- **Mensagens recebidas** e atualização de status de recebimento;
--	**KPI Eventos** inseridos no ambiente (manualmente ou pelo sistema);
--	**Campanhas**, incluindo atualizações de status;
--	**Carteiras**, com informações de edição e atualizações de configuração;
--	**Templates HSM**, com status, qualidade e alterações;
-- **Linhas WhatsApp**, com status, qualidade e alterações;
-- **Relação de usuários**, incluindo logs e mudanças;
-- **Protocolos**, com estatísticas e dados associados
+<Note>
+Os dados são enviados em **lotes de até 30 arquivos JSON**, com intervalo médio de **2 segundos** entre os lotes.
+</Note>
 
 ---
 
-## Funcionamento da Integração
-A comunicação ocorre por meio do envio de blocos JSON para o endpoint configurado. Entre os objetos enviados estão:
+## Eventos Disponíveis
 
-`[contact]` · `[event]` · `[messageincoming]` · `[messageoutgoing]` · `[campaign]` · `[template]` · `[protocol]` · `[wallet]` · `[whatsapp numbers]` · `[status]`
+| Evento | Descrição |
+|--------|-----------|
+| **Mensagens enviadas** | Status de entrega das mensagens saintes |
+| **Mensagens recebidas** | Notificação de mensagens entrantes |
+| **KPI Eventos** | Indicadores inseridos no ambiente (manual ou sistema) |
+| **Campanhas** | Criação e atualização de status de campanhas |
+| **Carteiras** | Edições e atualizações de configuração de segmentos |
+| **Templates HSM** | Status, qualidade e alterações de templates |
+| **Linhas WhatsApp** | Status, qualidade e alterações das linhas |
+| **Usuários** | Logs e mudanças de usuários |
+| **Protocolos** | Estatísticas e dados de protocolos de atendimento |
 
-> Esses blocos são entregues em lotes de até 30 arquivos JSON, com intervalo médio de 2 segundos, garantindo um fluxo constante de informações.
-
----
-
-## Em qual linguagem utilizar a integração com o webhook da Invenio?
-
-Não há uma restrição a uma linguagem específica. Os webhooks do Invenio são baseados no protocolo HTTP, o que significa que podem ser implementados em qualquer linguagem capaz de:
-
-- Receber requisições HTTP (ter um endpoint/rota exposta);
-
-- Processar os dados recebidos (geralmente em JSON ou XML).
-
-**Exemplos de uso por linguagem**
-
-- JavaScript / Node.js → frameworks como Express;
-
-- Python → Flask, Django ou FastAPI;
-
-- C# (.NET) → ASP.NET Core;
-
-- Java → Spring Boot;
-
-- PHP → Laravel, Symfony ou mesmo nativo via $_POST;
-
-- Go, Ruby, Rust, Elixir, entre outras → qualquer linguagem que ofereça suporte a HTTP.
-
-> **Em resumo:** a integração via webhook da Invenio é flexível e universal. Se a linguagem escolhida suporta servidor web/HTTP, você poderá utilizá-la sem restrições.
-
-## Requisitos de Infraestrutura
-
-Para ambientes de produção, recomenda-se a seguinte configuração mínima para o servidor endpoint:
-
-- **SSD** de 250 GB  
-- **16 GB** de RAM  
-- **CPU** com 4 núcleos
-
-> ⚠️ **Importante**  
-> O uso de HD não é recomendado, pois pode gerar gargalos devido ao alto volume de mensagens e eventos. A infraestrutura deve ser monitorada continuamente pela área de TI, com possibilidade de escala futura.
+**Objetos JSON enviados:**
+`contact` · `event` · `messageincoming` · `messageoutgoing` · `campaign` · `template` · `protocol` · `wallet` · `whatsappnumbers` · `status`
 
 ---
 
-## Configuração Final no Invenio Center
+## Linguagens Suportadas
 
-Após preparar servidor, banco de dados, firewall e publicar o serviço, acesse:
+Os webhooks do Invenio são baseados em **HTTP** — qualquer linguagem que suporte servidor web pode ser utilizada.
 
-`Invenio Center > Configurações > Webhook > Gerenciar`  
-[Acesse a página de configurações](https://inveniocenter.robbu.global/painel/configuracoes)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook3.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook2.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook1.png" />
-
-Adicione a URL final gerada pela IDE ou ambiente de publicação e salve.
-
-> ❗ **Observação**  
-> Em até **60 minutos**, as requisições começarão a ser enviadas para o endpoint configurado.
-
-### Fila paralela ⚠️
-
-Por padrão, o Invenio Center disponibiliza dois campos para inclusão de URLs de webhook.  
-A **fila paralela** permite adicionar URLs adicionais de webhook, sujeita a custo extra na fatura.
-
-
-> Para mais informações, entre em contato com o gerente comercial responsável pela sua conta.
+| Linguagem | Framework sugerido |
+|-----------|--------------------|
+| JavaScript / Node.js | Express |
+| Python | Flask, Django ou FastAPI |
+| C# (.NET) | ASP.NET Core |
+| Java | Spring Boot |
+| PHP | Laravel, Symfony ou nativo `$_POST` |
+| Go, Ruby, Rust, Elixir | Qualquer lib HTTP nativa |
 
 ---
 
-# Mapeamento de Campos
+## Requisitos de Infraestrutura (Produção)
 
-Além dos exemplos de JSONs retornados pelo Webhook, é fundamental compreender a estrutura de campos utilizada.  
-Abaixo, apresentamos a organização desses dados, que servirá de base para a manipulação e integração adequada dentro do ambiente do cliente.
+<Warning>
+**Configuração mínima recomendada para o servidor endpoint:**
+
+| Componente | Requisito mínimo |
+|------------|-----------------|
+| **Armazenamento** | SSD de 250 GB |
+| **Memória RAM** | 16 GB |
+| **CPU** | 4 núcleos |
+
+⚠️ O uso de **HD** não é recomendado — pode gerar gargalos pelo alto volume de mensagens e eventos. Monitore a infraestrutura continuamente com possibilidade de escala futura.
+</Warning>
+
+---
+
+## Configurar o Webhook no Invenio Center
+
+**Caminho:** Invenio Center > Configurações > **Webhook > Gerenciar**
+
+<Tip>
+**Acesso direto:** [Configurações](https://inveniocenter.robbu.global/painel/configuracoes)
+</Tip>
+
+<Steps>
+  <Step title="Preparar o servidor endpoint">
+    Configure e publique o endpoint na sua infraestrutura (servidor, banco de dados, firewall).
+
+    Certifique-se de que os **IPs do Invenio** estão liberados no firewall.
+
+    Consulte: [Lista de IPs para liberação](https://docs.robbu.global/docs/configuracoes-gerais/lista-ips)
+  </Step>
+
+  <Step title="Acessar configurações do Webhook">
+    Acesse: **Invenio Center > Configurações > Webhook > Gerenciar**
+
+    <Frame caption="Tela de gerenciamento do Webhook">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook3.png" />
+    </Frame>
+
+    <Frame caption="Configuração da URL do endpoint">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook2.png" />
+    </Frame>
+
+    <Frame caption="Confirmação de configuração salva">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/webhook/webhook1.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Adicionar a URL do endpoint">
+    Cole a URL gerada pelo seu servidor/ambiente de publicação no campo disponível e clique em **Salvar**.
+
+    <Check>
+    Em até **60 minutos**, as requisições começarão a ser disparadas para o endpoint configurado.
+    </Check>
+  </Step>
+</Steps>
+
+<Note>
+**Fila paralela:** O Invenio disponibiliza dois campos para URLs de Webhook por padrão. A inclusão de URLs adicionais (fila paralela) está sujeita a **custo extra** — consulte o gerente comercial responsável pela sua conta.
+</Note>
+
+---
+
+## Diagrama de Funcionamento
+
+```mermaid
+sequenceDiagram
+    participant UsuarioFinal as Usuário Final
+    participant Invenio as Invenio (Sistema)
+    participant Cliente as Cliente (Aplicação)
+
+    UsuarioFinal->>Invenio: Envia mensagem (Texto/Arquivo/Localização)
+    Invenio->>Cliente: Dispara Webhook com dados da mensagem
+    Cliente-->>Invenio: Retorna resposta (HTTP 200/erro)
+    Cliente->>Invenio: Opcional: Envia instruções para resposta automática
+    Invenio->>UsuarioFinal: Responde mensagem ou exibe notificação
+```
+
+---
+
+## Mapeamento de Campos
 
 ### Message (Mensagem)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
-| `MessageSentToProviderAt` | Data e hora do envio da mensagem ao provedor | `Datetime` |
-| `MessageDeliveredAt` | Data e hora da entrega da mensagem | `Datetime` |
-| `MessageReadAt` | Data e hora da leitura da mensagem | `Datetime` |
-| `MessageFailedAt` | Data e hora da falha na entrega da mensagem | `Datetime` |
-| `MessagemSentAt` | Data e hora do envio da mensagem | `Datetime` |
-| `MessageReceivedAt` | Data e hora do recebimento da mensagem | `Datetime` |
+|-------|-----------|------|
+| `MessageSentToProviderAt` | Data/hora do envio ao provedor | `Datetime` |
+| `MessageDeliveredAt` | Data/hora da entrega | `Datetime` |
+| `MessageReadAt` | Data/hora da leitura | `Datetime` |
+| `MessageFailedAt` | Data/hora da falha na entrega | `Datetime` |
+| `MessagemSentAt` | Data/hora do envio | `Datetime` |
+| `MessageReceivedAt` | Data/hora do recebimento | `Datetime` |
 | `MessageCampaignid` | ID da campanha | `Int` |
-| `MessageType` | Tipo do envio da mensagem | `String` |
-| `MessageDirection` | Direção da mensagem: Outcoming (saída) ou Incoming (entrada) | `String` |
+| `MessageType` | Tipo de envio | `String` |
+| `MessageDirection` | `incoming` (entrada) ou `outgoing` (saída) | `String` |
 | `MessageId` | ID da mensagem | `Long` |
-| `MessageChannel` | Canal da mensagem (ver enumeração abaixo) | `Int` |
+| `MessageChannel` | Canal (ver enumeração) | `Int` |
 | `MessageText` | Texto da mensagem | `String` |
 | `MessageSourceCountryCode` | Código do país do remetente | `Int` |
-| `MessageSourcePhoneNumber` | Número de telefone do remetente | `Long` |
+| `MessageSourcePhoneNumber` | Telefone do remetente | `Long` |
 | `MessageSourceEmail` | E-mail do remetente | `String` |
 | `MessageDestinationCountryCode` | Código do país do destinatário | `Int` |
-| `MessageDestinationPhoneNumber` | Número de telefone do destinatário | `Long` |
+| `MessageDestinationPhoneNumber` | Telefone do destinatário | `Long` |
 | `MessageDestinationEmail` | E-mail do destinatário | `String` |
 | `ContactRobbuId` | ID do contato na Robbu | `Long` |
 | `ContactName` | Nome do contato | `String` |
 | `ContactID` | ID do contato | `String` |
-| `ContactCustomCode` | Código do cliente do contato | `String` |
-| `ContactMainEmail` | E-mail principal do contato | `String` |
-| `ContactMainWhatsAppCountryCode` | Código do país da linha principal de WhatsApp | `Int` |
-| `ContactMainWhatsAppPhoneNumber` | Número de WhatsApp principal do contato | `Long` |
-| `ContactMainSmsCountryCode` | Código do país da linha principal de SMS | `Int` |
-| `ContactMainSmsPhoneNumber` | Número de SMS principal do contato | `Long` |
-| `QueueWaitingSince` | Início da espera do contato na fila da operação | `Datetime` |
+| `ContactCustomCode` | Código do cliente | `String` |
+| `ContactMainEmail` | E-mail principal | `String` |
+| `ContactMainWhatsAppCountryCode` | Código do país (WhatsApp) | `Int` |
+| `ContactMainWhatsAppPhoneNumber` | Número WhatsApp principal | `Long` |
+| `ContactMainSmsCountryCode` | Código do país (SMS) | `Int` |
+| `ContactMainSmsPhoneNumber` | Número SMS principal | `Long` |
+| `QueueWaitingSince` | Início da espera na fila | `Datetime` |
 | `QueueFirstAnswerAt` | Primeira resposta ao contato | `Datetime` |
-| `ContactLastWalletCode` | Código do último segmento do contato | `String` |
-| `ContactLastWalletName` | Nome do último segmento do contato | `String` |
-| `ContactLastChannelDescripton` | Descrição do último canal do contato | `String` |
-| `ContactCreatedAt` | Data e hora de inclusão do contato | `Datetime` |
-| `ContactLastAnswearAt` | Data e hora da última mensagem enviada ao contato pela operação | `Datetime` |
-| `ContactLastIncomingMessageAt` | Data e hora da última mensagem recebida do contato | `Datetime` |
-| `DigitalPostman` | Indica se o envio é via Carteiro Digital | `Bool` |
+| `ContactLastWalletCode` | Código do último segmento | `String` |
+| `ContactLastWalletName` | Nome do último segmento | `String` |
+| `ContactLastChannelDescripton` | Último canal do contato | `String` |
+| `ContactCreatedAt` | Data/hora de inclusão do contato | `Datetime` |
+| `ContactLastAnswearAt` | Última mensagem enviada ao contato | `Datetime` |
+| `ContactLastIncomingMessageAt` | Última mensagem recebida do contato | `Datetime` |
+| `DigitalPostman` | Envio via Carteiro Digital | `Bool` |
 | `LocationLatitude` | Latitude de localização | `Double` |
 | `LocationLongitude` | Longitude de localização | `Double` |
 | `FileUrl` | URL do arquivo | `String` |
@@ -147,353 +177,327 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 | `FileExtension` | Extensão do arquivo | `String` |
 | `ProtocolMessageId` | ID do protocolo | `Long` |
 | `ProtocolMessageNumber` | Número do protocolo | `String` |
-| `MessageErrorCode` | Código da falha na entrega da mensagem | `String` |
-| `ErrorMessage` | Descrição do erro de entrega | `String` |
+| `MessageErrorCode` | Código de falha na entrega | `String` |
+| `ErrorMessage` | Descrição do erro | `String` |
 | `MessageChannelDescription` | Descrição do canal | `String` |
 | `MessageTemplateName` | Nome do template | `String` |
 | `MessageTemplateId` | ID do template | `Long` |
 
-**Enumeração – MessageChannel**  
+**Enumeração – MessageChannel:**
 `1` E-mail · `2` SMS · `3` WhatsApp · `4` Chat · `5` Facebook · `6` Telegram · `7` Voz · `8` Instagram · `9` Viber
 
-<Accordion title="Modelo JSON - Mensagem de entrada (Incoming)">
+<AccordionGroup>
+  <Accordion title="Modelo JSON — Mensagem de Entrada (Incoming)">
+    ```json
+    "message": {
+      "receivedAt": "2020-01-31T02:01:03",
+      "direction": "incoming",
+      "id": 13232322244444,
+      "channel": 3,
+      "text": "Olá, teste whats!",
+      "source": {
+        "countryCode": 55,
+        "phoneNumber": 11999999992
+      },
+      "destination": {
+        "countryCode": 55,
+        "phoneNumber": 11944497777
+      },
+      "location": {
+        "latitude": -23.5535317,
+        "longitude": -46.6631181
+      },
+      "file": {
+        "url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
+        "name": "robbu",
+        "extension": "pdf"
+      },
+      "contact": {
+        "robbuid": 11111111111,
+        "name": "TESTE ROBBU",
+        "customCode": "1372511",
+        "id": "00000000000",
+        "mainWhatsapp": { "countryCode": 55, "phoneNumber": 11999999992 },
+        "mainSMS": { "countryCode": 55, "phoneNumber": 11999999992 },
+        "mainEmail": "teste@robbu.global"
+      }
+    }
+    ```
+  </Accordion>
 
-   ```
-   "message": {
-		"receivedAt": "2020-01-31T02:01:03",
-		"direction": "incoming",
-		"id": 13232322244444,
-		"channel": 3,
-		"text": "Olá, teste whats!",
-		"source": {
-			"countryCode": 55,
-			"phoneNumber": 11999999992
-		},
-		"destination": {
-			"countryCode": 55,
-			"phoneNumber": 11944497777
-		},
-		"location": {
-			"latitude": -23.5535317,
-			"longitude": -46.6631181
-		},
-		"file": {
-			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
-			"name": "robbu",
-			"extension": "pdf"
-		},
-		"contact": {
-			"robbuid": 11111111111,
-			"name": "TESTE ROBBU",
-			"customCode": "1372511",
-			"id": "00000000000",
-			"mainWhatsapp": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainSMS": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainEmail": "teste@robbu.global"
-		}
-	}
-  ```
-</Accordion>
-<Accordion title="Modelo JSON - Mensagem de saída (Outgoing)">
-  You can put any content in here, including other components, like code:
+  <Accordion title="Modelo JSON — Mensagem de Saída (Outgoing)">
+    ```json
+    "message": {
+      "sentAt": "2020-01-31T02:05:21.2900000",
+      "direction": "outgoing",
+      "id": 1323232224455555,
+      "channel": 3,
+      "type": "",
+      "text": "Teste envio whats!",
+      "campaignId": 1234,
+      "source": {
+        "countryCode": 55,
+        "phoneNumber": 11944497777,
+        "sender": ""
+      },
+      "destination": {
+        "countryCode": 55,
+        "phoneNumber": 11999999992
+      },
+      "file": {
+        "url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
+        "name": "robbu",
+        "extension": "pdf"
+      },
+      "contact": {
+        "robbuid": 11111111111,
+        "name": "TESTE ROBBU",
+        "customCode": "1372511",
+        "id": "00000000000",
+        "mainWhatsapp": { "countryCode": 55, "phoneNumber": 11999999992 },
+        "mainSMS": { "countryCode": 55, "phoneNumber": 11999999992 },
+        "mainEmail": "teste@robbu.global",
+        "queue": {
+          "waitingSince": "2021-03-08 12:00:00",
+          "firstAnswerAt": "2021-03-08 11:30:00"
+        }
+      }
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
 
-   ```
-   "message": {
-		"sentAt": "2020-01-31T02:05:21.2900000",
-		"direction": "outgoing",
-		"id": 1323232224455555,
-		"channel": 3,
-		"type": "",
-		"text": "Teste envio whats!",
-		"campaignId": 1234,
-		"source": {
-			"countryCode": 55,
-			"phoneNumber": 11944497777,
-			"sender": ""
-		},
-		"destination": {
-			"countryCode": 55,
-			"phoneNumber": 11999999992
-		},
-		"file": {
-			"url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
-			"name": "robbu",
-			"extension": "pdf"
-		},
-		"contact": {
-			"robbuid": 11111111111,
-			"name": "TESTE ROBBU",
-			"customCode": "1372511",
-			"id": "00000000000",
-			"mainWhatsapp": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainSMS": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainEmail": "teste@robbu.global",
-			"queue": {
-				"waitingSince": "2021-03-08 12:00:00",
-				"firstAnswerAt": "2021-03-08 11:30:00"
-			}
-		}
-	}
-  ```
-</Accordion>
 ---
 
 ### Status
 
 | Campo | Descrição | Tipo |
-|---|---|---|
-| `MessageStatusId` | ID do status da mensagem | `Long` |
-| `SourceStatusSender` | Remetente do status de origem | `String` |
-| `MessageStatusSentToProviderAt` | Envio do status ao provedor | `Datetime` |
-| `MessageStatusDeliveredAt` | Entrega do status | `Datetime` |
-| `MessageStatusReadAt` | Leitura do status | `Datetime` |
+|-------|-----------|------|
+| `MessageStatusId` | ID do status | `Long` |
+| `SourceStatusSender` | Remetente do status | `String` |
+| `MessageStatusSentToProviderAt` | Envio ao provedor | `Datetime` |
+| `MessageStatusDeliveredAt` | Entrega | `Datetime` |
+| `MessageStatusReadAt` | Leitura | `Datetime` |
 | `MessageStatusSentAt` | Envio da mensagem | `Datetime` |
-| `MessageStatusFailedAt` | Falha no envio da mensagem | `Datetime` |
-| `MessageStatusDigitalPostman` | Indica envio via Carteiro Digital | `Bool` |
-| `MessageStatusErrorCode` | Código de erro da mensagem | `String` |
-| `MessageStatusErrorMessage` | Descrição do erro da mensagem | `String` |
-| `ContactStatusRobbuId` | ID do status do contato na Robbu | `Long` |
+| `MessageStatusFailedAt` | Falha no envio | `Datetime` |
+| `MessageStatusDigitalPostman` | Envio via Carteiro Digital | `Bool` |
+| `MessageStatusErrorCode` | Código de erro | `String` |
+| `MessageStatusErrorMessage` | Descrição do erro | `String` |
+| `ContactStatusRobbuId` | ID do contato na Robbu | `Long` |
 
-<Accordion title="Modelo JSON - Status">
-
-   ```
-   "status": {
-		"message": {
-			"id": 1323232224455555,
-			"source": {
-				"sender": "User1"
-			},
-			"sentToProviderAt": "2020-01-31T15:50:39.9312405",
-			"deliveredAt": "2020-01-31T15:51:52.9707831",
-			"readAt": "2020-01-31T15:53:14.6399299"
-		}
-	}
+<Accordion title="Modelo JSON — Status">
+  ```json
+  "status": {
+    "message": {
+      "id": 1323232224455555,
+      "source": { "sender": "User1" },
+      "sentToProviderAt": "2020-01-31T15:50:39.9312405",
+      "deliveredAt": "2020-01-31T15:51:52.9707831",
+      "readAt": "2020-01-31T15:53:14.6399299"
+    }
+  }
   ```
 </Accordion>
+
 ---
 
 ### Event (KPI Evento)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
+|-------|-----------|------|
 | `ID` | ID do evento | `Long` |
 | `Description` | Descrição do evento | `String` |
-| `Note` | Observação do evento | `String` |
-| `CustomCode` | Código customizado do evento | `String` |
-| `Sender` | Usuário responsável pelo evento | `String` |
-| `Finalized` | Indica se é um evento finalizador | `Bool` |
-| `Type` | Tipo do evento: negativo, neutro ou positivo | `String` |
+| `Note` | Observação | `String` |
+| `CustomCode` | Código customizado | `String` |
+| `Sender` | Usuário responsável | `String` |
+| `Finalized` | Evento finalizador | `Bool` |
+| `Type` | Tipo: negativo, neutro ou positivo | `String` |
 | `ProtocolNumber` | Número do protocolo | `String` |
 | `ProtocolID` | ID do protocolo | `Long` |
-| `ContactRobbuId` | ID único do contato na Robbu | `Long` |
+| `ContactRobbuId` | ID único do contato | `Long` |
 | `ContactName` | Nome do contato | `String` |
 | `ContactID` | ID do contato | `String` |
-| `ContactCustomCode` | Código do cliente do contato | `String` |
-| `ContactMainEmail` | E-mail principal do contato | `String` |
-| `ContactMainWhatsAppCountryCode` | Código do país da linha principal de WhatsApp | `Int` |
-| `ContactMainWhatsAppPhoneNumber` | Número de WhatsApp principal do contato | `Long` |
-| `ContactMainSmsCountryCode` | Código do país da linha principal de SMS | `Int` |
-| `ContactMainSmsPhoneNumber` | Número de SMS principal do contato | `Long` |
-| `QueueWaitingSince` | Início da espera na fila da operação | `Datetime` |
-| `QueueFirstAnswerAt` | Primeira resposta ao contato | `Datetime` |
-| `ContactLastWalletCode` | Código do último segmento do contato | `String` |
-| `ContactLastWalletName` | Nome do último segmento do contato | `String` |
-| `ContactLastChannelDescripton` | Descrição do último canal do contato | `String` |
-| `ContactCreatedAt` | Data e hora de inclusão do contato | `Datetime` |
-| `ContactLastAnswearAt` | Última mensagem enviada ao contato pela operação | `Datetime` |
-| `ContactLastIncomingMessageAt` | Última mensagem recebida do contato | `Datetime` |
+| `ContactCustomCode` | Código do cliente | `String` |
+| `ContactMainEmail` | E-mail principal | `String` |
+| `ContactMainWhatsAppCountryCode` | Código do país (WhatsApp) | `Int` |
+| `ContactMainWhatsAppPhoneNumber` | Número WhatsApp principal | `Long` |
+| `ContactMainSmsCountryCode` | Código do país (SMS) | `Int` |
+| `ContactMainSmsPhoneNumber` | Número SMS principal | `Long` |
+| `QueueWaitingSince` | Início da espera na fila | `Datetime` |
+| `QueueFirstAnswerAt` | Primeira resposta | `Datetime` |
+| `ContactLastWalletCode` | Código do último segmento | `String` |
+| `ContactLastWalletName` | Nome do último segmento | `String` |
+| `ContactLastChannelDescripton` | Último canal | `String` |
+| `ContactCreatedAt` | Inclusão do contato | `Datetime` |
+| `ContactLastAnswearAt` | Última mensagem enviada | `Datetime` |
+| `ContactLastIncomingMessageAt` | Última mensagem recebida | `Datetime` |
 
-<Accordion title="Exemplo JSON - KPI Evento">
-
-   ```
-   "event": {
-		"createdAt": "2020-01-31T02:05:21.0566667",
-		"id": 13232322244599998,
-		"description": "[CR] Saudacao Final",
-		"note": "Saudacao Final",
-		"customCode": "298",
-		"finalized": false,
-		"sender": "",
-		"type": "Neutro",
-		"contact": {
-			"robbuid": 11111111111,
-			"name": "TESTE ROBBU",
-			"customCode": "1372511",
-			"id": "00000000000",
-			"mainWhatsapp": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainSMS": {
-				"countryCode": 55,
-				"phoneNumber": 11999999992
-			},
-			"mainEmail": "teste@robbu.global"
-		}
-	}
-
+<Accordion title="Modelo JSON — KPI Evento">
+  ```json
+  "event": {
+    "createdAt": "2020-01-31T02:05:21.0566667",
+    "id": 13232322244599998,
+    "description": "[CR] Saudacao Final",
+    "note": "Saudacao Final",
+    "customCode": "298",
+    "finalized": false,
+    "sender": "",
+    "type": "Neutro",
+    "contact": {
+      "robbuid": 11111111111,
+      "name": "TESTE ROBBU",
+      "customCode": "1372511",
+      "id": "00000000000",
+      "mainWhatsapp": { "countryCode": 55, "phoneNumber": 11999999992 },
+      "mainSMS": { "countryCode": 55, "phoneNumber": 11999999992 },
+      "mainEmail": "teste@robbu.global"
+    }
+  }
   ```
 </Accordion>
+
 ---
 
 ### Campaign (Campanha)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
-| `CreatedAt` | Data e hora de criação da campanha | `Datetime` |
-| `CreatedBy` | Usuário responsável pela campanha | `String` |
+|-------|-----------|------|
+| `CreatedAt` | Data/hora de criação | `Datetime` |
+| `CreatedBy` | Usuário responsável | `String` |
 | `Id` | ID da campanha | `Int` |
-| `Channel` | Canal da campanha (ver enumeração abaixo) | `Int` |
+| `Channel` | Canal (ver enumeração) | `Int` |
 | `ChannelDescription` | Descrição do canal | `String` |
 | `StartAt` | Início da campanha | `Datetime` |
-| `Size` | Quantidade de mensagens a enviar | `Int` |
-| `Message` | Template enviado na campanha | `String` |
-| `HoursToDiscard` | Horas para descartar quando o contato já está em atendimento por outro canal | `Int` |
-| `TypeCampaignCode` | Código interno do tipo de campanha | `String` |
-| `TypeCampaignDescription` | Descrição do tipo de campanha [1-SMS; 2-WhatsApp; 3-E-mail; 4-Voz] | `String` |
-| `SplitSendPercentage` | Percentual para fracionar o envio | `Double` |
+| `Size` | Quantidade de mensagens | `Int` |
+| `Message` | Template enviado | `String` |
+| `HoursToDiscard` | Horas para descarte por atendimento ativo | `Int` |
+| `TypeCampaignCode` | Código interno do tipo | `String` |
+| `TypeCampaignDescription` | Tipo: SMS, WhatsApp, E-mail, Voz | `String` |
+| `SplitSendPercentage` | % de fracionamento | `Double` |
 | `SplitSendMinutes` | Intervalo (min) entre envios | `Int` |
 | `MailingDescription` | Descrição do mailing | `String` |
-| `MailingImportedAt` | Importação do mailing (data/hora) | `Datetime` |
-| `MailingImportedBy` | Usuário que importou o mailing | `String` |
-| `MailingSize` | Quantidade de registros no mailing | `Int` |
-| `MailingWalletClientCode` | Código da carteira do mailing | `String` |
-| `TotalSent` | Total de mensagens enviadas | `Int` |
-| `CampaignLastSentAt` | Data e hora da última mensagem enviada | `Datetime` |
-| `CampaignStatusCode` | Código de status da campanha | `String` |
+| `MailingImportedAt` | Importação do mailing | `Datetime` |
+| `MailingImportedBy` | Usuário que importou | `String` |
+| `MailingSize` | Registros no mailing | `Int` |
+| `MailingWalletClientCode` | Código da carteira | `String` |
+| `TotalSent` | Total enviado | `Int` |
+| `CampaignLastSentAt` | Última mensagem enviada | `Datetime` |
+| `CampaignStatusCode` | Código de status | `String` |
 | `CampaignDescription` | Descrição do tipo de campanha | `String` |
 
-**Enumeração – Channel**  
+**Enumeração – Channel:**
 `1` E-mail · `2` SMS · `3` WhatsApp · `4` Chat · `5` Facebook · `6` Telegram · `7` Voz · `8` Instagram · `9` Viber
 
-**TypeCampaignCode**  
-`EM` E-mail · `SL` SMS Long · `SS` SMS Short · `VW` Voz Way · `WB` WhatsApp Broadcast · `WE` WhatsApp Oficial Exclusivo · `WP` WhatsApp Prospect Convencional · `WO/WC` WhatsApp Oficial Compartilhado
+**TypeCampaignCode:**
+`EM` E-mail · `SL` SMS Long · `SS` SMS Short · `VW` Voz Way · `WB` WhatsApp Broadcast · `WE` WhatsApp Oficial Exclusivo · `WP` WhatsApp Prospect · `WO/WC` WhatsApp Oficial Compartilhado
 
-**CampaignStatusCode**  
+**CampaignStatusCode:**
 `C` Cancelada · `E` Não enviada · `F` Finalizada · `I` Iniciada · `P` Aguardando processamento
 
-<Accordion title="Modelo JSON - Campanha">
+<AccordionGroup>
+  <Accordion title="Modelo JSON — Campanha">
+    ```json
+    "campaign": {
+      "createdAt": "2020-01-27T22:01:12.2766667",
+      "createdBy": "User Robbu",
+      "id": 994545,
+      "channel": 1,
+      "startAt": "2020-01-27T21:59:00",
+      "size": 3102,
+      "message": "<html><body>Envio campanha email!</body></html>",
+      "hoursToDiscard": 0,
+      "type": { "code": "EM", "description": "EMAIL" },
+      "splitSend": { "percentage": 100.00, "minutes": 0 },
+      "mailing": {
+        "description": "disparo_email",
+        "importedAt": "2020-01-27T21:54:16.5500000",
+        "importedBy": "User Robbu",
+        "size": 3102,
+        "walletClientCode": "1000"
+      }
+    }
+    ```
+  </Accordion>
 
-   ```
-   "campaign": {
-		"createdAt": "2020-01-27T22:01:12.2766667",
-		"createdBy": "User Robbu",
-		"id": 994545,
-		"channel": 1,
-		"startAt": "2020-01-27T21:59:00",
-		"size": 3102,
-		"message": "<html><body>Envio campanha email!<\/body><\/html>",
-		"hoursToDiscard": 0,
-		"type": {
-			"code": "EM",
-			"description": "EMAIL"
-		},
-		"splitSend": {
-			"percentage": 100.00,
-			"minutes": 0
-		},
-		"mailing": {
-			"description": "disparo_email",
-			"importedAt": "2020-01-27T21:54:16.5500000",
-			"importedBy": "User Robbu",
-			"size": 3102,
-			"walletClientCode": "1000"
-		}
-	}
-  ```
-</Accordion>
-<Accordion title="Modelo JSON - Status campanha">
+  <Accordion title="Modelo JSON — Status da Campanha">
+    ```json
+    "status": {
+      "campaign": {
+        "id": 994545,
+        "totalSent": 91,
+        "lastSentAt": "2020-01-31T16:10:12.0633333",
+        "statusCode": "F"
+      }
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
 
-   ```
-   "status": {
-		"campaign": {
-			"id": 994545,
-			"totalSent": 91,
-			"lastSentAt": "2020-01-31T16:10:12.0633333",
-			"statusCode": "F"
-		}
-	}
-  
-  ```
-</Accordion>
 ---
 
 ### Template
 
 | Campo | Descrição | Tipo |
-|---|---|---|
+|-------|-----------|------|
 | `Id` | ID do template | `Long` |
 | `Name` | Nome do template | `String` |
-| `Event` | Status da ação (Updated, Created) | `String` |
-| `EventAt` | Data e hora de inclusão/alteração | `Datetime` |
-| `Status` | Status na Meta [Approved; Reject; Deleted; Disabled] | `String` |
-| `Quality` | Qualidade na Meta [Green; Yellow; Red; Deleted; Disabled] | `String` |
-| `Category` | Categoria na Meta [Utility; Marketing; Service; Authentication] | `String` |
+| `Event` | Ação: `Updated` ou `Created` | `String` |
+| `EventAt` | Data/hora de inclusão/alteração | `Datetime` |
+| `Status` | Status na Meta: `Approved` · `Reject` · `Deleted` · `Disabled` | `String` |
+| `Quality` | Qualidade na Meta: `Green` · `Yellow` · `Red` · `Deleted` · `Disabled` | `String` |
+| `Category` | Categoria: `Utility` · `Marketing` · `Service` · `Authentication` | `String` |
 | `Language` | Idioma do template | `String` |
 
-
-<Accordion title="Modelo JSON - Template">
-
-   ```
-    "template": {
-      "id": 53129216,
-      "name": "bv_atualizar_informacoes_020",
-      "event": "updated",
-      "eventAt": "2025-02-28T12:10:24.2981975Z",
-      "status": "APPROVED",
-      "quality": "UNKNOWN",
-      "category": "MARKETING",
-      "language": "pt_BR"
-}
+<Accordion title="Modelo JSON — Template">
+  ```json
+  "template": {
+    "id": 53129216,
+    "name": "bv_atualizar_informacoes_020",
+    "event": "updated",
+    "eventAt": "2025-02-28T12:10:24.2981975Z",
+    "status": "APPROVED",
+    "quality": "UNKNOWN",
+    "category": "MARKETING",
+    "language": "pt_BR"
+  }
   ```
 </Accordion>
+
 ---
 
 ### Protocol (Protocolo)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
-| `Event` | Status da ação realizada ao protocolo [Updated; Created] | `String` |
-| `EventAt` | Data e hora de inclusão do protocolo | `Datetime` |
+|-------|-----------|------|
+| `Event` | Ação: `Updated` ou `Created` | `String` |
+| `EventAt` | Data/hora de inclusão | `Datetime` |
 | `Id` | ID do protocolo | `Long` |
 | `Number` | Número do protocolo | `String` |
-| `GeneratedAt` | Data e hora de geração do protocolo | `Datetime` |
-| `GenerationChannelDescription` | Descrição do canal do protocolo gerado | `String` |
-| `GenerationWalletName` | Nome do segmento onde o protocolo foi gerado | `String` |
-| `GenerationWalletCode` | Código do segmento onde o protocolo foi gerado | `String` |
-| `GenerationWalletId` | ID do segmento gerado | `Long` |
+| `GeneratedAt` | Data/hora de geração | `Datetime` |
+| `GenerationChannelDescription` | Canal do protocolo | `String` |
+| `GenerationWalletName` | Nome do segmento | `String` |
+| `GenerationWalletCode` | Código do segmento | `String` |
+| `GenerationWalletId` | ID do segmento | `Long` |
 | `SegmentId` | ID do segmento | `Long` |
 | `SegmentName` | Nome do segmento | `String` |
 | `ContactProtocolId` | ID do protocolo do contato | `String` |
-| `ContactProtocolRobbuId` | ID do protocolo na Robbu | `Long` |
+| `ContactProtocolRobbuId` | ID na Robbu | `Long` |
 | `FirstMessageIdrAt` | Primeira mensagem na IDR | `Datetime` |
 | `LastMessageIdrAt` | Última mensagem na IDR | `Datetime` |
-| `IdrClosedAt` | Encerramento do atendimento na IDR | `Datetime` |
-| `LastMessageContactIdrAt` | Última mensagem do contato para a IDR | `Datetime` |
+| `IdrClosedAt` | Encerramento na IDR | `Datetime` |
+| `LastMessageContactIdrAt` | Última mensagem do contato para IDR | `Datetime` |
 | `FirstMessageFromHumanAttendanceAt` | Primeira mensagem da operação | `Datetime` |
 | `IdrMessagesCount` | Total de mensagens da IDR | `Long` |
 | `HumanAttendanceMessagesCount` | Total de mensagens de atendentes | `Long` |
 | `IncomingMessagesCount` | Total de mensagens recebidas | `Long` |
 | `HumanAttendanceAnswersCount` | Total de respostas de atendentes | `Long` |
 | `ContactAnswersCount` | Total de respostas do contato | `Long` |
-| `HumanAttendanceAnswersTotalTimeInSeconds` | Soma total (seg) das respostas da operação | `Long` |
-| `ContactAnswersTotalTimeInSeconds` | Soma total (seg) das respostas do contato | `Long` |
-| `IdrAnswersTotalTimeInSeconds` | Soma total (seg) das respostas da IDR | `Long` |
+| `HumanAttendanceAnswersTotalTimeInSeconds` | Soma (seg) das respostas da operação | `Long` |
+| `ContactAnswersTotalTimeInSeconds` | Soma (seg) das respostas do contato | `Long` |
+| `IdrAnswersTotalTimeInSeconds` | Soma (seg) das respostas da IDR | `Long` |
 | `IdrAnswersCount` | Total de respostas da IDR | `Long` |
 | `ClosedAt` | Encerramento do protocolo | `Datetime` |
-| `ClosingUserInfo` | Nome do usuário que encerrou | `String` |
+| `ClosingUserInfo` | Usuário que encerrou | `String` |
 | `ClosingEventId` | ID do evento de encerramento | `Long` |
 | `ClosingEventName` | Nome do evento de encerramento | `String` |
 | `ClosingEventCode` | Código do evento de encerramento | `String` |
@@ -504,56 +508,55 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
 ### User (Usuário)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
+|-------|-----------|------|
 | `Id` | ID do usuário | `Long` |
-| `Name` | Nome do usuário | `String` |
-| `Event` | Status da ação [Updated; Created] | `String` |
-| `EventAt` | Data e hora de criação/edição | `Datetime` |
-| `Completename` | Nome completo do usuário | `String` |
+| `Name` | Nome de login | `String` |
+| `Event` | Ação: `Updated` ou `Created` | `String` |
+| `EventAt` | Data/hora de criação/edição | `Datetime` |
+| `Completename` | Nome completo | `String` |
 | `AcessGroup` | Grupo de acesso | `String` |
-| `AcessGroupDescription` | Descrição do grupo de acesso | `String` |
-| `EmailAddress` | Endereço de e-mail do usuário | `String` |
+| `AcessGroupDescription` | Descrição do grupo | `String` |
+| `EmailAddress` | E-mail do usuário | `String` |
 | `LastLoginAt` | Último login | `Datetime` |
-| `IsActive` | Usuário ativo/inativo | `Bool` |
-| `LastQueueUpdateAt` | Última atualização da fila de atendimento | `Datetime` |
+| `IsActive` | Ativo/inativo | `Bool` |
+| `LastQueueUpdateAt` | Última atualização da fila | `Datetime` |
 | `LastPasswordChangeAT` | Última troca de senha | `Datetime` |
-| `IsLogged` | Indica se está logado | `Bool` |
+| `IsLogged` | Logado no momento | `Bool` |
 
 ---
 
-### Wallet (Carteira)
+### Wallet (Carteira / Segmento)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
+|-------|-----------|------|
 | `Id` | ID do segmento | `Long` |
 | `Name` | Nome do segmento | `String` |
 | `Code` | Código do segmento | `String` |
-| `Event` | Status da ação [Updated; Created; Deleted] | `String` |
-| `EventAt` | Data e hora da criação/edição | `Datetime` |
-| `DistributionMethod` | Método de distribuição de contatos | `String` |
-| `DistributionMethodDescription` | Descrição do método de distribuição | `String` |
+| `Event` | Ação: `Updated` · `Created` · `Deleted` | `String` |
+| `EventAt` | Data/hora | `Datetime` |
+| `DistributionMethod` | Método de distribuição | `String` |
+| `DistributionMethodDescription` | Descrição do método | `String` |
 
 ---
 
-### WhatsApp Numbers (Números WhatsApp)
+### WhatsApp Numbers (Linhas WhatsApp)
 
 | Campo | Descrição | Tipo |
-|---|---|---|
-| `Event` | Status da ação na linha WhatsApp [Created; Updated] | `String` |
-| `EventAt` | Data e hora de inclusão/alteração | `Datetime` |
-| `Id` | ID da linha WhatsApp | `Long` |
+|-------|-----------|------|
+| `Event` | Ação: `Created` ou `Updated` | `String` |
+| `EventAt` | Data/hora | `Datetime` |
+| `Id` | ID da linha | `Long` |
 | `WalletId` | ID do segmento | `Long` |
-| `Status` | Qualidade da linha na Meta [Green; Yellow; Red; Unknown] | `String` |
+| `Status` | Qualidade na Meta: `Green` · `Yellow` · `Red` · `Unknown` | `String` |
 | `CountryCode` | Código do país | `String` |
 | `AreaCode` | Código de área | `String` |
-| `PhoneNumber` | Número de telefone da linha WhatsApp | `String` |
+| `PhoneNumber` | Número de telefone | `String` |
 | `IsActive` | Linha ativa | `Bool` |
 | `BroadCastLimitPerDay` | Limite diário de envios (Meta) | `Int` |
-| `CanSendHsm` | Linha habilitada para envio de HSM | `Bool` |
+| `CanSendHsm` | Habilitada para HSM | `Bool` |
 
-<Accordion title="Modelo JSON - Número WhatsApp">
-
-   ```
+<Accordion title="Modelo JSON — Número WhatsApp">
+  ```json
   "whatsappNumber": {
     "event": "updated",
     "eventAt": "2025-02-26T19:18:48.5888674+00:00",
@@ -569,123 +572,70 @@ Abaixo, apresentamos a organização desses dados, que servirá de base para a m
   }
   ```
 </Accordion>
----
-
-## Exemplo Prático de Funcionamento da Integração com Webhook
-
-```mermaid
-sequenceDiagram
-    participant UsuarioFinal as Usuário Final
-    participant Invenio as Invenio (Sistema)
-    participant Cliente as Cliente (Aplicação)
-
-    UsuarioFinal->>Invenio: Envia mensagem (Texto/Arquivo/Localização)
-    Invenio->>Cliente: Dispara Webhook com dados da mensagem
-    Cliente-->>Invenio: Retorna resposta (HTTP 200/erro)
-    Cliente->>Invenio: Opcional: Envia instruções para resposta automática
-    Invenio->>UsuarioFinal: Responde mensagem ou exibe notificação
-```
-
-1. **Mensagens enviadas:**
-Assim que o Invenio envia uma mensagem (por exemplo, um WhatsApp para um cliente), ele avisa seu sistema se a mensagem foi entregue com sucesso ou se houve algum problema.
-
-*Exemplo:*  
-`Mensagem para o João entregue às 15h.`
-
-2. **Mensagens recebidas:**
-Quando alguém responde ou envia uma mensagem para você, o Invenio imediatamente notifica o seu sistema.
-
-*Exemplo:*  
-`Mensagem recebida do João: "Preciso de ajuda com o pedido."`
-
-3. **Eventos de KPI:**
-Sempre que um indicador importante é registrado (como número de atendimentos concluídos), seu sistema recebe os dados.
-
-*Exemplo:*  
-`5 novos atendimentos registrados hoje.`
-
-4. **Campanhas:**
-Se você criou uma campanha de mensagens, o Invenio avisa sobre o andamento, como o número de mensagens enviadas ou se a campanha terminou.
-
-*Exemplo:*  
-`Campanha "Promoção de Verão" está 75% concluída.`
-
-5. **Carteiras:**
-Quando você atualiza as configurações das carteiras (listas de clientes ou grupos), o Invenio avisa sobre qualquer alteração feita.
-
-*Exemplo:*  
-`A carteira "Clientes VIP" foi atualizada com 20 novos contatos.`
-
-6. **Templates HSM:**
-Se você utiliza mensagens pré-aprovadas (templates HSM) para enviar comunicações, o Webhook informa mudanças de status, qualidade ou edições.
-
-*Exemplo:*  
-`Template "Promoção 10%" aprovado com sucesso.`
-
-7. **Linhas WhatsApp:**
-Caso sua linha do WhatsApp mude de status (ativa, inativa ou com problemas), o Webhook te avisa.
-
-*Exemplo:*  
-`Linha WhatsApp "Suporte" está ativa e funcionando normalmente.`
-
-8. **Usuários:**
-Sempre que um usuário da sua equipe faz alterações no sistema, o Webhook registra e envia essas informações.
-
-*Exemplo:*  
-`Usuário "Maria" atualizou o perfil dela.`
-
-9. **Protocolos:**
-Se você utiliza protocolos para monitorar atendimentos ou processos, o Webhook envia os dados detalhados.
-
-*Exemplo:*  
-`Protocolo #12345 foi finalizado com sucesso.`
-
-**Obs.:**
-Os eventos enviados pelo Webhook são estruturados no formato **JSON**, garantindo que seu sistema possa processar as informações de maneira organizada e confiável. Os exemplos apresentados acima são apenas ilustrativos para facilitar o entendimento e não representam o formato real das notificações enviadas.
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Links Relacionados
 
-- [Configurações gerais da conta (Invenio Center)](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)
-- [Lista de IPs para liberação de firewall](https://docs.robbu.global/docs/configuracoes-gerais/lista-ips)
+<CardGroup cols={2}>
+  <Card
+    title="Configurações Gerais da Conta"
+    icon="gear"
+    href="https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta"
+  >
+    Configurações do ambiente Invenio Center
+  </Card>
 
+  <Card
+    title="Lista de IPs para Firewall"
+    icon="shield"
+    href="https://docs.robbu.global/docs/configuracoes-gerais/lista-ips"
+  >
+    IPs que devem ser liberados no firewall
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Quais objetos o Webhook do Invenio envia para meu endpoint?">
-    São enviados blocos JSON dos seguintes objetos: <b>contact</b>, <b>event</b>, <b>messageincoming</b>, <b>messageoutgoing</b>, <b>campaign</b>, <b>template</b>, <b>protocol</b>, <b>wallet</b>, <b>whatsapp numbers</b> e <b>status</b>.
+  <Accordion title="📦 Quais objetos o Webhook envia?">
+    São enviados blocos JSON dos seguintes objetos:
+    `contact` · `event` · `messageincoming` · `messageoutgoing` · `campaign` · `template` · `protocol` · `wallet` · `whatsappnumbers` · `status`
   </Accordion>
 
-  <Accordion title="Com que frequência os lotes são entregues? Existe limite por lote?">
-    Sim. As entregas ocorrem em <b>lotes de até 30 arquivos JSON</b> com <b>intervalo médio de 2 segundos</b> entre os lotes, garantindo fluxo constante e organizado.
+  <Accordion title="⏱️ Com que frequência os lotes são entregues?">
+    Em **lotes de até 30 arquivos JSON** com **intervalo médio de 2 segundos** entre os lotes.
   </Accordion>
 
-  <Accordion title="Após configurar o endpoint, quando começam a chegar os dados?">
-    As requisições passam a ser disparadas em até <b>60 minutos</b> após o salvamento da URL do endpoint no Invenio Center.
+  <Accordion title="⏳ Quando começam a chegar os dados após a configuração?">
+    Em até **60 minutos** após o salvamento da URL do endpoint no Invenio Center.
   </Accordion>
 
-  <Accordion title="É obrigatório usar HTTPS no endpoint?">
-    É <b>altamente recomendado</b> utilizar HTTPS para garantir segurança no transporte dos dados. Além disso, é necessário liberar os <b>IPs oficiais</b> no firewall para assegurar a conectividade.
+  <Accordion title="🔐 É obrigatório usar HTTPS no endpoint?">
+    É **altamente recomendado** usar HTTPS para segurança no transporte dos dados. Além disso, libere os **IPs oficiais do Invenio** no firewall para garantir conectividade.
+
+    Consulte: [Lista de IPs](https://docs.robbu.global/docs/configuracoes-gerais/lista-ips)
   </Accordion>
 
-  <Accordion title="Quais são os requisitos mínimos de infraestrutura para produção?">
-    Recomendamos <b>SSD de 250 GB</b>, <b>16 GB de RAM</b> e <b>CPU com 4 núcleos</b>. O uso de HD não é indicado devido ao volume de mensagens e eventos.
+  <Accordion title="🖥️ Quais são os requisitos mínimos de infraestrutura?">
+    Para ambientes de produção: **SSD 250 GB** · **16 GB RAM** · **CPU 4 núcleos**.
+
+    ⚠️ HD não é recomendado pelo alto volume de eventos. Preveja escalabilidade futura.
   </Accordion>
 
-  <Accordion title="Posso utilizar meu banco de dados e minha infraestrutura atuais?">
-    Sim. A solução é compatível com infraestrutura <b>cloud</b> ou <b>on-premises</b>, mas a tecnologia do banco fica a critério do cliente, desde que a TI garanta operação e manutenção.
+  <Accordion title="☁️ Posso usar infraestrutura cloud ou on-premises?">
+    **Sim.** A solução é compatível com ambos — a tecnologia do banco de dados e infraestrutura ficam a critério do cliente, desde que a TI garanta operação e manutenção.
   </Accordion>
 
-  <Accordion title="Para que serve a 'fila paralela' de Webhook? Há custo adicional?">
-    A <b>fila paralela</b> permite configurar URLs adicionais para recebimento dos JSONs. Essa configuração pode <b>gerar cobrança adicional</b>; consulte o gerente comercial da sua conta para mais detalhes.
+  <Accordion title="➕ O que é a 'fila paralela' e há custo extra?">
+    A **fila paralela** permite configurar URLs adicionais além das duas padrão. Essa configuração pode gerar **cobrança adicional** — consulte o gerente comercial responsável pela sua conta.
   </Accordion>
 
-  <Accordion title="Onde faço a configuração final do Webhook no Invenio?">
-    Em <b>Invenio Center &gt; Configurações &gt; Webhook &gt; Gerenciar</b>. Após publicar seu serviço e liberar o firewall, informe a URL e salve.
-  </Accordion>
+  <Accordion title="📍 Onde configuro o Webhook no Invenio Center?">
+    **Caminho:** Invenio Center > Configurações > Webhook > Gerenciar
 
+    Após publicar o serviço e liberar o firewall, informe a URL do endpoint e salve.
+  </Accordion>
 </AccordionGroup>

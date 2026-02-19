@@ -1,161 +1,233 @@
 ---
 title: "Restrições no Invenio Center"
 sidebarTitle: "Restrições"
-description: "A funcionalidade de **Restrições**, disponível no menu do **Invenio Center**, permite bloquear o envio e o recebimento de mensagens a partir de critérios específicos previamente configurados.  
-Esse recurso viabiliza maior controle operacional ao permitir o bloqueio automático de **palavras**, **números de telefone** ou **endereços de e-mail**, assegurando governança e conformidade nos atendimentos."
+description: "Bloqueie envio e recebimento de mensagens por palavras, telefones ou e-mails — com escopo global ou por segmento, direto pelo Invenio Center ou Invenio Live."
 ---
 
-## Como funciona
+A funcionalidade de **Restrições** permite bloquear o envio e o recebimento de mensagens a partir de critérios específicos: **palavras**, **números de telefone** ou **endereços de e-mail**.
 
-Ao cadastrar uma restrição, é possível definir os seguintes parâmetros estratégicos:
-
-Acesse: `Invenio Center > Recursos > Restrições`
-
-[ Invenio Center - Restrições](https://inveniocenter.robbu.global/painel/restricoes)
-
-![restricao1](https://storage.robbu.global/v2/file/AF33ADAC32790C9C31E9F5786E10A9B9)
+Viabiliza maior controle operacional e conformidade — com escopo global ou por segmento.
 
 ---
 
-## Tipos de bloqueio
+## Tipos de Bloqueio
 
-### Palavras
+| Tipo | O que bloqueia | Aplica-se a campanhas? |
+|------|---------------|:---------------------:|
+| **Palavras** | Envio de mensagens pelo operador no Live que contenham o termo | — |
+| **Telefones / E-mails** | Envio e recebimento de mensagens do contato (manual e automático) | ✅ Sim |
 
-Quando uma palavra cadastrada como restrita é utilizada em uma mensagem no Live, a tentativa de envio é automaticamente bloqueada.  
-O operador é notificado imediatamente por meio de uma mensagem de erro, evitando a continuidade da interação.
+<Warning>
+Ao restringir um telefone ou e-mail, se o contato estiver incluído em uma **campanha ativa**, o disparo será interrompido automaticamente.
+</Warning>
 
-### Telefones ou e-mails
-
- Contatos com **telefones ou e-mails restritos** não poderão enviar nem receber mensagens.
- O bloqueio também se aplica a **envios automatizados**.  
-
-
-<Warning>Caso o contato esteja incluído em uma campanha ativa, o disparo será interrompido.</Warning>
-
-<Frame>
-  <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9C1B19BD004269972B" alt="Descriptive alt text" />
-</Frame>
-
-<Note>Utilize esse tipo de restrição com critério, especialmente em campanhas em larga escala ou atendimentos em andamento.</Note>
-
----
-## Tela de cadastro de restrição
-
- **Motivo da restrição** 
-
-  Campo destinado ao registro do motivo do bloqueio, promovendo rastreabilidade e padronização de decisões operacionais.
-
- **Segmento de atuação**
-
-  Define o escopo de aplicação da restrição:
-  - **Todos**: a restrição será aplicada de forma global em todo o ambiente.
-  - **Segmento específico**: o bloqueio será limitado exclusivamente ao segmento selecionado.
-
- <Frame>
-  <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9CE537077FD27370A4" alt="Descriptive alt text" />
-</Frame>
-
-<Tip> Sempre que possível, priorize segmentações específicas para mitigar impactos indevidos em fluxos paralelos.</Tip>
-
---- 
-
-## Restrições no Invenio Live
-
-Também é possível restringir contatos diretamente pelo **Invenio Live**, acessando a funcionalidade:
- `Engrenagem de configuração > Manutenção de Canais > Enviar para lista de restrição `  
-
-  <Frame>
-  <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9C277B3F567B32891F" alt="Descriptive alt text" />
-</Frame>
-
- 
-  <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9CFC116E850F3BE063" alt="Descriptive alt text" />
-
-
-<Note>Essa abordagem é recomendada para ações pontuais identificadas durante o atendimento em tempo real.</Note>
-
-![Live restricoes3](https://storage.robbu.global/v2/file/AF33ADAC32790C9CEA79B513C53AA17B)
-
-
-## Boas práticas
-
-> - Realize revisões periódicas das restrições cadastradas.
-> - Documente claramente o motivo de cada bloqueio.
-> - Alinhe a equipe sempre que houver alterações na política de restrições.
-> - Evite bloqueios globais quando o cenário permitir segmentação.
-
+<Note>
+O bloqueio por **palavras** atua somente sobre mensagens enviadas pelo **operador** no Live — não interfere nas mensagens recebidas do contato.
+</Note>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Configurar Restrições
 
-- [Criar contato no Invenio Live](https://docs.robbu.global/docs/live/criar-contato)
-- [Criação de contatos no Invenio Center](https://docs.robbu.global/docs/center/criacao-de-contatos-invenio-center)
-- [Exportação de conversas no Invenio Live](https://docs.robbu.global/docs/live/exportacao-de-conversas)
-- [Filtros e menus de busca no Invenio Live](https://docs.robbu.global/docs/live/filtros-e-menus-de-busca)
+<Tabs>
+  <Tab title="🖥️ Invenio Center" icon="desktop">
+    ### Cadastrar Restrição pelo Center
+
+    **Caminho:** Invenio Center > Recursos > **Restrições**
+
+    <Tip>
+    **Acesso direto:** [Restrições no Invenio Center](https://inveniocenter.robbu.global/painel/restricoes)
+    </Tip>
+
+    <Frame caption="Tela principal do módulo de Restrições">
+      <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9C31E9F5786E10A9B9" />
+    </Frame>
+
+    <Steps>
+      <Step title="Acessar o módulo">
+        Acesse: **Invenio Center > Recursos > Restrições**
+
+        Clique em **"Nova restrição"** ou no botão de adição.
+      </Step>
+
+      <Step title="Definir o tipo de bloqueio">
+        Escolha entre **Palavras** ou **Telefone/E-mail** e insira o valor a ser bloqueado.
+
+        <Frame caption="Cadastro de restrição — seleção do tipo e valor">
+          <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9C1B19BD004269972B" />
+        </Frame>
+      </Step>
+
+      <Step title="Preencher o motivo">
+        Informe o **Motivo da restrição** — campo obrigatório para rastreabilidade e padronização das decisões operacionais.
+      </Step>
+
+      <Step title="Definir o escopo (Segmento de atuação)">
+        Selecione o escopo de aplicação:
+
+        | Opção | Efeito |
+        |-------|--------|
+        | **Todos** | Restrição aplicada globalmente em todo o ambiente |
+        | **Segmento específico** | Bloqueio limitado ao segmento selecionado |
+
+        <Frame caption="Configuração de segmento de atuação da restrição">
+          <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9CE537077FD27370A4" />
+        </Frame>
+
+        <Tip>
+        Sempre que possível, prefira **segmentações específicas** para evitar impactos indevidos em fluxos paralelos.
+        </Tip>
+      </Step>
+
+      <Step title="Salvar">
+        Clique em **"Salvar"** para aplicar a restrição.
+
+        <Check>
+        A restrição entra em vigor **imediatamente** após o salvamento.
+        </Check>
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="💬 Invenio Live" icon="comment">
+    ### Restringir pelo Invenio Live
+
+    Restrinja contatos diretamente durante o atendimento em tempo real.
+
+    **Caminho:** Invenio Live > Engrenagem de configuração (⚙️) > Manutenção de Canais > **Enviar para lista de restrição**
+
+    <Steps>
+      <Step title="Acessar as configurações do atendimento">
+        No Invenio Live, clique na **Engrenagem de configuração (⚙️)** dentro do atendimento.
+
+        <Frame caption="Acesso à engrenagem de configuração no Invenio Live">
+          <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9C277B3F567B32891F" />
+        </Frame>
+      </Step>
+
+      <Step title="Acessar Manutenção de Canais">
+        Selecione **"Manutenção de Canais"**.
+
+        <Frame caption="Opção Manutenção de Canais">
+          <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9CFC116E850F3BE063" />
+        </Frame>
+      </Step>
+
+      <Step title="Enviar para lista de restrição">
+        Clique em **"Enviar para lista de restrição"** para bloquear o contato.
+
+        <Frame caption="Confirmação de envio para lista de restrição">
+          <img src="https://storage.robbu.global/v2/file/AF33ADAC32790C9CEA79B513C53AA17B" />
+        </Frame>
+
+        <Check>
+        O contato é adicionado à lista de restrição imediatamente, sem necessidade de acessar o Invenio Center.
+        </Check>
+      </Step>
+    </Steps>
+
+    <Note>
+    Essa abordagem é recomendada para **ações pontuais** identificadas durante o atendimento em tempo real.
+    </Note>
+  </Tab>
+</Tabs>
 
 ---
+
+## Boas Práticas
+
+<Tip>
+**Recomendações para gestão de restrições:**
+- Realize **revisões periódicas** das restrições cadastradas
+- **Documente** claramente o motivo de cada bloqueio no campo Motivo
+- **Comunique a equipe** sempre que houver alterações na política de restrições
+- Evite **bloqueios globais** quando o cenário permitir segmentação específica
+</Tip>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Criação de Contatos"
+    icon="user-plus"
+    href="https://docs.robbu.global/docs/center/criacao-de-contatos-invenio-center"
+  >
+    Criar contatos no Invenio Center
+  </Card>
+
+  <Card
+    title="Criar Contato no Live"
+    icon="comment-dots"
+    href="https://docs.robbu.global/docs/live/criar-contato"
+  >
+    Criar contatos pelo Invenio Live
+  </Card>
+
+  <Card
+    title="Exportação de Conversas"
+    icon="file-export"
+    href="https://docs.robbu.global/docs/live/exportacao-de-conversas"
+  >
+    Exportar histórico de conversas
+  </Card>
+
+  <Card
+    title="Filtros e Menus de Busca"
+    icon="filter"
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Menus e filtros de busca no Live
+  </Card>
+</CardGroup>
+
+---
+
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
+  <Accordion title="📍 Como acessar o módulo de Restrições?">
+    **Caminho:** Invenio Center > Recursos > Restrições
 
-  <Accordion title="O que é a funcionalidade de Restrições no Invenio Center?">
-    A funcionalidade de **Restrições** permite bloquear o envio e o recebimento de mensagens no Invenio Center a partir de critérios previamente configurados.  
-    É possível restringir **palavras**, **números de telefone** ou **endereços de e-mail**, garantindo maior controle operacional e conformidade nos atendimentos.
+    **Acesso direto:** [Restrições](https://inveniocenter.robbu.global/painel/restricoes)
   </Accordion>
 
-  <Accordion title="Onde posso acessar a funcionalidade de Restrições?">
-    Para acessar a funcionalidade, siga o caminho:  
-    **Invenio Center > Recursos > Restrições**.
+  <Accordion title="🔒 Quais tipos de bloqueio posso configurar?">
+    | Tipo | O que restringe |
+    |------|----------------|
+    | **Palavras** | Envio de mensagens pelo operador com o termo |
+    | **Telefones / E-mails** | Envio e recebimento do contato (manual + automático + campanhas) |
   </Accordion>
 
-  <Accordion title="As restrições entram em vigor imediatamente após o cadastro?">
-    Sim. Após o salvamento da restrição, ela passa a ser aplicada imediatamente, respeitando o escopo definido no momento da configuração.
+  <Accordion title="⚡ A restrição entra em vigor imediatamente?">
+    **Sim.** Após salvar, a restrição é aplicada imediatamente no escopo configurado (global ou segmento específico).
   </Accordion>
 
-  <Accordion title="Quais tipos de bloqueio podem ser configurados?">
-    É possível configurar restrições para:
-    - **Palavras**, bloqueando o envio de mensagens que contenham os termos definidos;
-    - **Telefones ou e-mails**, impedindo que contatos com esses dados enviem ou recebam mensagens.
+  <Accordion title="📣 Restrições de telefone/e-mail afetam campanhas ativas?">
+    **Sim.** Se o contato estiver incluído em uma campanha ativa, o **disparo é interrompido automaticamente** enquanto a restrição estiver vigente.
   </Accordion>
 
-  <Accordion title="Como funciona o bloqueio por palavras no Invenio Live?">
-    Quando uma palavra cadastrada como restrita é identificada em uma mensagem enviada no Live, o envio é automaticamente bloqueado.  
-    O operador recebe uma mensagem de erro, impedindo a continuidade da interação.
+  <Accordion title="🔤 O bloqueio de palavras afeta mensagens recebidas do contato?">
+    **Não.** O bloqueio por palavras atua somente sobre mensagens **enviadas pelo operador** no Live — não interfere nas mensagens recebidas.
   </Accordion>
 
-  <Accordion title="O bloqueio de palavras afeta mensagens enviadas pelo contato?">
-    Não. O bloqueio por palavras atua somente sobre mensagens enviadas pelo operador no Invenio Live, não interferindo nas mensagens recebidas do contato.
+  <Accordion title="🌐 Qual a diferença entre escopo 'Todos' e 'Segmento específico'?">
+    | Escopo | Efeito |
+    |--------|--------|
+    | **Todos** | Bloqueio global em todo o ambiente |
+    | **Segmento específico** | Bloqueio apenas no segmento selecionado |
+
+    Prefira segmentação específica sempre que possível para evitar impactos em fluxos paralelos.
   </Accordion>
 
-  <Accordion title="O que acontece ao restringir um telefone ou e-mail?">
-    Contatos que possuam telefones ou e-mails restritos ficam impossibilitados de **enviar e receber mensagens**.  
-    Esse bloqueio se aplica tanto a atendimentos manuais quanto a fluxos automatizados.
+  <Accordion title="💬 Posso restringir um contato pelo Invenio Live?">
+    **Sim.** Durante o atendimento acesse: **⚙️ Configuração > Manutenção de Canais > Enviar para lista de restrição**
+
+    Indicado para ações pontuais identificadas em tempo real, sem precisar acessar o Center.
   </Accordion>
 
-  <Accordion title="Restrições de telefone ou e-mail impactam campanhas ativas?">
-    Sim. Caso um contato restrito esteja incluído em uma campanha ativa, o envio automatizado será interrompido enquanto a restrição estiver vigente.
+  <Accordion title="✏️ Posso editar ou remover uma restrição já cadastrada?">
+    **Sim.** As restrições podem ser editadas ou removidas a qualquer momento pelo Invenio Center (módulo Restrições) ou pelo Invenio Live.
   </Accordion>
-
-  <Accordion title="O que é o Motivo da restrição e qual sua finalidade?">
-    O **Motivo da restrição** é um campo descritivo utilizado para registrar a justificativa do bloqueio.  
-    Ele facilita a rastreabilidade, a padronização de decisões e futuras revisões operacionais.
-  </Accordion>
-
-  <Accordion title="Como funciona o Segmento de atuação na restrição?">
-    O Segmento de atuação define o escopo da restrição:
-    - **Todos**: a restrição será aplicada globalmente em todo o ambiente;
-    - **Segmento específico**: o bloqueio será aplicado apenas ao segmento selecionado.
-  </Accordion>
-
-  <Accordion title="É possível aplicar restrições diretamente pelo Invenio Live?">
-    Sim. É possível restringir contatos diretamente pelo Invenio Live acessando:  
-    **Engrenagem de configuração > Manutenção de Canais > Enviar para lista de restrição**.  
-    Essa opção é indicada para ações pontuais durante o atendimento em tempo real.
-  </Accordion>
-
-  <Accordion title="Posso editar ou remover uma restrição após o cadastro?">
-    Sim. As restrições podem ser editadas ou removidas a qualquer momento pelo Invenio Center ou pelo Invenio Live, conforme o local onde foram configuradas.
-  </Accordion>
-
 </AccordionGroup>

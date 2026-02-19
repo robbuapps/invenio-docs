@@ -1,227 +1,288 @@
 ---
 title: "Carga de Mailing e Campanhas via FTP"
 sidebarTitle: "Importação via FTP"
-description: "Como alternativa à importação pelo Invenio Center, também é possível realizar a carga de mailing e geração de campanhas automaticamente por meio do protocolo FTP."
+description: "Configure a importação automática de mailings e criação de campanhas via FTP/SFTP no Invenio Center: parâmetros de conexão, nomenclatura de arquivos e exemplos práticos."
+mode: "wide"
 ---
 
-A importação de mailings e a criação de campanhas podem ser feitas automaticamente através do protocolo FTP. Este documento detalha o processo de configuração e os padrões necessários para garantir o correto funcionamento da importação via FTP.
+<Note>
+**Configurações gerais do job de importação:**
+- **Tipo:** Job recorrente para processamento automático
+- **Frequência:** A cada **2 minutos**
+- **IPs de saída:** `191.233.248.49` e `104.41.0.210` — libere-os no firewall se usar servidor FTP/SFTP próprio
+</Note>
 
-##  Configurações Gerais
- **Tipo de Serviço**: Job recorrente para processamento automático. <br />
-**Frequência de Execução**: A cada 2 minutos para garantir a importação contínua dos arquivos.<br />
-**IPs de Saída**: `191.233.248.49` `104.41.0.210`  (Certifique-se de liberar esse IP em seu firewall caso utilize um serviço FTP/SFTP próprio).
+---
 
-##  Configuração da Conexão FTP
+## Configurar Conexão FTP
 
-Para que a importação ocorra corretamente, é necessário configurar a conexão com o servidor FTP.
+<Tabs>
+  <Tab title="🌐 Servidor Próprio (FTP/SFTP)" icon="server">
+    ### Conexão com Servidor Próprio
 
-<img src="https://i0.wp.com/robbu.global/wp-content/uploads/2022/06/Animacao2.gif?resize=768%2C453&ssl=1" />
+    **Caminho:** Invenio Center > Configurações > **FTP**
 
-###  Parâmetros de Conexão
+    <Tip>
+    **Acesso direto:** [Configurações](https://inveniocenter.robbu.global/painel/configuracoes)
+    </Tip>
 
- Acesse as configurações de FTP na plataforma:
+    <Frame caption="Animação de configuração da conexão FTP">
+      <img src="https://i0.wp.com/robbu.global/wp-content/uploads/2022/06/Animacao2.gif?resize=768%2C453&ssl=1" />
+    </Frame>
 
-[Acesse a página de configurações](https://inveniocenter.robbu.global/painel/configuracoes)
+    <Steps>
+      <Step title="Acessar configurações FTP">
+        Acesse: **Invenio Center > Configurações > FTP**
+      </Step>
 
-   - Navegue até: `Configurações > FTP`
-  
- Preencha os seguintes campos:
+      <Step title="Preencher os parâmetros de conexão">
+        | Campo | Valor / Observação |
+        |-------|--------------------|
+        | **Servidor** | Endereço do servidor (ex: `ftp.robbu.com.br`) — **sem** `https://` |
+        | **Usuário** | Nome de usuário para autenticação |
+        | **Senha** | Senha de acesso |
+        | **Porta** | FTP → `21` · SFTP → `22` |
+        | **Modo de criptografia** | Depende do servidor — o mais comum é **Use Explícito** |
+      </Step>
 
-   - **Servidor**: Endereço do servidor FTP (exemplo: `ftp.robbu.com.br`).
-   - **Usuário**: Nome de usuário para autenticação.
-   - **Senha**: Senha de acesso.
-   - **Porta**: `FTP → porta padrão 21` ou `SFTP → porta padrão 22`
-   - **Modo de criptografia**: A escolha depende das exigências do servidor utilizado. O tipo mais comum é **Use Explícito**.
+      <Step title="Validar a conexão">
+        Após salvar, o sistema exibe imediatamente se a conexão foi bem-sucedida.
 
->⚠️ **Atenção**:
->
-> Ao configurar, não inclua `https://` no início da URL. Informe apenas o endereço do servidor (exemplo: ftp.seudominio.com).
->
->  Não utilize **IPs privados** como host.  
->  Exemplos a evitar:  
-> - `10.x.x.x`  
-> - `172.16.x.x` até `172.31.x.x`  
-> - `192.168.x.x`  
+        <Frame caption="Conexão bem-sucedida">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosucesso.png" />
+        </Frame>
 
+        <Frame caption="Falha na conexão">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosemsucesso.png" />
+        </Frame>
 
-**Caso sua empresa não possua um servidor FTP, acesse:**
+        Para validação extra, use **FileZilla** ou **WinSCP** enviando um arquivo de teste.
+      </Step>
+    </Steps>
 
- `Configurações >> Conta >> Gerenciar >> FTP` 
+    <Warning>
+    **Regras de preenchimento do servidor:**
+    - ❌ Não inclua `https://` no início — informe apenas o endereço (ex: `ftp.seudominio.com`)
+    - ❌ Não utilize **IPs privados** como host:
+      - `10.x.x.x`
+      - `172.16.x.x` até `172.31.x.x`
+      - `192.168.x.x`
+    </Warning>
+  </Tab>
 
- [Acesse a página de configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+  <Tab title="☁️ SFTP Invenio (sem servidor próprio)" icon="cloud">
+    ### Usar o SFTP da Invenio
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
+    Se sua empresa não possui servidor FTP, utilize o **SFTP fornecido pela Invenio**.
 
-Habilite o botão **Habilitar transferência de arquivos**
+    **Caminho:** Invenio Center > Configurações > Conta > Gerenciar > **FTP**
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
+    <Tip>
+    **Acesso direto:** [Configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+    </Tip>
 
-> ⚠️ **Atenção**  
-> O servidor disponibilizado pela **Invenio** é do tipo **SFTP**. Portanto, inclua no início da URL o prefixo `sftp://`.  
-> **Exemplo:** `sftp://sarobbuinveniosftp.xyz.core.windows.net`  
-> A porta utilizada para conexão é a **22**.
+    <Steps>
+      <Step title="Acessar FTP nas configurações da conta">
+        Acesse: **Invenio Center > Configurações > Conta > Gerenciar > FTP**
 
-### Teste de conexão
+        <Frame caption="Tela de configuração do FTP da conta">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
+        </Frame>
+      </Step>
 
- - Utilize um cliente FTP (exemplo: `FileZilla` ou `WinSCP`) para validar a conexão.
- - Confirme o acesso enviando um arquivo de teste.
+      <Step title="Habilitar a transferência de arquivos">
+        Ative o botão **"Habilitar transferência de arquivos"**.
 
->❗**Observação**: Ao incluir os dados do servidor em `Configurações > FTP`, o sistema exibe imediatamente se a conexão foi bem-sucedida ou não.
+        <Frame caption="Habilitando o FTP no Invenio Center">
+          <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
+        </Frame>
+      </Step>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosucesso.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/conexaosemsucesso.png" />
+      <Step title="Conectar com o endpoint SFTP fornecido">
+        Use as credenciais geradas com as seguintes configurações:
 
-##  Regras de Nomenclatura dos Arquivos
+        | Campo | Valor |
+        |-------|-------|
+        | **Prefixo da URL** | `sftp://` obrigatório |
+        | **Exemplo** | `sftp://sarobbuinveniosftp.xyz.core.windows.net` |
+        | **Porta** | `22` |
+        | **Protocolo** | SFTP (SSH) |
 
-Os arquivos a serem importados devem seguir uma nomenclatura padronizada. Isso é essencial para que o sistema consiga processá-los corretamente.
+        <Check>
+        O servidor Invenio já é do tipo **SFTP seguro** — a criptografia é nativa via SSH.
+        </Check>
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
-###  Padrão de Nomenclatura
+---
 
-| Parâmetro                     | Descrição |
-|--------------------------------|-----------|
-| `mailing`                      | Todo documento de importação deverá ser iniciado com o termo `mailing`. |
-| `_DDMMYY`                      | Representa o dia/mês/ano da geração do arquivo. Por segurança o sistema importará apenas os mailings gerados com a data do dia corrente.|
-| `_999`                         | Representa a sequência de geração do arquivo no dia (não pode haver mais de um arquivo com mesma sequência no mesmo dia).|
-| `_cXXXXXXXX`                   | Código da carteira. Se não informado, o arquivo deve estar em uma pasta com o nome da carteira. |
-| `_d`                           | Descrição do mailing. Se não informado, o nome do arquivo será utilizado. Não pode conter `_` (underline). |
-| `_h`                           | Indica que o mailing deve ser higienizado. |
-| `_smslong`                     | Campanha de SMS (longcode) para o mailing. |
-| `_smsshort`                    | Campanha de SMS (shortcode) para o mailing. |
-| `_whatsappexclusivo`           | Campanha de WhatsApp Oficial usando número exclusivo. |
-| `_whatsappcompartilhado`       | Campanha de WhatsApp Oficial usando número compartilhado. |
-| `_nw99999999999`               | Número de WhatsApp Oficial (exclusivo) pelo qual a campanha será enviada. |
-| `_ntXXXXXXXXXXXXXXXX`          | Nome do template a ser utilizado na campanha de WhatsApp Oficial. |
-| `_email`                       | Indica que uma campanha de E-MAIL será realizada para o mailing. |
-| `_ceXXXXXXX@XXXX.XXX.XX`       | Conta de e-mail a ser utilizada na campanha. Se não informado, será usada a conta ativa do cliente ou a conta padrão da Robbu. |
-| `_teXXXXXXXXXXXXXXXX`          | Título do e-mail a ser utilizado na campanha. |
-| `_iDDMMYYHHMM`                 | Define a data (`DDMMYY`) e hora (`HHMM`) específicas para o início da campanha. |
-| `_q88999`                      | Define envio parcelado: `88%` de envio por lote e `999` minutos de intervalo entre disparos. |
-| `_x999`                        | Descarta clientes com qualquer contato receptivo nas últimas `999` horas. <br /><span style={{ fontSize: '0.8em', opacity: 0.85, display: 'block' }}>⚠️ <strong>Atenção:</strong> A nomenclatura deste parâmetro deve ser definida antes da inclusão do parâmetro <code>_nt</code>, que corresponde ao nome do template.</span> |
-| `_limpartag`                   | Substitui todas as tags das pessoas no arquivo pela nova tag definida. |
-| `_removercarteiras`            | Remove os contatos das demais carteiras, mantendo apenas a carteira do arquivo. |
-| `_LEddMMyyHHmm`                | Define data e hora limite para envio, evitando disparos fora do horário desejado. |
-| `_whatsappprospect`            | Campanha via módulo WhatsApp Prospect. Obrigatório informar o template. <br /><span style={{ fontSize: '0.8em', opacity: 0.85, display: 'block' }}>❗<strong>Observação:</strong> Utilize _whatsappprospect apenas quando houver números prospects, caso contrário, ocorrerá falha. Nesta situação, utilize o parâmetro <code>_whatsappexclusivo</code> junto com a especificação do número pelo parâmetro <code>_nw</code> .</span> |
+## Nomenclatura dos Arquivos
 
-###  Exemplos de Nomenclatura para Importação via FTP
+Os arquivos devem seguir o padrão de nomenclatura abaixo para serem processados corretamente. A ordem dos parâmetros importa.
 
-Aqui estão exemplos práticos de nomenclatura de arquivos para importação de mailings e criação de campanhas via FTP. Utilize essas referências para garantir que seus arquivos sejam processados corretamente pelo sistema. 
+**Formato base:** `mailing_DDMMYY_999[_parâmetros].csv`
 
-<ResponseField name="mailing_101117_1.csv" type="string">
-  Apenas importar sem especificar carteira (o arquivo deve estar em uma pasta com o nome da carteira).
-</ResponseField>
+| Parâmetro | Descrição |
+|-----------|-----------|
+| `mailing` | **Obrigatório** — todo arquivo deve começar com `mailing` |
+| `_DDMMYY` | Data da geração do arquivo — o sistema importa **apenas arquivos com a data do dia corrente** |
+| `_999` | Sequência do arquivo no dia — **não pode haver dois arquivos com mesma sequência no mesmo dia** |
+| `_cXXXXXXXX` | Código da carteira — se omitido, o arquivo deve estar numa **pasta com o nome da carteira** |
+| `_dDESCRICAO` | Descrição do mailing — se omitido, usa o nome do arquivo. **Não pode conter `_` (underline)** |
+| `_h` | Higienização dos contatos durante a importação |
+| `_smslong` | Campanha SMS via longcode |
+| `_smsshort` | Campanha SMS via shortcode |
+| `_whatsappexclusivo` | Campanha WhatsApp Oficial com número exclusivo |
+| `_whatsappcompartilhado` | Campanha WhatsApp Oficial com número compartilhado |
+| `_nw99999999999` | Número de WhatsApp exclusivo para a campanha |
+| `_ntNOME_TEMPLATE` | Nome do template WhatsApp a ser utilizado |
+| `_email` | Campanha de E-mail para o mailing |
+| `_ceEMAIL@DOMINIO` | Conta de e-mail remetente — padrão: conta ativa do cliente |
+| `_teTITULO` | Assunto/título do e-mail da campanha |
+| `_iDDMMYYHHMM` | Data e hora de início da campanha (ex: `_i0102180820` = 01/02/18 às 08:20) |
+| `_q88999` | Envio parcelado: `88%` por lote · `999` minutos de intervalo |
+| `_x999` | Descarta contatos com interação nas últimas `999` horas — **posicionar antes de `_nt`** |
+| `_limpartag` | Substitui todas as tags dos contatos pela nova tag do arquivo |
+| `_removercarteiras` | Remove o contato das demais carteiras, mantendo apenas a do arquivo |
+| `_LEddMMyyHHmm` | Data/hora limite de envio — evita disparos fora do horário desejado |
+| `_whatsappprospect` | Campanha via WhatsApp Prospect — **usar apenas quando houver números prospects** |
 
-<ResponseField name="mailing_101117_1_c123_dRégua 60 dias.csv" type="string">
-  Importar na carteira `123`, informando a descrição `Régua 60 dias`.
-</ResponseField>
+<Warning>
+**`_whatsappprospect`** deve ser usado **somente quando houver números prospects** no arquivo. Caso contrário, use `_whatsappexclusivo` com `_nw` para especificar o número. O uso incorreto causa falha na importação.
+</Warning>
 
-<ResponseField name="mailing_101117_1_c123_h.csv" type="string">
-  Importar na carteira `123` e realizar a higienização dos contatos.
-</ResponseField>
+---
 
-<ResponseField name="mailing_101117_1_cALTORISCO3_smslong_i0102180820.csv" type="string">
-  Importar na carteira `ALTORISCO3` e criar uma campanha de SMS Longcode para iniciar em `01/02/18 às 08:20`.
-</ResponseField>
+## Exemplos de Nomenclatura
 
-<ResponseField name="mailing_101117_1_cBRAD_smsshort_q15020.csv" type="string">
-  Importar na carteira `BRAD` e criar uma campanha de SMS Shortcode com início imediato, enviando `15%` da base a cada `20 minutos`.
-</ResponseField>
+<AccordionGroup>
+  <Accordion title="mailing_101117_1.csv">
+    **Ação:** Importa sem especificar carteira.
 
-<ResponseField name="mailing_101117_1_cMAIOR30_whatsappexclusivo_nw11998877665_ntTEMPLATE HOMOLOGADO ITAU_x36.csv" type="string">
-  Importar na carteira `MAIOR30` e criar campanha de WhatsApp Oficial (número exclusivo) para início imediato, descartando contatos que tiveram interação nos últimos `36 horas`.
-</ResponseField>
+    O arquivo deve estar em uma pasta cujo nome é o código da carteira.
+  </Accordion>
 
-<ResponseField name="mailing_101117_1_c123_email_teAportunidade!!!_ceAVISO@COMUNICADO.COM.BR.csv" type="string">
-  Importar na carteira `123` e criar uma campanha de e-mail para início imediato, definindo o título `"Aportunidade!!!"` e utilizando a conta `AVISO@COMUNICADO.COM.BR`.
-</ResponseField>
+  <Accordion title="mailing_101117_1_c123_dRégua 60 dias.csv">
+    **Ação:** Importa na carteira `123` com a descrição `Régua 60 dias`.
+  </Accordion>
 
+  <Accordion title="mailing_101117_1_c123_h.csv">
+    **Ação:** Importa na carteira `123` e executa **higienização** dos contatos.
+  </Accordion>
 
+  <Accordion title="mailing_101117_1_cALTORISCO3_smslong_i0102180820.csv">
+    **Ação:** Importa na carteira `ALTORISCO3` e cria campanha de **SMS Longcode** com início em **01/02/18 às 08:20**.
+  </Accordion>
 
-## 🔗 Links e assuntos relacionados
+  <Accordion title="mailing_101117_1_cBRAD_smsshort_q15020.csv">
+    **Ação:** Importa na carteira `BRAD` e cria campanha de **SMS Shortcode** com início imediato, enviando **15% da base** a cada **20 minutos**.
+  </Accordion>
 
-- [Agendamento de relatório por FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)  
-- [Configurações gerais da conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
+  <Accordion title="mailing_101117_1_cMAIOR30_whatsappexclusivo_nw11998877665_ntTEMPLATE HOMOLOGADO ITAU_x36.csv">
+    **Ação:** Importa na carteira `MAIOR30`, cria campanha de **WhatsApp Oficial** (número exclusivo `11998877665`, template `TEMPLATE HOMOLOGADO ITAU`) com início imediato, descartando contatos com interação nas últimas **36 horas**.
+  </Accordion>
+
+  <Accordion title="mailing_101117_1_c123_email_teAportunidade!!!_ceAVISO@COMUNICADO.COM.BR.csv">
+    **Ação:** Importa na carteira `123` e cria campanha de **E-mail** com assunto `Aportunidade!!!` usando a conta `AVISO@COMUNICADO.COM.BR`.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Agendamento de Relatório por FTP"
+    icon="server"
+    href="https://docs.robbu.global/docs/center/agendamento-relatorio-ftp"
+  >
+    Envio automático de relatórios via FTP/SFTP
+  </Card>
+
+  <Card
+    title="Configurações Gerais da Conta"
+    icon="gear"
+    href="https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta"
+  >
+    Configurações gerais do ambiente
+  </Card>
+
+  <Card
+    title="Importação de Público"
+    icon="users"
+    href="https://docs.robbu.global/docs/center/publico-importacao"
+  >
+    Importar mailings pelo Invenio Center
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Com qual frequência os arquivos são processados pela carga via FTP?">
-    O job de importação roda de forma recorrente a cada <b>2 minutos</b>, garantindo a ingestão contínua dos arquivos válidos enviados ao servidor.
+  <Accordion title="⏱️ Com que frequência os arquivos são processados?">
+    O job de importação roda a cada **2 minutos**, garantindo ingestão contínua dos arquivos válidos no servidor.
   </Accordion>
 
-  <Accordion title="Quais IPs de saída preciso liberar no meu firewall?">
-    Libere os IPs <code>191.233.248.49</code> e <code>104.41.0.210</code> se você utiliza servidor próprio (FTP/SFTP). Sem essa liberação, a conexão pode falhar.
+  <Accordion title="🔒 Quais IPs liberar no firewall?">
+    Se você usa servidor FTP/SFTP próprio, libere:
+    - `191.233.248.49`
+    - `104.41.0.210`
+
+    Sem essa liberação, a conexão pode falhar silenciosamente.
   </Accordion>
 
-  <Accordion title="O que devo preencher nas configurações de conexão FTP/SFTP?">
-    Informe <b>Servidor</b> (sem <code>https://</code>), <b>Usuário</b>, <b>Senha</b>, <b>Porta</b> (FTP 21 / SFTP 22) e o <b>modo de criptografia</b> exigido pelo seu servidor (geralmente <i>Use Explícito</i> para FTP). Evite usar <b>IPs privados</b> como host.
+  <Accordion title="☁️ Não tenho servidor próprio. Como usar o SFTP da Invenio?">
+    **Caminho:** Invenio Center > Configurações > Conta > Gerenciar > FTP > Habilitar transferência de arquivos
+
+    Use o endpoint fornecido com prefixo `sftp://` e porta `22`.
   </Accordion>
 
-  <Accordion title="Não tenho servidor próprio. Posso usar o SFTP da Invenio?">
-    Sim. Em <b>Configurações &gt;&gt; Conta &gt;&gt; Gerenciar &gt;&gt; FTP</b>, habilite <b>Transferência de arquivos</b> e utilize o endpoint SFTP fornecido com prefixo <code>sftp://</code> e porta <b>22</b>.
+  <Accordion title="❌ Que erros de configuração do servidor devo evitar?">
+    | Erro comum | Correto |
+    |------------|---------|
+    | Incluir `https://` na URL | Apenas o endereço: `ftp.dominio.com` |
+    | Usar IP privado como host | Usar domínio ou IP público |
+    | Porta errada | FTP = `21` · SFTP = `22` |
+
+    Use **FileZilla** ou **WinSCP** para validar antes de configurar na plataforma.
   </Accordion>
 
-  <Accordion title="Como valido a conexão antes de enviar arquivos reais?">
-    Faça um teste com clientes como <b>FileZilla</b> ou <b>WinSCP</b>. Na própria tela <b>Configurações &gt; FTP</b>, o sistema indica se a conexão foi bem-sucedida após salvar.
+  <Accordion title="📅 Qual data colocar no nome do arquivo?">
+    Sempre a **data do dia corrente** no formato `_DDMMYY`. O sistema ignora arquivos com datas diferentes do dia de processamento.
   </Accordion>
 
-  <Accordion title="Qual formato de arquivo é aceito para a importação?">
-    Utilize arquivos <b>.csv</b> (separados por delimitador padrão). Os exemplos de nomenclatura desta documentação consideram <code>.csv</code>.
+  <Accordion title="🔢 Como funciona a sequência `_999` no nome?">
+    Representa a **ordem do arquivo no dia**. Não pode haver dois arquivos com a mesma sequência no mesmo dia — isso causaria conflito de importação.
   </Accordion>
 
-  <Accordion title="O sistema só importa mailings com qual data no nome do arquivo?">
-    Apenas os arquivos cujo nome contém a data do <b>dia corrente</b> no padrão <code>_DDMMYY</code> são importados no dia.
+  <Accordion title="🗂️ Como informo a carteira se não usar `_cXXX`?">
+    Coloque o arquivo em uma **pasta cujo nome é o código da carteira**. O sistema lerá o nome da pasta como identificador da carteira.
   </Accordion>
 
-  <Accordion title="Como funciona a sequência no nome do arquivo (ex.: _999)?">
-    Representa a ordem do arquivo no dia. <b>Não</b> pode haver dois arquivos com a <b>mesma sequência</b> no mesmo dia.
+  <Accordion title="📦 Como fracionar o envio em lotes?">
+    Use `_q88999` onde:
+    - `88` = percentual da base enviado por lote
+    - `999` = intervalo em minutos entre lotes
+
+    **Exemplo:** `_q15020` → 15% por lote, a cada 20 minutos.
   </Accordion>
 
-  <Accordion title="Onde informo a carteira se não usar o parâmetro _cXXXXXXXX?">
-    Se o sufixo <code>_cXXXXXXXX</code> não for informado, coloque o arquivo dentro de uma <b>pasta cujo nome é a carteira</b>.
+  <Accordion title="🚫 Como excluir contatos que interagiram recentemente?">
+    Use `_x999` para descartar contatos com interação nas últimas `999` horas.
+
+    **⚠️ Atenção:** O parâmetro `_x` deve vir **antes** de `_nt` (nome do template) no nome do arquivo.
   </Accordion>
 
-  <Accordion title="Para que serve o parâmetro _h no nome do arquivo?">
-    O sufixo <code>_h</code> indica que o mailing deve passar por <b>higienização</b> durante a importação.
-  </Accordion>
+  <Accordion title="📩 Como configurar campanha de WhatsApp Oficial?">
+    Combine os parâmetros conforme o tipo de número:
 
-  <Accordion title="Como agendar o início da campanha a partir do arquivo?">
-    Use <code>_iDDMMYYHHMM</code> para definir <b>data e hora</b> específicas de início (ex.: <code>_i0102180820</code> para 01/02/18 08:20).
-  </Accordion>
-
-  <Accordion title="Como fracionar o envio da campanha em lotes?">
-    Use <code>_q88999</code> para enviar <b>88%</b> por lote com intervalo de <b>999</b> minutos entre disparos.
-  </Accordion>
-
-  <Accordion title="Como evitar disparos para quem interagiu recentemente?">
-    Utilize <code>_x999</code> para <b>descartar</b> contatos com interação nas últimas <b>999 horas</b>. Observação: posicione <code>_x</code> antes de <code>_nt</code>.
-  </Accordion>
-
-  <Accordion title="Como defino o template e o número do WhatsApp Oficial?">
-    Para WhatsApp Oficial:  
-    • <code>_ntNOME_DO_TEMPLATE</code> define o <b>template</b>.  
-    • <code>_nw11998877665</code> define o <b>número exclusivo</b> remetente.  
-    Escolha entre <code>_whatsappexclusivo</code> (exclusivo) ou <code>_whatsappcompartilhado</code>.
-  </Accordion>
-
-  <Accordion title="Quando devo usar o parâmetro _whatsappprospect?">
-    Use <code>_whatsappprospect</code> apenas quando houver <b>números prospects</b>. Caso contrário, utilize <code>_whatsappexclusivo</code> com <code>_nw</code>.
-  </Accordion>
-
-  <Accordion title="Como configurar campanhas de e-mail a partir do nome do arquivo?">
-    Inclua <code>_email</code> para disparar e-mail, <code>_ceCONTA@DOMINIO</code> para definir a <b>conta remetente</b> e <code>_teTÍTULO</code> para o <b>assunto</b>.
-  </Accordion>
-
-  <Accordion title="Posso definir um limite de envio para não disparar fora de horário?">
-    Sim. Use <code>_LEddMMyyHHmm</code> para limitar o <b>prazo máximo</b> de envio (data/hora limite).
-  </Accordion>
-
-  <Accordion title="Qual criptografia devo escolher no FTP?">
-    Depende do seu servidor. O mais comum é <b>Explícito (TLS)</b> em FTP. Para SFTP (porta 22), a sessão já é segura por padrão via SSH.
-  </Accordion>
-
-  <Accordion title="O que fazer se a conexão falhar mesmo com as credenciais corretas?">
-    Verifique: liberação dos <b>IPs</b>, porta/protocolo corretos (21 FTP / 22 SFTP), host sem <code>https://</code>, ausência de <b>IP privado</b>, e valide via <b>FileZilla</b> ou <b>WinSCP</b>.
+    - **Número exclusivo:** `_whatsappexclusivo` + `_nw11999000000` + `_ntNOME_TEMPLATE`
+    - **Número compartilhado:** `_whatsappcompartilhado` + `_ntNOME_TEMPLATE`
+    - **Prospect:** `_whatsappprospect` + `_ntNOME_TEMPLATE` (somente se houver números prospects)
   </Accordion>
 </AccordionGroup>

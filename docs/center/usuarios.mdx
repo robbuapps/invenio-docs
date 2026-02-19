@@ -1,168 +1,294 @@
 ---
 title: "Usuários"
 sidebarTitle: "Usuários"
-description: "No Invenio Center, os usuários desempenham um papel fundamental na organização e no fluxo de atendimento. 
-Cada usuário possui permissões e responsabilidades específicas, que ajudam a garantir que o sistema funcione de forma eficiente."
+description: "Crie e gerencie usuários no Invenio Center: configure permissões, segmentos, canais restritos, linhas WhatsApp, grupos de acesso e host de acesso para controle total da operação."
 ---
 
-##  Criação de usuários 
+O módulo de **Usuários** centraliza a criação e gestão de todos os acessos à plataforma, com permissões específicas para cada perfil de uso.
 
-	**Acesse:** `Invenio Center>> Menu superior com foto do usuário >> Usuários`
+**Caminho:** Invenio Center > Menu superior (foto do usuário) > **Usuários**
 
-	Nesta tela, você pode visualizar todos os usuários criados, filtrar os dados e até criar usuários. Para realizar a criação de um novo usuário 
-de forma assertiva é importante se atentar aos campos e especificidades citados abaixo.
+<Tip>
+**Acesso direto:** [Painel de Usuários](https://inveniocenter.robbu.global/painel/usuarios)
+</Tip>
 
-[Acesso direto ao painel de usuários Invenio Center](https://inveniocenter.robbu.global/painel/usuarios)
+<Frame caption="Tela inicial do módulo de Usuários">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img1usuarios.png" />
+</Frame>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img1usuarios.png" />
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img1.1usuarios.png" />
-
----
-
-## Permissões Básicas de Usuários
-
-| **Configuração**                    | **Descrição**                                                                                  |
-|-------------------------------------|------------------------------------------------------------------------------------------------|
-| **Horário de Expediente**           | Configura o horário de login/logout do usuário, impedindo o acesso fora do horário programado. |
-| **Assinatura para Canal de E-mail** | A assinatura será inserida automaticamente em cada e-mail enviado.                             |
-| **Acesso Externo**                  | Impede o login fora do IP/rede cadastrada em **Configurar Host de Acesso**.                    |
-| **Envio de Anexo**                  | Permite o envio de documentos no Live.                                                         |
-| **Aviso Sonoro**                    | Habilita o som de notificação no Live ao receber mensagens.                                    |
-| **Visão de Contatos sem Segmento**  | Permite que contatos sem segmentação apareçam na fila de atendimento.                          |
-| **Adicionar Pessoa**                | Permite criar contatos pelo Live.                                                              |
-| **Atualizar Pessoa**                | Permite editar os dados dos contatos.                                                          |
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img2usuarios.png" /> 
+<Frame caption="Lista de usuários com opções de filtro e criação">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img1.1usuarios.png" />
+</Frame>
 
 ---
 
-##  Segmentos
- Permite definir os segmentos que o operador pode visualizar e atender. Para isso, basta selecionar os segmentos aos quais o operador tem permissão de atendimento.
+## Tipos de Usuários (Grupos de Acesso)
 
- <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img4usuarios.png" /> 
+Cada usuário deve ser criado com um **tipo** que define seu nível de acesso e consumo de licença:
 
-##  Canais Restritos
- Restringe o envio de mensagens a canais específicos, conforme a configuração do operador. Para isso, basta marcar os canais específicos aos quais o operador **não terá permissão** para o atendimento.
+| Tipo | Acesso ao Center | Acesso ao Live | Envia mensagens | Consome licença |
+|------|:---:|:---:|:---:|:---:|
+| **Atendente** | ❌ | ✅ | ✅ | ✅ |
+| **Supervisor** | ✅ | ✅ | ✅ | ✅ |
+| **Administrador** | ✅ | ✅ (limitado) | ❌ | ❌ |
+| **Integração API** | ❌ | ❌ | ✅ (via API) | ✅ |
+| **Carteiro Digital** | ❌ | ❌ | ✅ (via Carteiro) | ✅ |
 
-##  Linhas WhatsApp
- Essa configuração limita o operador a determinadas linhas de WhatsApp, permitindo que ele visualize apenas os templates vinculados às linhas selecionadas. Além disso, impede que o operador crie contatos
-  em outras linhas as quais não possui permissão. Vale ressaltar que essa restrição não impede o atendimento dos contatos, mas limita a criação e edição dos mesmos nas linhas restritas
+<Note>
+**Sobre cada tipo:**
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/linhas-whatsapp.png"/>
+- **Atendente:** Acessa apenas o Invenio Live. Recebe contatos automaticamente via distribuição.
+- **Supervisor:** Acessa Center e Live. **Não recebe contatos automaticamente** — usa o botão manual para puxar.
+- **Administrador:** Acessa Center e Live, mas **não envia mensagens** e não consome licença.
+- **Integração API:** Não acessa interfaces — necessita token, permissões a segmentos e envios.
+- **Carteiro Digital:** Exclusivo para disparos via Carteiro Digital — necessita token e permissões.
+</Note>
+
+<Frame caption="Configuração de grupo de acesso do usuário">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img5usuarios.png" />
+</Frame>
 
 ---
 
-##  Tipos de Usuários - Grupos de Acesso
+## Permissões Básicas
 
-**Atendente**  
-- **Licença:** Consome licença de atendimento **(adquirida via comercial ou financeiro Robbu)**.  
-- **Acesso ao Center:** Não possuí acesso ao Invenio Center, apenas as funcionalidades da Invenio Live.  
+Configurações individuais que controlam o comportamento do usuário na plataforma:
 
-**Supervisor**  
-- **Licença:** Consome licença de atendimento.  
-- **Distribuição Automática:** Supervisores **NÃO** recebem contatos automaticamente, mas têm o botão manual disponível para puxar contatos quando desejarem.  
-- **Acesso ao Center:** Pode acessar e usar todas as funcionalidades do Center, conforme permissões configuradas.  
+| Permissão | Descrição |
+|-----------|-----------|
+| **Horário de Expediente** | Restringe login/logout ao horário configurado — bloqueia o acesso fora do período programado |
+| **Assinatura para Canal de E-mail** | Assinatura inserida automaticamente em cada e-mail enviado |
+| **Acesso Externo** | Impede login fora do IP/rede cadastrada em **Host de Acesso** |
+| **Envio de Anexo** | Permite enviar documentos no Invenio Live |
+| **Aviso Sonoro** | Habilita som de notificação ao receber mensagens no Live |
+| **Visão de Contatos sem Segmento** | Exibe contatos sem segmentação na fila de atendimento |
+| **Adicionar Pessoa** | Permite criar novos contatos diretamente pelo Live |
+| **Atualizar Pessoa** | Permite editar dados de contatos existentes |
 
-**Administrador**  
-- **Licença:** Embora consiga acessar o Live, não consome licença e **NÃO** pode enviar mensagens aos contatos.  
-- **Acesso ao Center:** Pode acessar o Center e suas funcionalidades, conforme permissões de página.  
+<Frame caption="Configurações de permissões básicas do usuário">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img2usuarios.png" />
+</Frame>
 
-**Integração API**  
-- **Licença:** Não acessa o Invenio Center ou Live, mas consome licença para realizar chamadas API e disparos via API.  
-  Precisa de acesso ao token do usuário, permissões a segmentos e envios.  
+---
 
-**Integração Carteiro Digital**  
-- **Licença:** Não acessa o Invenio Center ou Live, mas consome licença para realizar disparos através do Carteiro Digital.  
-  Precisa de acesso ao token do usuário e permissões a segmentos e envios.  
+## Restrições de Acesso
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img5usuarios.png" />
+<Tabs>
+  <Tab title="Segmentos" icon="layer-group">
+    ### Segmentos do Usuário
+
+    Define quais **carteiras (segmentos)** o operador pode visualizar e atender.
+
+    Selecione os segmentos aos quais o operador tem permissão — ele só verá contatos e filas dos segmentos autorizados.
+
+    <Frame caption="Configuração de segmentos acessíveis pelo usuário">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img4usuarios.png" />
+    </Frame>
+  </Tab>
+
+  <Tab title="Canais Restritos" icon="ban">
+    ### Canais Restritos
+
+    Restringe o envio de mensagens a **canais específicos**.
+
+    Marque os canais nos quais o operador **NÃO terá permissão** para atendimento. Os demais permanecem liberados.
+
+    **Uso comum:** Restringir atendentes de determinadas regiões a canais específicos ou limitar operadores a um único canal de comunicação.
+  </Tab>
+
+  <Tab title="Linhas WhatsApp" icon="whatsapp">
+    ### Linhas WhatsApp
+
+    Limita o operador a determinadas **linhas de WhatsApp**:
+
+    - ✅ Visualiza apenas templates das linhas selecionadas
+    - ✅ Não pode criar/editar contatos em linhas não autorizadas
+    - ❌ **Não impede o atendimento** — apenas restringe criação e edição nas linhas restritas
+
+    <Frame caption="Configuração de linhas WhatsApp acessíveis pelo usuário">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/linhas-whatsapp.png" />
+    </Frame>
+  </Tab>
+</Tabs>
 
 ---
 
 ## Permissões de Página
-	Ao editar um usuário, você pode visualizar o botão Permissões de Páginas, que controla as permissões de acesso às páginas e configurações do Invenio.
-    
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img6usuarios.png" /> 
+
+Controla o acesso a **páginas e funcionalidades específicas** do Invenio Center.
+
+**Caminho:** Invenio Center > Usuários > Editar usuário > **Permissões de Páginas**
+
+<Frame caption="Botão e tela de Permissões de Páginas no perfil do usuário">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img6usuarios.png" />
+</Frame>
 
 ---
 
-##  Rotina de Expurgo de Usuários
+## Rotina de Expurgo de Usuários
 
-A rotina de expurgo na plataforma segue a regra padrão abaixo:
+A plataforma aplica automaticamente a seguinte regra para usuários inativos:
 
-- Após **60 dias** sem login, o usuário é automaticamente **desativado**.  
-- Após **70 dias** sem login, o usuário é **expurgado** do sistema e deixa de aparecer na lista de usuários do Center.  
+| Prazo sem login | Ação automática |
+|----------------|----------------|
+| **60 dias** | Usuário **desativado** automaticamente |
+| **70 dias** | Usuário **expurgado** — removido da lista de usuários do Center |
 
-> ⚠️ **Atenção**: O prazo de expurgo não pode ser alterado, pois trata-se de uma regra fixa da plataforma.
-
----
-
-## Configurando Host de Acesso
-
-Acesse: `Configurações >> Gerenciar hosts de acesso >> Gerenciar`
-
-[Acesso direto à pagina de gerenciamento de hosts de acesso](https://inveniocenter.robbu.global/painel/configuracoes/hosts)
-
-Esta configuração aumenta a segurança, permitindo definir IPs ou redes específicas para liberar o acesso ao Invenio. Apenas usuários logados nessas redes poderão acessar o sistema.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img7usuarios.png" /> 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img7.1usuarios.png" /> 
-
-[Acesse a documentação sobre gerenciamento de host de acesso no Invenio Center](https://docs.robbu.global/docs/center/gerenciar-host-de-acesso)
+<Warning>
+O prazo de expurgo **não pode ser alterado** — é uma regra fixa da plataforma. Usuários expurgados não aparecem mais na listagem, mas seus dados históricos são preservados nos relatórios.
+</Warning>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Configurar Host de Acesso
 
-- [Gerenciar Host de Acesso no Invenio Center](https://docs.robbu.global/docs/center/gerenciar-host-de-acesso)  
-- [Restrições de Usuários](https://docs.robbu.global/docs/center/restricoes)  
-- [Pausas no Atendimento](https://docs.robbu.global/docs/center/pausas-no-atendimento)  
-- [Meu Perfil no Invenio Live](https://docs.robbu.global/docs/live/meu-perfil)  
+Define IPs ou redes específicas para liberar o acesso ao Invenio, aumentando a segurança.
+
+**Caminho:** Invenio Center > Configurações > Gerenciar hosts de acesso > **Gerenciar**
+
+<Tip>
+**Acesso direto:** [Gerenciar Hosts de Acesso](https://inveniocenter.robbu.global/painel/configuracoes/hosts)
+</Tip>
+
+<Frame caption="Tela de configuração de hosts de acesso">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img7usuarios.png" />
+</Frame>
+
+<Frame caption="Formulário para adicionar IP ou rede autorizada">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/usuarios/img7.1usuarios.png" />
+</Frame>
+
+Consulte a documentação completa: [Gerenciar Host de Acesso](https://docs.robbu.global/docs/center/gerenciar-host-de-acesso)
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Gerenciar Host de Acesso"
+    icon="shield"
+    href="https://docs.robbu.global/docs/center/gerenciar-host-de-acesso"
+  >
+    Configurar IPs autorizados
+  </Card>
+
+  <Card
+    title="Restrições de Usuários"
+    icon="lock"
+    href="https://docs.robbu.global/docs/center/restricoes"
+  >
+    Detalhes sobre restrições avançadas
+  </Card>
+
+  <Card
+    title="Pausas no Atendimento"
+    icon="circle-pause"
+    href="https://docs.robbu.global/docs/center/pausas-no-atendimento"
+  >
+    Configurar pausas de operadores
+  </Card>
+
+  <Card
+    title="Meu Perfil (Live)"
+    icon="user"
+    href="https://docs.robbu.global/docs/live/meu-perfil"
+  >
+    Perfil e configurações do operador
+  </Card>
+
+  <Card
+    title="Segmentos"
+    icon="layer-group"
+    href="https://docs.robbu.global/docs/center/segmentos"
+  >
+    Configurar carteiras de atendimento
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-    <Accordion title="Não estou conseguindo logar no Invenio Live como atendente">
-    É possível que você esteja acessando uma URL incorreta. Usuários com perfil de atendente devem realizar o login através do seguinte endereço:  
-    https://invenio.robbu.global/painel/
-    </Accordion>
-  <Accordion title="Como crio um novo usuário no Invenio Center?">
-    Clique na sua foto no canto superior direito e selecione **Usuários**. Nessa tela, você poderá visualizar, filtrar e criar usuários. Preencha todos os campos obrigatórios e revise as permissões com atenção.
+  <Accordion title="📍 Como acessar o módulo de Usuários?">
+    **Caminho:** Invenio Center > Clique na sua **foto/avatar** no canto superior direito > Usuários
+
+    **Acesso direto:** [Painel de Usuários](https://inveniocenter.robbu.global/painel/usuarios)
   </Accordion>
 
-  <Accordion title="O que são as Permissões de Página?">
-    As Permissões de Página determinam quais áreas e funcionalidades do Invenio Center o usuário poderá acessar. Essa configuração está disponível durante a edição do perfil do usuário.
+  <Accordion title="🔑 Não consigo logar no Invenio Live como atendente. O que fazer?">
+    Verifique se está acessando a URL correta:
+
+    - **Invenio Live (atendente):** `https://invenio.robbu.global/painel/`
+    - **Invenio Center (admin/supervisor):** `https://inveniocenter.robbu.global/`
+
+    Se o login ainda falhar, verifique com o administrador se o horário de expediente não está bloqueando o acesso.
   </Accordion>
 
-  <Accordion title="Como restringir o acesso a partir de IPs específicos?">
-    Acesse **Configurações > Host de Acesso** para definir os IPs ou redes autorizadas. Usuários fora dessas redes não conseguirão acessar a plataforma.
+  <Accordion title="👥 Qual a diferença entre Atendente e Supervisor?">
+    | Característica | Atendente | Supervisor |
+    |---|---|---|
+    | Acesso ao Center | ❌ | ✅ |
+    | Recebe contatos automaticamente | ✅ | ❌ (manual) |
+    | Pode criar segmentos/usuários | ❌ | ✅ (conforme permissão) |
+    | Consome licença | ✅ | ✅ |
+
+    **Supervisor** tem as funções de gestão habilitadas mas **não entra na fila automática** — precisa usar o botão "Próximo" para puxar contatos.
   </Accordion>
 
-  <Accordion title="Quais são os tipos de usuários disponíveis?">
-    São cinco tipos:
-    - **Atendente**: acesso ao Live, consome licença;
-    - **Supervisor**: acesso ao Center e Live, não recebe contatos automaticamente;
-    - **Administrador**: acesso ao Center, não consome licença e não pode enviar mensagens;
-    - **Integração API**: não acessa a interface, mas consome licença para chamadas técnicas;
-    - **Carteiro Digital**: usado exclusivamente para disparos via Carteiro Digital.
+  <Accordion title="🔧 Como funcionam as Permissões de Página?">
+    Determinam quais **áreas e funcionalidades** do Invenio Center o usuário pode acessar.
+
+    **Caminho:** Invenio Center > Usuários > Editar usuário > **Permissões de Páginas**
+
+    Útil para criar usuários Supervisor com acesso apenas a módulos específicos (ex: somente Relatórios e Segmentos).
   </Accordion>
 
-  <Accordion title="O que são os Segmentos e como funcionam?">
-    Os segmentos determinam quais grupos de contatos o operador pode visualizar e atender. A configuração é feita na tela de edição do usuário.
+  <Accordion title="🌐 Como restringir acesso por IP?">
+    Configure o **Host de Acesso** para definir IPs ou redes autorizadas.
+
+    **Caminho:** Invenio Center > Configurações > Gerenciar hosts de acesso > Gerenciar > Adicionar IP
+
+    Após configurar, habilite a permissão **"Acesso Externo"** no usuário para que a restrição seja aplicada.
+
+    Consulte: [Gerenciar Host de Acesso](https://docs.robbu.global/docs/center/gerenciar-host-de-acesso)
   </Accordion>
 
-  <Accordion title="É possível restringir o envio de mensagens em canais específicos?">
-    Sim. Utilize a opção **Canais Restritos** para impedir que o operador envie mensagens por canais determinados.
+  <Accordion title="⚠️ O que acontece após 60 dias sem login?">
+    | Prazo | Ação |
+    |-------|------|
+    | 60 dias sem login | Usuário **desativado** automaticamente |
+    | 70 dias sem login | Usuário **expurgado** (removido da listagem) |
+
+    **Importante:** O prazo não pode ser alterado — é uma regra fixa da plataforma. Para reativar antes do expurgo, edite o usuário e reative manualmente.
   </Accordion>
 
-  <Accordion title="Para que serve a configuração de Linhas WhatsApp?">
-    Essa configuração limita quais linhas o operador pode visualizar, editar e criar contatos. Ela **não impede o atendimento**, apenas restringe a manipulação de contatos.
+  <Accordion title="📵 O que são Canais Restritos?">
+    Impedem que o operador **envie mensagens** por canais específicos.
+
+    **Como configurar:** Invenio Center > Usuários > Editar > Canais Restritos > Marcar os canais proibidos
+
+    Os canais **não marcados** permanecem liberados para o operador.
   </Accordion>
 
-  <Accordion title="O que faz a permissão Visão de Contatos sem Segmento?">
-    Permite ao operador visualizar e atender contatos que ainda não foram atribuídos a um segmento.
+  <Accordion title="💬 A configuração de Linhas WhatsApp impede o atendimento?">
+    **Não.** A restrição de Linhas WhatsApp **não impede o atendimento** — o operador ainda pode responder contatos de qualquer linha.
+
+    O que a restrição limita:
+    - ❌ Visualização de templates de linhas não autorizadas
+    - ❌ Criação de novos contatos em linhas restritas
+    - ❌ Edição de contatos nas linhas restritas
+  </Accordion>
+
+  <Accordion title="🔌 Como criar um usuário de Integração API?">
+    **Caminho:** Invenio Center > Usuários > + Criar usuário > Grupo de Acesso: **Integração API**
+
+    **Requisitos:**
+    - Token de acesso do usuário (gerado nas configurações)
+    - Permissão aos segmentos desejados
+    - Permissão de envio habilitada
+
+    Esse usuário não acessa interfaces — é usado exclusivamente para chamadas técnicas via API.
   </Accordion>
 </AccordionGroup>

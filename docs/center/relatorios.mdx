@@ -1,233 +1,317 @@
 ---
 title: "Relatórios"
-description: "Aprenda a acessar, gerar e agendar relatórios no Invenio Center para melhorar sua operação."
 sidebarTitle: "Relatórios"
+description: "Gere, visualize, baixe e agende relatórios no Invenio Center: 30+ modelos prontos em 7 categorias, filtros personalizáveis, exportação CSV e envio automático por e-mail ou FTP/SFTP."
+mode: "wide"
 ---
 
+A seção de **Relatórios** do Invenio Center centraliza e consolida dados da operação para monitoramento de atendimentos, KPIs, campanhas e desempenho da equipe — com modelos prontos, filtros personalizáveis e visualização detalhada.
 
+**Caminho:** Invenio Center > Analisar > **Relatórios**
 
-A seção de **Relatórios** do Invenio Center foi desenvolvida para proporcionar uma visão centralizada e estratégica sobre os dados da operação. É possível gerar, consultar e agendar relatórios que apoiam o monitoramento de atendimentos, KPIs, campanhas e desempenho da equipe.
+<Tip>
+**Acesso direto:** [Relatórios no Invenio Center](https://inveniocenter.robbu.global/painel/relatorios)
+</Tip>
 
-A interface é intuitiva e conta com modelos prontos, filtros personalizáveis e visualização detalhada de dados como período, canal, status e total de registros.
+<Frame caption="Tela principal do módulo de Relatórios">
+  <img src="https://storage.robbu.global/v2/file/C1B058E419FE84E3649C103F3F41918E" />
+</Frame>
 
----
+A tela principal exibe duas seções:
 
-## Acesso e Visualização
+| Seção | O que mostra |
+|-------|-------------|
+| **Relatórios** | Lista de relatórios gerados ou em processamento |
+| **Agendamentos** | Relatórios programados para execução automática |
 
-Para acessar os relatórios, navegue até: `Invenio Center > Analisar > Relatórios`
+<Frame caption="Lista de relatórios com status, usuário solicitante e período">
+  <img src="https://storage.robbu.global/v2/file/54CCA55563A510FA3BBC2304ADB66B52" />
+</Frame>
 
-[Invenio Center - Relatórios](https://inveniocenter.robbu.global/painel/relatorios)
+Cada relatório listado exibe: **Nome** · **Status** · **Usuário solicitante** · **Data/hora** · **Período** · **Total de registros**
 
-<img src="https://storage.robbu.global/v2/file/C1B058E419FE84E3649C103F3F41918E" /> 
+**Status possíveis:** `Aguardando` · `Em processamento` · `Finalizado` · `Falha`
 
-Na tela principal, duas seções principais estarão disponíveis:
-
-- **Relatórios**: lista os relatórios já gerados ou em processamento.
-- **Agendamentos**: mostra os relatórios programados para execução automática.
-
-Também é possível alternar entre:
-- **Todos os relatórios**: exibe todos disponíveis no ambiente.
-- **Meus relatórios**: exibe apenas os do usuário logado.
-
-![relatorios](https://storage.robbu.global/v2/file/54CCA55563A510FA3BBC2304ADB66B52) 
-
-Cada relatório mostra:
-- Nome
-- Status (Aguardando, Em processamento, Finalizado, Falha)
-- Usuário solicitante
-- Data e hora
-- Período analisado
-- Total de registros
-
-Alguns relatórios, como **KPI - Eventos**, incluem:
-- Carteira aplicada
-- Canal utilizado
-- Tipo de evento
-
+Alterne entre **Todos os relatórios** e **Meus relatórios** para filtrar por usuário logado.
 
 ---
 
-## Geração de Relatórios
+## Gerar um Relatório
 
-Selecione a opção **+ Gerar relatório** e escolha um modelo. Aplique filtros como período, segmento, canal, evento ou usuário.
-Após a escolha clique novamente em **Gerar relatório** para confirmar a geração.
+<Steps>
+  <Step title="Iniciar criação">
+    Clique em **"+ Gerar relatório"** na tela do módulo.
 
-![gerar relatorios](https://storage.robbu.global/v2/file/0922AD1BFE162486F35B99CAE7A3BD6F) 
+    **Caminho:** Invenio Center > Analisar > Relatórios > **+ Gerar relatório**
 
-## Visualização do relatório gerado
+    <Frame caption="Tela de seleção de modelo e filtros para geração de relatório">
+      <img src="https://storage.robbu.global/v2/file/0922AD1BFE162486F35B99CAE7A3BD6F" />
+    </Frame>
+  </Step>
 
-Após a criação do relatório, ao clicar no ícone de três pontos localizado à direita do item, será exibida a opção de visualização do relatório.
+  <Step title="Selecionar o modelo">
+    Escolha o **modelo de relatório** desejado entre os disponíveis no ambiente (30+ modelos em 7 categorias).
+  </Step>
 
-![baixar relatorio](https://storage.robbu.global/v2/file/A59426B5CD2C85ED7A9C03D22940DB88) 
+  <Step title="Aplicar filtros">
+    Configure os filtros conforme a análise desejada:
+    - **Período** (data início/fim)
+    - **Segmento / Carteira**
+    - **Canal** (WhatsApp, E-mail, SMS etc.)
+    - **Usuário / Operador**
+    - **Evento / Status**
+  </Step>
 
-## A plataforma disponibiliza duas formas de visualização:
+  <Step title="Confirmar e aguardar">
+    Clique em **"Gerar relatório"** para confirmar. O relatório entra na fila de processamento.
 
-### Visualização no Invenio Center:
-Exibe o relatório diretamente na tela, com limitação de até 100 linhas por relatório, além de contar com campo de pesquisa para facilitar a consulta das informações.
-
-### Download em CSV:
-Permite realizar o download do relatório em formato CSV, garantindo acesso a todas as linhas geradas, sem limitação de quantidade, possibilitando análises mais completas em ferramentas externas.
-
-![baixar relatorio](https://storage.robbu.global/v2/file/3D21FD22B041191F7D85DE198F884221) 
-
-> Escolha do formato de visualização deve considerar o volume de dados e a necessidade de análise, garantindo eficiência operacional no consumo das informações.
-
-
-
-### Agendamentos e Envio
-
-É possível agendar relatórios com envio programado por e-mail ou FTP/SFTP. 
-
-Acesse [Invenio Center - Relatório FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
-para saber mais detalhes.
-
-A plataforma também permite o acesso centralizado aos relatórios agendados, incluindo tanto todos os agendamentos disponíveis quanto aqueles criados exclusivamente por você, por meio da opção “Meus agendamentos”.
-
-![relatorios agendados](https://storage.robbu.global/v2/file/AEF82F18D1C977CD2A14853C5585EF36)
-
-**Envio por e-mail**
-
-Para realizar o envio do relatório agendado por e-mail, basta selecionar essa opção ao final da criação ou edição do relatório. Em seguida, informe os endereços de e-mail que deverão receber o relatório agendado e confirme a criação ou atualização.
-
-<img src="https://storage.robbu.global/v2/file/C46C7F77528C772DE4F630D7543C798A" /> 
-
-**Edição e exclusão**
-
-Ao selecionar o ícone de três pontos, localizado à direita do relatório já gerado, serão exibidas as opções para editá-lo ou excluí-lo.
-
-<img src="https://storage.robbu.global/v2/file/AEF82F18D1C977CD953C3CAA8BB3A2C9" /> 
-
-> Essas ações permitem a manutenção e o ajuste contínuo dos relatórios agendados, garantindo alinhamento com as necessidades operacionais e evitando a permanência de registros obsoletos.
+    <Note>
+    Quando mais de um relatório da mesma carteira é solicitado, o sistema processa na **fila sequencial** — o segundo aguarda o primeiro ser concluído.
+    </Note>
+  </Step>
+</Steps>
 
 ---
 
-## Tipos de Relatórios
+## Visualizar e Baixar
 
-### Relatórios de Contatos
+Após gerado, clique nos **três pontos** à direita do relatório para ver as opções de acesso.
 
-1. **Contatos atendidos**: Lista todos os contatos atendidos por usuário ou automação, com base no período definido no filtro.  
-2. **Contatos Atendidos por Usuário**: Detalha a quantidade de contatos atendidos por cada usuário em um período determinado.  
-3. **Contatos Atendidos por Usuário agrupado por carteira**: Apresenta a quantidade de contatos atendidos por cada usuário em um período específico, agrupados por carteira.  
-4. **Contatos Fidelizados por Usuário**: Lista todos os contatos fidelizados por cada usuário com base no momento real da extração.  
-5. **Contatos Recebidos no WebChat**: Extrai todos os dados gerados pelo canal de WebChat, com base no período especificado pelos filtros.  
-6. **Contatos com Agendamentos Pendentes**: Lista todos os contatos com agendamentos pendentes, com base no período definido pelo filtro.  
-7. **Contatos Novos por Data de Inclusão**: Lista todos os contatos novos com base no período de inclusão definido pelo filtro.  
-8. **Contatos Totais**: Lista todos os contatos no período, sejam eles entrantes ou saíntes, com ou sem atendimento, por humano ou bot.  
+<Frame caption="Opções de visualização e download do relatório gerado">
+  <img src="https://storage.robbu.global/v2/file/A59426B5CD2C85ED7A9C03D22940DB88" />
+</Frame>
 
-### Relatórios de KPIs e Desempenho
+<Tabs>
+  <Tab title="📊 Visualizar no Center" icon="eye">
+    Exibe o relatório diretamente na tela do Invenio Center:
 
-1. **KPI Eventos**: Lista todos os KPIs de eventos registrados na plataforma, com base no período definido pelo filtro.  
-2. **Fluxo IDR – KPIs**: Apresenta os resultados de todas as KPIs inseridas pela IDR. Usado para gerenciar atendimentos realizados pela IDR e acompanhar contatos atendidos pelos chatbots, com base no período definido.  
-3. **Nível de Serviço (SL)**: Mede o desempenho e a qualidade do serviço prestado aos clientes durante interações telefônicas.  
-4. **Taxa de Abandono**: Indica a porcentagem de chamadas abandonadas pelos clientes antes de serem atendidas por um agente em um DAC (Distribuidor Automático de Chamadas).  
-5. **Tempo Médio para Chamada Abandonada**: Mede o tempo médio que chamadores aguardam antes de abandonar uma chamada em fila de atendimento.  
-6. **Tempo Médio de Espera em Fila**: Representa a média de tempo que chamadores aguardam antes de serem atendidos por um agente.  
-7. **Tempo Médio Falado**: Mede a duração média das interações entre agentes e clientes durante chamadas atendidas.  
-8. **Relatório Analítico de Chamadas Abandonadas**: Analisa chamadas abandonadas para identificar pontos de falha e propor melhorias.  
+    - Limite de **até 100 linhas** por relatório
+    - Campo de **pesquisa** para localizar informações rapidamente
+    - Ideal para consultas rápidas e verificação de dados
 
-### Relatórios de Acesso e Sessões
+    <Frame caption="Visualização do relatório na tela do Invenio Center">
+      <img src="https://storage.robbu.global/v2/file/3D21FD22B041191F7D85DE198F884221" />
+    </Frame>
+  </Tab>
 
-1. **Relatório de Controle de Sessão por Usuário (Login e Logout)**: Lista todos os acessos por usuário em um período específico, incluindo logouts incorretos (registrados após novo login).  
-2. **Controle de Sessões WhatsApp**: Lista todas as sessões de WhatsApp abertas pelo contato ou pela empresa no período definido.  
-3. **Relatório de Status de Linhas WhatsApp**: Lista todas as atualizações de status das linhas no ambiente atual.  
-4. **Relatório de Status de Templates WhatsApp**: Lista todas as atualizações de status dos templates HSM no ambiente atual.  
+  <Tab title="📥 Download em CSV" icon="download">
+    Exporta o relatório completo em formato CSV:
 
-### Relatórios de Extração de Dados
+    - **Sem limitação** de linhas — todos os registros incluídos
+    - Compatível com **Excel**, **Power BI** e demais ferramentas analíticas
+    - Ideal para análises avançadas e cruzamento de dados externos
 
-1. **Extração de Telefones do Contato**: Gera lista de telefones dos contatos com base no período definido, limitado a 10.000 registros.  
-2. **Extração de E-mails do Contato**: Gera lista de e-mails associados aos contatos, limitada a 10.000 registros, com intervalo máximo de 30 dias.  
-3. **Extração de Cartões do Pipeline**: Extrai todos os cartões do Pipeline selecionado.  
+    <Tip>
+    Para volumes grandes de dados, prefira sempre o **download CSV** para garantir acesso a todos os registros sem truncamento.
+    </Tip>
+  </Tab>
+</Tabs>
 
-### Relatórios de Automação e Campanhas
+---
 
-1. **Envios Ativos de HSM – WhatsApp Business API**: Lista todos os envios ativos de mensagens HSM realizados via WhatsApp Business API, com base no período definido.  
-2. **Campanhas Realizadas**: Lista informações consolidadas das campanhas realizadas, com base no período definido.  
-3. **Envios de HSM por Usuário**: Lista HSMs enviados manualmente por usuários em um período específico.  
-4. **Cancelamento de Subscrição de Campanhas**: Lista pessoas que cancelaram inscrição e não recebem mais campanhas.  
+## Agendar Relatórios
 
-### Relatórios de Auditoria e Compliance
+Programe a geração e envio automático de relatórios por **e-mail** ou **FTP/SFTP**.
 
-1. **Auditoria (GDPR e LGPD)**: Lista ações dos usuários realizadas dentro das plataformas com base no período definido.  
+<Frame caption="Tela de agendamentos de relatórios">
+  <img src="https://storage.robbu.global/v2/file/AEF82F18D1C977CD2A14853C5585EF36" />
+</Frame>
 
-### Relatórios de Atendimento e Documentação
+**Envio por e-mail:** Selecione a opção ao criar/editar o agendamento, informe os endereços de destino e confirme.
 
-1. **Carteiro Digital – Envio de Documentos**: Lista documentos enviados por usuários ou automação via API, com base no período definido.  
-2. **Invenio Webchat – Net Promoter Score (NPS)**: Lista classificações, NPS e comentários realizados após atendimento via WebChat.  
-3. **Protocolos de Atendimentos**: Lista todos os protocolos gerados com base no período definido.  
-4. **Fila de Processamento**: Quando é solicitado mais de um relatório da mesma carteira, o sistema aguarda a conclusão do primeiro para então iniciar a geração do próximo.
+<Frame caption="Configuração de envio do relatório agendado por e-mail">
+  <img src="https://storage.robbu.global/v2/file/C46C7F77528C772DE4F630D7543C798A" />
+</Frame>
+
+**Editar ou excluir um agendamento:** Clique nos **três pontos** à direita do agendamento.
+
+<Frame caption="Opções de edição e exclusão de agendamentos">
+  <img src="https://storage.robbu.global/v2/file/AEF82F18D1C977CD953C3CAA8BB3A2C9" />
+</Frame>
+
+Para envio via FTP/SFTP, consulte: [Agendamento de Relatório via FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
+
+---
+
+## Tipos de Relatórios Disponíveis
+
+### 👥 Contatos
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **Contatos Atendidos** | Todos os contatos atendidos por usuário ou automação no período |
+| **Contatos Atendidos por Usuário** | Volume de contatos atendidos por cada operador |
+| **Contatos por Usuário (por Carteira)** | Agrupado por carteira e operador |
+| **Contatos Fidelizados por Usuário** | Contatos fidelizados de cada operador no momento da extração |
+| **Contatos Recebidos no WebChat** | Dados do canal WebChat no período |
+| **Contatos com Agendamentos Pendentes** | Contatos com agendamentos em aberto no período |
+| **Contatos Novos por Data de Inclusão** | Novos contatos inseridos no período |
+| **Contatos Totais** | Todos os contatos (entrantes, saintes, com/sem atendimento, humano/bot) |
+
+### 📊 KPIs e Desempenho
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **KPI Eventos** | KPIs de eventos registrados no período |
+| **Fluxo IDR – KPIs** | KPIs da IDR e atendimentos por chatbot |
+| **Nível de Serviço (SL)** | Desempenho e qualidade do atendimento |
+| **Taxa de Abandono** | % de chamadas abandonadas antes do atendimento |
+| **Tempo Médio p/ Chamada Abandonada** | Tempo médio de espera até abandono |
+| **Tempo Médio de Espera em Fila** | Tempo médio de espera até ser atendido |
+| **Tempo Médio Falado** | Duração média de interações por chamadas |
+| **Analítico de Chamadas Abandonadas** | Análise de pontos de falha em abandono |
+
+### 🔐 Acesso e Sessões
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **Controle de Sessão por Usuário** | Logins, logouts e acessos por usuário no período |
+| **Sessões WhatsApp** | Sessões abertas pelo contato ou empresa no período |
+| **Status de Linhas WhatsApp** | Atualizações de status das linhas no ambiente |
+| **Status de Templates WhatsApp** | Atualizações de status dos templates HSM |
+
+### 📤 Extração de Dados
+
+| Relatório | Restrições |
+|-----------|-----------|
+| **Extração de Telefones do Contato** | Limite de 10.000 registros |
+| **Extração de E-mails do Contato** | Limite de 10.000 registros, máx. 30 dias |
+| **Extração de Cartões do Pipeline** | Todos os cartões do Pipeline selecionado |
+
+### 🤖 Automação e Campanhas
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **Envios Ativos de HSM (WhatsApp API)** | Disparos de templates HSM via API no período |
+| **Campanhas Realizadas** | Dados consolidados das campanhas no período |
+| **Envios de HSM por Usuário** | Templates enviados manualmente por operadores |
+| **Cancelamento de Inscrição** | Pessoas que optaram por não receber campanhas |
+
+### ⚖️ Auditoria e Compliance
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **Auditoria (GDPR e LGPD)** | Ações dos usuários na plataforma no período — rastreabilidade completa |
+
+### 🗂️ Atendimento e Documentação
+
+| Relatório | Descrição |
+|-----------|-----------|
+| **Carteiro Digital – Envio de Documentos** | Documentos enviados por usuários ou API no período |
+| **WebChat – NPS** | Classificações, NPS e comentários pós-atendimento |
+| **Protocolos de Atendimentos** | Todos os protocolos gerados no período |
 
 ---
 
 ## Relatórios Customizados
 
-Também é possível solicitar **relatórios customizados** junto ao time comercial, mediante avaliação.
+Solicite **relatórios personalizados** junto ao time comercial mediante avaliação técnica.
 
-> Importante: solicitações customizadas estão sujeitas a custos adicionais e prazos específicos.
-
+<Warning>
+Relatórios customizados estão sujeitos a **custos adicionais** e **prazos específicos**, a serem definidos pelo time comercial Robbu.
+</Warning>
 
 ---
-Links e Assuntos Relacionados
 
-https://docs.robbu.global/docs/center/agendamento-relatorio-ftp
+## Links Relacionados
 
-https://docs.robbu.global/docs/center/tipos-de-kpi
+<CardGroup cols={2}>
+  <Card
+    title="Agendamento via FTP/SFTP"
+    icon="server"
+    href="https://docs.robbu.global/docs/center/agendamento-relatorio-ftp"
+  >
+    Envio automático de relatórios por FTP
+  </Card>
 
+  <Card
+    title="Tipos de KPI"
+    icon="chart-bar"
+    href="https://docs.robbu.global/docs/center/tipos-de-kpi"
+  >
+    Referência de KPIs disponíveis
+  </Card>
 
+  <Card
+    title="Protocolos de Atendimento"
+    icon="file-lines"
+    href="https://docs.robbu.global/docs/center/como-habilitar-protocolos-de-atendimento"
+  >
+    Habilitar e usar protocolos
+  </Card>
+
+  <Card
+    title="Pausas no Atendimento"
+    icon="circle-pause"
+    href="https://docs.robbu.global/docs/center/pausas-no-atendimento"
+  >
+    Relatório de pausas por usuário
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="O que são os Relatórios do Invenio Center?">
-    Os relatórios do Invenio Center são recursos analíticos que permitem consolidar, visualizar e extrair dados operacionais da plataforma, oferecendo uma visão estratégica sobre atendimentos, campanhas, KPIs, acessos e desempenho da operação.
+  <Accordion title="📍 Como acessar os relatórios?">
+    **Caminho:** Invenio Center > Analisar > Relatórios
+
+    **Acesso direto:** [Relatórios](https://inveniocenter.robbu.global/painel/relatorios)
+
+    O acesso depende das **Permissões de Página** configuradas no perfil do usuário.
   </Accordion>
 
-  <Accordion title="Quais são os principais benefícios de utilizar os relatórios?">
-    Os relatórios permitem acompanhamento de metas, otimização de processos, identificação de gargalos operacionais, monitoramento de performance da equipe e tomada de decisões baseada em dados reais e confiáveis.
+  <Accordion title="⚙️ Como gerar um relatório?">
+    **Caminho:** Invenio Center > Analisar > Relatórios > + Gerar relatório > Selecionar modelo > Aplicar filtros > Gerar relatório
+
+    O relatório entra na fila de processamento e fica disponível com status **Finalizado** quando pronto.
   </Accordion>
 
-  <Accordion title="Quem pode acessar e gerar relatórios na plataforma?">
-    O acesso aos relatórios depende do perfil de permissão configurado no ambiente. Usuários autorizados conseguem visualizar, gerar, baixar e agendar relatórios conforme as regras definidas pela operação.
+  <Accordion title="📊 Qual a diferença entre visualizar no Center e baixar o CSV?">
+    | Modo | Limite | Uso ideal |
+    |------|--------|-----------|
+    | **Visualizar no Center** | 100 linhas + busca | Consultas rápidas |
+    | **Download CSV** | Sem limite | Análises completas em Excel/Power BI |
+
+    Para volumes grandes, sempre prefira o **CSV** para evitar truncamento de dados.
   </Accordion>
 
-  <Accordion title="Consigo aplicar filtros personalizados nos relatórios?">
-    Sim. Durante a geração, é possível aplicar filtros como período, segmento, canal, carteira, usuário, evento e status, garantindo relatórios mais precisos e alinhados à necessidade de análise.
+  <Accordion title="📅 Posso agendar relatórios para envio automático?">
+    **Sim!** Agendamentos são suportados por **e-mail** e **FTP/SFTP**.
+
+    **Caminho:** Invenio Center > Analisar > Relatórios > Agendamentos > + Agendar
+
+    Consulte: [Agendamento via FTP/SFTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)
   </Accordion>
 
-  <Accordion title="Posso visualizar o relatório diretamente na plataforma?">
-    Sim. A visualização no Invenio Center permite consultar até 100 linhas por relatório, além de contar com campo de busca para facilitar a análise rápida das informações.
+  <Accordion title="❌ O que fazer quando um relatório mostra status 'Falha'?">
+    1. Verifique se os **filtros aplicados** são válidos (período, segmento, canal)
+    2. Confirme se o período não excede os **limites do relatório** (ex: extração de e-mails = máx. 30 dias)
+    3. Tente gerar o relatório novamente
+
+    Se o problema persistir, entre em contato com o suporte Robbu.
   </Accordion>
 
-  <Accordion title="Qual a vantagem de baixar o relatório em CSV?">
-    O download em CSV permite acesso a todos os registros gerados, sem limitação de linhas, possibilitando análises avançadas em ferramentas externas como Excel, Power BI ou sistemas internos.
+  <Accordion title="⏳ Por que meu relatório está demorando para processar?">
+    A plataforma usa uma **fila sequencial por carteira** — quando mais de um relatório da mesma carteira é solicitado simultaneamente, o segundo aguarda o primeiro ser concluído.
+
+    Para relatórios grandes (muitos registros), o processamento pode levar alguns minutos.
   </Accordion>
 
-  <Accordion title="É possível agendar relatórios para envio automático?">
-    Sim. Os relatórios podem ser agendados para envio automático por e-mail ou FTP/SFTP, garantindo recorrência, previsibilidade e eficiência no consumo das informações.
+  <Accordion title="📋 Quais filtros posso aplicar?">
+    Dependendo do modelo, os filtros disponíveis incluem:
+    - **Período** (data início/fim — obrigatório na maioria)
+    - **Segmento / Carteira**
+    - **Canal** (WhatsApp, E-mail, SMS, WebChat etc.)
+    - **Usuário / Operador**
+    - **Evento** (para KPI Eventos)
+    - **Status**
   </Accordion>
 
-  <Accordion title="Consigo gerenciar meus relatórios e agendamentos?">
-    Sim. A plataforma disponibiliza as abas “Relatórios”, “Agendamentos” e “Meus relatórios”, permitindo controle total sobre relatórios gerados, em processamento ou programados.
-  </Accordion>
+  <Accordion title="🔒 Os relatórios de Auditoria (LGPD/GDPR) cobrem todas as ações?">
+    **Sim.** O relatório **Auditoria (GDPR e LGPD)** registra as ações realizadas por usuários dentro das plataformas Invenio, garantindo rastreabilidade completa para fins de compliance.
 
-  <Accordion title="Quais tipos de relatórios estão disponíveis no Invenio Center?">
-    Estão disponíveis relatórios de contatos, KPIs e desempenho, acesso e sessões, extração de dados, automação e campanhas, auditoria e compliance, além de relatórios de atendimento e documentação.
-  </Accordion>
-
-  <Accordion title="Os relatórios auxiliam em auditoria e compliance?">
-    Sim. Relatórios como Auditoria (GDPR e LGPD), controle de sessões e histórico de ações garantem rastreabilidade, segurança da informação e conformidade com normas regulatórias.
-  </Accordion>
-
-  <Accordion title="É possível solicitar relatórios customizados?">
-    Sim. Relatórios customizados podem ser solicitados junto ao time comercial, mediante avaliação técnica, custos adicionais e prazos específicos.
-  </Accordion>
-
-  <Accordion title="O que significa o status 'Falha' em um relatório?">
-    O status “Falha” indica que o relatório não foi concluído corretamente. Nesses casos, recomenda-se revisar filtros, período selecionado ou gerar novamente o relatório.
-  </Accordion>
-
-  <Accordion title="Os relatórios impactam diretamente a performance da operação?">
-    Sim. O uso contínuo dos relatórios contribui para melhoria de performance, ajuste de estratégias, aumento da produtividade da equipe e maior controle da operação como um todo.
+    **Caminho:** Invenio Center > Analisar > Relatórios > + Gerar relatório > Auditoria (GDPR e LGPD)
   </Accordion>
 </AccordionGroup>

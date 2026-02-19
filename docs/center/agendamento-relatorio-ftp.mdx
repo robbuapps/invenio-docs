@@ -1,172 +1,279 @@
 ---
-title: "Agendamento Relatório FTP"
+title: "Agendamento de Relatório via FTP"
 sidebarTitle: "Relatório FTP"
-description: "Este serviço possibilita a geração automatizada de arquivos, permitindo que o cliente exporte relatórios e os transfira de forma segura para um servidor FTP. A solução garante praticidade e eficiência no armazenamento e compartilhamento das informações, facilitando a integração com outros sistemas e a consulta posterior dos arquivos.."
+description: "Agende relatórios no Invenio Center para envio automático por FTP, SFTP, S3 ou e-mail. Configure servidor, filtros e periodicidade para exportação recorrente em CSV."
 ---
 
-## Criando um Novo Agendamento
+O **Agendamento de Relatórios via FTP** automatiza a geração e exportação de relatórios para servidores FTP, SFTP, Amazon S3 ou por e-mail — eliminando processos manuais recorrentes.
 
-Para criar um agendamento acesse `Invenio Center >> Relatórios >> Agendamentos`
-
-[Acesse a página de agendamento de relatórios](https://inveniocenter.robbu.global/painel/relatorios)
-
-Ao acessar a aba de **Agendamentos**  clique em **Gerar Relatório**.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relatorioftp2.png" />
-
-Escolha o formato de relatório desejado.
-
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_2.png" />
-
-Defina os parâmetros do relatório, como:
-- **Período**
-- **Carteira**
-- **KPI – Eventos (caso o relatório seja de KPI Eventos)**
-- **Usuários**
-
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_3.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/ftp_4.png" />
+<Warning>
+O Invenio permite até **8 agendamentos** simultâneos por conta. Os arquivos são gerados no formato **CSV**.
+</Warning>
 
 ---
 
-## Configuração do Agendamento via FTP
+## Criar um Novo Agendamento
 
-- Após aplicar os filtros, inicie a configuração do envio via **FTP**.
-- O sistema permitirá definir o **dia e horário** de envio do relatório.
-- **Escolha o método de entrega:** selecione `FTP` ou, se necessário, `E-mail`. Ao habilitar a opção de e-mail, o arquivo também será enviado diretamente para sua caixa de entrada.
+**Caminho:** Invenio Center > Analisar > Relatórios > Agendamentos
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/emailouFTP.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relagpreenchimentoemail.png" />
+<Tip>
+**Acesso direto:** [Página de Relatórios e Agendamentos](https://inveniocenter.robbu.global/painel/relatorios)
+</Tip>
 
->❗**Atenção**: É recomendável preencher a **data de início**, que define a partir de quando o relatório será gerado.
-> Caso exista um limite para essa geração, também será necessário informar a **data de término**.
-> Se não houver prazo definido para encerramento, o campo de data de término pode permanecer em branco.
-> Para interromper a geração programada do relatório a qualquer momento, basta desabilitar a opção **“Agendamento ativo”**.
+<Steps>
+  <Step title="Acessar a aba de Agendamentos">
+    Acesse: **Invenio Center > Analisar > Relatórios > Agendamentos**
 
-## Configuração e preenchimento de campos do servidor
+    Clique em **"Gerar Relatório"**.
 
-Para envio via FTP, ative a opção **Enviar relatório por FTP** e configure os seguintes campos:
+    <Frame caption="Tela de agendamentos com botão Gerar Relatório">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relatorioftp2.png" />
+    </Frame>
+  </Step>
 
-| **Campo**     | **Descrição**                                                 |
-|---------------|---------------------------------------------------------------|
-| `Server`      | Host, IP ou link do servidor                                  |
-| `User`        | Usuário com permissão para acessar a pasta de envios FTP      | 
-| `Password`    | Senha de acesso à pasta dos arquivos FTP                      |
-| `Port`        | `FTP → porta padrão 21` ou `SFTP → porta padrão 22`           |
-| `Encryption`  | Defina se o FTP usará criptografia segura (recomendado: TLS)  |
-| `Protocol`    | Selecione FTP, SFTP ou S3 conforme a configuração do servidor |
+  <Step title="Escolher o modelo de relatório">
+    Selecione o **tipo de relatório** que deseja agendar na lista de modelos disponíveis.
 
-> ⚠️ **Atenção**  
-> - Ao configurar, **não inclua** `https://` no início da URL. Informe apenas o endereço do servidor (ex.: `ftp.seudominio.com`).  
-> - **Não utilize IPs privados** como host. Exemplos a evitar: `10.x.x.x`, `172.16.x.x` a `172.31.x.x`, `192.168.x.x`.
+    <Frame caption="Seleção do modelo de relatório">
+      <img src="https://robbublob.blob.core.windows.net/docs/ftp_2.png" />
+    </Frame>
+  </Step>
 
-## Configuração dos Campos do Servidor – Protocolo S3
+  <Step title="Definir filtros e parâmetros">
+    Configure os parâmetros do relatório:
 
-| **Campo**   | **Descrição**                                                                  |
-|-------------|--------------------------------------------------------------------------------|
-| `Server`    | Endereço do servidor no formato `s3.{REGIÃO}.amazonaws.com/{PASTA_DESTINO}`    |
-| `User`      | Informe a **Access Key** da conta AWS                                          |
-| `Password`  | Informe a **Secret Key** correspondente                                        |
-| `Port`      | Utilize a porta `443`                                                          |
-| `Protocol`  | Selecione o protocolo **S3**                                                   |
+    | Filtro | Observação |
+    |--------|-----------|
+    | **Período** | Intervalo de datas para o relatório |
+    | **Carteira** | Segmento a ser analisado |
+    | **KPI – Eventos** | Disponível apenas em relatórios do tipo KPI Eventos |
+    | **Usuários** | Operadores incluídos na análise |
 
+    <Frame caption="Definição de filtros do relatório">
+      <img src="https://robbublob.blob.core.windows.net/docs/ftp_3.png" />
+    </Frame>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/s3.png" />
+    <Frame caption="Configuração de período e carteira">
+      <img src="https://robbublob.blob.core.windows.net/docs/ftp_4.png" />
+    </Frame>
+  </Step>
 
+  <Step title="Configurar método de entrega">
+    Selecione o método de entrega: **FTP**, **SFTP**, **S3** ou **E-mail** (podem ser combinados).
 
----
+    <Frame caption="Seleção entre FTP e E-mail como método de entrega">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/emailouFTP.png" />
+    </Frame>
 
-**Caso sua empresa não possua um servidor FTP, acesse:**
+    <Frame caption="Configuração de e-mail para envio do relatório">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/relagpreenchimentoemail.png" />
+    </Frame>
 
- `Configurações >> Conta >> Gerenciar >> FTP` 
+    <Note>
+    **Datas do agendamento:**
+    - **Data de início** — a partir de quando o relatório será gerado (recomendado preencher)
+    - **Data de término** — se houver prazo final; deixe em branco para recorrência indefinida
+    - Para pausar sem excluir: desative o toggle **"Agendamento ativo"**
+    </Note>
+  </Step>
 
- [Acesse a página de configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+  <Step title="Configurar o servidor de destino">
+    Preencha os campos do servidor conforme o protocolo escolhido (veja detalhes na próxima seção).
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
+    <Frame caption="Preenchimento das configurações do servidor FTP">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/preechimentoftprelatorios.png" />
+    </Frame>
+  </Step>
 
-Habilite o botão **Habilitar transferência de arquivos**
+  <Step title="Finalizar o agendamento">
+    Clique em **"Agendar Relatório"** para concluir.
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
+    <Check>
+    O relatório será enviado ao diretório **`relatórios`** do servidor configurado no horário programado.
 
-> ⚠️ **Atenção**  
-> O servidor disponibilizado pela **Invenio** é do tipo **SFTP**. Portanto, inclua no início da URL o prefixo `sftp://`.  
-> **Exemplo:** `sftp://sarobbuinveniosftp.xyz.core.windows.net`  
-> A porta utilizada para conexão é a **22**.
+    Em caso de falha, o arquivo é movido para o diretório **`descartados`**.
+    </Check>
 
----
-
-## Organização e Estrutura dos Relatórios
-
-Para facilitar a gestão dos arquivos, recomendamos a criação de um **diretório exclusivo** para os relatórios.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/winCsp1.png" />
-
-No campo **Server**, inclua o nome do servidor + **diretório raiz** onde o arquivo será armazenado.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/preechimentoftprelatorios.png" />
-
-> ⚠️ **Importante**  
-> Se o servidor for **SFTP**, verifique se o protocolo correto está selecionado na configuração do relatório.
-
---- 
-
-## Finalização e Validação
-- Clique em **Agendar Relatório** para concluir o processo.
-- O relatório será enviado para o diretório **relatórios** do servidor configurado.
-
-Caso a geração não seja bem-sucedida, o arquivo será redirecionado para o diretório **descartados**.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/descartados.png" />
-
-> ❗ **Observação**  
-> O Invenio possui um limite de criação de **oito relatórios agendados** e o formato gerado é **CSV**.
+    <Frame caption="Diretório 'descartados' para relatórios com falha na geração">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/descartados.png" />
+    </Frame>
+  </Step>
+</Steps>
 
 ---
 
-## 🔗 Links e assuntos relacionados
+## Configuração do Servidor de Destino
 
-- [Relatórios — visão geral e agendamentos](https://docs.robbu.global/docs/center/relatorios)
-- [Carga FTP — configuração e boas práticas](https://docs.robbu.global/docs/center/carga-ftp)
-- [Tipos de KPI — seleção para relatórios](https://docs.robbu.global/docs/center/tipos-de-kpi)
+<Tabs>
+  <Tab title="FTP / SFTP" icon="server">
+    ### Campos para FTP e SFTP
+
+    Ative a opção **"Enviar relatório por FTP"** e preencha:
+
+    | Campo | Descrição |
+    |-------|-----------|
+    | **Server** | Host, IP ou endereço do servidor — **sem** `https://` — inclua o diretório raiz se necessário |
+    | **User** | Usuário com permissão de acesso à pasta FTP |
+    | **Password** | Senha de acesso |
+    | **Port** | FTP → `21` · SFTP → `22` |
+    | **Encryption** | Criptografia do FTP (recomendado: **TLS/Explícito**) |
+    | **Protocol** | Selecione **FTP** ou **SFTP** |
+
+    <Warning>
+    **Regras de preenchimento do servidor:**
+    - ❌ Não inclua `https://` — informe apenas o endereço (ex: `ftp.seudominio.com`)
+    - ❌ Não utilize **IPs privados** como host:
+      - `10.x.x.x` · `172.16.x.x` até `172.31.x.x` · `192.168.x.x`
+    - ✅ Se o protocolo for **SFTP**, verifique se o protocolo correto está selecionado
+    </Warning>
+
+    <Tip>
+    **Organizar arquivos:** Recomendamos criar um **diretório exclusivo** para relatórios no servidor.
+
+    <Frame caption="Estrutura de diretórios recomendada no servidor FTP">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/winCsp1.png" />
+    </Frame>
+
+    No campo **Server**, inclua o nome do servidor + **diretório raiz**:
+    - Exemplo: `ftp.empresa.com/relatorios`
+    </Tip>
+  </Tab>
+
+  <Tab title="Amazon S3" icon="aws">
+    ### Campos para protocolo S3
+
+    | Campo | Valor |
+    |-------|-------|
+    | **Server** | Formato: `s3.{REGIÃO}.amazonaws.com/{PASTA_DESTINO}` |
+    | **User** | **Access Key** da conta AWS |
+    | **Password** | **Secret Key** correspondente |
+    | **Port** | `443` |
+    | **Protocol** | **S3** |
+
+    <Frame caption="Configuração do protocolo S3 no agendamento">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/s3.png" />
+    </Frame>
+  </Tab>
+
+  <Tab title="☁️ SFTP Invenio (sem servidor próprio)" icon="cloud">
+    ### Usar SFTP da Invenio
+
+    Se sua empresa não possui servidor FTP/SFTP, utilize o **SFTP fornecido pela Invenio**.
+
+    **Caminho:** Invenio Center > Configurações > Conta > Gerenciar > **FTP** > Habilitar transferência de arquivos
+
+    <Tip>
+    **Acesso direto:** [Configurações da conta](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+    </Tip>
+
+    <Frame caption="Habilitando SFTP da Invenio nas configurações da conta">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/ftpconfig.png" />
+    </Frame>
+
+    <Frame caption="Toggle para habilitar transferência de arquivos">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/ftp/habilitando FTP.png" />
+    </Frame>
+
+    | Campo | Valor |
+    |-------|-------|
+    | **URL** | `sftp://sarobbuinveniosftp.xyz.core.windows.net` (fornecido pela Invenio) |
+    | **Port** | `22` |
+    | **Protocol** | **SFTP** |
+  </Tab>
+</Tabs>
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Relatórios"
+    icon="chart-line"
+    href="https://docs.robbu.global/docs/center/relatorios"
+  >
+    Visão geral, geração e agendamentos
+  </Card>
+
+  <Card
+    title="Carga FTP"
+    icon="upload"
+    href="https://docs.robbu.global/docs/center/carga-ftp"
+  >
+    Importação de mailings via FTP
+  </Card>
+
+  <Card
+    title="Tipos de KPI"
+    icon="chart-bar"
+    href="https://docs.robbu.global/docs/center/tipos-de-kpi"
+  >
+    KPIs disponíveis para relatórios
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Posso receber o relatório por e-mail além do FTP?">
-    Sim. Ao selecionar o método de entrega <b>E-mail</b> junto ao <b>FTP</b>, o arquivo será enviado automaticamente para a sua caixa de entrada além do envio ao servidor configurado.
+  <Accordion title="📍 Como acessar o agendamento de relatórios?">
+    **Caminho:** Invenio Center > Analisar > Relatórios > Agendamentos > Gerar Relatório
+
+    **Acesso direto:** [Relatórios](https://inveniocenter.robbu.global/painel/relatorios)
   </Accordion>
 
-  <Accordion title="Quais protocolos e portas devo utilizar (FTP, SFTP, S3)?">
-    Utilize <b>FTP (porta 21)</b> quando aplicável, <b>SFTP (porta 22)</b> quando usar canal seguro com chave/usuário e <b>S3 (porta 443)</b> para envio a buckets AWS seguindo o formato de servidor indicado.
+  <Accordion title="📧 Posso receber o relatório por e-mail além do FTP?">
+    **Sim!** Ao configurar a entrega, habilite a opção **E-mail** junto ao FTP — o arquivo será enviado para a caixa de e-mail configurada **e** ao servidor FTP simultaneamente.
   </Accordion>
 
-  <Accordion title="Como devo preencher o campo Server? Posso usar https:// ou IP privado?">
-    No <b>Server</b>, informe apenas o host (ex.: <code>ftp.seudominio.com</code>) e, se necessário, inclua o diretório raiz de destino. <b>Não</b> inclua <code>https://</code> e <b>não</b> utilize IPs privados (faixas 10.*, 172.16–31.*, 192.168.*).
+  <Accordion title="🔌 Qual protocolo e porta usar?">
+    | Protocolo | Porta | Uso |
+    |-----------|-------|-----|
+    | **FTP** | `21` | Servidores FTP padrão |
+    | **SFTP** | `22` | Conexão segura via SSH |
+    | **S3** | `443` | Buckets Amazon AWS |
+
+    O Invenio também oferece servidor **SFTP próprio** para contas sem servidor externo.
   </Accordion>
 
-  <Accordion title="Minha empresa não tem FTP. Posso usar o SFTP da Invenio?">
-    Sim. Em <b>Configurações &gt;&gt; Conta &gt;&gt; Gerenciar &gt;&gt; FTP</b>, habilite <b>Transferência de arquivos</b> e utilize o endpoint <b>SFTP</b> fornecido (prefixo <code>sftp://</code>, porta <b>22</b>).
+  <Accordion title="🌐 Como preencher o campo Server corretamente?">
+    | Correto | Incorreto |
+    |---------|-----------|
+    | `ftp.seudominio.com/relatorios` | `https://ftp.seudominio.com` |
+    | IP público | `192.168.x.x` (IP privado) |
+
+    Inclua o diretório raiz de destino diretamente no campo Server para organizar os arquivos.
   </Accordion>
 
-  <Accordion title="Como configurar envio para Amazon S3?">
-    Selecione o protocolo <b>S3</b> e preencha: <b>Server</b> no formato <code>s3.{REGIÃO}.amazonaws.com/{PASTA_DESTINO}</code>, <b>User</b> (Access Key), <b>Password</b> (Secret Key) e porta <b>443</b>.
+  <Accordion title="☁️ Minha empresa não tem FTP. Como usar o SFTP da Invenio?">
+    **Caminho:** Invenio Center > Configurações > Conta > Gerenciar > FTP > Habilitar transferência de arquivos
+
+    Use o endpoint fornecido com prefixo `sftp://` e porta `22`.
   </Accordion>
 
-  <Accordion title="Onde os arquivos ficam salvos e como validar o envio?">
-    Após agendar, os arquivos são armazenados no diretório <b>relatórios</b>. Em caso de falha na geração, são movidos para <b>descartados</b>. Verifique o diretório no servidor e o histórico de agendamentos no Invenio Center.
+  <Accordion title="🔺 Como configurar envio para Amazon S3?">
+    Selecione protocolo **S3** e preencha:
+    - **Server:** `s3.{REGIÃO}.amazonaws.com/{PASTA_DESTINO}`
+    - **User:** Access Key da conta AWS
+    - **Password:** Secret Key correspondente
+    - **Port:** `443`
   </Accordion>
 
-  <Accordion title="Há limite de agendamentos e qual o formato do arquivo?">
-    Sim. O Invenio permite até <b>oito agendamentos</b> simultâneos por conta, e o formato gerado é <b>CSV</b>.
+  <Accordion title="📁 Onde os arquivos ficam salvos? O que acontece em caso de falha?">
+    - ✅ **Sucesso:** Arquivo salvo no diretório **`relatórios`** do servidor
+    - ❌ **Falha:** Arquivo movido para o diretório **`descartados`**
+
+    Verifique o diretório no servidor e o histórico de agendamentos no Invenio Center em caso de falha.
   </Accordion>
 
-  <Accordion title="Quais parâmetros posso definir no relatório?">
-    É possível definir <b>Período</b>, <b>Carteira</b>, <b>KPI – Eventos</b> (quando aplicável) e <b>Usuários</b> antes de configurar o envio por FTP/E-mail.
+  <Accordion title="🔢 Há limite de agendamentos simultâneos?">
+    **Sim.** O Invenio permite até **8 agendamentos** simultâneos por conta. O formato de exportação é sempre **CSV**.
   </Accordion>
 
-  <Accordion title="Preciso ajustar algo no diretório de destino?">
-    Recomendamos criar um <b>diretório exclusivo</b> para os relatórios. No campo <b>Server</b>, informe o host seguido do <b>diretório raiz</b> onde o arquivo será armazenado.
+  <Accordion title="⏸️ Como pausar um agendamento sem excluí-lo?">
+    **Caminho:** Invenio Center > Analisar > Relatórios > Agendamentos > Editar agendamento > Desativar **"Agendamento ativo"**
+
+    O agendamento permanece salvo e pode ser reativado a qualquer momento.
   </Accordion>
 </AccordionGroup>

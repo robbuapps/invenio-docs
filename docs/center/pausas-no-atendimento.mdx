@@ -1,121 +1,242 @@
 ---
-title: "Pausas no Atendimento – Invenio Center"
+title: "Pausas no Atendimento"
 sidebarTitle: "Pausas de Atendimento"
-description: "Como configurar, iniciar e gerenciar pausas no Invenio Center e Invenio Live."
+description: "Configure pausas de atendimento no Invenio Center e gerencie indisponibilidade temporária dos operadores com controle via relatório de pausas realizadas."
+---
+
+As **pausas de atendimento** registram momentos de indisponibilidade temporária dos operadores (almoço, reuniões, intervalos), evitando que contatos sejam distribuídos para atendentes ausentes.
+
+**Durante uma pausa:**
+- ✅ O operador sai da fila de distribuição automática
+- ✅ Nenhum novo atendimento é direcionado a ele
+- ✅ O tempo total é registrado e refletido nos relatórios de desempenho
+
+<Tip>
+A plataforma já oferece **pausas padrão** (ex: almoço, intervalo), mas também permite criar pausas personalizadas conforme a rotina da operação.
+</Tip>
 
 ---
 
-## Pausas no Atendimento – Invenio Center
+## Configurar e Usar Pausas
 
-A funcionalidade de **pausas no atendimento** no Invenio foi desenvolvida para oferecer mais controle, organização e visibilidade sobre o tempo de atuação dos operadores. Com ela, é possível registrar momentos de indisponibilidade temporária dos atendentes, como pausas para almoço, reuniões, intervalos ou outras necessidades operacionais. 
+<Tabs>
+  <Tab title="⚙️ Configurar (Center)" icon="gear">
+    ### Criar Pausas no Invenio Center
 
-Esse recurso contribui para uma gestão mais eficiente, evitando que contatos sejam distribuídos para operadores ausentes, além de gerar relatórios detalhados para monitoramento.
+    **Caminho:** Invenio Center > Configurações > Pausas de Atendimento > Gerenciar > **+ Adicionar**
 
-## O que são as Pausas de Atendimento?
+    <Tip>
+    **Acesso direto:** [Pausas de Atendimento](https://inveniocenter.robbu.global/painel/configuracoes/pausas-de-atendimento)
+    </Tip>
 
-As pausas de atendimento permitem que os operadores informem quando estarão indisponíveis para receber **novos contatos**. Durante esse período:
+    <Frame caption="Tela de gerenciamento de pausas de atendimento">
+      <img src="https://storage.robbu.global/v2/file/313A76F8655F98E2B5A4EC934D4560DB" />
+    </Frame>
 
-- O operador sai da fila de distribuição automática.
-- O sistema não direciona novos atendimentos para ele.
-- O usuário pode retornar da pausa a qualquer momento, ciente de que o tempo total será registrado e refletido nos relatórios de desempenho..
+    <Steps>
+      <Step title="Acessar configurações de pausas">
+        Acesse: **Invenio Center > Configurações > Pausas de Atendimento > Gerenciar**
+      </Step>
 
-<Tip> A plataforma já oferece pausas padrão, mas também permite criações personalizadas. </Tip> 
+      <Step title="Iniciar nova pausa">
+        Clique em **"+ Adicionar"** para abrir o formulário de criação.
 
-## Como configurar pausas no Invenio Center
+        <Frame caption="Formulário para adicionar nova pausa">
+          <img src="https://robbublob.blob.core.windows.net/docs/inserirpausa.png" />
+        </Frame>
+      </Step>
 
-[ Invenio Center - Pausas no Atendimento ](https://inveniocenter.robbu.com.br/painel/configuracoes/pausas-de-atendimento)
+      <Step title="Preencher os campos">
+        | Campo | Descrição |
+        |-------|-----------|
+        | **Nome da pausa** | Identificação da pausa (máx. 25 caracteres) |
+        | **Tempo de duração** | Duração em minutos |
+      </Step>
 
-<img src="https://storage.robbu.global/v2/file/313A76F8655F98E2B5A4EC934D4560DB" alt="Descriptive alt text" />
+      <Step title="Salvar">
+        Clique em **"Criar"** para disponibilizar a pausa para todos os operadores.
 
+        <Check>
+        A pausa fica disponível imediatamente para todos os operadores do ambiente.
+        </Check>
+      </Step>
+    </Steps>
 
-As pausas são configuradas via **Invenio Center**, seguindo os passos:
+    ### Gerenciar Pausas Existentes
 
-1. Acesse o menu lateral.
-2. Vá até `Configurações > Pausas de Atendimento`.
-3. Clique em **Gerenciar**.
-4. Selecione a opção: **+ Adicionar**.
-5. Preencha:
-   - **Nome da pausa**: nome claro e objetivo com a limitação de 25 caracteres.
-   - **Tempo de duração (em minutos)**.
-6. Clique em **criar**.   
+    Pelos **três pontinhos** ao lado de cada pausa, você pode:
+    - ✏️ **Editar** — alterar nome ou duração
+    - 🗑️ **Excluir** — remover a pausa do ambiente
 
-![inserir pausa](https://robbublob.blob.core.windows.net/docs/inserirpausa.png)
+    <Frame caption="Menu de opções para editar ou excluir pausas">
+      <img src="https://storage.robbu.global/v2/file/B6E226C76D6ABA6A1F05E3A6089236D2" />
+    </Frame>
 
+    <Note>
+    Não há limite de pausas — crie quantas forem necessárias para a rotina da operação.
+    </Note>
+  </Tab>
 
-### Gerenciando pausas existentes
+  <Tab title="▶️ Iniciar Pausa (Live)" icon="circle-pause">
+    ### Usar Pausas no Invenio Live
 
-Para **editar ou excluir** uma pausa:
+    Após configuradas no Center, as pausas ficam disponíveis para os operadores ativarem no **Invenio Live**.
 
-- Clique nos três pontos ao lado da pausa.
-- Escolha **Editar** ou **Excluir**.
+    <Steps>
+      <Step title="Acessar o menu do usuário">
+        No **Invenio Live**, clique no seu **nome/avatar** no canto superior direito.
+      </Step>
 
-Você pode criar **quantas pausas forem necessárias**, conforme a rotina da operação.
+      <Step title="Selecionar Pausar Atendimento">
+        Acesse: **Menu do usuário > Pausar Atendimento**
 
-<img src="https://storage.robbu.global/v2/file/B6E226C76D6ABA6A1F05E3A6089236D2" alt="Descriptive alt text" />
+        <Frame caption="Menu do usuário com opção de Pausar Atendimento">
+          <img src="https://storage.robbu.global/v2/file/FFEA11E34AA1EFBC2D10A741903242F1" />
+        </Frame>
+      </Step>
 
-## Como iniciar uma pausa no Invenio Live
+      <Step title="Escolher o tipo de pausa">
+        Selecione a pausa desejada na lista de pausas disponíveis.
+      </Step>
 
-Após configuradas, os operadores utilizam as pausas no **Invenio Live**:
+      <Step title="Iniciar a pausa">
+        Clique em **"Iniciar Pausa"**. O sistema registra o horário de início automaticamente.
+      </Step>
 
-1. Acesse o Invenio Live.
-2. No canto superior direito, clique no menu do usuário.
-3. Selecione **Pausar Atendimento**.
-4. Escolha a pausa desejada.
-5. Clique em **Iniciar Pausa**.
+      <Step title="Retornar ao atendimento">
+        Ao finalizar a pausa, clique em **"Retornar ao Atendimento"**.
 
-O retorno pode ser feito a qualquer momento via botão **Retornar ao Atendimento**.
+        <Frame caption="Botão Retornar ao Atendimento">
+          <img src="https://robbublob.blob.core.windows.net/docs/retomaratendimento.png" />
+        </Frame>
+      </Step>
+    </Steps>
 
-_As pausas não encerram automaticamente._ Após o tempo configurado, o sistema sinaliza o atraso com a cor vermelha.
+    <Warning>
+    **⚠️ As pausas NÃO encerram automaticamente.**
 
-<img src="https://storage.robbu.global/v2/file/FFEA11E34AA1EFBC2D10A741903242F1" alt="Descriptive alt text" />
+    Após o tempo configurado, o sistema **sinaliza o atraso com a cor vermelha**, mas o operador precisa clicar manualmente em **"Retornar ao Atendimento"** para voltar à fila.
 
-<Tip> Para retomar as atividades, basta selecionar a opção **Retornar  ao atendimento** </Tip>
-
-
-![retomar atendimento](https://robbublob.blob.core.windows.net/docs/retomaratendimento.png)
+    Pausas extrapoladas ficam registradas no relatório com o tempo real de duração.
+    </Warning>
+  </Tab>
+</Tabs>
 
 ---
 
-## Controle e Relatórios de Pausas
+## Relatório de Pausas
 
-Acesse o relatório **"Pausas realizadas por usuários"** para acompanhar:
+Acompanhe todas as pausas realizadas pelo relatório **"Pausas realizadas por usuários"**:
 
-- Todas as pausas realizadas.
-- Tipo da pausa, horário de início e fim.
-- Usuário e carteira relacionada.
+**Caminho:** Invenio Center > Relatórios > Pausas realizadas por usuários
 
-### Filtros disponíveis:
+**Dados disponíveis:**
+- Tipo da pausa realizada
+- Horário de início e fim
+- Usuário e carteira (segmento) relacionados
 
-- Período (máximo de 30 dias).
-- Carteira (segmento).
-- Usuário específico.
+**Filtros disponíveis:**
 
-_Para visão geral, deixe os filtros em branco._
+| Filtro | Observação |
+|--------|-----------|
+| **Período** | Máximo de 30 dias por consulta |
+| **Carteira (Segmento)** | Filtrar por equipe específica |
+| **Usuário** | Filtrar por operador específico |
 
-![relatio atendimento](https://robbublob.blob.core.windows.net/docs/relatatendimento.jpeg)
+<Tip>
+Para uma visão geral de toda a operação, deixe os filtros em branco.
+</Tip>
+
+<Frame caption="Relatório de pausas realizadas por usuários">
+  <img src="https://robbublob.blob.core.windows.net/docs/relatatendimento.jpeg" />
+</Frame>
 
 ---
 
-## 🔗 Links e Assuntos Relacionados
-- [Relatórios ](http://localhost:3000/docs/center/relatorios)  
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Relatórios"
+    icon="chart-line"
+    href="https://docs.robbu.global/docs/center/relatorios"
+  >
+    Relatório de Pausas por Usuário
+  </Card>
+
+  <Card
+    title="Métodos de Distribuição"
+    icon="arrows-split-up-and-left"
+    href="https://docs.robbu.global/docs/live/metodos-de-distribuicao"
+  >
+    Como os contatos são distribuídos
+  </Card>
+
+  <Card
+    title="Segmentos"
+    icon="layer-group"
+    href="https://docs.robbu.global/docs/center/segmentos"
+  >
+    Carteiras de atendimento
+  </Card>
+
+  <Card
+    title="Fila de Atendimento"
+    icon="list-ol"
+    href="https://docs.robbu.global/docs/center/fila-de-atendimento"
+  >
+    Gerenciamento de filas
+  </Card>
+</CardGroup>
+
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="As pausas encerram automaticamente após o tempo configurado?">
-    Não. O operador precisa clicar em "Retornar ao Atendimento". O sistema apenas sinaliza o atraso caso o tempo seja ultrapassado.
+  <Accordion title="⚙️ Como criar uma nova pausa?">
+    **Caminho:** Invenio Center > Configurações > Pausas de Atendimento > Gerenciar > + Adicionar
+
+    Preencha o **nome** (máx. 25 caracteres) e o **tempo de duração** em minutos. Clique em "Criar".
+
+    A pausa fica disponível imediatamente para todos os operadores do ambiente.
   </Accordion>
-  <Accordion title="Todos os operadores têm acesso às mesmas pausas?">
-    Sim. As pausas configuradas no Center ficam disponíveis para todos os operadores do ambiente.
+
+  <Accordion title="⏱️ As pausas encerram automaticamente?">
+    **Não.** O operador deve clicar manualmente em **"Retornar ao Atendimento"**.
+
+    Quando o tempo configurado é ultrapassado, o sistema **sinaliza com a cor vermelha** no Live, mas a pausa permanece ativa até que o operador a encerre.
+
+    O tempo real de pausa (incluindo o excedente) é registrado no relatório.
   </Accordion>
-  <Accordion title="É possível limitar o número de pausas por dia?">
-    Atualmente, o sistema não impõe limite de uso. O controle é feito via relatório.
+
+  <Accordion title="👁️ O gestor pode ver quem está em pausa em tempo real?">
+    **Sim.** É possível visualizar em tempo real via relatórios e dashboards de atendimento no Invenio Center.
+
+    **Caminho:** Invenio Center > Relatórios > Pausas realizadas por usuários
   </Accordion>
-  <Accordion title="As pausas impactam os relatórios de atendimento?">
-    Sim. Elas são consideradas nos relatórios de produtividade e podem justificar períodos de inatividade.
+
+  <Accordion title="📊 Quais dados estão no relatório de pausas?">
+    O relatório **"Pausas realizadas por usuários"** exibe:
+    - Tipo da pausa
+    - Horário de início e fim
+    - Duração real (incluindo tempo excedido)
+    - Usuário e carteira (segmento) envolvidos
+
+    **Filtros:** Período (máx. 30 dias), carteira e usuário específico.
   </Accordion>
-  <Accordion title="O gestor pode ver em tempo real quem está em pausa?">
-    Sim. É possível visualizar em tempo real através dos relatórios e dashboards de atendimento.
+
+  <Accordion title="🔢 Há limite de pausas por dia por operador?">
+    **Não.** O sistema não impõe limite de uso por operador. O controle é feito pelo gestor via relatório de pausas.
+  </Accordion>
+
+  <Accordion title="👥 Todos os operadores veem as mesmas pausas?">
+    **Sim.** As pausas configuradas no Center ficam disponíveis para **todos os operadores** do ambiente, sem distinção por segmento.
+  </Accordion>
+
+  <Accordion title="▶️ Como o operador inicia uma pausa no Live?">
+    **Caminho:** Invenio Live > Menu do usuário (canto superior direito) > Pausar Atendimento > Selecionar pausa > Iniciar Pausa
+
+    Para retornar: **Menu do usuário > Retornar ao Atendimento**
   </Accordion>
 </AccordionGroup>

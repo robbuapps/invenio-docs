@@ -1,183 +1,210 @@
 ---
 title: "Painel de Faturas"
 sidebarTitle: "Painel de Faturas"
-description: "Gerencie, consulte e exporte informações financeiras sobre serviços contratados no Invenio Center com o Painel de Faturas."
+description: "Consulte, visualize e exporte cobranças mensais do Invenio Center por canal, licença e volume de uso — com total transparência sobre tarifas, impostos e cotação do dólar."
 ---
----
 
-O painel de faturas do Invenio Center é um recurso voltado à gestão financeira da plataforma. Ele permite que usuários autorizados consultem, visualizem e exportem os dados referentes às cobranças mensais, garantindo maior controle sobre os serviços contratados e os valores aplicados.  
-Através dele, gestores podem acompanhar os custos por canal, tipo de licença e volume de uso, com total transparência e organização.
+O **Painel de Faturas** centraliza a gestão financeira da plataforma: consulte cobranças mensais por canal, tipo de licença e volume de uso — com transparência completa sobre tarifas, impostos e cotação do dólar.
 
-
-## Acesso ao Painel de Faturas
-
-O acesso ao painel é restrito a usuários com permissões específicas. Para isso, é necessário que o perfil seja do tipo **Administrador** ou **Supervisor**, e que a permissão de faturas esteja habilitada.
-
-### Como habilitar o acesso a faturas:
-
-1. Acesse o caminho:  
-   **Invenio Center > Usuários > Editar usuário**
-
-   
-
-   [Clique aqui para acessar diretamente a pagina de Usuários](https://inveniocenter.robbu.global/painel/usuarios)
-  
-
-3. Localize o campo **Permissões das Páginas.**  
-   
-   <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/faturas1.png" />
-
-4. Encontre a seção **Faturas** e habilite as permissões:  
-   - Visualizar  
-   - Download  
-
-Após a habilitação, o usuário terá acesso ao painel completo de faturas no menu superior do Invenio Center. 
-
- <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas2.png" />
+<Note>
+O painel é atualizado **em tempo real** com o andamento da cobrança do mês vigente. Todos os relatórios são exportados em formato **CSV**, prontos para análise ou importação em sistemas financeiros.
+</Note>
 
 ---
 
-## Visualizando as Faturas
+## Acesso ao Painel
 
-Para acessar as faturas, vá até o menu superior direito e selecione **Faturas**.  
+O acesso é restrito a usuários **Administrador** ou **Supervisor**, com a permissão de faturas habilitada.
 
-[Clique aqui para acessar diretamente a pagina de Faturamento](https://inveniocenter.robbu.global/painel/faturamento)
+### Habilitar Permissão de Faturas
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas3.png" />
+**Caminho:** Invenio Center > Usuários > Editar usuário > Permissões das Páginas > **Faturas**
 
-Na tela inicial do painel, são exibidas as informações da fatura atual, incluindo:
-- Opções de fatura: Robbu (Invenio) e Robbu Voice
-- Período (mês e ano) e status (em aberto ou quitado)  
-- Opção para Download da fatura atual  
-- Nome da empresa, início do contrato, CNPJ e dia de fechamento  
-- E-mails cadastrados para cobrança  
+<Tip>
+**Acesso direto:** [Usuários no Invenio Center](https://inveniocenter.robbu.global/painel/usuarios)
+</Tip>
 
+<Steps>
+  <Step title="Acessar o cadastro do usuário">
+    Acesse: **Invenio Center > Usuários**
 
----
+    Localize o usuário desejado e clique em **Editar**.
+  </Step>
 
-## Download da Fatura Detalhada
+  <Step title="Localizar Permissões das Páginas">
+    Role até a seção **Permissões das Páginas**.
 
-Ao clicar em **Download**, será aberta uma janela com as opções disponíveis. Cada opção permite exportar um **arquivo CSV** contendo o detalhamento por tipo de serviço:
-- Analítico E-mail  
-- Analítico Licença Flex  
-- Analítico Carteiro Digital  
-- Analítico Linhas WhatsApp  
-- Analítico Fluxos IDR  
-- Analítico SMS  
-- Analítico WhatsApp Oficial  
-- Analítico Pedágio WhatsApp Oficial (Integração externa)  
-- Analítico Instagram  
-- Rateio por Segmento
-- Rateio por Campanha
-- Analítico WhatsApp Sessões  
-- Analítico WhatsApp Mobile  
+    <Frame caption="Seção de Permissões das Páginas no cadastro do usuário">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/faturas1.png" />
+    </Frame>
+  </Step>
 
-Esses relatórios são úteis para auditorias, revisões e projeções financeiras da operação.  
+  <Step title="Habilitar permissões de Faturas">
+    Encontre a seção **Faturas** e habilite:
+    - ✅ **Visualizar**
+    - ✅ **Download**
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas6Download.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas4.png" />
----
+    <Check>
+    Após salvar, o usuário terá acesso ao Painel de Faturas no menu superior do Invenio Center.
+    </Check>
 
-## Detalhamento da Fatura
-
-Logo abaixo da fatura principal, é possível visualizar os valores individuais por serviço contratado no mês vigente. A plataforma apresenta a fórmula de cálculo e a descrição detalhada de cada item. Abaixo, alguns exemplos:
-
-### Sessão WhatsApp SERVICE
-  **Fórmula:**` 15 x 0,0354 (Robbu 0,03 + Tabela FB + Imposto)  = R$ 0,53`
-
-  **Descrição:** `Foram contabilizadas 15 sessões no tipo SERVICE, com valor unitário de R$ 0,0354. Este valor inclui a taxa da Robbu (R$ 0,03), os valores da tabela do Facebook e os impostos. O total para este serviço foi de R$ 0,53.`
-
-### Sessão WhatsApp MARKETING  
-**Fórmula:** `3.333 x 0,4343 (Robbu 0,03 + Tabela FB + Imposto) = R$ 1.447,52`  
-
-**Descrição:** `Foram realizadas 3.333 sessões do tipo MARKETING, com custo unitário de R$ 0,4343, já considerando a taxa da Robbu, os valores da tabela oficial da Meta e os impostos. O valor total foi de R$ 1.447,52.`
+    <Frame caption="Painel de Faturas disponível no menu superior">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas2.png" />
+    </Frame>
+  </Step>
+</Steps>
 
 ---
 
-### Mensagem WhatsApp – Carteiro Digital  
-**Fórmula:** `67 x 0,3800 = R$ 25,46`  
+## Visualizar Faturas
 
-**Descrição:** `Foram enviadas 67 mensagens por meio do recurso Carteiro Digital, com valor unitário de R$ 0,38. O custo total foi de R$ 25,46.`
+**Caminho:** Invenio Center > Menu superior direito > **Faturas**
 
----
+<Tip>
+**Acesso direto:** [Faturamento no Invenio Center](https://inveniocenter.robbu.global/painel/faturamento)
+</Tip>
 
-### Licenças Invenio  
-**Fórmula:** `20 x 180,0000 = R$ 3.600,00`  
+<Frame caption="Tela principal do Painel de Faturas">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas3.png" />
+</Frame>
 
-**Descrição:** `A empresa possui 20 licenças da plataforma Invenio, ao custo individual de R$ 180,00. O total correspondente é de R$ 3.600,00.`
+A fatura atual exibe:
 
----
-
-### Licença IDR Full  
-**Fórmula:** `3 x 750,0000 = R$ 2.250,00`  
-
-**Descrição:** `Foram contratadas 3 licenças IDR Full, cada uma com valor de R$ 750,00. Totalizando R$ 2.250,00.`
-
----
-
-### Licenças WhatsApp Oficial  
-**Fórmula:** `18 Licenças = R$ 3.060,00`  
-
-**Descrição:** `A empresa possui 18 licenças vinculadas ao número oficial de WhatsApp, com custo total de R$ 3.060,00.`
+| Informação | Descrição |
+|------------|-----------|
+| **Opções de fatura** | Robbu (Invenio) e Robbu Voice |
+| **Período** | Mês e ano da fatura |
+| **Status** | Em aberto ou Quitado |
+| **Download** | Exportar fatura atual em CSV |
+| **Dados da empresa** | Nome, início do contrato, CNPJ, dia de fechamento |
+| **E-mails de cobrança** | E-mails cadastrados para recebimento de boletos |
 
 ---
 
-### Cotação do Dólar  
-**Valor utilizado:** `R$ 5,41`  
+## Download dos Analíticos
 
-**Descrição:** `Este é o valor utilizado como referência de cotação do dólar para fins de cálculo nos serviços cobrados pela Meta.`  
-*(Referência: [Tabela oficial de preços Meta](https://developers.facebook.com/docs/whatsapp/pricing/))*
+Clique em **"Download"** para exportar os relatórios disponíveis. Cada item gera um **arquivo CSV** com detalhamento por tipo de serviço:
 
-Ao final da seção, é exibido o **valor total acumulado das cobranças no mês**.  
+<Frame caption="Opções de download dos analíticos da fatura">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas6Download.png" />
+</Frame>
 
+| Analítico disponível | Conteúdo |
+|---------------------|----------|
+| **Analítico E-mail** | Envios por e-mail |
+| **Analítico Licença Flex** | Licenças por modelo Flex |
+| **Analítico Carteiro Digital** | Envios via Carteiro Digital |
+| **Analítico Linhas WhatsApp** | Linhas WhatsApp contratadas |
+| **Analítico Fluxos IDR** | Fluxos de atendimento automatizado |
+| **Analítico SMS** | Envios de SMS |
+| **Analítico WhatsApp Oficial** | Sessões e mensagens via API |
+| **Analítico Pedágio WhatsApp** | Pedágio de integração externa |
+| **Analítico Instagram** | Mensagens via Instagram |
+| **Rateio por Segmento** | Custos divididos por segmento |
+| **Rateio por Campanha** | Custos divididos por campanha |
+| **Analítico WhatsApp Sessões** | Sessões abertas no período |
+| **Analítico WhatsApp Mobile** | Mensagens via WhatsApp Mobile |
 
-> ⚠️ **Observação Importante:**
-> Os valores apresentados nos exemplos de fórmulas e descrições desta fatura possuem caráter exclusivamente ilustrativo. Para obter informações sobre valores reais e condições de contratação dos produtos e serviços, solicitamos que entre em contato diretamente com o setor comercial da empresa.
+<Frame caption="Detalhamento da fatura com valores por serviço">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Faturas/Faturas4.png" />
+</Frame>
+
+---
+
+## Detalhamento dos Itens de Cobrança
+
+A plataforma exibe a fórmula de cálculo e a descrição de cada serviço cobrado no mês. Exemplos ilustrativos:
+
+<AccordionGroup>
+  <Accordion title="Sessão WhatsApp SERVICE">
+    **Fórmula:** `15 × R$ 0,0354 (Robbu R$ 0,03 + Tabela Meta + Imposto) = R$ 0,53`
+
+    15 sessões do tipo SERVICE com valor unitário de R$ 0,0354 — inclui taxa Robbu, tabela Meta e impostos.
+  </Accordion>
+
+  <Accordion title="Sessão WhatsApp MARKETING">
+    **Fórmula:** `3.333 × R$ 0,4343 (Robbu R$ 0,03 + Tabela Meta + Imposto) = R$ 1.447,52`
+
+    3.333 sessões do tipo MARKETING com custo unitário de R$ 0,4343 — inclui taxa Robbu, tabela Meta e impostos.
+  </Accordion>
+
+  <Accordion title="Mensagem WhatsApp — Carteiro Digital">
+    **Fórmula:** `67 × R$ 0,3800 = R$ 25,46`
+
+    67 mensagens via Carteiro Digital a R$ 0,38 por mensagem.
+  </Accordion>
+
+  <Accordion title="Licenças Invenio">
+    **Fórmula:** `20 × R$ 180,00 = R$ 3.600,00`
+
+    20 licenças da plataforma Invenio ao custo de R$ 180,00 cada.
+  </Accordion>
+
+  <Accordion title="Licença IDR Full">
+    **Fórmula:** `3 × R$ 750,00 = R$ 2.250,00`
+
+    3 licenças IDR Full ao custo de R$ 750,00 cada.
+  </Accordion>
+
+  <Accordion title="Licenças WhatsApp Oficial">
+    **Fórmula:** `18 licenças = R$ 3.060,00`
+
+    18 licenças vinculadas ao número oficial de WhatsApp.
+  </Accordion>
+
+  <Accordion title="Cotação do Dólar">
+    **Valor de referência:** `R$ 5,41`
+
+    Cotação utilizada para os serviços cobrados pela Meta.
+
+    Referência: [Tabela oficial de preços Meta](https://developers.facebook.com/docs/whatsapp/pricing/)
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+Os valores nos exemplos acima são **exclusivamente ilustrativos**. Para informações sobre valores reais e condições de contratação, entre em contato com o setor comercial da Robbu.
+</Warning>
+
 ---
 
 ## Histórico de Faturas
 
-Neste campo, são listadas todas as faturas anteriores, organizadas por data, status e valor.  
-Ao clicar no ícone de três pontos ao lado de cada fatura, será exibido um menu com duas opções:
-- Visualizar detalhes da cobrança  
-- Fazer download dos analíticos referentes ao período
+As faturas anteriores são listadas organizadas por **data**, **status** e **valor**.
 
-
----
-
-> ⚠️**Importante**
-
->- As faturas só estão disponíveis para usuários com permissão habilitada;  
->- O painel é atualizado em tempo real com o andamento da cobrança do mês vigente;  
->- Todos os valores calculados consideram as tarifas da Robbu, taxas da Meta (WhatsApp), impostos e cotação atualizada do dólar;  
->- Os relatórios exportados são em formato CSV, prontos para análise ou importação em sistemas financeiros.
-
-O painel de faturas do Invenio Center é uma ferramenta essencial para gestores que desejam acompanhar os custos da operação com clareza e segurança. Ao centralizar as informações de cobrança, a plataforma facilita a análise financeira, a previsibilidade de gastos e o planejamento estratégico de cada área da empresa.
+Clique nos **três pontos (⋯)** ao lado de cada fatura para:
+- **Visualizar detalhes** da cobrança
+- **Fazer download** dos analíticos do período
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Quem pode acessar o Painel de Faturas?">
-    Apenas usuários com perfil Administrador ou Supervisor, com a permissão de faturas habilitada no cadastro do usuário.
+  <Accordion title="👤 Quem pode acessar o Painel de Faturas?">
+    Apenas usuários com perfil **Administrador** ou **Supervisor** com a permissão de faturas habilitada.
+
+    **Caminho para habilitar:** Invenio Center > Usuários > Editar > Permissões das Páginas > Faturas > Visualizar + Download
   </Accordion>
-  <Accordion title="Quais relatórios posso exportar do painel?">
-    Relatórios detalhados em formato CSV com informações sobre e-mails, licenças, sessões WhatsApp, fluxos IDR, SMS, integrações e outros serviços contratados.
+
+  <Accordion title="📥 Quais relatórios posso exportar?">
+    13 analíticos em CSV: E-mail, Licença Flex, Carteiro Digital, Linhas WhatsApp, Fluxos IDR, SMS, WhatsApp Oficial, Pedágio WhatsApp, Instagram, Rateio por Segmento, Rateio por Campanha, WhatsApp Sessões e WhatsApp Mobile.
   </Accordion>
-  <Accordion title="Como funciona o cálculo dos valores?">
-    Cada item exibe a fórmula de cálculo, considerando tarifas Robbu, taxas da Meta, impostos e cotação atualizada do dólar.
+
+  <Accordion title="🔢 Como funciona o cálculo dos valores?">
+    Cada item exibe a **fórmula de cálculo** com: tarifas Robbu + taxas da Meta + impostos + cotação atualizada do dólar.
+
+    Consulte a [tabela oficial de preços da Meta](https://developers.facebook.com/docs/whatsapp/pricing/) para referência da cotação.
   </Accordion>
-  <Accordion title="O painel atualiza os dados automaticamente?">
-    Sim, as informações são atualizadas em tempo real conforme o andamento da cobrança.
+
+  <Accordion title="⏱️ O painel atualiza automaticamente?">
+    **Sim.** As informações são atualizadas **em tempo real** conforme o andamento da cobrança do mês vigente.
   </Accordion>
-  <Accordion title="Qual o formato dos relatórios exportados?">
-    Todos os relatórios são exportados em formato CSV, prontos para análise e importação em outros sistemas financeiros.
+
+  <Accordion title="📋 Posso consultar faturas de meses anteriores?">
+    **Sim.** O **Histórico de Faturas** lista todos os registros anteriores com status, valor e opções de download dos analíticos do período.
   </Accordion>
-  <Accordion title="Posso consultar faturas anteriores?">
-    Sim. O histórico de faturas apresenta todos os registros anteriores com status, valores e opções de download.
-  </Accordion>
-  <Accordion title="Onde encontro a cotação utilizada para os cálculos?">
-    A cotação do dólar aplicada é exibida no detalhamento da fatura e pode ser consultada junto à referência oficial da Meta.
+
+  <Accordion title="💱 Onde vejo a cotação do dólar usada?">
+    A cotação aplicada é exibida no **detalhamento da fatura**, no item "Cotação do Dólar". Pode ser consultada também na [tabela oficial da Meta](https://developers.facebook.com/docs/whatsapp/pricing/).
   </Accordion>
 </AccordionGroup>
