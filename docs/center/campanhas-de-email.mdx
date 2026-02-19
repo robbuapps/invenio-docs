@@ -1,260 +1,420 @@
 ---
 title: "Campanhas de E-mail"
-sidebarTitle: "Campanhas de E-mail "
-description: "A funcionalidade de Campanhas da Plataforma Invenio permite o envio programado e massivo de mensagens por diversos canais, entre eles, o E-mail. Essa ferramenta é ideal para ações
- de marketing, notificações, cobranças e demais comunicações que exigem automação e organização.
-Por meio de uma interface intuitiva, o processo de criação e execução de campanhas é realizado em etapas, garantindo controle total 
-sobre os envios, segmentação do público e análise de resultados em tempo real."
+sidebarTitle: "Campanhas de E-mail"
+description: "Crie, configure e monitore campanhas de e-mail no Invenio Center: público-alvo, agendamento, remetente, templates e relatórios de desempenho em tempo real."
 ---
 
-## Público-Alvo
-Antes de iniciar qualquer criação de campanha de e-mail, é necessário que o público esteja previamente 
-cadastrado no módulo *“Público”*.
+As **Campanhas de E-mail** do Invenio Center permitem o envio programado e massivo de mensagens para públicos segmentados. Ideal para:
 
->Saiba mais sobre este processo em nossa documentação oficial:  
->[Importação de público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)
+- 📣 **Marketing:** promoções, lançamentos e engajamento
+- 💳 **Cobranças:** lembretes e notificações de vencimento
+- 🔔 **Notificações:** atualizações de status e confirmações
+
+A interface guia o processo em etapas, com controle total sobre envios, segmentação e análise de resultados.
 
 ---
 
-# Iniciando a criação da campanha
+## Pré-requisito: Público-Alvo
 
-Para iniciar uma campanha de e-mail, acesse o módulo:
+<Warning>
+**Antes de criar uma campanha**, o público deve estar cadastrado no módulo **Público**.
 
- `Converter >Campanhas > E-mail > + Criar campanha`
+**Caminho:** Invenio Center > Converter > Público > Importar
 
-[Clique aqui para acessar diretamente as campanhas de e-mail](https://inveniocenter.robbu.global/painel/campanhas/email)
+Consulte: [Importação de Público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)
+</Warning>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.2.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.3.png" />
+---
 
+## Criar Campanha de E-mail
 
-A seguir, você poderá configurar os seguintes campos:
+**Caminho:** Invenio Center > Converter > Campanhas > E-mail > **+ Criar campanha**
 
+<Tip>
+**Acesso direto:** [Campanhas de E-mail](https://inveniocenter.robbu.global/painel/campanhas/email)
+</Tip>
 
-**Descrição da Campanha**
+<Frame caption="Tela inicial das campanhas de e-mail">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.png" />
+</Frame>
 
-Defina um nome para a campanha. Esse nome será usado para identificação interna, organização e acompanhamento dos resultados.
+<Frame caption="Listagem de campanhas criadas">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.2.png" />
+</Frame>
 
-**Seleção do Público-Alvo**
+<Frame caption="Botão para criar nova campanha">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/campEmail1.3.png" />
+</Frame>
 
+<Steps>
+  <Step title="Descrição da campanha">
+    Defina um **nome** para identificação interna, organização e acompanhamento dos resultados.
+  </Step>
 
-- 	Escolha o **segmento** correspondente ao público que receberá os e-mails.
-- 	Em seguida, selecione o arquivo do público importado para a campanha.
+  <Step title="Selecionar público-alvo">
+    1. Escolha o **segmento** correspondente ao público que receberá os e-mails
+    2. Selecione o **arquivo do público** importado
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/descricaoPublico.png" /> 
+    <Frame caption="Seleção de segmento e público-alvo">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/descricaoPublico.png" />
+    </Frame>
 
+    <Warning>
+    O canal de e-mail remetente deve estar **vinculado ao mesmo segmento** do público selecionado.
+    </Warning>
+  </Step>
 
-> 📌 **Lembre-se:** O canal de e-mail utilizado como remetente precisa estar vinculado ao mesmo segmento do público selecionado.
+  <Step title="Agendamento e intervalo de envio">
+    Agende para data e horário específicos para:
+    - ✅ **Planejamento** adequado dos disparos
+    - ✅ **Evitar envios** fora do horário comercial
+    - ✅ **Reduzir sobrecarga** no servidor
 
-**Agendamento e Intervalo de Envio**
+    **Intervalo de envio (opcional):**
+    Configure o percentual de contatos que receberão o e-mail por ciclo de tempo.
 
-A campanha pode ser agendada para envio em data e horário específicos. Essa funcionalidade garante:
+    **Exemplo:** A cada 15 minutos, enviar para 20% dos contatos.
+  </Step>
 
--	**Planejamento adequado** dos disparos.
--	**Evita envios fora de horário comercial.**
--	**Reduz impactos por sobrecarga no servidor.**
+  <Step title="Contatos em atendimento">
+    Defina como lidar com contatos em atendimento ativo no momento do disparo:
 
->Você também pode configurar um **intervalo de envio**, definindo o percentual de contatos que receberão a mensagem por ciclo de tempo (ex: a cada 15 minutos, enviar para 20% dos contatos).
+    | Opção | Comportamento |
+    |-------|--------------|
+    | **Manter na campanha** | Contatos em atendimento recebem o e-mail normalmente |
+    | **Remover recentes** | Exclui contatos atendidos dentro do período configurado |
 
-**Contatos em Atendimento**
+    **Exemplo de configuração:** Remover contatos atendidos nas últimas 2 horas.
 
-Durante a configuração da campanha, é possível escolher como lidar com contatos que estão
-em atendimento ativo no momento do disparo:
+    <Frame caption="Configuração de limite de contatos em atendimento">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/LimiteContatosEmAtendimento.png" />
+    </Frame>
+  </Step>
 
--	Manter contatos **em atendimento** na campanha
--	**Remover contatos em atendimento recente**, com opção de definir o tempo a ser considerado (ex: remover contatos atendidos nas últimas 2 horas)
+  <Step title="Definir remetente e título">
+    **Remetente:**
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/LimiteContatosEmAtendimento.png" />
+    | Opção | Endereço |
+    |-------|---------|
+    | 📧 **Canal de e-mail próprio** | E-mail cadastrado e vinculado ao ambiente |
+    | 🏢 **Canal padrão da plataforma** | `mensagem@avisoseguro.com.br` |
 
+    **Título do e-mail:**
+    Informe o assunto exibido na caixa de entrada do destinatário. Campo essencial para uma boa **taxa de abertura**.
 
-**Definição do Remetente**
+    <Frame caption="Configuração de remetente e título do e-mail">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/RemetenteTitulo.png" />
+    </Frame>
+  </Step>
 
-Ao configurar a campanha, você deverá selecionar qual canal de e-mail será utilizado
-como remetente da mensagem:
+  <Step title="Conteúdo da mensagem">
+    Escolha como definir o conteúdo:
 
--	**Canal de e-mail próprio:** E-mail previamente cadastrado e vinculado ao seu ambiente.
--	**Canal padrão da plataforma:** mensagem@avisoseguro.com.br, e-mail padrão da plataforma. 
+    <Tabs>
+      <Tab title="Público importado" icon="database">
+        **Usar conteúdo existente** no campo "Mensagem" do público importado.
 
->Essa etapa é fundamental para garantir a entrega correta das mensagens.
+        Ideal quando o conteúdo já está personalizado por contato no arquivo de público.
+      </Tab>
 
-**Título do E-mail**
+      <Tab title="Construtor visual" icon="pen-ruler">
+        **Editor visual drag-and-drop** para criar e-mails sem precisar de HTML.
 
-Informe o assunto do e-mail, que será exibido na caixa de entrada do destinatário. Esse campo é essencial para garantir uma boa taxa de abertura.
+        **Vantagens:**
+        - 🎨 Interface intuitiva de arrastar e soltar
+        - 📱 Layout responsivo automático
+        - 👁️ Pré-visualização em tempo real
+        - 🖼️ Suporte a imagens, botões e colunas
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/RemetenteTitulo.png" />
+        Ideal para criação rápida com controle visual.
+      </Tab>
 
-**Conteúdo da Mensagem**
+      <Tab title="HTML Direto" icon="code">
+        **Insira código HTML** para controle total sobre o design.
 
-Você poderá optar por:
+        **Vantagens:**
+        - 🎯 Personalização completa do layout
+        - 🔧 Compatível com templates HTML externos
+        - 💻 Ideal para equipes com conhecimento técnico
 
--	**Usar o conteúdo existente** no campo **“Mensagem”** do público importado.
+        Cole ou importe seu código HTML diretamente.
+      </Tab>
+    </Tabs>
 
--	**Criar uma nova mensagem personalizada** para a campanha, utilizando templates de e-mail. Caso escolha criar um conteúdo, será possível selecionar um template existente ou desenvolver um novo diretamente pela plataforma utilizando as opções: 
+    <Frame caption="Opções de conteúdo da mensagem">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/conteudoMensagem.png" />
+    </Frame>
 
+    <Note>
+    Consulte: [Templates de E-mail no Invenio Center](https://docs.robbu.global/docs/center/templates-de-email)
+    </Note>
+  </Step>
 
-`Construtor`
+  <Step title="Iniciar campanha">
+    Revise todas as configurações e clique em **"Iniciar campanha"** para disparar ou confirmar o agendamento.
 
- Utilize nosso editor visual intuitivo para arrastar e soltar elementos e criar seu e-mail de forma rápida e fácil, sem necessidade de conhecimentos em HTML. 
-
-`HTML Direto`
-
- Insira seu próprio código HTML para ter controle total sobre o design do seu e-mail. Ideal para quem deseja uma personalização completa. 
-
- 
->Saiba mais sobre este processo em nossa documentação oficial:  
->[Templates de e-mail no Invenio Center](https://docs.robbu.global/docs/center/templates-de-email)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/conteudoMensagem.png" />
-
+    <Check>
+    Campanha criada com sucesso! Agora você pode acompanhar os resultados em tempo real no painel.
+    </Check>
+  </Step>
+</Steps>
 
 ---
 
 ## Acompanhamento da Campanha
 
-Após o disparo, você poderá acompanhar os resultados em tempo real:
+Na tela inicial, consulte informações de campanhas já realizadas:
+- 📅 Horário, data de criação e conclusão
+- ▶️ Início de envio
+- 📊 Quantidade de mensagens processadas
 
+Clique nos **três pontinhos** ao lado de cada campanha para:
+- 📈 **Estatísticas** detalhadas da campanha
+- 📥 **Download** do relatório CSV
 
-Na tela inicial, além da opção de criar novas campanhas, você também pode consultar informações sobre campanhas já realizadas, como horário, data de criação, conclusão, início de envio e quantidade de mensagens processadas.
-
-Nos três pontinhos à direita de cada campanha, há um menu de opções que permite acessar as estatísticas da campanha e baixar a planilha com os dados de envio.
-
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/painelCampanha2.png" /> 
-
- 
+<Frame caption="Painel de acompanhamento de campanhas de e-mail">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/campanhas-email/painelCampanha2.png" />
+</Frame>
 
 ---
 
-## Estatísticas da campanha
+## Estatísticas da Campanha
 
-Acompanhe o desempenho da sua campanha de E-mail em tempo real para garantir a máxima eficiência das ações. A seção de estatísticas fornece informações detalhadas sobre o envio e o engajamento do público, permitindo ajustes estratégicos quando necessário.
+Acompanhe o desempenho em tempo real com três visões:
 
-**Informações de envio:**
+<Columns>
+  <Column>
+    **📤 Informações de envio**
 
- Exibe o total de contatos, quantos e-mails foram enviados, quantos ainda estão pendentes e o número de falhas durante a campanha. 
+    - Total de contatos da campanha
+    - E-mails enviados com sucesso
+    - E-mails pendentes de envio
+    - Falhas durante o disparo
+  </Column>
+  <Column>
+    **📈 Retorno por período**
 
-**Retorno por período:**
+    Quantidade de respostas/interações por hora. Considera todos os retornos do público engajado, independente do canal de entrada.
 
- Permite acompanhar a quantidade de respostas ou interações geradas por hora, ajudando a analisar o comportamento do público ao longo do tempo. O cálculo considera todos os retornos do público engajado, independentemente do canal de entrada. 
+    **🎯 Retorno por evento**
 
-**Retorno por evento:**
+    Eventos registrados por atendentes e chatbots para o público engajado.
+  </Column>
+</Columns>
 
- Mostra a quantidade de eventos registrados por atendentes e chatbots para o público engajado, permitindo monitorar a efetividade de ações específicas e identificar oportunidades de melhoria. 
- 
- ---
+---
 
- ## Relatório de Campanha (Download)
+## Relatório CSV (Download)
 
-Ao selecionar a opção `Download`, o  **Invenio Center** também disponibiliza um **relatório em formato Excel (.csv)** com informações detalhadas sobre o desempenho das campanhas de e-mail.  
-Os dados disponíveis no arquivo permitem acompanhar todo o ciclo de envio e entrega das mensagens.  
+Exporte o relatório completo em **formato Excel (.csv)** pela opção **Download** no painel:
 
 | Campo | Descrição |
-|--------|------------|
-| **NomePessoa** | Nome do destinatário do e-mail. |
-| **CpfCnpj** | Documento de identificação do cliente (CPF ou CNPJ). |
-| **CodPessoaCliente** | Código interno utilizado para identificar o cliente dentro da plataforma. |
-| **DDDTelefone** | DDD cadastrado do telefone associado ao cliente (quando disponível). |
-| **NumeroTelefone** | Número de telefone do cliente (quando disponível). |
-| **EnderecoEmail** | Endereço de e-mail para o qual a campanha foi enviada. |
-| **DataHoraSolicitacao** | Data e hora em que a solicitação de envio foi registrada no sistema. |
-| **DataHoraEnvio** | Data e hora em que o e-mail foi efetivamente enviado ao servidor de e-mail do destinatário. |
-| **Mensagem** | Conteúdo do e-mail enviado ao destinatário. |
-| **SituacaoEntrega** | Status do envio do e-mail (enviado, entregue, falha, bloqueado, etc.). |
-| **Data/Hora Entrega Email** | Momento em que o servidor de destino confirmou o recebimento do e-mail. |
-| **Data/Hora Clique Email** | Data e hora em que o destinatário clicou em algum link contido no e-mail. |
-| **Data/Hora Abertura Email** | Data e hora em que o e-mail foi aberto pelo destinatário. |
-| **Data/Hora Cancelamento Insc.** | Data e hora em que o destinatário optou por cancelar a inscrição (opt-out). |
-| **Data/Hora Marcação Spam Email** | Momento em que o destinatário marcou o e-mail como spam. |
+|-------|-----------|
+| **NomePessoa** | Nome do destinatário |
+| **CpfCnpj** | CPF ou CNPJ do cliente |
+| **CodPessoaCliente** | Código interno da plataforma |
+| **DDDTelefone** | DDD do telefone (quando disponível) |
+| **NumeroTelefone** | Telefone do cliente (quando disponível) |
+| **EnderecoEmail** | E-mail de destino da campanha |
+| **DataHoraSolicitacao** | Data/hora do registro de envio |
+| **DataHoraEnvio** | Data/hora do envio efetivo |
+| **Mensagem** | Conteúdo do e-mail enviado |
+| **SituacaoEntrega** | Status: enviado, entregue, falha, bloqueado |
+| **Data/Hora Entrega Email** | Confirmação de recebimento pelo servidor |
+| **Data/Hora Clique Email** | Data/hora do clique em link pelo destinatário |
+| **Data/Hora Abertura Email** | Data/hora da abertura do e-mail |
+| **Data/Hora Cancelamento Insc.** | Data/hora do opt-out do destinatário |
+| **Data/Hora Marcação Spam Email** | Data/hora da marcação como spam |
 
+<Note>
+**Relatório "Campanhas Realizadas"** também disponível na plataforma, com filtro por período e canal (incluindo e-mail).
 
-> 💡 **Observação:**  
-> Esse relatório pode ser exportado diretamente na tela de campanhas, permitindo análises mais detalhadas de performance nos envios.
-
-> Nos relatórios disponíveis na plataforma Invenio Center, é possível exportar o relatório  **Campanhas Realizadas.** <br/>
-> O Relatório de Campanhas Realizadas permite filtrar campanhas por período e canal, com a opção de visualizar especificamente as enviadas por e-mail. <br/>
-> Para mais detalhes, acesse: [Documentação Relatórios - Invenio Center](https://docs.robbu.global/docs/center/relatorios)
-
-
-As campanhas de e-mail são uma poderosa ferramenta de comunicação dentro da plataforma Invenio. Com uma estrutura clara, flexível e automatizada, é possível alcançar grandes públicos com personalização, organização e resultados
+Consulte: [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)
+</Note>
 
 ---
 
-## 🔗 Links Relacionados  
+## Links Relacionados
 
-- [Cadastro de Conta de E-mail no Invenio Center](https://docs.robbu.global/docs/center/cadastrar-conta-de-email)  
-- [Templates de E-mail no Invenio Center](https://docs.robbu.global/docs/center/templates-de-email)  
-- [Importação de Público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)  
-- [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)  
-- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
-- [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)  
-- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
+<CardGroup cols={2}>
+  <Card
+    title="Cadastro de Conta de E-mail"
+    icon="envelope"
+    href="https://docs.robbu.global/docs/center/cadastrar-conta-de-email"
+  >
+    Configurar canal de e-mail próprio
+  </Card>
+
+  <Card
+    title="Templates de E-mail"
+    icon="file-lines"
+    href="https://docs.robbu.global/docs/center/templates-de-email"
+  >
+    Criar e gerenciar templates
+  </Card>
+
+  <Card
+    title="Importação de Público"
+    icon="users"
+    href="https://docs.robbu.global/docs/center/publico-importacao"
+  >
+    Cadastrar público para campanhas
+  </Card>
+
+  <Card
+    title="Relatórios"
+    icon="chart-line"
+    href="https://docs.robbu.global/docs/center/relatorios"
+  >
+    Campanhas Realizadas e NPS
+  </Card>
+
+  <Card
+    title="Segmentos"
+    icon="layer-group"
+    href="https://docs.robbu.global/docs/center/segmentos"
+  >
+    Configurar segmentos de envio
+  </Card>
+
+  <Card
+    title="Filtro por Canal"
+    icon="filter"
+    href="https://docs.robbu.global/docs/live/filtro-por-canal"
+  >
+    Filtrar conversas de e-mail
+  </Card>
+</CardGroup>
 
 ---
 
-## ⁉️ Perguntas Frequentes (FAQ)  
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
+  <Accordion title="📋 É obrigatório ter público cadastrado antes de criar a campanha?">
+    **Sim.** O público deve estar importado **antes** de criar a campanha.
 
-  <Accordion title="Como iniciar a criação de uma campanha de e-mail?">  
-  Acesse o módulo **Campanhas > E-mail > + Criar campanha**. <br/>  
-  A partir daí, você poderá configurar o nome da campanha, público-alvo, agendamento, remetente, conteúdo e demais opções essenciais para o envio.  
-  </Accordion>  
+    **Caminho de importação:**
+    Invenio Center > Converter > Público > Importar > Selecionar arquivo > Confirmar
 
-  <Accordion title="É obrigatório ter um público cadastrado antes de criar uma campanha?">  
-  Sim. <br/>  
-  O público precisa estar previamente cadastrado no módulo **Público**, e durante a criação da campanha você deverá selecionar o segmento e grupo de contatos correspondentes.  
-  </Accordion>  
+    Durante a criação da campanha, você selecionará o segmento e o arquivo importado.
 
-  <Accordion title="Posso agendar campanhas para envio fora do horário comercial?">  
-  É possível, mas não é recomendado. <br/>  
-  O agendamento permite que os disparos ocorram em horários apropriados, evitando sobrecarga no servidor e melhorando a taxa de abertura.  
-  </Accordion>  
+    Consulte: [Importação de Público](https://docs.robbu.global/docs/center/publico-importacao)
+  </Accordion>
 
-  <Accordion title="Como funciona o intervalo de envio por percentual?">  
-  É possível definir ciclos de disparo baseados em tempo e percentual. <br/>  
-  Por exemplo, configurar o sistema para enviar o e-mail para **20% dos contatos a cada 15 minutos**, garantindo escalabilidade e estabilidade no processo de envio.  
-  </Accordion>  
+  <Accordion title="📧 Quais remetentes posso usar nas campanhas de e-mail?">
+    **Duas opções disponíveis:**
 
-  <Accordion title="O que acontece com contatos que estão em atendimento no momento do disparo?">  
-  Você pode escolher manter esses contatos na campanha ou removê-los conforme um tempo definido. <br/>  
-  Por exemplo, é possível configurar a exclusão de contatos que foram atendidos nas últimas 2 horas.  
-  </Accordion>  
+    | Opção | Endereço | Quando usar |
+    |-------|---------|-------------|
+    | **Canal próprio** | Seu e-mail cadastrado | Maior credibilidade e personalização |
+    | **Canal padrão** | `mensagem@avisoseguro.com.br` | Quando não há e-mail próprio configurado |
 
-  <Accordion title="Quais opções estão disponíveis para selecionar o remetente?">  
-  Existem duas opções de remetente: <br/>  
-  - **Canal de e-mail próprio**, previamente cadastrado e vinculado ao ambiente. <br/>  
-  - **Canal padrão da plataforma**, com o endereço `mensagem@avisoseguro.com.br`.  
-  Essa escolha garante que o envio ocorra de forma segura e devidamente autenticada.  
-  </Accordion>  
+    **Recomendação:** Use um canal próprio para melhor taxa de entrega e confiança do destinatário.
 
-  <Accordion title="O que devo preencher no campo Título da Mensagem?">  
-  O campo **Título da Mensagem** corresponde ao assunto do e-mail exibido na caixa de entrada do destinatário. <br/>  
-  É um dos principais fatores que influenciam a taxa de abertura da campanha.  
-  </Accordion>  
+    **Caminho para cadastrar:** Invenio Center > Configurações > Canais > E-mail > Adicionar conta
 
-  <Accordion title="Como é definido o conteúdo da mensagem da campanha?">  
-  Você pode utilizar o conteúdo existente no público importado ou criar uma nova mensagem diretamente na campanha. <br/>  
-  Há duas opções de criação:  
-  - **Construtor:** editor visual para criação rápida e intuitiva. <br/>  
-  - **HTML Direto:** para quem deseja controle total sobre o design do e-mail.  
-  </Accordion>  
+    Consulte: [Cadastro de Conta de E-mail](https://docs.robbu.global/docs/center/cadastrar-conta-de-email)
+  </Accordion>
 
-  <Accordion title="Posso usar templates prontos nas campanhas de e-mail?">  
-  Sim. <br/>  
-  É possível selecionar um template existente ou criar um novo na tela de criação da campanha.  
-  Saiba mais em: [Templates de E-mail no Invenio Center](https://docs.robbu.global/docs/center/templates-de-email).  
-  </Accordion>  
+  <Accordion title="⏰ Posso agendar a campanha para envio futuro?">
+    **Sim!** O agendamento permite definir data e hora exatas para o disparo.
 
-  <Accordion title="É possível acompanhar os resultados da campanha em tempo real?">  
-  Sim. <br/>  
-  Após o disparo, você pode acompanhar dados de envio, taxa de entrega, aberturas, cliques e cancelamentos. <br/>  
-  Além disso, a opção **Download** permite exportar o relatório completo da campanha em formato `.csv`.  
-  </Accordion>  
+    **Boas práticas de agendamento:**
+    - ✅ Horário comercial (9h–18h) para B2B
+    - ✅ Evite fins de semana para cobranças
+    - ✅ Terça a quinta têm melhores taxas de abertura
 
-  <Accordion title="O que o relatório de campanhas de e-mail contém?">  
-  O relatório apresenta informações como status de entrega, aberturas, cliques, cancelamentos e marcações de spam. <br/>  
-  Ele permite monitorar todo o ciclo de envio e desempenho da campanha com dados detalhados de cada contato.  
-  </Accordion>  
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Criar > Agendamento
+  </Accordion>
 
+  <Accordion title="📊 Como funciona o intervalo de envio por percentual?">
+    Permite enviar a campanha de forma **graduada**, evitando sobrecarga.
+
+    **Como configurar:**
+    - Defina o **percentual** de contatos por ciclo (ex: 20%)
+    - Defina o **intervalo de tempo** entre ciclos (ex: 15 minutos)
+
+    **Exemplo prático:**
+    - 1.000 contatos na campanha
+    - Configuração: 20% a cada 15 minutos
+    - Resultado: 200 e-mails a cada 15 min → campanha concluída em ~1h15
+
+    **Benefícios:** Evita bloqueios por volume anormal e mantém a reputação do servidor de e-mail.
+  </Accordion>
+
+  <Accordion title="👤 O que fazer com contatos em atendimento ativo no momento do disparo?">
+    Você pode escolher entre duas opções:
+
+    **Manter na campanha:**
+    - Contato recebe o e-mail mesmo estando em atendimento
+    - Pode causar mensagens duplicadas ou redundantes
+
+    **Remover contatos recentes:**
+    - Define um período de exclusão (ex: últimas 2 horas)
+    - Contatos atendidos dentro do período são excluídos do disparo
+    - Evita comunicação desnecessária com clientes já assistidos
+
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Criar > Contatos em Atendimento
+  </Accordion>
+
+  <Accordion title="📝 Qual a diferença entre o Construtor visual e o HTML Direto?">
+    | Característica | Construtor | HTML Direto |
+    |---|---|---|
+    | Conhecimento técnico | ❌ Não precisa | ✅ Recomendado |
+    | Interface | Visual (drag-and-drop) | Código HTML |
+    | Flexibilidade | Moderada | Total |
+    | Velocidade | Rápida | Depende da experiência |
+    | Responsividade | Automática | Manual |
+
+    **Recomendação:**
+    - **Equipe de marketing sem dev:** use o Construtor
+    - **Equipe técnica ou layout complexo:** use HTML Direto
+  </Accordion>
+
+  <Accordion title="📈 Como acompanhar os resultados em tempo real?">
+    Após o disparo, acesse as estatísticas:
+
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Três pontinhos > Estatísticas
+
+    **Métricas disponíveis:**
+    - 📤 **Enviados / Pendentes / Falhas**
+    - 📊 **Retorno por período** (respostas por hora)
+    - 🎯 **Retorno por evento** (ações de atendentes e chatbots)
+  </Accordion>
+
+  <Accordion title="📥 O que contém o relatório CSV da campanha?">
+    O relatório exportado inclui dados detalhados por contato:
+
+    **Dados de entrega:** situação, data/hora de envio e entrega
+    **Engajamento:** abertura, clique em links
+    **Problemas:** opt-out (cancelamento de inscrição), marcação como spam
+
+    **Como exportar:**
+    Invenio Center > Converter > Campanhas > E-mail > Três pontinhos > Download
+
+    Também disponível o relatório **"Campanhas Realizadas"** com filtro por período e canal.
+  </Accordion>
+
+  <Accordion title="🔗 O canal de e-mail precisa estar vinculado ao segmento do público?">
+    **Sim, obrigatoriamente.**
+
+    - O **segmento do público** define quem recebe o e-mail
+    - O **canal de e-mail remetente** deve estar vinculado ao mesmo segmento
+    - Se houver incompatibilidade, a campanha pode falhar ou não aparecer como opção
+
+    **Como verificar:** Invenio Center > Configurações > Canais > E-mail > Verificar segmentos vinculados
+  </Accordion>
+
+  <Accordion title="⭐ Posso usar templates de e-mail prontos nas campanhas?">
+    **Sim!** Durante a criação da campanha, ao selecionar a opção de conteúdo personalizado, você pode:
+
+    - ✅ **Selecionar um template existente** criado anteriormente
+    - ✅ **Criar um novo template** direto na campanha (Construtor ou HTML)
+    - ✅ **Editar templates** existentes antes de usar
+
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Criar > Conteúdo da Mensagem
+
+    Consulte: [Templates de E-mail](https://docs.robbu.global/docs/center/templates-de-email)
+  </Accordion>
 </AccordionGroup>

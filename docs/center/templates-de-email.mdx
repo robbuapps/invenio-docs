@@ -1,190 +1,368 @@
 ---
 title: "Criação de Templates de E-mail"
 sidebarTitle: "Templates de E-mail"
-description: "A aba de Templates de E-mail do Invenio Center permite criar modelos personalizados e reutilizáveis para campanhas, oferecendo flexibilidade e agilidade no envio de mensagens estruturadas e dinâmicas. Com uma interface intuitiva, é possível desenvolver os templates tanto pelo Construtor Visual do Invenio quanto via código HTML, atendendo diferentes necessidades e níveis de experiência."
+description: "Crie templates de e-mail reutilizáveis no Invenio Center com o Construtor Visual ou HTML Direto. Inclui layout, componentes, tags dinâmicas e pré-visualização."
 ---
 
-## Como acessar
+Os **Templates de E-mail** do Invenio Center permitem criar modelos personalizados e reutilizáveis para campanhas. Dois modos de criação disponíveis:
 
-[Clique aqui para acessar diretamente ao painel de templates de e-mail](https://inveniocenter.robbu.global/painel/campanhas/email/templates)
-
-Para acessar, basta selecionar as opções **Campanhas > E-mail > Templates**. Nesta tela, você poderá:  
-
-• Visualizar a lista de templates já criados;    
-• Redirecionar para o módulo de campanhas de e-mail, através do botão **Campanhas de Email** no canto superior direito;  
-• Criar um novo template clicando em **"+ Criar Template"**.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.2.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.3.png" />
+| Modo | Indicado para | Nível técnico |
+|------|--------------|---------------|
+| 🎨 **Construtor Visual** | Criação rápida com drag-and-drop | Iniciante |
+| 💻 **HTML Direto** | Controle total do layout | Avançado |
 
 ---
 
-## Criando um novo template
+## Acessar Templates de E-mail
 
-Ao clicar em **"+ Criar Template"**, será exibida uma tela com duas opções de criação:  
+**Caminho:** Invenio Center > Converter > Campanhas > E-mail > **Templates**
 
-**Construtor Invenio:** Permite construir e-mails visualmente, sem a necessidade de conhecimento técnico em HTML. Ideal para usuários que buscam praticidade e rapidez.  
-**HTML Direto:** Permite inserir seu próprio código HTML, com total liberdade de design. Indicado para profissionais com domínio técnico que buscam maior controle criativo.  
+<Tip>
+**Acesso direto:** [Painel de Templates de E-mail](https://inveniocenter.robbu.global/painel/campanhas/email/templates)
+</Tip>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail2.png" />
+Na tela de templates, você pode:
+- 📋 **Visualizar** a lista de templates criados
+- 📣 **Acessar Campanhas** de e-mail pelo botão no canto superior direito
+- ➕ **Criar** novo template com **"+ Criar Template"**
 
-## Estrutura do Construtor 
+<Frame caption="Painel de templates de e-mail">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.png" />
+</Frame>
 
-### Configurações Gerais
+<Frame caption="Lista de templates existentes">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.2.png" />
+</Frame>
 
-Nesta aba, você poderá:  
-
-• Definir o nome do template;  
-• Especificar o assunto do e-mail;  
-• Informar um e-mail para teste, que será usado no envio do preview do template.  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail3.png" />
-
-### Construtor
-
-No editor visual, você poderá montar o conteúdo do seu e-mail de forma modular:
-
-**Layout**  
-• Escolha a divisão do layout em colunas (de 1 até 4 colunas);  
-• Combine diferentes seções com divisões variadas de colunas, conforme a necessidade do conteúdo.
-
-**Componentes**  
-**Texto:** Arraste o componente de texto para uma das colunas e clique para **Editar**. Você poderá configurar:  
-- Negrito, itálico, sublinhado, links e alinhamentos;  
-- Cores de fundo e de texto;  
-- Bordas arredondadas, padding e tamanho da fonte.
-
-**Padding:**
-
-Ao definir o padding, estabelecemos o espaçamento interno entre o conteúdo de um elemento e suas bordas. Esse ajuste impacta diretamente a legibilidade e a organização visual da interface.
-
-Os valores de padding são aplicados na seguinte ordem, sempre em pixels (px):
-
-- Superior (top)
-
-- Lateral direita (right)
-
-- Inferior (bottom)
-
-- Lateral esquerda (left)
-
-> Esse recurso permite um controle mais refinado dos espaços internos do texto ou componentes, contribuindo para uma apresentação mais clara, equilibrada e alinhada às boas práticas de design de interface.
-
-**Imagem:** Arraste o componente de imagem para uma das colunas e editar. Você poderá configurar:  
-- Upload da imagem;  
-- Descrição e link;  
-- Cor de fundo, largura, padding, alinhamento e bordas.
-
-Para remover um conteúdo de coluna, utilize o **ícone vermelho** de exclusão localizado à **esquerda** da coluna.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCamp4.png" />
+<Frame caption="Botão + Criar Template">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail1.3.png" />
+</Frame>
 
 ---
 
-**Estilos Globais**  
-Configure o estilo padrão de todo o e-mail:  
-- Cor de fundo do corpo e conteúdo;  
-- Fonte e tamanho;  
-- Cores de texto e links;  
-- Padding do corpo do e-mail.  
+## Criar Template
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail5.png" />
+Ao clicar em **"+ Criar Template"**, escolha o modo de criação:
+
+<Frame caption="Seleção do modo de criação: Construtor ou HTML Direto">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail2.png" />
+</Frame>
+
+<Tabs>
+  <Tab title="Construtor Visual" icon="pen-ruler">
+    ### Construtor Invenio
+
+    Editor **drag-and-drop** para criar e-mails sem necessidade de código. Interface dividida em 3 abas:
+
+    ---
+
+    #### Aba: Configurações Gerais
+
+    <Steps>
+      <Step title="Nome do template">
+        Defina um nome interno para identificação e organização do template.
+      </Step>
+      <Step title="Assunto do e-mail">
+        Informe o assunto exibido na caixa de entrada do destinatário. Impacta diretamente na taxa de abertura.
+      </Step>
+      <Step title="E-mail para teste">
+        Informe um endereço para receber o preview do template ao testar.
+      </Step>
+    </Steps>
+
+    <Frame caption="Aba Configurações Gerais do template">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail3.png" />
+    </Frame>
+
+    ---
+
+    #### Aba: Construtor
+
+    Monte o e-mail de forma **modular** combinando layout e componentes.
+
+    **Layout:**
+    - Escolha a divisão em colunas: **1 a 4 colunas por seção**
+    - Combine seções com divisões variadas conforme o conteúdo
+
+    **Componentes disponíveis:**
+
+    | Componente | Configurações |
+    |-----------|--------------|
+    | 📝 **Texto** | Negrito, itálico, sublinhado, links, alinhamento, cores, bordas, padding, tamanho de fonte |
+    | 🖼️ **Imagem** | Upload, descrição, link, cor de fundo, largura, padding, alinhamento, bordas |
+
+    <Note>
+    **Padding:** Espaçamento interno entre o conteúdo e as bordas do elemento, aplicado em pixels na ordem: Superior → Direita → Inferior → Esquerda (top, right, bottom, left).
+    </Note>
+
+    Para **remover** um conteúdo de coluna, clique no **ícone vermelho** de exclusão à esquerda da coluna.
+
+    <Frame caption="Editor visual do Construtor com layout e componentes">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCamp4.png" />
+    </Frame>
+
+    **Estilos Globais:**
+
+    Configure o estilo padrão de todo o e-mail:
+    - 🎨 Cor de fundo do corpo e do conteúdo
+    - 🔤 Fonte e tamanho padrão
+    - 🎨 Cores de texto e links
+    - 📐 Padding do corpo do e-mail
+
+    <Frame caption="Painel de Estilos Globais do e-mail">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail5.png" />
+    </Frame>
+
+    ---
+
+    #### Aba: Tags (variáveis dinâmicas)
+
+    Personalize o conteúdo com informações específicas de cada contato. As tags são substituídas automaticamente no envio:
+
+    | Tag | Descrição |
+    |-----|-----------|
+    | `@NomePessoa` | Nome completo do contato |
+    | `@PrimeiroNome` | Primeiro nome do contato |
+    | `@CPFCNPJ` | CPF ou CNPJ do contato |
+    | `@ChaveCliente` | Código identificador do cliente |
+    | `@Hashtag` | Hashtag vinculada ao contato no Invenio |
+    | `@Coringa1` a `@Coringa5` | Informações adicionais personalizadas |
+
+    <Frame caption="Aba Tags com variáveis disponíveis">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail6.png" />
+    </Frame>
+
+    <Tip>
+    **Como usar:** Insira a tag no texto do template (ex: `Olá, @PrimeiroNome!`). No envio, será substituída automaticamente pelo valor do contato.
+    </Tip>
+  </Tab>
+
+  <Tab title="HTML Direto" icon="code">
+    ### HTML Direto
+
+    Insira seu código HTML para **controle total** do design. A plataforma exibe dois painéis lado a lado:
+
+    - **Esquerda:** Campo para colar ou escrever o código HTML
+    - **Direita:** Preview visual com renderização em tempo real
+
+    <Frame caption="Editor HTML com pré-visualização lado a lado">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail7.png" />
+    </Frame>
+
+    <Frame caption="Detalhe do editor HTML e preview">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail7.1.png" />
+    </Frame>
+
+    <Note>
+    As abas **Configurações Gerais** e **Tags** também estão disponíveis no modo HTML Direto. Use as mesmas tags dinâmicas (`@NomePessoa`, `@Coringa1`, etc.) no código HTML.
+    </Note>
+
+    **Vantagens do HTML Direto:**
+    - ✅ Personalização completa do layout
+    - ✅ Compatível com templates HTML externos
+    - ✅ Suporte a CSS customizado
+    - ✅ Ideal para layouts complexos ou templates já prontos
+  </Tab>
+</Tabs>
 
 ---
 
-### Tags
+## Preview, Ações e Gerenciamento
 
-Na aba Tags, você encontra as variáveis que podem ser utilizadas para personalizar o conteúdo com informações específicas do contato. Elas devem ser inseridas nos textos do template e serão substituídas automaticamente no envio:
+### Testar e Salvar
 
-| Tag                       | Descrição                              |
-|---------------------------|----------------------------------------|
-| `@NomePessoa`             | Nome completo do contato               |
-| `@PrimeiroNome`           | Primeiro nome do contato               |
-| `@CPFCNPJ`                | CPF ou CNPJ do contato                 |
-| `@ChaveCliente`           | Código identificador do cliente        |
-| `@Hashtag`                | Hashtag vinculada ao contato no Invenio|
-| `@Coringa1 até @Coringa5` | Informações adicionais personalizadas  |
+Após finalizar o template:
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail6.png" />
+| Ação | O que faz |
+|------|-----------|
+| **Preview** | Envia e-mail de teste para o endereço configurado em Configurações Gerais |
+| **Salvar** | Salva o progresso sem enviar preview |
 
----
+<Frame caption="Botão de pré-visualização e envio de teste">
+  <img src="https://storage.robbu.global/v2/file/8F427BD74AF6CFDA3FAED10AA346A94F" />
+</Frame>
 
-## Criação via HTML
-
-Se você optar por utilizar código HTML, a plataforma abrirá dois painéis:  
-• Um campo para colar ou escrever seu código HTML personalizado;  
-• Um preview visual ao lado direito com a renderização do seu template.  
-
-> **As Configurações Gerais e Tags continuam disponíveis nesta modalidade.**  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail7.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail7.1.png" />
+<Frame caption="E-mail de preview recebido no endereço de teste">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail8.1.png" />
+</Frame>
 
 ---
 
-## Preview, Edição e Salvamento
+### Menu de Ações (três pontinhos)
 
-Após finalizar a construção do template:
+Clique nos **três pontos** à direita de cada template na listagem:
 
-- Clique em **Preview** para visualizar como o e-mail será exibido ao destinatário. Um envio de teste será realizado automaticamente para o e-mail configurado.
+| Ação | Descrição |
+|------|-----------|
+| 👁️ **Visualizar** | Exibe prévia da estrutura do template |
+| ✏️ **Editar** | Abre o editor para ajustar o conteúdo |
+| 📋 **Duplicar** | Cria novo template com base no modelo (ideal para layouts similares) |
+| 🗑️ **Deletar** | Remove permanentemente o template |
 
-<img src="https://storage.robbu.global/v2/file/8F427BD74AF6CFDA3FAED10AA346A94F" />
+<Frame caption="Menu de edição e ações do template">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail-Edição.png" />
+</Frame>
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail8.1.png" />
+<Frame caption="Pré-visualização do template na listagem">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail-Visualizar.png" />
+</Frame>
 
-- Caso deseje apenas salvar o progresso sem enviar o preview, utilize o botão **Salvar** localizado ao lado.  
-- Você encontrará opções disponíveis no **menu lateral** representado pelos **três pontos** à direita: **Visualizar, Editar, Duplicar e Deletar**.
+<Frame caption="Opção de duplicar template">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmailDuplica.png" />
+</Frame>
 
-**Visualizar:** exibe uma prévia de como o template foi estruturado.  
-**Editar:** direciona para a tela de edição, onde é possível ajustar o conteúdo do template.  
-**Duplicar:** permite criar um novo template com base no modelo selecionado, facilitando a reutilização de layouts semelhantes.  
-**Deletar:** remove permanentemente o template da plataforma.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail-Edição.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmail-Visualizar.png" />
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/template-email/TempCampEmailDuplica.png" />
+<Warning>
+**Deletar** remove o template **permanentemente**. Essa ação não pode ser desfeita.
+</Warning>
 
 ---
 
-O módulo de criação de templates de e-mail do Invenio Center foi pensado para facilitar a gestão de campanhas por e-mail com eficiência e flexibilidade. Seja por meio da construção visual ou da liberdade do código HTML, é possível criar modelos ricos, personalizados e prontos para serem utilizados em campanhas recorrentes ou sazonais.  
-Explore os recursos, aproveite as tags dinâmicas para personalizar seus envios e utilize os testes para garantir que a mensagem chegue com clareza e impacto ao seu público.
+## Links Relacionados
 
----
+<CardGroup cols={2}>
+  <Card
+    title="Campanhas de E-mail"
+    icon="bullhorn"
+    href="https://docs.robbu.global/docs/center/campanhas-de-email"
+  >
+    Usar templates nas campanhas
+  </Card>
 
-## Links e Assuntos Relacionados
+  <Card
+    title="Cadastro de Conta de E-mail"
+    icon="envelope"
+    href="https://docs.robbu.global/docs/center/cadastrar-conta-de-email"
+  >
+    Configurar canal de e-mail
+  </Card>
 
-https://docs.robbu.global/docs/center/canais-atendimento
+  <Card
+    title="Importação de Público"
+    icon="users"
+    href="https://docs.robbu.global/docs/center/publico-importacao"
+  >
+    Cadastrar público para campanhas
+  </Card>
 
-https://docs.robbu.global/docs/center/campanhas-de-email
+  <Card
+    title="Variáveis de Sistema"
+    icon="code"
+    href="https://docs.robbu.global/docs/center/variaveis-de-sistema"
+  >
+    Referência de variáveis dinâmicas
+  </Card>
 
-https://docs.robbu.global/docs/center/cadastrar-conta-de-email
-
-https://docs.robbu.global/docs/center/publico-importacao
-
-https://docs.robbu.global/docs/center/variaveis-de-sistema
+  <Card
+    title="Canais de Atendimento"
+    icon="comments"
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Todos os canais disponíveis
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Onde posso acessar os templates de e-mail?">
-    Basta selecionar as opções Campanhas > E-mail > Templates.
+  <Accordion title="📍 Onde acesso os templates de e-mail?">
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Templates
+
+    Ou acesse diretamente: [painel de templates](https://inveniocenter.robbu.global/painel/campanhas/email/templates)
   </Accordion>
-  <Accordion title="Quais são as opções disponíveis para criar um novo template?">
-    Você pode escolher entre o Construtor Invenio (visual) ou o HTML Direto (código).
+
+  <Accordion title="🔀 Qual a diferença entre Construtor Visual e HTML Direto?">
+    | Característica | Construtor Visual | HTML Direto |
+    |---|---|---|
+    | Conhecimento técnico | ❌ Não precisa | ✅ HTML/CSS |
+    | Interface | Drag-and-drop | Editor de código |
+    | Flexibilidade | Moderada | Total |
+    | Pré-visualização | Automática | Lado a lado |
+    | Responsividade | Automática | Manual |
+
+    **Recomendação:**
+    - Equipes de marketing → **Construtor Visual**
+    - Desenvolvedores ou templates corporativos → **HTML Direto**
   </Accordion>
-  <Accordion title="É necessário saber HTML para criar um template?">
-    Não. O Construtor Invenio permite montar e-mails sem conhecimento técnico.
+
+  <Accordion title="💻 É necessário saber HTML para criar templates?">
+    **Não.** O **Construtor Visual** permite criar e-mails completos sem nenhum conhecimento técnico, usando drag-and-drop.
+
+    O **HTML Direto** é uma opção adicional para quem deseja controle total do design.
   </Accordion>
-  <Accordion title="Quais configurações posso realizar no Construtor Invenio?">
-    Nome do template, assunto do e-mail, e-mail para envio de teste, layout em colunas, componentes de texto e imagem, estilos globais e inserção de tags.
+
+  <Accordion title="🏷️ O que são as Tags e como usá-las?">
+    Tags são **variáveis dinâmicas** que personalizam o conteúdo por contato automaticamente no envio.
+
+    **Como usar:**
+    1. No editor, escreva a tag no texto: `Olá, @PrimeiroNome!`
+    2. No envio, `@PrimeiroNome` será substituído pelo primeiro nome de cada contato
+
+    **Tags disponíveis:**
+    - `@NomePessoa` → Nome completo
+    - `@PrimeiroNome` → Primeiro nome
+    - `@CPFCNPJ` → CPF ou CNPJ
+    - `@ChaveCliente` → Código do cliente
+    - `@Hashtag` → Hashtag do contato
+    - `@Coringa1` a `@Coringa5` → Campos personalizados
   </Accordion>
-  <Accordion title="Posso visualizar o resultado final antes de salvar?">
-    Sim. Após finalizar a criação, clique em Preview para visualizar a versão final. Um e-mail de teste será enviado automaticamente.
+
+  <Accordion title="👁️ Como testar o template antes de salvar?">
+    Clique em **Preview** para enviar um e-mail de teste para o endereço configurado em **Configurações Gerais**.
+
+    **Pré-requisito:** E-mail de teste deve estar preenchido em:
+    **Construtor > Configurações Gerais > E-mail para teste**
+
+    O preview exibe exatamente como o e-mail será renderizado no cliente de e-mail do destinatário.
   </Accordion>
-  <Accordion title="As configurações gerais e tags também estão disponíveis na criação por HTML?">
-    Sim. Mesmo na criação via HTML, é possível utilizar configurações gerais e variáveis (tags).
+
+  <Accordion title="📋 Posso criar templates com base em um existente?">
+    **Sim!** Use a opção **Duplicar** no menu de ações (três pontinhos).
+
+    **Caminho:** Templates > Três pontinhos > Duplicar
+
+    O template duplicado é criado com o mesmo layout e conteúdo, pronto para edição. Ideal para criar variações de um template já aprovado.
+  </Accordion>
+
+  <Accordion title="🌐 As Tags funcionam no modo HTML Direto?">
+    **Sim!** As mesmas tags (`@NomePessoa`, `@Coringa1`, etc.) podem ser inseridas diretamente no código HTML.
+
+    Exemplo no HTML:
+    ```html
+    <p>Olá, @PrimeiroNome! Seu código é @ChaveCliente.</p>
+    ```
+
+    As abas **Configurações Gerais** e **Tags** ficam disponíveis no painel lateral mesmo no modo HTML.
+  </Accordion>
+
+  <Accordion title="📐 O que é o Padding e como configurar?">
+    **Padding** é o espaçamento interno entre o conteúdo e as bordas do elemento.
+
+    **Ordem de configuração (em pixels):**
+    - Superior (top)
+    - Lateral direita (right)
+    - Inferior (bottom)
+    - Lateral esquerda (left)
+
+    **Exemplo:** `padding: 16 24 16 24` → 16px acima/abaixo, 24px nas laterais.
+
+    Disponível para componentes de **Texto**, **Imagem** e no **Estilo Global** do e-mail.
+  </Accordion>
+
+  <Accordion title="🗑️ É possível recuperar um template deletado?">
+    **Não.** A ação **Deletar** remove o template **permanentemente** da plataforma.
+
+    **Recomendação:** Antes de deletar, use **Duplicar** para manter uma cópia de segurança do template.
+
+    **Caminho:** Templates > Três pontinhos > Duplicar (antes de excluir)
+  </Accordion>
+
+  <Accordion title="🔁 Como usar um template criado em uma campanha?">
+    **Caminho:** Invenio Center > Converter > Campanhas > E-mail > Criar campanha > Conteúdo da Mensagem > Selecionar template existente
+
+    O template criado ficará disponível na lista de seleção durante a criação da campanha.
+
+    Consulte: [Campanhas de E-mail](https://docs.robbu.global/docs/center/campanhas-de-email)
   </Accordion>
 </AccordionGroup>

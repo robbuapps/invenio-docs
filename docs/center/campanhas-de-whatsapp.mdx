@@ -1,302 +1,598 @@
 ---
 title: "Campanhas de WhatsApp"
 sidebarTitle: "Campanhas de WhatsApp"
-description: "Aprenda a criar, configurar e acompanhar campanhas de WhatsApp na plataforma Invenio."
+description: "Crie, configure e acompanhe campanhas de WhatsApp no Invenio: envio em massa com templates HSM, agendamento, monitoramento e relatórios detalhados."
 ---
 
+As **campanhas de WhatsApp** no Invenio Center são elementos essenciais em estratégias de marketing digital e no envio de notificações ativas.
 
-As campanhas de WhatsApp no Invenio Center, são elementos essenciais em estratégias de marketing digital e no envio de notificações ativas, como cobranças, lembretes e promoções. Elas permitem o envio em massa de mensagens por meio da API Oficial do WhatsApp, utilizando mensagens estruturadas (HSM) — também conhecidas como templates pré-aprovados pela Meta.
+Elas permitem o **envio em massa** de mensagens por meio da **API Oficial do WhatsApp**, utilizando **mensagens estruturadas (HSM)** — templates pré-aprovados pela Meta.
 
-> No link abaixo, você encontra mais informações sobre a WhatsApp Business API:<br/>
-> [O que é o WhatsApp Business API?](https://docs.robbu.global/docs/center/whatsapp-business-api)
+**Benefícios:**
 
-A plataforma Invenio simplifica a criação e o gerenciamento dessas campanhas, contribuindo diretamente para:
+- 📈 **Maior engajamento** com o público
+- 💰 **Aumento de conversões**
+- 🚀 **Geração de tráfego**
+- 💵 **Crescimento de receita**
 
-- Maior engajamento com o público
-
-- Aumento de conversões
-
-- Geração de tráfego
-
-- Crescimento de receita
+<Note>
+**WhatsApp Business API:** Saiba mais sobre a API oficial em [O que é o WhatsApp Business API?](https://docs.robbu.global/docs/center/whatsapp-business-api)
+</Note>
 
 ---
 
-## Como criar uma campanha de Whatsapp no Invenio Center? 
+## Criar Campanha
 
-Para cadastrar uma nova campanha, siga os passos: 
-
-Acesse:  `Invenio Center > Converter > Campanhas > WhatsApp`
-
-[Clique aqui para acessar as campanhas de whatsapp no Invenio Center](https://inveniocenter.robbu.global/painel/campanhas/whatsapp)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CampanhaWhatsapp.png" /> 
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CampanhaWhatsApp2.png" /> 
-
-
-A criação de uma campanha no canal WhatsApp envolve etapas simples e essenciais para garantir eficiência e assertividade nos envios.
-Para iniciar uma nova campanha, selecione a opção `“+ Criar Campanha”`.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CriarCampanha.png" /> 
+<Steps>
+  <Step title="Acessar módulo de campanhas">
+    No **Invenio Center**, acesse: **Converter > Campanhas > WhatsApp**
+    
+    <Tip>
+    **Acesso direto:** [Campanhas de WhatsApp no Invenio Center](https://inveniocenter.robbu.global/painel/campanhas/whatsapp)
+    </Tip>
+    
+    <Frame caption="Painel de campanhas de WhatsApp no Invenio Center">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CampanhaWhatsapp.png" />
+    </Frame>
+    
+    <Frame caption="Lista de campanhas existentes">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CampanhaWhatsApp2.png" />
+    </Frame>
+  </Step>
   
-
-###  Descrição da Campanha
-
-Defina um **nome** para sua campanha. Ele será utilizado para identificação e acompanhamento interno.
-
-
-###  Alvo da Campanha
-
-Antes do disparo, selecione o **público-alvo**. Para isso, o público deve estar previamente cadastrado na aba **"Público"**.
-
-No link abaixo, saiba mais sobre a importação de público no Invenio Center:
-
-[Importação de Público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)
-
-Passos para seleção:
-
-- Selecione o segmento da campanha.
-- Escolha o público disponível dentro do segmento.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/DescricaoPublico.png" /> 
-
-
-###  Agendamento de Campanhas
-
-Você pode agendar o **início da campanha**, definindo data e hora específicas.
-
-**Benefícios do agendamento:**
-
--  Controle de horário de disparo  
--  Previsão de tempo de execução  
--  Mitigação de imprevistos técnicos
-
-###  Intervalo de Envio
-
-Permite envio **gradual** para evitar sobrecarga.
-
-**Exemplo:**  
-Enviar 20% dos contatos a cada 30 minutos, até completar o envio total.
-
-
-###  Contatos em Atendimento
-
-Você pode escolher como tratar os **contatos que já estão em atendimento**:
-
-- Incluir os contatos no disparo
-- Remover contatos em atendimento recente (ex: nas últimas 2 horas)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/InicioCampContatoEmAtendimento.png" />
-
-
-### Definição do Remetente
-
-**Escolha do Número de Disparo**
-
-Selecione o número que enviará a campanha.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Remetente.png" />
-
-> A escolha da linha **impacta diretamente o desempenho**.
-
-**Números Receptivos**
-
-Embora seja tecnicamente possível, o uso de números receptivos para campanhas `não é recomendado`. 
-
-> ⚠️**Atenção:**
-> - O sistema `não seleciona automaticamente` números receptivos para disparo.<br/>
-> - Todo o envio será feito por um `único número`, o que pode sobrecarregar a linha.<br/>
-> - A qualidade da linha pode ser rapidamente `reduzida` pela Meta, comprometendo a estabilidade da campanha.
-
-
-**Números Prospect**
-
-Para campanhas com linhas `Prospect`:
-
-- Devem existir `mínimo 3 linhas cadastradas` no mesmo segmento
-- Com `boa classificação de qualidade`.
-
-Se atendido, o sistema:
-
-- Seleciona automaticamente a melhor linha
-- Alterna entre as linhas para evitar sobrecarga
-- Garante continuidade mesmo com restrições
-
-
-**Seleção do Template**
-
-Antes de iniciar:
-
-- Escolha um `template previamente vinculado` aos números da campanha
-- Verifique o `preenchimento das variáveis` e `mídias`
-- Evite falhas e mensagens incompletas.
-
-> Para saber mais sobre como criar e gerenciar templates HSM, consulte a documentação:
-> [Criação de Templates no Invenio Center](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Template.png" />
-
-
----
-
-##  Detalhes da Campanha
-
-###  Acompanhamento das Informações
-
-Cada campanha gera dados úteis, mesmo com falhas:
-
-- Clique na campanha para abrir a página de **detalhes**
-- Veja o status de envio para cada contato
-- Verifique se a mensagem foi visualizada
-- Baixe um relatório CSV completo
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/detalhesCamp.png" />
-
-
-Entre as informações incluídas no relatório CSV, estão:
-
-`NomePessoa:` Nome do destinatário da mensagem.  
-`CpfCnpj:` Documento cadastrado do cliente (CPF ou CNPJ).  
-`CodPessoaCliente:` Código identificador interno do cliente.  
-`DDDTelefone:` DDD do número de destino.  
-`NumeroTelefone:` Número completo de destino.  
-`EnderecoEmail:` Endereço de e-mail vinculado ao contato (quando aplicável).  
-`DataHoraSolicitacao:` Data e hora em que o envio foi solicitado.  
-`DataHoraEnvio:` Data e hora em que o envio foi processado pela plataforma.  
-`Mensagem:` Conteúdo do SMS enviado.  
-`SituacaoEntrega:` Status do envio (enviado, entregue, falha, etc.).  
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/destalhesCamp2.png" />
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Planilha.png" />
----
-
-###  Estatísticas da Campanha
-
-A Invenio oferece gráficos e relatórios em tempo real para acompanhamento da performance da campanha. 
-
-- Os gráficos mostram os retornos por hora e os eventos relacionados (como IDR e/ou operação). 
-
-- Se o ambiente possuir o protocolo de resposta ativado, será possível identificar quantas 	pessoas responderam à campanha diretamente por esses gráficos. 
-
-![Estatísticas](https://robbublob.blob.core.windows.net/docs/estatisticacamp.jpeg)
+  <Step title="Iniciar nova campanha">
+    Clique em **"+ Criar Campanha"** para iniciar o processo.
+    
+    <Frame caption="Botão para criar nova campanha">  
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/CriarCampanha.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Preencher informações básicas">
+    **Descrição da Campanha:**
+    
+    Defina um **nome** para sua campanha. Ele será utilizado para identificação e acompanhamento interno.
+    
+    **Exemplo:** "Promoção Black Friday 2024" ou "Cobrança Vencimentos Janeiro"
+  </Step>
+  
+  <Step title="Selecionar público-alvo">
+    **Alvo da Campanha:**
+    
+    Selecione o **público-alvo** que deve estar previamente cadastrado na aba **"Público"**.
+    
+    **Passos:**
+    1. Selecione o **segmento** da campanha
+    2. Escolha o **público** disponível dentro do segmento
+    
+    <Frame caption="Configuração de descrição e público-alvo">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/DescricaoPublico.png" />
+    </Frame>
+    
+    <Note>
+    **Importação de público:** Consulte [Importação de Público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)
+    </Note>
+  </Step>
+  
+  <Step title="Configurar agendamento e envio">
+    **Agendamento:**
+    
+    Agende o **início da campanha** definindo data e hora específicas.
+    
+    **Benefícios do agendamento:**
+    - ⏰ Controle de horário de disparo
+    - 📊 Previsão de tempo de execução
+    - 🛡️ Mitigação de imprevistos técnicos
+    
+    ---
+    
+    **Intervalo de Envio:**
+    
+    Configure envio **gradual** para evitar sobrecarga.
+    
+    **Exemplo:** Enviar 20% dos contatos a cada 30 minutos até completar 100%.
+    
+    <Tip>
+    **Recomendação:** Use intervalos de 15-30 minutos para campanhas grandes (10.000+ contatos).
+    </Tip>
+    
+    ---
+    
+    **Contatos em Atendimento:**
+    
+    Escolha como tratar contatos **atualmente em atendimento**:
+    - ✅ **Incluir** os contatos no disparo
+    - ❌ **Remover** contatos em atendimento recente (ex: nas últimas 2 horas)
+    
+    <Frame caption="Configurações de agendamento e contatos em atendimento">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/InicioCampContatoEmAtendimento.png" />
+    </Frame>
+  </Step>
+  
+  <Step title="Definir remetente">
+    **Escolha do Número de Disparo:**
+    
+    Selecione o número que enviará a campanha.
+    
+    <Frame caption="Seleção do remetente">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Remetente.png" />
+    </Frame>
+    
+    <Warning>
+    **Números Receptivos (não recomendado):**
+    
+    Embora tecnicamente possível, o uso de números receptivos para campanhas **não é recomendado**:
+    
+    - ❌ Sistema **não seleciona automaticamente** outros números
+    - ❌ Todo envio será feito por **um único número**
+    - ❌ Pode **sobrecarregar** a linha
+    - ❌ **Qualidade da linha pode cair rapidamente**, comprometendo a campanha
+    </Warning>
+    
+    <Check>
+    **Números Prospect (recomendado):**
+    
+    Para campanhas com linhas **Prospect**:
+    
+    - ✅ Devem existir **mínimo 3 linhas cadastradas** no mesmo segmento
+    - ✅ Todas com **boa classificação de qualidade** (Green ou Yellow)
+    - ✅ Sistema **seleciona automaticamente** a melhor linha
+    - ✅ **Alterna entre linhas** para evitar sobrecarga
+    - ✅ **Garante continuidade** mesmo com restrições
+    </Check>
+  </Step>
+  
+  <Step title="Selecionar template HSM">
+    **Seleção do Template:**
+    
+    Escolha um **template previamente vinculado** aos números da campanha.
+    
+    **Antes de iniciar:**
+    - ✅ Verifique o **preenchimento das variáveis**
+    - ✅ Confira **mídias** (imagens, vídeos, documentos)
+    - ✅ Teste o template para evitar falhas
+    
+    <Frame caption="Seleção de template HSM">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Template.png" />
+    </Frame>
+    
+    <Note>
+    **Criação de templates:** Consulte [Criação de Templates no Invenio Center](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)
+    </Note>
+  </Step>
+  
+  <Step title="Revisar e iniciar" >
+    Revise todas as configurações e clique em **"Iniciar Campanha"** ou **"Agendar"**.
+    
+    <Check>
+    **Campanha criada com sucesso!** Acompanhe os resultados em tempo real no dashboard.
+    </Check>
+  </Step>
+</Steps>
 
 ---
 
-###  Relatórios Complementares
+## Acompanhamento e Relatórios
 
-**Relatório “Campanhas Realizadas”**
+### Detalhes da Campanha
 
-- Permite aplicar filtros por:
-  - Segmento
-  - Período
-  - Critérios específicos
+Após criar a campanha, você pode acompanhar **dados úteis** em tempo real:
 
-**Relatório “Envios Ativos de HSM – WhatsApp Business API**
+**Como acessar:**
+1. Clique na campanha na lista
+2. Visualize a página de **detalhes**
 
-- Exibe todos os disparos HSM por período
+**Informações disponíveis:**
+- 📊 **Status de envio** para cada contato
+- 👁️ **Mensagens visualizadas**
+- ✅ **Mensagens entregues**
+- ❌ **Falhas de envio**
+- 📥 **Download de relatório CSV completo**
+
+<Frame caption="Página de detalhes da campanha">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/detalhesCamp.png" />
+</Frame>
+
+---
+
+### Relatório CSV
+
+**Informações incluídas no relatório CSV:**
+
+| Campo | Descrição |
+|-------|-----------|
+| `NomePessoa` | Nome do destinatário |
+| `CpfCnpj` | Documento cadastrado (CPF ou CNPJ) |
+| `CodPessoaCliente` | Código identificador interno |
+| `DDDTelefone` | DDD do número de destino |
+| `NumeroTelefone` | Número completo de destino |
+| `EnderecoEmail` | E-mail vinculado ao contato |
+| `DataHoraSolicitacao` | Data/hora da solicitação de envio |
+| `DataHoraEnvio` | Data/hora do processamento |
+| `Mensagem` | Conteúdo da mensagem enviada |
+| `SituacaoEntrega` | Status (enviado, entregue, falha, etc.) |
+
+<Frame caption="Visualização detalhada de contatos">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/destalhesCamp2.png" />
+</Frame>
+
+<Frame caption="Exemplo de planilha CSV exportada">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/Campanhas WhatsApp/Planilha.png" />
+</Frame>
+
+---
+
+### Estatísticas em Tempo Real
+
+O Invenio oferece **gráficos e relatórios** em tempo real para acompanhamento da performance.
+
+**Métricas disponíveis:**
+
+- 📈 **Retornos por hora:** Visualize picos de resposta
+- 🎯 **Eventos relacionados:** IDR, operação, etc.
+- 💬 **Respostas à campanha:** Se protocolo estiver ativado
+
+<Frame caption="Dashboard de estatísticas da campanha">
+  <img src="https://robbublob.blob.core.windows.net/docs/estatisticacamp.jpeg" />
+</Frame>
+
+<Tip>
+**Protocolo de resposta:** Se ativado, você pode identificar quantas pessoas responderam diretamente pelos gráficos.
+</Tip>
+
+---
+
+### Relatórios Complementares
+
+**1. Relatório "Campanhas Realizadas"**
+
+Permite aplicar filtros por:
+- 📂 Segmento
+- 📅 Período
+- 🔍 Critérios específicos
+
+**2. Relatório "Envios Ativos de HSM – WhatsApp Business API"**
+
+- Exibe **todos os disparos HSM** por período
 - Filtragem por segmento, data/hora e template
-- Métricas mais precisas de retorno
+- **Métricas mais precisas** de retorno
 
-No link abaixo, saiba mais sobre relatórios no Invenio Center:
-
-[Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)
-
----
-
-## 🔗 Links e assuntos relacionados  
-
-- [O que é o WhatsApp Business API?](https://docs.robbu.global/docs/center/whatsapp-business-api)  
-- [Importação de Público no Invenio Center](https://docs.robbu.global/docs/center/publico-importacao)  
-- [Criação de Templates no Invenio Center](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)  
-- [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)  
-- [Como alterar a imagem da linha WhatsApp](https://docs.robbu.global/docs/center/como-alterar-imagem-da-linha-whatsapp)  
-- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
-- [Sessão de 24 horas no WhatsApp](https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp)  
+<Note>
+**Relatórios completos:** Consulte [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)
+</Note>
 
 ---
 
-## ⁉️ Perguntas Frequentes (FAQ)  
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card 
+    title="WhatsApp Business API" 
+    icon="code" 
+    href="https://docs.robbu.global/docs/center/whatsapp-business-api"
+  >
+    Entenda a API oficial
+  </Card>
+  
+  <Card 
+    title="Importação de Público" 
+    icon="users" 
+    href="https://docs.robbu.global/docs/center/publico-importacao"
+  >
+    Como importar contatos
+  </Card>
+  
+  <Card 
+    title="Templates WhatsApp" 
+    icon="file-lines" 
+    href="https://docs.robbu.global/docs/center/como-criar-templates-whatsapp"
+  >
+    Criar templates HSM
+  </Card>
+  
+  <Card 
+    title="Relatórios" 
+    icon="chart-line" 
+    href="https://docs.robbu.global/docs/center/relatorios"
+  >
+    Relatórios do Invenio
+  </Card>
+  
+  <Card 
+    title="Alterar Imagem da Linha" 
+    icon="image" 
+    href="https://docs.robbu.global/docs/center/como-alterar-imagem-da-linha-whatsapp"
+  >
+    Personalizar linha WhatsApp
+  </Card>
+  
+  <Card 
+    title="Canais de Atendimento" 
+    icon="comments" 
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Todos os canais disponíveis
+  </Card>
+  
+  <Card 
+    title="Sessão de 24h" 
+    icon="clock" 
+    href="https://docs.robbu.global/docs/live/sessao-de-24horas-no-whatsapp"
+  >
+    Janela de mensagens WhatsApp
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
+  <Accordion title="📱 O que são campanhas de WhatsApp no Invenio Center?">
+    São **envios programados ou em massa** de mensagens via **WhatsApp Business API**, utilizados para comunicação ativa com a base de contatos.
+    
+    **Casos de uso:**
+    - 💰 Cobranças e notificações financeiras
+    - 🎁 Promoções e ofertas
+    - 📢 Notificações importantes
+    - 🎯 Ações de engajamento
+    
+    **Caminho:** Invenio Center > Converter > Campanhas > WhatsApp
+  </Accordion>
 
-  <Accordion title="O que são campanhas de WhatsApp no Invenio Center?">  
-  São envios programados ou em massa de mensagens via **WhatsApp Business API**, <br/>  
-  utilizados para comunicação ativa com a base de contatos. <br/>  
-  Essas campanhas são ideais para notificações, cobranças, promoções e ações de engajamento.  
-  </Accordion>  
+  <Accordion title="✅ É necessário usar templates aprovados pela Meta?">
+    **Sim, obrigatório.**
+    
+    Todas as mensagens de campanhas devem utilizar **templates (HSM)** previamente aprovados pela Meta, conforme as políticas da API oficial do WhatsApp Business.
+    
+    **Por quê:**
+    - 📜 Conformidade com políticas da Meta
+    - 🛡️ Prevenção de spam
+    - ✅ Garantia de qualidade
+    
+    **Como criar:** Consulte [Criação de Templates no Invenio Center](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)
+  </Accordion>
 
-  <Accordion title="É necessário usar templates aprovados pela Meta?">  
-  Sim. <br/>  
-  Todas as mensagens de campanhas devem utilizar **templates (HSM)** previamente aprovados pela Meta, conforme as políticas da API oficial do WhatsApp Business.  
-  </Accordion>  
+  <Accordion title="🎯 Como criar uma campanha de WhatsApp?">
+    **Caminho completo:**
+    
+    **Invenio Center > Converter > Campanhas > WhatsApp > + Criar Campanha**
+    
+    **Passos:**
+    1. Defina **descrição** da campanha
+    2. Selecione **público-alvo** (segmento + público)
+    3. Configure **agendamento** (data/hora)
+    4. Defina **intervalo de envio** (opcional)
+    5. Escolha **número remetente** (Prospect recomendado)
+    6. Selecione **template HSM** aprovado
+    7. Revise e clique **"Iniciar Campanha"**
+  </Accordion>
 
-  <Accordion title="Como criar uma campanha de WhatsApp no Invenio Center?">  
-  Acesse o menu `Invenio Center > Converter > Campanhas > WhatsApp`. <br/>  
-  Em seguida, clique em **+ Criar Campanha** e configure os campos de descrição, público, remetente, agendamento e template.  
-  </Accordion>  
+  <Accordion title="⏰ Como agendar uma campanha para envio futuro?">
+    Durante a configuração da campanha, no campo **"Agendamento"**:
+    
+    1. Marque **"Agendar envio"**
+    2. Defina **data** (ex: 25/12/2024)
+    3. Defina **horário** (ex: 09:00)
+    4. Salve a campanha
+    
+    O sistema realizará automaticamente o envio das mensagens no momento programado.
+    
+    **Benefícios:**
+    - ✅ Envios em horários estratégicos
+    - ✅ Planejamento antecipado
+    - ✅ Execução automática
+  </Accordion>
 
-  <Accordion title="Como agendar uma campanha para envio futuro?">  
-  Durante a configuração, defina a **data e o horário** de início no campo de agendamento. <br/>  
-  O sistema realizará automaticamente o envio das mensagens no momento programado.  
-  </Accordion>  
+  <Accordion title="⏱️ O que significa 'Intervalo de Envio'?">
+    O **intervalo de envio** permite que a campanha seja disparada de forma **gradual**, evitando sobrecarga na linha.
+    
+    **Como funciona:**
+    
+    Divida o envio em **lotes** com **intervalo de tempo** entre eles.
+    
+    **Exemplo:**
+    - Campanha de 10.000 contatos
+    - Configuração: 20% a cada 30 minutos
+    - Resultado:
+      - 09:00 → 2.000 contatos
+      - 09:30 → 2.000 contatos
+      - 10:00 → 2.000 contatos
+      - 10:30 → 2.000 contatos
+      - 11:00 → 2.000 contatos
+    
+    **Benefícios:**
+    - 🛡️ Evita bloqueios por volume
+    - ⚖️ Distribui carga na linha
+    - 📊 Facilita monitoramento
+  </Accordion>
 
-  <Accordion title="O que significa 'Intervalo de Envio'?">  
-  O intervalo de envio permite que a campanha seja disparada de forma **gradual**, <br/>  
-  evitando sobrecarga na linha. <br/>  
-  Exemplo: enviar **20% dos contatos a cada 30 minutos** até completar o envio total.  
-  </Accordion>  
+  <Accordion title="👥 Como tratar contatos que já estão em atendimento?">
+    No campo **"Contatos em Atendimento"**, você pode escolher:
+    
+    **Opção 1: Incluir contatos em atendimento** ✅
+    - Todos os contatos do público receberão a mensagem
+    - Mesmo quem está conversando com operador
+    
+    **Opção 2: Remover contatos em atendimento recente** ❌
+    - Define período (ex: últimas 2 horas)
+    - Contatos que tiveram atendimento nesse período são **excluídos** da campanha
+    
+    **Recomendação:**
+    - Use **Opção 2** para evitar duplicidade de comunicação
+    - Configure período de 1-4 horas conforme operação
+  </Accordion>
 
-  <Accordion title="Como tratar contatos que já estão em atendimento?">  
-  Você pode escolher entre: <br/>  
-  - **Incluir contatos em atendimento** na campanha; ou <br/>  
-  - **Remover contatos em atendimento recente**, definindo o período (ex: últimas 2 horas).  
-  </Accordion>  
+  <Accordion title="📞 O que considerar ao selecionar o número de disparo?">
+    **Escolha estratégica do número:**
+    
+    **Números Prospect (Recomendado)** ✅
+    - Dedicados para campanhas
+    - **Requisito:** Mínimo 3 linhas com boa reputação
+    - **Vantagens:**
+      - Sistema alterna automaticamente entre linhas
+      - Evita sobrecarga
+      - Protege reputação
+      - Garante continuidade
+    
+    **Números Receptivos (Não Recomendado)** ❌
+    - Usados para atendimento
+    - **Problemas:**
+      - Todo envio por 1 único número
+      - Alto risco de sobrecarga
+      - Qualidade pode cair rapidamente
+      - Compromete atendimento
+    
+    **Caminho:** Ao criar campanha, selecione o número no campo "Remetente"
+  </Accordion>
 
-  <Accordion title="O que considerar ao selecionar o número de disparo?">  
-  Escolha um número de envio vinculado ao segmento da campanha. <br/>  
-  O uso de **números receptivos** não é recomendado, pois pode causar sobrecarga e redução da qualidade da linha. <br/>  
-  Campanhas com linhas **Prospect** exigem ao menos 3 linhas ativas com boa reputação.  
-  </Accordion>  
+  <Accordion title="🔄 O que são linhas Prospect e Receptivas?">
+    **Linhas Prospect (Outbound)** 📤
+    - **Uso:** Envio ativo em campanhas
+    - **Volume:** Alto (milhares/dia)
+    - **Recomendação:** 3+ linhas para redundância
+    - **Exemplos:** Promoções, cobranças, notificações
+    
+    **Linhas Receptivas (Inbound)** 📥
+    - **Uso:** Recebem mensagens de clientes
+    - **Volume:** Médio (atendimento)
+    - **Recomendação:** **Não usar para campanhas**
+    - **Exemplos:** Atendimento, suporte, vendas
+    
+    **Por que separar:**
+    - Protege linha de atendimento
+    - Isola risco de bloqueios
+    - Otimiza performance
+    
+    Consulte: [Canal WhatsApp](https://docs.robbu.global/docs/center/canal-whatsapp)
+  </Accordion>
 
-  <Accordion title="O que são linhas Prospect e Receptivas?">  
-  - **Prospect:** usadas para envio ativo em campanhas e recomendadas para alto volume. <br/>  
-  - **Receptivas:** recebem mensagens, mas **não são recomendadas** para disparos, pois podem afetar a reputação da conta.  
-  </Accordion>  
+  <Accordion title="📄 Como selecionar e configurar um template?">
+    **Processo:**
+    
+    1. **Pré-requisito:** Template deve estar **previamente vinculado** às linhas da campanha
+    2. **Selecionar:** Escolha na lista de templates disponíveis
+    3. **Preencher variáveis:** Complete campos dinâmicos (exemplo usando dois asteriscos nome dois asteriscos, exemplo usando dois asteriscos valor dois asteriscos)
+    4. **Adicionar mídias:** Se template incluir imagem/vídeo/documento
+    5. **Pré-visualizar:** Verifique resultado final
+    
+    **Dicas:**
+    - ✅ Teste template antes de campanha grande
+    - ✅ Revise ortografia das variáveis
+    - ✅ Confirme que mídias estão no formato correto
+    
+    **Caminho:** Invenio Center > Recursos > Templates > Gerenciar
+    
+    Consulte: [Criação de Templates](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)
+  </Accordion>
 
-  <Accordion title="Como selecionar e configurar um template?">  
-  Selecione um **template previamente vinculado** às linhas da campanha, <br/>  
-  revise o **preenchimento das variáveis e mídias** antes de iniciar o envio. <br/>  
-  Saiba mais em: [Criação de Templates no Invenio Center](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp).  
-  </Accordion>  
+  <Accordion title="📊 Como acompanho os resultados da campanha?">
+    **Caminho:** Invenio Center > Converter > Campanhas > WhatsApp > Clique na campanha
+    
+    **Informações disponíveis:**
+    
+    **Em tempo real:**
+    - 📊 **Estatísticas:** Taxa de entrega, leitura, resposta
+    - 📈 **Gráficos:** Retornos por hora
+    - 🎯 **Eventos:** IDR, operação, etc.
+    
+    **Relatório CSV:**
+    - 📥 **Download completo:** Todos os contatos
+    - ✅ **Status individual:** Enviado, entregue, lido, falha
+    - 🕒 **Timestamps:** Solicitação e envio
+    
+    **Relatórios complementares:**
+    - "Campanhas Realizadas"
+    - "Envios Ativos de HSM"
+    
+    **Atualização:** Dados são atualizados em tempo real conforme Meta retorna status.
+  </Accordion>
 
-  <Accordion title="Como acompanho os resultados da campanha?">  
-  Após o envio, o Invenio Center exibe **estatísticas em tempo real**, <br/>  
-  incluindo taxas de entrega, leitura, resposta e falhas. <br/>  
-  É possível **baixar relatórios CSV** com detalhes por contato e visualizar gráficos de desempenho por hora e evento.  
-  </Accordion>  
+  <Accordion title="🎯 Posso segmentar o público da campanha?">
+    **Sim!** A segmentação é feita na etapa de seleção de público.
+    
+    **Critérios de segmentação:**
+    - 📂 **Segmento:** Grupos pré-definidos
+    - #️⃣ **Hashtags:** Tags específicas
+    - ✅ **Opt-in:** Apenas quem consentiu
+    - 📍 **Localização:** Cidade, estado
+    - 🎂 **Idade/Gênero:** Dados demográficos
+    - 💰 **Ticket médio:** Valor de compra
+    
+    **Como fazer:**
+    1. Importe público com filtros em **Converter > Público**
+    2. Aplique critérios desejados
+    3. Salve o público segmentado
+    4. Use na criação da campanha
+    
+    Consulte: [Importação de Público](https://docs.robbu.global/docs/center/publico-importacao)
+  </Accordion>
 
-  <Accordion title="Posso segmentar o público da campanha?">  
-  Sim. <br/>  
-  Utilize filtros de **segmento**, **hashtag**, **opt-in** e outras condições para direcionar a campanha a públicos específicos.  
-  </Accordion>  
+  <Accordion title="📈 Quantas mensagens posso enviar por campanha?">
+    O volume permitido depende de:
+    
+    **1. Tier da conta WhatsApp Business**
+    - Tier 1: Até 1.000 mensagens únicas/dia
+    - Tier 2: Até 10.000 mensagens únicas/dia
+    - Tier 3: Até 100.000 mensagens únicas/dia
+    - Tier 4: Unlimited (casos especiais)
+    
+    **2. Reputação da linha**
+    - 🟢 Green: Sem restrições
+    - 🟡 Yellow: Pode ter limites reduzidos
+    - 🔴 Red: Limites muito baixos ou bloqueio
+    
+    **3. Regras da Meta**
+    - Políticas podem mudar
+    - Meta pode aplicar limitações temporárias
+    
+    **Alertas do sistema:**
+    O Invenio emitirá alertas se envio ultrapassar limite permitido.
+    
+    Consulte: [Canal WhatsApp - Limites](https://docs.robbu.global/docs/center/canal-whatsapp)
+  </Accordion>
 
-  <Accordion title="Quantas mensagens posso enviar por campanha?">  
-  O volume permitido depende do **Tier da conta WhatsApp Business**, <br/>  
-  da **reputação da linha** e das **regras vigentes da Meta**. <br/>  
-  O sistema emitirá alertas caso o envio ultrapasse o limite permitido.  
-  </Accordion>  
+  <Accordion title="🔐 O que acontece se um contato não tiver opt-in ativo?">
+    **A campanha não será enviada** para contatos sem opt-in ativo.
+    
+    **Por quê:**
+    - 📜 **LGPD:** Exige consentimento prévio
+    - 📜 **Política da Meta:** Obrigatório para WhatsApp Business API
+    - 🛡️ **Proteção da linha:** Evita denúncias de spam
+    
+    **Como funciona:**
+    1. Sistema verifica opt-in de cada contato
+    2. **Com opt-in:** Mensagem é enviada
+    3. **Sem opt-in:** Contato é **automaticamente excluído** do envio
+    
+    **Como obter opt-in:**
+    - Formulário de cadastro
+    - Resposta "SIM" do cliente
+    - Participação em promoção com termo de aceite
+    
+    **Caminho para verificar:** Invenio Center > Contatos > Editar > Campo "Opt-in WhatsApp"
+  </Accordion>
 
-  <Accordion title="O que acontece se um contato não tiver opt-in ativo?">  
-  A campanha **não será enviada** para contatos sem opt-in ativo. <br/>  
-  Essa restrição segue as diretrizes oficiais da Meta para comunicação via WhatsApp Business.  
-  </Accordion>  
-
-  <Accordion title="Como visualizar relatórios complementares das campanhas?">  
-  Você pode acessar os relatórios **Campanhas Realizadas** e **Envios Ativos de HSM**, <br/>  
-  disponíveis no módulo de relatórios do Invenio Center. <br/>  
-  Saiba mais em: [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios).  
-  </Accordion>  
-
+  <Accordion title="📋 Como visualizar relatórios complementares?">
+    **Caminho:** Invenio Center > Relatórios
+    
+    **Relatório 1: Campanhas Realizadas**
+    - 📊 Visão geral de todas as campanhas
+    - 🔍 Filtros: Segmento, período, status
+    - 📥 Exportação CSV
+    
+    **Relatório 2: Envios Ativos de HSM**
+    - 📡 Todos os disparos HSM por período
+    - 🔍 Filtros: Segmento, data/hora, template
+    - 📊 Métricas detalhadas de retorno
+    - 📈 Taxa de entrega e visualização
+    
+    **Como acessar:**
+    1. Menu lateral > **Relatórios**
+    2. Selecione relatório desejado
+    3. Aplique filtros
+    4. Visualize ou exporte
+    
+    Consulte: [Relatórios no Invenio Center](https://docs.robbu.global/docs/center/relatorios)
+  </Accordion>
 </AccordionGroup>

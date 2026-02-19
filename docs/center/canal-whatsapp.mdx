@@ -1,235 +1,395 @@
 ---
 title: "Canal WhatsApp"
 sidebarTitle: "Canal WhatsApp"
-description: "Informações sobre o uso, integração e boas práticas do canal WhatsApp no Invenio."
+description: "Configure e gerencie o WhatsApp Business API no Invenio: linhas receptivas e prospect, limites de envio, classificação de qualidade e boas práticas."
 ---
 
+O **WhatsApp** é um dos canais mais utilizados para comunicação entre empresas e clientes.
 
-O **WhatsApp** é um dos canais mais utilizados para comunicação entre empresas e clientes, sendo considerado um canal online.
-A integração é realizada pela equipe da Robbu, por meio da API oficial do WhatsApp via Meta Business, e pode ser feita tanto com linhas adquiridas diretamente com a Robbu quanto com números já existentes do cliente.
+A integração é realizada pela equipe da Robbu, por meio da **API oficial do WhatsApp via Meta Business**, e pode ser feita com:
 
-**Vantagens:** alta performance e escalabilidade
+- 📱 **Linhas adquiridas com a Robbu**
+- 🔢 **Números já existentes do cliente**
 
-> ⚠️ **Atenção:** siga as regras da Meta, pois o uso é monitorado constantemente.
+**Vantagens:**
 
-### Como localizar o Canal WhatsApp no ambiente
+- 🚀 **Alta performance:** Suporta alto volume de mensagens
+- 📈 **Escalabilidade:** Cresce conforme demanda
+- ✅ **Confiabilidade:** API oficial da Meta
+- 💬 **Popularidade:** Canal preferido dos brasileiros
 
-Acesse: `Invenio Center > Recursos > Canais > WhatsApp`
-
-[Clique aqui para acessar diretamente o canal WhatsApp no Invenio Center](https://inveniocenter.robbu.com.br/painel/canais/whatsapp)
-
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/painelcanalwhats.png" /> 
-
-
----
-
-##  Envio de Mensagens e Limites
-
-O WhatsApp permite:
-
-- Mensagens de até **60 mil caracteres**
-- Suporte a **diversos tipos de mídias**
-
-###  Tabela de limites por tipo de mídia
-
-| Tipo de mídia | Tamanho máximo | Formatos aceitos (MIME)                              |
-|---------------|----------------|-------------------------------------------------------|
-| Áudio         | 16 MB          | `audio/aac`, `audio/mp4`, `audio/amr`, `audio/mpeg`, `audio/ogg; codecs=opus` |
-| Documento     | 100 MB         | Qualquer formato válido (`application/pdf`, etc.)    |
-| Imagem        | 5 MB           | `image/jpeg`, `image/png`                            |
-| Sticker       | 100 KB         | `image/webp`                                         |
-| Vídeo         | 16 MB          | `video/mp4`, `video/3gpp`                            |
-
-🔗 [Consulte a documentação oficial da Meta](https://developers.facebook.com/docs/whatsapp/on-premises/reference/media)
+<Warning>
+**Atenção:** Siga as **regras da Meta** rigorosamente. O uso é **monitorado constantemente** e violações podem resultar em bloqueios ou banimento.
+</Warning>
 
 ---
 
-##  WABA – WhatsApp Business Account
+## Acessar Canal WhatsApp
 
-**WABA** é a conta comercial usada para gerenciar as linhas vinculadas à Meta.  
-A configuração é feita pela **Robbu**, seguindo as diretrizes da **Meta Business**.
-
->  É possível conectar múltiplas WABAs ao mesmo ambiente Invenio, proporcionando flexibilidade e controle.
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/WABAS.png" /> 
-
----
-
-##  Linhas Receptivas
-
-As **linhas receptivas**:
-
-- Recebem mensagens iniciadas pelos clientes
-- São canais de **entrada essenciais** para manter uma comunicação espontânea e contínua
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/LINHAS.png" />
----
-
-##  Linhas Prospect
-
-As **linhas prospect** são voltadas para campanhas de **envio ativo (Outbound)**.
-
-###  Benefícios
-
-- Preservam as linhas receptivas contra SPAM e bloqueios
-- Se penalizadas, **não afetam a operação principal**
-
->  **Para enviar campanhas com linhas prospect:**
-> - Tenha ao menos **3 linhas ativas** no mesmo segmento
-> - Todas com **boa classificação de qualidade**
-
-###  Aleatorização Inteligente
-
-O sistema alterna entre as linhas ativamente, com isso:
-
-- Evita desgaste concentrado
-- Minimiza riscos de bloqueio
-- Garante continuidade mesmo em caso de queda de qualidade
-
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/PROSPECT.png" />
+<Steps>
+  <Step title="Navegar até canais">
+    No **Invenio Center**, acesse: **Recursos > Canais > WhatsApp**
+    
+    <Tip>
+    **Acesso direto:** [Canal WhatsApp no Invenio Center](https://inveniocenter.robbu.com.br/painel/canais/whatsapp)
+    </Tip>
+    
+    <Frame caption="Painel de configuração do canal WhatsApp no Invenio Center">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/painelcanalwhats.png" />
+    </Frame>
+  </Step>
+</Steps>
 
 ---
 
-##  Limites e Classificações das Linhas
+## Limites de Envio
 
-Na interface do Invenio, é possível acompanhar:
+### Mensagens de Texto
 
--  **Limite de mensagens**
--  **Classificação de qualidade**
+O WhatsApp permite mensagens de até **60.000 caracteres** (aproximadamente 10 páginas de texto).
 
-Ambos são definidos pela Meta com base em:
+### Mídias Suportadas
 
-- Critérios técnicos
-- Engajamento e comportamento dos usuários
+| Tipo de Mídia | Tamanho Máximo | Formatos Aceitos (MIME) |
+|---------------|----------------|-------------------------|
+| 🖼️ **Imagem** | 5 MB | `image/jpeg`, `image/png` |
+| 📄 **Documento** | 100 MB | Qualquer formato válido (`application/pdf`, `application/vnd.ms-excel`, etc.) |
+| 🎵 **Áudio** | 16 MB | `audio/aac`, `audio/mp4`, `audio/amr`, `audio/mpeg`, `audio/ogg; codecs=opus` |
+| 🎥 **Vídeo** | 16 MB | `video/mp4`, `video/3gpp` |
+| 🎨 **Sticker** | 100 KB | `image/webp` |
 
----
+<Note>
+**Importante:** Respeitar esses limites é essencial para garantir o envio correto. Arquivos maiores serão rejeitados pela API.
+</Note>
 
-##  Aumento de Limite
-
-Cada linha começa com **1.000 mensagens/dia**.  
-Com uso responsável, pode alcançar até **100.000 mensagens/dia**.
-
-###  Critérios para aumento automático:
-
-- Linha com status **Conectado**
-- Classificação **Green** ou **Yellow**
-- Pelo menos **50% do limite atual** utilizado nos últimos 7 dias
+**Documentação oficial:** [Meta - Media Types](https://developers.facebook.com/docs/whatsapp/on-premises/reference/media)
 
 ---
 
-##  Redução de Limite
+## WABA (WhatsApp Business Account)
 
-Se a linha tiver classificação **Red** por 7 dias consecutivos, a Meta reduz imediatamente seu limite.
+**WABA** é a **conta comercial** usada para gerenciar as linhas de WhatsApp vinculadas à Meta.
 
----
+**Características:**
 
-##  Classificação de Qualidade
+- 🏢 **Conta empresarial:** Vinculada ao CNPJ da empresa
+- 🔗 **Gerencia múltiplas linhas:** Várias linhas sob uma WABA
+- ⚙️ **Configurada pela Robbu:** Processo de ativação feito pelo time técnico
+- ✅ **Aprovação da Meta:** Requer validação do Meta Business Manager
 
-Avalia a **reputação da linha**, com base em interações dos últimos 7 dias.  
-Atualizada constantemente no Invenio.
+<Note>
+**Flexibilidade:** É possível conectar **múltiplas WABAs** ao mesmo ambiente Invenio, proporcionando controle granular sobre diferentes unidades de negócio ou marcas.
+</Note>
 
-| Status   | Descrição |
-|----------|-----------|
-|  **Green** | Linha saudável, sem restrições |
-|  **Yellow** | Linha em alerta. Pode sofrer restrições. Decorre de denúncias ou bloqueios |
-|  **Red** | Baixa qualidade. Alto risco de banimento |
-
-> ⚠️ O Facebook **não revela** os usuários que bloquearam ou denunciaram a linha.
-
- [Mais informações na documentação oficial da Meta](https://www.facebook.com/business/help/896873687365001)
-
-![Qualidade da linha](https://robbublob.blob.core.windows.net/docs/statuslinha.png)
+<Frame caption="Visualização de WABAs conectadas no Invenio Center">
+  <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/WABAS.png" />
+</Frame>
 
 ---
 
-##  Boas Práticas para Manter a Qualidade
+## Tipos de Linhas
 
-Para garantir uma boa reputação:
+<Tabs>
+  <Tab title="Linhas Receptivas" icon="inbox">
+    ### Linhas Receptivas (Inbound)
+    
+    As **linhas receptivas** são destinadas a **receber mensagens** iniciadas pelos clientes.
+    
+    **Características:**
+    
+    - 📥 **Inbound:** Cliente inicia a conversa
+    - 💬 **Comunicação espontânea:** Atendimento de dúvidas, suporte, vendas
+    - 🔒 **Protegidas:** Não devem ser usadas para campanhas em massa
+    - ✅ **Resposta livre:** Após cliente enviar mensagem, pode responder livremente por 24h
+    
+    **Uso recomendado:**
+    
+    - ✅ Atendimento ao cliente
+    - ✅ Suporte técnico
+    - ✅ Vendas consultivas
+    - ✅ Relacionamento contínuo
+    
+    <Frame caption="Gerenciamento de linhas receptivas no Invenio Center">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/LINHAS.png" />
+    </Frame>
+    
+    <Check>
+    **Boa prática:** Mantenha linhas receptivas **exclusivas** para atendimento. Não as use para campanhas outbound.
+    </Check>
+  </Tab>
+  
+  <Tab title="Linhas Prospect" icon="bullhorn">
+    ### Linhas Prospect (Outbound)
+    
+    As **linhas prospect** são voltadas para **campanhas de envio ativo** (Outbound).
+    
+    **Benefícios:**
+    
+    - 🛡️ **Protegem linhas receptivas:** Isolam risco de SPAM e bloqueios
+    - 📊 **Dedicadas a campanhas:** Envio em massa com templates HSM
+    - 🔄 **Se penalizadas, não afetam operação principal:** Continuidade do atendimento
+    
+    <Warning>
+    **Para enviar campanhas com linhas prospect:**
+    
+    - ✅ Tenha ao menos **3 linhas ativas** no mesmo segmento
+    - ✅ Todas com **boa classificação de qualidade** (Green ou Yellow)
+    - ✅ **Opt-in** dos contatos (consentimento prévio)
+    </Warning>
+    
+    ### Aleatorização Inteligente
+    
+    O sistema do Invenio **alterna automaticamente** entre as linhas prospect durante os envios, distribuindo o volume de forma equilibrada.
+    
+    **Benefícios:**
+    
+    - ⚖️ Evita desgaste concentrado
+    - 🛡️ Minimiza riscos de bloqueio
+    - ✅ Garante continuidade operacional
+    
+    <Frame caption="Configuração de linhas prospect com aleatorização inteligente">
+      <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/canais/PROSPECT.png" />
+    </Frame>
+  </Tab>
+</Tabs>
 
-- Siga a [Política do WhatsApp Business](https://business.whatsapp.com/policy)
+---
+
+## Classificação de Qualidade
+
+A **classificação de qualidade** avalia a **reputação da linha**, com base nas interações dos **últimos 7 dias**.
+
+| Status | Descrição | Ação Recomendada |
+|--------|-----------|-----------------|
+| 🟢 **Green** | Linha saudável, sem restrições | Continue com boas práticas |
+| 🟡 **Yellow** | Linha em alerta. Pode sofrer restrições | Revise conteúdo, reduza volume |
+| 🔴 **Red** | Baixa qualidade. Alto risco de banimento | **Pare envios imediatamente** |
+
+<Warning>
+**Privacidade:** A Meta **não revela** quais usuários bloquearam ou denunciaram a linha. Você só vê o status agregado.
+</Warning>
+
+<Frame caption="Monitoramento de qualidade da linha no dashboard">
+  <img src="https://robbublob.blob.core.windows.net/docs/statuslinha.png" />
+</Frame>
+
+**Documentação oficial:** [Meta - Phone Number Quality Rating](https://www.facebook.com/business/help/896873687365001)
+
+---
+
+## Limites de Mensagens
+
+Cada linha começa com **1.000 mensagens/dia** e pode alcançar até **100.000 mensagens/dia** (ou mais).
+
+### Aumento Automático
+
+**Critérios para aumento pela Meta:**
+
+- ✅ Linha com status **"Conectado"**
+- ✅ Classificação **Green** ou **Yellow**
+- ✅ Uso de pelo menos **50% do limite atual** nos **últimos 7 dias**
+
+<Tip>
+**Progressão típica:** 1.000 → 10.000 → 100.000 mensagens/dia
+</Tip>
+
+### Redução de Limite
+
+<Warning>
+Se a linha tiver classificação **Red** por **7 dias consecutivos**, a Meta **reduz imediatamente** o limite. A redução pode ser drástica (ex: de 100.000 para 1.000 mensagens/dia).
+</Warning>
+
+---
+
+## Boas Práticas
+
+Para garantir **boa reputação** e **evitar bloqueios**:
+
+**1. Consentimento (Opt-in)** ✅
 - Envie mensagens **somente para contatos que consentiram**
-- Personalize o conteúdo e evite mensagens genéricas
-- Evite excesso de mensagens
-- Controle a frequência dos envios com foco em **relevância e clareza**
+- Mantenha registro de opt-in
+
+**2. Personalização** 🎯
+- Personalize o conteúdo (use variáveis do template)
+- Evite mensagens genéricas
+
+**3. Relevância** 💡
+- Envie apenas conteúdo **relevante**
+- Evite spam
+
+**4. Frequência Controlada** ⏱️
+- Controle a frequência dos envios
+- Máximo 1-2 mensagens/semana por contato (ideal)
+
+**5. Resposta Rápida** ⚡
+- Responda rapidamente quando cliente retornar
+- Demonstra engajamento genuíno
+
+**6. Opt-out Fácil** 🚪
+- Permita que cliente cancele facilmente
+- Honre solicitações imediatamente
+
+**7. Conformidade** 📜
+- Siga a [Política do WhatsApp Business](https://business.whatsapp.com/policy)
+- Respeite a LGPD
+
+<Check>
+**Regra de ouro:** Trate cada mensagem como se fosse para você. Se você não gostaria de receber, não envie.
+</Check>
 
 ---
 
-## 🔗 Links e assuntos relacionados  
+## Links Relacionados
 
-- [Canais de Atendimento no Invenio Center](https://docs.robbu.global/docs/center/canais-atendimento)  
-- [Canal WhatsApp no Invenio Center](https://docs.robbu.global/docs/center/canal-whatsapp)  
-- [Campanhas de WhatsApp](https://docs.robbu.global/docs/center/campanhas-de-whatsapp)  
-- [Como Criar Templates no WhatsApp](https://docs.robbu.global/docs/center/como-criar-templates-whatsapp)  
-- [WhatsApp Business API](https://docs.robbu.global/docs/center/whatsapp-business-api)  
-- [Filtro por Canal no Invenio Live](https://docs.robbu.global/docs/live/filtro-por-canal)  
-- [Adicionar Canal no Invenio Live](https://docs.robbu.global/docs/live/adicionar-canal-invenio-live)  
+<CardGroup cols={2}>
+  <Card 
+    title="Canais de Atendimento" 
+    icon="comments" 
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Visão geral de todos os canais
+  </Card>
+  
+  <Card 
+    title="Campanhas de WhatsApp" 
+    icon="bullhorn" 
+    href="https://docs.robbu.global/docs/center/campanhas-de-whatsapp"
+  >
+    Como criar campanhas
+  </Card>
+  
+  <Card 
+    title="Templates WhatsApp (HSM)" 
+    icon="file-lines" 
+    href="https://docs.robbu.global/docs/center/como-criar-templates-whatsapp"
+  >
+    Como criar templates aprovados
+  </Card>
+  
+  <Card 
+    title="WhatsApp Business API" 
+    icon="code" 
+    href="https://docs.robbu.global/docs/center/whatsapp-business-api"
+  >
+    Documentação da API
+  </Card>
+</CardGroup>
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
 <AccordionGroup>
-  <Accordion title="Posso usar um número de WhatsApp já existente da minha empresa?">
-    Sim. O Invenio permite integrar **números existentes do cliente** ou **linhas adquiridas diretamente com a Robbu**, desde que estejam vinculados à conta comercial (WABA) aprovada pela Meta.
+  <Accordion title="📱 Posso usar um número de WhatsApp já existente da minha empresa?">
+    **Sim!** O Invenio permite integrar **números existentes** do cliente ou **linhas adquiridas com a Robbu**.
+    
+    **Requisitos:**
+    - ✅ Número disponível (não pode estar no WhatsApp Business app comum)
+    - ✅ Aprovação da Meta via WABA
+    - ✅ Processo de verificação
+    
+    **Caminho:** Entre em contato com **suporte@robbu.global** ou seu gerente de conta para iniciar a migração.
   </Accordion>
 
-  <Accordion title="Qual é o tamanho máximo das mídias que posso enviar?">
-    O limite depende do tipo de mídia:
-    - **Imagens:** até 5 MB  
-    - **Áudios/Vídeos:** até 16 MB  
-    - **Documentos:** até 100 MB  
-    - **Stickers:** até 100 KB  
-    Respeitar esses limites é essencial para garantir o envio correto.
+  <Accordion title="📊 Qual o tamanho máximo das mídias que posso enviar?">
+    **Limites por tipo:**
+    - 🖼️ **Imagens:** 5 MB
+    - 📄 **Documentos:** 100 MB
+    - 🎵 **Áudios:** 16 MB
+    - 🎥 **Vídeos:** 16 MB
+    - 🎨 **Stickers:** 100 KB
+    
+    Arquivos que excederem esses limites serão rejeitados pela API.
   </Accordion>
 
-  <Accordion title="O que é a WABA e por que ela é necessária?">
-    A **WABA (WhatsApp Business Account)** é a conta comercial vinculada à Meta, utilizada para autenticar e gerenciar suas linhas de WhatsApp.  
-    Toda integração com o Invenio precisa estar associada a uma WABA ativa e configurada pela equipe da Robbu.
+  <Accordion title="🏢 O que é a WABA e por que é necessária?">
+    **WABA (WhatsApp Business Account)** é a conta comercial vinculada à Meta para autenticar e gerenciar linhas de WhatsApp.
+    
+    **É necessária porque:**
+    - ✅ WhatsApp Business API exige WABA
+    - ✅ Permite gerenciar múltiplas linhas
+    - ✅ Garante conformidade com políticas da Meta
+    
+    A configuração é feita pela equipe Robbu.
   </Accordion>
 
-  <Accordion title="Qual a diferença entre linha receptiva e linha prospect?">
-    - **Linha Receptiva:** recebe mensagens iniciadas pelos clientes (Inbound).  
-    - **Linha Prospect:** usada para campanhas de envio ativo (Outbound).  
-    Essa separação ajuda a preservar a reputação das linhas principais.
+  <Accordion title="🔄 Qual a diferença entre linha receptiva e prospect?">
+    **Linha Receptiva (Inbound):**
+    - Cliente inicia o contato
+    - Uso: Atendimento, suporte
+    - Baixo risco de bloqueio
+    
+    **Linha Prospect (Outbound):**
+    - Empresa inicia o contato
+    - Uso: Campanhas, notificações
+    - Requer templates HSM aprovados
+    - Protege linha receptiva de bloqueios
+    
+    **Caminho para configurar:** Invenio Center > Recursos > Canais > WhatsApp > Gerenciar Linhas
   </Accordion>
 
-  <Accordion title="Como funciona a aleatorização inteligente de linhas prospect?">
-    O sistema distribui os envios entre múltiplas linhas automaticamente, evitando sobrecarga e reduzindo o risco de bloqueio.  
-    Assim, se uma linha sofrer penalização, a operação continua normalmente pelas demais.
+  <Accordion title="🔀 Como funciona a aleatorização inteligente?">
+    O sistema do Invenio **distribui automaticamente** os envios entre múltiplas linhas prospect.
+    
+    **Benefícios:**
+    - Evita sobrecarga de uma única linha
+    - Minimiza bloqueios
+    - Se uma linha cai, outras continuam
+    
+    **Requisito:** Mínimo de 3 linhas prospect ativas.
   </Accordion>
 
-  <Accordion title="Por que o limite de mensagens da minha linha diminuiu?">
-    Quando a **classificação da linha** cai para **Red (vermelha)** e permanece assim por 7 dias consecutivos, a Meta reduz automaticamente o limite diário de disparos.
+  <Accordion title="📉 Por que o limite da minha linha diminuiu?">
+    **Causa:** Classificação **Red** por **7 dias consecutivos**.
+    
+    **Como evitar:**
+    - Monitore a classificação diariamente
+    - Ao ver Yellow, reduza volume imediatamente
+    - Ao ver Red, pare envios e revise estratégia
+    
+    **Caminho para monitorar:** Invenio Center > Recursos > Canais > WhatsApp > Ver classificação de cada linha
   </Accordion>
 
-  <Accordion title="Como posso aumentar o limite diário de mensagens?">
-    O aumento é feito automaticamente pela Meta quando:
-    - A linha está **conectada e ativa**  
-    - Possui classificação **Green** ou **Yellow**  
-    - Utiliza **pelo menos 50% do limite atual** nos últimos 7 dias
+  <Accordion title="📈 Como aumentar o limite diário?">
+    O aumento é **automático** quando você demonstra uso responsável:
+    
+    **Critérios:**
+    - Status: Conectado
+    - Qualidade: Green ou Yellow
+    - Uso: 50%+ do limite nos últimos 7 dias
+    
+    **Tempo:** 7-14 dias por nível (1k → 10k → 100k)
   </Accordion>
 
-  <Accordion title="O que significa a classificação Green, Yellow e Red?">
-    - **Green:** linha saudável, sem restrições.  
-    - **Yellow:** linha em alerta — pode ter denúncias recentes.  
-    - **Red:** linha com baixa qualidade, sujeita a bloqueios.  
-    Essas classificações são atualizadas automaticamente conforme o desempenho da linha.
+  <Accordion title="🟢🟡🔴 O que significa Green, Yellow e Red?">
+    **🟢 Green:** Linha saudável, sem restrições
+    
+    **🟡 Yellow:** Em alerta, pode sofrer restrições. Ação: Revise conteúdo e reduza volume.
+    
+    **🔴 Red:** Baixa qualidade, alto risco. Ação: **Pare envios imediatamente** e revise estratégia.
+    
+    Baseado em: bloqueios, denúncias e engajamento dos últimos 7 dias.
+    
+    **Caminho:** Invenio Center > Recursos > Canais > WhatsApp > Coluna "Qualidade"
   </Accordion>
 
-  <Accordion title="Posso ver quem denunciou ou bloqueou minha linha?">
-    Não. Por questões de privacidade, a Meta **não informa** quais usuários realizaram bloqueios ou denúncias.
+  <Accordion title="🔒 Posso ver quem bloqueou minha linha?">
+    **Não.** Por privacidade, a Meta **não informa** usuários específicos que bloquearam ou denunciaram.
+    
+    Você vê apenas o **status agregado** (Green/Yellow/Red) e tendências gerais no Meta Business Manager.
   </Accordion>
 
-  <Accordion title="Quais são as boas práticas para manter a qualidade da linha?">
-    - Envie mensagens apenas para contatos com **consentimento prévio**  
-    - Personalize o conteúdo e evite mensagens repetitivas  
-    - Respeite o intervalo entre envios  
-    - Siga sempre a [Política do WhatsApp Business](https://business.whatsapp.com/policy)
+  <Accordion title="✅ Quais as boas práticas essenciais?">
+    **Top 7 práticas:**
+    
+    1. **Opt-in obrigatório:** Só envie para quem consentiu
+    2. **Personalização:** Use variáveis dos templates
+    3. **Relevância:** Conteúdo útil para o destinatário
+    4. **Frequência:** Máximo 1-2 mensagens/semana
+    5. **Resposta rápida:** Atenda retornos em até 5 minutos
+    6. **Opt-out fácil:** Permita cancelamento simples
+    7. **Conformidade:** Siga LGPD e políticas do WhatsApp
+    
+    **Regra de ouro:** Se você não gostaria de receber, não envie!
   </Accordion>
 </AccordionGroup>
-
-
- 
-
