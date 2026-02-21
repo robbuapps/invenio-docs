@@ -1,97 +1,277 @@
 ---
 title: "Integração de Páginas"
 sidebarTitle: "Integração de Páginas"
-description: "Aprenda a configurar páginas integradas no Invenio Center e Live, utilizando links, targets e ações para melhorar seus atendimentos."
+description: "A funcionalidade de Integração de Páginas é configurada dentro do Invenio Center para ser utilizada no Invenio Live, com o objetivo de facilitar consultas
+e retornos de informações no dia a dia do usuário, garantindo mais praticidade no atendimento."
 ---
 
-##  Integração de Páginas
-
-Aqui você encontrará informações valiosas para facilitar suas consultas e retornos de informações no dia a dia. Aprenda a integrar páginas de forma simples e prática no **Invenio Center** e **Invenio Live**, aproveitando ao máximo as funcionalidades disponíveis.
-
----
 
 ###  Como Acessar
 
-1. Acesse o **Invenio Center**
-2. Clique na imagem do seu usuário
-3. Vá até **Configurações**
+- Acesse o **Invenio Center**
+- Clique na imagem do seu usuário, localizada no canto superior direito.
+- Vá até **Configurações**
+- Em seguida, selecione **Integração de Páginas** e clique na opção **Gerenciar**.
 
-> <img
->   src="https://robbublob.blob.core.windows.net/docs/configuracoes.png"
->   alt="configurações"
->   style={{ width:"100%" }}
->   title="Configurações"
-> />
+[Acesso direto - Integração de Páginas](https://inveniocenter.robbu.global/painel/configuracoes/paginas)
 
-> <img
->   src="https://robbublob.blob.core.windows.net/docs/integracaopaginas.png"
->   alt="integração paginas"
->   style={{ width:"55%" }}
-> />
+<img src="https://storage.robbu.global/v2/file/B30B71D21AB26900BFA7648B3A17E2E7" /> 
+<img src="https://storage.robbu.global/v2/file/A3331E95EEDEC9C73B4782558C4DD790" /> 
+
+Ao acessar o painel de Páginas Integradas, você terá acesso a todas as integrações atualmente configuradas. 
+Cada página integrada é apresentada com os seguintes campos: 
+
+
+- Título do botão 
+
+ 
+
+- Target 
+
+ 
+
+- Chamada URL 
+
+
+### Remoção de uma integração
+Para **excluir** uma integração, clique no ícone de  três pontos à direita da linha correspondente. Um menu lateral será exibido contendo a opção **Deletar**. 
+
+<img src="https://storage.robbu.global/v2/file/A3331E95EEDEC9C7545F7A46FB721CAE" /> 
+
+Para criar ou excluir integrações de páginas, o usuário precisa pertencer aos perfis **Supervisor** ou **Administrador** e possuir as permissões específicas de acesso configuradas em Permissões de Páginas.
+Se o usuário não visualizar o menu Integração de Páginas ou não tiver acesso às opções de criação e exclusão, é possível que a permissão correspondente esteja desativada. Para habilitá-la, siga o caminho:
+
+`Invenio Center > Usuários > Editar usuário > Permissões de Páginas`
+
+[Acesso direto - Usuários - Invenio Center](https://inveniocenter.robbu.global/painel/usuarios)
+
+<img src="https://storage.robbu.global/v2/file/A3331E95EEDEC9C74CEC1CCFE9269945" /> 
+
+<img src="https://storage.robbu.global/v2/file/B30B71D21AB269002AC7600CBE554DC3" /> 
+
+Em seguida, localize a seção **Integrações de Páginas**.
+Ative ou desative as permissões necessárias, entre elas:
+
+- Visualizar
+- Criar
+- Excluir
+
+Após realizar os ajustes, clique em Salvar para aplicar as alterações.
+
+
+
+<img src="https://storage.robbu.global/v2/file/038A0D2C5F1305F8C2A4A59E9C1FE6C4" /> 
+
+
+>**Observação importante:**<br/> 
+>Atualmente, não é possível editar uma integração de páginas após a sua criação. Caso seja necessário realizar qualquer alteração, basta excluir a integração existente e então recriá-la com as configurações desejadas. 
+
+
+---
+
+## Acesso ao recurso
+
+
+Todos os usuários dos grupos de acesso **Administrador**, **Supervisor** e **Atendente** podem visualizar as páginas integradas através do **Invenio Live**. 
+Para isso, siga os passos abaixo: 
+
+- Acesse a conversa de um determinado contato
+- Selecione o ícone de engrenagem (Localizado no canto superior direito do Invenio Live)
+- Abaixo da seção de Manutenção de Canais, serão exibidas todas as **Integrações de Páginas** criadas, listadas conforme os nomes definidos pelos usuários durante a configuração.
+
+<img src="https://storage.robbu.global/v2/file/B30B71D21AB2690011D3B16660FEEFDD" /> 
+<img src="https://storage.robbu.global/v2/file/B30B71D21AB2690069409587C8BE2335" /> 
+
+> **Exemplo:** Modelo do site de consulta de CPF da Receita Federal aberto diretamente no recurso em tela.
+
+<img src="https://storage.robbu.global/v2/file/9A2714A28E55FAD44DD096AECCCB0F78" /> 
 
 ---
 
 ###  Como Criar uma Página Integrada
 
-Ao clicar em **“Adicionar página”**, preencha os seguintes campos:
+Após acessar o painel de Integração de Páginas, clique no botão **Adicionar página**. Em seguida, será exibido um formulário no qual você poderá configurar todas as informações necessárias para a criação da nova página integrada. Os campos disponíveis são:
+Título do botão: Nome que será exibido tanto no Invenio Center quanto no Invenio Live. Recomenda-se utilizar títulos curtos e intuitivos para facilitar a usabilidade no dia a dia operacional.
 
-####  Título do botão
+**Target:** Define o comportamento de abertura da página. Estão disponíveis três opções:
 
-É o nome que será exibido no **Invenio Center** e no **Invenio Live**.
 
-####  Target (comportamento da página)
+          **_blank:** Abre o link ou o resultado do formulário em uma nova aba ou janela do navegador.
+          Exemplo: Durante o atendimento, é possível abrir os dados do CRM em outra aba sem sair da tela atual do Invenio Live.
 
-Três opções disponíveis:
 
-- `_blank`: Abre o link ou resultado em uma nova aba ou janela.\
-  **Exemplo**: Você quer consultar o CRM sem sair do atendimento no Invenio Live? Use `_blank` para abrir a página em outra aba e manter o atendimento atual.
-- `_self`: Substitui a aba/página atual pelo conteúdo do link.\
-  **Exemplo**: O cliente precisa de uma documentação? Use `_self` para mostrar a documentação diretamente na mesma aba.
+          **_self:** Abre o link ou conteúdo na mesma aba, substituindo a visualização anterior.
+          > **Exemplo:** Pode ser utilizado para abrir uma documentação solicitada durante o atendimento, mantendo tudo em uma única aba.
 
-####  Action
 
-A ação define o destino ou comportamento do link, geralmente usado com formulários:
+          **action:** Define como os dados devem ser processados ou para onde devem ser enviados, sendo utilizado especialmente em formulários ou frameworks.
+          > **Exemplos:** <br/>
+          > – Em formulários HTML, determina o destino de envio dos dados.<br/>
+          > – Em frameworks MVC, direciona para métodos responsáveis por processar as solicitações.
 
-- **Formulários HTML**: Define o destino dos dados enviados.
-- **Frameworks MVC**: Aponta para métodos de backend que processam dados.
-- **Chamada URL**: Link direto para consulta externa.\
-  **Exemplo**: `https://robbu.global/docs/faq-perguntas-frequentes/`
-> ![add pagina](https://robbublob.blob.core.windows.net/docs/addpagina.png)
+
+**Chamada URL:** Endereço que será requisitado ou consultado ao acionar o botão.
+
+<img src="https://storage.robbu.global/v2/file/B30B71D21AB26900EF1A1884094008F3" /> 
+
+
 ---
 
-###  Como testar o link após a criação?
+###  Testando o link após criar uma página integrada
 
-Você pode validar o link de duas formas:
+Após criar a página integrada, você pode testá-la de duas formas:
 
-1. **No Invenio Center**\
-   Clique diretamente na coluna **Chamada URL**.
+### Pelo painel do Invenio Center:
 
-> ![add pagina](https://robbublob.blob.core.windows.net/docs/minhapagina.png)
+Clique diretamente sobre o link exibido na coluna Chamada URL.
 
-2. **No Invenio Live**\
-   Acesse um contato → vá para **Configurações**\
-   O link será exibido após “Manutenção de canais”.
 
-   > ![links paginas](https://robbublob.blob.core.windows.net/docs/linkspaginas.png)
+### Pelo Invenio Live:
+
+Acesse o recurso seguindo os passos já mencionados anteriormente em **Acesso ao Recurso**  e localize a integração criada, utilizando o título definido no momento da sua criação.
+
+
+---
+
+## Restrições de segurança ao utilizar URLs externas em iframes
+
+Ao configurar uma nova Página Integrada utilizando o target **_self** ou **_blank**, é importante considerar que alguns sites, como o Google, possuem políticas de segurança que impedem o carregamento do conteúdo dentro de um `<iframe>`.
+
+
+
+### Sobre o erro “Refused to display… in a frame”
+
+Esse erro pode ocorrer ao tentar carregar uma URL como `https://www.google.com/` dentro de um iframe. A mensagem exibida pelo navegador é:
+
+`Refused to display 'https://www.google.com/' in a frame because it set 'X-Frame-Options' to 'sameorigin'.`
+
+
+### O que isso significa
+
+O servidor de destino define que a página só pode ser carregada em um iframe quando estiver no mesmo domínio de origem. Essa regra é controlada pelo cabeçalho de segurança **X-Frame-Options**.
+
+---
+
+### Valores comuns de X-Frame-Options
+
+| Valor            | Comportamento                                                        |
+|------------------|----------------------------------------------------------------------|
+| **DENY**         | Bloqueia totalmente o carregamento em iframes.                       |
+| **SAMEORIGIN**   | Permite apenas se o iframe estiver hospedado no mesmo domínio.       |
+| **ALLOW-FROM**   | Permite o carregamento a partir de um domínio específico. Suporte limitado. |
+
+> No caso do Google, o valor utilizado é **SAMEORIGIN**, o que impede a exibição do site dentro do Invenio Live.
+
+---
+
+## Alternativas recomendadas
+
+Para garantir o funcionamento da integração, considere as opções abaixo:
+
+### window.open()
+Configure a URL para abrir em uma nova aba do navegador utilizando target **_blank**.
+
+### APIs oficiais
+Para consultas específicas, como mapas ou buscas, utilize APIs disponibilizadas pelo próprio serviço.
+
+### Proxy backend
+O servidor pode consumir os dados e exibir uma versão tratada da informação, desde que as permissões sejam respeitadas.
+
+### Serviços alternativos
+Dê preferência a URLs que permitam embutimento e sejam compatíveis com carregamento via iframe.
+
+---
+
+## Exemplos
+
+### Exemplo que não funciona
+
+
+`https://www.google.com/</iframe> <!-- Bloqueado -->`
+
+### Exemplo funcional abrindo em nova aba
+
+`<a href="https://www.google.com/" target="_blank">Abrir Google</a>`
+
+---
+
+## 🔗 Links e assuntos relacionados
+
+- [Configurações gerais da conta - Invenio Center](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)  
+- [Usuários - Invenio Center](https://docs.robbu.global/docs/center/usuarios)
+  
+
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
-<AccordionGroup>
-  <Accordion title="Posso usar qualquer link na integração de páginas?">
-    Sim, desde que o link esteja acessível externamente e utilize HTTPS para segurança. Verifique também se a página de destino permite abertura em iframe, se aplicável.
-  </Accordion>
-  <Accordion title="Qual a diferença prática entre _blank e _self?">
-    \_blank mantém a aba original aberta e cria uma nova com o link, ideal para não interromper o atendimento. Já \_self substitui o conteúdo da aba atual, útil para redirecionamentos simples.
-  </Accordion>
-  <Accordion title="É possível editar uma página integrada após a criação?">
-    Sim. Basta acessar as configurações, localizar a página e clicar no botão de edição. Você pode alterar qualquer campo, incluindo título, target e URL.
-  </Accordion>
-  <Accordion title="A funcionalidade funciona em dispositivos móveis?">
-    Sim, porém o comportamento do target pode variar dependendo do navegador e sistema operacional. Recomenda-se testar nos principais dispositivos utilizados por sua equipe.
-  </Accordion>
-  <Accordion title="Quantas páginas posso integrar no ambiente?">
-    Não há um limite técnico documentado, mas é recomendável manter uma organização lógica e nomeações claras para facilitar o uso no dia a dia.
-  </Accordion>
-</AccordionGroup>
+<Accordion title="O que é a Integração de Páginas?">
+
+É uma funcionalidade do Invenio Center que permite cadastrar links e sistemas externos para serem acessados diretamente de dentro do Invenio Live, facilitando consultas a CRMs, documentações ou sistemas próprios durante o atendimento.
+
+</Accordion>
+
+<Accordion title="Como acesso a configuração de Integração de Páginas?">
+
+Acesse pelo caminho:
+
+Menu do usuário (canto superior direito) >> Configurações >> Integração de Páginas >> Gerenciar
+
+Você também pode utilizar o link direto do painel.
+
+</Accordion>
+
+<Accordion title="Quais são os tipos de 'Target' disponíveis na criação?">
+
+O Target define como a página será aberta:
+
+_blank: Abre o link em uma nova aba do navegador.
+
+_self: Abre o conteúdo dentro da mesma aba (substituindo a visão atual ou em um frame).
+
+action: Utilizado para processar dados em formulários ou métodos de frameworks MVC.
+
+</Accordion>
+
+<Accordion title="O que são iframes?">
+
+Um iframe (abreviação de inline frame) é um elemento HTML que permite carregar uma página dentro de outra página. Na prática, ele funciona como uma “janela” dentro do site atual, exibindo o conteúdo de outra URL.
+
+</Accordion>
+
+<Accordion title="Por que alguns sites (como o Google) não carregam dentro da integração?">
+
+Isso ocorre devido a políticas de segurança como o cabeçalho X-Frame-Options: SAMEORIGIN. Sites com essa configuração bloqueiam a exibição dentro de iframes para evitar ataques.
+
+Solução: Nestes casos, configure o Target como _blank para abrir o site em uma nova aba.
+
+</Accordion>
+
+<Accordion title="Posso editar uma integração de página já criada?">
+
+Atualmente, não é possível editar uma integração após a sua criação. Caso precise alterar o título, URL ou target, você deve excluir a integração existente e criá-la novamente com os novos dados.
+
+</Accordion>
+
+<Accordion title="Como excluir uma integração?">
+
+No painel de Integração de Páginas, clique no ícone de três pontos à direita da linha desejada e selecione a opção Deletar.
+
+</Accordion>
+
+<Accordion title="Quais permissões são necessárias para gerenciar as páginas?">
+
+O usuário deve ser Supervisor ou Administrador. Além disso, as permissões específicas devem estar ativas em:
+
+Invenio Center >> Usuários >> Editar usuário >> Permissões de Páginas
+
+Lá é possível habilitar individualmente as opções de Visualizar, Criar e Excluir.
+
+</Accordion>
+
+<Accordion title="Onde os atendentes visualizam essas páginas no dia a dia?">
+
+No Invenio Live, dentro de uma conversa ativa, basta clicar no ícone de engrenagem (canto superior direito). As páginas integradas estarão listadas logo abaixo da seção de Manutenção de Canais.
+
+</Accordion>
