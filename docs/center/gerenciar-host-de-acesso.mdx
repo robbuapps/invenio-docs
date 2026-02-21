@@ -4,62 +4,55 @@ sidebarTitle: "Gerenciar Host de Acesso"
 description: "Aprenda como controlar IPs e domínios permitidos para acesso externo no Invenio Center/Live, garantindo segurança e conformidade."
 ---
 
-##  Gerenciar Host de Acesso
-
-Seja bem-vindo ao guia de controle de acessos de IP no **Invenio Center/Live**!  
-Este documento irá te ajudar a **gerenciar os IPs e domínios permitidos** para acesso externo e garantir a segurança da sua empresa.
+Aprenda como gerenciar os IPs e domínios autorizados para acesso externo no **Invenio Center e Invenio Live**, garantindo mais segurança e conformidade para sua empresa. 
+Este guia foi desenvolvido para te orientar no controle de permissões e assegurar que somente conexões confiáveis tenham acesso ao ambiente. 
 
 ---
+
+<Tip>
+    **Acesso direto:** [Pausas de Atendimento](https://inveniocenter.robbu.com.br/painel/configuracoes/hosts)
+    </Tip>
 
 ##  Passo a passo para cadastrar IPs e domínios
 
-1. Acesse as **Configurações** do Center.  
-   ![Configurações do Center](https://robbublob.blob.core.windows.net/docs/configuracoes.png)
+1. Acesse o **Invenio Center**.
+2. Clique sobre o **seu perfil** no canto superior direito da tela.
+3. No menu suspenso, selecione **"Configurações"**.
 
-2. Selecione a opção **"Gerenciar Hosts de Acesso"**.  
-   ![Gerenciar Hosts de Acesso](https://robbublob.blob.core.windows.net/docs/hostacesso.png)
+> <img src="https://storage.robbu.global/v2/file/F41EEE2A6C893836FFFFD0B89A783AE0" />
 
-3. Adicione os **IPs e domínios** que deseja permitir o acesso externo.  
-   ![Cadastro de IPs e domínios](https://robbublob.blob.core.windows.net/docs/Ips.png)
+4. Selecione a opção **Gerenciar Hosts de Acesso**.  
 
->  Após adicionar, clique em **Salvar** para aplicar as alterações.
+> <img src="https://storage.robbu.global/v2/file/F41EEE2A6C893836416374F201CC420E" />
+   
+5. Adicione os **IPs e domínios** que deseja permitir o acesso externo. 
+
+> <img src="https://storage.robbu.global/v2/file/E405EF9711C4B014BB5585A2654750EA" />
+
+6. Após adicionar, clique em **Criar** para aplicar as alterações.
 
 ---
 
-##  Garantindo o Acesso Externo
+##  Configuração do Acesso Externo
 
-Para garantir que um usuário possa acessar o Invenio de fora da rede configurada:
+Para garantir que um usuário não acesse o Invenio de fora da rede configurada:
 
-1. **Verifique se o IP do usuário está cadastrado** em “Gerenciar Hosts de Acesso”.
+1. Certifique-se de que o IP do usuário está cadastrado em **Gerenciar Hosts de Acesso**.
 
-2. **Habilite a opção "Acesso Externo"** nas configurações do usuário:
+2. Desabilite a opção **Acesso Externo** nas configurações do usuário:
 
-   - Pesquise o usuário no menu correspondente.  
-     ![Busca por usuário](https://robbublob.blob.core.windows.net/docs/usuario.png)
+   - Acesse o Invenio Center, clique sobre o seu perfil no canto superior direito da tela.
+    > <img src="https://storage.robbu.global/v2/file/AA4314C89F77494314DC13ADCEB7B45E" />
+
    
-   - Selecione o usuário com necessidade de acesso externo.  
-     ![Resultado da busca](https://robbublob.blob.core.windows.net/docs/changelog/filtrousu.png)
+   - Selecione o usuário que deseja configurar e desabilite a permissão de **acesso externo** e salve as alterações.
+   > <img src="https://storage.robbu.global/v2/file/7CC3B69003F9BED623F9582628FA7665" />
    
-   - Ative a opção **"Acesso Externo"** e salve as alterações.  
-     ![Ativar acesso externo](https://robbublob.blob.core.windows.net/docs/changelog/acessoexterno.png)
 
 ---
-
-##  Importância de bloquear o acesso externo
-
-Bloquear o acesso externo é essencial para:
-
-###  Segurança  
-Ao restringir o acesso externo, você protege os dados sensíveis da empresa contra acessos não autorizados.
-
-###  Controle de Acesso  
-Permite decidir quem pode acessar a plataforma remotamente, aumentando o controle organizacional.
-
-###  Conformidade  
-Auxilia no cumprimento de regulamentações de segurança e proteção de dados (LGPD, ISO etc.).
-
+<Tip>
 >  Seguindo essas boas práticas, você garante **mais segurança, rastreabilidade e conformidade** nos acessos da sua empresa ao Invenio.
-
+</Tip>
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
@@ -90,6 +83,20 @@ Auxilia no cumprimento de regulamentações de segurança e proteção de dados 
   <Accordion title="Essa configuração afeta o acesso via celular?">
     Sim. Se o acesso externo não estiver configurado corretamente, o uso fora da rede corporativa (como dados móveis) pode ser bloqueado.
   </Accordion>
+
+  <Accordion title="Qual a Importância de bloquear o acesso externo?">
+  Bloquear o acesso externo é essencial para:
+​
+- **Segurança**:
+Ao restringir o acesso externo, você protege os dados sensíveis da empresa contra acessos não autorizados.
+​
+- **Controle de Acesso**:
+Permite decidir quem pode acessar a plataforma remotamente, aumentando o controle organizacional.
+​
+- **Conformidade**:
+Auxilia no cumprimento de regulamentações de segurança e proteção de dados (LGPD, ISO etc.).
+ </Accordion>
+
 </AccordionGroup>
 
 
