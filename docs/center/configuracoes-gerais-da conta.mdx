@@ -9,7 +9,7 @@ que impactam diretamente o funcionamento da distribuição de contatos, desempen
 
 Para acessar o painel de configurações do seu ambiente, siga o caminho:
 
-`Menu superior do usuário >> Configurações >> Gerenciar`
+`Menu superior do usuário >> Configurações >> Localize a seção “Conta” e clique em “Gerenciar”`
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/img1.1confg.gerais.png" /> 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/img1.2confg.gerais.png" /> 
@@ -24,14 +24,20 @@ O Invenio permite escolher entre dois modos principais de distribuição de cont
 
 ## Distribuição Manual
 
-Ideal para ambientes com baixo volume de interações simultâneas. Nesse modelo, o operador puxa os contatos manualmente da fila de acordo com a sua disponibilidade. 
+Indicada para ambientes com baixo volume de interações simultâneas. Nesse modelo, o operador assume os contatos **manualmente**, retirando-os da fila conforme
+sua disponibilidade. A ação é realizada diretamente no **Invenio Live**, por meio do botão **“Próximo”**, permitindo que o operador escolha o momento ideal para iniciar cada atendimento.”
 
-## Distribuição Automática com Algoritmos Preditivos
+
+## Distribuição Preditiva
 
 A distribuição automática analisa critérios para balancear o fluxo de atendimento entre os operadores. A distribuição preditiva pode ser configurada levando em consideração três métricas distintas:
 
 ### Média de clientes fidelizados:
-Prioriza operadores com menor número de clientes **fidelizados**.
+
+ Quando ativado, impede que o usuário receba novos atendimentos ao atingir o limite máximo de contatos fidelizados por operador.
+
+
+> Esse limite pode ser configurado no campo **Quantidade de Contatos Fidelizados**, aplicável tanto para canais online quanto offline. A definição pode ser feita de duas formas: como um **parâmetro geral do ambiente**, nas configurações da conta, ou **individualmente por segmento**, dentro das configurações específicas de cada segmento.
 
 ### Média de clientes pendentes:
 Favorece operadores com menos contatos **pendentes** na fila.
@@ -69,10 +75,9 @@ Define o tempo-limite para responder contatos enquanto o operador está ativo na
 Define o tempo-limite que o operador tem para responder os contatos após se deslogar da plataforma.
 
 ### Tempo máximo de resposta de operadores em Pausa: 
-Define o tempo-limite de resposta do operador após iniciar o seu período de pausa.
 
-Em ambos os casos, se o operador ultrapassar o tempo previsto nas configurações acima, o contato é automaticamente transferido para a fila de operação.
-Além dessas configurações, também é possível ativar a opção "Voltar para a fila geral de **contatos fidelizados e ainda não atendidos**”. Com essa opção habilitada, qualquer contato que não tenha sido atendido será automaticamente redistribuído para a fila de operação sempre que o operador se **desconectar** ou entrar em **pausa**.
+Em ambos os casos, se o operador ultrapassar o tempo previsto nas configurações acima, o contato é automaticamente transferido para a fila de operação. Além dessas configurações, também é possível ativar a opção **‘Retornar contatos fidelizados e pendentes à fila de atendimento ao pausar ou desconectar’**. 
+Com essa opção habilitada, qualquer contato que esteja fidelizado e pendente será automaticamente redistribuído para a fila de operação sempre que o operador se desconectar ou entrar em pausa.
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/img 1.5confg.gerais.png" />
 
@@ -91,11 +96,9 @@ Define o tamanho máximo permitido para envio de arquivos pelos operadores, com 
 ## Quantidade de contatos fidelizados
 Configura o número máximo de clientes fidelizados por operador, conforme o tipo de canal o qual ele está em atendimento:
 
-### Canais Online: 
-Limite entre 1 e 100.
+**Canais Online:** Limite entre 1 e 100.
 
-### Canais Offline: 
-Limite entre 1 e 100.
+**Canais Offline:** Limite entre 1 e 100.
 
 > **Observação:**  
 > Essa configuração também pode ser aplicada individualmente por segmento, acessando diretamente as configurações específicas de cada segmento.
@@ -109,10 +112,15 @@ Limite entre 1 e 100.
 ## Configurações de Limite de envio de HSM
 
 ### Limite máximo de HSM por telefone: 
-Define o número máximo de mensagens HSM que podem ser disparadas por linha de entrada.
+Define o número máximo de mensagens HSM que podem ser disparados para uma mesma linha de entrada.
+
+>  É importante lembrar que essa regra é aplicada por **telefone**, ou seja, se houver múltiplos contatos dentro do ambiente utilizando o mesmo número de entrada,
+> o limite será contabilizado pelo telefone, e não individualmente por contato.
+
 
 ### Período máximo de envio:
-Define o intervalo (em minutos) para considerar esse limite.
+
+Define o intervalo, em minutos, no qual o limite de HSM será considerado. 
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/img1.8config.gerais.png" />
 
@@ -121,12 +129,21 @@ Define o intervalo (em minutos) para considerar esse limite.
 ## Parâmetros da IDR
 
 ### IDR - Permanência máxima de atendimento sem interação
-Tempo (em minutos) que o contato pode ficar em atendimento sem interação da IDR antes de ser redirecionado.
+
+Tempo máximo (em minutos) que o contato pode permanecer no fluxo da IDR sem receber interação do próprio chatbot.
 
 ### Ações possíveis após atingir esse tempo
-- Enviar o contato para fila de operação  
-- Finalizar atendimento  
-- Redirecionar para uma etapa específica da IDR
+
+Além de definir o tempo máximo de permanência na IDR, é necessário configurar qual ação será executada quando esse limite for ultrapassado. 
+As opções disponíveis incluem: 
+
+
+- Enviar o contato diretamente para a fila de operação, direcionando-o ao atendimento humano;  
+
+- Finalizar o atendimento;  
+
+- Redirecioná-lo para uma etapa específica da própria IDR. Caso essa última alternativa seja escolhida, será necessário selecionar a IDR de destino e informar exatamente o nome da etapa para a qual o contato será encaminhado, garantindo que o redirecionamento ocorra corretamente.
+
 
 ### IDR - Tempo de retorno
 Define em quantos dias um contato pode ser tratado como um novo retorno.
@@ -144,8 +161,13 @@ A opção **“Gerar números de protocolo de atendimento automaticamente”** p
 e acompanhar o histórico do contato ou do assunto tratado.
 
 Com essa funcionalidade ativada, é possível:
-- Filtrar contatos com base no número do protocolo  
-- Inserir o protocolo automaticamente em mensagens, utilizando a variável do sistema **"protocol"** aberto e fechado com chaves duplas.
+
+- Filtrar contatos pelo protocolo tanto no **Invenio Live** quanto no **Invenio Center**, bem como em **relatórios** ou via **integração webhook**, ampliando a capacidade de rastreabilidade das interações. 
+
+- Inserir o número do protocolo em mensagens dentro do **fluxo da IDR** utilizando a variável `{{protocol}}`.  
+
+- Configurar uma **mensagem padrão**, diretamente nas configurações gerais da conta, para comunicar aos contatos sobre a abertura do protocolo. Dessa forma, sempre que um novo protocolo for criado, o contato receberá automaticamente a mensagem configurada, garantindo visibilidade imediata do número gerado.
+
 
 <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/protocol.png" />
 
@@ -234,82 +256,161 @@ Além disso, uma rotina automática executada diariamente à noite garantirá qu
 
 ---
 
+## Timezone do ambiente
+
+Defina o fuso horário do seu ambiente para que rotinas como a unificação de contatos, logout automático e outras sejam executadas corretamente. 
+
+<img src="https://storage.robbu.global/v2/file/F7F40D7C0D4152DE0C9904FBE386091E" />
+
+---
+
 ## 🔗 Links e assuntos relacionados
 
 - [Métodos de Distribuição no Invenio Live](https://docs.robbu.global/docs/live/metodos-de-distribuicao)  
 - [Fila de Atendimento (Center)](https://docs.robbu.global/docs/center/fila-de-atendimento)  
 - [Carga de Mailing e Campanhas via FTP](https://docs.robbu.global/docs/center/carga-ftp)  
 - [Agendamento de Relatório via FTP](https://docs.robbu.global/docs/center/agendamento-relatorio-ftp)  
-
+- [Segmentos - Invenio Center](https://docs.robbu.global/docs/center/segmentos)
 
 ---
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
-<AccordionGroup>
+<Accordion title="Onde acesso as Configurações Gerais da Conta?">
 
-<Accordion title="O que são canais online e offline?">
-  Canais online são aqueles que permitem comunicação em tempo real, como WebChat, WhatsApp, Instagram e Facebook Messenger — exigindo operadores disponíveis para respostas imediatas. Já os canais offline, como E-mail e SMS, não exigem interação instantânea, permitindo tratativas assíncronas com maior flexibilidade no tempo de resposta.
+Acesse pelo caminho:  
+`Menu superior do usuário >> Configurações >> Conta >> Gerenciar`  
+
+Também é possível utilizar o link direto disponibilizado na documentação para acesso rápido ao painel.
+
 </Accordion>
 
-<Accordion title="Qual a diferença entre distribuição manual e automática de contatos?">
-  A distribuição manual exige que o operador puxe os contatos da fila conforme sua disponibilidade. Já a distribuição automática utiliza algoritmos preditivos para balancear a carga entre operadores com base em critérios como TMR, fidelizados e pendentes.
+<Accordion title="Qual a diferença entre Distribuição Manual e Distribuição Preditiva?">
+
+Na **Distribuição Manual**, o operador assume os contatos conforme sua disponibilidade, utilizando o botão **“Próximo”** no Invenio Live.  
+
+Na **Distribuição Preditiva**, o sistema realiza a distribuição automática com base em critérios como clientes fidelizados, pendências e TMR.
+
 </Accordion>
 
-<Accordion title="Como funcionam as restrições de distribuição?">
-  Essas regras limitam o recebimento de novos contatos quando o operador atinge certos limites, como excesso de pendências, fidelizações ou atrasos — penalizando com bloqueios temporários.
+<Accordion title="Como funciona o limite de contatos fidelizados?">
+
+Define a quantidade máxima de contatos que um operador pode manter fidelizados simultaneamente.  
+
+A configuração pode ser aplicada como parâmetro geral da conta ou individualmente por segmento, para canais online e offline.
+
 </Accordion>
 
-<Accordion title="O que acontece se um operador exceder o tempo máximo de resposta?">
-  O contato é automaticamente redirecionado para a fila geral. Isso vale para operadores logados, deslogados ou em pausa, conforme os tempos definidos.
+<Accordion title="O que acontece quando o operador ultrapassa o limite de pendências?">
+
+Se o limite máximo de pendência estiver configurado, o operador deixa de receber novos contatos até que o volume pendente seja reduzido.
+
 </Accordion>
 
-<Accordion title="É possível redistribuir contatos fidelizados automaticamente?">
-  Sim. Ao ativar a opção específica, contatos fidelizados que ainda não foram atendidos retornam à fila sempre que o operador entra em pausa ou se desconecta.
+<Accordion title="Para que serve o tempo de castigo por atraso?">
+
+Aplica uma penalidade temporária ao operador que exceder os tempos máximos configurados, bloqueando o recebimento de novos contatos durante o período definido.
+
 </Accordion>
 
-<Accordion title="Qual o tamanho máximo permitido para envio de arquivos?">
-  Pode ser configurado entre 1MB e 100MB ou 1KB e 1024KB. Ao definir o valor como 0, o envio de arquivos é desativado para todos os operadores.
+<Accordion title="O que ocorre quando o tempo máximo de resposta é ultrapassado?">
+
+O contato é automaticamente transferido para a fila de operação.  
+
+Também é possível configurar o retorno automático de contatos fidelizados e pendentes à fila ao pausar ou desconectar.
+
 </Accordion>
 
-<Accordion title="O que é o limite de contatos fidelizados por operador?">
-  É o número máximo de clientes que podem estar vinculados a um operador, variando de 1 a 100 por canal (online ou offline). Também pode ser ajustado por segmento.
+<Accordion title="Como funciona o limite de envio de arquivos?">
+
+Permite definir o tamanho máximo de arquivos enviados pelos operadores em MB ou KB.  
+
+O valor **0** desativa completamente o envio de arquivos.
+
 </Accordion>
 
-<Accordion title="O que é o limite de envio de HSM por telefone?">
-  Define quantas mensagens HSM podem ser disparadas por número dentro de um intervalo de tempo determinado, prevenindo excessos e bloqueios por parte da Meta.
+<Accordion title="Como é aplicado o limite de envio de HSM?">
+
+O limite é configurado por telefone e considera todas as interações realizadas por aquele número de entrada dentro do período definido em minutos.
+
 </Accordion>
 
-<Accordion title="Para que servem os parâmetros da IDR?">
-  Regulam o tempo de inatividade permitido em atendimentos automatizados, o tempo de retorno considerado novo, e o intervalo para agrupar múltiplas mensagens como uma única interação.
+<Accordion title="O que acontece quando o tempo máximo de permanência na IDR é atingido?">
+
+É possível configurar uma ação automática:  
+
+- Enviar o contato para a fila de atendimento humano;  
+- Finalizar o atendimento;  
+- Redirecionar para uma etapa específica da própria IDR.
+
 </Accordion>
 
-<Accordion title="O que é o protocolo de atendimento e como ele funciona?">
-  É um número único gerado automaticamente a cada atendimento, usado como referência para rastrear o histórico e facilitar buscas e auditorias.
+<Accordion title="Como funciona a geração automática de protocolo?">
+
+Ao ativar a opção, o sistema gera um número único para cada atendimento.  
+
+O protocolo pode ser utilizado em filtros, relatórios, integrações webhook e dentro do fluxo da IDR por meio da variável `{{protocol}}`.
+
 </Accordion>
 
-<Accordion title="Como funciona a funcionalidade de FTP no Invenio?">
-  Permite integração com sistemas externos via transferência segura de arquivos. O sistema gera automaticamente as credenciais (usuário, senha, porta e servidor).
+<Accordion title="As credenciais de FTP são geradas automaticamente?">
+
+Sim. Ao habilitar o FTP, o sistema gera automaticamente:  
+
+- Usuário  
+- Senha  
+- Porta  
+- Servidor  
+
+Essas credenciais devem ser armazenadas com segurança.
+
 </Accordion>
 
-<Accordion title="O que é a unificação de contatos no Omnichannel?">
-  É uma funcionalidade que agrupa automaticamente registros duplicados com base em dados como telefone, CPF/CNPJ e código de cliente, evitando atendimentos simultâneos.
+<Accordion title="O que significa unificar contatos automaticamente?">
+
+O sistema identifica registros duplicados com base em dados como telefone, CPF/CNPJ ou código de cliente e realiza a unificação automática, evitando duplicidade de atendimentos.
+
 </Accordion>
 
-<Accordion title="Como funcionam as notificações automáticas e no navegador?">
-  As notificações automáticas enviam alertas por e-mail para a equipe, enquanto as notificações no navegador informam visualmente sobre novos contatos pendentes.
+<Accordion title="Para que servem as notificações automáticas?">
+
+Permitem cadastrar e-mails para receber alertas sobre falhas em integrações.  
+
+Também é possível ativar notificações no navegador para novos contatos pendentes.
+
 </Accordion>
 
-<Accordion title="O que é o modo de transferência rápida?">
-  Permite repassar um atendimento entre segmentos com apenas um clique, desvinculando automaticamente o atendente anterior e redistribuindo o contato para a fila do novo segmento.
+<Accordion title="O que faz o modo de transferência rápida?">
+
+Permite transferir atendimentos entre segmentos com um clique no Invenio Live.  
+
+Ao realizar a transferência, o sistema:  
+
+- Desvincula o contato de segmentos anteriores;  
+- Desfideliza o atendente atual;  
+- Marca a conversa como não lida;  
+- Retorna o contato para a fila do novo segmento.
+
 </Accordion>
 
-<Accordion title="O que acontece ao ativar a opção de bloquear acesso externo?">
-  Em ambientes com restrição por IP, impede que atendentes ou supervisores ativem manualmente o acesso externo. Além disso, uma rotina noturna reforça essa proteção desabilitando o acesso automaticamente.
+<Accordion title="O que acontece ao habilitar o bloqueio de acesso externo?">
+
+Impede que Supervisores e Atendentes ativem manualmente o acesso externo.  
+
+Uma rotina automática diária também garante que essa permissão permaneça desabilitada.
+
 </Accordion>
 
-<Accordion title="Para que servem os tokens da conta?">
-  O token privado é usado para integrações via API, enquanto o token público identifica a conta em páginas web no WebChat. Ambos devem ser armazenados com segurança.
+<Accordion title="Qual a diferença entre token privado e token público?">
+
+O **token privado** é utilizado para integrações via API e deve ser armazenado com segurança.  
+
+O **token público** é utilizado para integração com o WebChat.
+
 </Accordion>
 
-</AccordionGroup>
+<Accordion title="Por que configurar corretamente o timezone é importante?">
+
+O fuso horário impacta rotinas automatizadas como unificação de contatos, logout automático e demais processos dependentes de horário.
+
+</Accordion>
