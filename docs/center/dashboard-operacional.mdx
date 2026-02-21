@@ -1,91 +1,68 @@
 ---
-title: "Dashboard Operacional – Invenio Center"
-description: "Monitoramento em tempo real da operação com indicadores estratégicos de atendimento."
-sidebarTitle: "Dashboard Operacional"
+title: "Dashboard Operacional"
+description: "O Dashboard Operacional do Invenio Center é uma ferramenta de monitoramento em tempo real desenvolvida para oferecer uma visão estratégica e detalhada da performance da equipe de atendimento.
+
+Por meio desse painel, supervisores e administradores conseguem acompanhar o comportamento da operação ao longo do dia, identificar gargalos, analisar indicadores essenciais e tomar decisões com base em dados atualizados. Essa visão dinâmica permite uma gestão mais ágil, proativa e orientada a resultados, contribuindo diretamente para a manutenção da qualidade e eficiência dos atendimentos."
 ---
 
-##  Dashboard Operacional
+## Como acessar
 
-O **Dashboard Operacional** do *Invenio Center* é uma ferramenta de **monitoramento em tempo real**, desenvolvida para oferecer uma **visão clara e detalhada da performance da equipe de atendimento**.
+O acesso ao Dashboard Operacional pode ser realizado pelo seguinte caminho na plataforma:
 
-Por meio dele, supervisores podem:
+Invenio Center → Dashboards → Operacional
+<a href="https://inveniocenter.robbu.com.br/painel/frases" target="_blank" rel="noopener noreferrer">
+  Acessar Gerenciador de Frases
+</a>
 
-- Acompanhar o fluxo de contatos
-- Identificar gargalos nas filas
-- Medir tempos médios
-- Distribuir a carga de trabalho de maneira equilibrada entre os operadores
+Ao acessar essa seção, serão exibidos todos os operadores logados no momento, juntamente com seus principais indicadores de desempenho e status de atendimento. 
+![dashboard operacional](https://storage.robbu.global/v2/file/8A224DE94801F6EFCDBB9729B849B9DD)
 
-Essa visão dinâmica da operação permite uma gestão mais **ágil**, **proativa** e **baseada em dados concretos**, essencial para manter a **qualidade e eficiência** dos atendimentos.
+## Painel de Operadores
 
----
+No Dashboard Operacional cada operador ativo é representado por um cartão individual, que consolida informações relevantes sobre seu desempenho e situação atual na operação. Entre os principais indicadores apresentados estão:
 
-##  Como acessar
+- **Nome do operador:** Identificação do usuário logado.
+- **Fidelizados:** Total de contatos atualmente em atendimento com o operador.
+- **Pending:** Tempo acumulado de espera dos contatos que aguardam resposta.
+- **Login:** Horário em que o operador realizou o acesso à plataforma.
+- **TMA:** Tempo médio de atendimento.
+- **Pending:** Quantidade de atendimentos pendentes de resposta. 
+- **Attended:** Quantidade de atendimentos em aberto e concluídos.
 
-**Caminho de acesso**:  
-`Invenio Center → Dashboards → Operacional`
+O painel utiliza sinalizações visuais para facilitar a gestão. Indicadores críticos, como tempos de espera elevados, podem ser destacados em cores de alerta como vermelho, por exemplo, permitindo rápida identificação de sobrecarga ou necessidade de intervenção.
+![dashboard operacional](https://storage.robbu.global/v2/file/D48BA663BB9429EA0D465B4DBB69B8FC)
 
-Ao acessar essa seção, você visualizará todos os **operadores logados**, juntamente com seus **principais indicadores de atendimento**.
+## Filtros e Segmentações
 
- > ![dashboard operacional](https://robbublob.blob.core.windows.net/docs/dashoperacional.png)
+Na parte superior da interface, estão disponíveis recursos de filtragem que permitem personalizar a visualização conforme a necessidade da gestão.
 
----
+É possível aplicar:
 
-##  Painel de Operadores
+- **Filtro por segmento:** Exibe apenas os operadores vinculados a um segmento específico.
+> Obs: Para selecionar um segmento individual, é necessário primeiro desabilitar a opção de selecionar todos os segmentos. Após desmarcar essa opção, o sistema permitirá a escolha do segmento desejado, restringindo a visualização aos operadores correspondentes.
 
-Cada operador ativo é representado por um **cartão individual**, que traz informações fundamentais sobre seu desempenho e status atual. Os dados apresentados incluem:
+![dashboard operacional](https://storage.robbu.global/v2/file/118BCC8E6EF7D9DB4A922092A4B8A385)
 
-- **Nome do operador**
-- **Fidelizados**: Total de contatos em atendimento ativo com esse operador
-- **Pending**: Tempo acumulado de espera dos contatos aguardando resposta
-- **Login**: Horário em que o operador logou na plataforma
-- **TMA**: Tempo Médio de Atendimento
-- **Status dos atendimentos**: Total de atendimentos em aberto e concluídos
+- **Busca por nome:** Campo destinado à localização rápida de operadores pelo nome de usuário.
+![dashboard operacional](https://storage.robbu.global/v2/file/F73ECBAD4FAF4AE46548FE12C8A79F44)
 
- *Cores são utilizadas para sinalizar situações críticas*. Por exemplo, tempos de espera elevados podem ser destacados em **vermelho**, facilitando a identificação de sobrecarga.
+Essa filtragem facilita o acompanhamento de equipes organizadas por área, produto ou frente de atendimento, tornando a supervisão mais direcionada e eficiente.
 
-> ![dashboard operacional](https://robbublob.blob.core.windows.net/docs/dashoperacional1.png)
+## Gerenciamento de Contatos
 
----
+O Dashboard Operacional também permite aprofundar a análise dos atendimentos em andamento. Ao clicar sobre os números exibidos nos campos **Fidelizados**, **Pending** ou **Attended**, o sistema abre uma nova janela com os detalhes dos contatos vinculados àquela categoria.
 
-##  Filtros e Segmentações
+Nessa visualização, é possível consultar informações como:
 
-No topo da interface, estão disponíveis filtros que permitem **personalizar a visualização**:
+- Nome do contato;
+- Acesso ao histórico da conversa (tanto no Invenio Center quanto no Invenio Live);
+> Obs: Para acessar a opção de redirecionamento ao histórico completo do contato, basta clicar no menu de opções (ícone de três pontos) localizado à direita do nome do contato e selecionar a ação correspondente.
+- Tempo total de atendimento;
+- Tempo de primeira resposta;
+- Tempo de espera.
 
-- **Filtro por segmento**: Exibe apenas os operadores vinculados a um determinado segmento.
-- **Campo de busca por nome**: Permite localizar operadores específicos rapidamente pelo nome de usuário.
-
-Essa segmentação é útil para **supervisionar times por área**, facilitando a atuação em diferentes frentes da operação.
-
-> ![dashboard operacional](https://robbublob.blob.core.windows.net/docs/dashoperacionalfiltros.png)
-
----
-
-##  Gerenciamento de Contatos
-
-Ao clicar sobre os números apresentados nos campos **Fidelizados**, **Pending** ou **Attended**, o sistema abre uma nova janela com os **detalhes dos contatos** vinculados àquela categoria.
-
-Nessa visualização é possível consultar:
-
-- **Nome do contato**
-- **Redirecionamento ao histórico da conversa** (Invenio Center e Live)
-- **Tempo de primeira resposta**
-- **Tempo de espera**
-- **Tempo total do atendimento**
-
-Essa tela permite que os supervisores acompanhem, em tempo real, os **atendimentos em andamento**, oferecendo mais controle sobre a qualidade e o andamento das conversas.
-
----
-
-##  Benefícios
-
-O **Dashboard Operacional** é uma ferramenta indispensável para equipes que buscam:
-
-- Identificar operadores com alta carga de atendimentos
-- Redirecionar atendimentos com base na capacidade atual da equipe
-- Garantir menor tempo de espera ao cliente
-- Supervisionar a jornada de trabalho e desempenho individual
-
-> Quando utilizado de forma estratégica, o Dashboard Operacional se transforma em um **aliado fundamental** para melhorar a fluidez da operação e **elevar a qualidade do atendimento prestado ao cliente**.
+Essa funcionalidade permite ao supervisor acompanhar, em tempo real, o andamento das conversas, identificar possíveis atrasos e atuar preventivamente para manter os indicadores dentro do esperado.
+![dashboard operacional](https://storage.robbu.global/v2/file/25A3FDD813DDE20305DB97E67671866F)
 
 ---
 
@@ -96,6 +73,10 @@ O **Dashboard Operacional** é uma ferramenta indispensável para equipes que bu
 <Accordion title="O dashboard é acessado pelo Invenio Live?">
 Não. O Dashboard Operacional está disponível apenas no **Invenio Center**, na seção **Dashboards**.
 
+</Accordion>
+
+<Accordion title="Quem pode acessar o Dashboard Operacional?">
+O acesso ao Dashboard Operacional está disponível para usuários com perfil de Supervisor e Administrador no Invenio Center, pois trata-se de uma ferramenta voltada para acompanhamento estratégico e gestão da operação.
 </Accordion>
 
 <Accordion title="Os supervisores conseguem visualizar atendimentos em tempo real?">
@@ -116,7 +97,16 @@ Sim. Cores como **vermelho** sinalizam situações críticas, como **tempos de e
 <Accordion title="Qual a diferença entre Fidelizados, Pending e Attended?">
 - **Fidelizados**: Contatos atualmente em atendimento com o operador.
 - **Pending**: Contatos aguardando resposta.
-- **Attended**: Total de atendimentos realizados no dia, se o operador apenas enviar uma mensagem ao contato, ele contará como atendido no painel.
+- **Attended**: Total de atendimentos realizados no dia. Mesmo que o operador envie apenas uma única mensagem ao contato, sem efetivar a fidelização, o atendimento será contabilizado no painel, sendo essa métrica é contabilizada por contato e não protocolo.
+
+</Accordion>
+
+<Accordion title="O Dashboard permite redistribuir atendimentos?">
+Não. O Dashboard Operacional é uma ferramenta voltada para monitoramento e análise da operação. Ele não realiza a redistribuição de atendimentos diretamente, mas fornece os indicadores necessários para apoiar a tomada de decisão.
+
+A redistribuição pode ser realizada de forma manual no Invenio Live, por meio das funcionalidades de transferência de atendimento, ou de forma automatizada através das regras de otimização configuradas no Invenio Center.
+
+Dessa forma, o Dashboard atua como instrumento estratégico de apoio à gestão, enquanto as ações operacionais são executadas nos módulos correspondentes.
 
 </Accordion>
 
