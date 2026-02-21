@@ -4,13 +4,14 @@ sidebarTitle: "Cancelamento de Inscrição de Email"
 description: "Agora é possível cadastrar de maneira rápida e prática em seus templates uma opção de cancelamento de inscrição para os clientes que não desejarem mais receber comunicações através do canal de email."
 ---
 
+
 ## Como Configurar o Template
 
 Agora você pode incluir um link de cancelamento de inscrição nos seus templates de email no **Invenio Center**. Isso permite que os clientes optem por não receber mais comunicações por email de forma simples e eficiente.
 
 ### Passo a Passo
 
-1. Acesse **Invenio Center** e navegue até o menu:
+Acesse **Invenio Center** e navegue até o menu:
 
    * **Campanhas** → **Email** → **Templates**
 
@@ -18,7 +19,7 @@ Agora você pode incluir um link de cancelamento de inscrição nos seus templat
 
 ![Texto alternativo](https://robbublob.blob.core.windows.net/docs/Campanhas-Email-Tela.png)
 
-1. Escolha um dos tipos de template disponíveis:
+Escolha um dos tipos de template disponíveis:
 
    * **Construtor:** Possui elementos de arrastar e soltar para facilitar a criação do template.
 
@@ -28,21 +29,21 @@ Agora você pode incluir um link de cancelamento de inscrição nos seus templat
 
 #### No Construtor
 
-1. Arraste um componente de **Coluna** para a sua estrutura.
+Arraste um componente de **Coluna** para a sua estrutura.
 
-2. Em seguida, adicione um **Componente de Texto**.
+Em seguida, adicione um **Componente de Texto**.
 
-3. Digite o texto desejado e utilize uma palavra-chave para vincular o link de cancelamento.
+Digite o texto desejado e utilize uma palavra-chave para vincular o link de cancelamento.
 
-4. Utilize a seguinte URL base:
+Utilize a seguinte URL base:
 
    ```
    https://api.robbu.global/cancelar-inscricao/{privateToken}?email=@contactemail
    ```
 
-5. Substitua `{privateToken}` pelo **Invenio PrivateToken**.
+Substitua `{privateToken}` pelo **Invenio PrivateToken**.
 
-![Texto alternativo](https://robbublob.blob.core.windows.net/docs/Campanhas-Email-Tela-1.png)
+
 
 ![Texto alternativo](https://robbublob.blob.core.windows.net/docs/Campanhas-Email-Tela-2.png)
 
@@ -52,13 +53,13 @@ Agora você pode incluir um link de cancelamento de inscrição nos seus templat
 
 #### No HTML Direto
 
-1. Insira o seguinte link no seu código HTML:
+Insira o seguinte link no seu código HTML:
 
    ```html
    <a href="https://api.robbu.global/cancelar-inscricao/{privateToken}?email=@contactemail">Cancelar Inscrição</a>
    ```
 
-2. Substitua `{privateToken}` pelo **Invenio PrivateToken**.
+ Substitua `{privateToken}` pelo **Invenio PrivateToken**.
 
 ### Onde Encontrar o Invenio PrivateToken
 
@@ -73,3 +74,81 @@ O **Invenio PrivateToken** é encontrado no ambiente administrativo da empresa, 
 Quando um cliente opta por cancelar a inscrição, ele é automaticamente adicionado à **lista de restrição**. Isso significa que ele não receberá mais comunicações daquela **Carteira/Segmento**.
 
 Com isso, sua empresa pode garantir conformidade com boas práticas de comunicação e respeitar a privacidade dos clientes.
+
+---
+## 🔗 Links e assuntos relacionados
+
+- [Campanhas de E-mail - Invenio Center](https://docs.robbu.global/docs/center/campanhas-de-email)  
+- [Contas de E-mail - Invenio Center](https://docs.robbu.global/docs/center/cadastrar-conta-de-email)  
+- [Importação via FTP](https://docs.robbu.global/docs/center/carga-ftp)  
+- [Templates de E-mail - Invenio Center](https://docs.robbu.global/docs/center/templates-de-email)
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<Accordion title="O que é o cancelamento de inscrição de e-mail?">
+
+É a opção que permite que seus clientes parem de receber comunicações enviadas por e-mail. Agora, você pode incluir esse recurso de forma simples nos templates do Invenio Center.
+
+</Accordion>
+
+<Accordion title="Para que serve esse recurso?">
+
+Ele garante que o cliente possa escolher não receber mais mensagens, respeitando sua privacidade e seguindo as boas práticas de comunicação e conformidade.
+
+</Accordion>
+
+<Accordion title="Onde eu configuro a opção de cancelamento?">
+
+A configuração é feita diretamente na criação ou edição de templates de e-mail, seguindo o caminho:
+
+Campanhas >> Email >> Templates >> Criar Templates
+
+</Accordion>
+
+<Accordion title="Em quais tipos de template posso adicionar o link?">
+
+O recurso pode ser utilizado em dois modelos de criação:
+
+Construtor: Utiliza elementos de arrastar e soltar (drag and drop).
+
+HTML Direto: Permite a personalização total através de código fonte.
+
+</Accordion>
+
+<Accordion title="Como adicionar o link de cancelamento no modo Construtor?">
+
+Arraste um componente de Coluna e adicione um Componente de Texto.
+
+Digite o texto desejado (ex: "Cancelar Inscrição").
+
+Vincule a palavra-chave à URL: https://api.robbu.global/cancelar-inscricao/{privateToken}?email=@contactemail
+
+Nota: Substitua {privateToken} pelo seu token privado do Invenio.
+
+</Accordion>
+
+<Accordion title="Como adicionar o link de cancelamento no modo HTML Direto?">
+
+Insira o seguinte trecho de código no seu HTML:
+
+<a href="https://api.robbu.global/cancelar-inscricao/{privateToken}?email=@contactemail">Cancelar Inscrição</a>
+
+Nota: Lembre-se de substituir {privateToken} pelo token real da sua conta.
+
+</Accordion>
+
+<Accordion title="Onde encontro o Invenio PrivateToken?">
+
+O token está disponível no ambiente administrativo da empresa, acessando:
+
+Menu superior >> Configurações >> Conta
+
+</Accordion>
+
+<Accordion title="O que acontece após o cliente cancelar a inscrição?">
+
+O cliente é automaticamente adicionado à lista de restrição. Com isso, ele deixa de receber novas comunicações daquela Carteira/Segmento específica.
+
+</Accordion>
