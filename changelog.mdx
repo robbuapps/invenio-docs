@@ -2,8 +2,158 @@
 title: "Changelog"
 mode: "center"
 ---
+<Update label="Fevereiro 2026 - 2.0.94" description="Invenio Live e Center.">
 
-<Update label="Fevereiro 2026 - 2.0.92" description="Invenio Live e Center.">
+## Press Release — Melhoria no Agrupamento de Tempo de Espera para Agrupar Mensagens de Entrada
+
+### Mais fluidez e inteligência no tratamento de mensagens sequenciais
+
+O Invenio recebeu uma melhoria importante no Webchat para tornar as conversas mais naturais e eficientes. Agora, é possível configurar um **tempo de espera para agrupar mensagens enviadas em sequência**, evitando que mensagens fragmentadas sejam tratadas como interações separadas pelo chatbot.
+
+Essa evolução atende a cenários comuns em canais digitais, nos quais os usuários enviam mensagens em partes curtas, como:
+
+**Exemplo:**  
+“Oi”  
+“Bom dia”  
+
+Com a nova configuração, o sistema pode agrupar automaticamente essas mensagens em uma única interação:
+
+**Resultado:**  
+“Oi Bom dia”
+
+---
+
+## Como funciona
+
+Foi adicionada uma nova configuração que permite definir, em segundos, quanto tempo o chatbot deve aguardar antes de processar as mensagens recebidas.
+
+- O intervalo pode ser configurado entre **0 e 5 segundos**.
+- Mensagens enviadas dentro desse período são automaticamente combinadas.
+- A configuração é independente para **canais online** e **canais offline**.
+- Caso o campo fique vazio, o comportamento padrão será **0 segundos** (sem agrupamento).
+
+Essa abordagem reduz respostas fragmentadas e melhora a interpretação do contexto pelo bot.
+
+---
+
+### Benefícios para a operação
+
+- Conversas mais naturais e organizadas  
+- Redução de interpretações incorretas pelo chatbot  
+- Melhor aproveitamento dos fluxos automatizados  
+- Experiência mais fluida para o usuário final  
+
+---
+
+### Experiência de configuração mais clara
+
+Além da nova funcionalidade, o campo de configuração foi atualizado para tornar o uso mais intuitivo:
+
+- Limite máximo definido em **5 segundos**
+- Ajuste automático caso seja informado valor acima do permitido
+- Nova legenda orientativa para facilitar o entendimento
+
+---
+
+</Update>
+
+<Update label="Fevereiro 2026 - 2.0.93" description="Invenio Live e Center.">
+
+
+## Bloqueio de recebimento de arquivos por extensão
+
+A funcionalidade **Bloquear recebimento de arquivos por extensão** permite impedir automaticamente o recebimento de arquivos com extensões consideradas indesejadas ou inseguras.
+
+O bloqueio:
+
+- Se aplica a **todos os canais**
+- Mantém a mensagem registrada na conversa
+- Impede o download do conteúdo
+- Pode ser configurado no nível da **Conta** ou do **Segmento**
+- Respeita hierarquia de prioridade (**Segmento > Conta**)
+
+---
+
+### Como funciona a hierarquia
+
+A regra aplicada no recebimento do arquivo segue esta ordem:
+
+1. Se o **segmento possuir configuração própria**, ela será aplicada.
+2. Caso contrário, será utilizada a **configuração definida na conta**.
+
+> A configuração do segmento sempre sobrescreve a da conta quando existir.
+
+---
+
+## Configuração no nível da Conta
+
+Define uma política padrão para todos os segmentos que não possuam regra específica.
+
+### Caminho
+
+`Configurações da Conta → Bloqueio de arquivos de entrada`
+
+### Como configurar
+
+- Selecione as extensões que deseja bloquear.
+- Utilize o campo de busca para localizar extensões específicas.
+- Utilize:
+  - **Marcar todos**
+  - **Desmarcar todos**
+
+As extensões selecionadas passam a ser a **regra padrão da conta**.
+
+---
+
+## Configuração no nível do Segmento
+
+Permite sobrescrever a política da conta quando necessário.
+
+### Caminho
+
+`Segmentos → Selecionar segmento → Bloqueio de arquivos de entrada`
+
+## Toggle: Usar configurações gerais da conta
+
+### Toggle ativado
+- O segmento utiliza automaticamente as regras definidas na conta.
+- A lista de extensões não é exibida.
+
+### Toggle desativado
+- A lista de extensões é exibida.
+- O administrador pode definir regras próprias para o segmento.
+
+> Se o toggle estiver desativado e nenhuma extensão estiver selecionada, o segmento permitirá o recebimento de qualquer tipo de arquivo.
+
+> A configuração da conta só será considerada quando o toggle estiver ativado.
+
+---
+
+### Comportamento no recebimento do arquivo
+
+Quando um contato envia um arquivo:
+
+1. O sistema identifica o segmento da conversa.
+2. Aplica a regra do segmento (se existir).
+3. Caso não exista regra no segmento, aplica a regra da conta.
+4. Se a extensão estiver bloqueada:
+   - O arquivo não é armazenado.
+   - O download não é permitido.
+   - A mensagem permanece registrada na conversa.
+
+---
+
+### Exibição no histórico da conversa
+
+Quando um arquivo é bloqueado:
+
+- O bloco do arquivo aparece normalmente na timeline.
+- O nome do arquivo é substituído por:
+
+
+</Update>
+
+<Update label="Janeiro 2026 - 2.0.92" description="Invenio Live e Center.">
 
 ## Atualização no uso de ações DovePL nas IDRs
 
