@@ -4,16 +4,18 @@ sidebarTitle: "Dashboard Analítico"
 description: "Visualização em tempo real dos dados operacionais de atendimento no Invenio Center."
 ---
 
-##  Dashboard Analítico – Invenio Center
 
 O **Dashboard Analítico** do Invenio Center é uma ferramenta poderosa de visualização de dados em tempo real, voltada à gestão operacional de atendimentos. Ele consolida as principais métricas e indicadores do ambiente de atendimento da plataforma Invenio Live, permitindo uma leitura clara do desempenho da operação.
 
 Seu objetivo é apoiar a supervisão e a tomada de decisão com base em dados concretos, oferecendo uma visão estratégica sobre produtividade, qualidade e eficiência da equipe.
 
-> **Caminho de acesso:** Invenio Center → Dashboards → Analítico
+> **Caminho de acesso:** Invenio Center → Analisar → Dashboards → Analítico
 
-![dashboard analitico](https://robbublob.blob.core.windows.net/docs/dashanalitico.png)
+<Tip>
+**Acesso direto:** [Dashboard Analítico](https://inveniocenter.robbu.com.br/painel/dashboards/analitico)
+</Tip>
 
+ <img src="https://storage.robbu.global/v2/file/AE68AE6ADD90312AE55882766AD4A7BD" />
 ---
 
 
@@ -30,7 +32,8 @@ Esse painel permite:
 
 - Acompanhar a performance das campanhas por canal;
 - Identificar o canal com maior volume de disparos;
-- Avaliar o esforço de contato ao longo do tempo.
+- Avaliar o esforço de contato ao longo do tempo;
+- Botão para criação de campanhas.
 
 ![dados campanha](https://robbublob.blob.core.windows.net/docs/dadoscampanha.png)
 
@@ -38,20 +41,22 @@ Esse painel permite:
 
 Logo abaixo, encontram-se os principais indicadores operacionais em tempo real:
 
-- Contatos atendidos hoje
-- Contatos na fila aguardando atendimento
-- Contatos em chatbot
-- Atendimentos finalizados
-- Contatos fidelizados
-- Contatos fidelizados pendentes
-- Tempo máximo de espera
-- Usuários logados
+- **Contatos atendidos hoje:** Quantidade total de contatos que já foram atendidos pela equipe no dia atual. 
+- **Contatos na fila aguardando atendimento:** Número de contatos que estão esperando para serem atendidos por um agente humano. 
+- **Contatos em chatbot:** Quantidade de conversas que estão sendo tratadas automaticamente pelo chatbot no momento.
+- **Atendimentos finalizados:** Número de atendimentos totalmente concluídos, que não estão mais com protocolo aberto. 
+- **Contatos fidelizados:** Quantidade de contatos que estão em atendimento com algum operador. 
+- **Contatos fidelizados pendentes:** Quantidade de contatos que estão em atendimento com algum operador e possuem pendência de resposta por parte do operador. 
+- **Tempo máximo de espera:** Maior tempo que um contato aguardou antes de ser atendido. 
+- **Usuários logados:** Quantidade de operadores conectados na plataforma,prontos para realizar atendimentos. 
 
 Esses indicadores ajudam a:
 
 - Identificar filas congestionadas;
 - Monitorar os tempos de espera e respeitar SLAs;
 - Avaliar a produtividade e ocupação da equipe.
+
+ <img src="https://storage.robbu.global/v2/file/57301A8EA6AC9A711A9955E3B1D580A8" />
 
 
 ##  Gráficos e Distribuições
@@ -82,7 +87,15 @@ Gráfico de pizza com proporção de atendimentos finalizados:
 - Equilibra estratégia multicanal;
 - Mapeia oportunidades na jornada do cliente.
 
-![Por canal](https://robbublob.blob.core.windows.net/docs/atendcanal.png)
+
+ <img src="https://storage.robbu.global/v2/file/8518B387A157CA5E60CE809D9C07DCBB" />
+
+##  KPI Indicador  
+
+Mostra em formato de barras, quais KPI eventos foram mais utilizados no atendimento durante o dia.  
+
+ <img src="https://storage.robbu.global/v2/file/7E3F593BCDFF590E677ABC08FFEA2621" />
+
 
 ##  Resumo dos Segmentos
 
@@ -95,6 +108,21 @@ Esse painel permite:
 - Tomar decisões sobre redistribuição;
 - Avaliar a eficiência das operações.
 
+Entenda os campos:
+
+- **Nome**: Identifica o nome do segmento. 
+- **Fila**: Mostra a quantidade de atendimentos que estão na fila de espera naquele segmento.
+- **Atendidos**: Para que um atendimento seja considerado “Atendido”, é necessário que atenda simultaneamente aos seguintes critérios:
+    - **Fidelização no dia**: O cliente deve ter sido fidelizado no mesmo dia ou ter recebido a primeira mensagem da operação na data em questão. 
+
+    - **Atendente designado**: Deve haver um atendente fidelizado responsável pelo atendimento. 
+
+    - **Protocolo ativo**: O protocolo associado ao atendimento não pode ter sido encerrado. 
+
+- **Espera**: O contato está fidelizado e aguarda um retorno da operação. 
+- **Finalizados**: Os contatos que foram finalizados por aquele segmento, naquele dia. Contatos que já foram finalizados não constam em contatos atendidos. 
+
+
 ![resumo segmentos](https://robbublob.blob.core.windows.net/docs/resumosegmento.png)
 
 ##  Resumo dos Usuários
@@ -105,6 +133,17 @@ Esse painel mostra o desempenho individual dos operadores logados:
 - Identifica operadores de destaque;
 - Apoia colaboradores com baixa produtividade;
 - Balanceia a carga da equipe.
+
+Entenda os campos:
+
+- **Nome:** Mostra o nome dos usuários. 
+- **Login:** Indica o horário em que cada usuário fez o último login no sistema. 
+- **Situação:** Exibe o status atual do usuário, como por exemplo “Disponível”. 
+- **TMA:** Representa o Tempo Médio de Atendimento de cada usuário. 
+- **Atendidos:** Número total de atendimentos realizados. 
+- **Fidelizados:** Número de atendimentos que estão vinculados ao operador. 
+- **Pendentes:** Quantidade de atendimentos que existem uma pendência por parte do operador. 
+- **Finalizados:** Total de atendimentos em que os protocolos foram encerrados. 
 
 ![resumo usuario](https://robbublob.blob.core.windows.net/docs/resumousuario.png)
 
