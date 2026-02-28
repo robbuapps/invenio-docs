@@ -1,0 +1,120 @@
+---
+title: "Unificação de Contatos — Omnichannel"
+sidebarTitle: "Omnichannel"
+description: "A funcionalidade de **Unificação de Contatos Omnichannel** tem como objetivo central consolidar registros duplicados de um mesmo contato dentro da plataforma, garantindo uma visão única
+e organizada do cliente. Esse processo contribui diretamente para a eficiência operacional, redução de retrabalho e maior consistência nas informações utilizadas durante os atendimentos."
+---
+
+
+---
+
+##  Configuração da Unificação Automática
+
+Para que o processo funcione corretamente, é indispensável que a opção de unificação automática esteja ativada na plataforma. Essa configuração pode ser verificada e ajustada acessando o seguinte caminho:
+ 
+`Configurações > Conta > Gerenciar > Omnichannel – Unificar contatos automaticamente`
+
+Clique aqui para acesso direto à:
+[Configurações da conta - Invenio Center](https://inveniocenter.robbu.global/painel/configuracoes/conta)
+
+<img src="https://storage.robbu.global/v2/file/F5EF5EA5BD9B1853F61B26B5AD25FB85" />
+<img src="https://storage.robbu.global/v2/file/21E98B6BC72358DE7614137E6EFC343C" />
+<img src="https://storage.robbu.global/v2/file/21E98B6BC72358DE9D5263AD77A0D359" />
+
+Somente com essa opção habilitada o sistema executará as rotinas automáticas de unificação conforme as regras descritas abaixo.
+
+---
+
+##  Funcionamento da Rotina de Unificação
+
+###  Primeira execução  
+
+Quando a opção de **Omnichannel – Unificar contatos automaticamente** é habilitada pela primeira vez, o sistema executa um processo inicial de unificação durante a madrugada do dia seguinte à ativação. Nessa primeira execução, são analisados e unificados os contatos cadastrados na plataforma considerando um histórico de até **seis anos**.
+
+###  Execuções diárias  
+
+Após a conclusão dessa etapa inicial, a rotina de unificação passa a ser executada **diariamente no período noturno**, realizando a consolidação apenas dos contatos criados nos últimos dois dias, garantindo que novos registros sigam o mesmo padrão de organização.
+
+---
+
+## Critério de Contatos Considerados na rotina
+
+O processo de unificação considera apenas **contatos recentes**, ou seja, registros que possuam **um ou mais cadastros realizados** nos últimos **dois dias**. Contatos que não atendam a esse critério de recência não entram no escopo da rotina automática, mesmo que possuam dados compatíveis para unificação.
+
+---
+
+##  Regras de Validação para Unificação
+
+A unificação ocorre **somente quando todos os critérios abaixo forem atendidos**:
+
+| Dado Comparado | Obrigatório | Descrição |
+|---------------|:-----------:|-----------|
+| **Telefone** | ✅ | A validação para que dois ou mais registros sejam unificados leva em consideração, obrigatoriamente, o número de telefone de entrada do contato, associado a seus dados únicos de identificação |
+| **CPF ou CNPJ** | ⚠️ | Deve ser compatível entre os registros |
+| **Código do cliente** | ⚠️ | Deve ser igual |
+| **Segmentação** | ⚠️ | Deve coincidir |
+
+
+> Para que a unificação ocorra, é necessário que o telefone seja o mesmo e que os dados únicos estejam compatíveis. Caso o contato possua o mesmo número de telefone, mas apresente divergências em CPF/CNPJ, código do cliente ou segmentação, **o sistema não realizará a unificação**, mantendo os registros separados.
+
+
+---
+
+##  Impacto da Fidelização a Operadores
+
+Contatos que estejam **fidelizados a um operador** não são unificados automaticamente. Essa regra existe para evitar impactos em atendimentos em andamento, como a remoção indevida de um contato da fila ou a alteração inesperada de responsabilidades durante um atendimento ativo.
+Por esse motivo, é fundamental que, no momento do cadastro de um contato, seja realizada uma verificação prévia para identificar se já existe um registro fidelizado a outro operador.<br/> Caso o contato permaneça fidelizado durante o período de execução da rotina noturna, ele será desconsiderado no processo de unificação, mesmo que atenda a todos os demais critérios técnicos.
+
+
+
+---
+
+## Boas Práticas
+
+
+- Realize verificações antes de criar novos contatos  
+- Confirme se já existe um registro ativo e/ou fidelizado  
+- Mantenha dados estruturados para evitar divergências impeditivas  
+
+
+---
+
+## 🔗 Links Relacionados
+
+-  [Configurações Gerais da Conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)
+-  [Criação de contatos - Invenio Center](https://docs.robbu.global/docs/center/criacao-de-contatos-invenio-center)
+-  [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)
+-  [Criação de contatos - Live](https://docs.robbu.global/docs/live/criar-contato)
+
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+
+  <Accordion title=" O que acontece quando ativo a unificação automática?">
+    O sistema executa uma rotina inicial na madrugada seguinte, analisando até seis anos de contatos para remover duplicidades.
+  </Accordion>
+
+  <Accordion title=" Quando a rotina de unificação roda?">
+    Após a primeira execução, a rotina roda diariamente durante o período noturno, unificando somente contatos criados nos últimos dois dias.
+  </Accordion>
+
+  <Accordion title=" A unificação depende do telefone?">
+    Sim. O telefone é o dado principal. A unificação somente ocorre se o número de entrada for o mesmo entre os registros.
+  </Accordion>
+
+  <Accordion title=" O que pode impedir a unificação?">
+    Divergências em CPF/CNPJ, código do cliente ou segmentação — mesmo que o telefone seja igual.
+  </Accordion>
+
+  <Accordion title=" Contatos fidelizados são unificados?">
+    Não. Contatos fidelizados a operadores são ignorados para evitar impactos no atendimento.
+  </Accordion>
+
+  <Accordion title=" Contatos antigos são unificados?">
+    Somente na primeira execução. Depois disso, apenas contatos criados nos últimos dois dias entram na rotina.
+  </Accordion>
+
+</AccordionGroup>

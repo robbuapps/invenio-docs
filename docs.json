@@ -63,7 +63,6 @@
                     "docs/center/dashboard-analitico",
                     "docs/center/dashboard-kpi-eventos",
                     "docs/center/dashboard-operacional",
-                    "docs/center/fila-de-atendimento",
                     "docs/center/filtros-de-busca-de-contatos",
                     "docs/center/gerenciar-host-de-acesso",
                     "docs/center/gestao-frases-prontas",
@@ -71,6 +70,7 @@
                     "docs/center/carga-ftp",
                     "docs/center/integracao-de-paginas",
                     "docs/center/bibliotecas-de-midias",
+                    "docs/center/omnichannel",
                     "docs/center/otimizacao",
                     "docs/center/painel-de-faturas",
                     "docs/center/pausas-no-atendimento",
@@ -87,6 +87,7 @@
                     "docs/center/web-chat",
                     "docs/center/webhook",
                     "docs/center/whatsapp-business-api"
+                    
                 ]
             },
             {
