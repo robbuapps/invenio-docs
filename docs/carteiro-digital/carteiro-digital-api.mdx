@@ -1,19 +1,19 @@
 ---
 title: "Carteiro Digital API – Documentos e Pix"
 sidebarTitle: "Carteiro Digital API – Documentos e Pix"
-description: "A API Carteiro Digital permite o envio automatizado e autenticado de documentos (boletos, faturas, PDFs e Pix) via WhatsApp, com rastreabilidade e validação do destinatário."
+description: "A API Carteiro Digital, da Robbu, permite a integração para envio automatizado de documentos (como boletos, faturas, PDFs e Pix) diretamente pelo WhatsApp, garantindo autenticação segura do destinatário. Ideal para comunicações financeiras, contratuais e informativas, essa solução
+oferece segurança, rastreabilidade e personalização, tornando o processo de envio mais ágil e confiável."
 ---
-
-A **API Carteiro Digital** possibilita o envio seguro de documentos e cobranças pelo WhatsApp, exigindo uma validação do destinatário antes do acesso ao arquivo. A integração é indicada para envios financeiros e documentos sensíveis que requerem autenticação.
 
 
 ## Autenticação
 
-Antes de realizar chamadas à API do Carteiro Digital, é necessário obter um token de acesso (`access_token`) utilizando a rota de login. Esse token deve ser enviado no cabeçalho das requisições no formato `Authorization: Bearer {access_token}`.
+Para utilizar a **API Carteiro Digital** , é necessário obter um token de acesso `(access_token)`. Esse token deve ser solicitado através da rota de login e posteriormente enviado na requisição da **API Carteiro Digital** como `Bearer Token`, permitindo que a operação seja autorizada e executada corretamente.
 
 > ⚠️ **Importante**:<br/>
-> - O usuário usado para autenticar deve ser do tipo **API**. Consulte [Usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios).<br/>
-> - O campo `expires_in` no response de login define a validade do token; por padrão pode ser considerado válido por longos períodos (ex.: 3333 dias). Se a rota de login for executada novamente, o token anterior será invalidado — armazene o token e solicite novo somente ao receber `401 Unauthorized`.
+> - Caso o token esteja ausente, inválido ou expirado, a API retornará o erro `401 Unauthorized`, impedindo a atualização ou criação do contato.
+> - O usuário utilizado na autenticação deve ser do tipo **API**, garantindo a segurança da integração e o funcionamento adequado do processo.<br/> Consulte: [Usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios).<br/>
+> - Não é necessário gerar um novo token a cada envio. O campo `expires_in` define sua validade em segundos e, por padrão, pode ser considerado válido por até **3333 dias**.<br/> É importante lembrar que, caso a rota de login seja **executada novamente**, o token anterior será **invalidado**. Por isso, a recomendação é armazená-lo e solicitar um novo apenas quando a requisição de envio retornar `401 Unauthorized`.
 
 
 ### Endpoint de Login
@@ -90,12 +90,14 @@ O envio deve incluir o cabeçalho `Authorization: Bearer {access_token}`.
 | `walletCode`           | Código da carteira cadastrada no Invenio. |
 | `contactPhoneNumber`   | Número do destinatário com DDI + DDD (ex.: `5511999999999`). |
 | `invalidTokenMessage`  | Mensagem exibida quando o token informado pelo usuário for inválido. |
-| `instructionsMessage`  | Mensagem com instruções enviada junto ao documento. |
+| `instructionsMessage`  | Mensagem com instruções enviada junto ao documento disparado. |
 | `documentCollection`   | Array com os documentos a serem enviados (veja estrutura abaixo). |
 
 > ⚠️ **Importante**:<br/>
-> - Apenas `invalidTokenMessage` e `instructionsMessage` podem ser totalmente personalizadas; demais mensagens do fluxo são geradas pelo sistema.<br/>
-> - As quebras de linha devem usar `\r\n` e emojis podem ser utilizados normalmente.
+> - Com exceção dos campos `invalidTokenMessage` e `instructionsMessage`, nenhuma outra mensagem ou frase exibida durante a jornada do contato pode ser personalizada, além dos próprios campos **variáveis da integração**. Esses dois campos são os únicos que permitem customização textual completa. <br/> 
+> 
+> - Além disso, para ambos é possível inserir **emojis** diretamente no código, bem como realizar **quebras de linha** utilizando os caracteres `\r\n`, garantindo maior flexibilidade na formatação da comunicação.
+
 
 ### Estrutura do campo `documentCollection`
 
@@ -108,7 +110,7 @@ O envio deve incluir o cabeçalho `Authorization: Bearer {access_token}`.
 
 > ⚠️ **Observações**:<br/>
 > - Converta seus arquivos para Base64 antes do envio (use encoders online se necessário).<br/>
-> - Respeite os limites de tamanho por tipo de mídia definidos pelo canal (consulte a tabela de limites do WhatsApp no Invenio Center).<br/>
+> - Respeite os limites de tamanho por tipo de mídia definidos pelo canal: [Consulte a tabela de limites do WhatsApp no Invenio Center](https://docs.robbu.global/docs/center/canal-whatsapp#m%C3%ADdias-suportadas).
 
 ---
 
@@ -122,7 +124,7 @@ O envio deve incluir o cabeçalho `Authorization: Bearer {access_token}`.
 | `404 Not Found` | URL incorreta. |
 | `500 Internal Server Error` | Erro interno da API. |
 
->  A API pode não retornar detalhes de erros de provedores externos (por exemplo Meta/WhatsApp). Para logs e detalhes de entrega, verifique o Invenio Center.
+>  A API pode não retornar detalhes de erros de provedores externos (**Por exemplo:** `Meta/WhatsApp`).<br/> Para logs e detalhes de entrega, verifique o **Invenio Center**.
 
 ---
 
@@ -130,7 +132,7 @@ O envio deve incluir o cabeçalho `Authorization: Bearer {access_token}`.
 
 Ao enviar o documento, o usuário destinatário precisa validar o acesso informando os **3 primeiros dígitos** do `contactId` (CPF/CNPJ). Se a validação for correta, o arquivo é disponibilizado.
 
-> ⚠️ Observação sobre CPFs iniciados por zero:<br/>
+> ⚠️ **Observação sobre CPFs iniciados por zero:**<br/>
 > - Para CPFs que começam com `0`, aceitamos a digitação dos três dígitos com ou sem o zero inicial. Ex.: `011.222.333-44` aceita `011` ou `112`.
 
 ---
@@ -140,6 +142,7 @@ Ao enviar o documento, o usuário destinatário precisa validar o acesso informa
 - Envio de documento (boleto) — já mostrado acima.
 - Envio de Pix — neste caso inclua `documentValue` com o valor do pagamento no objeto do `documentCollection`.
 
+**Exemplo:**
 
 
 ```json title="POST https://api.robbu.global/v2/digitalpostman" showLineNumbers
@@ -161,6 +164,7 @@ Ao enviar o documento, o usuário destinatário precisa validar o acesso informa
   ]
 }
 ```
+
 
 ---
 
