@@ -1,16 +1,18 @@
 ---
 title: "Autenticação"
 sidebarTitle: "Autenticação"
-description: "Para realizar chamadas no portal de integrações da Robbu, é necessário obter um Token de Acesso. Este token permite autenticação e autorização das requisições feitas à API."
+description: "Para consumir os serviços disponibilizados pelas APIs da Robbu, é obrigatória a geração de um Token de Acesso via API de autenticação.<br/>
+<br/>
+A autenticação deve ser realizada exclusivamente com usuários do tipo Intergração API, os quais devem ser criados especificamente para integrações. A geração do token de acesso viabiliza a autenticação das requisições assegurando o controle e a segurança do consumo dos serviços."
 ---
 
 
-### Request
+### Endpoint de Autenticação
 
+**Método:** POST <br/>
+**URL:** `https://api.robbu.global/v1/login`
 
-`https://api.robbu.global/v1/login`
-
-```json login.json
+```json Body
 {
     "Company": "#####",
     "Username": "#####",
@@ -22,9 +24,81 @@ description: "Para realizar chamadas no portal de integrações da Robbu, é nec
 
 | **Parâmetro** | **Tipo**   | **Obrigatório** | **Descrição**                           | **Exemplo**      |
 |---------------|------------|-----------------|-----------------------------------------|------------------|
-| `Company`     | `string`   | Sim             | Identificação única da empresa.         | `12345`          |
+| `Company`     | `string`   | Sim             | Nome da empresa no ambiente Invenio.    | `Robbu`          |
 | `Username`    | `string`   | Sim             | Nome de usuário para autenticação.      | `usuario_teste`  |
 | `Password`    | `string`   | Sim             | Senha associada ao usuário.             | `senha_secreta`  |
 
-#### Exemplos
+### Exemplo de response
 
+```json
+{ 
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5...", 
+  "expires_in": 287971200, 
+  "refresh_token": "", 
+  "token_type": "bearer" 
+} 
+```
+### Campos do Response
+
+| **Campo**       | **Descrição**                                                                 |
+|-----------------|-------------------------------------------------------------------------------|
+| `access_token`  | Token de acesso utilizado para autenticar as próximas requisições às APIs.    | 
+| `expires_in`    | Tempo de expiração do token, em segundos.                                     | 
+| `token_type`    | Tipo do token retornado, que deve ser informado no header das requisições. 
+
+> Não é necessário gerar um novo token de forma recorrente. O campo expires_in informa o tempo de validade do token em segundos e, por padrão, ele pode ser considerado válido por até 3333 dias.
+Vale ressaltar que, ao realizar uma nova chamada à rota de login, o token anteriormente emitido será automaticamente invalidado, passando a valer apenas o token mais recente.
+
+---
+
+## 🔗 Links e assuntos relacionados  
+
+- [API SendMessage](https://docs.robbu.global/docs/robbu-api/send-message)  
+- [Robbu Verify](https://docs.robbu.global/docs/robbu-api/verify)  
+- [Carteiro Digital API](https://docs.robbu.global/docs/carteiro-digital/carteiro-digital-api)  
+- [API Update Contact](https://docs.robbu.global/docs/robbu-api/api-update-contact)  
+- [Usuários](https://docs.robbu.global/docs/center/usuarios)  
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="Por que a autenticação deve ser realizada apenas com usuários do tipo Integração API?">
+    Usuários do tipo Integração API são destinados exclusivamente a integrações sistêmicas e não realizam login interativo na plataforma.
+
+    Quando credenciais de usuários que acessam a plataforma regularmente são utilizadas para autenticação via API, pode ocorrer a geração de um novo token a cada login na interface. Como consequência, o token anteriormente emitido para integrações é invalidado automaticamente.
+
+    Esse comportamento pode gerar expiração inesperada do token utilizado por outras integrações ativas, ocasionando falhas de autenticação e indisponibilidade nos serviços integrados.
+
+    Por esse motivo, recomenda-se sempre a utilização de usuários do tipo API, garantindo estabilidade, isolamento de acesso e maior previsibilidade no funcionamento das integrações. 
+</Accordion>
+
+  <Accordion title="Como devo enviar o token nas próximas requisições?">
+    O token retornado no campo access_token deve ser enviado no header das requisições no seguinte formato:
+
+    ```http
+    Authorization: Bearer {access_token}
+    ```
+    O valor deve respeitar o token_type retornado no response. Por padrão utilizamos o tipo bearer token.
+  </Accordion>
+
+  <Accordion title="Preciso gerar um novo token a cada requisição?">
+    Não. O token possui validade definida pelo campo expires_in (em segundos).
+
+    Por padrão, ele pode ser considerado válido por até 3333 dias, não sendo necessário gerar tokens de forma recorrente.
+  </Accordion>
+
+  <Accordion title="O que acontece se eu executar novamente a rota de login?">
+    O token anterior será automaticamente **invalidado**. Isso significa que apenas o token mais recente permanecerá válido.
+  </Accordion>
+
+  <Accordion title="Como saber se o token estiver expirado ou inválido?">
+    A API retornará erro de autenticação (401 – Unauthorized), indicando que é necessário gerar um novo Token de acesso válido. 
+ </Accordion>
+
+  <Accordion title="É possível utilizar o mesmo token em múltiplas integrações?">
+    Sim. No entanto, é importante lembrar que, se uma das integrações gerar um novo token via login, o token anterior será invalidado para todas.
+  </Accordion>
+
+</AccordionGroup>
