@@ -1,22 +1,197 @@
 ---
-title: "Tipos de KPI"
+title: "KPI Eventos"
 sidebarTitle: "Tipos de KPI"
-description: "Configure KPIs de eventos com tipos específicos para otimizar o registro de interações no Invenio Live e na IDR. Essa funcionalidade permite uma integração precisa com a API CAPI da Meta, garantindo melhor análise da performance das campanhas publicitárias."
+description: "Os eventos permitem registrar de forma estruturada cada etapa do atendimento ao cliente. Com esse recurso, será possível mapear todo caminho percorrido pelo contato, tanto no atendimento humano quanto durante a interação com o chatbot. 
+
+
+Ao configurar e utilizar o **KPI Eventos**, você personaliza o fluxo da sua operação e transforma essas etapas em métricas estratégicas. Dessa forma, é possível extrair insights valiosos para analisar desempenho, otimizar processos e apoiar decisões importantes da gestão. "
 ---
 
-### Funcionamento  
-Ao associar um KPI a um tipo específico, ele será automaticamente utilizado no registro de eventos dentro do **Invenio Live** e da **IDR**. Essa configuração facilita a categorização dos eventos, permitindo que cada interação seja devidamente registrada conforme seu propósito.
 
-Além disso, sempre que um contato iniciar uma conversa a partir de um link de anúncio, um evento será automaticamente enviado à **API CAPI da Meta**. Isso garante que a plataforma da Meta receba dados precisos sobre a interação, possibilitando uma análise detalhada da efetividade das campanhas publicitárias dos clientes.
+**Caminho:** Invenio Center > Recursos > **KPI Eventos**
 
-### Como configurar  
-Para configurar um KPI de evento com um tipo específico, siga os passos abaixo:
+<Tip>
+**Acesso direto:** [KPI Eventos](https://inveniocenter.robbu.com.br/painel/eventos)
+</Tip>
 
-1. Acesse a seção **KPI – Eventos** no painel de administração.
-2. Clique em **Cadastrar novo evento**.
-3. Escolha um **Tipo** específico relacionado ao evento.
-4. Salve a configuração para ativar a categorização automática dos eventos.
 
-<img src="https://i1.wp.com/robbu.global/wp-content/uploads/2025/01/KPI-events.png?resize=768%2C620&ssl=1" />
+<img src="https://storage.robbu.global/v2/file/6DFF97FB89EAD28C03F8088D355206A1" />
 
-Essa funcionalidade melhora a rastreabilidade dos eventos e a qualidade dos dados analisados, permitindo decisões mais estratégicas com base no desempenho das campanhas.
+### Criação de Eventos
+
+Crie os eventos para utilizar em sua operação.
+
+1. Acesse o Invenio Center.
+2. Vá em Recursos > KPI Eventos.
+3. No canto direito da tela, escolha a opção **+ Adicionar Evento **.
+
+<img src="https://storage.robbu.global/v2/file/6F57019523D3A0DF9A2FA99AEA8A6D78" />
+
+Entenda os campos da criação:
+
+- **Descrição:** Escolha um nome para seu evento. 
+- **Código cliente:** Utilize no chatbot, caso queira registrar um evento em algum momento do fluxo, ressalto que esse código tem que ser único. 
+- **Segmento:** É possível deixar o evento para um segmento específico e será exibido apenas para operadores associados ao segmento determinado ou para ‘todos’ que engloba toda operação. 
+- **Webhook:** Capture informações de determinado evento e crie gatilhos na IDR utilizando essa opção.  
+- **Tipo:** Ao associar um KPI a um tipo específico, ele será automaticamente utilizado no registro de eventos dentro do Invenio Live e da IDR. Essa configuração facilita a categorização dos eventos, permitindo que cada interação seja devidamente registrada conforme seu propósito. 
+- **Ocultar no Invenio:** Defina se o evento irá ficar visível para operação ou não, comumente utilizado em eventos criados apenas para o chatbot. 
+- **KPI:** Defina se o evento representa algo neutro, positivo ou negativo em sua operação, por exemplo, cliente aceitou acordo é o evento, ele será positivo para sua operação.  
+- **Finalizar atendimento:** Defina se o evento irá finalizar o atendimento. 
+- **Exibir valor:** Ativando essa opção, é possível incluir valores, esses valores, como valores financeiros, quantidades ou pontuações, são posteriormente organizados no dashboard em diferentes formas de visualização. 
+- **CPC:** Contato Pessoa Certa, é utilizado quando o contato é a pessoa que vocês estejam procurando, sendo assertivos nos próximos contatos. 
+
+**Configurando eventos Voice:** 
+Utilize essas opções se seu KPI for relacionado com voice. Caso seja mensageria, deixe tudo como não.  
+
+- **Rediscagem:** Realiza a rediscagem automática ao contato nos minutos determinados. 
+- **Próximo telefone:** Passa para a próxima ligação 
+- **Agendamento:** Determine a quantidade de tentativas e agendamento máximo de dias. 
+- **Interromper contato:** Encerra a ligação. 
+- **Interromper telefone:** Bloqueia o telefone.
+
+<img src="https://storage.robbu.global/v2/file/263318D022FCEC09AE1AD40FBD0CFE0B" />
+
+
+<Note>
+**Importante:** É possível editar ou deletar um evento, basta localiza e ir aos três pontinhos no canto direito da página.
+</Note>
+
+## Localizando Eventos
+
+ A plataforma oferece filtros que permitem localizar rapidamente os eventos cadastrados e utilizados na operação. Essa busca pode ser realizada de forma simples por meio dos seguintes critérios: 
+
+ - **Descrição:** Busque utilizando o nome exato do evento criado (ex.: Em andamento, Retorno agendado, sem resposta do cliente). 
+ - **Segmento:** Filtre apenas os eventos relacionados à carteira/segmento desejado, facilitando análises específicas. 
+ - **Código do cliente:** Utilize o código do cliente, o mesmo aplicado no chatbot. 
+  
+
+Esses filtros permitem uma navegação mais ágil, garantindo eficiência no acompanhamento dos registros dentro da plataforma. 
+
+## Dados Gerados pelos KPI de Eventos
+
+ Os **KPI Eventos** permitem que as ações registradas nos atendimentos se transformem em informações estratégicas para tomada de decisão. 
+
+ A partir da configuração e utilização dos eventos personalizados, a plataforma passa a gerar dados consolidados sobre: 
+
+ - Volume de atendimentos;
+ - Produtividade operacional;
+ - Fluxo e comportamento dos atendimentos;
+ - Acompanhamento detalhado da jornada do cliente.
+
+  Esses dados tornam-se métricas poderosas para análise de desempenho, monitoramento da operação e identificação de oportunidades de melhoria. 
+
+
+## Criação de Dashboards com KPI Eventos
+
+ Você pode utilizar os KPIs gerados para montar dashboards personalizados e visuais, possibilitando uma visão clara dos indicadores da sua operação. 
+
+Utilize a documentação para criar seu Dashboard de KPI Eventos.
+
+<Tip>
+**Acesse:** [KPI Eventos](http://localhost:3000/docs/center/dashboard-kpi-eventos)
+</Tip> 
+
+## Relatórios Relacionados a KPI de Eventos 
+
+ A plataforma disponibiliza relatórios que auxiliam no acompanhamento e mensuração dos KPIs. Os principais são:  
+
+**KPI Eventos**
+
+Este relatório permite analisar os eventos personalizados, aplicando filtros como: 
+
+- Período de análise (máximo de 30 dias por filtro) 
+- Segmento
+- Evento desejado  
+- Operador específico (opcional)  
+- Canal utilizado no atendimento (opcional) 
+
+**Fluxo IDR – KPIs**  
+
+Este relatório exibe exclusivamente os KPIs vinculados à IDR (Interação de Resposta). Por meio dele, é possível acompanhar o desempenho e o comportamento das interações realizadas nessa etapa do fluxo automatizado. 
+
+Para utilizar o relatório:  
+
+- Período de análise (máximo de 30 dias por filtro) 
+- Escolha a IDR que deseja validar dentro da lista disponível.
+
+Após a seleção, o sistema apresentará os indicadores relacionados à IDR escolhida, exibindo a trilha que o contato passou através dos eventos.  
+
+## KPI do Sistema   
+
+Além dos eventos personalizados, a plataforma possui eventos nativos que são automaticamente registrados pelo sistema, tais como:  
+
+- Protocolo criado  
+- Protocolo encerrado  
+- Movimentação entre segmentos  
+- Troca de operadores durante o atendimento 
+
+  
+Esses eventos fixos garantem rastreabilidade completa do processo, mesmo sem a criação de eventos personalizados. 
+
+  
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="O que são KPI Eventos?">
+    São indicadores baseados em eventos registrados durante o atendimento ao cliente, tanto no atendimento humano quanto no chatbot. Eles permitem mapear cada etapa percorrida pelo contato, gerando métricas valiosas para análises e tomada de decisão.
+  </Accordion>
+
+  <Accordion title="Para que serve criar eventos personalizados?">
+    A criação de eventos possibilita: 
+    - Personalizar a operação de atendimento. 
+    - Registrar etapas específicas do fluxo.  
+    - Extrair dados estratégicos.  
+    - Mensurar produtividade, volume e desempenho da jornada do cliente. 
+  </Accordion>
+
+  <Accordion title="Onde acesso o KPI Eventos no Invenio Center?">
+    **Caminho:** Invenio Center > Recursos > **KPI Eventos**
+  </Accordion>
+
+  <Accordion title="Para que servem as configurações de KPI Voice?">
+   Essas opções são utilizadas apenas em operações de voz. Caso seja mensageria, devem permanecer desativadas. 
+
+   Funções disponíveis:  
+
+   - Rediscagem automática
+   - Passar para próximo telefone
+   - Agendamento com limite 
+   - Interromper contato  
+   - Bloquear telefone   
+  </Accordion>
+
+  <Accordion title="Posso editar ou excluir um evento?">
+    Sim. Basta localizar o evento desejado e acessar o menu (três pontinhos) para editar ou deletar.
+  </Accordion>
+
+  <Accordion title="Como localizar um evento já criado?">
+    Você pode usar filtros por:  
+
+   - Descrição (nome do evento)
+   - Segmento 
+   - Código do cliente
+
+   Esses filtros tornam a busca mais rápida e eficiente. 
+  </Accordion>
+
+  <Accordion title="Quais dados posso obter com KPI Eventos?">
+    Os eventos geram métricas relacionadas à:  
+
+    - Volume de atendimentos 
+    - Produtividade da operação  
+    - Fluxo e comportamento da jornada  
+    - Desempenho de etapas específicas do atendimento 
+  </Accordion>
+
+  <Accordion title="Posso criar dashboards com esses KPIs?">
+    Sim! Os dados gerados podem ser exibidos em dashboards personalizados, permitindo visão visual e estratégica dos indicadores da operação. 
+  </Accordion>
+
+
+ <Accordion title="Quais relatórios posso utilizar com KPI Eventos?">
+   KPI - Eventos e  Fluxo IDR – KPIs.
+  </Accordion>
+  </AccordionGroup>
+
+
+ 
