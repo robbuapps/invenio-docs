@@ -1,24 +1,23 @@
 ---
 title: "API - Consulta de Templates HSM"
-description: "Documentação técnica sobre a consulta de templates HSM via API no Invenio."
+description: "A API de **Consulta de Templates HSM** do Invenio permite visualizar de forma prática todos os modelos de mensagem estruturada (HSM) cadastrados no ambiente, incluindo aqueles aprovados, pausados ou desabilitados. Essa integração é ideal para equipes que desejam acompanhar e gerenciar seus templates ativos antes de realizar disparos via WhatsApp Business API."
 sidebarTitle: "API Consulta de Templates"
----
-
-##  API - Consulta de Templates HSM
-
-A API de **Consulta de Templates HSM** do Invenio permite visualizar de forma prática todos os modelos de mensagem estruturada (HSM) cadastrados no ambiente, incluindo aqueles aprovados, pausados ou desabilitados. Essa integração é ideal para equipes que desejam acompanhar e gerenciar seus templates ativos antes de realizar disparos via WhatsApp Business API.
-
 ---
 
 ##  Autenticação
 Para consumir esta API, é necessário possuir o **token privado da conta** configurada no Invenio. Esse token pode ser localizado ao final da página de configurações da conta dentro do Invenio Center.
 
-![tokens](https://robbublob.blob.core.windows.net/docs/tokens.png)
+### **Para localizar as configurações da conta, siga o caminho:**
+**Invenio Center → Configurações →  Conta**
+
+[Clique para acessar as Configurações da Conta](https://inveniocenter.robbu.com.br/painel/configuracoes/conta)
+
+![tokens](https://storage.robbu.global/v2/file/1598D047A7945B0306CCC4B0AABB66AA)
 
 ---
 
 ##  Requisição
-**URL de requisição:**
+**URL:**
 ```http
 http://s.robbu.com.br/wsInvenioAPI.ashx?token={tokenPrivado}&acao=buscartemplates
 ```
@@ -58,7 +57,7 @@ http://s.robbu.com.br/wsInvenioAPI.ashx?token={tokenPrivado}&acao=buscartemplate
 
 ---
 
-##  Exemplo de Resposta
+##  Exemplo de Response
 ```json
 [
   {
@@ -76,7 +75,7 @@ http://s.robbu.com.br/wsInvenioAPI.ashx?token={tokenPrivado}&acao=buscartemplate
     "NomeCliente": "ROBBU ATENDIMENTO",
     "StatusWhatsapp": "APPROVED",
     "NomeContaWhatsApp": "ROBBU ATENDIMENTO - waba Robbu",
-    "HashTemplateMensagem": "A316D01E1",
+    "HashTemplateMensagem": "xxxxxxxxx",
     "HashCarteira": null
   }
 ]
@@ -86,9 +85,9 @@ http://s.robbu.com.br/wsInvenioAPI.ashx?token={tokenPrivado}&acao=buscartemplate
 ---
 
 ##  Recomendações
-- O endpoint pode ser acessado diretamente pelo navegador, facilitando testes e validações manuais.
-- O retorno da requisição é um array em formato JSON.
-- Para melhor leitura, recomenda-se o uso de ferramentas como Postman ou JSON Formatter.
+É possível acessar esse endpoint diretamente pelo navegador, o que facilita a realização de testes rápidos e validações manuais.
+
+O retorno da requisição é exibido em formato JSON, estruturado como um array. Para uma visualização mais clara e organizada dos dados, recomenda-se a utilização de ferramentas como o Postman ou extensões específicas para formatação de JSON no navegador.
 
 ---
 
