@@ -4,7 +4,6 @@ sidebarTitle: "Carteiro Digital"
 description: "Serviço de envio seguro de documentos via WhatsApp com autenticação."
 ---
 
-##  Carteiro Digital
 
 O **Carteiro Digital** é um serviço automatizado que permite o envio seguro de documentos personalizados via WhatsApp, com autenticação do destinatário. Essa funcionalidade foi criada para facilitar a entrega de faturas, boletos e arquivos PDF de forma simples, rápida e segura, garantindo que os documentos sejam recebidos exclusivamente pela pessoa autorizada.
 
@@ -16,13 +15,22 @@ O Carteiro Digital pode ser utilizado em diversos cenários, com destaque para:
 - Faturas personalizadas
 - Documentos em PDF (como contratos, notificações, entre outros)
 
-Esse recurso é ideal para empresas que desejam manter um processo seguro, automatizado e escalável para comunicações sensíveis com seus clientes.
+> Esse recurso é ideal para empresas que desejam manter um processo seguro, automatizado e escalável para comunicações sensíveis com seus clientes.
+
+---
 
 ##  Como acessar o Carteiro Digital
 
-Para utilizar o Carteiro Digital, é necessário que o usuário tenha um acesso cadastrado no Invenio Center, com o grupo de acesso “Carteiro Digital” habilitado. Após esse cadastro, basta acessar o portal do Carteiro Digital com suas credenciais através do link: [https://carteirodigital.robbu.global/](https://carteirodigital.robbu.global/)
+Para utilizar o Carteiro Digital, é necessário que o usuário tenha um acesso cadastrado no Invenio Center, com o grupo de acesso “Carteiro Digital” habilitado. Após esse cadastro, basta acessar o portal do Carteiro Digital com suas credenciais através do link: 
+
+[https://carteirodigital.robbu.global/](https://carteirodigital.robbu.global/)
 
 ![Login Carteiro Digital](https://robbublob.blob.core.windows.net/docs/carteirodigital.png)
+
+> Para mais detalhes sobre a criação e configuração de usuários, consulte a documentação abaixo:<br/> [Usuários - Invenio Center](https://docs.robbu.global/docs/center/usuarios)
+
+---
+
 ##  Criando um envio
 
 ### Identificação do destinatário
@@ -32,9 +40,10 @@ Nesta etapa, você irá preencher os dados do contato que receberá o documento.
 **Campos obrigatórios:**
 
 - **Nome:** Nome completo da pessoa que receberá a mensagem.
-- **CPF ou CNPJ:** Utilizado como critério de validação para confirmar a identidade.
+- **CPF ou CNPJ:** CPF ou CPNJ do destinatário. Utilizado como critério de validação para confirmar a identidade.
 - **Telefone:** Número de WhatsApp que receberá a mensagem.
-- **Segmento:** Define a carteira à qual o contato será vinculado no Invenio Center.
+- **Segmento:** Define a carteira à qual o contato será vinculado.
+
 ![contato carteiro](https://robbublob.blob.core.windows.net/docs/contatocarteiro.png)
 
 
@@ -58,43 +67,114 @@ Após o envio, é possível verificar se o documento foi entregue e validado com
 1. Acesse a aba de “Contatos Recentes”.
 2. Encontre o destinatário desejado.
 3. Verifique o status de entrega:
-   - **Validado:** Significa que o destinatário passou pelo processo de autenticação e recebeu o documento corretamente.
+
+- **Validado:** Significa que o destinatário passou pelo processo de autenticação e recebeu o documento corretamente.
+
+<img src="https://storage.robbu.global/v2/file/534CAF5030A163E303C23B877FE1E1CC" />
+
    - **Não validado:** Indica que o contato ainda não confirmou a identidade, ou não recebeu/interagiu com a mensagem enviada.
+
+<img src="https://storage.robbu.global/v2/file/534CAF5030A163E38E741FC4D3D4A45E" />
+
+   - **Modelo de recebimento via WhatsApp** 
+
+<img src="https://storage.robbu.global/v2/file/534CAF5030A163E3D2C32A8D8C01C974" />
 
 Esse controle oferece mais segurança e rastreabilidade no processo de entrega, sendo especialmente importante em casos que envolvam documentos financeiros ou jurídicos.
 
-_Imagem 4 – Tela do carteiro com exemplo de envio validado e não validado_
 
-O **Carteiro Digital** é uma solução que combina praticidade, segurança e escalabilidade para a entrega de documentos via WhatsApp. Ao garantir a autenticação do destinatário, ele reduz falhas de comunicação, elimina a necessidade de envio manual e melhora significativamente a eficiência dos processos de cobrança, atendimento e pós-venda.
+> O **Carteiro Digital** é uma solução que combina praticidade, segurança e escalabilidade para a entrega de documentos via WhatsApp. Ao garantir a autenticação do destinatário, ele reduz falhas de comunicação, elimina a necessidade de envio manual e melhora significativamente a eficiência dos processos de cobrança, atendimento e pós-venda.
 
-## 🙋‍♂️ FAQ
 
-<AccordionGroup>
+---
 
-<Accordion title="Preciso de um usuário específico para acessar o Carteiro Digital??">
-Sim. É necessário ter um usuário ativo no Invenio Center com o grupo de acesso “Carteiro Digital” habilitado.
+## 🔗 Links e assuntos relacionados
+
+- [Usuários -  Invenio Center](https://docs.robbu.global/docs/center/usuarios)  
+- [Carteiro Digital - API](https://docs.robbu.global/docs/carteiro-digital/carteiro-digital-api)  
+- [Segmentos - Invenio Center](https://docs.robbu.global/docs/center/segmentos)
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<Accordion title="Preciso de um usuário específico para acessar o Carteiro Digital?">
+
+Sim. Para acessar o sistema, é necessário possuir um usuário ativo no **Invenio Center** com o grupo de acesso **“Carteiro Digital”** habilitado.
+
 </Accordion>
 
-<Accordion title= "O envio funciona apenas com documentos PDF?">
-Não. Você pode enviar também um link externo (URL) ou apenas a linha digitável de um boleto.
+<Accordion title="O envio funciona apenas com documentos PDF?">
+
+Não. O Carteiro Digital permite três formatos de envio:
+
+- Documento PDF  
+- Link externo (URL)  
+- Linha digitável  
+
+Isso permite flexibilidade total no envio de boletos, contratos e documentos diversos.
+
 </Accordion>
 
 <Accordion title="Como é feita a autenticação do destinatário?">
-A autenticação ocorre com base nos três primeiros dígitos do CPF ou CNPJ informados no envio.
+
+A autenticação é realizada utilizando os **três primeiros dígitos do CPF ou CNPJ** informados durante o envio do documento.  
+Somente após validar corretamente o código o destinatário acessa o conteúdo.
+
 </Accordion>
 
-<Accordion title="É possível acompanhar se o documento foi entregue?"> 
-Sim. O sistema mostra se o destinatário validou ou não a mensagem acessando a aba "Contatos Recentes".
+<Accordion title="É possível acompanhar se o documento foi entregue?">
+
+Sim. A aba **“Contatos Recentes”** permite visualizar:
+
+- **Validado** – o destinatário confirmou a identidade e recebeu o documento  
+- **Não validado** – o destinatário não confirmou a identidade ou não interagiu com a mensagem  
+
 </Accordion>
 
-<Accordion title="E se o destinatário errar o código de autenticação?"> 
-Ele verá a mensagem configurada como resposta para token inválido, permitindo nova tentativa ou redirecionamento para suporte.
+<Accordion title="E se o destinatário errar o código de autenticação?">
+
+O destinatário verá a mensagem configurada como resposta para **token inválido**, podendo tentar novamente ou seguir para suporte, conforme o fluxo definido.
+
 </Accordion>
 
-<Accordion title="Posso integrar esse processo a sistemas externos?">
-Sim. Existe uma API pública documentada que permite a integração do envio com autenticação via WhatsApp.
+<Accordion title="Posso integrar o Carteiro Digital a sistemas externos?">
+
+Sim. O sistema possui uma **API pública** que permite criar envios, validar códigos e acompanhar status diretamente de plataformas externas.
+
 </Accordion>
 
-</AccordionGroup>
+<Accordion title="Por que estou recebendo o erro “found more than one wallet using this code” ao disparar um documento?">
 
+Esse erro ocorre quando **mais de uma carteira (segmento)** utiliza o **mesmo código de segmentação**.
 
+Como o código precisa ser **único**, o sistema não consegue identificar qual carteira utilizar no momento do disparo.
+
+**Para resolver:**
+
+1. Acesse **Segmentos** no Invenio Center.  
+2. Localize as carteiras com código duplicado.  
+3. Ajuste o código da carteira desejada para um valor único.  
+4. Tente o disparo novamente.  
+
+Após corrigir, o envio funcionará normalmente.
+
+</Accordion>
+
+<Accordion title="O que é o segmento informado no envio?">
+
+O segmento define a **carteira** vinculada ao contato. Ele determina regras operacionais, permissões e o direcionamento adequado dentro do Carteiro Digital.
+
+</Accordion>
+
+<Accordion title="Posso enviar linha digitável e PDF ao mesmo tempo?">
+
+Sim. Se o envio for um boleto, você pode anexar o **PDF** e também incluir a **linha digitável**, facilitando o pagamento para o cliente.
+
+</Accordion>
+
+<Accordion title="O Carteiro Digital funciona com qualquer telefone WhatsApp?">
+
+Sim. Qualquer número ativo no WhatsApp pode receber documentos enviados pelo Carteiro Digital, desde que seja válido e esteja acessível.
+
+</Accordion>
