@@ -1,18 +1,24 @@
 ---
 title: "API – Update Contact"
-description: "Criação e atualização automatizada de contatos no ambiente Invenio via integração."
 sidebarTitle: "API Update Contact"
----
+description: "A **API Update Contact** é responsável pela criação e atualização automatizada de contatos no ambiente Invenio, por meio de uma integração API. Esse serviço permite inserir novos registros ou modificar informações existentes de forma simples, rápida e segura, garantindo que a base de dados permaneça sempre atualizada. 
 
-##  API Update Contact – Criação e Atualização de Contatos
-
-A **API Update Contact** permite que você crie ou atualize registros de contatos dentro do ambiente **Invenio** de forma simples e automatizada. Esse recurso é essencial para manter a base de dados sempre atualizada, garantindo que o atendimento e os fluxos automáticos da plataforma funcionem com mais eficiência e precisão.
+Ao manter os contatos organizados e consistentes, a API contribui para a eficiência dos atendimentos, automações e fluxos operacionais da plataforma, assegurando maior precisão nos processos e melhor experiência para o usuário."
 
 ---
+
 
 ##  Autenticação
 
-Para utilizar esta API, é necessário realizar uma autenticação prévia via API de Login.
+Para utilizar a **API Update Contact**, é necessário obter um token de acesso `(access_token)`. Esse token deve ser solicitado através da rota de login e posteriormente enviado na requisição da API Update Contact como `Bearer Token`, permitindo que a operação seja autorizada e executada corretamente. 
+
+>⚠️ **Importante:** Caso o token esteja **ausente, inválido ou expirado**, a API retornará o erro `401 Unauthorized`, impedindo a atualização ou criação do contato.<br/>
+> O usuário utilizado na autenticação deve ser do tipo **API**, garantindo a segurança da integração e o funcionamento adequado do processo.<br/>
+> Consulte também: [Usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios).
+
+
+
+
 
 ### Endpoint de Login
 ```http
@@ -34,8 +40,8 @@ POST https://api.robbu.global/v1/login
 | Username  | Nome do usuário com permissão do grupo de acesso "Integração API"        |
 | Password  | Senha do usuário de integração                                           |
 
- O token de autenticação tem um tempo de expiração (campo `expires_in`), podendo durar até **3333 dias**. Caso a API retorne `"title": "Unauthorized"`, será necessário renovar o token.
-
+ 
+ > Não é necessário gerar um novo token a cada envio. O campo `expires_in` define sua validade em segundos e, por padrão, pode ser considerado válido por até 3333 dias.<br/> É importante lembrar que, caso a rota de login seja executada novamente, o token anterior será invalidado. Por isso, a recomendação é armazená-lo e solicitar um novo apenas quando a requisição de envio retornar `401 Unauthorized`.
 
 ---
 
@@ -46,15 +52,16 @@ POST https://api.robbu.global/v1/login
 ```http
 POST https://robbuapi.azurewebsites.net/v1/updatecontact
 ```
+> O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: Bearer {access_token}`
 
-### Corpo da requisição
+### Body
 ```json
 {
   "invenioPrivateToken": "SEU_TOKEN_PRIVADO",
   "name": "João da Silva",
   "customCode": "cliente_001",
   "id": "12345678900",
-  "tag": "prioridade_alta",
+  "tag": "Alta",
   "jokers": ["R$50,00", "Contrato123", "Xpto", "coringa4", "coringa5"],
   "walletClientCode": "CART001"
 }
@@ -79,12 +86,43 @@ POST https://robbuapi.azurewebsites.net/v1/updatecontact
 
 ##  Respostas da API
 
+A API pode retornar **400 – Bad Request** quando algum parâmetro da requisição não atende às validações exigidas. Nesses casos, o response body informa exatamente qual campo gerou o problema. Alguns exemplos são: 
+
+- `invalid private token – O private token informado é inválido ou não autorizado.`
+
+- `invalid id (cpf/cnpj/nif) – O documento enviado (CPF, CNPJ ou NIF) está incorreto ou fora do padrão esperado.` 
+
+- `invalid wallet – O segmento especificado não existe ou não está ativo.`
+
+
 | Código | Descrição                                      |
-|--------|-------------------------------------------------|
+|--------|------------------------------------------------|
 | 200    | Contato atualizado ou inserido com sucesso     |
 | 400    | Erro de validação nos parâmetros da requisição |
 | 401    | Token inválido ou expirado                     |
 | 500    | Erro interno do servidor                       |
+
+
+---
+
+## Criação de Contatos 
+
+Quando a API recebe uma requisição contendo dados de um contato, ela verifica se já existe um registro correspondente no ambiente Invenio, com base nas informações encaminhadas (como nome e CPF/CNPJ). Caso nenhum contato existente seja encontrado, a API interpreta a operação como uma **criação de novo registro**. Dessa forma, um novo contato é automaticamente inserido na base utilizando
+exatamente os dados fornecidos na requisição. Esse processo garante que informações novas sejam incorporadas ao sistema de forma consistente, evitando duplicidade e mantendo a base sempre atualizada.
+
+
+---
+
+## 🔗 Links e assuntos relacionados
+
+
+- [Usuários no Invenio Center](https://docs.robbu.global/docs/center/usuarios)
+- [API Send Message](https://docs.robbu.global/docs/robbu-api/send-message)
+- [Segmentos no Invenio Center](https://docs.robbu.global/docs/center/segmentos)
+- [Criação de contatos - Invenio Center](https://docs.robbu.global/docs/center/criacao-de-contatos-invenio-center)
+- [Configurações Gerais da Conta](https://docs.robbu.global/docs/center/configuracoes-gerais-da%20conta)
+- [Variaveis de sistema - Invenio](https://docs.robbu.global/docs/center/variaveis-de-sistema)
+
 
 ---
 
