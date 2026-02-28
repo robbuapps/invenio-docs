@@ -1,11 +1,12 @@
 ---
 title: "Robbu Verify"
 sidebarTitle: "Robbu Verify"
-description: "Robbu Verify permite verificar se um número de telefone está ativo no WhatsApp. Este serviço é ideal para integrar em sistemas que precisam confirmar a presença no WhatsApp antes de interagir com um usuário."
+description: "O Robbu Verify é uma API que permite validar se um número de telefone está ativo no WhatsApp antes de iniciar qualquer interação.
+<br/>
+Essa verificação aumenta a assertividade das comunicações, evita tentativas de envio para números inválidos e contribui para a eficiência das integrações.
+<br/>
+Para utilizar o serviço, é necessário solicitar a habilitação junto à equipe comercial da Robbu."
 ---
-
-## Introdução
-O serviço Robbu Verify API oferece a funcionalidade de verificar se um número de telefone está ativo no WhatsApp, tornando-se uma solução essencial para sistemas que exigem a validação da presença no WhatsApp antes de realizar qualquer interação com o usuário. Para utilizar este serviço, é necessário entrar em contato com a equipe comercial da Robbu para habilitá-lo na sua conta.
 
 ## Integração
 
@@ -41,16 +42,57 @@ Ambos os tokens devem ser incluídos como cabeçalhos na requisição HTTP.
 
 <Tip>Clique <a href="https://inveniocenter.robbu.global/painel/configuracoes/conta" target="_blank">aqui</a> para obter o Private Token do seu ambiente.</Tip>
 
+## Obteção de Tokens
+
+### Token Privado
+Para consumir esta API, é necessário possuir o **token privado da conta** configurada no Invenio. Esse token pode ser localizado ao final da página de configurações da conta dentro do Invenio Center.
+### **Para localizar as configurações da conta, siga o caminho:**
+**Invenio Center → Configurações →  Conta**
+
+[Clique para acessar as Configurações da Conta](https://inveniocenter.robbu.com.br/painel/configuracoes/conta)
+
+![tokens](https://storage.robbu.global/v2/file/1598D047A7945B0306CCC4B0AABB66AA)
+
+### Authorization
+Além do token privado, é obrigatória a inclusão de um token de autorização nas requisições.
+
+Esse token de autorização deve ser obtido por meio da API de login e enviado no header da requisição para validação de acesso.
+
+Abaixo estão as instruções para geração do token.
+
+**Endpoint de Login**
+
+Para gerar o token de autorização, realize a autenticação conforme o exemplo abaixo:
+
+Método: POST
+URL: https://api.robbu.global/v1/login
+
+```json Body
+{
+    "Company": "#####",
+    "Username": "#####",
+    "Password": "#####"
+}
+```
+
+**Parâmetros da Requisição**
+
+| **Parâmetro** | **Tipo**   | **Obrigatório** | **Descrição**                           | **Exemplo**      |
+|---------------|------------|-----------------|-----------------------------------------|------------------|
+| `Company`     | `string`   | Sim             | Nome da empresa no ambiente Invenio.    | `Robbu`          |
+| `Username`    | `string`   | Sim             | Nome de usuário para autenticação.      | `usuario_teste`  |
+| `Password`    | `string`   | Sim             | Senha associada ao usuário.             | `senha_secreta`  |
+
 ####  Modelo de Requisição
 
 #####  Headers
 
 <ParamField header="PrivateToken" type="string" placeholder="Teste" required="true">
-29d08afc-a349-42b8-995a-562242999
+xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 </ParamField>
 
 <ParamField header="Authentication" type="string" placeholder="Bearer" required="true">
-Bearer MEU_TOKEN
+Bearer TOKEN
 </ParamField>
 
 #####  Body
@@ -67,7 +109,7 @@ Bearer MEU_TOKEN
 curl --location 'https://api.robbu.global/v1/verify' \
 --header 'Content-Type: application/json' \
 --header 'PrivateToken: teste' \
---header 'Authorization: Bearer MEU_TOKEN' \
+--header 'Authorization: Bearer TOKEN' \
 --data '{
     "PhoneNumbers": [
         "14128880043",
@@ -87,7 +129,7 @@ curl --location 'https://api.robbu.global/v1/verify' \
 var client = new HttpClient();
 var request = new HttpRequestMessage(HttpMethod.Post, "https://api.robbu.global/v1/verify");
 request.Headers.Add("PrivateToken", "teste");
-request.Headers.Add("Authorization", "Bearer MEU_TOKEN");
+request.Headers.Add("Authorization", "Bearer TOKEN");
 var content = new StringContent("{\n    \"PhoneNumbers\": [\n        \"14128880043\",\n        \"56971332420\",\n        \"17077878069\",\n        \"18176475163\",\n        \"50431999232\",\n        \"51941700660\",\n        \"18057965469\",\n        \"18402846702\",\n        \"15097929172\"\n    ]\n}\n", null, "application/json");
 request.Content = content;
 var response = await client.SendAsync(request);
@@ -123,7 +165,7 @@ xhr.addEventListener("readystatechange", function() {
 xhr.open("POST", "https://api.robbu.global/v1/verify");
 xhr.setRequestHeader("Content-Type", "application/json");
 xhr.setRequestHeader("PrivateToken", "teste");
-xhr.setRequestHeader("Authorization", "Bearer MEU_TOKEN");
+xhr.setRequestHeader("Authorization", "Bearer TOKEN");
 
 xhr.send(data);
 ```
@@ -213,8 +255,3 @@ xhr.send(data);
   </Accordion>
 
 </AccordionGroup>
-
-#### Consulte se um número tem WhatsApp
-
-<input type="number" />
-<button id="btn-consultar-whatsapp">Teste</button>
