@@ -119,6 +119,12 @@
                 ]
             },
             {
+                "group": "Orion",
+                "pages": [
+                    "docs/orion/api-add-contact-mailing"
+                ]
+            },            
+            {
                 "group": "Atualizações",
                 "pages": [
                     "changelog"

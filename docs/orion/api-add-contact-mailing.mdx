@@ -1,0 +1,240 @@
+---
+title: "Importar Contatos para Mailing"
+sidebarTitle: "Mailing Contacts"
+description: "API para importar contatos em lote para um mailing."
+---
+
+## Visão Geral
+
+A API permite importar contatos em lote para um mailing.
+
+Principais características:
+
+- Importação de até **1000 contatos por requisição**
+- Criação automática de mailing no primeiro envio
+- Envio incremental de contatos
+- Possibilidade de fechar o mailing quando a importação terminar
+
+---
+
+## Endpoint
+
+```bash
+POST https://api.orion.robbu.global/mailing/contacts
+```
+
+### Headers
+
+```http
+Content-Type: application/json
+```
+
+---
+
+# Estrutura da Requisição
+
+## Body
+
+```json
+{
+  "mailingId": "m_20260305_143022_abc123",
+  "segmentCode": "SEG001",
+  "templateGroup": "TEMPLATE_GROUP_01",
+  "close": false,
+  "contacts": [
+    {
+      "id": "12345",
+      "name": "João Silva",
+      "email": "joao@email.com",
+      "phone": "11999999999"
+    }
+  ]
+}
+```
+
+---
+
+## Parâmetros
+
+| Campo | Tipo | Obrigatório | Descrição |
+|------|------|------------|-----------|
+| mailingId | string | Não* | Identificador do mailing |
+| segmentCode | string | Sim** | Código do segmento |
+| templateGroup | string | Sim** | Grupo de templates |
+| close | boolean | Não | Fecha o mailing após inserir contatos |
+| contacts | array | Sim | Lista de contatos |
+| contacts[].id | string | Sim | Identificador único do contato |
+
+\* obrigatório a partir do segundo envio  
+\** obrigatório apenas no primeiro envio
+
+---
+
+# Fluxo de Uso
+
+## 1 — Criar um novo mailing
+
+Se `mailingId` não for enviado, um mailing será criado automaticamente.
+
+### Request
+
+```json
+{
+  "segmentCode": "PROMO_2026",
+  "templateGroup": "EMAIL_MARKETING",
+  "contacts": [
+    {
+      "id": "001",
+      "name": "Maria Santos",
+      "email": "maria@example.com",
+      "phone": "11988887777"
+    }
+  ]
+}
+```
+
+### Response
+
+```json
+{
+  "mailingId": "m_20260305_143022_1a2b3c",
+  "created": true,
+  "saved": 1,
+  "closed": false
+}
+```
+
+---
+
+## 2 — Adicionar contatos ao mailing
+
+Utilize o `mailingId` retornado anteriormente.
+
+### Request
+
+```json
+{
+  "mailingId": "m_20260305_143022_1a2b3c",
+  "contacts": [
+    {
+      "id": "002",
+      "name": "Pedro Oliveira",
+      "email": "pedro@example.com",
+      "phone": "11977776666"
+    }
+  ]
+}
+```
+
+### Response
+
+```json
+{
+  "mailingId": "m_20260305_143022_1a2b3c",
+  "created": false,
+  "saved": 1,
+  "closed": false
+}
+```
+
+---
+
+## 3 — Fechar o mailing
+
+Quando terminar de enviar os contatos, utilize `close: true`.
+
+### Request
+
+```json
+{
+  "mailingId": "m_20260305_143022_1a2b3c",
+  "close": true,
+  "contacts": [
+    {
+      "id": "003",
+      "name": "Ana Costa",
+      "email": "ana@example.com",
+      "phone": "11966665555"
+    }
+  ]
+}
+```
+
+### Response
+
+```json
+{
+  "mailingId": "m_20260305_143022_1a2b3c",
+  "created": false,
+  "saved": 1,
+  "closed": true
+}
+```
+
+Após o mailing ser fechado **não será possível adicionar novos contatos**.
+
+---
+
+# Regras Importantes
+
+- Máximo de **1000 contatos por request**
+- Todos os contatos devem possuir um **id único**
+- Não é permitido duplicar `id` dentro do mesmo mailing
+- Mailings fechados **não aceitam novos contatos**
+
+---
+
+# Códigos de Resposta
+
+| Status | Descrição |
+|------|-----------|
+| 200 | Operação realizada com sucesso |
+| 400 | Requisição inválida |
+| 409 | Mailing já está fechado |
+| 500 | Erro interno |
+
+---
+
+# Exemplos de Erro
+
+## Contatos ausentes
+
+```json
+{
+  "message": "contacts é obrigatório e deve conter pelo menos 1 contato."
+}
+```
+
+## Limite excedido
+
+```json
+{
+  "message": "Máximo de 1000 contatos por request."
+}
+```
+
+## IDs duplicados
+
+```json
+{
+  "message": "Existem IDs duplicados neste mailing.",
+  "duplicatedIds": ["123", "456"]
+}
+```
+
+## Mailing fechado
+
+```json
+{
+  "mailingId": "m_20260305_143022_abc123",
+  "message": "Este mailing já está fechado e não aceita novos contatos."
+}
+```
+
+---
+
+# Boas Práticas
+
+- Utilize batches entre **500 e 1000 contatos**
+- Guarde o `mailingId` retornado na primeira requisição
+- Apenas envie `close: true` quando tiver certeza de que não haverá novos contatos
