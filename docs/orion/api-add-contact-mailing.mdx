@@ -43,10 +43,9 @@ Content-Type: application/json
   "close": false,
   "contacts": [
     {
-      "tipo_de_registro": "003",
-      "valor_do_registro": "Ana Costa",
-      "mensagem": "ana@example.com",
-      "nome_cliente": "11966665555",
+      "tipo_de_registro": "EMAIL",
+      "valor_do_registro": "ana@example.com",
+      "nome_cliente": "Ana Costa",
       "cpfcnpj": "12345678900",
       "codcliente": "",
       "tag": "",
@@ -71,11 +70,11 @@ Content-Type: application/json
 | templateGroup | string | Sim** | Grupo de templates |
 | close | boolean | Não | Fecha o mailing após inserir contatos |
 | contacts | array | Sim | Lista de contatos |
-| contacts[].tipo_de_registro | string | Sim | Tipo do registro (use `003`) |
-| contacts[].valor_do_registro | string | Sim | Nome do contato |
-| contacts[].mensagem | string | Sim | Email do contato |
-| contacts[].nome_cliente | string | Sim | Telefone do contato |
-| contacts[].cpfcnpj | string | Sim | CPF/CNPJ do contato |
+| contacts[].tipo_de_registro | string | Sim | Tipo do contato: `TELEFONE` ou `EMAIL` |
+| contacts[].valor_do_registro | string | Sim | Valor do contato: telefone válido quando `tipo_de_registro` for `TELEFONE`, ou e-mail válido quando for `EMAIL` |
+| contacts[].nome_cliente | string | Sim | Nome do cliente |
+| contacts[].cpfcnpj | string | Não | CPF/CNPJ válido (quando informado) |
+| contacts[].mensagem | string | Não | Campo adicional de mensagem |
 | contacts[].codcliente | string | Não | Código do cliente |
 | contacts[].tag | string | Não | Tag associada ao contato |
 | contacts[].coringa1..coringa5 | string | Não | Campos coringa para uso livre |
@@ -88,6 +87,8 @@ Content-Type: application/json
 Os campos de `contacts` **não precisam ser enviados em maiúsculo**.
 
 Exemplo válido: `tipo_de_registro` e `TIPO_DE_REGISTRO`.
+
+Também são válidos os valores `telefone` e `email` em `tipo_de_registro`.
 
 ---
 
@@ -105,18 +106,11 @@ Se `mailingId` não for enviado, um mailing será criado automaticamente.
   "templateGroup": "EMAIL_MARKETING",
   "contacts": [
     {
-      "tipo_de_registro": "003",
-      "valor_do_registro": "Maria Santos",
-      "mensagem": "maria@example.com",
-      "nome_cliente": "11988887777",
+      "tipo_de_registro": "EMAIL",
+      "valor_do_registro": "maria@example.com",
+      "nome_cliente": "Maria Santos",
       "cpfcnpj": "12345678900",
-      "codcliente": "",
-      "tag": "",
-      "coringa1": "",
-      "coringa2": "",
-      "coringa3": "",
-      "coringa4": "",
-      "coringa5": ""
+      "tag": "lead_novo"
     }
   ]
 }
@@ -146,18 +140,10 @@ Utilize o `mailingId` retornado anteriormente.
   "mailingId": "m_20260305_143022_1a2b3c",
   "contacts": [
     {
-      "tipo_de_registro": "003",
-      "valor_do_registro": "Pedro Oliveira",
-      "mensagem": "pedro@example.com",
-      "nome_cliente": "11977776666",
-      "cpfcnpj": "98765432100",
-      "codcliente": "",
-      "tag": "",
-      "coringa1": "",
-      "coringa2": "",
-      "coringa3": "",
-      "coringa4": "",
-      "coringa5": ""
+      "tipo_de_registro": "TELEFONE",
+      "valor_do_registro": "11977776666",
+      "nome_cliente": "Pedro Oliveira",
+      "cpfcnpj": ""
     }
   ]
 }
@@ -188,18 +174,10 @@ Quando terminar de enviar os contatos, utilize `close: true`.
   "close": true,
   "contacts": [
     {
-      "tipo_de_registro": "003",
-      "valor_do_registro": "Ana Costa",
-      "mensagem": "ana@example.com",
-      "nome_cliente": "11966665555",
-      "cpfcnpj": "45612378900",
-      "codcliente": "",
-      "tag": "",
-      "coringa1": "",
-      "coringa2": "",
-      "coringa3": "",
-      "coringa4": "",
-      "coringa5": ""
+      "tipo_de_registro": "EMAIL",
+      "valor_do_registro": "ana@example.com",
+      "nome_cliente": "Ana Costa",
+      "cpfcnpj": "45612378900"
     }
   ]
 }
@@ -223,8 +201,11 @@ Após o mailing ser fechado **não será possível adicionar novos contatos**.
 # Regras Importantes
 
 - Máximo de **1000 contatos por request**
-- Cada contato deve seguir o novo contrato de `contacts[]`
-- Recomenda-se manter `tipo_de_registro` com valor `003`
+- `tipo_de_registro` deve ser `TELEFONE` ou `EMAIL`
+- `valor_do_registro` deve ser um telefone válido quando o tipo for `TELEFONE`, ou um e-mail válido quando o tipo for `EMAIL`
+- `nome_cliente` deve conter o nome do cliente
+- `cpfcnpj` é opcional, mas quando enviado deve ser um CPF/CNPJ válido
+- Os demais campos são opcionais
 - Mailings fechados **não aceitam novos contatos**
 
 ---
@@ -262,7 +243,23 @@ Após o mailing ser fechado **não será possível adicionar novos contatos**.
 
 ```json
 {
-  "message": "Contato inválido: verifique os campos obrigatórios do contrato em contacts[]."
+  "message": "Contato inválido: tipo_de_registro deve ser TELEFONE ou EMAIL."
+}
+```
+
+## Valor incompatível com o tipo_de_registro
+
+```json
+{
+  "message": "Contato inválido: valor_do_registro deve ser telefone válido para TELEFONE ou e-mail válido para EMAIL."
+}
+```
+
+## CPF/CNPJ inválido
+
+```json
+{
+  "message": "Contato inválido: cpfcnpj informado é inválido."
 }
 ```
 
