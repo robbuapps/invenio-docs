@@ -43,10 +43,18 @@ Content-Type: application/json
   "close": false,
   "contacts": [
     {
-      "id": "12345",
-      "name": "João Silva",
-      "email": "joao@email.com",
-      "phone": "11999999999"
+      "tipo_de_registro": "003",
+      "valor_do_registro": "Ana Costa",
+      "mensagem": "ana@example.com",
+      "nome_cliente": "11966665555",
+      "cpfcnpj": "12345678900",
+      "codcliente": "",
+      "tag": "",
+      "coringa1": "",
+      "coringa2": "",
+      "coringa3": "",
+      "coringa4": "",
+      "coringa5": ""
     }
   ]
 }
@@ -63,10 +71,23 @@ Content-Type: application/json
 | templateGroup | string | Sim** | Grupo de templates |
 | close | boolean | Não | Fecha o mailing após inserir contatos |
 | contacts | array | Sim | Lista de contatos |
-| contacts[].id | string | Sim | Identificador único do contato |
+| contacts[].tipo_de_registro | string | Sim | Tipo do registro (use `003`) |
+| contacts[].valor_do_registro | string | Sim | Nome do contato |
+| contacts[].mensagem | string | Sim | Email do contato |
+| contacts[].nome_cliente | string | Sim | Telefone do contato |
+| contacts[].cpfcnpj | string | Sim | CPF/CNPJ do contato |
+| contacts[].codcliente | string | Não | Código do cliente |
+| contacts[].tag | string | Não | Tag associada ao contato |
+| contacts[].coringa1..coringa5 | string | Não | Campos coringa para uso livre |
 
 \* obrigatório a partir do segundo envio  
 \** obrigatório apenas no primeiro envio
+
+### Observação sobre os campos do contato
+
+Os campos de `contacts` **não precisam ser enviados em maiúsculo**.
+
+Exemplo válido: `tipo_de_registro` e `TIPO_DE_REGISTRO`.
 
 ---
 
@@ -84,10 +105,18 @@ Se `mailingId` não for enviado, um mailing será criado automaticamente.
   "templateGroup": "EMAIL_MARKETING",
   "contacts": [
     {
-      "id": "001",
-      "name": "Maria Santos",
-      "email": "maria@example.com",
-      "phone": "11988887777"
+      "tipo_de_registro": "003",
+      "valor_do_registro": "Maria Santos",
+      "mensagem": "maria@example.com",
+      "nome_cliente": "11988887777",
+      "cpfcnpj": "12345678900",
+      "codcliente": "",
+      "tag": "",
+      "coringa1": "",
+      "coringa2": "",
+      "coringa3": "",
+      "coringa4": "",
+      "coringa5": ""
     }
   ]
 }
@@ -117,10 +146,18 @@ Utilize o `mailingId` retornado anteriormente.
   "mailingId": "m_20260305_143022_1a2b3c",
   "contacts": [
     {
-      "id": "002",
-      "name": "Pedro Oliveira",
-      "email": "pedro@example.com",
-      "phone": "11977776666"
+      "tipo_de_registro": "003",
+      "valor_do_registro": "Pedro Oliveira",
+      "mensagem": "pedro@example.com",
+      "nome_cliente": "11977776666",
+      "cpfcnpj": "98765432100",
+      "codcliente": "",
+      "tag": "",
+      "coringa1": "",
+      "coringa2": "",
+      "coringa3": "",
+      "coringa4": "",
+      "coringa5": ""
     }
   ]
 }
@@ -151,10 +188,18 @@ Quando terminar de enviar os contatos, utilize `close: true`.
   "close": true,
   "contacts": [
     {
-      "id": "003",
-      "name": "Ana Costa",
-      "email": "ana@example.com",
-      "phone": "11966665555"
+      "tipo_de_registro": "003",
+      "valor_do_registro": "Ana Costa",
+      "mensagem": "ana@example.com",
+      "nome_cliente": "11966665555",
+      "cpfcnpj": "45612378900",
+      "codcliente": "",
+      "tag": "",
+      "coringa1": "",
+      "coringa2": "",
+      "coringa3": "",
+      "coringa4": "",
+      "coringa5": ""
     }
   ]
 }
@@ -178,8 +223,8 @@ Após o mailing ser fechado **não será possível adicionar novos contatos**.
 # Regras Importantes
 
 - Máximo de **1000 contatos por request**
-- Todos os contatos devem possuir um **id único**
-- Não é permitido duplicar `id` dentro do mesmo mailing
+- Cada contato deve seguir o novo contrato de `contacts[]`
+- Recomenda-se manter `tipo_de_registro` com valor `003`
 - Mailings fechados **não aceitam novos contatos**
 
 ---
@@ -213,12 +258,11 @@ Após o mailing ser fechado **não será possível adicionar novos contatos**.
 }
 ```
 
-## IDs duplicados
+## Contrato inválido de contato
 
 ```json
 {
-  "message": "Existem IDs duplicados neste mailing.",
-  "duplicatedIds": ["123", "456"]
+  "message": "Contato inválido: verifique os campos obrigatórios do contrato em contacts[]."
 }
 ```
 
