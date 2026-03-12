@@ -70,7 +70,7 @@ Não há uma nomenclatura específica a se seguir na importação de campanha, m
 #### Colunas do arquivo
 As colunas abaixo são possíveis no arquivo
 ```plaintext
-TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,NOME_ARQUIVO_ANEXO,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20
+TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,NOME_ARQUIVO_ANEXO,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20,SMS_FLASH
 ```
 Descrição dos campos:
 | Campo                 | Obrigatório            | Descrição                                                       |
@@ -87,16 +87,17 @@ Descrição dos campos:
 | **NOME_CLIENTE**      | ❌                     | Nome do cliente para referência.                                |
 | **NOME_ARQUIVO_ANEXO**| ❌                     | Arquivo inserido na mesma pasta do CSV no SFTP para ser adicionado como anexo em e-mail|
 | **Var1...Var20**      | ❌                     | Variáveis dinâmicas que alimentam os placeholders do template.  |
+| **SMS_FLASH**         | ❌ apenas SMS          | Ative para enviar mensagens de SMS Flash se a conta selecionada tiver essa opção disponível. |
 
 > ⚠️ Não é necessário que os campos estejam na ordem sugerida, mas os nomes das colunas devem ser exatamente como estão nesta documentação
 
 **Exemplo:**
 
 ```csv
-TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,NOME_ARQUIVO_ANEXO,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20
-TELEFONE,+5511988887777,whatsapp,W0003,Varejo,12345678900,CT-98765,+5511999998888,2025-09-01 14:56:00,João Silva,,Promoção de Inverno,10%,Cupom123,Loja Centro,Campanha Primavera,Segunda Onda,Lote A,Segmento VIP,Teste A/B,Link Personalizado,CTA1,CTA2,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6
-EMAIL,cliente@dominio.com,email,E0001,Financeiro,98765432100,CT-12345,,2025-09-01 15:10:00,Maria Souza,Fatura_Maria_Souza_07_2025.pdf,Fatura 07/2025,R$350,00,Vencimento 10/09/2025,Linha Digitável,https://pagamento.com/123,Segunda Via,Campanha Agosto,Cliente Ouro,Instruções,CTA Pagamento,CTA Suporte,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8
-TELEFONE,+5511977776666,sms,S0002,Atacado,11223344556,CT-45678,,2025-09-01 15:30:00,Carlos Lima,BoletoCarlosLima.pdf,Código 123456,Validade 5min,Campanha Primavera,Lote B,Segmento Prata,Teste B,Link Resgate,CTA SMS,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8,Obs9,Obs10
+TIPO_DE_REGISTRO,VALOR_DO_REGISTRO,CANAL,CODIGO_TEMPLATE,SEGMENTO,CPF_CNPJ,COD_CONTRATO,REMETENTE,DATA_HORA_DISPARO,NOME_CLIENTE,NOME_ARQUIVO_ANEXO,Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8,Var9,Var10,Var11,Var12,Var13,Var14,Var15,Var16,Var17,Var18,Var19,Var20,SMS_FLASH
+TELEFONE,+5511988887777,whatsapp,W0003,Varejo,12345678900,CT-98765,+5511999998888,2025-09-01 14:56:00,João Silva,,Promoção de Inverno,10%,Cupom123,Loja Centro,Campanha Primavera,Segunda Onda,Lote A,Segmento VIP,Teste A/B,Link Personalizado,CTA1,CTA2,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,NÃO
+EMAIL,cliente@dominio.com,email,E0001,Financeiro,98765432100,CT-12345,,2025-09-01 15:10:00,Maria Souza,Fatura_Maria_Souza_07_2025.pdf,Fatura 07/2025,R$350,00,Vencimento 10/09/2025,Linha Digitável,https://pagamento.com/123,Segunda Via,Campanha Agosto,Cliente Ouro,Instruções,CTA Pagamento,CTA Suporte,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8,NÃO
+TELEFONE,+5511977776666,sms,S0002,Atacado,11223344556,CT-45678,,2025-09-01 15:30:00,Carlos Lima,BoletoCarlosLima.pdf,Código 123456,Validade 5min,Campanha Primavera,Lote B,Segmento Prata,Teste B,Link Resgate,CTA SMS,Obs1,Obs2,Obs3,Obs4,Obs5,Obs6,Obs7,Obs8,Obs9,Obs10,SIM
 ```
 
 #### Fluxo de processamento
