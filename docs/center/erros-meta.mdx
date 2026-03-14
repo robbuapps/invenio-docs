@@ -1,0 +1,344 @@
+---
+title: "Guia de Erros da API do WhatsApp"
+sidebarTitle: "Erros Meta"
+description: "Dicionário de erros da API do WhatsApp Business: causas prováveis e como evitar falhas de entrega."
+---
+
+Este guia detalha os erros mais comuns retornados pela API da Meta, ajudando a identificar por que uma mensagem não foi entregue e como solucionar o problema.
+
+---
+
+## Erros de Entrega e Comportamento
+
+### 1. `Message Undeliverable`
+
+O erro Message Undeliverable indica que a mensagem enviada pela API do WhatsApp Business não pôde ser entregue ao destinatário. Isso significa que a requisição foi processada pela API da Meta, porém a entrega da mensagem ao usuário final não foi possível devido a alguma condição relacionada ao número de destino ou ao estado da conversa.
+
+> **Causa provável:**<br/> Esse erro pode ocorrer por diversos motivos, sendo os mais comuns:<br/>
+> - Número não possui WhatsApp
+> - Número inválido (DDI ausente, DDD incorreto, número incompleto);
+> - Usuário bloqueou o número de envio 
+> - Usuário não aceita mensagens de empresas.
+
+---
+
+### 2. `users-number-is-part-of-an-experiment`
+
+Esse erro ocorre quando o número envolvido na comunicação está participando de experimentos internos da Meta. Durante esses experimentos, determinados comportamentos da API podem ser alterados ou restringidos temporariamente. A Meta utiliza experimentos para validar novas funcionalidades, mudanças de comportamento da plataforma ou melhorias no sistema de entrega de mensagens.
+
+> **Causa provável:**<br/>
+> -  O número do destinatário foi incluído em um teste A/B da Meta
+> -  A Meta está realizando testes de comportamento de entrega
+> -  O número de envio ou o número do cliente está em um grupo experimental.
+
+<Warning>
+**Como evitar:**
+  Não existe uma forma direta de evitar esse erro, pois ele é causado por experimentos internos da Meta. Boas práticas que ajudam a reduzir impacto: 
+  - Utilizar templates aprovados
+  - Garantir que o número possui boa qualidade
+  - Evitar envios massivos sem consentimento do usuário
+  - Seguir as políticas da Meta.
+</Warning>
+
+---
+
+### 3. `rate-limit-hit-spam`
+
+O erro rate-limit-hit-spam ocorre quando a Meta identifica um volume elevado de mensagens sendo enviadas em um curto período ou um padrão de envio que pode ser interpretado como comportamento de spam. Quando esse limite é atingido, a Meta bloqueia temporariamente novos envios para evitar abuso da plataforma e proteger a experiência dos usuários.
+
+> **Causa provável:**<br/>
+> - Alto volume de mensagens em pouco tempo (envio massivo sem espaçamento adequado)
+> - Baixa qualidade do número (Quality Rating) devido a muitas denúncias, muitos bloqueios ou baixa taxa de resposta.
+
+<Warning>
+**Como evitar:** 
+ Para reduzir a ocorrência desse erro, recomenda-se:
+ - Controlar a taxa de envio;
+ - Evitar enviar muitas mensagens simultaneamente
+ - Enviar mensagens apenas para usuários que autorizaram o contato
+ - Manter boa qualidade do número evitando mensagens irrelevantes e campanhas frequentes.
+</Warning>
+
+---
+
+### 4. `number-of-parameters-does-not-match-the-expected-number-of-params`
+
+Esse erro ocorre quando a quantidade de parâmetros enviados na requisição da API não corresponde à quantidade de variáveis esperadas no template do WhatsApp. Ou seja, o template possui um número específico de variáveis (placeholders), mas a requisição enviada pela API contém mais ou menos parâmetros do que o esperado.
+
+> **Causa provável:**<br/>
+> - Quantidade incorreta de parâmetros enviados em relação ao que o template aprovado espera
+> - Parâmetros vazios ou mal estruturados.
+
+<Tip>
+**Como evitar:** 
+- Conferir quantidade de variáveis do template
+- Sempre validar quantas variáveis o template possui
+- Sempre editar o template logo após a criação.
+</Tip>
+
+---
+
+### 5. `receiver-is-incapable`
+
+O erro receiver-is-incapable ocorre quando o número destinatário não é capaz de receber o tipo de mensagem que está sendo enviado. Isso significa que a requisição foi processada pela API, porém o dispositivo ou a conta do usuário não suporta o conteúdo (como botões, listas ou mídias específicas).
+
+> **Causa provável:**<br/>
+> - Dispositivo do usuário ou versão do WhatsApp desatualizada
+> - Tipo de mensagem incompatível com a configuração do cliente
+> - Conta do usuário com restrições que impedem o recebimento de determinados tipos de mensagens.
+
+<Warning>
+**Como evitar:** Utilizar tipos de mensagens amplamente suportados;
+ - Validar tipo de mensagem enviado
+ -  Evitar recursos muito específicos em campanhas massivas
+ - Manter integração conforme documentação da Meta.
+</Warning>
+
+---
+
+### 6. `nenhum-numero-contendo-id-nessa-conta`
+
+O erro nenhum-numero-contendo-id-nessa-conta ocorre quando a requisição faz referência a um Phone Number ID que não está associado à conta do WhatsApp Business (WABA) utilizada na autenticação.
+
+> **Causa provável:**<br/> 
+> -  Phone Number ID incorreto ou inexistente
+> -  Número pertence a outra conta (WABA)
+> -  Número removido, desconectado da integração ou migrado para outra conta.
+
+<Tip>
+**Como evitar:** 
+- Validar o Phone Number ID
+- Garantir que o token pertence à mesma conta
+- Manter configurações atualizadas em caso de troca de número ou migração
+- Conferir números ativos no WhatsApp Manager.
+</Tip>
+
+---
+
+### 7. `template-name-does-not-exist`
+
+O erro template-name-does-not-exist ocorre quando a requisição tenta utilizar um template que não existe ou não foi encontrado na conta WABA. O nome informado não corresponde a nenhum template registrado ou aprovado.
+
+> **Causa provável:**<br/>
+> - Nome do template incorreto (lembrando que é case sensitive)
+> - Template ainda em análise, rejeitado ou desativado
+> - Template pertence a outra conta
+> -  Ambiente de integração apontando para WABA incorreta.
+
+<Tip>
+**Como evitar:**
+- Validar nome do template (copiar exatamente como está no WhatsApp Manager)
+- Verificar se o status do template está como aprovado e ativo.
+</Tip>
+
+---
+
+### 8. `translated-text-too-long`
+
+O erro translated-text-too-long ocorre quando o texto enviado em uma mensagem template excede o limite de caracteres permitido pela Meta, especialmente em casos de tradução automática ou múltiplos idiomas.
+
+> **Causa provável:**<br/>
+> - Texto maior que o limite permitido `Header/Footer/Botões`
+> - Parâmetros dinâmicos (variáveis) muito longos
+> - Tradução do template ultrapassa o limite no idioma selecionado.
+
+<Warning>
+**Como evitar:** 
+- Validar tamanho do texto antes do envio
+- Limitar tamanho das variáveis dinâmicas
+- Revisar templates com múltiplos idiomas
+- Padronizar tamanho de mensagens.
+</Warning>
+
+---
+
+### 9. `something-went-wrong`
+
+O erro something-went-wrong é uma resposta genérica retornada pela API da Meta quando ocorre uma falha inesperada durante o processamento da requisição, geralmente relacionada a instabilidades internas da Meta.
+
+> **Causa provável:**<br/>
+> - Instabilidade temporária da API da Meta
+> - Falha inesperada no processamento interno
+> - Timeout ou falha de comunicação de rede entre servidores.
+
+<Tip>
+**Como evitar:** 
+- Realizar uma nova tentativa de envio após alguns segundos
+- Monitorar status da API da Meta para verificar incidentes ou instabilidades.
+</Tip>
+
+---
+
+### 10. `This message was not delivered to maintain healthy ecosystem engagement`
+
+Esse erro ocorre devido a atualizações nas políticas de mensagens de marketing da Meta. Caso um usuário receba mensagens de marketing e não interaja com elas, a plataforma pode limitar ou bloquear o envio de novas mensagens para esse contato.
+
+> **Causa provável:**<br/>
+> - Usuário recebeu mensagens repetidas sem interação
+> - Contato não respondeu mensagens anteriores
+> - Baixa taxa de engajamento identificada pela Meta
+> - Envio considerado potencialmente indesejado.
+
+<Warning>
+**Como evitar:** 
+- Priorizar contatos com interação recente
+- Evitar envios repetitivos sem resposta
+- Segmentar corretamente as campanhas
+- Tentar o envio de templates da categoria Utility em caso de bloqueios na categoria Marketing.
+</Warning>
+
+---
+
+### 11. `media-upload-error`
+
+O erro media-upload-error ocorre quando há uma falha durante o processo de upload de um arquivo de mídia para a API do WhatsApp. Indica que a plataforma não conseguiu processar ou armazenar o arquivo enviado.
+
+> **Causa provável:**<br/>
+> - Formato de arquivo não suportado
+> - Tamanho acima do permitido
+> - Arquivo corrompido
+> - Problemas na requisição (headers/autenticação)
+> - Falha na leitura da URL da mídia pelo servidor da Meta.
+
+---
+
+### 12. `business-account-rate-limit-hit`
+
+O erro business-account-rate-limit-hit ocorre quando a conta atinge o limite de envios permitido pela Meta em um determinado período. A Meta aplica esses limites para prevenir spam e garantir estabilidade.
+
+> **Causa provável:**<br/>
+> - Volume elevado de mensagens em curto período
+> - Disparo em massa simultâneo
+> - Qualidade da conta baixa ou média (limites mais restritivos)
+> - Envio paralelo por múltiplos sistemas.
+
+<Warning>
+**Como evitar:**
+ - Dividir grandes listas em lotes menores
+ - Monitorar a qualidade da conta no WhatsApp Manager
+ - Evitar múltiplos sistemas enviando simultaneamente
+ -  Centralizar envios em um único fluxo.
+</Warning>
+
+---
+
+### 13. `spam-rate-limit-hit`
+
+O erro spam-rate-limit-hit ocorre quando a Meta identifica características de spam no envio. A plataforma aplica limitações temporárias para proteger os usuários baseando-se em frequência, taxa de resposta e denúncias.
+
+> **Causa provável:**<br/>
+> - Envio em massa para usuários que não interagem
+> - Alta taxa de bloqueios ou denúncias
+> - Baixa taxa de engajamento; Campanhas muito frequentes em curtos períodos.
+
+<Warning>
+**Como evitar:**
+- Priorizar contatos que já interagiram
+- Segmentar listas de envio; Reduzir a frequência de campanhas
+- Melhorar o conteúdo das mensagens para gerar engajamento
+- Utilizar templates adequados ao conteúdo.
+</Warning>
+
+---
+
+## Links e Assuntos Relacionados
+
+<CardGroup cols={3}>
+  <Card
+    title="Dados da Mensagem"
+    icon="circle-info"
+    href="https://docs.robbu.global/docs/live/dados-da-mensagem"
+  >
+    Entenda os detalhes técnicos e metadados das mensagens enviadas.
+  </Card>
+
+  <Card
+    title="Campanhas de WhatsApp"
+    icon="megaphone"
+    href="https://docs.robbu.global/docs/center/campanhas-de-whatsapp"
+  >
+    Como criar e gerenciar disparos massivos de forma eficiente.
+  </Card>
+
+  <Card
+    title="Configuração de Canal"
+    icon="whatsapp"
+    href="https://docs.robbu.global/docs/center/canal-whatsapp"
+  >
+    Passo a passo para conectar seu número de WhatsApp ao Invenio Center.
+  </Card>
+
+  <Card
+    title="Criação de Templates"
+    icon="memo-circle-check"
+    href="https://docs.robbu.global/docs/center/como-criar-templates-whatsapp"
+  >
+    Guia para criar modelos de mensagens e enviá-los para aprovação da Meta.
+  </Card>
+
+  <Card
+    title="WhatsApp Business API"
+    icon="gears"
+    href="https://docs.robbu.global/docs/center/whatsapp-business-api"
+  >
+    Visão geral sobre o funcionamento da API oficial do WhatsApp.
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="❓ Por que recebo o erro 'Message Undeliverable' se o número está correto?">
+    Mesmo com o número correto, esse erro ocorre se o usuário não tiver WhatsApp, se o número estiver em formato inválido (falta de DDI/DDD), ou se o destinatário tiver bloqueado o seu número comercial. Em alguns casos, as configurações de privacidade do usuário também impedem o recebimento.
+  </Accordion>
+
+  <Accordion title="🧪 O que significa o erro 'users-number-is-part-of-an-experiment'?">
+    Este erro indica que o número do destinatário ou do remetente foi incluído em um teste A/B interno da própria Meta. Como são experimentos gerenciados por eles para validar novas funcionalidades, não há uma forma direta de evitar, mas manter templates aprovados e boa qualidade do número reduz o impacto.
+  </Accordion>
+
+  <Accordion title="🚫 Como evitar o bloqueio por 'rate-limit-hit-spam'?">
+    Para evitar este bloqueio, você deve controlar a taxa de envio e evitar disparos massivos simultâneos sem espaçamento. É essencial manter a boa qualidade do número (Quality Rating), enviando mensagens apenas para usuários que autorizaram o contato e evitando conteúdos irrelevantes que gerem denúncias.
+  </Accordion>
+
+  <Accordion title="📐 Por que ocorre erro de parâmetros no template?">
+    O erro `number-of-parameters-does-not-match` acontece quando a quantidade de variáveis enviadas na API é diferente do esperado no template aprovado. Se o template possui 2 variáveis (`{{1}}` e `{{2}}`), enviar mais ou menos do que isso impedirá o envio. Sempre valide a estrutura do template logo após a criação.
+  </Accordion>
+
+  <Accordion title="📱 O que causa o erro 'receiver-is-incapable'?">
+    Este erro ocorre quando o dispositivo ou a versão do WhatsApp do usuário é muito antiga e não suporta o tipo de mensagem enviada, como mensagens interativas, botões, listas ou determinados formatos de mídia. Para reduzir o erro, utilize tipos de mensagens amplamente suportados.
+  </Accordion>
+
+  <Accordion title="🆔 O que verificar no erro 'nenhum-numero-contendo-id-nessa-conta'?">
+    Você deve validar se o **Phone Number ID** na requisição está correto e se o Token de acesso pertence à mesma conta WABA onde o número está registrado. Verifique no WhatsApp Manager se o número não foi removido, migrado ou desconectado da integração.
+  </Accordion>
+
+  <Accordion title="🔠 O nome do template diferencia maiúsculas de minúsculas?">
+    **Sim.** O erro `template-name-does-not-exist` ocorre frequentemente porque o nome do template é *case sensitive*. Por exemplo, enviar `Confirmacao_Pedido` quando o correto é `confirmacao_pedido` resultará em falha. Certifique-se também de que o template está aprovado e ativo.
+  </Accordion>
+
+  <Accordion title="📏 Quais os limites de caracteres para evitar o erro 'translated-text-too-long'?">
+    Para evitar que o texto exceda os limites da Meta:
+    - **Body (Corpo):** até ~1024 caracteres.
+    - **Header/Footer:** até ~60 caracteres.
+    - **Botões:** até ~20 caracteres.
+    Cuidado com variáveis dinâmicas muito extensas que podem estourar esses limites.
+  </Accordion>
+
+  <Accordion title="🔄 O que fazer ao receber o erro 'something-went-wrong'?">
+    Por ser uma resposta genérica de instabilidade na infraestrutura da Meta, a recomendação é realizar uma nova tentativa de envio após alguns segundos e monitorar o status oficial da API da Meta para verificar incidentes globais.
+  </Accordion>
+
+  <Accordion title="📉 Como o engajamento afeta a entrega das mensagens?">
+    Através do erro `maintain healthy ecosystem engagement`, a Meta pode limitar envios de marketing para usuários que não interagem ou não respondem às suas mensagens. Para evitar isso, priorize contatos com interação recente e segmente suas campanhas para públicos interessados.
+  </Accordion>
+
+  <Accordion title="📁 Por que meu upload de mídia falhou?">
+    O erro `media-upload-error` pode ser causado por formatos não suportados, arquivos corrompidos ou tamanho acima do permitido. Se estiver usando URLs, garanta que o servidor da Meta consiga acessar o arquivo e que os headers da requisição estejam corretos.
+  </Accordion>
+
+  <Accordion title="📊 Qual a diferença entre 'business-account-rate-limit' e 'spam-rate-limit'?">
+    O `business-account-rate-limit` refere-se ao limite de volume de envios da sua conta (Tier). Já o `spam-rate-limit` ocorre quando a Meta identifica comportamento de spam, como alta taxa de bloqueios, denúncias ou mensagens enviadas para muitos contatos que não respondem.
+  </Accordion>
+</AccordionGroup>

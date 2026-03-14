@@ -87,7 +87,8 @@
                     "docs/center/web-chat",
                     "docs/center/webhook",
                     "docs/center/whatsapp-business-api",
-                    "docs/center/endpoints-customizados"
+                    "docs/center/endpoints-customizados",
+                    "docs/center/erros-meta"
                 ]
             },
             {
