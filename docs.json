@@ -63,6 +63,9 @@
                     "docs/center/dashboard-analitico",
                     "docs/center/dashboard-kpi-eventos",
                     "docs/center/dashboard-operacional",
+                    "docs/center/dashboard-advertising",
+                    "docs/center/endpoints-customizados",
+                    "docs/center/erros-meta",
                     "docs/center/filtros-de-busca-de-contatos",
                     "docs/center/gerenciar-host-de-acesso",
                     "docs/center/gestao-frases-prontas",
@@ -86,9 +89,8 @@
                     "docs/center/variaveis-de-sistema",
                     "docs/center/web-chat",
                     "docs/center/webhook",
-                    "docs/center/whatsapp-business-api",
-                    "docs/center/endpoints-customizados",
-                    "docs/center/erros-meta"
+                    "docs/center/whatsapp-business-api"
+                    
                 ]
             },
             {
