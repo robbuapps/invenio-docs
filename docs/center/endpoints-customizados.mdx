@@ -1,0 +1,224 @@
+---
+title: "Endpoints Customizados em JavaScript"
+sidebarTitle: "Endpoints Customizados"
+description: "Crie, edite e gerencie APIs próprias em JavaScript diretamente na plataforma Invenio para implementar regras de negócio e integrações."
+---
+
+Os **Endpoints Customizados** permitem a criação, edição, exclusão e utilização de APIs próprias desenvolvidas em JavaScript, diretamente na plataforma Invenio. Essa funcionalidade oferece autonomia técnica para implementar regras de negócio, validações e integrações externas, sem depender de serviços intermediários.
+
+Com os endpoints customizados, é possível potencializar fluxos, IDRs e automações, garantindo maior flexibilidade, escalabilidade e controle sobre as integrações da operação.
+
+---
+
+## Visão Geral
+
+Os endpoints são executados sob demanda, a partir de chamadas externas realizadas por:
+
+* **Flows** dinâmicos;
+* **IDRs/Chatbots**, por meio da ação “API – Chamada Externa”;
+* **Ferramentas externas**, como Postman ou sistemas integrados.
+
+### Principais Benefícios
+
+* **Flexibilidade total:** Crie APIs sob medida para validações e regras específicas.
+* **Integração inteligente:** Enriqueça decisões em tempo real em flows e IDRs.
+* **Agilidade:** Reduza o tempo de implementação concentrando a lógica na plataforma.
+* **Manutenção simplificada:** Centralize a lógica em um único ponto.
+
+<Warning>
+**Permissões de acesso:**<br/> Para realizar o CRUD (criação, edição, visualização e exclusão), o usuário deve possuir as permissões adequadas habilitadas em seu perfil no Invenio Center. Acesse [Usuários - Permissões de página - Invenio Center](https://docs.robbu.global/docs/center/usuarios#permiss%C3%B5es-de-p%C3%A1gina) e saiba mais.
+</Warning>
+
+
+---
+
+## Como Localizar
+
+Para acessar os Endpoints Customizados:
+
+1. Acesse o **Invenio Center**.
+2. No canto superior direito, clique no ícone do seu **perfil**.
+3. Selecione a opção **Integrações**.
+4. Escolha a opção **Endpoints Customizados**.
+
+[Integrações - Invenio Center](https://inveniocenter.robbu.global/painel/integracoes)
+
+<img src="https://storage.robbu.global/v2/file/030AA0AC5947E9A88ED1F4765DE91941" />
+
+<img src="https://storage.robbu.global/v2/file/030AA0AC5947E9A8B99D770960C76EAE" />
+
+---
+
+## Gerenciamento de Endpoints
+
+### Criação
+<Steps>
+  <Step title="Iniciar">
+    Clique no botão **+ Criar endpoint**.
+  </Step>
+  <Step title="Identificar">
+    Informe o **nome** (obrigatório) e uma **descrição** clara sobre a finalidade.
+  </Step>
+  <Step title="Desenvolver">
+    No editor de código, implemente a lógica em JavaScript (manipulação de dados, validações, chamadas externas).
+  </Step>
+</Steps>
+
+
+<img src="https://storage.robbu.global/v2/file/030AA0AC5947E9A82F172C601609EDD5" />
+
+<img src="https://storage.robbu.global/v2/file/030AA0AC5947E9A8C6AF2B672C815F61" />
+
+
+### Testes
+<Tip>
+Utilize ferramentas como o **Postman** para validar a estrutura da requisição, parâmetros, códigos de status e tempo de execução antes de publicar em produção.
+</Tip>
+
+<img src="https://storage.robbu.global/v2/file/294BD668F857E82C45FF189CD4A7D45F" />
+
+<img src="https://storage.robbu.global/v2/file/E02BB8D08FE8B69CBB0D48B71F478AB0" />
+
+
+---
+
+## Regras e Funcionamento
+
+### Palavras Reservadas
+Não é permitido criar variáveis ou constantes com os seguintes nomes, pois são funções nativas do sistema:
+* `logger`
+* `loggerHistory`
+* `response`
+* `request`
+
+### Limitações de Execução
+
+| Limitação | Regra | Erro Retornado |
+|-----------|-------|----------------|
+| **Tempo Máximo** | 10 segundos | `{ "error": "The JavaScript code took more than 10 seconds to execute" }` |
+| **Retorno** | Obrigatório via `response()` | `{ "error": "Endpoint has no data returned" }` |
+
+---
+
+## Variáveis e Métodos Globais
+
+### Objeto `request`
+Contém as informações da requisição recebida:
+* `method`: Método HTTP (GET, POST, etc.)
+* `headers`: Cabeçalhos da requisição
+* `body`: Corpo da requisição
+* `query`: Parâmetros da URL
+
+### Métodos Disponíveis
+
+#### `logger(data: any)`
+Registra informações no log para debugging.
+```javascript
+logger({ data: request, tipo: "Chamada externa" });
+```
+#### `response(data: object, status: number = 200, success: boolean = true)`
+
+Responsável por retornar a resposta do endpoint.
+
+**Parâmetros:**
+- `data`: objeto de retorno;
+- `status`: código HTTP da resposta (padrão: 200);
+- `success`: indica sucesso ou falha da execução.
+
+**Exemplos:**
+```javascript
+// Retorno de sucesso
+return response({ success: true });
+
+// Retorno de erro
+return response({ error: true }, 400);
+```
+---
+
+## Bibliotecas Disponíveis
+
+Para facilitar o desenvolvimento, é possível utilizar bibliotecas externas nos endpoints customizados. Após criar o endpoint, durante a edição, basta acessar a opção **Editar dados** e selecionar as bibliotecas desejadas.
+
+<img src="https://storage.robbu.global/v2/file/E02BB8D08FE8B69CB5C0699FABF17225" />
+
+
+| Nome | Exemplo de uso | Documentação |
+| :--- | :--- | :--- |
+| **Axios** | `axios.get()` | [Documentação](https://axios-http.com/) |
+| **Day.js** | `dayjs().now()` | [Documentação](https://day.js.org/) |
+| **Lodash** | `lodash.sortBy()` | [Documentação](https://lodash.com/) |
+| **Moment.js** | `moment().now()` | [Documentação](https://momentjs.com/) |
+
+---
+
+## Gerenciamento dos Endpoints Customizados
+
+Na tela inicial de **Endpoints Customizados**, é possível gerenciar todos os endpoints existentes no ambiente. Ao clicar no ícone de **três pontos** localizado ao lado de cada endpoint, são exibidas as seguintes opções:
+
+* **Editar:** Direciona para a tela principal de edição do código em JavaScript.
+* **Deletar:** Exclui permanentemente o endpoint do ambiente.
+
+<img src="https://storage.robbu.global/v2/file/E02BB8D08FE8B69CAE98E336A95BD924" />
+
+### Boas práticas recomendadas
+
+<Tip>
+* Sempre documente o objetivo do endpoint nas anotações;
+* Utilize `logger()` durante o desenvolvimento e remova logs excessivos em produção;
+* Valide entradas de dados antes de processá-las;
+* Padronize o formato das respostas;
+* Teste o endpoint via Postman antes de utilizá-lo em flows ou IDRs.
+</Tip>
+
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={3}>
+  <Card
+    title="Usuários"
+    icon="user"
+    href="https://docs.robbu.global/docs/center/usuarios"
+  >
+    Como configurar usuários
+  </Card>
+
+  <Card
+    title="Ação de Chamada Externa"
+    icon="code"
+    href="https://docs.robbu.global/docs/center/acao-api"
+  >
+    Como integrar endpoints no IDR
+  </Card>
+
+   <Card
+    title="Webhook"
+    icon="code"
+    href="https://docs.robbu.global/docs/center/webhook"
+  >
+    Webhook Invenio
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="⏱️ Qual o tempo máximo de execução?">
+    O tempo máximo de execução de um endpoint é de **10 segundos**. Caso esse limite seja ultrapassado, o sistema retornará um erro de timeout.
+  </Accordion>
+
+  <Accordion title="📤 O retorno da resposta é obrigatório?">
+    **Sim.** É obrigatório retornar uma resposta utilizando o método `response()`. Caso nenhum retorno seja realizado, o endpoint exibirá um erro de ausência de dados.
+  </Accordion>
+
+  <Accordion title="🚫 Posso usar qualquer nome para minhas variáveis?">
+    Não. Você deve evitar as palavras reservadas: `logger`, `loggerHistory`, `response` e `request`. O uso delas para definir variáveis ou constantes resultará em erro.
+  </Accordion>
+
+  <Accordion title="📝 Como posso documentar a lógica do meu endpoint?">
+    Você pode utilizar o recurso de **Anotações** dentro do próprio endpoint para inserir descrições, observações ou exemplos de uso para outros desenvolvedores.
+  </Accordion>
+</AccordionGroup>
