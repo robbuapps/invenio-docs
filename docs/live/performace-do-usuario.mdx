@@ -1,0 +1,67 @@
+---
+title: "Performance do Usuário"
+sidebarTitle: "Performance do Usuário"
+description: "A funcionalidade de Performance tem como objetivo fornecer uma visão consolidada e objetiva do desempenho individual de cada operador dentro do Invenio Live. Os dados são atualizados em tempo real e refletem a atividade do usuário durante seu período de login na plataforma."
+---
+
+## Como acessar a funcionalidade de Performance
+Para acessar as estatísticas de atendimento, siga os passos abaixo:
+1.	Acesse o Invenio Live,
+2.	No canto superior direito da tela, clique sobre o ícone de usuário,
+3.	No menu suspenso que será exibido, selecione a opção "Performance".
+
+[Clique para acessar o painel de Performance do Usuário:](https://invenio.robbu.com.br/contacts-analytics)
+
+Com a tela aberta, são exibidas as estatísticas do dia atual, juntamente com um gráfico comparativo dos atendimentos realizados no mês atual e no mês anterior.
+
+Essa funcionalidade está disponível para atendentes e supervisores e exibe exclusivamente métricas **individuais**. Cada usuário visualiza apenas a própria performance, não sendo possível consultar dados de outros usuários sem acesso ao perfil correspondente.
+
+<img src="https://storage.robbu.global/v2/file/C69CBFA2E0D931A262F024388551A374" />
+
+
+## Estatísticas apresentadas
+Na parte superior da tela, são exibidas as principais métricas de atendimento do dia referentes ao usuário logado, conforme descrito abaixo:
+
+## Indicadores de Atendimento
+
+| Indicador       | Descrição |
+|-----------------|----------|
+| **Login**       | Horário em que o usuário iniciou sua jornada de atendimento no dia atual. |
+| **Atendidos**   | Total de contatos únicos atendidos pelo usuário até o momento. A contagem considera apenas um registro por contato, mesmo que haja múltiplos atendimentos para um mesmo contato no dia. |
+| **Fidelizados** | Quantidade de contatos atualmente vinculados ao usuário. |
+| **Pendentes**   | Número de contatos vinculados ao usuário que possuem mensagens aguardando resposta. |
+| **TMA**         | Tempo Médio de Atendimento, calculado com base nos atendimentos realizados no dia. |
+| **Mais Atrasado** | Maior tempo de espera entre os contatos vinculados com mensagens pendentes. |
+
+## Gráfico de Histórico de Atendimentos
+Abaixo das estatísticas diárias, há um gráfico que exibe o histórico de contatos atendidos ao longo do mês atual e do mês anterior. Cada ponto do gráfico representa o total de atendimentos realizados no dia atual.
+Esse recurso permite acompanhar a produtividade ao longo do dia, identificar padrões de atendimento e apoiar a tomada de decisão com base em dados.
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="Por que o número de Atendidos é menor do que a quantidade de protocolos que finalizei?">
+    O indicador de Atendidos considera contatos únicos, e não protocolos. Ou seja, se um mesmo contato teve múltiplos atendimentos no dia, ele será contabilizado apenas uma vez.  
+  </Accordion>
+
+  <Accordion title="Quando um contato deixa de ser considerado Fidelizado?">
+    Um contato deixa de ser considerado fidelizado quando é finalizado, transferido ou desvinculado do usuário, deixando de estar sob sua responsabilidade.
+  </Accordion>
+
+  <Accordion title="O TMA considera atendimentos ainda em andamento?">
+    Não. O cálculo do TMA (Tempo Médio de Atendimento) considera apenas atendimentos já finalizados no dia.
+  </Accordion>
+
+  <Accordion title="Posso visualizar a performance de outros usuários?">
+    Não, visualização é restrita à performance individual. O acesso a dados de outros usuários só é possível caso você tenha permissão para acessar o perfil correspondente.  
+  </Accordion>
+
+  <Accordion title="Se eu sair e entrar novamente no sistema, o horário de Login é atualizado?">
+    Não, o indicador de **Login** considera apenas o primeiro acesso realizado no dia. Mesmo que haja logout e novos acessos ao longo do dia, o horário exibido permanecerá o do login inicial.  
+  </Accordion>
+
+  <Accordion title="Com que frequência as métricas são atualizadas?">
+    As métricas são reiniciadas automaticamente no início de um novo dia, iniciando uma nova contagem para todos os indicadores.
+  </Accordion>
+
+</AccordionGroup>
