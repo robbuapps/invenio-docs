@@ -63,7 +63,8 @@ Utilize essas opções se seu KPI for relacionado com voice. Caso seja mensageri
  - **Descrição:** Busque utilizando o nome exato do evento criado (ex.: Em andamento, Retorno agendado, sem resposta do cliente). 
  - **Segmento:** Filtre apenas os eventos relacionados à carteira/segmento desejado, facilitando análises específicas. 
  - **Código do cliente:** Utilize o código do cliente, o mesmo aplicado no chatbot. 
-  
+
+ <img src="https://storage.robbu.global/v2/file/4D6A9734A128F445FCB403CFC379F7FE" />  
 
 Esses filtros permitem uma navegação mais ágil, garantindo eficiência no acompanhamento dos registros dentro da plataforma. 
 
@@ -88,7 +89,7 @@ Esses filtros permitem uma navegação mais ágil, garantindo eficiência no aco
 Utilize a documentação para criar seu Dashboard de KPI Eventos.
 
 <Tip>
-**Acesse:** [KPI Eventos](http://localhost:3000/docs/center/dashboard-kpi-eventos)
+**Acesse:** [KPI Eventos](https://docs.robbu.global/docs/center/dashboard-kpi-eventos)
 </Tip> 
 
 ## Relatórios Relacionados a KPI de Eventos 
@@ -128,6 +129,54 @@ Além dos eventos personalizados, a plataforma possui eventos nativos que são a
   
 Esses eventos fixos garantem rastreabilidade completa do processo, mesmo sem a criação de eventos personalizados. 
 
+## KPI Eventos no Invenio Live
+
+A utilização de KPI eventos no Invenio Live ocorre diretamente no histórico de conversa do contato, permitindo que os operadores registrem interações relevantes em tempo real durante o atendimento.
+
+Para visualizar e disparar eventos, é necessário acessar o ícone de calendário localizado no canto superior direito da tela. Ao clicar nesse ícone, serão exibidos todos os eventos disponíveis para aquele contato.
+
+**É importante destacar que:**
+- Apenas eventos vinculados ao segmento do contato serão exibidos,
+- Apenas eventos configurados com a flag **"Ocultar no Invenio Live" = Não** estarão visíveis.
+
+<img src="https://storage.robbu.global/v2/file/4D6A9734A128F44546338F20A0A485D3" />
+
+### Identificação visual dos eventos
+
+No Invenio Live, os eventos possuem indicadores visuais que facilitam sua identificação e interpretação durante o atendimento:
+
+- **Cor do indicador (círculo):**
+  - **Cinza:** Indica um evento **neutro**, sem impacto positivo ou negativo,
+  - **Verde:** Representa um evento **positivo**, geralmente associado a um resultado favorável,
+  - **Vermelho:** Sinaliza um evento **negativo**, indicando algum ponto de atenção ou insucesso.
+
+- **Símbolo de cifrão ($):**
+  - Indica que o evento possui um **valor monetário** vinculado,  
+  - Ao realizar o disparo, será possível informar o valor correspondente. Caso não seja preenchido, o valor será automaticamente definido como **R$ 0,00**.
+
+- **Símbolo de finalização (| |):**
+  - Identifica eventos **finalizadores**, utilizados para encerrar o protocolo de atendimento,
+  - Eventos que não possuem esse símbolo são considerados **não finalizadores**.
+
+<img src="https://storage.robbu.global/v2/file/CCD07A936B82DE8DA9BFA301AFF0C529" />
+
+### Disparo de eventos
+
+O disparo de um evento é realizado de forma simples e intuitiva. Para isso, basta selecionar o evento desejado na lista exibida no painel. Após a seleção, poderão ser registradas informações adicionais, de acordo com a configuração do evento, como preenchimento de valores ou inclusão de observações.
+
+Por fim, é necessário confirmar a ação por meio do botão **Aplicar**, garantindo que o evento seja devidamente registrado e refletido no histórico da conversa do contato.
+
+<img src="https://storage.robbu.global/v2/file/CCD07A936B82DE8D2BC94E2B401D17F5" />
+<img src="https://storage.robbu.global/v2/file/CCD07A936B82DE8D7B37B68498217C7E" />
+
+### Observações no disparo
+
+Ao registrar um evento, é possível adicionar uma observação. Esse campo permite incluir informações relevantes sobre o contexto do registro, como detalhes do atendimento ou justificativas, com limite de até **300 caracteres**.
+
+Essas observações podem ser visualizadas diretamente no histórico da conversa do contato, tanto no Invenio Center quanto no Invenio Live. Além disso, também podem ser acessadas por meio do relatório de KPI de eventos, que consolida:
+- Os eventos registrados  
+- As observações inseridas  
+- Informações adicionais do contexto da conversa  
   
 ## ⁉️ Perguntas Frequentes (FAQ)
 
