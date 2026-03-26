@@ -109,20 +109,22 @@ Configura o número máximo de clientes fidelizados por operador, conforme o tip
 
 ---
 
-## Configurações de Limite de envio de HSM
+## Configurações de Limite de envio de HSM via Invenio Live
 
-### Limite máximo de HSM por telefone: 
-Define o número máximo de mensagens HSM que podem ser disparados para uma mesma linha de entrada.
+### Limite máximo de HSM por telefone:
 
->  É importante lembrar que essa regra é aplicada por **telefone**, ou seja, se houver múltiplos contatos dentro do ambiente utilizando o mesmo número de entrada,
-> o limite será contabilizado pelo telefone, e não individualmente por contato.
+Define o número máximo de mensagens HSM que podem ser disparadas para uma mesma linha de entrada.
+
+> ⚠️ **Importante:** Essa funcionalidade se aplica exclusivamente a envios manuais realizados no Invenio Live.
+
+É importante destacar também que essa regra é aplicada por telefone. Ou seja, caso existam múltiplos contatos utilizando o mesmo número de entrada, o limite será contabilizado por telefone, e não individualmente por contato.
 
 
 ### Período máximo de envio:
 
 Define o intervalo, em minutos, no qual o limite de HSM será considerado. 
 
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/img1.8config.gerais.png" />
+<img src="https://storage.robbu.global/v2/file/2DBA6B86E571912A0FDB347F9B41D672" />
 
 ---
 
@@ -167,9 +169,6 @@ Com essa funcionalidade ativada, é possível:
 - Inserir o número do protocolo em mensagens dentro do **fluxo da IDR** utilizando a variável `{{protocol}}`.  
 
 - Configurar uma **mensagem padrão**, diretamente nas configurações gerais da conta, para comunicar aos contatos sobre a abertura do protocolo. Dessa forma, sempre que um novo protocolo for criado, o contato receberá automaticamente a mensagem configurada, garantindo visibilidade imediata do número gerado.
-
-
-<img src="https://robbublob.blob.core.windows.net/docs/invenio-center/configurações-gerais-da-conta/configurações-gerais-da-conta/protocol.png" />
 
 Essa prática facilita a organização dos atendimentos e oferece mais segurança e rastreabilidade em cada interação.
 
@@ -276,6 +275,7 @@ Defina o fuso horário do seu ambiente para que rotinas como a unificação de c
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
+<AccordionGroup>
 <Accordion title="Onde acesso as Configurações Gerais da Conta?">
 
 Acesse pelo caminho:  
@@ -414,3 +414,10 @@ O **token público** é utilizado para integração com o WebChat.
 O fuso horário impacta rotinas automatizadas como unificação de contatos, logout automático e demais processos dependentes de horário.
 
 </Accordion>
+
+  <Accordion title="O limite de envio de HSM se aplica a qualquer tipo de disparo?">
+    Não. Essa configuração é aplicada exclusivamente a envios manuais realizados no **Invenio Live**.
+
+    Disparos realizados por outros meios, como APIs, campanhas ou automações, não seguem essa regra e não são impactados por esse limite.
+  </Accordion>
+  </AccordionGroup>

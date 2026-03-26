@@ -1,11 +1,10 @@
 ---
 title: "Guia de Erros da API do WhatsApp"
 sidebarTitle: "Erros Meta"
-description: "Dicionário de erros da API do WhatsApp Business: causas prováveis e como evitar falhas de entrega."
----
-
-Este guia detalha os erros mais comuns retornados pela API da Meta, ajudando a identificar por que uma mensagem não foi entregue e como solucionar o problema.
-
+description: "Os erros retornados pela API do WhatsApp Business são respostas enviadas pela Meta sempre que ocorre alguma falha no envio ou processamento de uma mensagem. Esses retornos indicam diferentes cenários, como restrições da conta, limitações do destinatário, inconsistências na requisição ou políticas de uso não atendidas.
+<br/>
+<br/>
+Compreender esses erros é essencial para garantir uma operação mais estável e eficiente, permitindo identificar rapidamente a causa de falhas de entrega e agir de forma preventiva."
 ---
 
 ## Erros de Entrega e Comportamento
@@ -14,7 +13,9 @@ Este guia detalha os erros mais comuns retornados pela API da Meta, ajudando a i
 
 O erro Message Undeliverable indica que a mensagem enviada pela API do WhatsApp Business não pôde ser entregue ao destinatário. Isso significa que a requisição foi processada pela API da Meta, porém a entrega da mensagem ao usuário final não foi possível devido a alguma condição relacionada ao número de destino ou ao estado da conversa.
 
-> **Causa provável:**<br/> Esse erro pode ocorrer por diversos motivos, sendo os mais comuns:<br/>
+<img src="https://storage.robbu.global/v2/file/963B79DA639F00B722D2FC21836E6882" />
+
+> **Causas possíveis:**<br/> Esse erro pode ocorrer por diversos motivos, sendo os mais comuns:<br/>
 > - Número não possui WhatsApp
 > - Número inválido (DDI ausente, DDD incorreto, número incompleto)
 > - Usuário bloqueou o número de envio 
@@ -25,6 +26,8 @@ O erro Message Undeliverable indica que a mensagem enviada pela API do WhatsApp 
 ### 2. `users-number-is-part-of-an-experiment`
 
 Esse erro ocorre quando o número envolvido na comunicação está participando de experimentos internos da Meta. Durante esses experimentos, determinados comportamentos da API podem ser alterados ou restringidos temporariamente. A Meta utiliza experimentos para validar novas funcionalidades, mudanças de comportamento da plataforma ou melhorias no sistema de entrega de mensagens.
+
+<img src="https://storage.robbu.global/v2/file/963B79DA639F00B7421E3431FD317B8C" />
 
 > **Causa provável:**<br/>
 > -  O número do destinatário foi incluído em um teste A/B da Meta
@@ -65,16 +68,18 @@ O erro rate-limit-hit-spam ocorre quando a Meta identifica um volume elevado de 
 
 Esse erro ocorre quando a quantidade de parâmetros enviados na requisição da API não corresponde à quantidade de variáveis esperadas no template do WhatsApp. Ou seja, o template possui um número específico de variáveis (placeholders), mas a requisição enviada pela API contém mais ou menos parâmetros do que o esperado.
 
+<img src="https://storage.robbu.global/v2/file/1295159819F623E36430B7BC2F7C6D94" />
+
 > **Causa provável:**<br/>
 > - Quantidade incorreta de parâmetros enviados em relação ao que o template aprovado espera
 > - Parâmetros vazios ou mal estruturados.
 
-<Tip>
+<Warning>
 **Como evitar:** 
 - Conferir quantidade de variáveis do template
 - Sempre validar quantas variáveis o template possui
 - Sempre editar o template logo após a criação.
-</Tip>
+</Warning>
 
 ---
 
@@ -105,13 +110,13 @@ O erro nenhum-numero-contendo-id-nessa-conta ocorre quando a requisição faz re
 > -  Número pertence a outra conta (WABA)
 > -  Número removido, desconectado da integração ou migrado para outra conta.
 
-<Tip>
+<Warning>
 **Como evitar:** 
 - Validar o Phone Number ID
 - Garantir que o token pertence à mesma conta
 - Manter configurações atualizadas em caso de troca de número ou migração
 - Conferir números ativos no WhatsApp Manager.
-</Tip>
+</Warning>
 
 ---
 
@@ -125,11 +130,11 @@ O erro template-name-does-not-exist ocorre quando a requisição tenta utilizar 
 > - Template pertence a outra conta
 > -  Ambiente de integração apontando para WABA incorreta.
 
-<Tip>
+<Warning>
 **Como evitar:**
 - Validar nome do template (copiar exatamente como está no WhatsApp Manager)
 - Verificar se o status do template está como aprovado e ativo.
-</Tip>
+</Warning>
 
 ---
 
@@ -156,22 +161,26 @@ O erro translated-text-too-long ocorre quando o texto enviado em uma mensagem te
 
 O erro something-went-wrong é uma resposta genérica retornada pela API da Meta quando ocorre uma falha inesperada durante o processamento da requisição, geralmente relacionada a instabilidades internas da Meta.
 
+<img src="https://storage.robbu.global/v2/file/963B79DA639F00B704A24AAE845EC62D" />
+
 > **Causa provável:**<br/>
 > - Instabilidade temporária da API da Meta
 > - Falha inesperada no processamento interno
 > - Timeout ou falha de comunicação de rede entre servidores.
 
-<Tip>
+<Warning>
 **Como evitar:** 
 - Realizar uma nova tentativa de envio após alguns segundos
 - Monitorar status da API da Meta para verificar incidentes ou instabilidades.
-</Tip>
+</Warning>
 
 ---
 
 ### 10. `This message was not delivered to maintain healthy ecosystem engagement`
 
 Esse erro ocorre devido a atualizações nas políticas de mensagens de marketing da Meta. Caso um usuário receba mensagens de marketing e não interaja com elas, a plataforma pode limitar ou bloquear o envio de novas mensagens para esse contato.
+
+<img src="https://storage.robbu.global/v2/file/963B79DA639F00B77671CB11022D2D9E" />
 
 > **Causa provável:**<br/>
 > - Usuário recebeu mensagens repetidas sem interação
@@ -192,6 +201,8 @@ Esse erro ocorre devido a atualizações nas políticas de mensagens de marketin
 ### 11. `media-upload-error`
 
 O erro media-upload-error ocorre quando há uma falha durante o processo de upload de um arquivo de mídia para a API do WhatsApp. Indica que a plataforma não conseguiu processar ou armazenar o arquivo enviado.
+
+<img src="https://storage.robbu.global/v2/file/FC2A7252F21A8C09A67B0C66736B5A16" />
 
 > **Causa provável:**<br/>
 > - Formato de arquivo não suportado
@@ -240,6 +251,9 @@ O erro spam-rate-limit-hit ocorre quando a Meta identifica características de s
 </Warning>
 
 ---
+
+### Para mais detalhes, acesse a documentação oficial da Meta: 
+[Clique para acessar](https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes) 
 
 ## Links e Assuntos Relacionados
 

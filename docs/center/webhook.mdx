@@ -11,6 +11,12 @@ A integração via **Webhook** permite comunicação em tempo quase real entre o
 Os dados são enviados em **lotes de até 30 arquivos JSON**, com intervalo médio de **2 segundos** entre os lotes.
 </Note>
 
+<Warning>
+⚠️ **Importante:** A Robbu não realiza integrações customizadas com APIs dos clientes no contexto de webhooks.
+
+A plataforma envia os dados em tempo real para endpoints previamente definidos, sendo o consumo, processamento e tratamento dessas informações de responsabilidade da empresa responsável pela integração.
+</Warning>
+
 ---
 
 ## Eventos Disponíveis
@@ -131,6 +137,7 @@ sequenceDiagram
 ## Mapeamento de Campos
 
 ### Message (Mensagem)
+Reúne todas as informações relacionadas às mensagens trafegadas no contato, tanto de entrada quanto de saída. Inclui o conteúdo da mensagem, identificadores únicos para rastreio e dados como data, hora e canal de envio, permitindo o acompanhamento completo das interações.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -270,6 +277,7 @@ sequenceDiagram
 ---
 
 ### Status
+Responsável por informar o estado atual da mensagem ao longo do seu ciclo de vida. Contempla informações como status de envio (enviado, entregue, lido ou falha), além de datas e horários relevantes de cada etapa, permitindo o monitoramento completo da evolução da mensagem.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -302,6 +310,7 @@ sequenceDiagram
 ---
 
 ### Event (KPI Evento)
+Reúne os dados de eventos da plataforma, incluindo eventos sistêmicos e personalizados, utilizados no mapeamento do fluxo de comunicação. Esses eventos representam ações ou gatilhos que influenciam o comportamento e o processamento das interações.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -359,6 +368,7 @@ sequenceDiagram
 ---
 
 ### Campaign (Campanha)
+Apresenta os dados da campanha disparada, contemplando informações da campanha em si, e não das mensagens individuais. Inclui identificador, canal, tipo, datas, volume de envio, status e dados do mailing, além de informações de criação e configuração, permitindo acompanhar e analisar o desempenho da campanha.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -436,6 +446,7 @@ sequenceDiagram
 ---
 
 ### Template
+Contém os dados do template, sem relação direta com envios de mensagens. Apresenta informações de identificação e estrutura, além de eventos como criação, alterações e mudanças de status ao longo do seu ciclo de vida.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -466,7 +477,7 @@ sequenceDiagram
 ---
 
 ### Protocol (Protocolo)
-
+Refere-se ao identificador do atendimento, vinculando a mensagem a um protocolo específico. Permite organizar e rastrear conversas, trazendo dados como ID do protocolo, data de criação, status e informações de encerramento do atendimento.
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
 | `Event` | Ação: `Updated` ou `Created` | `String` |
@@ -506,6 +517,7 @@ sequenceDiagram
 ---
 
 ### User (Usuário)
+Apresenta os dados do usuário na plataforma, de forma independente das interações com mensagens. Contempla informações relacionadas à identificação e ao perfil do usuário, além de eventos como criação, atualização e grupos de acesso, permitindo o acompanhamento e controle operacional.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -526,6 +538,7 @@ sequenceDiagram
 ---
 
 ### Wallet (Carteira / Segmento)
+Representa os dados da carteira (segmento) na plataforma, de forma independente dos envios de mensagens. Inclui informações de identificação e configuração, além de eventos como criação e atualização, permitindo o gerenciamento e a organização dos segmentos.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
@@ -540,6 +553,7 @@ sequenceDiagram
 ---
 
 ### WhatsApp Numbers (Linhas WhatsApp)
+Contém os dados dos números de WhatsApp cadastrados na plataforma, de forma independente das mensagens. Inclui informações cadastrais, configurações e o histórico de alterações, como atualizações e mudanças de status ao longo do tempo.
 
 | Campo | Descrição | Tipo |
 |-------|-----------|------|
