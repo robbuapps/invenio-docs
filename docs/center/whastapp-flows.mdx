@@ -1,0 +1,456 @@
+---
+title: "WhatsApp Flows"
+sidebarTitle: "WhatsApp Flows"
+description: "O **WhatsApp Flows** é um recurso nativo da Meta, integrado ao Invenio Center, que permite o envio de formulários interativos diretamente nas mensagens do WhatsApp. Essa funcionalidade possibilita a coleta estruturada de informações e a execução de fluxos inteligentes, proporcionando uma experiência de atendimento moderna, fluida e altamente eficiente.
+<br/>
+<br/>
+Os Flows permitem concentrar múltiplas interações em uma única mensagem, reduzindo a troca excessiva de mensagens e garantindo uma jornada mais intuitiva para o usuário final.
+"
+---
+
+### Documentação oficial da Meta: 
+[Clique para acessar](https://developers.facebook.com/docs/whatsapp/flows)
+
+## Acesso aos Flows no Invenio Center
+Para acessar os Flows no Invenio Center, siga o passo a passo abaixo:
+1.	Acesse o Invenio Center,
+2.	No menu principal, navegue até Canais,
+3.	Selecione a opção WhatsApp,
+4.	Escolha a WABA desejada,
+5.	Clique na opção Flows.
+
+Ao acessar essa área, será exibida a página inicial de Flows, contendo a listagem de todos os fluxos existentes no ambiente (caso haja).
+
+<img src="https://storage.robbu.global/v2/file/852717A2B502EAD345EB0B3A0BFF7F27" />
+
+## Lista de Flows
+Na tela inicial de Flows, é possível visualizar todos os fluxos criados com as seguintes informações:
+
+- **Nome:** Nome atribuído ao Flow.
+- **Flow ID:** Identificador numérico único do Flow.
+- **Status:**
+  - **Publicado** — Flow já publicado na API da Meta.
+  - **Rascunho** — Flow ainda não publicado.
+- **Categoria:** Classificação funcional do Flow.
+- **Tipo:** Indica se o Flow é estático ou dinâmico.
+
+Essa visualização facilita o gerenciamento, organização e acompanhamento do ciclo de vida dos Flows.
+
+<img src="https://storage.robbu.global/v2/file/6927A21BD45CDA1DD3C9CB9BB60688C3" />
+
+## Categorias de Flow
+
+Os WhatsApp Flows são classificados de acordo com seu objetivo principal, facilitando a organização e utilização dentro da plataforma, conforme descrito abaixo:
+
+<img src="https://storage.robbu.global/v2/file/31DEABE2947BEB2FAB2FFC7A3BD1159F" />
+
+| Categoria            | Objetivo                                                                 | Exemplos |
+|---------------------|-------------------------------------------------------------------------|----------|
+| **SIGN_UP**         | Cadastro de novos usuários na plataforma.                               | Nome, e-mail, telefone, CPF/CNPJ, criação de senha |
+| **SIGN_IN**         | Autenticação de usuários já cadastrados.                                | Login via telefone, código de verificação (OTP), senha |
+| **APPOINTMENT_BOOKING** | Agendamento de compromissos ou serviços.                          | Data, horário, local de atendimento |
+| **LEAD_GENERATION** | Captação e qualificação de potenciais clientes.                         | Nome, empresa, cargo, interesse em produtos ou serviços |
+| **CONTACT_US**      | Facilitar o contato do cliente com a empresa.                           | Motivo do contato, setor desejado, mensagem |
+| **CUSTOMER_SUPPORT**| Suporte ao cliente e registro de solicitações.                          | Tipo de problema, número de protocolo, descrição |
+| **SURVEY**          | Coleta de feedback e avaliação de satisfação.                           | Avaliação de atendimento, feedback de produtos ou serviços |
+| **OTHER**           | Casos não contemplados nas demais categorias.                           | Processos internos, formulários administrativos, testes |
+
+## Tipos de Flow
+
+Os Flows podem ser classificados em dois tipos principais:
+
+- **Flows Estáticos:** Não dependem de integrações externas e utilizam formulários pré-configurados para coleta de informações. São ideais para atendimentos simples, rápidos e diretos, onde não há necessidade de personalização baseada em dados externos.
+
+- **Flows Dinâmicos:** Permitem integração com sistemas externos por meio de endpoints, possibilitando respostas personalizadas com base em dados contextuais. São recomendados para cenários mais complexos, que exigem maior inteligência e adaptação durante a interação com o usuário.
+
+<img src="https://storage.robbu.global/v2/file/461BC13D4C9FB56F266F05B91F51667F" />
+
+## Criação de um Flow
+
+Para criar um novo Flow:
+
+1. Clique no botão **+ Criar Flow**, localizado no canto superior direito da tela.
+2. Preencha as informações básicas:
+   - Nome do Flow
+   - Categoria
+   - Tipo do Flow (estático ou dinâmico)
+
+<img src="https://storage.robbu.global/v2/file/CBB5DFA5172346C29D29E8F307E69345" />
+
+Ao selecionar o tipo **dinâmico**, será necessário configurar um endpoint responsável pela comunicação com sistemas externos durante a navegação do Flow. Essa configuração permite a troca de informações em tempo real, possibilitando respostas mais personalizadas com base em dados externos.
+
+### Configuração do endpoint
+
+Ao criar um Flow dinâmico, é possível escolher entre dois tipos de endpoint:
+
+- **Endpoint programável (Robbu):** Endpoint gerado automaticamente pela plataforma em JavaScript.
+- **Endpoint externo:** Endpoint próprio, fornecido pelo cliente ou por um sistema de terceiros, acessado por meio de uma URL.
+
+Ao optar pelo **endpoint programável (Robbu)**, você pode:
+
+- Criar um **novo endpoint**, que será automaticamente vinculado ao Flow,
+- Utilizar um **endpoint já existente**, previamente configurado na plataforma.
+
+Caso escolha um **endpoint externo**, será necessário informar a **URL** responsável pelo processamento das requisições.
+
+> Para mais detalhes sobre a implementação e configuração de endpoints, consulte a documentação de [Endpoints Customizados](https://docs.robbu.global/docs/center/endpoints-customizados).
+
+### Exemplos de configuração de endpoint
+
+#### Endpoint programável (novo)
+Criação automática de um novo endpoint programável da Robbu para o Flow.
+
+<img src="https://storage.robbu.global/v2/file/BE265DFE84FFC68CE904771671866314" />
+
+#### Endpoint programável (existente)
+Utilização de um endpoint programável da Robbu já configurado na plataforma.
+
+<img src="https://storage.robbu.global/v2/file/BE265DFE84FFC68C30863F7D2810BD63" />
+
+> Para acessar e gerenciar os endpoints customizados da plataforma, clique no botão **Gerenciar endpoints**, localizado no canto superior direito da tela.
+
+#### Endpoint externo
+Integração com um endpoint próprio, informado pelo usuário.
+
+<img src="https://storage.robbu.global/v2/file/BE265DFE84FFC68C0B435A67C462B3B6" />
+
+Após configurar o endpoint, clique em **Criar Flow** para finalizar o processo.
+
+## Gerenciamento de Flows
+
+Após a criação, ao clicar no menu de opções (três pontos) ao lado de um Flow, estarão disponíveis as seguintes ações:
+
+- **Editar:** Permite alterar configurações e conteúdo do Flow.
+- **Deletar:** Remove o Flow do ambiente.
+- **Publicar:** Publica o Flow na API da Meta, tornando-o disponível para uso.
+
+> ⚠️ **Importante:** Após a publicação, o Flow não poderá mais ser editado.
+
+<img src="https://storage.robbu.global/v2/file/871354A0603837EC9A7F1DC5313C2962" />
+
+## Criação do Conteúdo do Flow
+
+O Invenio Center disponibiliza uma interface visual dedicada para a construção do conteúdo do Flow. Cada Flow pode conter até **8 telas**, organizadas de forma sequencial.
+
+### Telas
+
+- As telas são gerenciadas pelo menu lateral esquerdo.
+- Para adicionar uma nova tela, clique em **+ Adicionar tela** e informe um nome.
+
+<img src="https://storage.robbu.global/v2/file/18D51CC4646743E701E1C96BFDABA956" />
+
+### Conteúdo da Tela
+
+Cada tela pode conter os seguintes componentes:
+
+- **Título da tela:** até 20 caracteres
+- **Imagem:** formatos JPEG, PNG ou SVG, com até 5MB ou em base64
+- **Cabeçalho grande:** até 80 caracteres
+- **Cabeçalho pequeno:** até 80 caracteres
+<img src="https://storage.robbu.global/v2/file/0957F93194ADD2A47E960527B7887A4F" />
+- **Corpo de texto:** até 4096 caracteres
+- **Legenda:** até 4096 caracteres
+- **Formulário**
+<img src="https://storage.robbu.global/v2/file/1CECA8A0FB51F61D687CB19862D15A59" />
+<img src="https://storage.robbu.global/v2/file/1CECA8A0FB51F61DCE6340322690EBBB" />
+
+## Tipos de Campos de Formulário
+
+Os formulários dos WhatsApp Flows permitem a coleta de informações do usuário por meio de diferentes tipos de campos, organizados em campos de resposta de texto e campos de seleção. Cada tipo possui configurações específicas que devem ser preenchidas no momento da criação.
+
+### Campos de Resposta de Texto
+
+Os **Campos de resposta de texto** são utilizados quando se deseja que o usuário insira informações manualmente, permitindo maior flexibilidade e personalização nas respostas. Esse tipo de campo é ideal para coletar dados abertos ou semi-estruturados, como nomes, e-mails, descrições, comentários ou qualquer outra informação que não esteja previamente limitada a opções definidas.
+
+#### Resposta curta
+
+Utilizado para coletar informações objetivas, como nome, e-mail, telefone, CPF ou códigos.
+
+Ao selecionar **Resposta curta**, é necessário configurar:
+
+| Campo                          | Descrição |
+|-------------------------------|----------|
+| Nome do componente            | Identificação interna do campo (até 30 caracteres). |
+| Tipo do componente | Define o formato da resposta esperada: Texto, Número, E-mail, Senha, Código, Telefone |
+| Texto de ajuda                | Mensagem opcional exibida abaixo do campo para orientar o preenchimento (até 80 caracteres). |
+| Quantidade mínima e máxima de caracteres | Define os limites de caracteres permitidos para a resposta. |
+| Campo obrigatório             | Define se o preenchimento do campo será obrigatório ou opcional. |
+
+<img src="https://storage.robbu.global/v2/file/FCFAE013EB0C99A94DFAF592F92CBED8" />
+
+#### Parágrafo
+
+Indicado para respostas mais longas, como comentários, observações ou descrições detalhadas.
+
+Ao selecionar **Parágrafo**, é necessário configurar:
+
+| Campo               | Descrição |
+|--------------------|----------|
+| Nome do componente | Identificação interna do campo. |
+| Texto de ajuda     | Mensagem opcional para orientar o usuário (até 80 caracteres). |
+| Quantidade de caracteres | Define o limite de caracteres permitidos para a resposta, variando de 0 a 600 caracteres. |
+| Campo obrigatório  | Define se o preenchimento será obrigatório ou não. |
+
+<img src="https://storage.robbu.global/v2/file/FCFAE013EB0C99A9DFDC1CC96E81FFDD" />
+
+#### Seletor de data
+
+Permite que o usuário selecione uma data específica por meio de um calendário.
+
+Ao selecionar **Seletor de data**, é necessário configurar:
+
+| Campo               | Descrição |
+|--------------------|----------|
+| Nome do componente | Identificação interna do campo. |
+| Campo obrigatório  | Define se a seleção da data será obrigatória. |
+
+### Campos de Seleção
+
+Os **Campos de seleção** são utilizados quando o usuário deve escolher uma ou mais opções a partir de uma lista previamente definida. Esse modelo é indicado para padronizar respostas, reduzir ambiguidades e facilitar o processamento dos dados, já que limita as escolhas a alternativas controladas.
+
+#### Checkbox (Seleção múltipla)
+
+Permite que o usuário selecione mais de uma opção.
+
+Ao configurar um campo do tipo **Checkbox**, é necessário definir:
+
+| Campo                                      | Descrição |
+|-------------------------------------------|----------|
+| Nome do componente                        | Identificação interna do campo. |
+| Quantidade mínima de itens selecionados   | Opcional. |
+| Quantidade máxima de itens selecionados   | Opcional. |
+| Campo obrigatório                         | Define se ao menos uma opção deve ser selecionada. |
+
+**Itens de seleção**
+
+Para cada item disponível, devem ser informados:
+
+- ID do item  
+- Título do item  
+- Descrição do item  
+- Metadados do item  
+
+<img src="https://storage.robbu.global/v2/file/FCFAE013EB0C99A97E18F0237FC48819" />
+
+#### Radio Button (Seleção única)
+
+Permite que o usuário selecione apenas uma opção entre as disponíveis.
+
+A configuração é semelhante à do checkbox, com a diferença de que somente uma opção pode ser escolhida.
+
+Ao configurar um campo do tipo **Radio Button**, é necessário definir:
+
+| Campo               | Descrição |
+|--------------------|----------|
+| Nome do componente | Identificação interna do campo. |
+| Campo obrigatório  | Define se o preenchimento será obrigatório. |
+| Lista de itens     | ID, título, descrição e metadados. |
+
+<img src="https://storage.robbu.global/v2/file/4889CA4DCE02168649C0BEC6AFCF8C12" />
+
+#### Dropdown (Menu suspenso)
+
+Exibe um menu suspenso com opções de seleção única.
+
+Ao selecionar **Dropdown**, é necessário preencher os campos:
+
+| Campo               | Descrição |
+|--------------------|----------|
+| Nome do componente | Identificação interna do campo. |
+| Campo obrigatório  | Define se o campo é obrigatório. |
+| Itens de seleção   | Cadastrar os itens que aparecerão na lista de seleção (ID, título, descrição e metadados). |
+
+<img src="https://storage.robbu.global/v2/file/BEEE62811403AA171CB577B67860E24B" />
+<img src="https://storage.robbu.global/v2/file/BEEE62811403AA1725AE94DE300C4019" />
+
+#### Opt-in (Consentimento)
+
+Campo utilizado para obter o consentimento explícito do usuário, como aceite de termos de uso ou política de privacidade.
+
+<img src="https://storage.robbu.global/v2/file/5362AD1F79AFE5247EAB8A9D5B301E4A" />
+
+#### Para mais detalhes sobre os componentes do Flow, acesse a documentação oficial da Meta:
+https://developers.facebook.com/docs/whatsapp/flows/reference/components
+
+## Edição via JSON
+
+Para usuários com conhecimento técnico, é possível criar ou editar Flows diretamente via JSON, utilizando a opção **Editar JSON**, localizada no canto superior direito da tela.
+
+Caso você já possua um código pronto, é possível copiá-lo e colá-lo nessa área para importar diretamente a estrutura do Flow para dentro da plataforma.
+
+A estrutura segue integralmente o padrão definido na documentação oficial da Meta, incluindo:
+
+- `version`  
+- `screens`  
+- `layout`  
+- `children`  
+- Tipos de componentes e formulários  
+
+<img src="https://storage.robbu.global/v2/file/EDA68B69BD8CB0956CAF9ABDA923315E" />
+<img src="https://storage.robbu.global/v2/file/EDA68B69BD8CB0951A5AC9BF3BA41C13" />
+
+## Envio de Flows via IDR Studio
+
+Os Flows podem ser enviados aos clientes exclusivamente por meio da IDR Studio, utilizando a ação:
+
+> **“Enviar Flow de WhatsApp”**
+
+Nessa ação, é necessário configurar:
+
+- O Flow desejado  
+- A tela inicial que será exibida no Flow 
+- O texto do corpo da mensagem enviado juntamente ao Flow
+- O nome do botão exibido ao usuário  
+
+<img src="https://storage.robbu.global/v2/file/6B8DB75D3F5C98D19DC7C8693A3547A8" />
+
+#### Visualização do Flow em modo rascunho
+Quando o Flow ainda não está publicado (modo rascunho), a experiência visual dentro do WhatsApp não é impactada em sua estrutura. No entanto, a pré-visualização inicial do formulário, exibida no momento do envio, segue um padrão do próprio WhatsApp, não refletindo integralmente as configurações definidas na plataforma. Isso significa que elementos como texto de abertura e formatação podem não aparecer conforme configurado no IDR.
+
+<img src="https://storage.robbu.global/v2/file/262D1CE29839D24DCF89E6ECADDB0A77" />
+
+#### Visualização do Flow após publicação
+Após a publicação do Flow, a experiência passa a respeitar integralmente as configurações definidas na plataforma. A pré-visualização e a abertura do formulário são exibidas conforme o configurado no IDR, e o retorno das informações ocorre corretamente, seguindo a estrutura dos campos definidos no Flow. Isso garante maior consistência na experiência do usuário e na captura dos dados.
+
+<img src="https://storage.robbu.global/v2/file/262D1CE29839D24D9CA852BC56AF81C1" />
+
+## Retorno de dados e estrutura de payload
+
+O **payload** é a estrutura responsável por transportar os dados preenchidos pelo usuário no Flow. Ele é essencial para garantir que as informações coletadas no formulário sejam enviadas corretamente para integrações externas, além de disponibilizar também esses dados na **visualização do operador**. Ou seja, é por meio dele que as informações preenchidas pelo usuário ficam registradas e visíveis no histórico do contato.
+
+Em resumo, tudo o que o usuário preenche nos campos do Flow só será retornado e exibido se estiver devidamente configurado no payload.
+
+### Como funciona o payload
+
+Cada campo do formulário possui um identificador único definido pela propriedade `name`. Esse identificador é utilizado para recuperar os valores preenchidos pelo usuário no momento do envio.
+
+Na configuração do payload, você define:
+
+- **A chave (nome do campo no retorno)** → como a informação será identificada
+- **O valor dinâmico** → que vem do formulário (`${form.nome_do_campo}`)
+
+### Exemplo de mapeamento e payload completo
+
+**Exemplo 1: Mapeamento de um campo individual**
+```JSON
+{
+  "nome": "${form.nome}"
+}
+```
+**Exemplo 2: JSON do formulário no flow com diferentes tipos de campos**
+```JSON
+{
+  "form": [
+    {
+      "type": "TextInput",
+      "name": "nome",
+      "label": "Nome",
+      "required": true,
+      "placeholder": "Digite seu nome"
+    },
+    {
+      "type": "TextInput",
+      "name": "cpf",
+      "label": "CPF",
+      "required": true,
+      "placeholder": "Digite seu CPF"
+    },
+    {
+      "type": "TextInput",
+      "name": "email",
+      "label": "E-mail",
+      "required": true,
+      "placeholder": "Digite seu e-mail"
+    },
+    {
+      "type": "TextInput",
+      "name": "telefone",
+      "label": "Telefone",
+      "required": false,
+      "placeholder": "Digite seu telefone"
+    },
+    {
+      "type": "Select",
+      "name": "categoria",
+      "label": "Categoria",
+      "options": ["Suporte", "Financeiro", "Comercial"],
+      "required": true
+    },
+    {
+      "type": "Select",
+      "name": "urgencia",
+      "label": "Urgência",
+      "options": ["Baixa", "Média", "Alta"],
+      "required": true
+    },
+    {
+      "type": "TextArea",
+      "name": "descricao",
+      "label": "Descrição do problema",
+      "required": true,
+      "placeholder": "Descreva o problema"
+    },
+    {
+      "type": "Checkbox",
+      "name": "consentimento",
+      "label": "Aceito os termos",
+      "required": true
+    }
+  ]
+}
+```
+
+**Exemplo 3: Payload completo**
+```JSON
+{
+  "payload": {
+    "nome": "${form.nome}",
+    "cpf": "${form.cpf}",
+    "email": "${form.email}",
+    "telefone": "${form.telefone}",
+    "categoria": "${form.categoria}",
+    "urgencia": "${form.urgencia}",
+    "descricao": "${form.descricao}",
+    "consentimento": "${form.consentimento}"
+  }
+}
+```
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="Posso reutilizar o mesmo endpoint para múltiplos Flows dinâmicos?">
+    Sim. Um endpoint programável da Robbu ou externo pode ser vinculado a diferentes Flows.  
+
+    É importante garantir que ele consiga diferenciar a origem das requisições (por exemplo, pelo **Flow ID** enviado no payload) para processar corretamente cada fluxo.
+  </Accordion>
+
+<Accordion title="É possível alterar um Flow após a publicação?">
+  Não. Após a publicação, o Flow se torna imutável. Isso inclui quaisquer campos do Flow, estrutura das telas, conteúdo e configuração do payload.  
+
+  💡 **Sugestão:** Recomendamos que o código de cada Flow seja armazenado internamente com segurança. Dessa forma, caso seja necessário fazer alterações, você pode criar um **novo Flow** usando o mesmo código do anterior, adaptá-lo conforme necessário e publicá-lo novamente.
+</Accordion>
+
+<Accordion title="Como o WhatsApp trata campos obrigatórios em rascunho versus publicado?">
+  Quando o Flow está em **rascunho**, apenas a **pré-visualização configurada via IDR** é impactada. Nessa pré-visualização, os campos configurados via IDR não são respeitados, exibindo um layout padrão do WhatsApp.  
+
+  Após a **publicação**, o comportamento real do Flow é aplicado e os campos passam a funcionar corretamente, conforme configurado na plataforma.
+</Accordion>
+
+  <Accordion title="Posso misturar tipos de campos (texto e seleção) no mesmo Flow?">
+    Sim. Cada tela pode conter múltiplos tipos de campos, respeitando a limitação de **até 8 telas por Flow**.  
+  </Accordion>
+
+  <Accordion title="O payload envia apenas os campos preenchidos pelo usuário?">
+    Não necessariamente. Todos os campos definidos no payload serão enviados, mas se o usuário não preencher um campo **não obrigatório**, o valor pode vir como `null` ou vazio, dependendo da integração do endpoint.
+  </Accordion>
+
+  <Accordion title="Como garantir que os dados do Flow aparecem corretamente no histórico do operador?">
+    O **payload** é essencial. Se algum campo não estiver mapeado no payload, mesmo que o usuário o preencha, ele **não aparecerá no histórico do contato**.  
+    
+    Sempre revise se o `name` do campo corresponde à chave usada no payload.
+  </Accordion>
+  
+</AccordionGroup>

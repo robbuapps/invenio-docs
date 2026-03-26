@@ -44,7 +44,7 @@
                     "docs/live/metodos-de-distribuicao",
                     "docs/live/meu-perfil",
                     "docs/live/criar-contato",
-                    "docs/live/performace-do-usuario",
+                    "docs/live/performance-do-usuario",
                     "docs/live/sessao-de-24horas-no-whatsapp"
                 ]
             },
@@ -91,6 +91,7 @@
                     "docs/center/variaveis-de-sistema",
                     "docs/center/web-chat",
                     "docs/center/webhook",
+                    "docs/center/whastapp-flows",
                     "docs/center/whatsapp-business-api"
                     
                 ]
