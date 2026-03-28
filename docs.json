@@ -92,7 +92,8 @@
                     "docs/center/web-chat",
                     "docs/center/webhook",
                     "docs/center/whastapp-flows",
-                    "docs/center/whatsapp-business-api"
+                    "docs/center/whatsapp-business-api",
+                    "docs/center/marcadores"
                     
                 ]
             },
