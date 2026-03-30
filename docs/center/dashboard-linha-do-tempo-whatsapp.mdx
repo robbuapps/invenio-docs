@@ -1,0 +1,120 @@
+---
+title: "Dashboard Linha do tempo Whatsapp"
+sidebarTitle: "Dashboard Linha do tempo Whatsapp"
+description: "Permite que você monitore os contatos dentro da janela de 24h."
+
+---
+
+O Dashboard Linha do Tempo WhatsApp foi desenvolvido para acompanhar os contatos que estão dentro da janela de 24 horas do WhatsApp, permitindo monitorar conversas pendentes e o tempo restante da sessão.
+
+**Caminho:** Invenio Center > Analisar > Dashboard > Linha do tempo WhatsApp 
+
+<Tip>
+**Acesso direto:** [Dashboard Linha do Tempo WhatsApp](https://inveniocenter.robbu.com.br/painel/dashboards/linha-do-tempo-whatsapp)
+</Tip>
+
+<img src="https://storage.robbu.global/v2/file/836CBFE81F79A26C4BC64E603E296D81" />
+
+
+### Entenda o Dashboard
+
+Regras de exibição dos dados no dashboard:
+
+- Considera apenas contatos cujo último canal de interação seja o WhatsApp.  
+
+- Os dados são exibidos em tempo real (real-time).  
+
+- São contabilizados apenas clientes com mensagens pendentes de resposta.  
+
+- Inclui todos os contatos vinculados aos segmentos aos quais o usuário logado possui acesso.  
+
+- No canto superior direito, é possível aplicar filtros por segmento, caso deseje acompanhar os contatos de forma individualizada por segmento.
+
+- Também podem ser exibidos contatos sem segmento vinculado, desde que o usuário logado possua permissão para visualizar contatos sem segmento. Caso contrário, esses contatos não serão exibidos nos contadores.  
+
+### Indicadores
+
+Os indicadores irão te auxiliar a monitorar os contatos:
+
+<img src="https://storage.robbu.global/v2/file/32AA9D0DBE16CBB6FE68532D8FEC789D" />
+
+
+**Ultrapassaram a janela de 24h:**
+Representa todos os contatos com mensagens pendentes cujo último canal de atendimento seja o WhatsApp e em que a data e hora de encerramento da sessão de 24 horas já foi ultrapassada. 
+
+**Contatos até 20h sem resposta:** 
+Representa todos os contatos com mensagens pendentes cujo último canal de atendimento seja o WhatsApp e em que a data hora de encerramento de sessão seja menor que 20h 
+
+**Contatos de 20h a 24h sem resposta:** 
+Representa todos os contatos com mensagens pendentes cujo último canal de atendimento seja o WhatsApp e em que a a data hora de encerramento sessão de 24 está entre 20 e 24 horas desde a última interação, ou seja, próxima de expirar. 
+
+**Contatos com 1h para o fim da janela de 24h:** 
+Representa todos os contatos com mensagens pendentes cujo último canal seja o WhatsApp e em que resta aproximadamente 1 hora ou menos para o encerramento da sessão de 24 horas. 
+
+**Agentes com conversas sem resposta (maior que 3h):**
+É a soma de usuários do sistema, que possuem uma ou mais conversas pendentes, cujo último canal seja o WhatsApp, e que estão aguardando resposta há mais de 3 horas. 
+
+
+
+### Total de contatos sem resposta por faixa de tempo 
+
+Este gráfico é apresentado em formato de barras, organizado por hora, considerando a linha do tempo da sessão de conversa do WhatsApp (24 horas). 
+
+<img src="https://storage.robbu.global/v2/file/E70A08DA68348206241DDA26FC06425D" />
+
+O indicador contabiliza a quantidade de contatos únicos com base na data e hora de encerramento da Sessão do WhatsApp. 
+São considerados apenas contatos com mensagens pendentes cujo último canal de interação seja o WhatsApp.
+
+Entenda as regras definidas nas cores: 
+    - **Verde:** Menor que 3 horas 
+    - **Amarelo:** Menor ou igual a 17 horas 
+    - **Vermelho:** Maior que 17 horas
+
+
+### Total de contatos sem resposta do atendente.
+
+Este gráfico é exibido em formato de barras, agrupado por usuário (agente) que possui conversas com mensagens pendentes dentro da timeline da sessão de conversa do WhatsApp (24 horas).
+
+<img src="https://storage.robbu.global/v2/file/BBA75228B52C68C839CA859E3463B29C" />
+
+O indicador apresenta a quantidade de contatos pendentes atribuídos a cada agente, considerando apenas conversas cujo último canal de interação seja o WhatsApp. 
+Aqui se aplica a mesma regra de cores citadas acima.  
+
+
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="O que é o Dashboard Linha do Tempo WhatsApp?">
+    É um painel que permite monitorar os contatos dentro da janela de 24 horas do WhatsApp, ajudando a acompanhar conversas pendentes e identificar atendimentos que precisam de resposta antes do encerramento da sessão.
+  </Accordion>
+
+ <Accordion title="Onde posso acessar o Dashboard Linha do Tempo WhatsApp?">
+    Acesse pelo caminho: 
+    Invenio Center > Analisar > Dashboard > Linha do tempo WhatsApp 
+  </Accordion>
+
+  <Accordion title="O que representa a janela de 24 horas do WhatsApp?">
+    A janela de 24 horas corresponde ao período em que é possível responder livremente ao contato após a última mensagem recebida. Após esse período, a sessão é encerrada.
+  </Accordion>
+
+  <Accordion title="É possível filtrar as informações exibidas no dashboard?">
+    Sim. No canto superior direito do painel, é possível aplicar filtros por segmento, permitindo analisar os contatos de forma individualizada por segmento.
+  </Accordion>
+
+  <Accordion title="O que significa o indicador “Ultrapassaram a janela de 24h”?">
+    Indica todos os contatos com mensagens pendentes cujo último canal de atendimento foi o WhatsApp e em que a janela de 24 horas já foi encerrada. 
+  </Accordion>
+
+  <Accordion title="O que significa “Contatos com 1h para o fim da janela de 24h”?">
+    Mostra os contatos com mensagens pendentes cujo encerramento da sessão ocorrerá em aproximadamente 1 hora ou menos, exigindo atenção imediata no atendimento. 
+  </Accordion>
+
+  <Accordion title="O que significam as cores exibidas nos indicadores e gráficos?">
+    As cores indicam o tempo de espera das conversas sem resposta: 
+    Verde: Menor que 3 horas 
+    Amarelo: Menor ou igual a 17 horas 
+    Vermelho: Maior que 17 horas  
+    Essas cores ajudam a identificar rapidamente conversas que precisam de maior atenção ou urgência.  
+  </Accordion>
+  </AccordionGroup>
