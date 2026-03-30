@@ -1,0 +1,285 @@
+---
+title: "Fila de Atendimento"
+sidebarTitle: "Fila de Atendimento"
+description: ""
+---
+A Fila de Atendimento é o principal mecanismo de organização dos contatos dentro da operação, funcionando como o ponto inicial onde todas as interações aguardam tratamento antes de serem direcionadas a um operador humano. 
+
+A gestão e acompanhamento dessa fila podem ser realizados por meio de dois módulos da plataforma:
+
+- **Invenio Live**: Interface operacional voltada ao atendimento em tempo real, onde os operadores visualizam e tratam os contatos,
+- **Otimização (Invenio Center)**: Visão analítica e gerencial da fila, permitindo monitoramento, priorização e tomada de decisão sobre os atendimentos. 
+
+A presença de um contato na fila está diretamente associada à existência de uma pendência que ainda **não foi atribuída ou vinculada a um operador específico**. Ou seja, contatos que possuem mensagens não respondidas ou ações pendentes permanecem na fila apenas enquanto **não estão fidelizados a nenhum operador**.  
+
+Dessa forma, a fila de atendimento funciona como um ponto de controle centralizado, reunindo exclusivamente os contatos que aguardam ser assumidos, permitindo que a operação distribua e organize o fluxo de atendimento de maneira eficiente.
+
+### O que gera a pendência?
+
+Um contato será considerado pendente sempre que houver uma ação necessária por parte da operação. As principais situações incluem:
+
+- **Mensagem não respondida**: Quando o cliente envia uma mensagem e ainda não recebeu retorno de um operador,
+
+- **Transferência rápida**: Quando o contato é transferido entre usuários ou segmentos, exigindo novo atendimento,
+
+- **Alteração de responsabilidade**: Quando o atendimento é atribuído a outro operador, ficando pendente de continuidade.
+
+### O que remove a pendência?
+
+A pendência é removida quando ocorre uma das seguintes ações:
+
+- **Resposta ao contato**: Qualquer interação enviada remove automaticamente a pendência do contato,
+
+- **Marcação como lida**: Pode ser realizada tanto no LIVE quanto no módulo de Otimização,
+
+- **Registro de evento (KPI)**: Considera a interação como tratada para fins operacionais.
+
+**Observações importantes:**
+
+<Tip>
+Contatos sem pendência não são exibidos na fila de atendimento.
+</Tip>
+
+<Tip>
+Para evitar que um contato permaneça em estados como hibernação ou fidelização indevida, é necessário finalizar corretamente a conversa após o atendimento.
+</Tip>
+
+## Organização da Fila de Atendimento
+
+A Fila de Atendimento é um recurso dinâmico que organiza os contatos de forma estruturada, garantindo que as interações mais relevantes recebam atenção prioritária. A ordenação da fila é baseada em dois critérios principais: **Prioridade do Contato** e **Data/Hora de Início da Pendência**.
+
+### Critérios de Ordenação
+
+**Prioridade do Contato**: A prioridade indica o nível de urgência de cada atendimento, seguindo a hierarquia:
+
+- **Alta** – Contatos que exigem atenção imediata,
+- **Média** – Contatos com necessidade de resposta dentro de um prazo padrão,
+- **Baixa** – Contatos que podem ser atendidos posteriormente.
+
+
+**Data/Hora de Início da Pendência**: Os contatos são organizados do **mais antigo para o mais recente**, garantindo que interações aguardando há mais tempo sejam visíveis e tratadas de forma adequada.
+
+### Fatores que alteram a prioridade
+
+A prioridade de um contato pode ser modificada automaticamente ou manualmente, considerando diferentes fatores:
+
+1. **Palavras-chave cadastradas**: Termos ou frases definidos no menu **Marcadores** do Invenio Center podem elevar a prioridade do contato para **Alta**,
+
+2. **Fluxo de ChatBot**: Caso o fluxo do ChatBot altere a prioridade, o sistema ajusta automaticamente o nível do contato,
+
+3. **Cadastro de Público**: Públicos previamente definidos com prioridade terão seus contatos ajustados automaticamente,
+
+4. **Edição de Contato**: É possível alterar manualmente a prioridade ao editar o contato dentro do Invenio Center ou Live.
+
+### Prioridade de Canais na Fila
+
+No **Invenio Live**, a fila considera também a prioridade dos canais para definir a posição dos contatos, seguindo a ordem crescente de critérios:
+
+1. **Prioridade do Canal**  
+2. **Prioridade do Contato**  
+3. **Data de Recebimento da Mensagem**  
+
+> **Importante:** Contatos provenientes do canal **Chat** devem possuir prioridade absoluta, já que o cliente está online e requer atendimento imediato.  
+
+Esses critérios influenciam diretamente a **ordenção da fila** e a **distribuição dos atendimentos**, garantindo que os operadores atendam primeiro os contatos mais urgentes e relevantes.
+
+## Fluxo de Envio à Fila
+
+### Sem IDR
+Quando não há IDR configurado, o fluxo segue a seguinte lógica:
+
+1. **Mensagem recebida do contato**, 
+2. **Vinculação de segmento pelo canal**, caso exista,
+3. **Envio à fila de operação**.
+
+### Com IDR
+Se houver um IDR configurado, o fluxo é ligeiramente diferente:
+
+1. **Mensagem recebida do contato**,  
+2. **IDR vinculada ao canal**,
+3. **Envio à fila do segmento vinculado**.  
+
+**Observações importantes importantes sobre a interação entre IDR e fila de operação:**
+
+- Se não houver segmento definido, o contato é enviado para a **fila do ambiente**, podendo ser atendido por qualquer usuário com permissão de acesso a atender contatos sem segmento.  
+- No módulo de Otimização, é possível utilizar o filtro **“IDR”** para separar contatos que estão dentro ou fora da IDR, facilitando o monitoramento e a gestão da fila.
+
+## Métodos de Distribuição de Atendimento
+
+A distribuição dos contatos pode ser realizada de forma **manual** ou **automática**, dependendo do volume de atendimentos e das configurações da operação.
+
+### Distribuição Manual
+Indicada para contas com menor volume de atendimentos simultâneos ou tarefas pontuais. Nesse modelo:
+
+- O operador assume o controle direto dos atendimentos,
+- Para atender um contato, o usuário deve clicar no botão **“Próximo”**, o que fideliza o contato ao operador,
+- Caso nenhuma configuração específica esteja habilitada, o sistema adota automaticamente o modo manual por padrão.
+
+### Distribuição Automática
+Recomendada para operações com maior volume de atendimentos, permitindo que os contatos sejam distribuídos automaticamente entre os operadores. Este método considera as seguintes configurações:
+
+- Limite máximo de pendências por operador  
+- Quantidade máxima de contatos fidelizados  
+- Distribuição entre canais online e offline  
+- Tempo de castigo para atrasos no atendimento  
+
+#### Tipos de Distribuição Preditiva
+
+1. **Média de Clientes Fidelizados**: Prioriza distribuição para operadores com menor número de clientes fidelizados,
+
+2. **Média de Clientes Pendentes**: Distribui favorecendo operadores com menos contatos pendentes em atendimento,
+
+3. **Incentivar TMR (Tempo Médio de Resposta) Baixo**: Prioriza usuários com menor TMR (Tempo Médio de Resposta).
+
+Esses mecanismos permitem que a fila de atendimento funcione de forma estruturada, garantindo que todos os contatos com pendência sejam tratados com prioridade adequada, enquanto a distribuição preditiva maximiza eficiência e desempenho da operação.
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+
+  <Card
+    title="Configuração da Conta"
+    icon="gear"
+    href="https://inveniocenter.robbu.com.br/painel/configuracoes/conta"
+  >
+    Configurações gerais do ambiente Invenio Center
+  </Card>
+
+  <Card
+    title="Otimização"
+    icon="chart-bar"
+    href="https://inveniocenter.robbu.com.br/painel/otimizacao-de-fila"
+  >
+    Monitoramento e análise da fila de atendimento
+  </Card>
+
+  <Card
+    title="IDR"
+    icon="link"
+    href="https://inveniocenter.robbu.com.br/painel/idr"
+  >
+    Configuração e gerenciamento de fluxos de ChatBot
+  </Card>
+
+  <Card
+    title="Marcadores"
+    icon="tag"
+    href="https://inveniocenter.robbu.com.br/painel/marcadores"
+  >
+    Palavras-chave e regras que alteram prioridade de contatos
+  </Card>
+
+  <Card
+    title="Invenio Live"
+    icon="desktop"
+    href="https://invenio.robbu.com.br/painel/"
+  >
+    Interface de atendimento em tempo real
+  </Card>
+
+  <Card
+    title="Prioridade de Canais"
+    icon="sort-amount-up"
+    href="https://inveniocenter.robbu.com.br/painel/configuracoes/prioridade-canal"
+  >
+    Critérios de ordenação da fila por canal de atendimento
+  </Card>
+
+  <Card
+    title="Usuários"
+    icon="users"
+    href="https://inveniocenter.robbu.com.br/painel/usuarios"
+  >
+    Gerenciamento de operadores e permissões de atendimento
+  </Card>
+
+</CardGroup>
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+
+<Accordion title="O que determina se um contato aparece na fila de atendimento?">
+Um contato é exibido na fila apenas quando há **pendência de ação** e **não está fidelizado a nenhum operador**. Mesmo que haja mensagens não respondidas, se o contato já estiver atribuído a um operador, ele não aparece na fila geral.
+</Accordion>
+
+<Accordion title="Como a prioridade do contato influencia a posição na fila?">
+A posição de um contato na fila depende de três critérios, aplicados em ordem:  
+
+1. **Prioridade do Canal:** Contatos de canais mais críticos (como Chat) têm prioridade absoluta, pois o cliente está online e requer atendimento imediato.  
+2. **Prioridade do Contato:** Indica o nível de urgência do atendimento (Alta, Média ou Baixa). Contatos com prioridade alta serão exibidos antes de contatos com prioridade menor, dentro do mesmo canal.  
+3. **Data/Hora de Recebimento da Mensagem:** Organiza os contatos do mais antigo para o mais recente, garantindo que interações aguardando há mais tempo sejam tratadas antes das mais recentes, quando canal e prioridade forem iguais.
+
+Portanto, a **prioridade do contato não é o único fator**: o canal de origem do contato tem precedência e influencia diretamente a posição na fila.
+</Accordion>
+
+<Accordion title="Como posso garantir que contatos críticos sejam atendidos primeiro?">
+No **Invenio Live**, o sistema considera também a **prioridade do canal**. Contatos do canal Chat possuem prioridade absoluta, garantindo que clientes online sejam atendidos imediatamente. Para outros canais, a organização considera:  
+1. Prioridade do canal  
+2. Prioridade do contato  
+3. Data de recebimento da mensagem
+</Accordion>
+
+<Accordion title="O que acontece se um contato não tiver segmento ou IDR?">
+- Sem segmento: o contato vai para a **fila do ambiente**, podendo ser atendido por qualquer operador com permissão.  
+- Com IDR: o contato é enviado para a **fila do segmento vinculado**.  
+O módulo de **Otimização** permite filtrar contatos que estão dentro ou fora da IDR para facilitar a gestão.
+</Accordion>
+
+<Accordion title="Quando a pendência é removida da fila?">
+A pendência é automaticamente removida quando:  
+- O operador envia uma mensagem de resposta;  
+- A conversa é marcada como “lida” (no Live ou Otimização);  
+- Um evento é registrado para fins de KPI, indicando que a interação foi tratada.
+</Accordion>
+
+<Accordion title="A prioridade de um contato pode mudar automaticamente?">
+Sim, a prioridade pode ser alterada automaticamente ou manualmente:  
+- **Palavras-chave cadastradas** no menu Marcadores podem elevar a prioridade para Alta;  
+- **Fluxos de ChatBot** podem modificar a prioridade;  
+- **Públicos cadastrados com prioridade** ajustam automaticamente os contatos;  
+- **Edição manual** pelo operador permite alterar a prioridade dentro do Live ou Otimização.
+</Accordion>
+
+<Accordion title="O que é a distribuição preditiva e como ela funciona?">
+A distribuição preditiva envia contatos automaticamente aos operadores, equilibrando carga e priorizando eficiência. Os tipos mais comuns são:  
+- **Média de Clientes Fidelizados:** distribui contatos para manter média de fidelização entre operadores;  
+- **Média de Clientes Pendentes:** favorece operadores com menos pendências;  
+- **Incentivar TMR Baixo:** prioriza operadores com menor Tempo Médio de Resposta, aumentando a agilidade.
+</Accordion>
+
+<Accordion title="Como funciona a fidelização do contato?">
+Um contato é **fidelizado** quando um operador inicia o atendimento manualmente (ex.: botão “Próximo” no Live) ou através da distribuição automática.
+</Accordion>
+
+<Accordion title="É possível atender contatos sem segmento mesmo que exista IDR?">
+Sim. Contatos que não possuem segmento são enviados para a **fila do ambiente** e podem ser atendidos por qualquer operador com permissão para acessar contatos sem segmento.  
+
+É importante destacar que a **IDR por si só não vincula segmentos aos contatos**. Para associar um segmento a um contato dentro do fluxo, é necessário utilizar explicitamente o step de ação **"Vincular Segmento ao Contato"**.
+</Accordion>
+
+<Accordion title="O que pode causar atrasos na distribuição automática?">
+A distribuição automática considera:  
+- Limite máximo de pendências por operador;  
+- Quantidade máxima de contatos fidelizados;  
+- Distribuição entre canais online/offline;  
+- Tempo de castigo por atrasos no atendimento.  
+
+Se algum operador atingir limites configurados, o contato será distribuído a outro operador disponível.
+</Accordion>
+
+<Accordion title="Como evitar que contatos fiquem 'hibernando' na fila?">
+Para evitar que um contato permaneça em estado de hibernação ou fidelização indevida, é necessário **finalizar corretamente a conversa** após o atendimento.
+</Accordion>
+
+<Accordion title="Como posso monitorar contatos que estão dentro ou fora da IDR?">
+No módulo **Otimização**, utilize o filtro **“IDR”** para separar contatos:  
+- **Dentro da IDR:** já estão vinculados a um segmento específico;  
+- **Fora da IDR:** disponíveis para atendimento.
+</Accordion>
+
+<Accordion title="O tempo de pendência influencia a posição do contato na fila?">
+Sim. A fila é organizada do **contato mais antigo para o mais recente**, garantindo que interações aguardando há mais tempo sejam tratadas antes das mais recentes.
+</Accordion>
+
+</AccordionGroup>
