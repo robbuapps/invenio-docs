@@ -62,6 +62,7 @@
                     "docs/center/cadastrar-conta-de-email",
                     "docs/center/criacao-de-contatos-invenio-center",
                     "docs/center/dashboard-analitico",
+                    "docs/center/dashboard-linha-do-tempo-whatsapp",
                     "docs/center/dashboard-kpi-eventos",
                     "docs/center/dashboard-operacional",
                     "docs/center/dashboard-advertising",
@@ -75,6 +76,7 @@
                     "docs/center/integracao-de-paginas",
                     "docs/center/integracao-com-chatgpt",
                     "docs/center/kpi-eventos",
+                    "docs/center/marcadores",
                     "docs/center/bibliotecas-de-midias",
                     "docs/center/omnichannel",
                     "docs/center/otimizacao",
@@ -92,8 +94,8 @@
                     "docs/center/web-chat",
                     "docs/center/webhook",
                     "docs/center/whastapp-flows",
-                    "docs/center/whatsapp-business-api",
-                    "docs/center/marcadores"
+                    "docs/center/whatsapp-business-api"
+                    
                     
                 ]
             },
