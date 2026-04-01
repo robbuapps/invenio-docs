@@ -1,0 +1,162 @@
+---
+title: "Canal Telegram"
+sidebarTitle: "Canal Telegram"
+description: "O **Telegram** é um aplicativo de mensagens amplamente utilizado, reconhecido por sua segurança, velocidade e capacidade de compartilhamento de diversos tipos de mídia, além de permitir sincronização entre múltiplos dispositivos. Na plataforma, esse canal é integrado ao Invenio Center como parte da estratégia omnichannel, possibilitando centralizar o atendimento digital em um único ambiente.
+<br/>
+<br/>
+Diferente de outros canais, o Telegram opera por meio de bots, que representam a empresa e intermediam a comunicação com os clientes. Para utilizá-lo, é necessário criar um bot a partir de uma conta pessoal e vinculá-lo à plataforma. A comunicação ocorre inicialmente de forma receptiva, sendo iniciada pelo cliente e, após esse primeiro contato, a empresa pode enviar mensagens livremente, mantendo o atendimento contínuo e integrado aos demais canais."
+---
+
+## Pré-requisitos
+
+Antes de iniciar a integração, certifique-se de que você atende aos seguintes requisitos:
+
+- Possuir uma conta ativa no Telegram,
+- Ter acesso ao aplicativo Telegram (mobile ou web),
+- Possuir acesso ao Invenio Center,
+- Ter permissão para gerenciar o canal de telegram na plataforma.
+
+## Integrando o Telegram a plataforma
+
+### Criando um Bot no Telegram
+
+O primeiro passo é criar o bot que será utilizado como canal de atendimento.
+
+#### Passo a passo
+
+1. Acesse o Telegram,
+2. Pesquise por **@BotFather**,
+3. Inicie uma conversa com o bot oficial
+4. Envie o comando: **/newbot**,
+5. Informe:
+   - Nome do bot (nome visível para usuários),
+   - Username do bot (deve terminar com `_bot`).
+
+####  Regras para o username
+
+- Deve conter entre 5 e 32 caracteres,
+- Aceita letras, números e underscore (_),
+- Obrigatoriamente termina com `_bot`.
+
+## Obtendo o Token do Bot
+
+Após a criação do bot, o Telegram disponibilizará um token de autorização. Esse token é utilizado para autenticar o bot e permitir que a plataforma Invenio envie e receba mensagens em seu nome, viabilizando a comunicação com a API do Telegram.
+
+> O token funciona como uma credencial de autenticação entre o Telegram e a plataforma.
+
+⚠️ **Importante:** Mantenha este token seguro. Não compartilhe com terceiros.
+
+<img src="https://storage.robbu.global/v2/file/85293307A35E8F02A38B6E6AA55E3EF9" />
+
+> A área destacada em vermelho corresponde ao trecho onde está o token gerado pelo bot do Telegram.
+
+## Configurando o Canal no Invenio Center
+
+Com o token em mãos, siga os passos abaixo para concluir a integração:
+
+1. Acesse o Invenio Center,
+2. Navegue até: Canais → Telegram,
+3. Insira o token gerado pelo BotFather,
+4. Clique em **Salvar**.
+
+Após salvar, o canal estará ativo e pronto para uso.
+
+<img src="https://storage.robbu.global/v2/file/EB9E201E84F363CEBBDBCEE95B390AA1" />
+
+## Funcionamento do Canal
+
+Após a integração, o fluxo de comunicação ocorre da seguinte forma:
+
+1. O cliente encontra seu bot no Telegram,
+2. Inicia uma conversa,
+3. A mensagem é recebida pela Invenio,
+4. O atendimento pode ser realizado por meio de atendimento humano ou de forma automatizada, utilizando chatbot.
+
+#### Visão do contato
+<img src="https://storage.robbu.global/v2/file/85293307A35E8F022F63A6F95177A5A7" />
+
+#### Visão da operação
+<img src="https://storage.robbu.global/v2/file/45FF236629658AD533B6756E9141C01F" />
+
+As conversas no Telegram devem ser iniciadas pelo contato. A partir desse primeiro contato, sua empresa pode enviar mensagens livremente, sem restrições de envio.
+
+A integração com o Telegram amplia as possibilidades de atendimento digital, oferecendo um canal rápido, seguro e escalável para comunicação com seus clientes.
+## Links Relacionados
+
+<CardGroup cols={2}>
+
+  <Card
+  title="Canais Invenio"
+  icon="gear"
+  href="https://inveniocenter.robbu.com.br/painel/canais"
+>
+  Gerenciamento e ativação de canais de atendimento no Invenio Center
+</Card>
+
+<Card
+  title="IDR"
+  icon="link"
+  href="https://inveniocenter.robbu.com.br/painel/idr"
+>
+  Criação e configuração de fluxos automatizados
+</Card>
+
+  <Card
+    title="Invenio Live"
+    icon="desktop"
+    href="https://invenio.robbu.com.br/painel/"
+  >
+    Plataforma utilizada pelos operadores para atendimento em tempo real
+  </Card>
+
+  <Card
+    title="Usuários e Permissões"
+    icon="users"
+    href="https://inveniocenter.robbu.com.br/painel/usuarios"
+  >
+    Gerenciamento de usuários e definição de acessos no ambiente
+  </Card>
+
+</CardGroup>
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+
+<Accordion title="O que acontece se o cliente nunca iniciar uma conversa com o bot?">
+Se o cliente não iniciar a conversa, não será possível enviar mensagens para ele. No Telegram, o primeiro contato deve obrigatoriamente partir do usuário.
+</Accordion>
+
+<Accordion title="Posso importar contatos e iniciar conversas ativamente pelo Telegram?">
+Não. O Telegram não permite o envio de mensagens para contatos que ainda não interagiram com o bot.
+</Accordion>
+
+<Accordion title="O bot precisa estar online para receber mensagens?">
+Não. O bot funciona por meio da integração com a plataforma, portanto as mensagens enviadas pelos clientes serão recebidas normalmente no Invenio Center.
+</Accordion>
+
+<Accordion title="O que acontece se o token do bot for alterado ou exposto?">
+Se o token for alterado ou comprometido, a integração pode parar de funcionar ou ficar vulnerável. Nesse caso, será necessário gerar um novo token no BotFather e atualizá-lo no Invenio Center.
+</Accordion>
+
+<Accordion title="Existe limite de envio de mensagens no Telegram?">
+Não há restrição de janela de envio após o primeiro contato do cliente. A comunicação pode ocorrer livremente a partir da interação inicial.
+</Accordion>
+
+<Accordion title="Como o cliente pode encontrar o bot da minha empresa?">
+O bot pode ser acessado pelo username (ex: @suaempresa_bot) ou por meio de um link direto compartilhado pela empresa.
+</Accordion>
+
+<Accordion title="É possível utilizar apenas chatbot no atendimento via Telegram?">
+Sim. O canal pode operar de forma totalmente automatizada por meio de fluxos de chatbot, sem necessidade de atendimento humano.
+</Accordion>
+
+<Accordion title="O que acontece se o cliente parar de interagir com o bot?">
+A conversa permanece registrada e sua empresa ainda pode enviar mensagens, desde que o cliente já tenha iniciado a interação anteriormente.
+</Accordion>
+
+<Accordion title="Posso integrar o Telegram com fluxos já existentes no Invenio Center?">
+Sim. Após a ativação do canal, ele pode ser integrado normalmente aos fluxos de atendimento já configurados na plataforma.
+</Accordion>
+
+</AccordionGroup>
