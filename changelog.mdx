@@ -2,6 +2,108 @@
 title: "Changelog"
 mode: "center"
 ---
+<Update label="Março 2026 - 2.0.95" description="Invenio Live e Center.">
+
+## Press Release —Indicador de Digitação no WhatsApp (Invenio Live)
+### Visão Geral
+
+O Indicador de Digitação foi implementado no Invenio Live para tornar o atendimento via WhatsApp mais fluido e natural, aproximando a experiência do cliente final ao comportamento nativo do aplicativo.
+
+Agora, quando o atendente estiver digitando uma resposta, o cliente visualizará no WhatsApp a indicação de que sua mensagem está sendo respondida em tempo real.
+
+### Essa melhoria aumenta:
+
+- Sensação de agilidade
+- Transparência na comunicação
+- Redução da percepção de demora
+- Experiência mais humanizada
+
+### Objetivo da funcionalidade
+
+Evitar que o cliente interprete pausas na resposta como ausência de atendimento, exibindo a indicação de que o atendente está digitando.
+
+### Como funciona
+- Início da digitação
+
+#### Quando:
+
+- O atendente está em uma conversa ativa no Invenio Live
+- E começa a digitar uma mensagem
+
+#### O sistema:
+
+- Envia automaticamente uma notificação ao WhatsApp
+- O cliente visualiza o indicador de “digitando...”
+- Pausa na digitação
+
+#### Quando:
+
+- O atendente para de digitar
+
+#### O sistema:
+
+- Interrompe o envio da notificação
+- O indicador desaparece automaticamente no WhatsApp
+
+A notificação deixará de aparecer em no máximo 25 segundos, caso nenhuma nova digitação seja detectada.
+
+### Onde se aplica
+
+Esta funcionalidade está disponível para:
+
+- Conversas via WhatsApp
+- Utilizando o provedor Positus
+- Realizadas pelo Invenio Live
+
+#### Outros canais não são impactados.
+
+### Regras de funcionamento
+O envio do indicador respeita um intervalo mínimo entre chamadas, evitando requisições excessivas.
+Chamadas repetidas não são disparadas enquanto a digitação continua.
+Caso ocorra erro técnico na comunicação com o provedor, o atendimento continua normalmente (sem impacto no envio de mensagens).
+
+### Experiência para o cliente final
+
+#### O cliente perceberá:
+
+- Que o atendente está ativo
+- Que sua mensagem está sendo respondida
+- Uma experiência mais próxima do uso direto do WhatsApp
+
+- Nenhuma ação é necessária por parte do cliente.
+
+
+## Press Release — Restrição de templates de autenticação no Invenio Live
+### Visão geral
+
+Para garantir mais segurança e coerência no uso de templates de WhatsApp, os templates do tipo Autenticação (Authentication) não são mais exibidos no Invenio Live.
+
+Esses templates são destinados exclusivamente a processos automatizados, como chatbots e integrações de sistema, e não devem ser utilizados em atendimentos manuais.
+
+### O que mudou
+Templates do tipo Authentication não aparecem mais para os atendentes no Invenio Live
+Não é mais possível configurar esses templates para exibição no Live
+Templates já existentes foram ajustados automaticamente para não serem exibidos
+
+### Por que essa mudança foi feita
+
+#### Essa melhoria evita:
+
+Uso indevido de templates sensíveis por atendentes
+Erros operacionais no envio de mensagens
+Inconsistências entre o uso manual e automatizado da plataforma
+
+Além disso, garante que os templates de autenticação sejam utilizados apenas nos contextos corretos.
+
+### Impacto para o usuário
+Atendentes não terão acesso a templates de autenticação no Live
+Não há impacto no envio de mensagens comuns ou outros tipos de templates
+Fluxos automatizados continuam funcionando normalmente
+
+
+
+</Update>
+
 <Update label="Fevereiro 2026 - 2.0.94" description="Invenio Live e Center.">
 
 ## Press Release — Melhoria no Agrupamento de Tempo de Espera para Agrupar Mensagens de Entrada
