@@ -1,0 +1,386 @@
+---
+title: "Integração de Facebook e Instagram"
+sidebarTitle: "Facebook e Instagram"
+description: "Integre Facebook Messenger e Instagram Direct ao Invenio para centralizar atendimentos, automatizar interações e manter rastreabilidade completa das conversas."
+---
+
+A integração dos canais **Facebook Messenger** e **Instagram Direct** com a plataforma **Invenio** permite centralizar todas as interações com clientes em um único ambiente, promovendo maior controle, agilidade e rastreabilidade no atendimento.
+
+Por meio dessa integração, a empresa passa a enviar e receber mensagens, gerenciar comentários e menções, além de automatizar atendimentos por meio de **Chatbots**, garantindo escalabilidade e padronização da comunicação, sem perder a possibilidade de atendimento humano quando necessário.
+
+---
+
+## Pré-requisitos
+
+Antes de iniciar o processo, é fundamental garantir que todos os pré-requisitos abaixo estejam atendidos.
+
+### Facebook Messenger
+- Possuir uma **Página ativa no Facebook**;
+- Ter **acesso administrativo** à página que será integrada.
+
+### Instagram
+
+- Possuir uma **Conta Business no Facebook verificada**.
+
+<Warning>
+Este é o requisito mais crítico para o funcionamento correto do **Instagram Direct**.
+</Warning>
+
+- Ter uma conta no Instagram com perfil do tipo **Profissional (Empresa ou Criador)**;
+- O Instagram deve estar **vinculado à página do Facebook** correspondente.
+
+---
+
+## Verificação de aplicativos conectados à página
+
+Antes de realizar qualquer integração, é necessário verificar se existem outros aplicativos com permissão para gerenciar mensagens da página do Facebook.
+
+Isso é fundamental para evitar conflitos entre aplicações, que podem comprometer o correto envio e recebimento de mensagens.
+
+### Como verificar
+
+<Steps>
+  <Step title="Acesso ao facebook">
+    Acesse a **Página do Facebook**.
+  </Step>
+
+  <Step title="Abrir configurações">
+    Vá em **Configurações da Página**.
+  </Step>
+
+  <Step title="Configurações avançadas">
+    Acesse **Configurações Avançadas de Mensagens**.
+  </Step>
+
+  <Step title="Verificar aplicativos conectados">
+    Verifique se há aplicativos conectados com permissão de gerenciamento.
+  </Step>
+</Steps>
+
+<Note>
+Caso existam outros aplicativos ativos, recomenda-se removê-los, garantindo que o **Invenio Connector** seja o único responsável pelo tráfego de mensagens.
+</Note>
+
+<Frame caption="Configurações da página">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE51A52CB2C2958F676B" />
+</Frame>
+
+<Frame caption="Configurações avançadas de mensagens">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE51CB4D238704F1EBC5" />
+</Frame>
+
+
+<Frame caption="Connected Apps">
+  <img src="https://storage.robbu.global/v2/file/65277E16F915EC7A46ACCF04B63A30BB" />
+</Frame>
+
+<Frame caption="Invenio Connector Settings">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE51D4930A4D576A2CE2" />
+</Frame>
+
+---
+
+## Configurações no Business Suite
+
+Nesta etapa, será configurado o fluxo de mensagens do Instagram dentro do **Business Suite**, assegurando que o Direct esteja corretamente vinculado à caixa de entrada.
+
+### Conexão do Instagram Direct
+
+<Steps>
+  <Step title="Acessar o Gerenciador de Negócios">
+    Acesse:  
+    https://business.facebook.com/
+  </Step>
+
+  <Step title="Caixa de entrada">
+    Localize a **Caixa de Entrada do Business Suite**.
+  </Step>
+
+  <Step title="Instagram Direct">
+    Conecte o **Instagram Direct** à caixa de entrada.
+  </Step>
+</Steps>
+
+<Frame caption="Caixa de entrada no Business Suite">
+  <img src="https://storage.robbu.global/v2/file/65277E16F915EC7AB310AD3304147B70" />
+</Frame>
+
+
+---
+
+## Desativação de automações
+
+Para evitar conflitos com o funcionamento da **IDR/Chatbot do Invenio**, é altamente recomendado desativar as automações nativas do Business Suite.
+
+**Caminho:**  
+Business Suite > Caixa de Entrada > Automações
+
+- Desative mensagens automáticas;
+- Desative respostas instantâneas;
+- Caso utilize IDR/BOT no Invenio, mantenha apenas a automação configurada na plataforma.
+
+<Frame caption="Acesso às automações">
+  <img src="https://storage.robbu.global/v2/file/65277E16F915EC7AB3512391C29B34CB" />
+</Frame>
+
+<Frame caption="Automações desativadas">
+  <img src="https://storage.robbu.global/v2/file/65277E16F915EC7ADC9EE6D768F99802" />
+</Frame>
+
+---
+
+## Integração com o Invenio Center
+
+Com as configurações da Meta ajustadas, o próximo passo é realizar a integração diretamente no **Invenio Center**.
+
+Utilize um perfil do Facebook com **permissão administrativa** sobre a página ou o perfil que realizou a criação da página.
+
+### Passo a passo
+
+<Steps>
+  <Step title="Acessar o Invenio Center">
+    
+  </Step>
+
+  <Step title="Navegar até o módulo de canais">
+    Vá em **Canais > Facebook**.
+  </Step>
+
+  <Step title="Iniciar integração">
+    Clique em **Continuar com o Facebook**.
+  </Step>
+
+  <Step title="Selecionar páginas e perfis">
+    Selecione as **Páginas do Facebook** e os **perfis do Instagram** que deseja integrar.
+  </Step>
+</Steps>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/65277E16F915EC7AFC513F77A548BD83" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE516B8E1D1A679B5D54" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE517A37D72443DED1AE" />
+</Frame>
+
+
+
+---
+
+## Configuração de permissões
+
+Na etapa final da integração, será apresentada a lista de permissões solicitadas pelo Invenio.
+
+### Recomendação
+- Habilitar **todas as permissões**;
+- A permissão de **comentários em publicações** é opcional.
+
+### Importante
+
+Quando a permissão de comentários está habilitada:
+- Comentários passam a ser tratados como **mensagens Direct** dentro do Invenio;
+- Caso o canal esteja vinculado a uma **IDR/BOT**, qualquer comentário pode iniciar automaticamente um fluxo;
+- Mensagens enviadas pela empresa chegam ao contato como **Direct**.
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D93950A50D7715597A1C612842BD7EC7" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D93950A50D7715596EEDCC057AB3C784" />
+</Frame>
+
+Após revisar as permissões, clique em **Salvar** para concluir a integração.
+
+---
+
+
+## Ativação dos canais no Invenio Center
+
+Com a integração concluída, os canais precisam ser ativados dentro do **Invenio Center** para ficarem disponíveis aos usuários.
+
+### Permissões de usuário
+
+Certifique-se de que o usuário possui as seguintes permissões:
+- Facebook Messenger
+- Instagram
+
+**Caminho:**  
+Center > Usuários > Editar > Permissões de Páginas
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE512D80BF314BC96DB6" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D6834424D8DADE51E50C40FA29142555" />
+</Frame>
+
+---
+
+### Ativação e vinculação
+
+<Steps>
+  <Step title="Canais">
+    Acesse **Center > Canais > Facebook**.
+  </Step>
+
+  <Step title="Vincular ambiente ou segmento">
+    Nos três pontos da integração, clique em **Vincular segmento/ambiente**.
+  </Step>
+
+  <Step title="Seleção">
+    Selecione os canais desejados.
+  </Step>
+
+  <Step title="Definir tipo de vínculo">
+    - **Ambiente:** sem vínculo automático de segmento;  
+    - **Segmento:** novos contatos serão automaticamente vinculados ao segmento escolhido.
+  </Step>
+</Steps>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/0EE390263FBDAF2DC76BF21940C42B16" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/0EE390263FBDAF2D931B53AE0C0A4766" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/64907B709EEA3D7A58FC09A7DEA0D402" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/64907B709EEA3D7A5A864BF689471B5A" />
+</Frame>
+
+> Concluída essa etapa, os canais estarão prontos para uso no Invenio. Certifique-se de selecionar as opções dos canais que deseja manter ativos.
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/0EE390263FBDAF2D420B805553E7A80A" />
+</Frame>
+
+---
+
+## Remoção da integração
+
+Caso seja necessário remover a integração, o processo deve ser realizado **no Invenio Center e no Facebook**.
+
+### Remoção pelo Invenio Center
+
+A conta do Facebook utilizada na integração deve estar logada no navegador.
+
+**Caminho:**  
+Center > Canais > Facebook
+
+Formas de remoção:
+- **Remoção individual:**  
+  Três pontos da integração > **Remover integração**.
+- **Remoção em massa:**  
+  Botão **Remoção em massa** no canto superior direito.
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/82E1ACB7F403678CEA80AC3311FFC882" />
+</Frame>
+
+---
+
+### Remoção pelo Facebook
+
+<Steps>
+  <Step title="Acessar configurações">
+    Acesse: https://www.facebook.com/settings
+  </Step>
+
+  <Step title="Integrações comerciais">
+    Vá em **Integrações Comerciais**.
+    Acesse: https://www.facebook.com/settings/?tab=business_tools
+  </Step>
+
+  <Step title="Remover Invenio">
+    Localize o **Invenio** e clique em **Remover**.
+  </Step>
+</Steps>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D93950A50D771559A76EAD2B563ABC23" />
+</Frame>
+
+<Frame caption="">
+  <img src="https://storage.robbu.global/v2/file/D93950A50D771559CCE12AC1B6C58A1C" />
+</Frame>
+
+Após a conclusão, a conexão será totalmente encerrada e os canais deixarão de enviar e receber mensagens pelo Invenio.
+
+---
+
+## Links Relacionados
+
+<CardGroup cols={2}>
+  <Card
+    title="Canais de Atendimento"
+    icon="comments"
+    href="https://docs.robbu.global/docs/center/canais-atendimento"
+  >
+    Gestão e configuração dos canais no Invenio Center.
+  </Card>
+
+  <Card
+    title="Omnichannel"
+    icon="layer-group"
+    href="https://docs.robbu.global/docs/center/omnichannel"
+  >
+    Conceito e funcionamento do Omnichannel no Invenio.
+  </Card>
+
+  <Card
+    title="Filtros e Menus de Busca"
+    icon="filter"
+    href="https://docs.robbu.global/docs/live/filtros-e-menus-de-busca"
+  >
+    Filtros e menus disponíveis no Invenio Live.
+  </Card>
+
+  <Card
+    title="Filtros de Busca de Contatos"
+    icon="user-search"
+    href="https://docs.robbu.global/docs/center/filtros-de-busca-de-contatos"
+  >
+    Localização avançada de contatos no Invenio Center.
+  </Card>
+</CardGroup>
+
+---
+
+## ⁉️ Perguntas Frequentes (FAQ)
+
+<AccordionGroup>
+  <Accordion title="✅ Quais canais são integrados nessa configuração?">
+    Facebook Messenger e Instagram Direct.
+  </Accordion>
+
+  <Accordion title="⚠️ Qual é o requisito mais crítico para o Instagram?">
+    Possuir uma **Conta Business no Facebook verificada**.
+  </Accordion>
+
+  <Accordion title="🤖 Posso usar Chatbot nesses canais?">
+    Sim. Os canais podem ser vinculados a uma **IDR/BOT** ou utilizados apenas para atendimento humano.
+  </Accordion>
+
+  <Accordion title="💬 Comentários em publicações viram mensagens?">
+    Sim, quando a permissão de comentários está habilitada, eles são tratados como **mensagens Direct** no Invenio.
+  </Accordion>
+
+  <Accordion title="🔁 É possível remover a integração?">
+    Sim. A remoção deve ser feita **no Invenio Center e no Facebook** para encerrar totalmente a conexão.
+  </Accordion>
+
+  <Accordion title="👥 Quem pode realizar a integração?">
+    Um usuário com **permissão administrativa** sobre a página do Facebook integrada.
+  </Accordion>
+</AccordionGroup>
