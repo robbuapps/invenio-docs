@@ -659,6 +659,55 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
 
 </Accordion>
 
+## Rate Limit
+
+Para garantir a estabilidade da plataforma e a qualidade de entrega das mensagens, a API **SendMessage** aplica um **limite de requisições** por unidade de tempo. Quando o limite é atingido, novas chamadas são temporariamente recusadas e a API retorna **HTTP `429 Too Many Requests`**, sem encaminhar a mensagem para envio.
+
+<Note>
+  Requisições rejeitadas com status `429` **não consomem cota de envio** nem geram registro de mensagem no Invenio Center.
+</Note>
+
+### Headers da resposta `429`
+
+| Header | Descrição |
+| --- | --- |
+| `X-RateLimit-Limit` | Quantidade máxima de requisições permitidas dentro da janela de tempo. |
+| `X-RateLimit-Remaining` | Requisições ainda disponíveis na janela atual. Em uma resposta `429` será sempre `0`. |
+| `X-RateLimit-Reset` | Segundos até que novas requisições sejam aceitas. |
+| `Retry-After` | Segundos que o cliente deve aguardar antes de tentar novamente. |
+
+### Body da resposta `429`
+
+```json
+{
+  "message": "rate limit exceeded",
+  "limit": 60,
+  "retryAfterSeconds": 2
+}
+```
+
+| Campo | Descrição |
+| --- | --- |
+| `message` | Mensagem descritiva do motivo do bloqueio. |
+| `limit` | Quantidade máxima de requisições configurada para a janela de tempo. |
+| `retryAfterSeconds` | Tempo, em segundos, que o cliente deve aguardar antes de reenviar a requisição. |
+
+<Tip>
+  Sempre respeite o valor de `Retry-After` retornado e implemente **exponential backoff** em caso de bloqueios consecutivos. Para cenários de alto volume, distribua os disparos ao longo do tempo em vez de concentrá-los em curtos intervalos.
+</Tip>
+
+<Warning>
+  O rate limit é avaliado **antes** de qualquer outra validação de negócio (autenticação, criação de pessoa, blacklist, template, envio etc.). Os limites podem ser revistos pela Robbu de acordo com o perfil de uso da integração e as características do canal utilizado.
+</Warning>
+
+### Atualização da tabela de Responses
+
+Adicione a linha abaixo na tabela existente **Responses API Send Message**:
+
+| Código | Descrição |
+| --- | --- |
+| `429 Too Many Requests` | Limite de requisições da API excedido. Consulte os headers `Retry-After` e `X-RateLimit-Reset` para saber quando tentar novamente. |
+
 ---
 
 ## 🔗 Links e assuntos relacionados  
