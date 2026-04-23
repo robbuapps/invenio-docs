@@ -116,9 +116,10 @@ Empresas com perfil **Revisora** visualizam apenas o que é referente à revisã
 ---
 
 ##  Público
-Esta seção permite que você importe contatos para que sejam utilizados em campanhas.
 
-Essa importação será utilizada como ponto de partida para campanhas massificada
+Esta seção permite importar contatos que serão utilizados em campanhas.
+
+Essa importação será utilizada como ponto de partida para campanhas massificadas.
 
 Esse recurso garante maior agilidade na preparação de campanhas e na gestão contínua da base de público.
 
@@ -129,7 +130,7 @@ Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se n
 O layout padrão do arquivo de importação possuí as seguintes colunas: 
 
 ```csv
-TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE
+TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, SEGMENTO, CPF_CNPJ, COD_CONTRATO, REMETENTE, DATA_HORA_DISPARO, NOME_CLIENTE, NOME_ARQUIVO_ANEXO, OBS1, OBS2, OBS3, OBS4, BROKER_REFERENCE, Var1, Var2, Var3
 ```
 
 Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
@@ -142,25 +143,78 @@ Você também pode fazer o download do arquivo modelo de importação mais atual
 * **VALOR_REGISTRO \[OBRIGATÓRIO]**:
   * Insira o registro do destinatário, como o seu número de telefone com DDD ou e-mail.
 
+* **CANAL \[OBRIGATÓRIO]**:
+  * Canal de envio. Exemplo: whatsapp, sms, email.
+
+* **CODIGO_TEMPLATE \[OBRIGATÓRIO]**:
+  * Código do template que será utilizado.
+
+* **SEGMENTO \[OBRIGATÓRIO]**:
+  * Segmento associado à campanha.
+
 * **CPF_CNPJ \[OBRIGATÓRIO]**:
   * Importante para evitar homônimos e permitir integrações externas.
 
 * **COD_CONTRATO \[OBRIGATÓRIO]**:
   * Identificador interno da empresa (ex: número de contrato).
 
+* **REMETENTE \[OPCIONAL]**:
+  * Número ou identificador do remetente.
+
+* **DATA_HORA_DISPARO \[OPCIONAL]**:
+  * Data e hora para envio da mensagem.
+
 * **NOME_CLIENTE \[OPCIONAL]**:
   * Recomendado para facilitar localização e interação.
 
-* **PRIORIDADE \[OPCIONAL]**:
-  * Defina entre: `BAIXA`, `MEDIA` ou `ALTA`
-  * Impacta a ordenação de envio
+* **NOME_ARQUIVO_ANEXO \[OPCIONAL]**:
+  * Nome do arquivo de anexo.
 
-Para utilizar variáveis dinâmicas em templates, crie-as após a última coluna do arquivo.
+#### Campos de Observação
+
+- **OBS1, OBS2, OBS3, OBS4** `[OPCIONAIS]`  
+
+Campos livres para envio de informações adicionais.
+
+Esses dados:
+- são armazenados no Maestro
+- podem ser utilizados em relatórios
+- não interferem na validação ou envio das campanhas
+
+#### Campo de Referência para o Provedor
+
+- **BROKER_REFERENCE** `[OPCIONAL]`  
+
+Campo livre para envio de uma referência externa.
+
+Quando informado:
+- é armazenado no Maestro
+- pode ser enviado ao provedor no momento do disparo (quando suportado)
+
+#### Variáveis do Template
+
+As variáveis do template devem ser adicionadas após a última coluna do arquivo, **atualmente a coluna `BROKER_REFERENCE`**.
 Tudo que estiver após a última coluna do modelo são campos adicionados manualmente pelo usuário como no exemplo abaixo.
 
+Exemplo:
+
+```text
+...;OBS1;OBS2;OBS3;OBS4;BROKER_REFERENCE;Var1;Var2;Var3;Var4
 ```
-TIPO_REGISTRO, VALOR_REGISTRO, CPF_CNPJ, COD_CONTRATO, NOME_CLIENTE, PRIORIDADE, VAR1, VAR2, VAR3
+
+Essas variáveis podem ser utilizadas no template:
+
+```text
+{{Var1}}
+{{Var2}}
+{{Var3}}
 ```
+
+## Observações importantes
+
+- As colunas `OBS1` a `OBS4` são apenas informativas
+- O campo `BROKER_REFERENCE` é opcional
+- Todas as colunas após `BROKER_REFERENCE` são tratadas como variáveis dinâmicas
 
 ---
 
