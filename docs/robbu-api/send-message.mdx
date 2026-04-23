@@ -696,10 +696,6 @@ Para garantir a estabilidade da plataforma e a qualidade de entrega das mensagen
   Sempre respeite o valor de `Retry-After` retornado e implemente **exponential backoff** em caso de bloqueios consecutivos. Para cenários de alto volume, distribua os disparos ao longo do tempo em vez de concentrá-los em curtos intervalos.
 </Tip>
 
-<Warning>
-  O rate limit é avaliado **antes** de qualquer outra validação de negócio (autenticação, criação de pessoa, blacklist, template, envio etc.). Os limites podem ser revistos pela Robbu de acordo com o perfil de uso da integração e as características do canal utilizado.
-</Warning>
-
 ### Atualização da tabela de Responses
 
 Adicione a linha abaixo na tabela existente **Responses API Send Message**:
