@@ -2,1342 +2,1287 @@
 title: "Changelog"
 mode: "center"
 ---
+
 <Update label="Março 2026 - 2.0.95" description="Invenio Live e Center.">
+  ## Press Release —Indicador de Digitação no WhatsApp (Invenio Live)
 
-## Press Release —Indicador de Digitação no WhatsApp (Invenio Live)
-### Visão Geral
+  ### Visão Geral
 
-O Indicador de Digitação foi implementado no Invenio Live para tornar o atendimento via WhatsApp mais fluido e natural, aproximando a experiência do cliente final ao comportamento nativo do aplicativo.
+  O Indicador de Digitação foi implementado no Invenio Live para tornar o atendimento via WhatsApp mais fluido e natural, aproximando a experiência do cliente final ao comportamento nativo do aplicativo.
 
-Agora, quando o atendente estiver digitando uma resposta, o cliente visualizará no WhatsApp a indicação de que sua mensagem está sendo respondida em tempo real.
+  Agora, quando o atendente estiver digitando uma resposta, o cliente visualizará no WhatsApp a indicação de que sua mensagem está sendo respondida em tempo real.
 
-### Essa melhoria aumenta:
+  ### Essa melhoria aumenta:
 
-- Sensação de agilidade
-- Transparência na comunicação
-- Redução da percepção de demora
-- Experiência mais humanizada
+  - Sensação de agilidade
+  - Transparência na comunicação
+  - Redução da percepção de demora
+  - Experiência mais humanizada
 
-### Objetivo da funcionalidade
+  ### Objetivo da funcionalidade
 
-Evitar que o cliente interprete pausas na resposta como ausência de atendimento, exibindo a indicação de que o atendente está digitando.
+  Evitar que o cliente interprete pausas na resposta como ausência de atendimento, exibindo a indicação de que o atendente está digitando.
 
-### Como funciona
-- Início da digitação
+  ### Como funciona
 
-#### Quando:
+  - Início da digitação
 
-- O atendente está em uma conversa ativa no Invenio Live
-- E começa a digitar uma mensagem
+  #### Quando:
 
-#### O sistema:
+  - O atendente está em uma conversa ativa no Invenio Live
+  - E começa a digitar uma mensagem
 
-- Envia automaticamente uma notificação ao WhatsApp
-- O cliente visualiza o indicador de “digitando...”
-- Pausa na digitação
+  #### O sistema:
 
-#### Quando:
+  - Envia automaticamente uma notificação ao WhatsApp
+  - O cliente visualiza o indicador de “digitando...”
+  - Pausa na digitação
 
-- O atendente para de digitar
+  #### Quando:
 
-#### O sistema:
+  - O atendente para de digitar
 
-- Interrompe o envio da notificação
-- O indicador desaparece automaticamente no WhatsApp
+  #### O sistema:
 
-A notificação deixará de aparecer em no máximo 25 segundos, caso nenhuma nova digitação seja detectada.
+  - Interrompe o envio da notificação
+  - O indicador desaparece automaticamente no WhatsApp
 
-### Onde se aplica
+  A notificação deixará de aparecer em no máximo 25 segundos, caso nenhuma nova digitação seja detectada.
 
-Esta funcionalidade está disponível para:
+  ### Onde se aplica
 
-- Conversas via WhatsApp
-- Utilizando o provedor Positus
-- Realizadas pelo Invenio Live
+  Esta funcionalidade está disponível para:
 
-#### Outros canais não são impactados.
+  - Conversas via WhatsApp
+  - Utilizando o provedor Positus
+  - Realizadas pelo Invenio Live
 
-### Regras de funcionamento
-O envio do indicador respeita um intervalo mínimo entre chamadas, evitando requisições excessivas.
-Chamadas repetidas não são disparadas enquanto a digitação continua.
-Caso ocorra erro técnico na comunicação com o provedor, o atendimento continua normalmente (sem impacto no envio de mensagens).
+  #### Outros canais não são impactados.
 
-### Experiência para o cliente final
+  ### Regras de funcionamento
 
-#### O cliente perceberá:
+  O envio do indicador respeita um intervalo mínimo entre chamadas, evitando requisições excessivas. Chamadas repetidas não são disparadas enquanto a digitação continua. Caso ocorra erro técnico na comunicação com o provedor, o atendimento continua normalmente (sem impacto no envio de mensagens).
 
-- Que o atendente está ativo
-- Que sua mensagem está sendo respondida
-- Uma experiência mais próxima do uso direto do WhatsApp
+  ### Experiência para o cliente final
 
-- Nenhuma ação é necessária por parte do cliente.
+  #### O cliente perceberá:
 
+  - Que o atendente está ativo
+  - Que sua mensagem está sendo respondida
+  - Uma experiência mais próxima do uso direto do WhatsApp
+  - Nenhuma ação é necessária por parte do cliente.
 
-## Press Release — Restrição de templates de autenticação no Invenio Live
-### Visão geral
+  ## Press Release — Restrição de templates de autenticação no Invenio Live
 
-Para garantir mais segurança e coerência no uso de templates de WhatsApp, os templates do tipo Autenticação (Authentication) não são mais exibidos no Invenio Live.
+  ### Visão geral
 
-Esses templates são destinados exclusivamente a processos automatizados, como chatbots e integrações de sistema, e não devem ser utilizados em atendimentos manuais.
+  Para garantir mais segurança e coerência no uso de templates de WhatsApp, os templates do tipo Autenticação (Authentication) não são mais exibidos no Invenio Live.
 
-### O que mudou
-Templates do tipo Authentication não aparecem mais para os atendentes no Invenio Live
-Não é mais possível configurar esses templates para exibição no Live
-Templates já existentes foram ajustados automaticamente para não serem exibidos
+  Esses templates são destinados exclusivamente a processos automatizados, como chatbots e integrações de sistema, e não devem ser utilizados em atendimentos manuais.
 
-### Por que essa mudança foi feita
+  ### O que mudou
 
-#### Essa melhoria evita:
+  Templates do tipo Authentication não aparecem mais para os atendentes no Invenio Live Não é mais possível configurar esses templates para exibição no Live Templates já existentes foram ajustados automaticamente para não serem exibidos
 
-Uso indevido de templates sensíveis por atendentes
-Erros operacionais no envio de mensagens
-Inconsistências entre o uso manual e automatizado da plataforma
+  ### Por que essa mudança foi feita
 
-Além disso, garante que os templates de autenticação sejam utilizados apenas nos contextos corretos.
+  #### Essa melhoria evita:
 
-### Impacto para o usuário
-Atendentes não terão acesso a templates de autenticação no Live
-Não há impacto no envio de mensagens comuns ou outros tipos de templates
-Fluxos automatizados continuam funcionando normalmente
+  Uso indevido de templates sensíveis por atendentes Erros operacionais no envio de mensagens Inconsistências entre o uso manual e automatizado da plataforma
 
+  Além disso, garante que os templates de autenticação sejam utilizados apenas nos contextos corretos.
 
+  ### Impacto para o usuário
 
+  Atendentes não terão acesso a templates de autenticação no Live Não há impacto no envio de mensagens comuns ou outros tipos de templates Fluxos automatizados continuam funcionando normalmente
 </Update>
 
 <Update label="Fevereiro 2026 - 2.0.94" description="Invenio Live e Center.">
+  ## Press Release — Melhoria no Agrupamento de Tempo de Espera para Agrupar Mensagens de Entrada
 
-## Press Release — Melhoria no Agrupamento de Tempo de Espera para Agrupar Mensagens de Entrada
+  ### Mais fluidez e inteligência no tratamento de mensagens sequenciais
 
-### Mais fluidez e inteligência no tratamento de mensagens sequenciais
+  O Invenio recebeu uma melhoria importante no Webchat para tornar as conversas mais naturais e eficientes. Agora, é possível configurar um **tempo de espera para agrupar mensagens enviadas em sequência**, evitando que mensagens fragmentadas sejam tratadas como interações separadas pelo chatbot.
 
-O Invenio recebeu uma melhoria importante no Webchat para tornar as conversas mais naturais e eficientes. Agora, é possível configurar um **tempo de espera para agrupar mensagens enviadas em sequência**, evitando que mensagens fragmentadas sejam tratadas como interações separadas pelo chatbot.
+  Essa evolução atende a cenários comuns em canais digitais, nos quais os usuários enviam mensagens em partes curtas, como:
 
-Essa evolução atende a cenários comuns em canais digitais, nos quais os usuários enviam mensagens em partes curtas, como:
+  **Exemplo:**\
+  “Oi”\
+  “Bom dia”
 
-**Exemplo:**  
-“Oi”  
-“Bom dia”  
+  Com a nova configuração, o sistema pode agrupar automaticamente essas mensagens em uma única interação:
 
-Com a nova configuração, o sistema pode agrupar automaticamente essas mensagens em uma única interação:
+  **Resultado:**\
+  “Oi Bom dia”
 
-**Resultado:**  
-“Oi Bom dia”
+  ---
 
----
+  ## Como funciona
 
-## Como funciona
+  Foi adicionada uma nova configuração que permite definir, em segundos, quanto tempo o chatbot deve aguardar antes de processar as mensagens recebidas.
 
-Foi adicionada uma nova configuração que permite definir, em segundos, quanto tempo o chatbot deve aguardar antes de processar as mensagens recebidas.
+  - O intervalo pode ser configurado entre **0 e 5 segundos**.
+  - Mensagens enviadas dentro desse período são automaticamente combinadas.
+  - A configuração é independente para **canais online** e **canais offline**.
+  - Caso o campo fique vazio, o comportamento padrão será **0 segundos** (sem agrupamento).
 
-- O intervalo pode ser configurado entre **0 e 5 segundos**.
-- Mensagens enviadas dentro desse período são automaticamente combinadas.
-- A configuração é independente para **canais online** e **canais offline**.
-- Caso o campo fique vazio, o comportamento padrão será **0 segundos** (sem agrupamento).
+  Essa abordagem reduz respostas fragmentadas e melhora a interpretação do contexto pelo bot.
 
-Essa abordagem reduz respostas fragmentadas e melhora a interpretação do contexto pelo bot.
+  ---
 
----
+  ### Benefícios para a operação
 
-### Benefícios para a operação
+  - Conversas mais naturais e organizadas
+  - Redução de interpretações incorretas pelo chatbot
+  - Melhor aproveitamento dos fluxos automatizados
+  - Experiência mais fluida para o usuário final
 
-- Conversas mais naturais e organizadas  
-- Redução de interpretações incorretas pelo chatbot  
-- Melhor aproveitamento dos fluxos automatizados  
-- Experiência mais fluida para o usuário final  
+  ---
 
----
+  ### Experiência de configuração mais clara
 
-### Experiência de configuração mais clara
+  Além da nova funcionalidade, o campo de configuração foi atualizado para tornar o uso mais intuitivo:
 
-Além da nova funcionalidade, o campo de configuração foi atualizado para tornar o uso mais intuitivo:
+  - Limite máximo definido em **5 segundos**
+  - Ajuste automático caso seja informado valor acima do permitido
+  - Nova legenda orientativa para facilitar o entendimento
 
-- Limite máximo definido em **5 segundos**
-- Ajuste automático caso seja informado valor acima do permitido
-- Nova legenda orientativa para facilitar o entendimento
-
----
-
+  ---
 </Update>
 
 <Update label="Fevereiro 2026 - 2.0.93" description="Invenio Live e Center.">
+  ## Bloqueio de recebimento de arquivos por extensão
 
+  A funcionalidade **Bloquear recebimento de arquivos por extensão** permite impedir automaticamente o recebimento de arquivos com extensões consideradas indesejadas ou inseguras.
 
-## Bloqueio de recebimento de arquivos por extensão
+  O bloqueio:
 
-A funcionalidade **Bloquear recebimento de arquivos por extensão** permite impedir automaticamente o recebimento de arquivos com extensões consideradas indesejadas ou inseguras.
+  - Se aplica a **todos os canais**
+  - Mantém a mensagem registrada na conversa
+  - Impede o download do conteúdo
+  - Pode ser configurado no nível da **Conta** ou do **Segmento**
+  - Respeita hierarquia de prioridade (**Segmento \> Conta**)
 
-O bloqueio:
+  ---
 
-- Se aplica a **todos os canais**
-- Mantém a mensagem registrada na conversa
-- Impede o download do conteúdo
-- Pode ser configurado no nível da **Conta** ou do **Segmento**
-- Respeita hierarquia de prioridade (**Segmento > Conta**)
+  ### Como funciona a hierarquia
 
----
+  A regra aplicada no recebimento do arquivo segue esta ordem:
 
-### Como funciona a hierarquia
+  1. Se o **segmento possuir configuração própria**, ela será aplicada.
+  2. Caso contrário, será utilizada a **configuração definida na conta**.
 
-A regra aplicada no recebimento do arquivo segue esta ordem:
+  > A configuração do segmento sempre sobrescreve a da conta quando existir.
 
-1. Se o **segmento possuir configuração própria**, ela será aplicada.
-2. Caso contrário, será utilizada a **configuração definida na conta**.
+  ---
 
-> A configuração do segmento sempre sobrescreve a da conta quando existir.
+  ## Configuração no nível da Conta
 
----
+  Define uma política padrão para todos os segmentos que não possuam regra específica.
 
-## Configuração no nível da Conta
+  ### Caminho
 
-Define uma política padrão para todos os segmentos que não possuam regra específica.
+  `Configurações da Conta → Bloqueio de arquivos de entrada`
 
-### Caminho
+  ### Como configurar
 
-`Configurações da Conta → Bloqueio de arquivos de entrada`
+  - Selecione as extensões que deseja bloquear.
+  - Utilize o campo de busca para localizar extensões específicas.
+  - Utilize:
+    - **Marcar todos**
+    - **Desmarcar todos**
 
-### Como configurar
+  As extensões selecionadas passam a ser a **regra padrão da conta**.
 
-- Selecione as extensões que deseja bloquear.
-- Utilize o campo de busca para localizar extensões específicas.
-- Utilize:
-  - **Marcar todos**
-  - **Desmarcar todos**
+  ---
 
-As extensões selecionadas passam a ser a **regra padrão da conta**.
+  ## Configuração no nível do Segmento
 
----
+  Permite sobrescrever a política da conta quando necessário.
 
-## Configuração no nível do Segmento
+  ### Caminho
 
-Permite sobrescrever a política da conta quando necessário.
+  `Segmentos → Selecionar segmento → Bloqueio de arquivos de entrada`
 
-### Caminho
+  ## Toggle: Usar configurações gerais da conta
 
-`Segmentos → Selecionar segmento → Bloqueio de arquivos de entrada`
+  ### Toggle ativado
 
-## Toggle: Usar configurações gerais da conta
+  - O segmento utiliza automaticamente as regras definidas na conta.
+  - A lista de extensões não é exibida.
 
-### Toggle ativado
-- O segmento utiliza automaticamente as regras definidas na conta.
-- A lista de extensões não é exibida.
+  ### Toggle desativado
 
-### Toggle desativado
-- A lista de extensões é exibida.
-- O administrador pode definir regras próprias para o segmento.
+  - A lista de extensões é exibida.
+  - O administrador pode definir regras próprias para o segmento.
 
-> Se o toggle estiver desativado e nenhuma extensão estiver selecionada, o segmento permitirá o recebimento de qualquer tipo de arquivo.
+  > Se o toggle estiver desativado e nenhuma extensão estiver selecionada, o segmento permitirá o recebimento de qualquer tipo de arquivo.
 
-> A configuração da conta só será considerada quando o toggle estiver ativado.
+  > A configuração da conta só será considerada quando o toggle estiver ativado.
 
----
+  ---
 
-### Comportamento no recebimento do arquivo
+  ### Comportamento no recebimento do arquivo
 
-Quando um contato envia um arquivo:
+  Quando um contato envia um arquivo:
 
-1. O sistema identifica o segmento da conversa.
-2. Aplica a regra do segmento (se existir).
-3. Caso não exista regra no segmento, aplica a regra da conta.
-4. Se a extensão estiver bloqueada:
-   - O arquivo não é armazenado.
-   - O download não é permitido.
-   - A mensagem permanece registrada na conversa.
+  1. O sistema identifica o segmento da conversa.
+  2. Aplica a regra do segmento (se existir).
+  3. Caso não exista regra no segmento, aplica a regra da conta.
+  4. Se a extensão estiver bloqueada:
+     - O arquivo não é armazenado.
+     - O download não é permitido.
+     - A mensagem permanece registrada na conversa.
 
----
+  ---
 
-### Exibição no histórico da conversa
+  ### Exibição no histórico da conversa
 
-Quando um arquivo é bloqueado:
+  Quando um arquivo é bloqueado:
 
-- O bloco do arquivo aparece normalmente na timeline.
-- O nome do arquivo é substituído por:
-
-
+  - O bloco do arquivo aparece normalmente na timeline.
+  - O nome do arquivo é substituído por:
 </Update>
 
 <Update label="Janeiro 2026 - 2.0.92" description="Invenio Live e Center.">
+  ## Atualização no uso de ações DovePL nas IDRs
 
-## Atualização no uso de ações DovePL nas IDRs
+  Para direcionar novos desenvolvimentos para soluções mais modernas e fáceis de manter, a plataforma passou por um ajuste no uso de ações baseadas em DovePL.
 
-Para direcionar novos desenvolvimentos para soluções mais modernas e fáceis de manter, a plataforma passou por um ajuste no uso de ações baseadas em DovePL.
+  ### O que mudou
 
-### O que mudou
+  - A ação “Executar bloco de código DovePL” não está mais disponível na criação de novas ações em IDRs.
+  - Essa opção deixa de aparecer na lista de ações, sem indicação visual ou opção desabilitada.
+  - Novas IDRs devem utilizar apenas ações alinhadas às diretrizes atuais da plataforma, como Custom Endpoints.
 
-- A ação “Executar bloco de código DovePL” não está mais disponível na criação de novas ações em IDRs.
+  ### O que permanece igual
 
-- Essa opção deixa de aparecer na lista de ações, sem indicação visual ou opção desabilitada.
-
-- Novas IDRs devem utilizar apenas ações alinhadas às diretrizes atuais da plataforma, como Custom Endpoints.
-
-### O que permanece igual
-
-- IDRs que já possuem ações DovePL continuam funcionando normalmente.
-
-- Os blocos existentes permanecem visíveis e podem ser executados sem impacto.
-
+  - IDRs que já possuem ações DovePL continuam funcionando normalmente.
+  - Os blocos existentes permanecem visíveis e podem ser executados sem impacto.
 </Update>
 
 <Update label="Novembro 2025 - 2.0.91" description="Invenio Live e Center.">
-  
-## Análise Antivírus em Tempo Real para Mensagens Recebidas.
-Para reforçar a segurança do ambiente, o Invenio agora realiza uma verificação antivírus automática em todos os arquivos recebidos.
-Antes de serem armazenados ou exibidos, os anexos passam por uma análise via ClamAV, garantindo que nenhum conteúdo infectado seja processado ou disponibilizado para download.
+  ## Análise Antivírus em Tempo Real para Mensagens Recebidas.
 
-Se um arquivo for identificado como suspeito:
+  Verificação de Vírus em Arquivos Este recurso foi criado para aumentar a segurança no recebimento e download de arquivos, protegendo os usuários contra possíveis ameaças.
 
-- Ele será bloqueado automaticamente;
+  1. Recebimento e Verificação de Arquivos Sempre que um arquivo é recebido:
 
-- O sistema impedirá o download e exibirá uma mensagem informando que o arquivo está infectado;
+  O sistema realiza automaticamente uma verificação de segurança O arquivo é classificado como:
 
-- Um evento de sistema será registrado para monitoramento de segurança.
+  - Seguro → segue normalmente
+  - Suspeito → recebe sinalização de risco Arquivos suspeitos continuam disponíveis, porém com tratamento diferenciado de segurança.
 
-Essa atualização assegura que apenas arquivos limpos sigam no fluxo de mensagens, protegendo operadores, clientes e dados corporativos.
+  2. Identificação de Arquivos Suspeitos**
+
+  Quando um arquivo suspeito é exibido:
+
+  - Ele aparece com um **aviso visual de risco**
+  - Esse comportamento é o mesmo em:
+    - Invenio Center
+    - Invenio Live\
+      📌 Importante:\
+      A verificação se aplica apenas a arquivos recebidos **após a ativação da funcionalidade**.
+
+
+
+  3. Controle de Permissão do Usuário
+   A liberação para download de arquivos suspeitos depende das permissões do usuário.
+Permissão:
+“Permitir by-pass para download de arquivos suspeitos”
+
+- Desativada (padrão):
+O usuário não pode baixar arquivos suspeitos
+O download permanece bloqueado
+- Ativada:
+O usuário pode optar por baixar o arquivo, mediante confirmação de risco
+
+4. Bloqueio de Download por Segurança
+Por padrão, o sistema protege o usuário:
+
+Downloads de arquivos suspeitos são bloqueados automaticamente
+📌 Mensagem exibida:
+"O download deste arquivo foi bloqueado por motivos de segurança."
+
+5. Download com Confirmação de Risco
+Se o usuário tiver permissão para prosseguir:
+
+Será exibida uma tela de confirmação antes do download
+
+- Mensagem apresentada:
+"Este arquivo foi identificado como suspeito e pode representar riscos à segurança. Ao prosseguir, você assume total responsabilidade pelo download."
+
+- Opções disponíveis:
+Cancelar → interrompe a ação
+Baixar mesmo assim → prossegue com o download
+⚠️ Essa ação exige confirmação explícita e indica que o usuário está ciente do risco.
+
+6. Registro de Segurança (Auditoria)
+Sempre que um arquivo suspeito for baixado:
+
+O sistema registra informações da ação, como:
+- Usuário que realizou o download
+- Identificação do arquivo
+- Referência do conteúdo baixado
+### Esse registro:
+- Não gera notificações
+- Não interfere no fluxo
+É utilizado apenas para controle e auditoria de segurança
 
 ## Atualização no Flow: experiência mais prática para os operadores
 
-Atualização no Flow: experiência mais prática para os operadores
+  Atualização no Flow: experiência mais prática para os operadores
 
-Estamos lançando uma nova versão do Flow com o objetivo de tornar a visualização das mensagens respondidas via WhatsApp muito mais simples e intuitiva.
+  Estamos lançando uma nova versão do Flow com o objetivo de tornar a visualização das mensagens respondidas via WhatsApp muito mais simples e intuitiva.
 
-Com esta melhoria, os dados passam a ser exibidos de forma mais clara e organizada, apresentando todas as respostas do usuário em um só lugar. Isso torna o processo de atendimento mais prático, reduz retrabalho e melhora a continuidade da conversa.
+  Com esta melhoria, os dados passam a ser exibidos de forma mais clara e organizada, apresentando todas as respostas do usuário em um só lugar. Isso torna o processo de atendimento mais prático, reduz retrabalho e melhora a continuidade da conversa.
 
-Agora, não é mais necessário solicitar novamente informações que o cliente já enviou, deixando o atendimento mais fluido, dinâmico e eficiente.
+  Agora, não é mais necessário solicitar novamente informações que o cliente já enviou, deixando o atendimento mais fluido, dinâmico e eficiente.
 
-- Experimente a nova versão do Flow e veja como seu atendimento pode ficar ainda mais ágil!
-
+  - Experimente a nova versão do Flow e veja como seu atendimento pode ficar ainda mais ágil!
 </Update>
 
 <Update label="Outubro 2025 - 2.0.90" description="Invenio Live e Center.">
+  ## Cálculo e Compartilhamento de Limites de Mensagens por Portfólio
 
-## Cálculo e Compartilhamento de Limites de Mensagens por Portfólio
+  A partir de hoje, 7 de outubro de 2025, os limites de mensagens são calculados e definidos com base no portfólio de negócios vinculado à BM e serão compartilhados por todos os números de telefone comerciais.
 
-A partir de hoje, 7 de outubro de 2025, os limites de mensagens são calculados e definidos com base no portfólio de negócios vinculado à BM e serão compartilhados por todos os números de telefone comerciais.
-  
-Os portfólios de negócios existentes terão seu limite de mensagens definido para o limite mais alto de qualquer número de telefone em seu portfólio (por exemplo, se um portfólio tiver um número de telefone com um limite de 100 mil e outros números de telefone com limites mais baixos, o limite do portfólio será definido como 100 mil).
+  Os portfólios de negócios existentes terão seu limite de mensagens definido para o limite mais alto de qualquer número de telefone em seu portfólio (por exemplo, se um portfólio tiver um número de telefone com um limite de 100 mil e outros números de telefone com limites mais baixos, o limite do portfólio será definido como 100 mil).
 
-Essas mudanças resultarão em:
+  Essas mudanças resultarão em:
 
-- Acesso mais rápido a limites mais altos, com upgrades em 6 horas (em comparação com as 24 horas atuais) e acesso imediato aos limites da carteira para números recém-registrados.
-- Maior flexibilidade, permitindo que você tenha quantos telefones forem necessários sem a necessidade de telefones adicionais para acessar limites mais altos, já que todos os telefones compartilham o limite do portfólio.
-- Redução da carga administrativa e dos custos operacionais, minimizando a necessidade de números de telefone desnecessários.
+  - Acesso mais rápido a limites mais altos, com upgrades em 6 horas (em comparação com as 24 horas atuais) e acesso imediato aos limites da carteira para números recém-registrados.
+  - Maior flexibilidade, permitindo que você tenha quantos telefones forem necessários sem a necessidade de telefones adicionais para acessar limites mais altos, já que todos os telefones compartilham o limite do portfólio.
+  - Redução da carga administrativa e dos custos operacionais, minimizando a necessidade de números de telefone desnecessários.
 
-Você pode acompanhar o limite atual do portifólio pelo Center acessando: Canais > WhatsApp > Waba > Números > Coluna Limite de mensagens. 
+  Você pode acompanhar o limite atual do portifólio pelo Center acessando: Canais \> WhatsApp \> Waba \> Números \> Coluna Limite de mensagens.
 
-- Observação: O valor exibido não é o limite diário do número, mas sim de todos os números do mesmo portifólio.
- 
-Fonte: https://developers.facebook.com/docs/whatsapp/messaging-limits
-https://developers.facebook.com/docs/whatsapp/messaging-limits/upcoming-changes
+  - Observação: O valor exibido não é o limite diário do número, mas sim de todos os números do mesmo portifólio.
 
-
+  Fonte: [https://developers.facebook.com/docs/whatsapp/messaging-limits](https://developers.facebook.com/docs/whatsapp/messaging-limits) [https://developers.facebook.com/docs/whatsapp/messaging-limits/upcoming-changes](https://developers.facebook.com/docs/whatsapp/messaging-limits/upcoming-changes)
 </Update>
 
 <Update label="Setembro 2025 - 2.0.90" description="Invenio Live e Center.">
+  ## Atualização no Accounts
 
-## Atualização no Accounts
+  - Visualização da senha na tela de login\
+    <img src="https://robbublob.blob.core.windows.net/docs/changelog/logineye.png" alt="login eye" />
 
-- Visualização da senha na tela de login  
-![login eye](https://robbublob.blob.core.windows.net/docs/changelog/logineye.png)
+  ### O que mudou
 
-### O que mudou
+  Agora é possível visualizar ou ocultar a senha digitada no campo de login do Accounts. Um ícone de olho foi adicionado à direita do campo, permitindo alternar a exibição da senha sem impactar regras de autenticação.
 
-Agora é possível visualizar ou ocultar a senha digitada no campo de login do Accounts.
-Um ícone de olho foi adicionado à direita do campo, permitindo alternar a exibição da senha sem impactar regras de autenticação.
+  ### Por que isso importa
 
-### Por que isso importa
+  Facilita a digitação e evita erros de senha.
 
-Facilita a digitação e evita erros de senha.
+  Mantém a segurança: o campo continua oculto por padrão.
 
-Mantém a segurança: o campo continua oculto por padrão.
-
-Nenhuma alteração nas validações ou no back-end.
-
-</Update> 
-
+  Nenhuma alteração nas validações ou no back-end.
+</Update>
 
 <Update label="Agosto 2025 - 2.0.89" description="Invenio Live e Center.">
+  ## Tratamento de debounce no Invenio Center:
 
-##  Tratamento de debounce no Invenio Center: 
-Center > Menu do Usuário> Configurações > Conta > Tempo de espera (segundos) para tratar mensagens entrantes
-O Invenio Center passa a suportar o tratamento de debounce condicional no motor de atendimento IDR. 
+  Center \> Menu do Usuário\> Configurações \> Conta \> Tempo de espera (segundos) para tratar mensagens entrantes O Invenio Center passa a suportar o tratamento de debounce condicional no motor de atendimento IDR.
 
-### O que é debounce? 
-É um recurso que define um tempo de espera (em segundos) para que várias mensagens enviadas em sequência sejam entendidas como uma única entrada. Isso evita duplicidade e garante mais fluidez no atendimento. Como funciona agora Linhas atualizadas (nova versão da IDR) 
+  ### O que é debounce?
 
-O tempo de espera é aplicado conforme a configuração da linha. Exemplo: se o tempo estiver configurado em 3 segundos, duas mensagens enviadas dentro desse intervalo serão agrupadas e tratadas como uma só. 
+  É um recurso que define um tempo de espera (em segundos) para que várias mensagens enviadas em sequência sejam entendidas como uma única entrada. Isso evita duplicidade e garante mais fluidez no atendimento. Como funciona agora Linhas atualizadas (nova versão da IDR)
 
-Linhas antigas (versão anterior da IDR) O recurso não é aplicado. Todas as mensagens continuam sendo processadas individualmente, preservando o comportamento atual. 
+  O tempo de espera é aplicado conforme a configuração da linha. Exemplo: se o tempo estiver configurado em 3 segundos, duas mensagens enviadas dentro desse intervalo serão agrupadas e tratadas como uma só.
 
-Diferença por tipo de canal Canais online: 3 segundos Canais offline: 10 segundos Benefícios Atendimento mais estável e organizado Ajuste flexível por canal Compatibilidade com linhas que ainda utilizam o modelo antigo Gostaria de ativar esta funcionalidade agora? 
+  Linhas antigas (versão anterior da IDR) O recurso não é aplicado. Todas as mensagens continuam sendo processadas individualmente, preservando o comportamento atual.
 
-Entre em contato com o seu gerente de contas para solicitar a habilitação. Caso já utilize a IDR na versão V1, será necessário migrar para a versão V2 como parte do processo de ativação.
+  Diferença por tipo de canal Canais online: 3 segundos Canais offline: 10 segundos Benefícios Atendimento mais estável e organizado Ajuste flexível por canal Compatibilidade com linhas que ainda utilizam o modelo antigo Gostaria de ativar esta funcionalidade agora?
 
-</Update> 
-
+  Entre em contato com o seu gerente de contas para solicitar a habilitação. Caso já utilize a IDR na versão V1, será necessário migrar para a versão V2 como parte do processo de ativação.
+</Update>
 
 <Update label="Julho 2025 - 2.0.88" description="Invenio Live e Center.">
- 
-## Exibição de qualidade e status operacional de números WhatsApp
+  ## Exibição de qualidade e status operacional de números WhatsApp
 
-A tela Center > Canais > WhatsApp > Números foi atualizada para melhorar a visibilidade sobre a condição dos números conectados.
+  A tela Center \> Canais \> WhatsApp \> Números foi atualizada para melhorar a visibilidade sobre a condição dos números conectados.
 
-A coluna “Status” foi renomeada para “Qualidade”, exibindo a avaliação de qualidade da linha segundo critérios da Meta.
+  A coluna “Status” foi renomeada para “Qualidade”, exibindo a avaliação de qualidade da linha segundo critérios da Meta.
 
-Foi adicionada uma nova coluna chamada “Status”, que mostra o status operacional real do número, conforme informações recebidas da Positus.
+  Foi adicionada uma nova coluna chamada “Status”, que mostra o status operacional real do número, conforme informações recebidas da Positus.
 
-Essas mudanças oferecem mais clareza sobre a saúde dos números, auxiliando na gestão preventiva e no acompanhamento do funcionamento das linhas.
+  Essas mudanças oferecem mais clareza sobre a saúde dos números, auxiliando na gestão preventiva e no acompanhamento do funcionamento das linhas.
 
-## O que mudou?
-A coluna "Status" foi renomeada para "Qualidade", indicando a avaliação da Meta sobre o número:
+  ## O que mudou?
 
-Alta – Boa qualidade
+  A coluna "Status" foi renomeada para "Qualidade", indicando a avaliação da Meta sobre o número:
 
-Média – Atenção necessária
+  Alta – Boa qualidade
 
-Baixa – Risco de bloqueio
+  Média – Atenção necessária
 
-## Foi adicionada uma nova coluna chamada "Status", que mostra a condição operacional atual do número, conforme retorno da Positus:
+  Baixa – Risco de bloqueio
 
-Conectado – Operando normalmente
+  ## Foi adicionada uma nova coluna chamada "Status", que mostra a condição operacional atual do número, conforme retorno da Positus:
 
-Sinalizado – Sob análise da Meta
+  Conectado – Operando normalmente
 
-Pendente – Aguardando verificação ou ativação
+  Sinalizado – Sob análise da Meta
 
-Não Verificado – Status ainda não confirmado
+  Pendente – Aguardando verificação ou ativação
 
+  Não Verificado – Status ainda não confirmado
 </Update>
+
 <Update label="Junho 2025 - 2.0.87" description="Invenio Live e Center.">
+  ## 🌍 Definição de Idioma Padrão no WebChat 3.0
 
- ## 🌍 Definição de Idioma Padrão no WebChat 3.0
+  Adicionamos um novo dropdown nas configurações do WebChat 3.0 que permite selecionar o idioma padrão para o mesmo. Com essa atualização, o WebChat será carregado automaticamente no idioma escolhido. Caso fique marcado assumirá o idioma padrão do sistema, otimizando a experiência do usuário desde o início da conversa. Para acessar -\> Grupo Recursos -\> Canais -\> WebChat -\> Fluxo <img src="https://robbublob.blob.core.windows.net/docs/changelog/idiomawebchat.png" alt="idioma webchat" />
 
-Adicionamos um novo dropdown nas configurações do WebChat 3.0 que permite selecionar o idioma padrão para o mesmo. Com essa atualização, o WebChat será carregado automaticamente no idioma escolhido. Caso fique marcado assumirá o idioma padrão do sistema, otimizando a experiência do usuário desde o início da conversa.
-Para acessar -> Grupo Recursos -> Canais -> WebChat -> Fluxo
-![idioma webchat](https://robbublob.blob.core.windows.net/docs/changelog/idiomawebchat.png)
+  ## Melhoria na Exibição de Templates WhatsApp no Invenio Center/Live
 
-##  Melhoria na Exibição de Templates WhatsApp no Invenio Center/Live
-Nova visualização com nome, tag e preview dos templates, além de controle por segmento e visibilidade.
-Aprimorar a rastreabilidade dos templates no Invenio Center e controlar o acesso no Invenio Live com base em segmentos de usuários vinculados.
-![canais wapp](https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png)
-![canais wapp](https://robbublob.blob.core.windows.net/docs/changelog/templates.png)
+  Nova visualização com nome, tag e preview dos templates, além de controle por segmento e visibilidade. Aprimorar a rastreabilidade dos templates no Invenio Center e controlar o acesso no Invenio Live com base em segmentos de usuários vinculados. <img src="https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png" alt="canais wapp" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/templates.png" alt="canais wapp" />
 
-##  O que foi melhorado?
+  ## O que foi melhorado?
 
-A tela de **WhatsApp Ativo** no Invenio Live agora conta com uma nova estrutura para facilitar o dia a dia dos operadores.
+  A tela de **WhatsApp Ativo** no Invenio Live agora conta com uma nova estrutura para facilitar o dia a dia dos operadores.
 
-Antes, eram exibidas apenas as frases dos templates, sem nome ou identificação clara, o que dificultava o uso correto.
+  Antes, eram exibidas apenas as frases dos templates, sem nome ou identificação clara, o que dificultava o uso correto.
 
-Agora, com essa melhoria:
+  Agora, com essa melhoria:
 
-- A visualização foi **reformulada para espelhar o Invenio Center**, exibindo:
-  - ✅ **Nome do template**
-  - 🏷️ **Tag personalizada (`tag`)**
-  - 👁️ **Preview do conteúdo**
-![Editar template wapp](https://robbublob.blob.core.windows.net/docs/editartemplatewapp.png)
+  - A visualização foi **reformulada para espelhar o Invenio Center**, exibindo:
+    - ✅ **Nome do template**
+    - 🏷️ **Tag personalizada (`tag`)**
+    - 👁️ **Preview do conteúdo** <img src="https://robbublob.blob.core.windows.net/docs/editartemplatewapp.png" alt="Editar template wapp" />
 
-### Após a criação do template:
-•	Adicionada nova opção no menu de três pontinhos (...) ao lado de cada template:
-o	"Vincular Segmentos" – nova funcionalidade para associar o template a um ou mais segmentos específicos.
+  ### Após a criação do template:
 
-![vincular segmento](https://robbublob.blob.core.windows.net/docs/vincularsegmento.png)
+  •	Adicionada nova opção no menu de três pontinhos (...) ao lado de cada template: o	"Vincular Segmentos" – nova funcionalidade para associar o template a um ou mais segmentos específicos.
 
-### Vincular Segmentos"
-- Exibi nome do template no título da modal.
-- Listar os segmentos disponíveis com opção de seleção múltipla (checkbox).
-- Salvar associação dos segmentos ao clicar em "Atualizar segmentos".
-![vincular segmento](https://robbublob.blob.core.windows.net/docs/vincularsegmento2.png)
+  ![vincular segmento](https://robbublob.blob.core.windows.net/docs/vincularsegmento.png)
 
----
+  ### Vincular Segmentos"
 
-## Personalização por Segmento
+  - Exibi nome do template no título da modal.
+  - Listar os segmentos disponíveis com opção de seleção múltipla (checkbox).
+  - Salvar associação dos segmentos ao clicar em "Atualizar segmentos". <img src="https://robbublob.blob.core.windows.net/docs/vincularsegmento2.png" alt="vincular segmento" />
 
-A nova exibição é **dinâmica e personalizada para cada operador**, garantindo mais controle e organização:
+  ---
 
-- Criada uma **nova rota exclusiva para o Invenio Live**
-- O retorno da rota inclui **apenas os templates com:**
-  -  **Flag de visibilidade ativa**
-  -  **Segmentos compatíveis com o usuário logado**
----
-##  Benefícios
+  ## Personalização por Segmento
 
-- Melhor identificação dos templates pelo operador
-- Prevenção de uso incorreto
-- Interface alinhada entre Center e Live
-- Mais controle por parte de administradores e gestores
----
-## No LIVE
-Nova exibição dos templates WhatsApp no Invenio Live
-Para facilitar a identificação e o uso correto dos templates, realizamos melhorias importantes na tela de WhatsApp Ativo do Invenio Live.
+  A nova exibição é **dinâmica e personalizada para cada operador**, garantindo mais controle e organização:
 
- O que mudou?
-Antes, eram exibidas apenas as frases dos templates, sem nome ou tag, o que dificultava para o operador saber qual template estava utilizando.
+  - Criada uma **nova rota exclusiva para o Invenio Live**
+  - O retorno da rota inclui **apenas os templates com:**
+    - **Flag de visibilidade ativa**
+    - **Segmentos compatíveis com o usuário logado**
 
-Agora, com a nova estrutura:
-•	A tela de WhatsApp Ativo passou a espelhar o layout do Invenio Center, mostrando:
--  Nome do template
--  Tag personalizada (tag)
--  Preview do conteúdo
+  ---
 
-![Atendimento](https://robbublob.blob.core.windows.net/docs/mensagem.png)
-![Atendimento](https://robbublob.blob.core.windows.net/docs/wappativo.png)
-![template ativo](https://robbublob.blob.core.windows.net/docs/templateswappativo.png)
+  ## Benefícios
 
----
-##  Observação
+  - Melhor identificação dos templates pelo operador
+  - Prevenção de uso incorreto
+  - Interface alinhada entre Center e Live
+  - Mais controle por parte de administradores e gestores
 
-Essa melhoria depende da configuração correta de:
-- `tag` e
-- Segmentos vinculados ao template (no Invenio Center)
----
-Precisa de ajuda para configurar? Fale com nosso time de suporte! 💬
+  ---
+
+  ## No LIVE
+
+  Nova exibição dos templates WhatsApp no Invenio Live Para facilitar a identificação e o uso correto dos templates, realizamos melhorias importantes na tela de WhatsApp Ativo do Invenio Live.
+
+  O que mudou? Antes, eram exibidas apenas as frases dos templates, sem nome ou tag, o que dificultava para o operador saber qual template estava utilizando.
+
+  Agora, com a nova estrutura: •	A tela de WhatsApp Ativo passou a espelhar o layout do Invenio Center, mostrando:
+
+  - Nome do template
+  - Tag personalizada (tag)
+  - Preview do conteúdo
+
+  <img src="https://robbublob.blob.core.windows.net/docs/mensagem.png" alt="Atendimento" /> <img src="https://robbublob.blob.core.windows.net/docs/wappativo.png" alt="Atendimento" /> <img src="https://robbublob.blob.core.windows.net/docs/templateswappativo.png" alt="template ativo" />
+
+  ---
+
+  ## Observação
+
+  Essa melhoria depende da configuração correta de:
+
+  - `tag` e
+  - Segmentos vinculados ao template (no Invenio Center)
+
+  ---
+
+  Precisa de ajuda para configurar? Fale com nosso time de suporte! 💬
 </Update>
 
 <Update label="Maio 2025 - 2.0.51 2.0.86" description="Invenio Live e Center.">
+  ## Novo Filtro: Contatos Pendentes de Primeira Resposta no Invenio Live
 
-  ##  Novo Filtro: Contatos Pendentes de Primeira Resposta no Invenio Live
+  Para tornar o atendimento ainda mais ágil e eficiente, lançamos uma nova funcionalidade no Invenio Live que permite identificar rapidamente os **contatos transbordados que ainda aguardam a primeira resposta** do operador.
 
-Para tornar o atendimento ainda mais ágil e eficiente, lançamos uma nova funcionalidade no Invenio Live que permite identificar rapidamente os **contatos transbordados que ainda aguardam a primeira resposta** do operador.
+  ---
 
----
+  ## O que foi implementado?
 
-##  O que foi implementado?
+  - **Novo filtro na interface do operador**\
+    Agora é possível usar o filtro **"Contatos pendentes de primeira resposta"** para visualizar apenas os atendimentos atribuídos que ainda não receberam uma resposta inicial. <img src="https://robbublob.blob.core.windows.net/docs/changelog/filtrocontpendpriresp.png" alt="Filtro primeira resposta" />
+  - **Atualização dinâmica da lista de contatos**\
+    A listagem se ajusta automaticamente com base na seleção do filtro, garantindo visibilidade em tempo real dos atendimentos críticos.
+  - **Remoção automática do filtro ao alternar entre categorias**\
+    A interface retorna ao comportamento padrão sempre que o operador muda de filtro, garantindo uma navegação fluida.
 
-- **Novo filtro na interface do operador**  
-  Agora é possível usar o filtro **"Contatos pendentes de primeira resposta"** para visualizar apenas os atendimentos atribuídos que ainda não receberam uma resposta inicial.
-![Filtro primeira resposta](https://robbublob.blob.core.windows.net/docs/changelog/filtrocontpendpriresp.png)
-- **Atualização dinâmica da lista de contatos**  
-  A listagem se ajusta automaticamente com base na seleção do filtro, garantindo visibilidade em tempo real dos atendimentos críticos.
+  ## 👥 Novidade na Visualização de Contatos no Invenio Live
 
-- **Remoção automática do filtro ao alternar entre categorias**  
-  A interface retorna ao comportamento padrão sempre que o operador muda de filtro, garantindo uma navegação fluida.
+  Pensando em oferecer mais controle e segurança sobre as informações exibidas na plataforma, realizamos melhorias na forma como os contatos são apresentados para os atendentes.
 
+  ---
 
-## 👥 Novidade na Visualização de Contatos no Invenio Live
+  ## O que mudou?
 
-Pensando em oferecer mais controle e segurança sobre as informações exibidas na plataforma, realizamos melhorias na forma como os contatos são apresentados para os atendentes.
+  ### • Aba **"Meus Contatos"** mais precisa:
 
----
+  Agora, essa aba mostrará **apenas os contatos fidelizados**, ou seja, aqueles com vínculo confirmado com o atendente.\
+  Isso facilita o foco no relacionamento direto com seus clientes.
 
-##  O que mudou?
+  ---
 
-### • Aba **"Meus Contatos"** mais precisa:
-Agora, essa aba mostrará **apenas os contatos fidelizados**, ou seja, aqueles com vínculo confirmado com o atendente.  
- Isso facilita o foco no relacionamento direto com seus clientes.
+  ### • Nova aba: **"Lista Geral"**
 
----
+  Criamos uma nova aba que permite visualizar **todos os contatos cadastrados na plataforma** — fidelizados ou não.
 
-### • Nova aba: **"Lista Geral"**
+  <img
+    src="https://robbublob.blob.core.windows.net/docs/changelog/listageral.png"
+    alt="Visualização da Lista Geral de Contatos"
+    width="600"
+    height="200"
+  />
 
-Criamos uma nova aba que permite visualizar **todos os contatos cadastrados na plataforma** — fidelizados ou não.
+  ⚠️ **Importante:** Essa aba estará disponível **somente para usuários com uma permissão específica**.
 
-<img src="https://robbublob.blob.core.windows.net/docs/changelog/listageral.png" alt="Visualização da Lista Geral de Contatos" width="600" height="200" />
+  ---
 
+  ## ⚙️ Como ativar a permissão?
 
-⚠️ **Importante:** Essa aba estará disponível **somente para usuários com uma permissão específica**.
+  Você pode configurar essa permissão no seguinte caminho:
 
----
+  > **Invenio Center** → **Menu Usuários** → **Editar**\
+  > Selecione a opção **`<Visualizar lista geral de contatos>`** <img src="https://robbublob.blob.core.windows.net/docs/changelog/permissoes.png" alt="Permissoes" />
 
-## ⚙️ Como ativar a permissão?
+  ---
 
-Você pode configurar essa permissão no seguinte caminho:
+  ## 🔐 Mais segurança e controle
 
-> **Invenio Center** → **Menu Usuários** → **Editar**  
-> Selecione a opção **`<Visualizar lista geral de contatos>`**
-![Permissoes](https://robbublob.blob.core.windows.net/docs/changelog/permissoes.png)
----
+  Para acessar a **"Lista Geral"**, o responsável precisa ter a permissão ativada.\
+  Essa autorização é **gerenciada diretamente na interface de configuração dos usuários**.
 
-## 🔐 Mais segurança e controle
+  ---
 
-Para acessar a **"Lista Geral"**, o responsável precisa ter a permissão ativada.  
-Essa autorização é **gerenciada diretamente na interface de configuração dos usuários**.
+  ## ℹ️ Observação importante
 
----
+  - Todos os **usuários já existentes** continuarão com acesso à **"Lista Geral"** habilitado por padrão.
+  - **Novos usuários**, criados a partir desta atualização, terão essa permissão **desabilitada por padrão** e será necessário ativá-la manualmente, se necessário.
 
-## ℹ️ Observação importante
+  ---
 
-- Todos os **usuários já existentes** continuarão com acesso à **"Lista Geral"** habilitado por padrão.
-- **Novos usuários**, criados a partir desta atualização, terão essa permissão **desabilitada por padrão** e será necessário ativá-la manualmente, se necessário.
+  ## 🔒 Por que isso é importante?
 
----
+  - Garante que cada atendente veja **apenas o que é relevante** para seu atendimento.
+  - Dá aos gestores **mais controle** sobre quem pode acessar os dados de todos os contatos.
+  - Assegura **coerência e segurança nas permissões** entre o que é exibido na interface e o que está validado no sistema.
 
-## 🔒 Por que isso é importante?
+  ## Nova Funcionalidade: Bloqueio de Envio de Arquivos com Extensões Proibidas
 
--  Garante que cada atendente veja **apenas o que é relevante** para seu atendimento.
--  Dá aos gestores **mais controle** sobre quem pode acessar os dados de todos os contatos.
--  Assegura **coerência e segurança nas permissões** entre o que é exibido na interface e o que está validado no sistema.
+  Pensando na **segurança** e no **controle da comunicação** via plataforma, agora é possível bloquear o envio de arquivos com extensões específicas, definidas pelo supervisor.
 
-  
-##  Nova Funcionalidade: Bloqueio de Envio de Arquivos com Extensões Proibidas
+  ### O que muda?
 
-Pensando na **segurança** e no **controle da comunicação** via plataforma, agora é possível bloquear o envio de arquivos com extensões específicas, definidas pelo supervisor.
+  Supervisores podem configurar, por **segmento**, uma lista de extensões de arquivos que **não devem ser permitidas** nos atendimentos (como `.exe`, `.bat`, etc).\
+  Essa lista é aplicada automaticamente a **todos os canais** do segmento.
 
-###  O que muda?
+  ### 🔒 Benefícios da novidade
 
-Supervisores podem configurar, por **segmento**, uma lista de extensões de arquivos que **não devem ser permitidas** nos atendimentos (como `.exe`, `.bat`, etc).  
-Essa lista é aplicada automaticamente a **todos os canais** do segmento.
+  - Mais segurança no tráfego de arquivos
+  - Prevenção contra envio de arquivos indesejados ou potencialmente perigosos
+  - Configuração centralizada e aplicação imediata das regras
 
-### 🔒 Benefícios da novidade
+  ### 🛠 Como configurar?
 
--  Mais segurança no tráfego de arquivos  
--  Prevenção contra envio de arquivos indesejados ou potencialmente perigosos  
--  Configuração centralizada e aplicação imediata das regras  
-
-### 🛠 Como configurar?
-
-1. Acesse o **Invenio Center**
-2. No grupo de **Recursos**, vá até **Segmentos**
-3. Crie um novo segmento ou clique em `...` de um segmento existente
-4. Selecione **Editar**
-5. Defina as extensões de arquivos que devem ser bloqueadas (ex: `.exe`, `.bat`)
-6. Pronto! A regra já estará valendo para todos os atendimentos do segmento escolhido.
-![Segmentos](https://robbublob.blob.core.windows.net/docs/changelog/segmentos.png)
-</Update>  
+  1. Acesse o **Invenio Center**
+  2. No grupo de **Recursos**, vá até **Segmentos**
+  3. Crie um novo segmento ou clique em `...` de um segmento existente
+  4. Selecione **Editar**
+  5. Defina as extensões de arquivos que devem ser bloqueadas (ex: `.exe`, `.bat`)
+  6. Pronto! A regra já estará valendo para todos os atendimentos do segmento escolhido. <img src="https://robbublob.blob.core.windows.net/docs/changelog/segmentos.png" alt="Segmentos" />
+</Update>
 
 <Update label="Abril 2025 - 2.0.84/85 2.0.50" description="Invenio Live e Center.">
-  
-Apresentamos duas novas funcionalidades disponíveis na plataforma! As atualizações trazem mais controle, segurança e flexibilidade para a gestão do Invenio Center e Invenio Live.
+  Apresentamos duas novas funcionalidades disponíveis na plataforma! As atualizações trazem mais controle, segurança e flexibilidade para a gestão do Invenio Center e Invenio Live.
 
----
+  ---
 
-##  Limite de Tamanho para Envio de Arquivos no Invenio Live
+  ## Limite de Tamanho para Envio de Arquivos no Invenio Live
 
-Agora, administradores podem configurar o limite máximo (KB ou em MB) para envio de arquivos pelos atendentes, garantindo controle e segurança sobre os arquivos trafegados na plataforma.
+  Agora, administradores podem configurar o limite máximo (KB ou em MB) para envio de arquivos pelos atendentes, garantindo controle e segurança sobre os arquivos trafegados na plataforma.
 
-###  Como configurar:
-- Navegue até: **Menu Usuário → Configurações → Conta**
-- Acesse: **"Limite de tamanho para envio de arquivos no LIVE"**
-- Defina o tamanho máximo permitido (entre **1MB e 100MB**)
-- Ou o tamanho máximo permitido (entre **1KB e 1024KB**)
-- Caso seja configurado como **0**, o envio de arquivos será desabilitado
-![Remove Integração](https://robbublob.blob.core.windows.net/docs/changelog/tamanhoarqlive.png)
----
+  ### Como configurar:
 
-##  Exclusão de Páginas do Facebook Messenger
+  - Navegue até: **Menu Usuário → Configurações → Conta**
+  - Acesse: **"Limite de tamanho para envio de arquivos no LIVE"**
+  - Defina o tamanho máximo permitido (entre **1MB e 100MB**)
+  - Ou o tamanho máximo permitido (entre **1KB e 1024KB**)
+  - Caso seja configurado como **0**, o envio de arquivos será desabilitado <img src="https://robbublob.blob.core.windows.net/docs/changelog/tamanhoarqlive.png" alt="Remove Integração" />
 
-Nova funcionalidade permite a exclusão de páginas integradas ao Facebook Messenger, seja individualmente ou em massa, diretamente via API.
+  ---
 
-###  O que é possível:
-- Excluir **todas as páginas** do Facebook Messenger de um cliente
-- Excluir **uma página específica** por ID
-- Todas as ações são registradas no **log de auditoria**
-- Retorno de status HTTP `204` para exclusões bem-sucedidas
-![Facebook Messenger Instagram](https://robbublob.blob.core.windows.net/docs/changelog/facemesseninsta.png)
+  ## Exclusão de Páginas do Facebook Messenger
 
-![Remove Integração](https://robbublob.blob.core.windows.net/docs/changelog/removeintegracvao.png)
+  Nova funcionalidade permite a exclusão de páginas integradas ao Facebook Messenger, seja individualmente ou em massa, diretamente via API.
 
----
+  ### O que é possível:
 
-##  Nova Funcionalidade: Extrator de Conversas Reestruturado
+  - Excluir **todas as páginas** do Facebook Messenger de um cliente
+  - Excluir **uma página específica** por ID
+  - Todas as ações são registradas no **log de auditoria**
+  - Retorno de status HTTP `204` para exclusões bem-sucedidas <img src="https://robbublob.blob.core.windows.net/docs/changelog/facemesseninsta.png" alt="Facebook Messenger Instagram" />
 
-Temos uma ótima novidade!
+  ![Remove Integração](https://robbublob.blob.core.windows.net/docs/changelog/removeintegracvao.png)
 
-O **Extrator de Conversas** foi totalmente reestruturado para trazer mais **praticidade** e **agilidade** ao seu dia a dia.
+  ---
 
-Agora, **não é mais necessário carregar as conversas em tela** antes de realizar a extração.  
-Basta informar o **período desejado**, definindo a **data e hora de início e fim**, e o sistema cuidará do resto.
-![Extrator de Conversas](https://robbublob.blob.core.windows.net/docs/changelog/extrator.png)
-### O que mudou:
+  ## Nova Funcionalidade: Extrator de Conversas Reestruturado
 
--  **Intervalo máximo por extração:** 90 dias  
--  **Precisa de mais dados?** Basta realizar novas extrações com outros períodos
+  Temos uma ótima novidade!
 
-Essa atualização torna o processo muito mais **eficiente**, **intuitivo** e **escalável**!
+  O **Extrator de Conversas** foi totalmente reestruturado para trazer mais **praticidade** e **agilidade** ao seu dia a dia.
 
----
+  Agora, **não é mais necessário carregar as conversas em tela** antes de realizar a extração.\
+  Basta informar o **período desejado**, definindo a **data e hora de início e fim**, e o sistema cuidará do resto. <img src="https://robbublob.blob.core.windows.net/docs/changelog/extrator.png" alt="Extrator de Conversas" />
 
-##  Novo Campo nos Relatórios Extraídos
+  ### O que mudou:
 
-###  O que mudou?
+  - **Intervalo máximo por extração:** 90 dias
+  - **Precisa de mais dados?** Basta realizar novas extrações com outros períodos
 
-A partir de agora, os relatórios extraídos contarão com um **novo campo na descrição**:  
-`total_lines`, que indica a **quantidade total de linhas geradas**.
+  Essa atualização torna o processo muito mais **eficiente**, **intuitivo** e **escalável**!
 
-Essa adição tem como objetivo:
+  ---
 
-- Proporcionar **maior transparência**
-- Facilitar a **análise dos dados apresentados**
-- Permitir que os usuários compreendam rapidamente o **volume de informações** contidas em cada relatório
-- Melhorar a **usabilidade e eficiência** na interpretação dos resultados extraídos
+  ## Novo Campo nos Relatórios Extraídos
 
-###  Observações
+  ### O que mudou?
 
-- Para **relatórios anteriores à implementação** ou em casos de **falha/ausência de dados**, o campo apresentará o valor `0`
-- Nestes casos, **o texto não será exibido na descrição dos relatórios**
-- Para **novos relatórios**, o valor de `total_lines` será exibido normalmente
+  A partir de agora, os relatórios extraídos contarão com um **novo campo na descrição**:\
+  `total_lines`, que indica a **quantidade total de linhas geradas**.
 
----
+  Essa adição tem como objetivo:
 
-Essa melhoria torna o processo de leitura dos relatórios mais intuitivo e informativo!
+  - Proporcionar **maior transparência**
+  - Facilitar a **análise dos dados apresentados**
+  - Permitir que os usuários compreendam rapidamente o **volume de informações** contidas em cada relatório
+  - Melhorar a **usabilidade e eficiência** na interpretação dos resultados extraídos
 
-##  Nova Funcionalidade: Configuração de Fuso Horário por Usuário
+  ### Observações
 
-###  O que foi implementado?
+  - Para **relatórios anteriores à implementação** ou em casos de **falha/ausência de dados**, o campo apresentará o valor `0`
+  - Nestes casos, **o texto não será exibido na descrição dos relatórios**
+  - Para **novos relatórios**, o valor de `total_lines` será exibido normalmente
 
-Agora é possível **configurar o fuso horário pessoal** diretamente pelo Center!
+  ---
 
-A nova funcionalidade permite que cada usuário selecione sua própria UTC, proporcionando mais precisão no registro e exibição dos horários.
+  Essa melhoria torna o processo de leitura dos relatórios mais intuitivo e informativo!
 
-###  Como acessar?
+  ## Nova Funcionalidade: Configuração de Fuso Horário por Usuário
 
-Você pode configurar seu fuso horário em:
+  ### O que foi implementado?
 
-**Menu do usuário → Meu perfil → Fuso horário**
-![UTC](https://robbublob.blob.core.windows.net/docs/changelog/UTC.png)
-###  O que está disponível?
+  Agora é possível **configurar o fuso horário pessoal** diretamente pelo Center!
 
-- Cadastro das **UTCs disponíveis**
-- Lista de opções para selecionar o **fuso horário desejado**
-- Aplicação personalizada para cada usuário
+  A nova funcionalidade permite que cada usuário selecione sua própria UTC, proporcionando mais precisão no registro e exibição dos horários.
 
-Essa melhoria garante que os horários exibidos estejam sempre alinhados com a localização e preferência de cada pessoa, aumentando a clareza e consistência na visualização de dados e eventos.
+  ### Como acessar?
 
----
-###  O que está disponível?
+  Você pode configurar seu fuso horário em:
 
-- Cadastro de múltiplas **UTCs disponíveis**
-- Seleção personalizada de fuso horário
-- Aplicação automática nos registros e exibições de dados
+  **Menu do usuário → Meu perfil → Fuso horário** <img src="https://robbublob.blob.core.windows.net/docs/changelog/UTC.png" alt="UTC" />
 
-###  Benefícios
+  ### O que está disponível?
 
-- Exibição de informações alinhadas com o fuso horário escolhido
-- Registros de atividades mais precisos
-- Experiência personalizada para cada usuário
+  - Cadastro das **UTCs disponíveis**
+  - Lista de opções para selecionar o **fuso horário desejado**
+  - Aplicação personalizada para cada usuário
 
+  Essa melhoria garante que os horários exibidos estejam sempre alinhados com a localização e preferência de cada pessoa, aumentando a clareza e consistência na visualização de dados e eventos.
+
+  ---
+
+  ### O que está disponível?
+
+  - Cadastro de múltiplas **UTCs disponíveis**
+  - Seleção personalizada de fuso horário
+  - Aplicação automática nos registros e exibições de dados
+
+  ### Benefícios
+
+  - Exibição de informações alinhadas com o fuso horário escolhido
+  - Registros de atividades mais precisos
+  - Experiência personalizada para cada usuário
 </Update>
 
 <Update label="Março 2025 - 2.0.83 2.0.48" description="Invenio Live e Center.">
-  
-##  Filtro de Usuários por Grupo de Acesso.
-Agora, no menu **Usuários → Usuários → Filtrar**, é possível **filtrar usuários com base em seus Grupos de Acesso**, como
+  ## Filtro de Usuários por Grupo de Acesso.
 
-- Administrador 
-- Atendente 
-- Supervisor 
-- Integração API 
-- IDR Studio 
-- Carteiro Digital 
+  Agora, no menu **Usuários → Usuários → Filtrar**, é possível **filtrar usuários com base em seus Grupos de Acesso**, como
 
-Essa funcionalidade **facilita pesquisas e a gestão de perfis**, permitindo uma **visualização rápida e precisa**
-dos usuários por categoria. Com isso, a análise e a tomada de decisão tornam-se **mais ágeis e eficientes**. 
-##  Notificações Automáticas para Atualizações de Template da Meta WhatsApp.
-## Melhoria na Integração com o Meta WhatsApp
+  - Administrador
+  - Atendente
+  - Supervisor
+  - Integração API
+  - IDR Studio
+  - Carteiro Digital
 
-Temos o prazer de anunciar uma melhoria significativa em nossa integração com o Meta WhatsApp.
+  Essa funcionalidade **facilita pesquisas e a gestão de perfis**, permitindo uma **visualização rápida e precisa** dos usuários por categoria. Com isso, a análise e a tomada de decisão tornam-se **mais ágeis e eficientes**.
 
-Implementamos uma regra de notificação no webhook de atualização de template que, automaticamente, dispara um e-mail aos 
-responsáveis financeiros do cliente sempre que ocorre uma alteração na categoria que aciona o webhook.
+  ## Notificações Automáticas para Atualizações de Template da Meta WhatsApp.
 
-Essa inovação assegura que todas as mudanças críticas sejam comunicadas de forma imediata, promovendo maior transparência e otimizando a gestão dos templates.
+  ## Melhoria na Integração com o Meta WhatsApp
 
-Com essa atualização, reafirmamos nosso compromisso com a eficiência e a melhoria contínua dos nossos serviços.
+  Temos o prazer de anunciar uma melhoria significativa em nossa integração com o Meta WhatsApp.
 
-## Aprimoramento da Função de Agendamento de Mensagens no Invenio Live
+  Implementamos uma regra de notificação no webhook de atualização de template que, automaticamente, dispara um e-mail aos responsáveis financeiros do cliente sempre que ocorre uma alteração na categoria que aciona o webhook.
 
-O **Invenio Live** apresenta uma nova funcionalidade que aprimora o agendamento de mensagens, permitindo que operadores configurem interações personalizadas para clientes específicos. Essa atualização possibilita a criação de agendamentos com alertas automáticos, disparados na data e horário previamente definidos, assegurando que as interações ocorram no momento exato e com máxima eficiência.
+  Essa inovação assegura que todas as mudanças críticas sejam comunicadas de forma imediata, promovendo maior transparência e otimizando a gestão dos templates.
 
-> **Perspectiva do Usuário:**
->
-> "Como operador do Invenio Live, gostaria de criar agendamentos para clientes específicos com alertas automáticos na data e horário definidos, para garantir que as interações sejam realizadas no momento certo e com eficiência."
+  Com essa atualização, reafirmamos nosso compromisso com a eficiência e a melhoria contínua dos nossos serviços.
 
-Essa melhoria demonstra o compromisso do Invenio Live em oferecer soluções inteligentes e precisas, otimizando a comunicação e promovendo uma experiência superior aos usuários.
+  ## Aprimoramento da Função de Agendamento de Mensagens no Invenio Live
 
-### Como Criar um Agendamento de Mensagens
+  O **Invenio Live** apresenta uma nova funcionalidade que aprimora o agendamento de mensagens, permitindo que operadores configurem interações personalizadas para clientes específicos. Essa atualização possibilita a criação de agendamentos com alertas automáticos, disparados na data e horário previamente definidos, assegurando que as interações ocorram no momento exato e com máxima eficiência.
 
-A criação do agendamento de mensagens ocorre na tela "**Editar informações de contato**" do Invenio Live. Essa funcionalidade permite ao operador:
+  > **Perspectiva do Usuário:**
+  >
+  > "Como operador do Invenio Live, gostaria de criar agendamentos para clientes específicos com alertas automáticos na data e horário definidos, para garantir que as interações sejam realizadas no momento certo e com eficiência."
 
-1. **Definir a Data e Hora:** Especifique o momento exato para o envio da mensagem ao cliente.
-2. **Registrar um Motivo Detalhado:** Utilize o campo "**Motivo**" para documentar a razão do agendamento, garantindo clareza e rastreabilidade para futuras interações.
+  Essa melhoria demonstra o compromisso do Invenio Live em oferecer soluções inteligentes e precisas, otimizando a comunicação e promovendo uma experiência superior aos usuários.
 
-Essa abordagem assegura que todas as comunicações sejam realizadas de forma organizada e transparente, beneficiando tanto os operadores quanto os clientes atendidos.
+  ### Como Criar um Agendamento de Mensagens
 
-## 🛠️ Como realizar a ação de agendamento no Invenio Live
+  A criação do agendamento de mensagens ocorre na tela "**Editar informações de contato**" do Invenio Live. Essa funcionalidade permite ao operador:
 
-### Passo a passo:
+  1. **Definir a Data e Hora:** Especifique o momento exato para o envio da mensagem ao cliente.
+  2. **Registrar um Motivo Detalhado:** Utilize o campo "**Motivo**" para documentar a razão do agendamento, garantindo clareza e rastreabilidade para futuras interações.
 
-1. **Acessar a tela**  
-   Entre na tela **"Editar informações de contato"** no Invenio Live.
+  Essa abordagem assegura que todas as comunicações sejam realizadas de forma organizada e transparente, beneficiando tanto os operadores quanto os clientes atendidos.
 
-2. **Definir o agendamento**  
-   Localize a seção de **agendamento de mensagens**.
+  ## 🛠️ Como realizar a ação de agendamento no Invenio Live
 
-3. **Inserir data e hora**  
-   Selecione a **data** e o **horário** desejados para o agendamento.
+  ### Passo a passo:
 
-4. **Registrar o motivo**  
-   Preencha o campo **"Motivo"** com uma **descrição detalhada** do propósito do agendamento.
+  1. **Acessar a tela**\
+     Entre na tela **"Editar informações de contato"** no Invenio Live.
+  2. **Definir o agendamento**\
+     Localize a seção de **agendamento de mensagens**.
+  3. **Inserir data e hora**\
+     Selecione a **data** e o **horário** desejados para o agendamento.
+  4. **Registrar o motivo**\
+     Preencha o campo **"Motivo"** com uma **descrição detalhada** do propósito do agendamento.
+  5. **Confirmar**\
+     **Salve as alterações** para concluir a criação do agendamento.
 
-5. **Confirmar**  
-   **Salve as alterações** para concluir a criação do agendamento.
+  ![Criar agendamento](https://robbublob.blob.core.windows.net/docs/changelog/agendamentomessage.png)
 
-![Criar agendamento](https://robbublob.blob.core.windows.net/docs/changelog/agendamentomessage.png)
-## 📆 Tela "Agendamentos Pendentes" — Invenio Live
+  ## 📆 Tela "Agendamentos Pendentes" — Invenio Live
 
-A tela **Agendamentos Pendentes** exibe todos os agendamentos com suas respectivas **datas e horários**.
+  A tela **Agendamentos Pendentes** exibe todos os agendamentos com suas respectivas **datas e horários**.
 
-🔧 **Operadores podem:**
-- Editar e excluir agendamentos diretamente;
-- Utilizar filtros avançados para facilitar a visualização e o gerenciamento.
+  🔧 **Operadores podem:**
 
----
+  - Editar e excluir agendamentos diretamente;
+  - Utilizar filtros avançados para facilitar a visualização e o gerenciamento.
 
-## 🛠️ Como realizar a ação
+  ---
 
-### 1️⃣ Acessar a Tela  
-➡️ Navegue até a interface **"Agendamentos Pendentes"** no Invenio Live.
+  ## 🛠️ Como realizar a ação
 
-### 2️⃣ Visualizar Agendamentos  
-👀 Consulte a lista que apresenta **data e horário** de cada agendamento.
+  ### 1️⃣ Acessar a Tela
 
-### 3️⃣ Editar Agendamentos  
-✏️ Selecione o agendamento desejado e clique em **Editar**.  
-📝 Faça as alterações necessárias e **salve**.
+  ➡️ Navegue até a interface **"Agendamentos Pendentes"** no Invenio Live.
 
-### 4️⃣ Excluir Agendamentos  
-🗑️ Clique na opção de **Excluir** ao lado do item que deseja remover.
+  ### 2️⃣ Visualizar Agendamentos
 
-### 5️⃣ Aplicar Filtros  
-🔍 Utilize filtros por:
-- **Data**
-- **Horário**
-- Outros critérios disponíveis
-![Agendamento de contatos](https://robbublob.blob.core.windows.net/docs/changelog/aplicarfiltro.png)
+  👀 Consulte a lista que apresenta **data e horário** de cada agendamento.
 
-> ✅ **Dica:** Aplique os filtros para uma visualização mais organizada e eficiente.
+  ### 3️⃣ Editar Agendamentos
 
----
+  ✏️ Selecione o agendamento desejado e clique em **Editar**.\
+  📝 Faça as alterações necessárias e **salve**.
 
-## ❗ Política de Exclusão de Agendamentos
+  ### 4️⃣ Excluir Agendamentos
 
-> ⚠️ **Importante!**
+  🗑️ Clique na opção de **Excluir** ao lado do item que deseja remover.
 
-📌 **Resumo da Operação:**
+  ### 5️⃣ Aplicar Filtros
 
-- 🧍‍♂️ **Gestão Manual**: Agendamentos **não são excluídos automaticamente**.
-- 👩‍💻 **Ação do Operador**: A exclusão só acontece **manualmente**.
-- 📅 **Persistência**: O agendamento **permanece ativo mesmo após interação com o contato**.
-- 🔒 **Autonomia Total**: Nenhuma exclusão automática — **controle total do usuário** sobre a lista.
+  🔍 Utilize filtros por:
 
----
+  - **Data**
+  - **Horário**
+  - Outros critérios disponíveis <img src="https://robbublob.blob.core.windows.net/docs/changelog/aplicarfiltro.png" alt="Agendamento de contatos" />
 
-## 🔁 Redirecionamento + Alerta de Fidelização
+  > ✅ **Dica:** Aplique os filtros para uma visualização mais organizada e eficiente.
 
-🧭 **Ao clicar em um agendamento:**
-- Você será **redirecionado** para a tela de **interação com o contato**.
-- 👁️‍🗨️ Um **alerta visual** será exibido se o contato já estiver **fidelizado a outro operador**, evitando duplicidade de atendimento.
-![Redirecionamento](https://robbublob.blob.core.windows.net/docs/changelog/redirecionamento.png)
-> 💡 **Fidelização** significa que apenas um operador pode realizar ações com o contato naquele momento.
+  ---
 
-### 🔔 Notificações de Agendamentos Pendentes
+  ## ❗ Política de Exclusão de Agendamentos
 
-O sistema envia **notificações automáticas** sempre que há **agendamentos pendentes**, garantindo que os operadores não percam nenhuma interação programada.
+  > ⚠️ **Importante!**
 
-## 📩 Funcionalidade da Notificação
+  📌 **Resumo da Operação:**
 
-- Uma **notificação automática** é enviada ao operador.
-- A notificação inclui um botão **"Retomar Conversa"**, que redireciona diretamente para a tela de interação com o contato.
+  - 🧍‍♂️ **Gestão Manual**: Agendamentos **não são excluídos automaticamente**.
+  - 👩‍💻 **Ação do Operador**: A exclusão só acontece **manualmente**.
+  - 📅 **Persistência**: O agendamento **permanece ativo mesmo após interação com o contato**.
+  - 🔒 **Autonomia Total**: Nenhuma exclusão automática — **controle total do usuário** sobre a lista.
 
-## 🚨 Alerta de Fidelização
+  ---
 
-- Se o contato já estiver **vinculado a outro operador**, o sistema exibe um **alerta visual**.
-- Isso evita **ações duplicadas** e garante que apenas o operador fidelizado continue a interação.
-![Evitar duplicidade](https://robbublob.blob.core.windows.net/docs/changelog/evitarduplicidade.png)
-> ✅ Essa funcionalidade aumenta a eficiência operacional e reduz riscos de falhas na comunicação com o cliente.
+  ## 🔁 Redirecionamento \+ Alerta de Fidelização
 
+  🧭 **Ao clicar em um agendamento:**
 
-##  **[LIVE] Ordenação Personalizada de Mensagens e Eventos por UTC do Usuário.** 
-Com o Invenio Live, a experiência do usuário foi aprimorada. Agora, a ordenação das mensagens e eventos é realizada de 
-acordo com o fuso horário (UTC) definido no perfil de cada usuário, garantindo que todas as interações sejam exibidas 
-de forma precisa e personalizada. Essa melhoria assegura que os atendimentos e contatos reflitam o horário correto, 
-proporcionando maior transparência e eficiência na comunicação.
+  - Você será **redirecionado** para a tela de **interação com o contato**.
+  - 👁️‍🗨️ Um **alerta visual** será exibido se o contato já estiver **fidelizado a outro operador**, evitando duplicidade de atendimento. <img src="https://robbublob.blob.core.windows.net/docs/changelog/redirecionamento.png" alt="Redirecionamento" />
 
-##  **[CENTER] Confirmação de Seleção de Template.**
-Objetivo: Prevenir incidentes (em especial para casos de troca automática de categoria pela Meta) e sinalizar o cliente 
-sobre o uso de templates do tipo marketing independente de ter ou não mudado de status recentemente. 
-Na tela de campanhas: ao selecionar um template do tipo Marketing, será aberta uma caixa de confirmação com a seguinte mensagem: 
-Confirmar seleção de template 
-O template {nometemplate} é da categoria Marketing, deseja realizar a campanha com este template?
-![Confirmar template](https://robbublob.blob.core.windows.net/docs/changelog/selecaotemplate.png)
-[Cancelar] [Confirmar] 
-Cancelar: O usuário retorna a listagem de templates para selecionar outro. 
-Confirmar: Com o template definido o usuário retorna a tela da campanha que estava sendo criada.
+  > 💡 **Fidelização** significa que apenas um operador pode realizar ações com o contato naquele momento.
 
-##  **[CENTER - ROBBU APP] Correção e Ordenação de Eventos por UTC do Usuário.**
-Detectamos uma questão em que os eventos disparados não eram contabilizados corretamente no contato. 
-Especificamente, os eventos comuns não apareciam no front do app nem na versão Desktop, e, para os eventos finalizadores, 
-apenas o protocolo de encerramento era registrado, sem exibir o evento finalizador propriamente dito. 
-Para resolver esse problema, implementamos uma melhoria que garante a correta ordenação dos KPI de Eventos e 
-dos Eventos do Sistema, alinhada com a UTC definida no perfil do usuário. Essa correção assegura que todos os 
-eventos sejam contabilizados e exibidos de maneira consistente, proporcionando maior transparência e eficiência na 
-gestão dos dados de interação.
+  ### 🔔 Notificações de Agendamentos Pendentes
 
+  O sistema envia **notificações automáticas** sempre que há **agendamentos pendentes**, garantindo que os operadores não percam nenhuma interação programada.
+
+  ## 📩 Funcionalidade da Notificação
+
+  - Uma **notificação automática** é enviada ao operador.
+  - A notificação inclui um botão **"Retomar Conversa"**, que redireciona diretamente para a tela de interação com o contato.
+
+  ## 🚨 Alerta de Fidelização
+
+  - Se o contato já estiver **vinculado a outro operador**, o sistema exibe um **alerta visual**.
+  - Isso evita **ações duplicadas** e garante que apenas o operador fidelizado continue a interação. <img src="https://robbublob.blob.core.windows.net/docs/changelog/evitarduplicidade.png" alt="Evitar duplicidade" />
+
+  > ✅ Essa funcionalidade aumenta a eficiência operacional e reduz riscos de falhas na comunicação com o cliente.
+
+  ## **\[LIVE\] Ordenação Personalizada de Mensagens e Eventos por UTC do Usuário.**
+
+  Com o Invenio Live, a experiência do usuário foi aprimorada. Agora, a ordenação das mensagens e eventos é realizada de acordo com o fuso horário (UTC) definido no perfil de cada usuário, garantindo que todas as interações sejam exibidas de forma precisa e personalizada. Essa melhoria assegura que os atendimentos e contatos reflitam o horário correto, proporcionando maior transparência e eficiência na comunicação.
+
+  ## **\[CENTER\] Confirmação de Seleção de Template.**
+
+  Objetivo: Prevenir incidentes (em especial para casos de troca automática de categoria pela Meta) e sinalizar o cliente sobre o uso de templates do tipo marketing independente de ter ou não mudado de status recentemente. Na tela de campanhas: ao selecionar um template do tipo Marketing, será aberta uma caixa de confirmação com a seguinte mensagem: Confirmar seleção de template O template {nometemplate} é da categoria Marketing, deseja realizar a campanha com este template? <img src="https://robbublob.blob.core.windows.net/docs/changelog/selecaotemplate.png" alt="Confirmar template" /> \[Cancelar\] \[Confirmar\] Cancelar: O usuário retorna a listagem de templates para selecionar outro. Confirmar: Com o template definido o usuário retorna a tela da campanha que estava sendo criada.
+
+  ## **\[CENTER - ROBBU APP\] Correção e Ordenação de Eventos por UTC do Usuário.**
+
+  Detectamos uma questão em que os eventos disparados não eram contabilizados corretamente no contato. Especificamente, os eventos comuns não apareciam no front do app nem na versão Desktop, e, para os eventos finalizadores, apenas o protocolo de encerramento era registrado, sem exibir o evento finalizador propriamente dito. Para resolver esse problema, implementamos uma melhoria que garante a correta ordenação dos KPI de Eventos e dos Eventos do Sistema, alinhada com a UTC definida no perfil do usuário. Essa correção assegura que todos os eventos sejam contabilizados e exibidos de maneira consistente, proporcionando maior transparência e eficiência na gestão dos dados de interação.
 </Update>
 
 <Update label="Fevereiro 2025 - 2.0.80/81" description="Invenio Live e Center.">
+  ## **Apresentamos o WhatsApp Flows**
+
+  ## Uma solução extraordinária para transformar a experiência de atendimento no WhatsApp!
+
+  - **Interação Inteligente:** Envie formulários dinâmicos e integrados em uma única mensagem, proporcionando uma jornada de usuário fluída, rápida e intuitiva.
+  - **Flexibilidade Total:**
+    - **Flows Estáticos:** Oferecem uma experiência completa sem a necessidade de integração externa, garantindo agilidade e simplicidade.
+    - **Flows Dinâmicos:** Interagem com sistemas externos para fornecer respostas personalizadas e contextuais, elevando o nível de atendimento ao cliente.
+  - **Benefícios Exclusivos:**
+    - Eliminam a fragmentação na comunicação e reduzem o número de mensagens enviadas.
+    - Aumentam a eficiência do atendimento e melhoram a satisfação do cliente com uma interface moderna e responsiva.
+  - **Documentação Oficial:** Baseada na tecnologia da Meta, com total conformidade e robustez. Confira os detalhes na [documentação oficial do WhatsApp Flows](https://developers.facebook.com/docs/whatsapp/flows/).
+
+  ## "WhatsApp Flows no Invenio Center"
+
+  ## Tipos de Flows
+
+  Existem dois tipos principais de flows no WhatsApp:
+
+  1. **Flows Estáticos:**
+     - Funcionam sem a necessidade de interação com sistemas externos.
+  2. **Flows Dinâmicos:**
+     - Interagem com sistemas externos através de endpoints para oferecer respostas personalizadas. <img src="https://robbublob.blob.core.windows.net/docs/changelog/flows.png" alt="Flows" /> **Observação:** O WhatsApp Flows foi desenvolvido para proporcionar uma experiência otimizada em dispositivos móveis. A ausência de suporte para a versão web reflete uma escolha de design da Meta e não uma limitação da funcionalidade.
+
+  ## Acessando e Criando Flows no Invenio Center
+
+  Para acessar e criar flows no Invenio Center, siga os passos abaixo:
+
+  1. No Invenio, os flows estão disponíveis em: `Canais > WhatsApp > Waba > Flows`. <img src="https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png" alt="Canais flows" />
+  2. Selecione a WABA desejada. <img src="https://robbublob.blob.core.windows.net/docs/changelog/waba.png" alt="Waba" />
+  3. Escolha a opção "Flows". <img src="https://robbublob.blob.core.windows.net/docs/changelog/opcaoflows.png" alt="Opção Flows" />
+  4. Visualize a lista de flows existentes. <img src="https://robbublob.blob.core.windows.net/docs/changelog/listaflows.png" alt="Listar Flows" />
+  5. Para criar um novo flow, clique em "\+ Criar flow". <img src="https://robbublob.blob.core.windows.net/docs/changelog/criarflows.png" alt="Criar Flows" />
+  6. Na tela de criação, você precisará fornecer: <img src="https://robbublob.blob.core.windows.net/docs/changelog/nomeflows.png" alt="Nome Flows" />
+     - Nome do flow
+     - Categorias
+     - Tipo do flow (dinâmico ou estático)
+       - Se o flow for dinâmico, será necessário vincular um endpoint:
+         - Endpoint externo (do cliente, por exemplo)
+         - Endpoint interno (customizado cadastrado no Invenio) <img src="https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico.png" alt="flow dinamico" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico1.png" alt="flow dinamico" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico2.png" alt="flow dinamico" />
+
+  Uma vez criado um flow você pode editá-lo e deixá-lo conforme a preferência do negócio (o céu é o limite). <img src="https://robbublob.blob.core.windows.net/docs/changelog/helloflow.png" alt="flow dinamico" />
+
+  Após criado, um flow pode ser editado, deletado ou publicado (a publicação ocorre na API da Meta).
+
+  **Endpoints:**
+
+  # Endpoints em JavaScript
+
+  Os endpoints programados utilizando **JavaScript** possuem algumas funcionalidades que precisam ser respeitadas para que funcionem corretamente.
+
+  <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints.png" alt="Enpoints" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints1.png" alt="Enpoints" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints2.png" alt="Enpoints" />
+
+  Para criar um endpoint basta clicar em “\+ Criar endpoint”, após isso, será exigida uma descrição para o endpoint. <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints3.png" alt="Enpoints" />
+
+  Após a criação, uma tela com o código do endpoint será aberta, permitindo que você programe em JavaScript. Por exemplo, é possível implementar a validação de um CPF. <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints4.png" alt="Enpoints" /> Após atualizar o endpoint você já pode testá-los via Postman (veja o exemplo abaixo). <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints5.png" alt="Enpoints" />
+
+  ## Palavras Reservadas
+
+  Os endpoints possuem algumas constantes e funções predefinidas que são fundamentais para seu funcionamento. Portanto, **não é possível criar novas constantes** com as seguintes palavras reservadas:
+
+  - `logger`
+  - `loggerHistory`
+  - `response`
+  - `request`
+
+  Caso você tente definir uma constante com alguma dessas palavras reservadas, o seu endpoint **retornará erro**.
+
+  ## Limitações
+
+  Os endpoints possuem as seguintes limitações:
+
+  - **Tempo máximo de execução:** 10 segundos. Se ultrapassar esse limite, será exibido o erro:
+    ```json
+    {
+      "error": "The JavaScript code took more than 10 seconds to execute"
+    }
+    ```
+  - **Obrigatoriedade de retorno:** É necessário sempre retornar algo no endpoint utilizando o método `response()`. Caso contrário, será exibido o erro:
+    ```json
+    {
+      "error": "Endpoint has no data returned"
+    }
+    ```
+
+  ## Variáveis Globais
+
+  Por padrão, existem algumas variáveis essenciais para o funcionamento dos endpoints:
+
+  ### `request`
+
+  Variável que contém várias informações sobre a requisição, como:
+
+  - `method` → Método da requisição (GET, POST, etc.).
+  - `headers` → Cabeçalhos da requisição.
+  - `body` → Corpo da requisição.
+  - `query` → Parâmetros da query string.
+
+  #### Exemplos de Uso:
+
+  ```javascript
+  if (request.method === "get") {}
   
-##  **Apresentamos o WhatsApp Flows**
-## Uma solução extraordinária para transformar a experiência de atendimento no WhatsApp!
-
-- **Interação Inteligente:** Envie formulários dinâmicos e integrados em uma única mensagem, proporcionando uma jornada de usuário fluída, rápida e intuitiva.
-
-- **Flexibilidade Total:**
-  - **Flows Estáticos:** Oferecem uma experiência completa sem a necessidade de integração externa, garantindo agilidade e simplicidade.
-  - **Flows Dinâmicos:** Interagem com sistemas externos para fornecer respostas personalizadas e contextuais, elevando o nível de atendimento ao cliente.
-
-- **Benefícios Exclusivos:**
-  - Eliminam a fragmentação na comunicação e reduzem o número de mensagens enviadas.
-  - Aumentam a eficiência do atendimento e melhoram a satisfação do cliente com uma interface moderna e responsiva.
-
-- **Documentação Oficial:** Baseada na tecnologia da Meta, com total conformidade e robustez. Confira os detalhes na [documentação oficial do WhatsApp Flows](https://developers.facebook.com/docs/whatsapp/flows/).
-
-
-## "WhatsApp Flows no Invenio Center"
-
-
-## Tipos de Flows
-
-Existem dois tipos principais de flows no WhatsApp:
-
-1.  **Flows Estáticos:**
-    - Funcionam sem a necessidade de interação com sistemas externos.
-2.  **Flows Dinâmicos:**
-    - Interagem com sistemas externos através de endpoints para oferecer respostas personalizadas.
-![Flows](https://robbublob.blob.core.windows.net/docs/changelog/flows.png)
-**Observação:** O WhatsApp Flows foi desenvolvido para proporcionar uma experiência otimizada em dispositivos móveis. 
-A ausência de suporte para a versão web reflete uma escolha de design da Meta e não uma limitação da funcionalidade.
-
-## Acessando e Criando Flows no Invenio Center
-
-Para acessar e criar flows no Invenio Center, siga os passos abaixo:
-
-1.  No Invenio, os flows estão disponíveis em: `Canais > WhatsApp > Waba > Flows`.
-![Canais flows](https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png)
-2.  Selecione a WABA desejada.
-![Waba](https://robbublob.blob.core.windows.net/docs/changelog/waba.png)
-3.  Escolha a opção "Flows".
-  ![Opção Flows](https://robbublob.blob.core.windows.net/docs/changelog/opcaoflows.png)
-4.  Visualize a lista de flows existentes.
-![Listar Flows](https://robbublob.blob.core.windows.net/docs/changelog/listaflows.png)
-5.  Para criar um novo flow, clique em "+ Criar flow".
-![Criar Flows](https://robbublob.blob.core.windows.net/docs/changelog/criarflows.png)
-6.  Na tela de criação, você precisará fornecer:
-![Nome Flows](https://robbublob.blob.core.windows.net/docs/changelog/nomeflows.png)
-    - Nome do flow
-    - Categorias
-    - Tipo do flow (dinâmico ou estático)
-        - Se o flow for dinâmico, será necessário vincular um endpoint:
-            - Endpoint externo (do cliente, por exemplo)
-            - Endpoint interno (customizado cadastrado no Invenio)
-![flow dinamico](https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico.png)
-![flow dinamico](https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico1.png)
-![flow dinamico](https://robbublob.blob.core.windows.net/docs/changelog/flowdinamico2.png)
-
-Uma vez criado um flow você pode editá-lo e deixá-lo conforme a preferência do negócio (o céu é o limite).
-![flow dinamico](https://robbublob.blob.core.windows.net/docs/changelog/helloflow.png)
-
-Após criado, um flow pode ser editado, deletado ou publicado (a publicação ocorre na API da Meta).
-
-**Endpoints:**
-
-# Endpoints em JavaScript
-
-Os endpoints programados utilizando **JavaScript** possuem algumas funcionalidades que precisam ser respeitadas para que funcionem corretamente.
-
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints.png)
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints1.png)
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints2.png)
-
-Para criar um endpoint basta clicar em “+ Criar endpoint”, após isso, será exigida uma descrição para o endpoint.
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints3.png)
-
-Após a criação, uma tela com o código do endpoint será aberta, permitindo que você programe em JavaScript. Por exemplo, é possível implementar a validação de um CPF.
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints4.png)
-Após atualizar o endpoint você já pode testá-los via Postman (veja o exemplo abaixo).
-![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints5.png)
-
-## Palavras Reservadas
-
-Os endpoints possuem algumas constantes e funções predefinidas que são fundamentais para seu funcionamento. Portanto, **não é possível criar novas constantes** com as seguintes palavras reservadas:
-
-- `logger`
-- `loggerHistory`
-- `response`
-- `request`
-
-Caso você tente definir uma constante com alguma dessas palavras reservadas, o seu endpoint **retornará erro**.
-
-## Limitações
-
-Os endpoints possuem as seguintes limitações:
-
-- **Tempo máximo de execução:** 10 segundos. Se ultrapassar esse limite, será exibido o erro:
-  ```json
-  {
-    "error": "The JavaScript code took more than 10 seconds to execute"
-  }
-  ```
-- **Obrigatoriedade de retorno:** É necessário sempre retornar algo no endpoint utilizando o método `response()`. Caso contrário, será exibido o erro:
-  ```json
-  {
-    "error": "Endpoint has no data returned"
-  }
+  if (request.headers.hasOwnProperty("server")) {}
+  
+  if (request.body.user.status === "active") {}
+  
+  if (request.query.user.q === "Nome") {}
   ```
 
-## Variáveis Globais
+  ## Métodos
 
-Por padrão, existem algumas variáveis essenciais para o funcionamento dos endpoints:
+  Existem alguns métodos fundamentais para o funcionamento de um endpoint:
 
-### `request`
+  ### `logger(data: any)`
 
-Variável que contém várias informações sobre a requisição, como:
+  Método utilizado para adicionar dados ao **logger** do request, útil no processo de debugging.
 
-- `method` → Método da requisição (GET, POST, etc.).
-- `headers` → Cabeçalhos da requisição.
-- `body` → Corpo da requisição.
-- `query` → Parâmetros da query string.
+  #### Exemplos:
 
-#### Exemplos de Uso:
-```javascript
-if (request.method === "get") {}
+  ```javascript
+  logger(request)
+  logger(request.body.user)
+  logger("Testando o log")
+  logger({data: request, tipo: "Chamada externa"})
+  ```
 
-if (request.headers.hasOwnProperty("server")) {}
+  ### `response(data: object, status: number = 200, success: boolean = true)`
 
-if (request.body.user.status === "active") {}
+  Método utilizado para **retornar a resposta do endpoint**.
 
-if (request.query.user.q === "Nome") {}
-```
+  #### Exemplos:
 
-## Métodos
+  ```javascript
+  // Retorna sucesso
+  return response({success: true})
+  
+  // Retorna erro
+  return response({error: true}, 400)
+  ```
 
-Existem alguns métodos fundamentais para o funcionamento de um endpoint:
+  ## Funcionalidades Extras
 
-### `logger(data: any)`
+  Além dos aspectos mencionados acima, os endpoints customizados contam com duas funcionalidades adicionais para facilitar a documentação e a organização do código.
 
-Método utilizado para adicionar dados ao **logger** do request, útil no processo de debugging.
+  ### Anotações nos Endpoints
 
-#### Exemplos:
-```javascript
-logger(request)
-logger(request.body.user)
-logger("Testando o log")
-logger({data: request, tipo: "Chamada externa"})
-```
+  - É possível adicionar **anotações** diretamente nos endpoints, servindo como documentação integrada.
+  - Para adicionar, basta clicar em **"Anotações"**, inserir as informações desejadas e salvar.
+  - Isso facilita o entendimento e o uso dos endpoints por toda a equipe <img src="https://robbublob.blob.core.windows.net/docs/changelog/anotacoesendpoint.png" alt="anotações" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/anotacoesendpoint1.png" alt="anotações" />
 
-### `response(data: object, status: number = 200, success: boolean = true)`
+  ### Bibliotecas Pré-definidas
 
-Método utilizado para **retornar a resposta do endpoint**.
-
-#### Exemplos:
-```javascript
-// Retorna sucesso
-return response({success: true})
-
-// Retorna erro
-return response({error: true}, 400)
-```
-
-## Funcionalidades Extras
-
-Além dos aspectos mencionados acima, os endpoints customizados contam com duas funcionalidades adicionais para facilitar a documentação e a organização do código.
-
-###  Anotações nos Endpoints
-
-- É possível adicionar **anotações** diretamente nos endpoints, servindo como documentação integrada.
-- Para adicionar, basta clicar em **"Anotações"**, inserir as informações desejadas e salvar.
-- Isso facilita o entendimento e o uso dos endpoints por toda a equipe 
-![anotações](https://robbublob.blob.core.windows.net/docs/changelog/anotacoesendpoint.png)
-![anotações](https://robbublob.blob.core.windows.net/docs/changelog/anotacoesendpoint1.png)
-### Bibliotecas Pré-definidas
-
-- A nova funcionalidade permite a **utilização de bibliotecas externas**, possibilitando a execução de códigos adicionais dentro dos endpoints.
-- Isso amplia as possibilidades de **integração e automação** de processos, tornando as implementações mais flexíveis e poderosas.
-![bibliotecas](https://robbublob.blob.core.windows.net/docs/changelog/bibliotecasendpoint.png)
-Essas melhorias tornam os endpoints customizados **mais organizados, eficientes e fáceis de manter**, garantindo uma melhor experiência para desenvolvedores e usuários da plataforma.
-![bibliotecas](https://robbublob.blob.core.windows.net/docs/changelog/atualizarendpoint.png)
+  - A nova funcionalidade permite a **utilização de bibliotecas externas**, possibilitando a execução de códigos adicionais dentro dos endpoints.
+  - Isso amplia as possibilidades de **integração e automação** de processos, tornando as implementações mais flexíveis e poderosas. <img src="https://robbublob.blob.core.windows.net/docs/changelog/bibliotecasendpoint.png" alt="bibliotecas" /> Essas melhorias tornam os endpoints customizados **mais organizados, eficientes e fáceis de manter**, garantindo uma melhor experiência para desenvolvedores e usuários da plataforma. <img src="https://robbublob.blob.core.windows.net/docs/changelog/atualizarendpoint.png" alt="bibliotecas" />
 </Update>
 
 <Update label="Setembro/Out 2024 - 2.0.77 2.0.78" description="Invenio Live e Center.">
+  ## - Atualização na Gestão de Imagens (Logos de Campanha) no WhatsApp API
 
-## - Atualização na Gestão de Imagens (Logos de Campanha) no WhatsApp API
+  Estamos entusiasmados em anunciar uma nova funcionalidade para facilitar a gestão da imagem (logos de campanha) de exibição dos números do WhatsApp API!
 
-Estamos entusiasmados em anunciar uma nova funcionalidade para facilitar a gestão da imagem (logos de campanha) 
-de exibição dos números do WhatsApp API!
+  ### O que mudou?
 
-### O que mudou?
+  Anteriormente, a troca de imagem só podia ser realizada na tela da Positus. Agora, com essa atualização, a mudança pode ser feita diretamente no **Invenio Center**, tornando o processo mais simples e acessível para os administradores.
 
-Anteriormente, a troca de imagem só podia ser realizada na tela da Positus. Agora, com essa atualização, a 
-mudança pode ser feita diretamente no **Invenio Center**, tornando o processo mais simples e acessível para os administradores.
+  ### Benefícios da Atualização
 
-### Benefícios da Atualização
-- **Mais praticidade:** Agora, a gestão da imagem pode ser feita de forma direta no Invenio Center.
-- **Maior agilidade:** Como a alteração não requer aprovação por parte do **META**, o processo se torna mais rápido.
-- **Facilidade na personalização:** Mantenha a identidade visual do seu negócio sempre atualizada com menos esforço.
+  - **Mais praticidade:** Agora, a gestão da imagem pode ser feita de forma direta no Invenio Center.
+  - **Maior agilidade:** Como a alteração não requer aprovação por parte do **META**, o processo se torna mais rápido.
+  - **Facilidade na personalização:** Mantenha a identidade visual do seu negócio sempre atualizada com menos esforço.
 
-### Observação Importante
-- A alteração da imagem **só pode ser feita um número por vez**.
-- No momento, **não é possível realizar a operação por lote**.
+  ### Observação Importante
 
+  - A alteração da imagem **só pode ser feita um número por vez**.
+  - No momento, **não é possível realizar a operação por lote**.
 
-##  😎 Alterando a Imagem de Perfil do WhatsApp no Invenio Center
+  ## 😎 Alterando a Imagem de Perfil do WhatsApp no Invenio Center
 
-## Passo a Passo para Alterar a Imagem de Perfil
+  ## Passo a Passo para Alterar a Imagem de Perfil
 
-Siga os passos abaixo para alterar a imagem de perfil da sua conta WhatsApp no Invenio Center:
+  Siga os passos abaixo para alterar a imagem de perfil da sua conta WhatsApp no Invenio Center:
 
-1.  **Acesse o menu Canais:**
-    * No Invenio Center, procure pelo grupo "Recursos" e clique no menu "Canais".
-![Canais](https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png)
-2.  **Selecione WhatsApp:**
-    * Em seguida, clique na opção "WhatsApp" (conforme imagem abaixo).
-![Canais](https://robbublob.blob.core.windows.net/docs/changelog/imgwapp.png)
-3.  **Escolha a conta WhatsApp:**
-    * Selecione a conta WhatsApp que deseja alterar a imagem (logo).
-![Canais](https://robbublob.blob.core.windows.net/docs/changelog/contaswapp.png)
-4.  **Acesse a seção Números:**
-    * Clique em "Números".
-![Canais](https://robbublob.blob.core.windows.net/docs/changelog/numeros.png)
-5.  **Edite o perfil do número:**
-    * Escolha o número que deseja alterar a imagem através da opção "Editar perfil".
-![Perfil Numero](https://robbublob.blob.core.windows.net/docs/changelog/perfilnum.png)
-6.  **Selecione e salve a imagem:**
-    * Selecione o arquivo desejado clicando em `<Selecionar arquivo>`.
-    * Após preencher os campos obrigatórios ("Sobre" e "Segmento") e os demais que desejar configurar, clique em `<Salvar>`.
+  1. **Acesse o menu Canais:**
+     - No Invenio Center, procure pelo grupo "Recursos" e clique no menu "Canais". <img src="https://robbublob.blob.core.windows.net/docs/changelog/canaiswapp.png" alt="Canais" />
+  2. **Selecione WhatsApp:**
+     - Em seguida, clique na opção "WhatsApp" (conforme imagem abaixo). <img src="https://robbublob.blob.core.windows.net/docs/changelog/imgwapp.png" alt="Canais" />
+  3. **Escolha a conta WhatsApp:**
+     - Selecione a conta WhatsApp que deseja alterar a imagem (logo). <img src="https://robbublob.blob.core.windows.net/docs/changelog/contaswapp.png" alt="Canais" />
+  4. **Acesse a seção Números:**
+     - Clique em "Números". <img src="https://robbublob.blob.core.windows.net/docs/changelog/numeros.png" alt="Canais" />
+  5. **Edite o perfil do número:**
+     - Escolha o número que deseja alterar a imagem através da opção "Editar perfil". <img src="https://robbublob.blob.core.windows.net/docs/changelog/perfilnum.png" alt="Perfil Numero" />
+  6. **Selecione e salve a imagem:**
+     - Selecione o arquivo desejado clicando em `<Selecionar arquivo>`.
+     - Após preencher os campos obrigatórios ("Sobre" e "Segmento") e os demais que desejar configurar, clique em `<Salvar>`.
 
+  ## Observação Importante
 
-## Observação Importante
+  - O tamanho máximo da imagem é de 640x640 pixels. <img src="https://robbublob.blob.core.windows.net/docs/changelog/imgtam.png" alt="Tamanho" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/imgtam1.png" alt="Tamanho" />
 
-* O tamanho máximo da imagem é de 640x640 pixels.
-![Tamanho](https://robbublob.blob.core.windows.net/docs/changelog/imgtam.png)
-![Tamanho](https://robbublob.blob.core.windows.net/docs/changelog/imgtam1.png)
-## 😎 Novos Filtros de Usuários no Invenio Center
+  ## 😎 Novos Filtros de Usuários no Invenio Center
 
-Agora, a tela de lista de usuários conta com novos filtros para uma pesquisa mais precisa e eficiente. Com essas melhorias, você pode:
+  Agora, a tela de lista de usuários conta com novos filtros para uma pesquisa mais precisa e eficiente. Com essas melhorias, você pode:
 
-- Filtrar usuários por **status** (ativos, inativos ou deletados);
-- Filtrar por **usuários com ramal**;
-- Filtrar por **segmentos vinculados**;
+  - Filtrar usuários por **status** (ativos, inativos ou deletados);
+  - Filtrar por **usuários com ramal**;
+  - Filtrar por **segmentos vinculados**;
 
-Esses novos filtros tornam a gestão de usuários mais ágil e organizada! 🚀
-![Filtro usuário](https://robbublob.blob.core.windows.net/docs/changelog/filtrousu.png)
+  Esses novos filtros tornam a gestão de usuários mais ágil e organizada! 🚀 <img src="https://robbublob.blob.core.windows.net/docs/changelog/filtrousu.png" alt="Filtro usuário" />
 
----
+  ---
 
-## PIX Copia e Cola no Invenio Center
+  ## PIX Copia e Cola no Invenio Center
 
-Facilitamos ainda mais o envio de pagamentos! Agora, os clientes podem enviar o **código PIX Copia e Cola** diretamente pela **IDR**, permitindo:
+  Facilitamos ainda mais o envio de pagamentos! Agora, os clientes podem enviar o **código PIX Copia e Cola** diretamente pela **IDR**, permitindo:
 
-- Geração fácil do código PIX;
-- Compartilhamento rápido pelo WhatsApp;
-- Pagamentos mais ágeis e eficientes com apenas um clique.
+  - Geração fácil do código PIX;
+  - Compartilhamento rápido pelo WhatsApp;
+  - Pagamentos mais ágeis e eficientes com apenas um clique.
 
-Essa funcionalidade melhora a experiência do cliente final, garantindo transações mais simples e fluidas. 💰✨
+  Essa funcionalidade melhora a experiência do cliente final, garantindo transações mais simples e fluidas. 💰✨
 
-### Como Configurar:
-![PIX](https://robbublob.blob.core.windows.net/docs/changelog/pix.png)
-1. Informar a condição;
-![PIX](https://robbublob.blob.core.windows.net/docs/changelog/condicao.png)
-2. Incluir nova ação (**Enviar botão de pagamento no WhatsApp**);
-![PIX](https://robbublob.blob.core.windows.net/docs/changelog/incluiracao.png)
-3. Incluir a nova ação e clicar em **Criar**
-![PIX](https://robbublob.blob.core.windows.net/docs/changelog/novaacao.png)
+  ### Como Configurar:
+
+  ![PIX](https://robbublob.blob.core.windows.net/docs/changelog/pix.png)
+
+  1. Informar a condição; <img src="https://robbublob.blob.core.windows.net/docs/changelog/condicao.png" alt="PIX" />
+  2. Incluir nova ação (**Enviar botão de pagamento no WhatsApp**); <img src="https://robbublob.blob.core.windows.net/docs/changelog/incluiracao.png" alt="PIX" />
+  3. Incluir a nova ação e clicar em **Criar** <img src="https://robbublob.blob.core.windows.net/docs/changelog/novaacao.png" alt="PIX" />
 </Update>
 
 <Update label="Agosto 2024 - 2.0.76" description="Invenio Live e Center.">
+  ## Nova Funcionalidade: Controle de Canais no Live
 
-## Nova Funcionalidade: Controle de Canais no Live
+  Estamos muito felizes em anunciar uma atualização que traz mais controle e flexibilidade para o gerenciamento de comunicações no **Live**!
 
-Estamos muito felizes em anunciar uma atualização que traz mais controle e flexibilidade para o gerenciamento de comunicações no **Live**!
+  ### O que há de novo?
 
-###  O que há de novo?
-Agora, ao configurar o cadastro de usuários no **Center**, os administradores podem definir com facilidade quais canais de comunicação os usuários estão autorizados a utilizar. Isso inclui:
+  Agora, ao configurar o cadastro de usuários no **Center**, os administradores podem definir com facilidade quais canais de comunicação os usuários estão autorizados a utilizar. Isso inclui:
 
-- **WhatsApp**
-- **E-mail**
-- **Outros canais disponíveis**
+  - **WhatsApp**
+  - **E-mail**
+  - **Outros canais disponíveis**
 
-###  Restrição de Acesso a Canais
-Caso um usuário tente acessar um canal não permitido no **Live**, ele receberá um **alerta** informando que não possui permissão para enviar mensagens por aquele canal.
+  ### Restrição de Acesso a Canais
 
-###  Benefícios da Nova Funcionalidade
-- **Mais controle** sobre as interações realizadas pelos usuários.
-- **Cumprimento das regras de comunicação** definidas pela empresa.
-- **Experiência mais organizada e segura** para administradores e operadores.
+  Caso um usuário tente acessar um canal não permitido no **Live**, ele receberá um **alerta** informando que não possui permissão para enviar mensagens por aquele canal.
 
-Essa nova feature oferece um **controle mais preciso e eficiente** sobre as interações, garantindo que as regras de comunicação sejam seguidas conforme as configurações estabelecidas.
+  ### Benefícios da Nova Funcionalidade
 
-## Restrições de Canais de Mensagens no Invenio Center
+  - **Mais controle** sobre as interações realizadas pelos usuários.
+  - **Cumprimento das regras de comunicação** definidas pela empresa.
+  - **Experiência mais organizada e segura** para administradores e operadores.
 
-1. No **Invenio Center**, ao **criar** ou **editar** um usuário.
-![Criar usuário](https://robbublob.blob.core.windows.net/docs/changelog/criarusu.png)
-2. No formulário, agora há a opção **Restrições de Canais de Mensagens** dentro do grupo **Canais Restritos** (Chat, E-mail, Facebook, Instagram, SMS, Telegram, Viber, Voz, WhatsApp). Se marcados, esses canais ficarão bloqueados para envio de mensagens.
-![Canais restritos](https://robbublob.blob.core.windows.net/docs/changelog/canaisrestrit.png)
-3. No **Live**, caso um usuário tente enviar uma mensagem por um canal restrito (exemplo: WhatsApp), ele receberá um **alerta de restrição**.
-![Sem permissão](https://robbublob.blob.core.windows.net/docs/changelog/sempermiss.png)
----
+  Essa nova feature oferece um **controle mais preciso e eficiente** sobre as interações, garantindo que as regras de comunicação sejam seguidas conforme as configurações estabelecidas.
 
-##  NOVO! Configure limites no envio de HSMs
+  ## Restrições de Canais de Mensagens no Invenio Center
 
-Estamos animados em compartilhar uma nova funcionalidade que trará ainda mais **controle e eficiência** para suas operações! Agora, os administradores podem **configurar limites no envio de HSMs** (mensagens), garantindo que um número específico de mensagens seja enviado dentro de um determinado período.
+  1. No **Invenio Center**, ao **criar** ou **editar** um usuário. <img src="https://robbublob.blob.core.windows.net/docs/changelog/criarusu.png" alt="Criar usuário" />
+  2. No formulário, agora há a opção **Restrições de Canais de Mensagens** dentro do grupo **Canais Restritos** (Chat, E-mail, Facebook, Instagram, SMS, Telegram, Viber, Voz, WhatsApp). Se marcados, esses canais ficarão bloqueados para envio de mensagens. <img src="https://robbublob.blob.core.windows.net/docs/changelog/canaisrestrit.png" alt="Canais restritos" />
+  3. No **Live**, caso um usuário tente enviar uma mensagem por um canal restrito (exemplo: WhatsApp), ele receberá um **alerta de restrição**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/sempermiss.png" alt="Sem permissão" />
 
-###  Benefícios da funcionalidade:
-- **Maior controle:** Evite o envio excessivo de mensagens.
-- **Personalização:** Configure regras específicas conforme a necessidade da empresa.
-- **Conformidade:** Mantenha a comunicação dentro dos padrões definidos.
+  ---
 
-###  Como configurar limites de envio de HSMs:
-1. Acesse **Configurações > Conta > Configurações de limite de envio de HSM**.
-2. Vá para **Conta > Gerenciar**.
-3. Defina a **quantidade máxima de HSMs** permitida.
-4. Configure o **tempo em minutos** para limitar o envio.
-![configurações Gerenciar](https://robbublob.blob.core.windows.net/docs/changelog/configgerencial.png)
-![Limite HSM](https://robbublob.blob.core.windows.net/docs/changelog/limitehsm.png)
-### Exemplo de configuração:
-Você pode definir que seja permitido o envio de apenas **1 HSM a cada 1440 minutos** (o equivalente a **1 mensagem por dia**).
+  ## NOVO! Configure limites no envio de HSMs
 
-Essa novidade proporciona uma **gestão mais rigorosa e eficiente**, garantindo que as mensagens sejam enviadas dentro dos critérios estabelecidos!
+  Estamos animados em compartilhar uma nova funcionalidade que trará ainda mais **controle e eficiência** para suas operações! Agora, os administradores podem **configurar limites no envio de HSMs** (mensagens), garantindo que um número específico de mensagens seja enviado dentro de um determinado período.
 
+  ### Benefícios da funcionalidade:
+
+  - **Maior controle:** Evite o envio excessivo de mensagens.
+  - **Personalização:** Configure regras específicas conforme a necessidade da empresa.
+  - **Conformidade:** Mantenha a comunicação dentro dos padrões definidos.
+
+  ### Como configurar limites de envio de HSMs:
+
+  1. Acesse **Configurações \> Conta \> Configurações de limite de envio de HSM**.
+  2. Vá para **Conta \> Gerenciar**.
+  3. Defina a **quantidade máxima de HSMs** permitida.
+  4. Configure o **tempo em minutos** para limitar o envio. <img src="https://robbublob.blob.core.windows.net/docs/changelog/configgerencial.png" alt="configurações Gerenciar" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/limitehsm.png" alt="Limite HSM" />
+
+  ### Exemplo de configuração:
+
+  Você pode definir que seja permitido o envio de apenas **1 HSM a cada 1440 minutos** (o equivalente a **1 mensagem por dia**).
+
+  Essa novidade proporciona uma **gestão mais rigorosa e eficiente**, garantindo que as mensagens sejam enviadas dentro dos critérios estabelecidos!
 </Update>
 
 <Update label="Julho 2024 - 2.0.74" description="Invenio Live e Center.">
+  ## Integração com GMail no Invenio.
 
-##  Integração com GMail no Invenio.
+  Implementamos a funcionalidade de conexão com o Google no nosso sistema de integração de e-mails, permitindo o envio e recebimento de mensagens. A integração padrão via IMAP/POP do Google foi descontinuada. Portanto, a partir de agora, as caixas de e-mail via Google/Gmail precisarão ser conectadas através do botão **Conectar com o Google**.
 
-Implementamos a funcionalidade de conexão com o Google no nosso sistema de integração de e-mails, permitindo o envio e recebimento de mensagens. A integração padrão via IMAP/POP do Google foi descontinuada. Portanto, a partir de agora, as caixas de e-mail via Google/Gmail precisarão ser conectadas através do botão **Conectar com o Google**.
+  ### Importante:
 
-### Importante:
-- A mensagem só irá aparecer no Invenio Live caso não tenha sido lida na caixa postal do GMail.
-- Agora, além da opção de integração com a Microsoft, os usuários também podem conectar suas contas via Autenticação do Gmail.
-- Essa atualização aumenta a segurança do sistema, oferecendo mais fatores de autenticação para proteger as contas dos usuários.
+  - A mensagem só irá aparecer no Invenio Live caso não tenha sido lida na caixa postal do GMail.
+  - Agora, além da opção de integração com a Microsoft, os usuários também podem conectar suas contas via Autenticação do Gmail.
+  - Essa atualização aumenta a segurança do sistema, oferecendo mais fatores de autenticação para proteger as contas dos usuários.
 
-### Como configurar:
-1. No **Invenio Center**, acesse **Recursos** > **Canais** > **E-mail**.
-![Email](https://robbublob.blob.core.windows.net/docs/changelog/gmail.png)
-2. Clique em **+Adicionar E-mail**.
-![Email g](https://robbublob.blob.core.windows.net/docs/changelog/addemail.png)
-3. Em seguida, clique em **Conectar com o Google**.
-![google](https://robbublob.blob.core.windows.net/docs/changelog/addemail1.png)
-4. Após concluir a conexão, clique em **Criar**.
-![Criar](https://robbublob.blob.core.windows.net/docs/changelog/addconta.png)
-![email ok](https://robbublob.blob.core.windows.net/docs/changelog/emailok.png)
-![ok edit](https://robbublob.blob.core.windows.net/docs/changelog/emailokedit.png)
-**Importante:** Conectar com o Google não necessita de configurações adicionais como tipo de conta ou configurações SMTP.
+  ### Como configurar:
 
-##  Nova Funcionalidade: Frases Prontas no Invenio Center
-Essa funcionalidade, frequentemente solicitada por diversos clientes, será agora integrada ao Invenio Center. Perfis de **administrador e supervisor** terão a capacidade de adicionar frases prontas para uso em suas operações, facilitando a padronização e a eficiência no atendimento.
+  1. No **Invenio Center**, acesse **Recursos** \> **Canais** \> **E-mail**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/gmail.png" alt="Email" />
+  2. Clique em **\+Adicionar E-mail**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/addemail.png" alt="Email g" />
+  3. Em seguida, clique em **Conectar com o Google**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/addemail1.png" alt="google" />
+  4. Após concluir a conexão, clique em **Criar**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/addconta.png" alt="Criar" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/emailok.png" alt="email ok" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/emailokedit.png" alt="ok edit" /> **Importante:** Conectar com o Google não necessita de configurações adicionais como tipo de conta ou configurações SMTP.
 
-### Como configurar:
-1. Acesse o [Invenio Center](https://inveniocenter.robbu.global/painel/) e no menu **Recursos**, clique na opção **Frases**.
-![frases](https://robbublob.blob.core.windows.net/docs/changelog/frases.png)
-2. Você será levado até a tela de **Cadastro de frases**.
-![Lcad frase](https://robbublob.blob.core.windows.net/docs/changelog/cadfrase.png)
-3. Clique em **Adicionar frases** e insira um identificador e a mensagem desejada.
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/addfrase.png)
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/fraseok.png)
+  ## Nova Funcionalidade: Frases Prontas no Invenio Center
+
+  Essa funcionalidade, frequentemente solicitada por diversos clientes, será agora integrada ao Invenio Center. Perfis de **administrador e supervisor** terão a capacidade de adicionar frases prontas para uso em suas operações, facilitando a padronização e a eficiência no atendimento.
+
+  ### Como configurar:
+
+  1. Acesse o [Invenio Center](https://inveniocenter.robbu.global/painel/) e no menu **Recursos**, clique na opção **Frases**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/frases.png" alt="frases" />
+  2. Você será levado até a tela de **Cadastro de frases**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/cadfrase.png" alt="Lcad frase" />
+  3. Clique em **Adicionar frases** e insira um identificador e a mensagem desejada. <img src="https://robbublob.blob.core.windows.net/docs/changelog/addfrase.png" alt="add frase" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/fraseok.png" alt="add frase" />
 </Update>
 
 <Update label="Junho 2024 - 2.0.73" description="Invenio Live e Center.">
+  ## Compra de número para WhatsApp
 
-##  Compra de número para WhatsApp
+  Estamos entusiasmados em apresentar uma nova funcionalidade que vai transformar a maneira como você ativa contas de WhatsApp. Agora é possível comprar números de telefone de forma rápida e simples diretamente pelo nosso sistema!
 
-Estamos entusiasmados em apresentar uma nova funcionalidade que vai transformar a maneira como você ativa contas de WhatsApp. Agora é possível comprar números de telefone de forma rápida e simples diretamente pelo nosso sistema!
+  ### Como comprar um número:
 
-### Como comprar um número:
-1. Acesse o menu **Recursos > Canais > Voz**;
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/compranum.png)
-2. Na opção **Números**, você terá acesso a uma lista de números disponíveis para compra;
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/compranum1.png)
-3. Clique em **+ Adicionar** para ver a lista de números disponíveis;
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/addnum.png)
-4. Após selecionar um número, basta adicionar e consultar seu gerente de contas para a contratação do canal de voz;
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/consultanum.png)
-5. Associe o número escolhido a um agente (**tipo atendente**). Certifique-se de que o **Canal de Voz** está habilitado no perfil do agente.
-![add frase](https://robbublob.blob.core.windows.net/docs/changelog/tpvoz.png)
+  1. Acesse o menu **Recursos \> Canais \> Voz**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/compranum.png" alt="add frase" />
+  2. Na opção **Números**, você terá acesso a uma lista de números disponíveis para compra; <img src="https://robbublob.blob.core.windows.net/docs/changelog/compranum1.png" alt="add frase" />
+  3. Clique em **\+ Adicionar** para ver a lista de números disponíveis; <img src="https://robbublob.blob.core.windows.net/docs/changelog/addnum.png" alt="add frase" />
+  4. Após selecionar um número, basta adicionar e consultar seu gerente de contas para a contratação do canal de voz; <img src="https://robbublob.blob.core.windows.net/docs/changelog/consultanum.png" alt="add frase" />
+  5. Associe o número escolhido a um agente (**tipo atendente**). Certifique-se de que o **Canal de Voz** está habilitado no perfil do agente. <img src="https://robbublob.blob.core.windows.net/docs/changelog/tpvoz.png" alt="add frase" />
 
-Com essa atualização, você pode adquirir números de telefone para ativação de contas de WhatsApp com apenas alguns cliques, garantindo maior escalabilidade para suas operações.
+  Com essa atualização, você pode adquirir números de telefone para ativação de contas de WhatsApp com apenas alguns cliques, garantindo maior escalabilidade para suas operações.
 
----
+  ---
 
-##  Novo JOB de Notificação
+  ## Novo JOB de Notificação
 
-- Implementamos uma nova estrutura de **Card**, reativando o serviço e otimizando o gerenciamento de notificações.
-- **Atualização da documentação de Webhook:** agora inclui novas informações retornadas.
-  - Acesse a documentação atualizada: [Documentação Webhook](https://robbu.global/docs/webhook-invenio/)
+  - Implementamos uma nova estrutura de **Card**, reativando o serviço e otimizando o gerenciamento de notificações.
+  - **Atualização da documentação de Webhook:** agora inclui novas informações retornadas.
+    - Acesse a documentação atualizada: [Documentação Webhook](https://robbu.global/docs/webhook-invenio/)
 
----
+  ---
 
-##  Nova Feature no Módulo de Criação de Templates
+  ## Nova Feature no Módulo de Criação de Templates
 
-Agora é possível criar **templates para carrosséis de produtos**, tanto para marketing quanto para utilidades. Cada carrossel pode conter **até 10 cards**, cada um com descrição, imagem e pelo menos um botão do mesmo tipo.
+  Agora é possível criar **templates para carrosséis de produtos**, tanto para marketing quanto para utilidades. Cada carrossel pode conter **até 10 cards**, cada um com descrição, imagem e pelo menos um botão do mesmo tipo.
 
-### Como criar um template de carrossel:
-1. Acesse **Recursos > Canais > WhatsApp**;
-![carrosel](https://robbublob.blob.core.windows.net/docs/changelog/imgwapp.png)
-2. Selecione uma conta e clique em **Templates**;
-![tempaltes](https://robbublob.blob.core.windows.net/docs/changelog/contaswapp.png)
-3. Clique em **+ Criar Template**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/templates.png)
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/criartemplate.png)
-4. Escolha a categoria: **Marketing** ou **Utilidades**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/tipotemplate.png)
-5. Selecione a opção **Carrossel**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/carrosel.png)
-6. Configure os **cards**:
-   - Adicione até 10 cards ao carrossel;
-   - Para cada card, insira uma descrição e uma imagem (cabeçalho);
-   - Adicione pelo menos um botão por card (todos devem ser do mesmo tipo);
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/configcards.png)  
-7. Revise todas as configurações e **salve o template**.
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/addbotoes.png)
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/criartemplate1.png)
+  ### Como criar um template de carrossel:
 
-### Criando uma campanha com carrossel:
-1. Acesse **Converter > Campanhas**;
+  1. Acesse **Recursos \> Canais \> WhatsApp**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/imgwapp.png" alt="carrosel" />
+  2. Selecione uma conta e clique em **Templates**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/contaswapp.png" alt="tempaltes" />
+  3. Clique em **\+ Criar Template**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/templates.png" alt="templates" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/criartemplate.png" alt="templates" />
+  4. Escolha a categoria: **Marketing** ou **Utilidades**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/tipotemplate.png" alt="templates" />
+  5. Selecione a opção **Carrossel**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/carrosel.png" alt="templates" />
+  6. Configure os **cards**:
+     - Adicione até 10 cards ao carrossel;
+     - Para cada card, insira uma descrição e uma imagem (cabeçalho);
+     - Adicione pelo menos um botão por card (todos devem ser do mesmo tipo); <img src="https://robbublob.blob.core.windows.net/docs/changelog/configcards.png" alt="templates" />
+  7. Revise todas as configurações e **salve o template**. <img src="https://robbublob.blob.core.windows.net/docs/changelog/addbotoes.png" alt="templates" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/criartemplate1.png" alt="templates" />
 
-2. Clique em **+ Criar Campanha**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/campcarrosel.png)
-3. Defina:
-   - Nome da campanha;
-   - Segmento e público;
-   - Início e horário;
-   - Fluxo de envio (%);
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/nomecamp.png)
-4. Em **Contatos de atendimento**, marque **Remover (recomendado)**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/contatoatend.png)
-5. Selecione o **número do WhatsApp** que deseja usar;
-6. Escolha o **template** desejado;
-7. Configure as **variáveis**, se necessário;
-8. Clique em **Criar**.
+  ### Criando uma campanha com carrossel:
 
-**📝 Importante:**
-- Informe as variáveis quando utilizar mídia (imagem, vídeo, PDF...);
-- Vincule o número correto à campanha e ao template escolhido.
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/editartemplate.png)
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/vincularnum.png)
-Após escolher o numero com a template selecionada. Agora é só clicar em *Criar*
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/vincularnum1.png)
----
+  1. Acesse **Converter \> Campanhas**;
+  2. Clique em **\+ Criar Campanha**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/campcarrosel.png" alt="templates" />
+  3. Defina:
+     - Nome da campanha;
+     - Segmento e público;
+     - Início e horário;
+     - Fluxo de envio (%); <img src="https://robbublob.blob.core.windows.net/docs/changelog/nomecamp.png" alt="templates" />
+  4. Em **Contatos de atendimento**, marque **Remover (recomendado)**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/contatoatend.png" alt="templates" />
+  5. Selecione o **número do WhatsApp** que deseja usar;
+  6. Escolha o **template** desejado;
+  7. Configure as **variáveis**, se necessário;
+  8. Clique em **Criar**.
 
-##  Editor de Templates de E-mail com Suporte a HTML
+  **📝 Importante:**
 
-Agora é possível colar **código HTML puro** diretamente no editor de templates de e-mail!
+  - Informe as variáveis quando utilizar mídia (imagem, vídeo, PDF...);
+  - Vincule o número correto à campanha e ao template escolhido. <img src="https://robbublob.blob.core.windows.net/docs/changelog/editartemplate.png" alt="templates" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/vincularnum.png" alt="templates" /> Após escolher o numero com a template selecionada. Agora é só clicar em _Criar_ <img src="https://robbublob.blob.core.windows.net/docs/changelog/vincularnum1.png" alt="templates" />
 
-### Benefícios:
-- Flexibilidade total para criar layouts personalizados;
-- Integração de elementos interativos;
-- Melhor alinhamento com a identidade visual da sua marca.
+  ---
 
-### Como usar:
-1. Acesse **Converter > Campanhas**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/campemail.png)
-2. Clique em **Campanhas de E-mail** > **Templates**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/templateemail.png)
-3. Clique em **+ Criar Template**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/addtemplate.png)
-4. Escolha o tipo **HTML Direto**;
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/htmldireto.png)
-5. Insira seu código HTML e as configurações desejadas.
-![templates](https://robbublob.blob.core.windows.net/docs/changelog/htmlconfig.png)
-Com essa melhoria, você tem **controle total** sobre o design dos seus e-mails, garantindo uma comunicação mais eficaz e profissional.
+  ## Editor de Templates de E-mail com Suporte a HTML
 
----
+  Agora é possível colar **código HTML puro** diretamente no editor de templates de e-mail!
 
+  ### Benefícios:
+
+  - Flexibilidade total para criar layouts personalizados;
+  - Integração de elementos interativos;
+  - Melhor alinhamento com a identidade visual da sua marca.
+
+  ### Como usar:
+
+  1. Acesse **Converter \> Campanhas**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/campemail.png" alt="templates" />
+  2. Clique em **Campanhas de E-mail** \> **Templates**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/templateemail.png" alt="templates" />
+  3. Clique em **\+ Criar Template**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/addtemplate.png" alt="templates" />
+  4. Escolha o tipo **HTML Direto**; <img src="https://robbublob.blob.core.windows.net/docs/changelog/htmldireto.png" alt="templates" />
+  5. Insira seu código HTML e as configurações desejadas. <img src="https://robbublob.blob.core.windows.net/docs/changelog/htmlconfig.png" alt="templates" /> Com essa melhoria, você tem **controle total** sobre o design dos seus e-mails, garantindo uma comunicação mais eficaz e profissional.
+
+  ---
 </Update>
