@@ -130,7 +130,7 @@ Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se n
 O layout padrão do arquivo de importação possuí as seguintes colunas: 
 
 ```csv
-TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, SEGMENTO, CPF_CNPJ, COD_CONTRATO, REMETENTE, DATA_HORA_DISPARO, NOME_CLIENTE, NOME_ARQUIVO_ANEXO, OBS1, OBS2, OBS3, OBS4, BROKER_REFERENCE, Var1, Var2, Var3
+TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, CODIGO_TEMPLATE_EXTERNO, SEGMENTO, CPF_CNPJ, COD_CONTRATO, REMETENTE, DATA_HORA_DISPARO, NOME_CLIENTE, NOME_ARQUIVO_ANEXO, OBS1, OBS2, OBS3, OBS4, BROKER_REFERENCE, Var1, Var2, Var3
 ```
 
 Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
@@ -148,6 +148,9 @@ Você também pode fazer o download do arquivo modelo de importação mais atual
 
 * **CODIGO_TEMPLATE \[OBRIGATÓRIO]**:
   * Código do template que será utilizado.
+
+* **CODIGO_TEMPLATE_EXTERNO \[OBRIGATÓRIO]**:
+  * Código externo do template que será utilizado.
 
 * **SEGMENTO \[OBRIGATÓRIO]**:
   * Segmento associado à campanha.
@@ -215,6 +218,23 @@ Essas variáveis podem ser utilizadas no template:
 - As colunas `OBS1` a `OBS4` são apenas informativas
 - O campo `BROKER_REFERENCE` é opcional
 - Todas as colunas após `BROKER_REFERENCE` são tratadas como variáveis dinâmicas
+
+### Código do Template Externo (CODIGO_TEMPLATE_EXTERNO)
+
+Foi adicionada a coluna `CODIGO_TEMPLATE_EXTERNO` para permitir a integração com sistemas externos de validação de templates.
+
+#### Como funciona
+- Representa um identificador externo do template
+- Pode ser utilizado como alternativa ao `CODIGO_TEMPLATE`
+- O sistema prioriza o código externo quando informado
+
+#### Regras
+- Pelo menos um dos campos deve ser informado:
+  - `CODIGO_TEMPLATE`
+  - `CODIGO_TEMPLATE_EXTERNO`
+- Se ambos estiverem vazios → erro
+- Se o código externo não for encontrado → procura pelo código template do Maestro
+- Se nenhum for encontrado → erro
 
 ---
 
