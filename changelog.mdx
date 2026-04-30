@@ -242,6 +242,40 @@ mode: "center"
 
   - O bloco do arquivo aparece normalmente na timeline.
   - O nome do arquivo é substituído por:
+
+
+## Envio de Mensagens de Marketing (MM Lite API)
+
+### Visão Geral
+
+A Meta implementou um novo modelo para envio de mensagens de marketing no WhatsApp, chamado Marketing Messages Lite API (MM Lite API).
+
+Essa mudança é obrigatória para empresas que utilizam contas no modelo WABA incorporada (Partner-initiated).
+
+Para garantir a continuidade dos envios, a plataforma foi atualizada para suportar esse novo padrão.
+
+### O que muda na prática?
+- Não há alteração de endpoint (URL)
+- Não há mudanças estruturais no sistema
+- A definição da API utilizada passa a ser feita via parâmetro
+
+- Adicionado
+Novo campo type_model no payload de envio
+Suporte ao valor "marketing_lite" para uso da nova API da Meta
+Parâmetro opcional message_activity_sharing
+- Alterado
+Lógica de roteamento de envio na Positus, que passa a direcionar automaticamente para a API correta da Meta
+- Mantido
+Endpoint de integração inalterado
+Compatibilidade com envios existentes (Cloud API)
+
+- Impacto
+🔴 Alto (obrigatoriedade da Meta)
+🟢 Baixo impacto técnico (sem mudanças estruturais)
+- Compatibilidade
+Totalmente retrocompatível
+Não afeta fluxos existentes sem o uso do novo parâmetro
+
 </Update>
 
 <Update label="Janeiro 2026 - 2.0.92" description="Invenio Live e Center.">
