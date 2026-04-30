@@ -149,64 +149,76 @@ As colunas abaixo são possíveis no arquivo:
 
 **Templates WhatsApp:**
 ```plaintext
-TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT
+TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
 ```
 
-| Campo               | Obrigatório | Descrição                                                     |
-| ------------------- | ----------- | ------------------------------------------------------------- |
-| **TEMPLATE_NAME**   | ✅           | Nome único do template (sem espaços, usar `_` se necessário). |
-| **LANGUAGE**        | ✅           | Idioma no formato `pt_BR`, `en_US`, etc.                      |
-| **CATEGORY**        | ✅           | Categoria: `MARKETING`, `UTILITY`, `AUTHENTICATION`         |
-| **HEADER_TEXT**     | ❌           | Texto do cabeçalho (opcional).                                |
-| **BODY_TEXT**       | ✅           | Texto do corpo da mensagem.                                   |
-| **FOOTER_TEXT**     | ❌           | Texto do rodapé (opcional).                                   |
-| **REPLYBUTTON_1**   | ❌           | Texto do botão de resposta rápida 1.                          |
-| **REPLYBUTTON_2**   | ❌           | Texto do botão de resposta rápida 2.                          |
-| **REPLYBUTTON_3**   | ❌           | Texto do botão de resposta rápida 3.                          |
-| **URL_BUTTON**      | ❌           | URL do botão de ação (se existir).                            |
-| **URL_BUTTON_TEXT** | ❌           | Texto exibido no botão de URL.                                |
+| Campo               | Obrigatório                        | Descrição                                                                                      |
+| ------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **TEMPLATE_NAME**   | ✅ (criação)                        | Nome único do template (sem espaços, usar `_` se necessário).                                  |
+| **LANGUAGE**        | ✅ (criação)                        | Idioma no formato `pt_BR`, `en_US`, etc.                                                       |
+| **CATEGORY**        | ✅ (criação)                        | Categoria: `MARKETING`, `UTILITY`, `AUTHENTICATION`.                                           |
+| **HEADER_TEXT**     | ❌                                  | Texto do cabeçalho (opcional).                                                                 |
+| **BODY_TEXT**       | ✅ (criação)                        | Texto do corpo da mensagem.                                                                    |
+| **FOOTER_TEXT**     | ❌                                  | Texto do rodapé (opcional).                                                                    |
+| **REPLYBUTTON_1**   | ❌                                  | Texto do botão de resposta rápida 1.                                                           |
+| **REPLYBUTTON_2**   | ❌                                  | Texto do botão de resposta rápida 2.                                                           |
+| **REPLYBUTTON_3**   | ❌                                  | Texto do botão de resposta rápida 3.                                                           |
+| **URL_BUTTON**      | ❌                                  | URL do botão de ação (se existir).                                                             |
+| **URL_BUTTON_TEXT** | ❌                                  | Texto exibido no botão de URL.                                                                 |
+| **TEMPLATE_STATUS** | ❌                                  | Status da revisão: `APROVADO` ou `REJEITADO`.                                                  |
+| **REASONS**         | ❌                                  | Motivos de reprovação separados por `\|`. Cada motivo deve estar cadastrado no Maestro.        |
+| **TEMPLATE_CODE**   | ❌                                  | Código do template no Maestro. Usado para identificar o template na revisão.                   |
+| **EXTERNAL_CODE**   | ❌                                  | Identificador externo do template (ex.: ID no sistema do cliente). Deve ser único.             |
 
 Exemplo:
 ```csv
-TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT
-exemplo_template,pt_BR,MARKETING,Cabeçalho Exemplo,Texto do Corpo,Rodapé Exemplo,Sim,Não,Não receber,,
-fatura_atrasada,en_US,UTILITY,Invoice Reminder,"Hello {{Var1}}, your invoice {{Var2}} is overdue.","Contact support if already paid",Pay Now,Ignore,Talk to Agent,https://pay.example.com,Pay Securely
-codigo_otp,pt_BR,AUTHENTICATION,,Seu código de acesso é {{Var1}},Este código expira em 5 minutos,,,,,
+TEMPLATE_NAME,LANGUAGE,CATEGORY,HEADER_TEXT,BODY_TEXT,FOOTER_TEXT,REPLYBUTTON_1,REPLYBUTTON_2,REPLYBUTTON_3,URL_BUTTON,URL_BUTTON_TEXT,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
+exemplo_template,pt_BR,MARKETING,Cabeçalho Exemplo,Texto do Corpo,Rodapé Exemplo,Sim,Não,Não receber,,,APROVADO,Motivo1|Motivo 2,W0003,EXT001
+fatura_atrasada,en_US,UTILITY,Invoice Reminder,"Hello {{Var1}}, your invoice {{Var2}} is overdue.","Contact support if already paid",Pay Now,Ignore,Talk to Agent,https://pay.example.com,Pay Securely,,,,
+codigo_otp,pt_BR,AUTHENTICATION,,Seu código de acesso é {{Var1}},Este código expira em 5 minutos,,,,,,REJEITADO,Motivo2 |Motivo3,W0012,EXT001
 ```
 
 **Templates de E-mail:**
 ```plaintext
-TEMPLATE_NAME,SUBJECT,BODY_HTML
+TEMPLATE_NAME,SUBJECT,BODY_HTML,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
 ```
-| Campo             | Obrigatório | Descrição                                                  |
-| ----------------- | ----------- | ---------------------------------------------------------- |
-| **TEMPLATE_NAME** | ✅           | Nome único do template (sem espaços, usar `_` se preciso). |
-| **SUBJECT**       | ✅           | Assunto do e-mail.                                         |
-| **BODY_HTML**     | ✅           | Conteúdo do corpo em HTML (inline).                        |
+| Campo               | Obrigatório                          | Descrição                                                                                    |
+| ------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------- |
+| **TEMPLATE_NAME**   | ✅ (criação)                          | Nome único do template (sem espaços, usar `_` se preciso).                                     |
+| **SUBJECT**         | ✅ (criação)                          | Assunto do e-mail.                                                                             |
+| **BODY_HTML**       | ✅ (criação)                          | Conteúdo do corpo em HTML (inline).                                                            |
+| **TEMPLATE_STATUS** | ❌                                    | Status da revisão: `APROVADO` ou `REJEITADO`.                                                  |
+| **REASONS**         | ❌                                    | Motivos de reprovação separados por `\|`. Cada motivo deve estar cadastrado no Maestro.        |
+| **TEMPLATE_CODE**   | ❌                                    | Código do template no Maestro. Usado para identificar o template na revisão.                   |
+| **EXTERNAL_CODE**   | ❌                                    | Identificador externo do template (ex.: ID no sistema do cliente). Deve ser único.             |
 
 Exemplo:
 ```csv
-TEMPLATE_NAME,SUBJECT,BODY_HTML
-ExemploTemplate,ExemploAssunto,<html><body><h1>Teste</h1><p>Corpo do e-mail</p></body></html>
-BoasVindas,Seja bem-vindo!,<html><body><h1>Olá {{1}}</h1><p>Obrigado por se cadastrar em nossa plataforma.</p></body></html>
-FaturaAtrasada,Lembrete de pagamento,<html><body><p>Olá {{1}},</p><p>Sua fatura {{2}} está em aberto.</p><p><a href="https://pagamento.exemplo.com/{{2}}">Clique aqui para pagar</a></p></body></html>
+TEMPLATE_NAME,SUBJECT,BODY_HTML,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
+ExemploTemplate,ExemploAssunto,<html><body><h1>Teste</h1><p>Corpo do e-mail</p></body></html>,,,,
+BoasVindas,Seja bem-vindo!,<html><body><h1>Olá {{1}}</h1><p>Obrigado por se cadastrar em nossa plataforma.</p></body></html>,,,,
+FaturaAtrasada,Lembrete de pagamento,<html><body><p>Olá {{1}},</p><p>Sua fatura {{2}} está em aberto.</p><p><a href="https://pagamento.exemplo.com/{{2}}">Clique aqui para pagar</a></p></body></html>,REJEITADO,Motivo1|Motivo2,E0002,EXT050
 ```
 
 **Templates de SMS:**
 ```plaintext
-TEMPLATE_NAME,TEXT_BODY
+TEMPLATE_NAME,TEXT_BODY,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
 ```
-| Campo             | Obrigatório | Descrição                                                              |
-| ----------------- | ----------- | ---------------------------------------------------------------------- |
-| **TEMPLATE_NAME** | ✅           | Nome único do template (sem espaços, usar `_` se preciso).             |
-| **TEXT_BODY**     | ✅           | Texto do corpo do SMS, pode conter variáveis dinâmicas (ex.: `{{1}}`). |
+| Campo               | Obrigatório                          | Descrição                                                                                    |
+| ------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------- |
+| **TEMPLATE_NAME**   | ✅ (criação)                          | Nome único do template (sem espaços, usar `_` se preciso).                                     |
+| **TEXT_BODY**       | ✅ (criação)                          | Texto do corpo do SMS, pode conter variáveis dinâmicas (ex.: `{{1}}`).                         |
+| **TEMPLATE_STATUS** | ❌                                    | Status da revisão: `APROVADO` ou `REJEITADO`.                                                  |
+| **REASONS**         | ❌                                    | Motivos de reprovação separados por `\|`. Cada motivo deve estar cadastrado no Maestro.        |
+| **TEMPLATE_CODE**   | ❌                                    | Código do template no Maestro. Usado para identificar o template na revisão.                   |
+| **EXTERNAL_CODE**   | ❌                                    | Identificador externo do template (ex.: ID no sistema do cliente). Deve ser único.             |
 
 Exemplo:
 ```csv
-TEMPLATE_NAME,TEXT_BODY
-ExemploTemplate,ExemploTexto
-BoasVindasSMS,Olá {{1}}, bem-vindo(a) à nossa plataforma!
-CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.
+TEMPLATE_NAME,TEXT_BODY,TEMPLATE_STATUS,REASONS,TEMPLATE_CODE,EXTERNAL_CODE
+ExemploTemplate,ExemploTexto,,,,
+BoasVindasSMS,Olá {{1}} bem-vindo(a) à nossa plataforma!,APROVADO,Motivo1|Motivo5,S0002,EXT041
+CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.,REJEITADO,Motivo4|Motivo7,S0048,EXT032
 ```
 
 #### Fluxo de processamento
@@ -217,8 +229,8 @@ CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.
 3. Durante a importação, algumas validações são executadas:
    - Nome do arquivo segue o padrão?
    - Segmento existe e assessoria possui permissão de acesso?
-4. Importação:
-   - Cria os templates já com status `Em Revisão`
+   - Campos obrigatórios para o cenário identificado estão presentes?
+4. Importação — o comportamento varia conforme os campos informados (veja [Fluxos](#fluxos) abaixo).
 5. Move o `.csv` para:  
    - `/processed` em caso de sucesso.
    - `/error` em caso de falha.  
@@ -226,24 +238,30 @@ CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.
 
 ### Fluxos
 
-**Criar template**
-- Sem TEMPLATE_CODE e EXTERNAL_CODE
+O comportamento do Maestro para cada linha do arquivo é determinado pela combinação de campos presentes:
 
-**Criar e revisar**
-- Template não existe + TEMPLATE_STATUS informado
+| Situação                                          | Ação do Maestro       |
+| ------------------------------------------------- | --------------------- |
+| Template não existe + `TEMPLATE_STATUS` ausente   | Cria o template       |
+| Template não existe + `TEMPLATE_STATUS` informado | Cria e revisa         |
+| Template existe + `TEMPLATE_STATUS` informado     | Apenas revisa         |
+| Template existe + `TEMPLATE_STATUS` ausente       | Erro                  |
 
-**Revisar**
-- TEMPLATE_CODE informado ou EXTERNAL_CODE já existente
+**Identificação do template existente** — o Maestro busca pelo template na seguinte ordem:
+1. `TEMPLATE_CODE` (código interno do Maestro)
+2. `EXTERNAL_CODE` (identificador externo)
+3. Se nenhum dos dois for informado → novo template será criado
 
 ---
 
 ### Regras
 
-- TEMPLATE_STATUS: APROVADO ou REJEITADO
-- REJEITADO exige REASONS
-- REASONS devem existir no sistema
-- EXTERNAL_CODE deve ser único
-- Se houver erro, nenhuma linha é processada
+- **`TEMPLATE_STATUS`**: aceita apenas `APROVADO` ou `REJEITADO`.
+- **`REASONS`**: obrigatório quando `TEMPLATE_STATUS=REJEITADO`. Informe ao menos um motivo; motivos múltiplos devem ser separados por `|`.
+- Cada motivo informado em `REASONS` deve estar previamente cadastrado no Maestro.
+- O template existente deve estar com status `Em Revisão` para ser revisado.
+- **`EXTERNAL_CODE`** deve ser único por empresa.
+- Se qualquer linha do arquivo contiver erro, nenhuma linha é processada.
 
 ---
 
