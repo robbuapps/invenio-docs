@@ -29,7 +29,7 @@ Atualmente, os brokers disponíveis são:
 5. O provedor processa e entrega a mensagem ao destinatário.
 6. Uma resposta é retornada, indicando o **status do envio** (sucesso, falha, pendente, etc.).
 
-> ⚠️ ATENÇÃO: Se o seu _broker_ exige que uma URL de Webhook seja adicionada para que o Maestro receba as atualizações de status das mensagens, insira a URL a seguir como URL de Webhook:
+> ⚠️ **Atenção:** Se o seu _broker_ exige que uma URL de Webhook seja adicionada para que o Maestro receba as atualizações de status das mensagens, insira a URL a seguir como URL de Webhook:
 
 ```url
 https://api.common.maestro.robbu.global/v1/messages/events
@@ -52,5 +52,18 @@ A cobrança seguirá sendo **proporcional ao número de segmentos enviados**, pr
 - Alinha o comportamento do Maestro a fluxos já utilizados na operação.
 
 Essa funcionalidade torna o envio de SMS mais flexível e confiável, especialmente em comunicações que exigem textos mais completos.
+
+![](https://robbublob.blob.core.windows.net/docs/maestro/maestroconcat160.png)
+
+## Envio de SMS Flash no Maestro
+
+O **Maestro** pode enviar SMS no formato flash (Mensagem no formato de pop-up) se isso estiver indicado no contato do destinatário e devidamente configurado.
+
+> **Atenção:** O recurso de **SMS Flash** também deve ser **contratado/habilitado no provedor da Pontal**, não apenas habilitado no Maestro.
+
+### Como configurar
+
+1. Acesse **Configurações \> Integração com provedores \> Adicionar provedor \> Canal: Sms**
+2. Para o provedor *Pontal* poderá habilitar/desabilitar o recurso
 
 ![](https://robbublob.blob.core.windows.net/docs/maestro/maestroconcat160.png)

@@ -135,7 +135,7 @@ TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, CODIGO_TEMPLATE_EXT
 
 Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
 
-#### Colunas do Template
+#### Colunas do Template Público
 
 * **TIPO_REGISTRO \[OBRIGATÓRIO]**: Valores possíveis: `TELEFONE` ou `EMAIL`.
   * Um contato pode ter múltiplas linhas (um canal por linha).
@@ -212,6 +212,13 @@ Essas variáveis podem ser utilizadas no template:
 {{Var2}}
 {{Var3}}
 ```
+
+#### Coluna SMS_FLASH
+
+**SMS_FLASH \[OPCIONAL]**: Valores possíveis: `SIM` ou `NÃO`.
+  * Um contato pode ser indicado para receber um SMS do tipo flash (Mensagem no formato de pop-up).
+
+> **Atenção:** O recurso de **SMS Flash** também deve ser **contratado/habilitado no provedor da Pontal**, não apenas habilitado no Maestro.
 
 ## Observações importantes
 
