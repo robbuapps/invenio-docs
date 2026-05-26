@@ -4,31 +4,34 @@ sidebarTitle: Motor de Regras
 description: Regras de restrição, bloqueio e controle aplicadas às campanhas no Maestro.
 ---
 
-## Motor de Regras
+# **Motor de Regras**
 O motor de regras é um mecanismo do Maestro para gerenciar e supervisionar os disparos feitos pelas assessorias.
 A Gerente do Ambiente pode configurar diversas regras dentro deste motor e essas regras serão verificadas durante campanhas, disparos por API ou upload de campanhas por SFTP.
 
-## Configuração Inicial
+### **Configuração Inicial**
 
-- O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Configurações > Regras**
+O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Configurações > Regras**
 
-## Tipos de regras
+### **Tipos de regras**
 Há dois tipos primários de regras:
 
-- Regras implícitas
-    - Estas regras validam conceitos do sistema e não podem ser desativadas
-- Regras customizáveis
-    - Cada regra customizável pode ser ativada ou desativada.
+1. Regras implícitas
+
+    Estas regras validam conceitos do sistema e não podem ser desativadas.
+
+2. Regras customizáveis
+
+    Cada regra customizável pode ser ativada ou desativada.
+
+> ### **1️⃣ Regras implícitas**
+Algumas regras não são exibidas no motor de regras mas rodam como validadores de disparos e campanhas no Maestro:
+
+#### **• Segmento válido**
+A assessoria só consegue criar templates, criar campanhas e disparar mensagens em segmentos que possui acesso.
 
 ---
 
-### Regras implícitas
-Algumas regras não são exibidas no motor de regras mas rodam como validadores de disparos e campanhas no Maestro:
-
-#### Segmento válido
-A assessoria só consegue criar templates, criar campanhas e disparar mensagens em segmentos que possui acesso.
-
-#### Template aprovados
+#### **• Template aprovados**
 Apenas templates aprovados são válidos para criar campanhas e disparar mensagens.
 
 Se houver broker configurado para o canal utilizado, o template deve estar "Publicado".
@@ -37,73 +40,121 @@ Se não houver broker configurado, a mensagem não será disparada, mas o templa
 Templates expirados não ficam disponíveis para uso após a rotina de expiração.
 Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.
 
-#### DDD e Telefone
+---
+
+#### **• DDD e Telefone**
 Quando o disparo é efetuado para um telefone (WhatsApp ou SMS):
-- Campanhas devem ter DDD mapeado corretamente.
-- Telefones com formatação inválida serão rejeitados.
+1. Campanhas devem ter DDD mapeado corretamente.
+2. Telefones com formatação inválida serão rejeitados.
+
+> ### **2️⃣ Regras customizáveis**
+Essas regras podem ser ativadas ou desativadas individualmente.
+
+#### **• Horário**
+Campanhas e disparos fora da faixa configurada são bloqueados.
+
+Há dois modos de configuração, que podem coexistir:
+1. **Horário comercial**: janela fixa aplicada de segunda a sexta-feira.
+2. **Períodos específicos**: intervalos com datas de início e fim, que permitem incluir sábados e domingos. Múltiplos intervalos podem ser cadastrados.
 
 ---
 
-### Regras customizáveis
-Essas regras podem ser ativadas ou desativadas
+#### **• Feriados**
+Campanhas e disparos são bloqueados nos dias configurados como feriado.
 
-#### Regra de horário
-- Campanhas não podem ser agendadas fora da faixa permitida
-- Disparos não podem acontecer fora da faixa permitida
+A regra opera em dois níveis independentes:
+1. Bloqueio por feriados nacionais (ativável separadamente).
+2. Bloqueio por datas avulsas inseridas manualmente.
 
-A configuração pode ser por horário comercial (das 08:00 às 18:00) ou por intervalo de datas e horários específicos
+---
 
-#### Bloqueio por feriado
-Em dias de feriado configurados, campanhas e disparos são bloqueados automaticamente.
-É possível configurar apenas feriados nacionais ou também feriados inseridos manualmente.
+#### **• Localidade**
+Permite definir janelas de envio diferenciadas por localidade do contato. Quando ativa, disparos fora do horário permitido para a localidade do destinatário são bloqueados.
 
-#### Bloqueio por listas de restrição
-Essa regra funciona tanto como uma lista de restrição para números ou e-mails fornecidos, quanto como um limitador de disparos por DDD ou por quantidade de disparos por contato.
+---
 
-- Números ou e-mails bloqueados em lista de restrição não serão processados para disparo.
+#### **• Contatos**
+Permite autorizar ou bloquear contatos específicos no momento de enviar as mensagens.
 
-- Restrições por DDD impedem disparos para contatos dessas regiões fora do horário definido.
+> ⚠️ **Contatos duplicados serão rejeitados pelo motor de regras**
 
-> ⚠️ Contatos duplicados serão rejeitados pelo motor de regras
+##### **1. Autorizados**
+Somente contatos presentes na lista poderão receber mensagens pelos canais selecionados. A lista é atualizada via arquivos CSV no diretório `maestro/allow_list` do SFTP.
 
-#### Limite diário de disparos por contrato
+A regra é aplicada apenas nos canais explicitamente configurados — outros canais não são afetados.
 
-Limite a quantidade de mensagens enviadas por dia para cada contrato. Deixe este campo vazio para não aplicar limite de disparos diários.
-- Cada contrato tem um limite diário de disparos.
+| Campo               | Obrigatório                            | Descrição                                                                                    |
+| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **CPF_CNPJ**        | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
+| **NUMERO_CONTRATO** | ❌                                     | Código do contrato do cliente.                                                               |
+| **NUMERO_TELEFONE** | ✅ se e-mail não esttiver preenchido   | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**           | ✅ se telefone não esttiver preenchido | E-mail do cliente.                                                                           |
+
+Exemplo:
+```csv
+CPF_CNPJ,NUMERO_CONTRATO,NUMERO_TELEFONE,EMAIL
+12345678965,456,11981236549,
+98765432156,654,,cliente@dominio.com
+```
+
+##### **2. Bloqueados**
+Contatos presentes na lista são impedidos de receber mensagens em qualquer canal. A lista é atualizada via arquivos CSV no diretório `maestro/block_list` do SFTP.
+
+| Campo               | Obrigatório                            | Descrição                                                                                    |
+| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **TIPO_BLOQUEIO**   | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
+| **DATA_SOLICITACAO**| ❌                                     | Código do contrato do cliente.                                                               |
+| **DATA_EXPIRACAO**  | ✅ se e-mail não esttiver preenchido   | Número de telefone com DDD do cliente.                                                       |
+
+Exemplo:
+```csv
+TIPO_BLOQUEIO,NUMERO_CONTRATO,NUMERO_TELEFONE,EMAIL
+12345678965,456,11981236549,
+98765432156,654,,cliente@dominio.com
+```
+
+---
+
+#### **• Domínio**
+Domínios configurados terão todas as tentativas de disparo rejeitadas.
+
+---
+
+#### **• Limites**
+
+##### **1. Limite de erros por arquivo de Público**
+Se o percentual de erros no arquivo da campanha ultrapassar o limite configurado, a base inteira é invalidada e nenhum disparo é efetuado.
+
+Caso o limite esteja configurado em 0%, nenhuma base será invalidada por esta regra, mesmo ela estando ativa.
+
+##### **2. Limite diário de disparos por contrato**
+Cada contrato tem uma cota diária de mensagens. Ao atingir o limite, novos disparos daquele contrato são bloqueados para o restante do dia.
 
 Se um contato (e-mail ou telefone) estiver vinculado a mais de um contrato:
 - O contrato que ultrapassar o limite será bloqueado.
 - O contrato dentro do limite terá o disparo processado normalmente.
 
-#### Bloqueio por Domínio de Email
-Domínios de e-mail podem ser configurados para que todas as tentativas de disparo para estes domínios sejam rejeitadas.
-
-Ex: gov.br, bol.com.br, etc.
-
-#### Controle de Erros
-Se o percentual de erros no arquivo da campanha ultrapassar o limite configurado, a base inteira é invalidada e nenhum disparo é efetuado.
-
-- Caso o limite esteja configurado em 0%, nenhuma base será invalidada por esta regra, mesmo ela estando ativa.
-
 ---
 
-## Como o motor de regras funciona?
+## **Como o motor de regras funciona?**
 
-### Campanhas
+### **Campanhas**
 Ao se criar uma nova campanha, o motor de regras é executado.
 A **criação** da campanha será rejeitada caso as seguintes regras forem inválidas:
-- Regra de horário
-- Bloqueio por feriado
-- Controle de erros
+- Regra de Horário
+- Bloqueio por Feriado
+- Limite de erros por arquivo de Público
 
 Caso as regras acima sejam válidas, a campanha será criada e cada disparo será efetuado.
 O disparo pode ser bloqueado caso as seguintes regras forem inválidas:
-- Bloqueio por listas de restrição
-- Limite de disparos diários por contato
-- Bloqueio diário
-- Bloqueio por domínio de e-mail
+- Contatos Autorizados / Contatos Bloqueados
+- Restrições de horário por Localidade
+- Limite diário de disparos por contrato
+- Bloqueio por Domínio de Email
 
-### API Direct Message
+---
+
+### **API Direct Message**
 Cada chamada da API Direct Message é considerado um disparo avulso.
 O disparo será bloqueado caso uma regra seja quebrada.
 
@@ -123,7 +174,9 @@ O disparo será bloqueado caso uma regra seja quebrada.
 
 Para mais informações, consulte a [documentação da API Direct Message](https://docs.robbu.global/docs/maestro/api-direct-message)
 
-### SFTP
+---
+
+### **SFTP**
 Valida todo o arquivo linha a linha.
 Caso alguma linha seja invalidada por alguma regra, no arquivo final da importação, criado na pasta `/maestro/campaigns/processed`, será criado um arquivo `{nome original}_EXCEPTIONS.csv` com todas as exceções que foram encontradas durante a validação do arquivo importado.
 - Este arquivo contém a cópia da linha original com uma coluna adicional `Motivo Falha` exibindo o porquê do contato não ter sido processado
@@ -139,7 +192,7 @@ Caso alguma linha seja invalidada por alguma regra, no arquivo final da importa�
 
 ---
 
-## Histórico
+## **Histórico**
 
 No botão histórico de cada regra é possível ver as alterações que cada regra teve com o tempo, incluindo o usuário que realizou a alteração e qual foi a alteração.
 
