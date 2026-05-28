@@ -15,21 +15,21 @@ O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Con
 ### **Tipos de regras**
 Há dois tipos primários de regras:
 
-1. Regras implícitas
+**1. Regras implícitas**
 
     Estas regras validam conceitos do sistema e não podem ser desativadas.
 
-2. Regras customizáveis
+**2. Regras customizáveis**
 
     Cada regra customizável pode ser ativada ou desativada.
 
-> ### **1️⃣ Regras implícitas**
+---
+
+### **Regras implícitas**
 Algumas regras não são exibidas no motor de regras mas rodam como validadores de disparos e campanhas no Maestro:
 
 #### **• Segmento válido**
 A assessoria só consegue criar templates, criar campanhas e disparar mensagens em segmentos que possui acesso.
-
----
 
 #### **• Template aprovados**
 Apenas templates aprovados são válidos para criar campanhas e disparar mensagens.
@@ -40,14 +40,14 @@ Se não houver broker configurado, a mensagem não será disparada, mas o templa
 Templates expirados não ficam disponíveis para uso após a rotina de expiração.
 Templates vencidos há mais de 5 dias não devem aparecer na lista de seleção.
 
----
-
 #### **• DDD e Telefone**
 Quando o disparo é efetuado para um telefone (WhatsApp ou SMS):
 1. Campanhas devem ter DDD mapeado corretamente.
 2. Telefones com formatação inválida serão rejeitados.
 
-> ### **2️⃣ Regras customizáveis**
+---
+
+### **Regras customizáveis**
 Essas regras podem ser ativadas ou desativadas individualmente.
 
 #### **• Horário**
@@ -57,7 +57,6 @@ Há dois modos de configuração, que podem coexistir:
 1. **Horário comercial**: janela fixa aplicada de segunda a sexta-feira.
 2. **Períodos específicos**: intervalos com datas de início e fim, que permitem incluir sábados e domingos. Múltiplos intervalos podem ser cadastrados.
 
----
 
 #### **• Feriados**
 Campanhas e disparos são bloqueados nos dias configurados como feriado.
@@ -66,12 +65,8 @@ A regra opera em dois níveis independentes:
 1. Bloqueio por feriados nacionais (ativável separadamente).
 2. Bloqueio por datas avulsas inseridas manualmente.
 
----
-
 #### **• Localidade**
 Permite definir janelas de envio diferenciadas por localidade do contato. Quando ativa, disparos fora do horário permitido para a localidade do destinatário são bloqueados.
-
----
 
 #### **• Contatos**
 Permite autorizar ou bloquear contatos específicos no momento de enviar as mensagens.
@@ -87,38 +82,38 @@ A regra é aplicada apenas nos canais explicitamente configurados — outros can
 | ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **CPF_CNPJ**        | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
 | **NUMERO_CONTRATO** | ❌                                     | Código do contrato do cliente.                                                               |
-| **NUMERO_TELEFONE** | ✅ se e-mail não esttiver preenchido   | Número de telefone com DDD do cliente.                                                       |
-| **EMAIL**           | ✅ se telefone não esttiver preenchido | E-mail do cliente.                                                                           |
+| **NUMERO_TELEFONE** | ✅ se e-mail não estiver preenchido    | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**           | ✅ se telefone não estiver preenchido  | E-mail do cliente.                                                                           |
 
 Exemplo:
 ```csv
-CPF_CNPJ,NUMERO_CONTRATO,NUMERO_TELEFONE,EMAIL
-12345678965,456,11981236549,
-98765432156,654,,cliente@dominio.com
+CPF_CNPJ;NUMERO_CONTRATO;NUMERO_TELEFONE;EMAIL
+12345678965;456;+5511981236549;
+98765432156;654;;cliente@dominio.com
 ```
 
 ##### **2. Bloqueados**
 Contatos presentes na lista são impedidos de receber mensagens em qualquer canal. A lista é atualizada via arquivos CSV no diretório `maestro/block_list` do SFTP.
 
-| Campo               | Obrigatório                            | Descrição                                                                                    |
-| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **TIPO_BLOQUEIO**   | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
-| **DATA_SOLICITACAO**| ❌                                     | Código do contrato do cliente.                                                               |
-| **DATA_EXPIRACAO**  | ✅ se e-mail não esttiver preenchido   | Número de telefone com DDD do cliente.                                                       |
+| Campo               | Obrigatório                                    | Descrição                                                                                    |
+| ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **TIPO_BLOQUEIO**   | ✅ se DATA_EXPIRACAO não for preenchido        | 1] Bloqueio permanente / 2] Bloqueio temporário / 3] Desbloqueio                             |
+| **DATA_SOLICITACAO**| ❌                                             | Data de solicitação do bloqueio.                                                             |
+| **DATA_EXPIRACAO**  | ✅ se TIPO_BLOQUEIO não for preenchido         | Data de expiração do bloqueio.                                                               |
+| **NUMERO_CONTRATO** | ❌                                             | Nümero do contrato do cliente.                                                               |
+| **EMAIL**           | ✅ se NUMERO_TELEFONE não estiver preenchido   | E-mail do cliente.                                                                           |
+| **NUMERO_TELEFONE** | ✅ se EMAIL não estiver preenchido             | Número de telefone com DDD do cliente.                                                       |
+| **MOTIVO**          | ❌                                             | Motivo do bloqueio.                                                                          |
 
 Exemplo:
 ```csv
-TIPO_BLOQUEIO,NUMERO_CONTRATO,NUMERO_TELEFONE,EMAIL
-12345678965,456,11981236549,
-98765432156,654,,cliente@dominio.com
+TIPO_BLOQUEIO;DATA_SOLICITACAO;DATA_EXPIRACAO;NUMERO_CONTRATO;EMAIL;NUMERO_TELEFONE;MOTIVO
+2;05/03/2026;;12313213213;cliente@dominio.com;;Motivo 1
+2;05/03/2026;;45665465464;;+5511930457438;
 ```
-
----
 
 #### **• Domínio**
 Domínios configurados terão todas as tentativas de disparo rejeitadas.
-
----
 
 #### **• Limites**
 
@@ -152,7 +147,6 @@ O disparo pode ser bloqueado caso as seguintes regras forem inválidas:
 - Limite diário de disparos por contrato
 - Bloqueio por Domínio de Email
 
----
 
 ### **API Direct Message**
 Cada chamada da API Direct Message é considerado um disparo avulso.
@@ -174,7 +168,6 @@ O disparo será bloqueado caso uma regra seja quebrada.
 
 Para mais informações, consulte a [documentação da API Direct Message](https://docs.robbu.global/docs/maestro/api-direct-message)
 
----
 
 ### **SFTP**
 Valida todo o arquivo linha a linha.
