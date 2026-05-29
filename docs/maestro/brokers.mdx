@@ -38,6 +38,13 @@ https://api.common.maestro.robbu.global/v1/messages/events
 - Configurações Personalizadas
 - Pontal - Concatenar mensagens com mais de 160 caracteres; Se esta opção estiver marcada e sua conta Pontal não tiver esse serviço habilitado, a Pontal rejeitará todos os envios de mensagens de SMS.
 
+## Direcionamento por Segmento
+Um provedor (E-mail e SMS) pode ser configurado para enviar mensagens para todos os segmentos, ou para segmentos específicos.
+
+- **Provedor sem segmento** → usado para qualquer segmento que não tenha um provedor dedicado.
+- **Provedor com segmento** → usado exclusivamente para os segmentos vinculados; tem prioridade sobre o provedor sem segmento.
+- **Exclusividade** → um segmento só pode ser vinculado a um único provedor.
+
 ## Envio de SMS Concatenado no Maestro
 
 O **Maestro** passa a permitir o envio automático de **SMS concatenados** quando o conteúdo da mensagem ultrapassar o limite de **160 caracteres**. Com essa melhoria, mensagens mais longas deixam de ser bloqueadas e passam a ser enviadas em múltiplas partes, de forma transparente para a operação.
