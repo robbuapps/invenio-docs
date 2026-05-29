@@ -50,7 +50,7 @@ Quando o disparo é efetuado para um telefone (WhatsApp ou SMS):
 ### **Regras customizáveis**
 Essas regras podem ser ativadas ou desativadas individualmente.
 
-#### **• Horário**
+#### **• Horários**
 Campanhas e disparos fora da faixa configurada são bloqueados.
 
 Há dois modos de configuração, que podem coexistir:
@@ -65,7 +65,7 @@ A regra opera em dois níveis independentes:
 1. Bloqueio por feriados nacionais (ativável separadamente).
 2. Bloqueio por datas avulsas inseridas manualmente.
 
-#### **• Localidade**
+#### **• Localidades**
 Permite definir janelas de envio diferenciadas por localidade do contato. Quando ativa, disparos fora do horário permitido para a localidade do destinatário são bloqueados.
 
 #### **• Contatos**
@@ -73,7 +73,7 @@ Permite autorizar ou bloquear contatos específicos no momento de enviar as mens
 
 > ⚠️ **Contatos duplicados serão rejeitados pelo motor de regras**
 
-##### **1. Autorizados**
+##### **1. Contatos Autorizados**
 Somente contatos presentes na lista poderão receber mensagens pelos canais selecionados. A lista é atualizada via arquivos CSV no diretório `maestro/allow_list` do SFTP.
 
 A regra é aplicada apenas nos canais explicitamente configurados — outros canais não são afetados.
@@ -81,38 +81,38 @@ A regra é aplicada apenas nos canais explicitamente configurados — outros can
 | Campo               | Obrigatório                            | Descrição                                                                                    |
 | ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **CPF_CNPJ**        | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
-| **NUMERO_CONTRATO** | ❌                                     | Código do contrato do cliente.                                                               |
-| **NUMERO_TELEFONE** | ✅ se e-mail não estiver preenchido    | Número de telefone com DDD do cliente.                                                       |
-| **EMAIL**           | ✅ se telefone não estiver preenchido  | E-mail do cliente.                                                                           |
+| **NUCONTRATOGESTAO**| ❌                                     | Número do contrato do cliente.                                                               |
+| **NUMERO**          | ✅ se EMAIL não estiver preenchido     | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**           | ✅ se NUMERO não estiver preenchido    | E-mail do cliente.                                                                           |
 
 Exemplo:
 ```csv
-CPF_CNPJ;NUMERO_CONTRATO;NUMERO_TELEFONE;EMAIL
+CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
 12345678965;456;+5511981236549;
 98765432156;654;;cliente@dominio.com
 ```
 
-##### **2. Bloqueados**
+##### **2. Contatos Bloqueados**
 Contatos presentes na lista são impedidos de receber mensagens em qualquer canal. A lista é atualizada via arquivos CSV no diretório `maestro/block_list` do SFTP.
 
 | Campo               | Obrigatório                                    | Descrição                                                                                    |
 | ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **TIPO_BLOQUEIO**   | ✅ se DATA_EXPIRACAO não for preenchido        | 1] Bloqueio permanente / 2] Bloqueio temporário / 3] Desbloqueio                             |
-| **DATA_SOLICITACAO**| ❌                                             | Data de solicitação do bloqueio.                                                             |
-| **DATA_EXPIRACAO**  | ✅ se TIPO_BLOQUEIO não for preenchido         | Data de expiração do bloqueio.                                                               |
-| **NUMERO_CONTRATO** | ❌                                             | Nümero do contrato do cliente.                                                               |
-| **EMAIL**           | ✅ se NUMERO_TELEFONE não estiver preenchido   | E-mail do cliente.                                                                           |
-| **NUMERO_TELEFONE** | ✅ se EMAIL não estiver preenchido             | Número de telefone com DDD do cliente.                                                       |
+| **CPF_CNPJ**        | ❌                                             | Documento do cliente (para validações ou relatórios).                                        |
+| **DATA_SOLICITACAO**| ❌                                             | Data da solicitação do bloqueio.                                                             |
+| **DATA_EXPIRACAO**  | ❌                                             | Data de expiração do bloqueio.                                                               |
+| **NUCONTRATOGESTAO**| ❌                                             | Número do contrato do cliente.                                                               |
+| **NUMERO**          | ✅ se EMAIL não estiver preenchido             | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**           | ✅ se NUMERO não estiver preenchido            | E-mail do cliente.                                                                           |
 | **MOTIVO**          | ❌                                             | Motivo do bloqueio.                                                                          |
 
 Exemplo:
 ```csv
-TIPO_BLOQUEIO;DATA_SOLICITACAO;DATA_EXPIRACAO;NUMERO_CONTRATO;EMAIL;NUMERO_TELEFONE;MOTIVO
-2;05/03/2026;;12313213213;cliente@dominio.com;;Motivo 1
-2;05/03/2026;;45665465464;;+5511930457438;
+CPF_CNPJ;DATA_SOLICITACAO;DATA_EXPIRACAO;NUCONTRATOGESTAO;NUMERO;EMAIL;MOTIVO
+12313213213;;;1516;;cliente@dominio.com;Motivo 1
+45665465464;;25/04/2026;;+5511930457438;;Motivo 2
 ```
 
-#### **• Domínio**
+#### **• Domínios**
 Domínios configurados terão todas as tentativas de disparo rejeitadas.
 
 #### **• Limites**
