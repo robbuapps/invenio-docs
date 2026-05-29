@@ -305,24 +305,6 @@ Ao criar um Segmento, a Gerente do Ambiente pode incluir as assessorias que ter�
 
 ---
 
-## Dashboard
-A tela de dashboard está disponível exclusivamente para usuários dos tipos Gerente e Assessoria. 
-Ela exibe informações sobre o número de contatos e permite a visualização e análise de dados 
-através de filtros, incluindo:
-
-- Empresa
-- Canal
-- Segmento
-- Data Inicial
-- Data Final
-
-Esses filtros proporcionam uma análise detalhada e personalizada dos dados
-![Dash filtro](https://robbublob.blob.core.windows.net/docs/maestro/DashFiltroMaestro.png)
-
-#### Análise de Campanha
-
-![analise campanha](https://robbublob.blob.core.windows.net/docs/maestro/analisecamp.png)
-
 ##  Relatórios
 
 Ao acessar a seção de **Relatórios**, o usuário terá a opção de **Criar Relatório** a partir dos seguintes modelos:
@@ -356,6 +338,7 @@ Nesta seção é possível:
 - Criar novos templates
 - Consultar o status de todos os templates criados  
 - Acompanhar o fluxo de aprovação (quando aplicável)  
+- Duplicar templates ativos ou expirados  
 
 Os templates são categorizados de acordo com o tipo de canal de disparo.
 ![templatesSMS](https://robbublob.blob.core.windows.net/docs/maestro/templatesms.png)
@@ -363,12 +346,41 @@ Os templates são categorizados de acordo com o tipo de canal de disparo.
 Os templates podem ter diversos status, como:
 
 - Em criação: O template está em desenvolvimento e ainda não foi submetido para revisão. Este status existe apenas no canal Email.
-- Em revisão: O template já foi submetido para revisão da Gerente do Ambiente ou da empresa Revisora e está aguardando análise
+- Em revisão: O template já foi submetido para revisão da Gerente do Ambiente ou da empresa Revisora e está aguardando análise. Templates em reaprovação também aparecem com este status, sem destaque especial.
 - Aprovado: O template foi aprovado por um revisor, mas ainda não foi publicado no broker
 - Publicado: O template foi aprovado por um revisor e já está disponível para uso no broker
 - Rejeitado: O template foi reprovado por um revisor. O motivo fica disponível para consulta.
 - Expirado: O template expirou devido à configuração de expiração de templates
 - Rejeitado por Meta: O template **foi aprovado** pelo revisor, mas rejeitado pela Meta. Este status existe apenas no canal Whatsapp.
+
+### Ciclo de vida dos templates
+
+Templates expirados permanecem visíveis na listagem por 30 dias após a expiração, mas não estão disponíveis para novos disparos. Após 90 dias, são movidos para cold storage, com histórico mantido para relatórios e auditoria.
+
+Um botão de filtro rápido está disponível para facilitar a navegação.
+
+### Alertas de vencimento
+
+Na coluna "Inclusão" na listagem é exibida a data de vencimento do template. As sinalizações visuais seguem a seguinte ordem de prioridade:
+
+1. **Vence amanhã**
+2. **Expirado há X dias** — exclusão ocorrerá em 30 dias
+3. **Em reaprovação**
+
+Todos os usuários cadastrados pela Assessoria recebem notificação por e-mail conforme a janela de alerta configurada.
+
+### Configurações de templates
+
+Em **Configurações > Ambiente > Configurações de templates** é possível definir as regras de validade dos templates:
+
+- **Quantidade de dias para expiração:** define após quantos dias o template é considerado expirado. Templates expirados ficam visíveis mas indisponíveis para novos disparos até serem atualizados ou revalidados.
+- **Quantidade de dias para alertar:** define com quantos dias de antecedência os alertas visuais e as notificações por e-mail são disparados.
+
+### Duplicar template
+
+Qualquer template ativo ou expirado pode ser duplicado. A duplicação gera um novo template com o conteúdo original e um novo código, submetendo-o automaticamente para aprovação. Após aprovação, o novo template fica disponível independentemente do status do template original.
+
+---
 
 Novos templates podem ser criados diretamente no Construtor de Templates do Maestro, ou importados por arquivo CSV.
 
