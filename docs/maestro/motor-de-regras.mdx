@@ -15,12 +15,10 @@ O acesso às regras deve ser feito com perfil **Gerente do Ambiente** em:  **Con
 ### **Tipos de regras**
 Há dois tipos primários de regras:
 
-**1. Regras implícitas**
-
+**1. Regras implícitas**  
     Estas regras validam conceitos do sistema e não podem ser desativadas.
 
-**2. Regras customizáveis**
-
+**2. Regras customizáveis**  
     Cada regra customizável pode ser ativada ou desativada.
 
 ---
@@ -71,6 +69,14 @@ Permite definir janelas de envio diferenciadas por localidade do contato. Quando
 #### **• Contatos**
 Permite autorizar ou bloquear contatos específicos no momento de enviar as mensagens.
 
+##### **Escopo do bloqueio**
+O bloqueio se aplica quando todos os campos preenchidos na entrada coincidem com o envio. Quanto mais campos informados, mais específico e restrito é o escopo.
+
+Exemplo
+- **Apenas telefone preenchido** → qualquer envio para aquele telefone é bloqueado, independente do contrato.  
+- **Telefone + contrato preenchidos** → somente a combinação exata é bloqueada. Envios para o mesmo telefone com outro contrato, ou para o mesmo contrato com outro telefone, não são afetados.
+
+
 > ⚠️ **Contatos duplicados serão rejeitados pelo motor de regras**
 
 ##### **1. Contatos Autorizados**
@@ -85,7 +91,15 @@ A regra é aplicada apenas nos canais explicitamente configurados — outros can
 | **NUMERO**          | ✅ se EMAIL não estiver preenchido     | Número de telefone com DDD do cliente.                                                       |
 | **EMAIL**           | ✅ se NUMERO não estiver preenchido    | E-mail do cliente.                                                                           |
 
-Exemplo:
+> ℹ️ É possível fazer combinações misturando os campos acima. **A combinação que não pode ser feita** no mesmo contato é o **"numero" e "email".**  
+> **Exemplo Inválido**
+> ```csv
+>    CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
+> 🚫 12345678965;456;+5511981236549;cliente@dominio.com
+> ```
+
+
+**Exemplo Válido**
 ```csv
 CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
 12345678965;456;+5511981236549;
@@ -95,21 +109,32 @@ CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
 ##### **2. Contatos Bloqueados**
 Contatos presentes na lista são impedidos de receber mensagens em qualquer canal. A lista é atualizada via arquivos CSV no diretório `maestro/block_list` do SFTP.
 
+> ⚠️ **Contatos bloqueados prevalecem em relação aos contatos autorizados**  
+> Isso significa que se um contato for importado nas duas regras (Autorizados e Bloqueados), ele será bloqueado.
+
 | Campo               | Obrigatório                                    | Descrição                                                                                    |
 | ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **TIPO_BLOQUEIO**   | ❌                                             | Tipos permitidos: 1 (Permanente) | 2 (Temporário) | Vazio.                                   |
 | **CPF_CNPJ**        | ❌                                             | Documento do cliente (para validações ou relatórios).                                        |
 | **DATA_SOLICITACAO**| ❌                                             | Data da solicitação do bloqueio.                                                             |
 | **DATA_EXPIRACAO**  | ❌                                             | Data de expiração do bloqueio.                                                               |
 | **NUCONTRATOGESTAO**| ❌                                             | Número do contrato do cliente.                                                               |
-| **NUMERO**          | ✅ se EMAIL não estiver preenchido             | Número de telefone com DDD do cliente.                                                       |
-| **EMAIL**           | ✅ se NUMERO não estiver preenchido            | E-mail do cliente.                                                                           |
+| **NUMERO**          | ❌                                             | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**           | ❌                                             | E-mail do cliente.                                                                           |
 | **MOTIVO**          | ❌                                             | Motivo do bloqueio.                                                                          |
 
-Exemplo:
+> ℹ️ É possível fazer combinações misturando os campos acima. **A combinação que não pode ser feita** no mesmo contato é o **"numero" e "email".**  
+> **Exemplo Inválido**
+> ```csv
+>    TIPO_BLOQUEIO;CPF_CNPJ;DATA_SOLICITACAO;DATA_EXPIRACAO;NUCONTRATOGESTAO;NUMERO;EMAIL;MOTIVO
+> 🚫 2;12313213213;;;1516;+5511930457438;cliente@dominio.com;Motivo 1
+> ```
+
+**Exemplo Válido**
 ```csv
-CPF_CNPJ;DATA_SOLICITACAO;DATA_EXPIRACAO;NUCONTRATOGESTAO;NUMERO;EMAIL;MOTIVO
-12313213213;;;1516;;cliente@dominio.com;Motivo 1
-45665465464;;25/04/2026;;+5511930457438;;Motivo 2
+TIPO_BLOQUEIO;CPF_CNPJ;DATA_SOLICITACAO;DATA_EXPIRACAO;NUCONTRATOGESTAO;NUMERO;EMAIL;MOTIVO
+2;12313213213;;;1516;;cliente@dominio.com;Motivo 1
+;45665465464;;25/04/2026;;+5511930457438;;Motivo 2
 ```
 
 #### **• Domínios**
