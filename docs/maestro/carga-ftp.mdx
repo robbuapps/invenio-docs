@@ -77,7 +77,7 @@ Descrição dos campos:
 | ----------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
 | **TIPO_DE_REGISTRO**          | ✅                     | Tipo de contato (`TELEFONE` ou `EMAIL`).                                                      |
 | **VALOR_DO_REGISTRO**         | ✅                     | Valor do contato (número com DDD ou e-mail).                                                  |
-| **CANAL**                     | ✅                     | Canal da mensagem: `whatsapp`, `email` ou `sms`.                                              |
+| **CANAL**                     | ✅                     | Canal da mensagem: `whatsapp`, `email`, `sms` ou `rcs`.                                       |
 | **CODIGO_TEMPLATE**           | ✅                     | Código do template aprovado no Maestro (ex.: `W0003`, `E0001`).                               |
 | **CODIGO_TEMPLATE_EXTERNO**   | ✅                     | Código externo do template (ex.: ID do template no sistema do cliente).                       |
 | **SEGMENTO**                  | ✅                     | Nome do segmento cadastrado no Maestro.                                                       |
@@ -132,7 +132,7 @@ O **nome do arquivo** deve seguir a seguinte nomenclatura:
 {nome do segmento}_{canal}_[{nome da WABA}]_{data}.csv
 ```
 - **nome do segmento**: nome exato do segmento configurado (Maestro/Segmentos).  
-- **canal**: `email` | `sms` | `whatsapp` (case-insensitive).  
+- **canal**: `email` | `sms` | `whatsapp` | `rcs` (case-insensitive).  
 - **nome da WABA** *(opcional, apenas WhatsApp)*: descrição da WABA.  
 - **data**: data de referência com formato yyyyMMdd (ex: `20250531`).  
 
@@ -221,6 +221,36 @@ BoasVindasSMS,Olá {{1}} bem-vindo(a) à nossa plataforma!,APROVADO,Motivo1|Moti
 CodigoOTP,Seu código de acesso é {{1}}. Ele expira em 5 minutos.,REJEITADO,Motivo4|Motivo7,S0048,EXT032
 ```
 
+**Templates de RCS:**
+```plaintext
+TEMPLATE_NAME;MESSAGE_TYPE;MESSAGE;TITLE;FALLBACK;SUGGESTION_1_TITLE;SUGGESTION_1_TYPE;SUGGESTION_1_VALUE;SUGGESTION_2_TITLE;SUGGESTION_2_TYPE;SUGGESTION_2_VALUE;SUGGESTION_3_TITLE;SUGGESTION_3_TYPE;SUGGESTION_3_VALUE;SUGGESTION_4_TITLE;SUGGESTION_4_TYPE;SUGGESTION_4_VALUE;TEMPLATE_STATUS;REASONS;TEMPLATE_CODE;EXTERNAL_CODE
+```
+| Campo                   | Obrigatório            | Descrição                                                                                                                                              |
+| ----------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **TEMPLATE_NAME**       | ✅ (criação)            | Nome único do template (sem espaços, usar `_` se preciso).                                                                                              |
+| **MESSAGE_TYPE**        | ✅                      | Tipo da mensagem RCS: `Texto simples`, `Sugestão` ou `RichCard`.                                                                                         |
+| **MESSAGE**             | ✅                      | Texto do corpo da mensagem. Pode conter variáveis dinâmicas (ex.: `{{1}}`).                                                                               |
+| **TITLE**               | ❌                      | Título do cartão. Usado principalmente em `RichCard`.                                                                                                   |
+| **FALLBACK**            | ❌                      | Texto alternativo exibido quando o dispositivo/operadora do destinatário não suporta o recurso RCS.                                                     |
+| **SUGGESTION_x_TITLE**  | ❌                      | Texto exibido no botão de sugestão `x` (1 a 4).                                                                                                         |
+| **SUGGESTION_x_TYPE**   | ❌                      | Tipo da ação da sugestão `x`: `Resposta rápida`, `Abrir URL`, `Ligar`, `Criar evento`, `Compartilhar localização` ou `Ver localização`.                |
+| **SUGGESTION_x_VALUE**  | ❌                      | Valor da ação correspondente ao tipo (ex.: URL para `Abrir URL`, telefone para `Ligar`). Fica **vazio** quando o tipo for `Resposta rápida`.            |
+| **TEMPLATE_STATUS**     | ❌                      | Status da revisão: `APROVADO` ou `REJEITADO`.                                                                                                           |
+| **REASONS**             | ❌                      | Motivos de reprovação separados por `\|`. Cada motivo deve estar cadastrado no Maestro.                                                                  |
+| **TEMPLATE_CODE**       | ❌                      | Código do template no Maestro. Usado para identificar o template na revisão.                                                                            |
+| **EXTERNAL_CODE**       | ❌                      | Identificador externo do template (ex.: ID no sistema do cliente). Deve ser único.                                                                      |
+
+> ⚠️ **Regra específica do RCS:** via importação, os templates dos tipos `Texto simples` e `Sugestão` podem ser **criados e revisados**. O template do tipo `RichCard` é **apenas revisado**; isso significa que o template `RichCard` importado já deve existir no Maestro.
+
+Exemplo:
+```csv
+TEMPLATE_NAME;MESSAGE_TYPE;MESSAGE;TITLE;;FALLBACK;SUGGESTION_1_TITLE;SUGGESTION_1_TYPE;SUGGESTION_1_VALUE;SUGGESTION_2_TITLE;SUGGESTION_2_TYPE;SUGGESTION_2_VALUE;SUGGESTION_3_TITLE;SUGGESTION_3_TYPE;SUGGESTION_3_VALUE;SUGGESTION_4_TITLE;SUGGESTION_4_TYPE;SUGGESTION_4_VALUE;TEMPLATE_STATUS;REASONS;TEMPLATE_CODE;EXTERNAL_CODE
+Boas-vindas;Texto simples;Olá! Seja bem-vindo {1}. Estamos felizes em ter você com a gente.;;;;;;;;;;;;;;;;;;BR002
+Lembrete de pagamento;Texto simples;Olá, {1}! Sua fatura vence amanhã. Evite juros pagando em dia.;;;;;;;;;;;;;;;;;;BR213
+Confirmação de pedido;Sugestão;Seu pedido {1} foi confirmado! O que deseja fazer agora?;;Seu pedido foi confirmado.;Acompanhar pedido;Abrir URL;https://exemplo.com/pedido/123;Falar com atendente;Resposta rápida;;Ligar para a loja;Ligar;+5511999999999;;;;;;;BR001
+Pesquisa de satisfação;Sugestão;Como você avalia o nosso atendimento?;;;Responda de 1 a 3.;Ótimo;Resposta rápida;;Regular;Resposta rápida;;Ruim;Resposta rápida;;;;;;;;BR654
+```
+
 #### Fluxo de processamento
 1. Faça upload do `.csv` em `/maestro/templates`
 2. Um serviço rotineiro roda a cada 10 minutos e executa:  
@@ -246,6 +276,8 @@ O comportamento do Maestro para cada linha do arquivo é determinado pela combin
 | Template não existe + `TEMPLATE_STATUS` informado | Cria e revisa         |
 | Template existe + `TEMPLATE_STATUS` informado     | Apenas revisa         |
 | Template existe + `TEMPLATE_STATUS` ausente       | Erro                  |
+
+> ⚠️ **RCS:** templates com `MESSAGE_TYPE` igual a `Texto simples` ou `Sugestão` seguem a tabela acima (criação e revisão). Já o tipo `RichCard` é **apenas revisado** — não é criado pela importação.
 
 **Identificação do template existente** — o Maestro busca pelo template na seguinte ordem:
 1. `TEMPLATE_CODE` (código interno do Maestro)
