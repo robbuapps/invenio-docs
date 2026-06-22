@@ -3,6 +3,94 @@ title: "Changelog"
 mode: "center"
 ---
 
+<Update label="Junho 2026 - 2.0.97" description="Invenio Live e Center.">
+  ## Encerramento automático de atendimentos por inatividade
+
+  Para oferecer mais controle sobre a gestão de atendimentos e evitar o acúmulo de protocolos sem retorno, o Invenio passa a permitir a **configuração do encerramento automático de contatos inativos**. Com essa melhoria, cada operação pode definir por quanto tempo um atendimento pode permanecer sem interação antes de ser encerrado automaticamente.
+
+  ---
+
+  ## O que mudou
+
+  Anteriormente, o sistema utilizava uma regra fixa para encerramento de protocolos inativos. Agora, é possível configurar esse prazo de forma flexível em dois níveis:
+
+  - **Conta** (regra geral)
+  - **Carteira (Segmento)** (regra específica)
+
+  Quando existir uma configuração na carteira, ela terá prioridade sobre a configuração da conta.
+
+  ---
+
+  ## Como funciona
+
+  O sistema monitora automaticamente o tempo desde a **última mensagem enviada na conversa**, independentemente de quem enviou. Se o prazo configurado for atingido:
+
+  - O protocolo é encerrado automaticamente
+  - O contato é removido da fidelização (quando aplicável)
+  - Pendências são finalizadas
+  - Um evento de encerramento é registrado no histórico
+
+  Essa rotina é executada automaticamente pelo sistema.
+
+  ---
+
+  ## Configuração na Conta
+
+  O administrador pode definir um prazo padrão de inatividade que será aplicado a todos os segmentos que não possuam configuração própria. **Local:**\
+  Configurações da Conta **Campo:**\
+  Prazo de encerramento por inatividade (em dias) **Regras:**
+
+  - Valor permitido: **1 a 30 dias**
+  - Campo obrigatório
+
+  ---
+
+  ## Configuração na Carteira (Segmento)
+
+  Cada carteira pode usar a configuração padrão da conta ou definir um prazo específico.
+
+  ### Opção: Usar configurações da conta
+
+  Quando ativada:
+
+  - O segmento utiliza automaticamente o prazo definido na conta.
+
+  Quando desativada:
+
+  - O campo de dias fica disponível para configuração própria.
+
+  **Valor permitido:**\
+  1 a 30 dias
+
+  ---
+
+  ## Regra de prioridade
+
+  A aplicação das configurações segue a seguinte ordem:
+
+  1. Configuração da **Carteira (Segmento)**
+  2. Configuração da **Conta**
+
+  Se o segmento não possuir valor definido, o sistema utiliza automaticamente o valor da conta.
+
+  ---
+
+  ## Benefícios
+
+  - Reduz acúmulo de atendimentos inativos
+  - Mantém a base de dados mais organizada
+  - Diminui esforço operacional manual
+  - Permite ajustes conforme a realidade de cada operação
+
+  ---
+
+  ## Observações importantes
+
+  - Apenas protocolos sem interação dentro do período configurado serão encerrados.
+  - Protocolos dentro do prazo permanecem ativos normalmente.
+  - A configuração não impacta atendimentos já encerrados.
+</Update>
+
 <Update label="Março 2026 - 2.0.95" description="Invenio Live e Center.">
   ## Press Release —Indicador de Digitação no WhatsApp (Invenio Live)
 
@@ -243,39 +331,26 @@ mode: "center"
   - O bloco do arquivo aparece normalmente na timeline.
   - O nome do arquivo é substituído por:
 
+  ## Envio de Mensagens de Marketing (MM Lite API)
 
-## Envio de Mensagens de Marketing (MM Lite API)
+  ### Visão Geral
 
-### Visão Geral
+  A Meta implementou um novo modelo para envio de mensagens de marketing no WhatsApp, chamado Marketing Messages Lite API (MM Lite API).
 
-A Meta implementou um novo modelo para envio de mensagens de marketing no WhatsApp, chamado Marketing Messages Lite API (MM Lite API).
+  Essa mudança é obrigatória para empresas que utilizam contas no modelo WABA incorporada (Partner-initiated).
 
-Essa mudança é obrigatória para empresas que utilizam contas no modelo WABA incorporada (Partner-initiated).
+  Para garantir a continuidade dos envios, a plataforma foi atualizada para suportar esse novo padrão.
 
-Para garantir a continuidade dos envios, a plataforma foi atualizada para suportar esse novo padrão.
+  ### O que muda na prática?
 
-### O que muda na prática?
-- Não há alteração de endpoint (URL)
-- Não há mudanças estruturais no sistema
-- A definição da API utilizada passa a ser feita via parâmetro
-
-- Adicionado
-Novo campo type_model no payload de envio
-Suporte ao valor "marketing_lite" para uso da nova API da Meta
-Parâmetro opcional message_activity_sharing
-- Alterado
-Lógica de roteamento de envio na Positus, que passa a direcionar automaticamente para a API correta da Meta
-- Mantido
-Endpoint de integração inalterado
-Compatibilidade com envios existentes (Cloud API)
-
-- Impacto
-🔴 Alto (obrigatoriedade da Meta)
-🟢 Baixo impacto técnico (sem mudanças estruturais)
-- Compatibilidade
-Totalmente retrocompatível
-Não afeta fluxos existentes sem o uso do novo parâmetro
-
+  - Não há alteração de endpoint (URL)
+  - Não há mudanças estruturais no sistema
+  - A definição da API utilizada passa a ser feita via parâmetro
+  - Adicionado Novo campo type\_model no payload de envio Suporte ao valor "marketing\_lite" para uso da nova API da Meta Parâmetro opcional message\_activity\_sharing
+  - Alterado Lógica de roteamento de envio na Positus, que passa a direcionar automaticamente para a API correta da Meta
+  - Mantido Endpoint de integração inalterado Compatibilidade com envios existentes (Cloud API)
+  - Impacto 🔴 Alto (obrigatoriedade da Meta) 🟢 Baixo impacto técnico (sem mudanças estruturais)
+  - Compatibilidade Totalmente retrocompatível Não afeta fluxos existentes sem o uso do novo parâmetro
 </Update>
 
 <Update label="Janeiro 2026 - 2.0.92" description="Invenio Live e Center.">
@@ -307,7 +382,7 @@ Não afeta fluxos existentes sem o uso do novo parâmetro
   - Seguro → segue normalmente
   - Suspeito → recebe sinalização de risco Arquivos suspeitos continuam disponíveis, porém com tratamento diferenciado de segurança.
 
-  2. Identificação de Arquivos Suspeitos**
+  2. Identificação de Arquivos Suspeitos\*\*
 
   Quando um arquivo suspeito é exibido:
 
@@ -318,52 +393,36 @@ Não afeta fluxos existentes sem o uso do novo parâmetro
       📌 Importante:\
       A verificação se aplica apenas a arquivos recebidos **após a ativação da funcionalidade**.
 
+  3. Controle de Permissão do Usuário A liberação para download de arquivos suspeitos depende das permissões do usuário. Permissão: “Permitir by-pass para download de arquivos suspeitos”
 
+  - Desativada (padrão): O usuário não pode baixar arquivos suspeitos O download permanece bloqueado
+  - Ativada: O usuário pode optar por baixar o arquivo, mediante confirmação de risco
 
-  3. Controle de Permissão do Usuário
-   A liberação para download de arquivos suspeitos depende das permissões do usuário.
-Permissão:
-“Permitir by-pass para download de arquivos suspeitos”
+  4. Bloqueio de Download por Segurança Por padrão, o sistema protege o usuário:
 
-- Desativada (padrão):
-O usuário não pode baixar arquivos suspeitos
-O download permanece bloqueado
-- Ativada:
-O usuário pode optar por baixar o arquivo, mediante confirmação de risco
+  Downloads de arquivos suspeitos são bloqueados automaticamente 📌 Mensagem exibida: "O download deste arquivo foi bloqueado por motivos de segurança."
 
-4. Bloqueio de Download por Segurança
-Por padrão, o sistema protege o usuário:
+  5. Download com Confirmação de Risco Se o usuário tiver permissão para prosseguir:
 
-Downloads de arquivos suspeitos são bloqueados automaticamente
-📌 Mensagem exibida:
-"O download deste arquivo foi bloqueado por motivos de segurança."
+  Será exibida uma tela de confirmação antes do download
 
-5. Download com Confirmação de Risco
-Se o usuário tiver permissão para prosseguir:
+  - Mensagem apresentada: "Este arquivo foi identificado como suspeito e pode representar riscos à segurança. Ao prosseguir, você assume total responsabilidade pelo download."
+  - Opções disponíveis: Cancelar → interrompe a ação Baixar mesmo assim → prossegue com o download ⚠️ Essa ação exige confirmação explícita e indica que o usuário está ciente do risco.
 
-Será exibida uma tela de confirmação antes do download
+  6. Registro de Segurança (Auditoria) Sempre que um arquivo suspeito for baixado:
 
-- Mensagem apresentada:
-"Este arquivo foi identificado como suspeito e pode representar riscos à segurança. Ao prosseguir, você assume total responsabilidade pelo download."
+  O sistema registra informações da ação, como:
 
-- Opções disponíveis:
-Cancelar → interrompe a ação
-Baixar mesmo assim → prossegue com o download
-⚠️ Essa ação exige confirmação explícita e indica que o usuário está ciente do risco.
+  - Usuário que realizou o download
+  - Identificação do arquivo
+  - Referência do conteúdo baixado
 
-6. Registro de Segurança (Auditoria)
-Sempre que um arquivo suspeito for baixado:
+  ### Esse registro:
 
-O sistema registra informações da ação, como:
-- Usuário que realizou o download
-- Identificação do arquivo
-- Referência do conteúdo baixado
-### Esse registro:
-- Não gera notificações
-- Não interfere no fluxo
-É utilizado apenas para controle e auditoria de segurança
+  - Não gera notificações
+  - Não interfere no fluxo É utilizado apenas para controle e auditoria de segurança
 
-## Atualização no Flow: experiência mais prática para os operadores
+  ## Atualização no Flow: experiência mais prática para os operadores
 
   Atualização no Flow: experiência mais prática para os operadores
 
@@ -399,8 +458,7 @@ O sistema registra informações da ação, como:
 <Update label="Setembro 2025 - 2.0.90" description="Invenio Live e Center.">
   ## Atualização no Accounts
 
-  - Visualização da senha na tela de login\
-    <img src="https://robbublob.blob.core.windows.net/docs/changelog/logineye.png" alt="login eye" />
+  - Visualização da senha na tela de login\\ <img src="https://robbublob.blob.core.windows.net/docs/changelog/logineye.png" alt="login eye" />
 
   ### O que mudou
 
@@ -533,7 +591,11 @@ O sistema registra informações da ação, como:
   - Tag personalizada (tag)
   - Preview do conteúdo
 
-  <img src="https://robbublob.blob.core.windows.net/docs/mensagem.png" alt="Atendimento" /> <img src="https://robbublob.blob.core.windows.net/docs/wappativo.png" alt="Atendimento" /> <img src="https://robbublob.blob.core.windows.net/docs/templateswappativo.png" alt="template ativo" />
+  ![Atendimento](https://robbublob.blob.core.windows.net/docs/mensagem.png)
+
+  ![Atendimento](https://robbublob.blob.core.windows.net/docs/wappativo.png)
+
+  ![template ativo](https://robbublob.blob.core.windows.net/docs/templateswappativo.png)
 
   ---
 
@@ -969,7 +1031,11 @@ O sistema registra informações da ação, como:
 
   Os endpoints programados utilizando **JavaScript** possuem algumas funcionalidades que precisam ser respeitadas para que funcionem corretamente.
 
-  <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints.png" alt="Enpoints" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints1.png" alt="Enpoints" /> <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints2.png" alt="Enpoints" />
+  ![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints.png)
+
+  ![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints1.png)
+
+  ![Enpoints](https://robbublob.blob.core.windows.net/docs/changelog/Endpoints2.png)
 
   Para criar um endpoint basta clicar em “\+ Criar endpoint”, após isso, será exigida uma descrição para o endpoint. <img src="https://robbublob.blob.core.windows.net/docs/changelog/Endpoints3.png" alt="Enpoints" />
 
