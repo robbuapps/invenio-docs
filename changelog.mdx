@@ -47,11 +47,39 @@ mode: "center"
   - Valor permitido: **1 a 30 dias**
   - Campo obrigatório
 
+  ## Configurações gerais da conta
+
+  <Info>
+    Defina após quantos dias completos de inatividade um atendimento será encerrado automaticamente.
+
+    O prazo é contado a partir da última mensagem enviada ou recebida na conversa.
+
+    O encerramento não ocorre imediatamente após o prazo ser atingido. A verificação é executada uma vez por dia, durante a madrugada, e o protocolo será encerrado na primeira execução após o período configurado.
+
+    **Exemplo:** se o prazo configurado for **1 dia**, o atendimento será encerrado apenas na primeira rotina executada após completar 24 horas sem interação.
+
+    Caso um segmento possua uma configuração própria, ela terá prioridade sobre a configuração definida na conta.
+  </Info>
+
   ---
 
   ## Configuração na Carteira (Segmento)
 
   Cada carteira pode usar a configuração padrão da conta ou definir um prazo específico.
+
+  ## Configurações do segmento
+
+  <Note>
+    Defina após quantos dias completos de inatividade um atendimento deste segmento será encerrado automaticamente.
+
+    O prazo é contado a partir da última mensagem enviada ou recebida na conversa.
+
+    O encerramento não ocorre imediatamente após o prazo ser atingido. A verificação é executada uma vez por dia, durante a madrugada, e o protocolo será encerrado na primeira execução após o período configurado.
+
+    **Exemplo:** se o prazo configurado for **1 dia**, o atendimento será encerrado apenas na primeira rotina executada após completar 24 horas sem interação.
+
+    > **Importante:** quando configurado, o prazo definido no segmento terá prioridade sobre a configuração geral da conta.
+  </Note>
 
   ### Opção: Usar configurações da conta
 
