@@ -121,6 +121,21 @@ mode: "center"
   - Apenas protocolos sem interação dentro do período configurado serão encerrados.
   - Protocolos dentro do prazo permanecem ativos normalmente.
   - A configuração não impacta atendimentos já encerrados.
+
+  ## Perguntas frequentes
+
+  <AccordionGroup>
+    <Accordion title="Se essa configuração não for preenchida, o sistema finalizará automaticamente os protocolos por inatividade?">
+      Não. Se nenhum prazo for configurado, os protocolos não serão encerrados automaticamente por inatividade.
+
+      Para que a rotina diária considere os atendimentos de uma conta, é necessário que pelo menos uma das seguintes configurações esteja preenchida com um valor maior que **0**:
+
+      - O prazo definido nas **Configurações Gerais da Conta**; ou
+      - O prazo definido no **Segmento (Carteira)**, desde que a opção **Usar configurações da conta** esteja desabilitada.
+
+      Caso nenhuma dessas configurações esteja definida, a conta não será processada pela rotina automática de encerramento por inatividade.
+    </Accordion>
+  </AccordionGroup>
 </Update>
 
 <Update label="Março 2026 - 2.0.95" description="Invenio Live e Center.">
