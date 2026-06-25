@@ -18,6 +18,8 @@ Atualmente, os brokers disponíveis são:
   - Pontal
 - WhatsApp:
   - Positus
+- RCS:
+  - Pontal
 
 ## Como configurar
 
@@ -74,3 +76,16 @@ O **Maestro** pode enviar SMS no formato flash (Mensagem no formato de pop-up) s
 2. Para o provedor *Pontal* poderá habilitar/desabilitar o recurso
 
 ![](https://robbublob.blob.core.windows.net/docs/maestro/maestroflashsms.png)
+
+## Envio de RCS no Maestro
+
+O **Maestro** pode enviar **RCS** (Rich Communication Services) se isso estiver indicado no contato do destinatário e devidamente configurado. O RCS permite mensagens mais ricas que o SMS tradicional, com título, mídia (imagem/vídeo) e botões de sugestão para interação do destinatário.
+
+Quando o dispositivo ou a operadora do destinatário não suportam RCS, o conteúdo da **Mensagem SMS de contingência** definido no template é utilizado, garantindo a entrega da mensagem como SMS tradicional.
+
+> ⚠️ **Atenção:** O recurso de **RCS** também deve ser **contratado/habilitado no provedor da Pontal**, não apenas configurado no Maestro.
+
+### Como configurar
+
+1. Acesse **Configurações \> Integração com provedores \> Adicionar provedor \> Canal: RCS**
+2. Informe as credenciais do provedor **Pontal**
