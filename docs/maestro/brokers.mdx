@@ -47,6 +47,16 @@ Um provedor (E-mail e SMS) pode ser configurado para enviar mensagens para todos
 - **Provedor com segmento** → usado exclusivamente para os segmentos vinculados; tem prioridade sobre o provedor sem segmento.
 - **Exclusividade** → um segmento só pode ser vinculado a um único provedor.
 
+### Definir o provedor no momento do disparo (SMS e RCS)
+
+Para os canais **SMS** e **RCS** (que podem ter mais de um provedor), é possível indicar o provedor de saída por registro, sem alterar o cadastro de provedores. Isso é útil para teste A/B, contorno de instabilidade ou equilíbrio de custo.
+
+- No arquivo da campanha, use a coluna opcional `BROKER`; na **Direct Message API**, use o campo opcional `broker`.
+- O valor é o **nome do provedor exatamente como cadastrado** (ex.: `Pontal`, `Classe A`), **sensível a maiúsculas/minúsculas e a espaços**.
+- **Vazio** → mantém o roteamento por segmento atual, conforme configurado na Integração com Provedores.
+- **Preenchido e válido** → força a utilização do provedor indicado.
+- **Nome inválido ou provedor sem perfil para o segmento** → o disparo é rejeitado (na campanha, o arquivo inteiro; na Direct Message, erro `400` para nome inválido e rejeição no disparo).
+
 ## Envio de SMS Concatenado no Maestro
 
 O **Maestro** passa a permitir o envio automático de **SMS concatenados** quando o conteúdo da mensagem ultrapassar o limite de **160 caracteres**. Com essa melhoria, mensagens mais longas deixam de ser bloqueadas e passam a ser enviadas em múltiplas partes, de forma transparente para a operação.

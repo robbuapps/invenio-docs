@@ -131,7 +131,7 @@ Dessa forma, um mesmo público pode ser utilizado por mais de uma campanha, se n
 O layout padrão do arquivo de importação possuí as seguintes colunas: 
 
 ```csv
-TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, CODIGO_TEMPLATE_EXTERNO, SEGMENTO, CPF_CNPJ, COD_CONTRATO, REMETENTE, DATA_HORA_DISPARO, NOME_CLIENTE, NOME_ARQUIVO_ANEXO, OBS1, OBS2, OBS3, OBS4, BROKER_REFERENCE, Var1, Var2, Var3
+TIPO_DE_REGISTRO, VALOR_DO_REGISTRO, CANAL, CODIGO_TEMPLATE, CODIGO_TEMPLATE_EXTERNO, SEGMENTO, CPF_CNPJ, COD_CONTRATO, REMETENTE, DATA_HORA_DISPARO, NOME_CLIENTE, NOME_ARQUIVO_ANEXO, OBS1, OBS2, OBS3, OBS4, BROKER_REFERENCE, BROKER, Var1, Var2, Var3
 ```
 
 Você também pode fazer o download do arquivo modelo de importação mais atualizado em Público > Importar público > Baixar modelo.
@@ -195,15 +195,28 @@ Quando informado:
 - é armazenado no Maestro
 - pode ser enviado ao provedor no momento do disparo (quando suportado)
 
+> ⚠️ Não confunda `BROKER_REFERENCE` com a coluna `BROKER`. `BROKER_REFERENCE` é uma referência externa livre, repassada ao provedor; `BROKER` define **qual** provedor fará o disparo.
+
+#### Definir o Provedor no Disparo (BROKER)
+
+- **BROKER** `[OPCIONAL — apenas SMS e RCS]`  
+
+Define o provedor de saída para o registro, informando o **nome do provedor exatamente como cadastrado** em Configurações > Integração com provedores (ex.: `Pontal`, `Classe A`). O valor é **sensível a maiúsculas/minúsculas e a espaços**.
+
+- Vazio → mantém o roteamento por segmento atual, conforme configurado na Integração com Provedores.
+- Preenchido e válido → força a utilização do provedor indicado.
+- Nome inválido → o arquivo é rejeitado.
+- Canais diferentes de SMS e RCS ignoram a coluna.
+
 #### Variáveis do Template
 
-As variáveis do template devem ser adicionadas após a última coluna do arquivo, **atualmente a coluna `BROKER_REFERENCE`**.
+As variáveis do template devem ser adicionadas após a última coluna do arquivo, **atualmente a coluna `BROKER`**.
 Tudo que estiver após a última coluna do modelo são campos adicionados manualmente pelo usuário como no exemplo abaixo.
 
 Exemplo:
 
 ```text
-...;OBS1;OBS2;OBS3;OBS4;BROKER_REFERENCE;Var1;Var2;Var3;Var4
+...;OBS1;OBS2;OBS3;OBS4;BROKER_REFERENCE;BROKER;Var1;Var2;Var3;Var4
 ```
 
 Essas variáveis podem ser utilizadas no template:
@@ -225,7 +238,8 @@ Essas variáveis podem ser utilizadas no template:
 
 - As colunas `OBS1` a `OBS4` são apenas informativas
 - O campo `BROKER_REFERENCE` é opcional
-- Todas as colunas após `BROKER_REFERENCE` são tratadas como variáveis dinâmicas
+- A coluna `BROKER` é opcional e vale apenas para SMS e RCS
+- Todas as colunas após `BROKER` são tratadas como variáveis dinâmicas
 
 ### Código do Template Externo (CODIGO_TEMPLATE_EXTERNO)
 

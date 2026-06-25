@@ -1,14 +1,14 @@
 ---
 title: "Direct Message API"
 sidebarTitle: "Direct Message API"
-description: "Envio de mensagens transacionais via E-mail, SMS e WhatsApp usando a infraestrutura do Maestro."
+description: "Envio de mensagens transacionais via E-mail, SMS, WhatsApp e RCS usando a infraestrutura do Maestro."
 ---
 
 ## Informações Gerais
 
 **Versão da API:** /v1 \
 **Nome da API:** Direct Message API \
-**Canais suportados:** Envio de mensagens sem campanha — E-mail, SMS e WhatsApp
+**Canais suportados:** Envio de mensagens sem campanha — E-mail, SMS, WhatsApp e RCS
 
 ---
 
@@ -55,7 +55,7 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-98765",
-  "template_code": "TEMPLATE_EMAIL_001",
+  "template_code": "E001",
   "segment": "Cartao Credito"
 }
 ````
@@ -79,7 +79,7 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-000123",
-  "template_code": "TEMPLATE_WPP_003",
+  "template_code": "W001",
   "segment": "Cartao Credito"
 }
 ```
@@ -97,13 +97,43 @@ Request Body:
   },
   "document_number": "12345678900",
   "contract_code": "CT-00987",
-  "template_code": "TEMPLATE_SMS_002",
+  "template_code": "S001",
   "segment": "Cartao Credito",
-  "flash_sms": false
+  "flash_sms": false,
+  "broker": "Pontal"
 }
 ```
 
 > ⚠️ **Atenção:** O recurso de **SMS Flash** também deve ser **contratado/habilitado no provedor da Pontal**, não apenas habilitado no Maestro.
+
+#### Envio de RCS
+```http
+POST /v1/directmessage/rcs
+```
+Request Body:
+```json
+{
+  "recipient_number": "5511999998888",
+  "variable_values": {
+    "Var1": "123456",
+    "Var2": "João"
+  },
+  "document_number": "12345678900",
+  "contract_code": "CT-00987",
+  "template_code": "R001",
+  "segment": "Cartao Credito",
+  "broker": "Pontal"
+}
+```
+
+#### Campo `broker` (opcional — apenas SMS e RCS)
+
+O campo `broker` define **qual provedor** fará o disparo, informando o **nome do provedor exatamente como cadastrado** no Maestro (ex.: `Pontal`, `Classe A`). O valor é **sensível a maiúsculas/minúsculas e a espaços**.
+
+- Omitido ou vazio → mantém o roteamento por segmento atual, conforme configurado na Integração com Provedores.
+- Preenchido e válido → dispara pelo provedor indicado.
+- Nome inválido → **400 - Bad Request**.
+- Demais canais (E-mail, WhatsApp) ignoram o campo.
 
 ## Variáveis de Template
 
@@ -122,6 +152,7 @@ Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o
 | ----------------------------- | ---------------------------------------------------------------------------------  |
 | **200 - OK**                  | Mensagem validada, mas não enviada — Não há serviço/broker configurado para o canal|
 | **202 - Accepted**            | Mensagem em processamento — Passou pelas validações e foi enfileirada para envio.  |
+| **400 - Bad Request**         | Nome de `broker` inválido — não corresponde a um provedor cadastrado.              |
 | **401 - Unauthorized**        | Falha na autenticação.                                                             |
 | **422 - UnprocessableEntity** | Erros de validação — Campos obrigatórios não preenchidos ou dados inválidos.       |
 | **409 - Conflict**            | Erros de validação do Motor de Regras — Lista os motivos de bloqueio.              |
@@ -136,6 +167,12 @@ Utilize o campo `variable_values` para informar variáveis dinâmicas conforme o
 ```json
 {
   "result": "Mensagem em processamento."
+}
+```
+- 400 - Bad Request: O nome informado em `broker` não corresponde a um provedor cadastrado.
+```json
+{
+  "result": "Broker informado é inválido."
 }
 ```
 - 401 - Unauthorized: Falha na autenticação
