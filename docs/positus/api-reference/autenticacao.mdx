@@ -1,0 +1,30 @@
+---
+title: Autenticação
+description: Como autenticar suas requisições
+---
+
+## Bearer Token
+
+Inclua o token em todas as requisições:
+
+```bash
+curl -X GET https://api.posit.us/v1/account \
+  -H "Authorization: Bearer SEU_TOKEN"
+```
+
+<ResponseExample>
+```json Sucesso
+{
+  "id": "acc_123",
+  "name": "Minha Empresa",
+  "plan": "pro"
+}
+```
+
+```json Erro
+{
+  "error": "unauthorized",
+  "message": "Token inválido ou expirado"
+}
+```
+</ResponseExample>

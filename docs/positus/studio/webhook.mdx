@@ -1,0 +1,124 @@
+---
+title: Webhook
+description: O Webhook é utilizado para receber eventos relacionados aos produtos Positus que pertencem ao workspace.
+---
+
+# Webhook
+
+Para configurar o webhook do workspace acesse: [https://studio.posit.us/workspace/configuracoes](https://studio.posit.us/workspace/configuracoes)
+
+**Classificação de qualidade do número**
+
+Receba em seu webhook a qualidade de cada número de WhatsApp afim de manter uma melhor integração com o seu CRM, aumentando assim a qualidade da gestão em seus números.
+
+* Indefinido: ainda não qualificado
+* Verde: qualidade alta
+* Amarelo: qualidade média
+* Vermelho: qualidade baixa
+
+| Tipo de Evento                          | Descrição                                                                                                     |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| phone\_number\_messaging\_limit\_update | Este evento será enviado sempre que o limite de quantidade de mensagens for alterado. messaging\_limit.amount |
+| phone\_number\_quality\_rating\_update  | Este evento será enviado sempre que a qualidade de um número for alterada. quality\_rating.code               |
+|                                         |                                                                                                               |
+
+| **Status do número** | Descrição                                  |
+| -------------------- | ------------------------------------------ |
+| 1                    | Número aguardando aprovação                |
+| 2                    | Número aguardando criação do servidor      |
+| 3                    | Número aguardando autenticação do servidor |
+| 4                    | Número aguardando instalação do servidor   |
+| 5                    | Número aguardando configuração do servidor |
+| 6                    | Número aguardando ativação                 |
+| 7                    | Número ativo                               |
+| 8                    | Número inativo                             |
+| 9                    | Número excluído                            |
+| 10                   | Tempo limite do servidor atingido          |
+
+| ID | Descrição da classificação de  qualidade |
+| -- | ---------------------------------------- |
+| 0  | UNKNOWN                                  |
+| 1  | GREEN                                    |
+| 2  | YELLOW                                   |
+| 3  | RED                                      |
+
+```
+POST / {
+    "event": "phone_number_quality_rating_update",
+    "workspace": {
+        "id": "0baf1974-2ccc-41dd-8659-594da132edd2",
+        "name": "Estúdio Rilo",
+        "business_id": "857420775150360",
+        "waba_id": "1781395745366162"
+    },
+    "number": {
+        "id": "96b3092d-bff9-4f53-bf46-74e5fb126043",
+        "status": {
+            "id": 7,
+            "description": "Número ativo"
+        },
+        "quality_rating": {
+            "id": 1,
+            "code": "GREEN"
+        },
+        "messaging_limit": {
+            "id": 1,
+            "amount": 1000
+        },
+        "name": "Estudio Rilo",
+        "country_code": "55",
+        "number": "4333385841",
+        "full_number": "554333385841"
+    }
+}
+```
+
+**Mensagem de template**
+
+Receba notificações de aprovação das suas templates de notificações por webhook
+
+| ID | Descrição (code)  |
+| -- | ----------------- |
+| 0  | UNDEFINED         |
+| 1  | PENDING           |
+| 2  | APPROVED          |
+| 3  | REJECTED          |
+| 4  | IN\_APPEAL        |
+| 5  | PENDING\_DELETION |
+| 6  | DELETED           |
+| 7  | DISABLED          |
+
+```
+POST / {
+	"event": "message_template_status_update",
+	"workspace": {
+		"id": "93834938-3242-131321-bbb3-123131321",
+		"name": "Robbu",
+		"business_id": "8274562463464",
+		"waba_id": "7362e34823764823"
+	},
+	"template": {
+		"id": "us737373736s616-dsf2342-fd23-b324ea8-23423fd13",
+		"status": {
+			"id": 2,
+			"code": "APPROVED",
+			"description": "Aprovado"
+		},
+		"category": {
+			"id": 11,
+			"code": "AUTO_REPLY",
+			"description": "Resposta automática"
+		},
+		"language": {
+			"id": 46,
+			"code": "pt_BR",
+			"name": "Portuguese (BR)"
+		},
+		"name": "abertura_janela_01",
+		"components": [{
+			"type": "BODY",
+			"text": "{{1}}, desculpe a demora para responder sua mensagem. Você quer continuar nossa conversa?"
+		}]
+	}
+}
+```

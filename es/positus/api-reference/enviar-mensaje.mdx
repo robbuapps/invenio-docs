@@ -1,0 +1,49 @@
+---
+title: Enviar Mensaje
+description: Endpoint para envío de mensajes por WhatsApp
+api: "POST https://api.posit.us/v1/messages"
+---
+
+## Body
+
+<ParamField body="to" type="string" required>
+  Número del destinatario en formato internacional. Ej: `5511999999999`
+</ParamField>
+
+<ParamField body="type" type="string" required>
+  Tipo de mensaje. Valores: `text`, `image`, `document`
+</ParamField>
+
+<ParamField body="text" type="object">
+  Obligatorio cuando `type` es `text`.
+  <Expandable title="propiedades">
+    <ParamField body="text.body" type="string" required>
+      Contenido del mensaje (máx. 4096 caracteres)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```bash
+curl -X POST https://api.posit.us/v1/messages \
+  -H "Authorization: Bearer SU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "to": "5511999999999",
+    "type": "text",
+    "text": {
+      "body": "¡Hola! Su mensaje vía Positus."
+    }
+  }'
+```
+
+<ResponseExample>
+```json 200
+{
+  "id": "msg_abc123",
+  "status": "queued",
+  "to": "5511999999999"
+}
+```
+</ResponseExample>
