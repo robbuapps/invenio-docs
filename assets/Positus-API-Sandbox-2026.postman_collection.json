@@ -1,0 +1,564 @@
+{
+  "info": {
+    "_postman_id": "fbe8a44c-6835-4b2a-8de5-f87791beaf8b",
+    "name": "Positus API Sandbox (2026)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Message Text",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\", \r\n  \"type\": \"text\", \r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Stickers from URL",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"to\": \"+5511999999999\",\r\n    \"type\": \"sticker\",\r\n    \"recipient_type\": \"individual\",\r\n    \"sticker\": {\r\n        \"provider\": {\r\n            \"name\": \"Robbu\"\r\n        },\r\n        \"link\": \"https://studio.posit.us/api/samples/sticker.webp\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Contact",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"contacts\",\r\n  \"contacts\":[{\r\n\t\"addresses\": [],\r\n\t\"emails\": [],\r\n\t\"ims\": [],\r\n\t\"name\": {\r\n\t\t\"first_name\": \"Positus Provider\",\r\n\t\t\"formatted_name\": \"Positus Provider\"\r\n\t},\r\n\t\"org\": [],\r\n\t\"phones\": [{\r\n\t\t\"phone\": \"+55 11 2626-4234\",\r\n\t\t\"type\": \"CELL\",\r\n\t\t\"wa_id\": \"551126264234\"\r\n\t}],\r\n\t\"urls\": []\r\n}]\r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Location",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"location\",\r\n  \"location\": {\r\n        \"longitude\": -46.662787,\r\n        \"latitude\": -23.553610,\r\n        \"name\": \"Robbu Brazil\",\r\n        \"address\": \"Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200\"\r\n    }\r\n}\r\n"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Image",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"image\",\r\n \"image\": {\r\n      \"link\": \"https://olhardigital.com.br/uploads/acervo_imagens/2019/02/r16x9/20190226124316_1200_675_-_Agua_potavel.jpg\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Document",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"document\",\r\n \"document\": {\r\n      \"link\": \"http://www.pdf995.com/samples/pdf.pdf\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Video",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"video\",\r\n \"video\": {\r\n      \"link\": \"https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Audio",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"audio\",\r\n \"audio\": {\r\n      \"link\": \"https://sample-videos.com/audio/mp3/crowd-cheering.mp3\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Interactive - List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"+5511999999999\",\n  \"type\": \"interactive\",\n  \"interactive\": {\n    \"type\": \"list\",\n    \"header\": {\n      \"type\": \"text\",\n      \"text\": \"CryptoBank\"\n    },\n    \"body\": {\n      \"text\": \"Veja as opções que preparamos para você!\"\n    },\n    \"footer\": {\n      \"text\": \"Demonstração Robbu\"\n    },\n    \"action\": {\n      \"button\": \"Opções de pagamento\",\n      \"sections\": [\n        {\n          \"title\": \"Atualização\",\n          \"rows\": [\n            {\n              \"id\": \"7\",\n              \"title\": \"Vencimento Hoje\",\n              \"description\": \"R$ 201,23\"\n            },\n            {\n              \"id\": \"1\",\n              \"title\": \"Vencimento Amanhã\",\n              \"description\": \"R$ 219,32\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Interactive - Buttons",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"+5511999999999\",\n  \"type\": \"interactive\",\n  \"recipient_type\": \"individual\",\n  \"interactive\": {\n    \"type\": \"button\",\n    \"header\": {\n      \"type\": \"text\",\n      \"text\": \"1 mês grátis\"\n    },\n    \"body\": {\n      \"text\": \"Ative seu número e realize testes por 1 mês.\"\n    },\n    \"footer\": {\n      \"text\": \"https://posit.us\"\n    },\n    \"action\": {\n      \"buttons\": [\n        {\n          \"type\": \"reply\",\n          \"reply\": {\n            \"id\": \"unique-postback-id-1\",\n            \"title\": \"Criar conta grátis\"\n          }\n        },\n        {\n          \"type\": \"reply\",\n          \"reply\": {\n            \"id\": \"unique-postback-id-2\",\n            \"title\": \"Falar com atendente\"\n          }\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Media Download",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/media/{{media_id}}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "sandbox",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "media",
+            "{{media_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "10f0dea4-e1e6-49a2-a23c-3aa5106072ca",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "748edcb1-f1b2-4233-b25e-85898ea9c765",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "d807bda1-d278-482d-9aa8-e9ee74b5bff0",
+      "key": "chave",
+      "value": "xxxxxx"
+    },
+    {
+      "id": "40dd5c6e-c76e-418a-a134-04688690226c",
+      "key": "access_token",
+      "value": "xxxxxx"
+    },
+    {
+      "key": "media_id",
+      "value": "<media-id>"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

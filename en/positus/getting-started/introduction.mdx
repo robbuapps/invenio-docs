@@ -33,15 +33,31 @@ WhatsApp Business API is not a platform. An API (Application Programming Interfa
 
 ## Can I use the WhatsApp Business API and keep the account active on my phone simultaneously?
 
-Do not. To use the WhatsApp Business API you need to delete your current WhatsApp account, so you will lose all existing conversations. Currently, WhatsApp does not offer any migration process, but people who have your contact on the calendar can start a conversation normally with you.
+Yes, through **Coexistence**.
+
+If you already use the number in the **WhatsApp Business App** (the business app on your phone), you can connect it to the WhatsApp Business API **without deleting the account and without losing access from your phone** — both run simultaneously on the same number.
+
+During onboarding, your **contacts and recent conversation history are synced** to the platform, and messages sent or received on the phone stay mirrored in the API (and vice versa). This removes the old need for a destructive migration.
+
+<Info>
+Coexistence applies to the **WhatsApp Business App**, not the regular WhatsApp. Availability and conditions (regions, app version, and sync limits) follow Meta's rules.
+</Info>
 
 ## Can I cancel the WhatsApp Business API contract and switch back to using WhatsApp on my mobile device?
 
-You can cancel the contract but your number will not be enabled again to use on your phone due to the security rules of WhatsApp Business API, these rules are not from Positus.
+It depends on how the number was connected.
+
+If you use **Coexistence**, the WhatsApp Business App stays active on your phone the whole time — there is nothing to "recover".
+
+In all other cases, when you stop using the API the number is **released** (we perform the *deregister* with Meta). From then on, going back to using it in the app depends on the **rules and new verification required by Meta** — these rules are Meta's, not Positus'.
 
 ## How long will my number be unavailable for switching between WhatsApp and WhatsApp Business API?
 
-This will depend on your CRM provider, however using Positus or Robbu solutions your number will be inactive for approximately 5 minutes, and may vary according to the receipt of the call or SMS triggered to verify the account.
+It depends on the type of activation.
+
+- **Coexistence:** there is no unavailability — the number keeps working in the WhatsApp Business App throughout the entire process.
+- **Already-verified number (embedded signup):** activation is practically immediate, with no code step.
+- **Traditional activation (unverified number):** there is a verification via **SMS or phone call**; during that interval the number is unavailable for a few minutes, varying according to the receipt of the code.
 
 ## Is WhatsApp Business API a service platform?
 

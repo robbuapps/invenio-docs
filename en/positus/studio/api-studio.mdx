@@ -1,0 +1,102 @@
+---
+title: API - Studio
+description: Query all your registered workspaces, numbers, statuses, and templates in real time.
+---
+
+# API - Studio
+
+<Info>
+Bearer Token authentication is required on all calls \
+See how to generate your token [**click here**](/docs/positus/studio/studio-positus#como-gerar-um-token-para-utilizar-na-api)
+</Info>
+
+## Workspaces
+
+Query the workspaces linked to your token
+
+[https://api.positus.global/v2/workspaces](https://api.positus.global/v2/workspaces)
+
+```
+GET/ {
+	"data": [{
+		"id": "564564-5555-33333-bbb3-3423r2cc",
+		"namespace": "dc3242af3_8a341_4343a_3435e_743434343a86",
+		"name": "Positus",
+		"webhook": null,
+		"last_plan_name": null,
+		"messenger_licenses": 0,
+		"currency": {
+			"id": 1,
+			"code": "BRL"
+		},
+		"created_at": "2021-05-11T18:53:07.000000Z",
+		"updated_at": "2021-05-11T19:03:36.000000Z"
+	}]
+}
+```
+
+## Message-templates
+
+Query the templates linked to the workspace
+
+[https://api.positus.global/v2/workspaces/\{id}/message-templates](https://api.positus.global/v2/workspaces/\{id}/message-templates)
+
+```
+GET/ {
+	"data": [{
+		"id": "234242-234242-23422-234242-2343242",
+		"wa_id": "2342424242",
+		"status": {
+			"id": 2,
+			"code": "APPROVED",
+			"description": "Aprovado"
+		},
+		"category": {
+			"id": 6,
+			"code": "ISSUE_RESOLUTION",
+			"description": "Resolução de problemas"
+		},
+		"language": {
+			"id": 46,
+			"code": "pt_BR",
+			"name": "Portuguese (BR)"
+		},
+		"name": "resposta_chamado",
+		"components": [{
+			"type": "BODY",
+			"text": "Olá {{1}}, tudo bem? O seu chamado foi respondido na nossa plataforma, caso você queira você também pode tratar o problema por aqui."
+		}],
+		"created_at": "2021-03-12T19:19:52.000000Z",
+		"updated_at": "2021-03-13T16:00:05.000000Z"
+	}]
+}
+```
+
+## Number
+
+Query the templates linked to the workspace
+
+[https://api.positus.global/v2/workspaces/\{id}/numbers](https://api.positus.global/v2/workspaces/\{id}/numbers)
+
+```
+GET/ {
+	"data": [{
+		"id": "12313-1231231-123131-12313-123132132131",
+		"status": {
+			"id": 7,
+			"description": "Número ativo"
+		},
+		"quality_rating": {
+			"id": 0,
+			"code": "UNKNOWN"
+		},
+		"name": "Positus Atendimento",
+		"tag": null,
+		"country_code": "55",
+		"number": "1176862233",
+		"display_phone_number": "551176862233",
+		"created_at": "2021-05-19T20:05:53.000000Z",
+		"updated_at": "2021-05-19T20:11:10.000000Z"
+	}]
+}
+```

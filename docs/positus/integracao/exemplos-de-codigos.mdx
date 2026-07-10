@@ -15,26 +15,26 @@ description: Veja alguns exemplos de código para realizar a integração da sua
 Você deverá utilizar a seguinte URL:\
 [https://api.positus.global/v2/whatsapp/numbers/\{\{chave}}/messages](https://api.positus.global/v2/whatsapp/numbers/\{\{chave}}/messages)
 
-*Ao contratar e ativar a sua conta de WhatsApp Business API, nós iremos fornecer um media\_id por número e você poderá gerar seus tokens pela plataforma.*
+*Ao contratar e ativar a sua conta de WhatsApp Business API, nós iremos fornecer uma chave por número e você poderá gerar seus tokens pela plataforma.*
 
 
-API for production
+[⬇️ Download da collection Postman — Produção (2026)](/assets/Positus-API-2026.postman_collection.json)
 
 
 ## Sandbox API
 
 <Info>
 **Desenvolvimento**\
-Você deverá utilizar a sequinte URL:\
-[https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{chave}}/messages](https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{number}}/messages)<br />
+Você deverá utilizar a seguinte URL:\
+[https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{chave}}/messages](https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{chave}}/messages)<br />
 
-*Crie  sua conta na sandbox pelo link* [*https://studio.posit.us/*](https://studio.posit.us/) *e gerar um token seguindo as instruções da tela. N*avegue no menu "webhook" e copiei a URL POST nela esta usa "Chave".
+*Crie sua conta na sandbox pelo link* [*https://studio.posit.us/*](https://studio.posit.us/) *e gere um token seguindo as instruções da tela.* Navegue no menu "Webhook" e copie a URL POST (ela usa a "Chave").
 
 *No ambiente de desenvolvimento você não poderá enviar mensagens HSM, mas todos os demais recursos estão disponiveis para envio e recebimento.*
 </Info>
 
 
-API for development SandBox
+[⬇️ Download da collection Postman — Sandbox (2026)](/assets/Positus-API-Sandbox-2026.postman_collection.json)
 
 
 ## Exemplos de códigos
@@ -162,9 +162,9 @@ $.ajax(settings).done(function (response) {
 
 
 
-## PowerShelll - RestMethod
+## PowerShell - RestMethod
 
-```d
+```powershell
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
 $headers.Add("Authorization", "Bearer xxxx")
@@ -199,16 +199,16 @@ import (
 
 func main() {
 
-  url := "https://api.positus.global/v2/sandbox/messages"
+  url := "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages"
   method := "POST"
 
-  payload := strings.NewReader("{
-\n  \"to\": \"+55119999999999\",
-\n  \"type\": \"text\",
-\n  \"text\": {
-\n      \"body\": \"your-message-content\"
-\n  }
-\n}")
+  payload := strings.NewReader(`{
+  "to": "+5511999999999",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}`)
 
   client := &http.Client {
   }

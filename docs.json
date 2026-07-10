@@ -163,13 +163,6 @@
                                 ]
                             },
                             {
-                                "group": "API Reference",
-                                "pages": [
-                                    "docs/positus/api-reference/autenticacao",
-                                    "docs/positus/api-reference/enviar-mensagem"
-                                ]
-                            },
-                            {
                                 "group": "Positus Studio",
                                 "pages": [
                                     "docs/positus/studio/studio-positus",
@@ -224,13 +217,6 @@
                                 ]
                             },
                             {
-                                "group": "API Reference",
-                                "pages": [
-                                    "en/positus/api-reference/authentication",
-                                    "en/positus/api-reference/send-message"
-                                ]
-                            },
-                            {
                                 "group": "Positus Studio",
                                 "pages": [
                                     "en/positus/studio/positus-studio",
@@ -276,13 +262,6 @@
                                     "es/positus/integracion/api",
                                     "es/positus/integracion/webhook",
                                     "es/positus/integracion/ejemplos-de-codigo"
-                                ]
-                            },
-                            {
-                                "group": "API Reference",
-                                "pages": [
-                                    "es/positus/api-reference/autenticacion",
-                                    "es/positus/api-reference/enviar-mensaje"
                                 ]
                             },
                             {

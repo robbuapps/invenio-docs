@@ -5,7 +5,24 @@ description: Integre agora mesmo com a maior plataforma de comunicação do mund
 
 ## Arquitetura Positus - WhatsApp Business API
 
-![Arquitetura Positus - WhatsApp Business API](/images/positus/integracao/arquitetura-positus-whatsapp-business-api.png)
+```mermaid
+flowchart LR
+    App["Sua aplicação / CRM"]
+    API["Positus API<br/>api.positus.global/v2"]
+    Cloud["WhatsApp Cloud API<br/>(Meta)"]
+    User(["Cliente no WhatsApp"])
+
+    App -->|"POST .../messages · Bearer"| API
+    API -->|encaminha| Cloud
+    Cloud -->|entrega| User
+    User -->|responde| Cloud
+    Cloud -->|webhook| API
+    API -->|"notificação: contacts / messages / statuses"| App
+```
+
+<Info>
+Você pode integrar diretamente com a Positus API (acima) ou usar uma plataforma de atendimento como o Invenio da Robbu, sem desenvolver a integração.
+</Info>
 
 | SDK                                                                                                    |                        |                                                        |
 | ------------------------------------------------------------------------------------------------------ | ---------------------- | ------------------------------------------------------ |
@@ -26,11 +43,11 @@ description: Integre agora mesmo com a maior plataforma de comunicação do mund
 [Download Postman App](https://www.postman.com/downloads/)
 
 <CardGroup cols={2}>
-  <Card title="API for production" icon="file-arrow-down" href="https://3796435217-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M5IW-6g1h0Jli46caJU%2F-MKocGEEujCH3HPut1mP%2F-MKocOHkPEcVZbDHMFG9%2FPositus%20API%20(October%202020).postman_collection.json?alt=media&token=6173bc85-e687-4d63-b0fa-1adb0a0ad1ce">
-    Positus API (October 2020).postman_collection.json
+  <Card title="API de produção" icon="file-arrow-down" href="/assets/Positus-API-2026.postman_collection.json">
+    Positus API (2026).postman_collection.json
   </Card>
-  <Card title="API for development SandBox" icon="file-arrow-down" href="https://3796435217-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M5IW-6g1h0Jli46caJU%2F-MLmBcBW-hcBKSJRC4aZ%2F-MLmBkSP997NiiDQ_RiC%2FPositus%20API%20Sandbox%20(November%202020).postman_collection.json?alt=media&token=0a9a5489-a9cb-4496-8e0d-72fb238ca08e">
-    Positus API Sandbox (November 2020).postman_collection.json
+  <Card title="API de desenvolvimento (Sandbox)" icon="file-arrow-down" href="/assets/Positus-API-Sandbox-2026.postman_collection.json">
+    Positus API Sandbox (2026).postman_collection.json
   </Card>
 </CardGroup>
 
@@ -51,7 +68,7 @@ Utilize esta rota para enviar mensagens de texto via WhatsApp
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
 | Content-Type   | string | application/json                 |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 
 #### Request Body
 
@@ -96,6 +113,64 @@ Utilize esta rota para enviar mensagens de texto via WhatsApp
   </Tab>
 </Tabs>
 
+## Indicador de digitação
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator`
+
+Exibe o indicador "digitando…" para o cliente e marca como lida a mensagem recebida. Informe o `message_id` da mensagem enviada pelo cliente. O indicador é dispensado automaticamente após cerca de 25 segundos ou assim que você responde.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name          | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | string | Autenticação usando Bearer Token |
+| Content-Type  | string | application/json                 |
+
+#### Request Body
+
+| Name       | Type   | Description                                          |
+| ---------- | ------ | ---------------------------------------------------- |
+| message_id | string | **Obrigatório.** ID da mensagem recebida do cliente. |
+
+```json
+{
+  "message_id": "wamid.HBgMNTUxMTk5OTk5OTk5FMA=="
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "success": true,
+        "message": "The typing indicator was sent successfully"
+    }
+    ```
+  </Tab>
+  <Tab title="Erro">
+    ```json
+    {
+        "errors": [
+            {
+                "code": 0,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": "Unfortunately, we were unable to send the typing indicator"
+    }
+    ```
+  </Tab>
+</Tabs>
+
 ## HSM
 
 `POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
@@ -114,7 +189,7 @@ HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens 
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -126,7 +201,6 @@ HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens 
   "to": "+551199999999",
   "type": "template",
   "template": {
-    "namespace": "xxxxxxx",
     "language": {
       "policy": "deterministic",
       "code": "pt_BR"
@@ -172,7 +246,6 @@ HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens 
   "to": "+5511999999999",
   "type": "template",
   "template": {
-    "namespace": "dc730af3_d5a86",
     "language": {
       "policy": "deterministic",
       "code": "pt_BR"
@@ -191,24 +264,6 @@ HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens 
         "sub_type": "quick_reply",
         "index": "0"
       }
-    ]
-  }
-}
-```
-
-```json Texto
-{
-  "to": "+55119999999999",
-  "type": "hsm",
-  "hsm": {
-    "namespace": "52_2bca4fad4c4a",
-    "element_name": "fgv_3",
-    "language": {
-      "policy": "deterministic",
-      "code": "pt_BR"
-    },
-    "localizable_params": [
-      { "default": "Thiago" }
     ]
   }
 }
@@ -263,7 +318,7 @@ Compartilhe contatos
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -342,7 +397,7 @@ Compartilhe localizações
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -407,7 +462,7 @@ Compartilhe imagens
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -458,7 +513,7 @@ Compartilhe imagens
 
 `POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
 
-Compartilhe imagens
+Compartilhe documentos
 
 #### Path Parameters
 
@@ -470,7 +525,7 @@ Compartilhe imagens
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -533,7 +588,7 @@ Compartilhe videos
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -596,7 +651,7 @@ Compartilhe audios
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -658,7 +713,7 @@ Compartilhe adesivos. O Formato do adesivo tem que ser exatamente 512x512
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -678,34 +733,6 @@ Compartilhe adesivos. O Formato do adesivo tem que ser exatamente 512x512
 <Tabs>
   <Tab title="200">
     ```json
-    ```
-  </Tab>
-</Tabs>
-
-## Download Midia
-
-`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{messages.type.id}}`
-
-Faça o download das midias
-
-#### Path Parameters
-
-| Name  | Type   | Description                         |
-| ----- | ------ | ----------------------------------- |
-| Chave | string | Código único por número de WhatsApp |
-
-#### Headers
-
-| Name           | Type   | Description                      |
-| -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
-| Content-Type   | string | application/json                 |
-
-#### Response
-
-<Tabs>
-  <Tab title="200">
-    ```json
     {
         "messages": [
             {
@@ -716,17 +743,42 @@ Faça o download das midias
     }
     ```
   </Tab>
-  <Tab title="500">
+</Tabs>
+
+## Download Midia
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{messages.type.id}}`
+
+Faça o download das mídias. Use o `id` da mídia recebido na notificação de webhook.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+| id    | string | ID da mídia (recebido no webhook)   |
+
+#### Headers
+
+| Name          | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | string | Autenticação usando Bearer Token |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Retorna o **conteúdo binário da mídia**, com o cabeçalho `Content-Type` correspondente ao tipo do arquivo (ex.: `image/jpeg`, `audio/ogg`, `application/pdf`).
+  </Tab>
+  <Tab title="404">
+    Mídia não encontrada (retorna o erro correspondente da Meta).
+  </Tab>
+  <Tab title="429">
+    Limite de requisições atingido na Meta. A resposta inclui o cabeçalho `Retry-After` (em segundos) indicando quando tentar novamente.
+
     ```json
     {
-        "errors": [
-            {
-                "code": ,
-                "title": "",
-                "details": ""
-            }
-        ],
-        "message": ""
+        "message": "..."
     }
     ```
   </Tab>
@@ -750,7 +802,7 @@ Mensagens de botão de lista ou de resposta não podem ser usadas como notifica�
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -815,6 +867,14 @@ Mensagens de botão de lista ou de resposta não podem ser usadas como notifica�
 <Tabs>
   <Tab title="200">
     ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
     ```
   </Tab>
 </Tabs>
@@ -841,7 +901,7 @@ Mensagens de botão de lista ou de resposta não podem ser usadas como notifica�
 
 | Name           | Type   | Description                      |
 | -------------- | ------ | -------------------------------- |
-| Authentication | string | Autenticação usando Bearer Token |
+| Authorization  | string | Autenticação usando Bearer Token |
 | Content-Type   | string | application/json                 |
 
 #### Request Body
@@ -890,6 +950,14 @@ Mensagens de botão de lista ou de resposta não podem ser usadas como notifica�
 <Tabs>
   <Tab title="200">
     ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
     ```
   </Tab>
 </Tabs>

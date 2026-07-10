@@ -1,0 +1,40 @@
+---
+title: Webhook
+description: The Webhook is used to receive events related to Positus products that belong to the workspace.
+---
+
+# Webhook
+
+To configure the workspace webhook, access: https://studio.posit.us/workspace/configuracoes
+
+**Phone number quality classification**
+
+Receive in your webhook the quality of each WhatsApp number in order to maintain better integration with your CRM, thus improving the management quality of your numbers.
+
+- Undefined: not yet classified
+- Green: high quality
+- Yellow: medium quality
+- Red: low quality
+
+| Event Type                          | Description                                                                       |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
+| phone_number_messaging_limit_update | This event will be triggered whenever the messaging limit of a number is updated. |
+| phone_number_quality_update         | This event will be triggered whenever the quality of a number is updated.         |
+
+## Example Payload
+
+```json
+{
+  "event": "phone_number_quality_update",
+  "data": {
+    "phone_number": "5511999999999",
+    "quality": "GREEN"
+  }
+}
+```
+
+## Notes
+
+- Events are sent via HTTP POST.
+- Make sure your endpoint is publicly accessible.
+- We recommend validating the request origin for security.

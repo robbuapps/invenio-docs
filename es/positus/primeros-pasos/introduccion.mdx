@@ -33,15 +33,31 @@ La API de WhatsApp Business no es una plataforma. Una API (interfaz de programac
 
 ## ¿Puedo usar la API de WhatsApp Business y mantener la cuenta activa en mi teléfono simultáneamente?
 
-No haga. Para utilizar la API de WhatsApp Business, debe eliminar su cuenta de WhatsApp actual, por lo que perderá todas las conversaciones existentes. Actualmente, WhatsApp no ​​ofrece ningún proceso de migración, pero las personas que tengan tu contacto en el calendario pueden iniciar una conversación normalmente contigo.
+Sí, a través de **Coexistence** (Coexistencia).
+
+Si ya usas el número en la **app WhatsApp Business** (la aplicación de negocios, en el teléfono), puedes conectarlo a la API de WhatsApp Business **sin eliminar la cuenta y sin perder el acceso desde el teléfono**: ambos funcionan de forma simultánea en el mismo número.
+
+Durante la conexión, tus **contactos y el historial reciente de conversaciones se sincronizan** con la plataforma, y los mensajes enviados o recibidos desde el teléfono siguen reflejándose en la API (y viceversa). Esto elimina la antigua necesidad de una migración destructiva.
+
+<Info>
+La Coexistencia se aplica a la **app WhatsApp Business**, no al WhatsApp común. La disponibilidad y las condiciones (regiones, versión de la app y límites de sincronización) siguen las reglas de Meta.
+</Info>
 
 ## ¿Puedo cancelar el contrato de la API empresarial de WhatsApp y volver a usar WhatsApp en mi dispositivo móvil?
 
-Puede cancelar el contrato, pero su número no se habilitará nuevamente para usar en su teléfono debido a las reglas de seguridad de la API de WhatsApp Business, estas reglas no son de Positus.
+Depende de cómo se conectó el número.
+
+Si usas la **Coexistencia**, la app WhatsApp Business sigue activa en tu teléfono todo el tiempo: no hay nada que "recuperar".
+
+En los demás casos, al finalizar el uso en la API el número queda **liberado** (hacemos el *deregister* ante Meta). A partir de ahí, volver a usarlo en la aplicación depende de las **reglas y la nueva verificación exigidas por Meta**: esas reglas son de Meta, no de Positus.
 
 ## ¿Cuánto tiempo no estará disponible mi número para cambiar entre WhatsApp y la API de WhatsApp Business?
 
-Esto dependerá de su proveedor de CRM, sin embargo, al usar las soluciones de Positus o Robbu, su número estará inactivo durante aproximadamente 5 minutos y puede variar según la recepción de la llamada o el SMS activado para verificar la cuenta.
+Depende del tipo de activación.
+
+- **Coexistencia:** no hay indisponibilidad — el número sigue funcionando en la app WhatsApp Business durante todo el proceso.
+- **Número ya verificado (embedded signup):** la activación es prácticamente inmediata, sin etapa de código.
+- **Activación tradicional (número no verificado):** hay una verificación por **SMS o llamada**; en ese intervalo el número queda no disponible por unos minutos, variando según la recepción del código.
 
 ## WhatsApp Business API es una plataforma de servicio?
 
