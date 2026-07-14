@@ -1,0 +1,269 @@
+---
+title: Webhook
+description: El Webhook se utiliza para recibir eventos relacionados con los productos Positus que pertenecen al workspace.
+---
+
+# Webhook
+
+Para configurar el webhook del workspace accede a: [https://studio.posit.us/workspace/configuracoes](https://studio.posit.us/workspace/configuracoes)
+
+Todo evento entregado a tu webhook sigue el mismo envoltorio: un campo `event` con el nombre del evento, un objeto `workspace` que identifica el workspace de origen y un objeto con el recurso relacionado al evento (`number`, `template`, etc.). La entrega se realiza mediante HTTP `POST`.
+
+**Objeto `workspace`**
+
+| Campo            | Descripción                                                  |
+| ---------------- | ----------------------------------------------------------- |
+| id               | Identificador (UUID) del workspace                          |
+| provider         | Proveedor del workspace: `{ "id", "name" }`                 |
+| type_workspace   | Tipo del workspace: `{ "id", "name" }` (Receptivo / Prospect) |
+| name             | Nombre del workspace                                        |
+| business_id      | ID del Business Manager en Meta                            |
+| waba_id          | ID de la WABA en Meta                                      |
+
+## Clasificación de calidad del número
+
+Recibe en tu webhook la calidad de cada número de WhatsApp con el fin de mantener una mejor integración con tu CRM, mejorando así la calidad de la gestión de tus números.
+
+* Indefinido: aún no calificado
+* Verde: calidad alta
+* Amarillo: calidad media
+* Rojo: calidad baja
+
+### Eventos de número
+
+| Tipo de Evento              | Descripción                                                                                                                                          |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| phone_number_status_update  | Se envía en tiempo real cada vez que se modifica el estado, la clasificación de calidad (`quality_rating`) o el límite de mensajes (`messaging_limit`) del número. |
+| phone_number_quality_update | Se envía durante la sincronización periódica de los números. Utiliza un payload en formato plano (ver el ejemplo a continuación).                    |
+| phone_number_sync           | Se envía durante la sincronización periódica, reflejando el estado actual del número.                                                               |
+
+### Estado del número
+
+| **Estado del número** | Descripción                                                  |
+| --------------------- | ----------------------------------------------------------- |
+| 1                     | Número esperando aprobación                                  |
+| 2                     | Número esperando creación del servidor                      |
+| 3                     | Número esperando autenticación del servidor                 |
+| 4                     | Número esperando instalación del servidor                   |
+| 5                     | Número esperando configuración del servidor                 |
+| 6                     | Número esperando activación                                  |
+| 7                     | Número activo                                                |
+| 8                     | Número inactivo                                              |
+| 9                     | Número eliminado                                             |
+| 10                    | Esperando migración a Cloud Api                             |
+| 11                    | Número esperando reinicio del servidor                      |
+| 12                    | Número esperando finalización de la activación por el usuario |
+| 13                    | Número baneado                                               |
+| 14                    | Número esperando restauración                               |
+| 15                    | Número transferido                                          |
+
+### Estado de calidad (`quality_status`)
+
+| ID | Código    |
+| -- | --------- |
+| 0  | UNKNOWN   |
+| 1  | CONNECTED |
+| 2  | FLAGGED   |
+| 3  | MIGRATED  |
+
+### Clasificación de calidad (`quality_rating`)
+
+| ID | Descripción de la clasificación de calidad |
+| -- | ------------------------------------------ |
+| 0  | UNKNOWN                                    |
+| 1  | GREEN                                     |
+| 2  | YELLOW                                   |
+| 3  | RED                                      |
+
+### Límite de mensajes (`messaging_limit`)
+
+| ID | amount    | formatted_amount |
+| -- | --------- | ---------------- |
+| 0  | UNKNOWN   | Unknown          |
+| 1  | 1000      | 1.000            |
+| 2  | 10000     | 10.000           |
+| 3  | 100000    | 100.000          |
+| 4  | UNLIMITED | Unlimited        |
+| 5  | 50        | 50               |
+| 6  | 250       | 250              |
+| 7  | 2000      | 2.000            |
+
+### Ejemplo de payload — `phone_number_status_update`
+
+```json
+POST / {
+    "event": "phone_number_status_update",
+    "workspace": {
+        "id": "0baf1974-2ccc-41dd-8659-594da132edd2",
+        "provider": {
+            "id": 1,
+            "name": "Positus V2"
+        },
+        "type_workspace": {
+            "id": 1,
+            "name": "Receptivo"
+        },
+        "name": "Estúdio Rilo",
+        "business_id": "857420775150360",
+        "waba_id": "1781395745366162"
+    },
+    "number": {
+        "id": "96b3092d-bff9-4f53-bf46-74e5fb126043",
+        "business_manager": {
+            "business_portfolio_id": "857420775150360",
+            "current_limit": 100000,
+            "max_daily_conversations_per_business": 100000,
+            "max_daily_conversation_per_phone": 1000,
+            "max_phone_numbers_per_business": 20,
+            "max_phone_numbers_per_waba": 20,
+            "quality_rating": "HIGH",
+            "throughput_level": "1000_mps"
+        },
+        "status": {
+            "id": 7,
+            "description": "Número ativo"
+        },
+        "quality_status": {
+            "id": 1,
+            "code": "CONNECTED"
+        },
+        "quality_rating": {
+            "id": 1,
+            "code": "GREEN"
+        },
+        "messaging_limit": {
+            "id": 3,
+            "amount": 100000,
+            "formatted_amount": "100.000"
+        },
+        "official_business_account": true,
+        "name": "Estudio Rilo",
+        "country_code": "55",
+        "number": "4333385841",
+        "display_phone_number": "554333385841"
+    }
+}
+```
+
+### Ejemplo de payload — `phone_number_quality_update`
+
+El evento de sincronización utiliza un payload en formato plano, con los límites del Business Manager al nivel del propio número y `quality_rating` como texto.
+
+```json
+POST / {
+    "event": "phone_number_quality_update",
+    "workspace": {
+        "id": "0baf1974-2ccc-41dd-8659-594da132edd2",
+        "provider": {
+            "id": 1,
+            "name": "Positus V2"
+        },
+        "type_workspace": {
+            "id": 1,
+            "name": "Receptivo"
+        },
+        "name": "Estúdio Rilo",
+        "business_id": "857420775150360",
+        "waba_id": "1781395745366162"
+    },
+    "number": {
+        "id": "96b3092d-bff9-4f53-bf46-74e5fb126043",
+        "business_portfolio_id": "857420775150360",
+        "current_limit": 100000,
+        "max_daily_conversations_per_business": 100000,
+        "max_daily_conversation_per_phone": 1000,
+        "max_phone_numbers_per_business": 20,
+        "max_phone_numbers_per_waba": 20,
+        "quality_rating": "HIGH",
+        "throughput_level": "1000_mps",
+        "status": {
+            "id": 7,
+            "description": "Número ativo"
+        },
+        "quality_status": {
+            "id": 1,
+            "code": "CONNECTED"
+        },
+        "messaging_limit": {
+            "id": 3,
+            "amount": 100000,
+            "formatted_amount": "100.000"
+        },
+        "official_business_account": true,
+        "name": "Estudio Rilo",
+        "country_code": "55",
+        "number": "4333385841",
+        "display_phone_number": "554333385841"
+    }
+}
+```
+
+## Mensaje de plantilla
+
+Recibe notificaciones de aprobación de tus plantillas de notificaciones a través del webhook. El evento `message_template_status_update` se envía cada vez que se modifica el estado de aprobación de una plantilla.
+
+### Estado de la plantilla
+
+| ID | Código (code)    | Descripción       |
+| -- | ---------------- | ----------------- |
+| 0  | UNDEFINED        | Indefinido        |
+| 1  | PENDING          | Pendiente         |
+| 2  | APPROVED         | Aprobado          |
+| 3  | REJECTED         | Rechazado         |
+| 4  | IN_APPEAL        | En apelación      |
+| 5  | PENDING_DELETION | Eliminación pendiente |
+| 6  | DELETED          | Eliminado         |
+| 7  | DISABLED         | Deshabilitado     |
+| 8  | FLAGGED          | Señalado          |
+| 9  | REINSTATED       | Restablecido      |
+| 10 | PAUSED           | Pausado           |
+| 11 | PAUSED           | Pausado           |
+
+### Ejemplo de payload — `message_template_status_update`
+
+```json
+POST / {
+    "event": "message_template_status_update",
+    "workspace": {
+        "id": "93834938-3242-131321-bbb3-123131321",
+        "provider": {
+            "id": 2,
+            "name": "Robbu"
+        },
+        "type_workspace": {
+            "id": 1,
+            "name": "Receptivo"
+        },
+        "name": "Robbu",
+        "business_id": "8274562463464",
+        "waba_id": "7362e34823764823"
+    },
+    "template": {
+        "id": "us737373736s616-dsf2342-fd23-b324ea8-23423fd13",
+        "status": {
+            "id": 2,
+            "code": "APPROVED",
+            "description": "Aprovado"
+        },
+        "quality_score": {
+            "id": 1,
+            "code": "GREEN"
+        },
+        "category": {
+            "id": 11,
+            "code": "AUTO_REPLY",
+            "description": "Resposta automática"
+        },
+        "language": {
+            "id": 46,
+            "code": "pt_BR",
+            "name": "Portuguese (BR)"
+        },
+        "name": "abertura_janela_01",
+        "components": [{
+            "type": "BODY",
+            "text": "{{1}}, desculpe a demora para responder sua mensagem. Você quer continuar nossa conversa?"
+        }]
+    }
+}
+```

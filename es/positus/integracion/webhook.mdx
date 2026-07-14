@@ -1,0 +1,461 @@
+---
+title: Webhook
+description: Cuando el cliente envíe un mensaje, el cliente de la API enviará una notificación HTTP POST a la URL del Webhook.
+---
+
+# Webhook
+
+Los Webhooks son retornos de llamada HTTP definidos por el usuario que se activan mediante eventos específicos. Siempre que ocurra un evento de activación, el cliente de la API de WhatsApp Business verá el evento, recopilará los datos e inmediatamente enviará una notificación (solicitud HTTP) a la URL de WhatsApp especificada en la configuración de la aplicación, actualizando el estado de los mensajes enviados o indicando cuándo recibe un mensaje.
+
+<Info>
+Es importante que su Webhook devuelva una respuesta HTTPS 200 OK a las notificaciones. De lo contrario, el cliente de la API de WhatsApp Business considerará esa notificación como un fallo y volverá a intentarlo tras un retraso.
+</Info>
+
+## Configuración del Webhook
+
+Para recibir notificaciones, el cliente debe registrar la URL de su Webhook en el número.
+
+**Definir/actualizar la URL del Webhook:**
+
+```
+PUT https://api.positus.global/v2/whatsapp/numbers/{chave}/webhook
+Authorization: Bearer <seu-token>
+Content-Type: application/json
+
+{
+  "webhook": "https://seu-dominio.com/webhook"
+}
+```
+
+El campo `webhook` es opcional (puede ser `null` para eliminarlo) y tiene un máximo de 255 caracteres. Si la URL del Webhook no está definida, las notificaciones no se entregarán.
+
+<Info>
+Además del Webhook principal, es posible configurar un **webhook secundario** (`secondary_webhook`). Cuando está definido, recibe las mismas notificaciones que el Webhook principal.
+</Info>
+
+**Probar el Webhook (handshake):** para validar que la URL responde correctamente, dispare un mensaje de prueba. Positus enviará una notificación de prueba (`"Beep Beep!"`) a la URL configurada:
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{chave}/positus-webhook
+Authorization: Bearer <seu-token>
+```
+
+<Info>
+Es importante que su Webhook devuelva una respuesta HTTP **200 OK** a las notificaciones. De lo contrario, la notificación se considerará un fallo y habrá intentos de reenvío.
+</Info>
+
+## Definir la configuración de notificaciones
+
+Los números de Positus utilizan la **WhatsApp Cloud API**. El cliente recibe, en la URL de Webhook registrada, un subconjunto normalizado del payload de Meta (sin el sobre `entry/changes`). Los objetos entregados son los objetos crudos de la Cloud API.
+
+| *Nombre* | contenido del objeto                 |
+| -------- | ------------------------------------ |
+| messages | Notificaciones de mensajes entrantes |
+| statuses | Actualizaciones de estado de los mensajes |
+| errors   | Errores graves fuera de banda        |
+
+<Info>
+ Siempre que sea posible, los nombres se mantendrán constantes en las funciones. (Por ejemplo, todas las marcas de fecha y hora se denominan `timestamp`.
+</Info>
+
+### Formato del Webhook de notificaciones <a href="#notifications" id="notifications"></a>
+
+Una notificación de mensaje entrante tiene el nivel superior `{ "contacts": [...], "messages": [...] }`. Una notificación de estado tiene el nivel superior `{ "statuses": [...], "contacts": [...] }` (`contacts` solo está presente cuando el estado **no** es `failed`).
+
+**Ejemplo (mensaje de texto entrante)**
+
+```json
+{
+  "contacts": [
+    {
+      "profile": { "name": "Kerry Fisher" },
+      "wa_id": "16315551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1518694235",
+      "type": "text",
+      "text": { "body": "Hello this is an answer" }
+    }
+  ]
+}
+```
+
+### Actualizaciones de estado de los mensajes <a href="#statuses" id="statuses"></a>
+
+Además de los mensajes entrantes, el cliente recibe notificaciones de **estado** de los mensajes que envió. Estas notificaciones tienen el nivel superior `{ "statuses": [...], "contacts": [...] }`.
+
+**Ejemplo (estado `delivered`)**
+
+```json
+{
+  "statuses": [
+    {
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "status": "delivered",
+      "timestamp": "1521497954",
+      "recipient_id": "16315551234"
+    }
+  ],
+  "contacts": [
+    {
+      "profile": { "name": "Kerry Fisher" },
+      "wa_id": "16315551234"
+    }
+  ]
+}
+```
+
+El campo `status` puede tomar los siguientes valores:
+
+| Valor       | Descripción                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `sent`      | El mensaje fue enviado al servidor de WhatsApp.               |
+| `delivered` | El mensaje fue entregado al dispositivo del destinatario.     |
+| `read`      | El mensaje fue leído por el destinatario.                     |
+| `failed`    | Hubo un fallo en el envío del mensaje.                        |
+
+Cuando el `status` es `failed`, el objeto de estado incluye un arreglo `errors` con el detalle del fallo y `contacts` **no** se envía.
+
+**Ejemplo (estado `failed`)**
+
+```json
+{
+  "statuses": [
+    {
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "status": "failed",
+      "timestamp": "1521497954",
+      "recipient_id": "16315551234",
+      "errors": [
+        {
+          "code": 131026,
+          "title": "Message undeliverable"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Errores de notificaciones <a href="#errors" id="errors"></a>
+
+ Cuando haya errores fuera de banda que ocurran durante la operación normal de la aplicación, el arreglo `errors` proporcionará una descripción del error. Este tipo de error puede deberse a errores temporales de conectividad de red, credenciales no válidas, controladores de gestión con estado no disponible, etc. Si recibe un error, consulte [Mensajes de error y estado](https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes) para obtener más información.
+
+**Ejemplo**
+
+```json
+{
+  "errors": [
+    {
+      "code": 131026,
+      "title": "Message undeliverable",
+      "details": "Message failed to send because more than 24 hours have passed since the customer last replied to this number.",
+      "href": "https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes"
+    }
+  ]
+}
+```
+
+**El objeto errors**\
+El objeto `errors` contiene los siguientes parámetros:
+
+| Nombre del campo | Descripción                                                     | Tipo    |
+| ---------------- | --------------------------------------------------------------- | ------- |
+| code             | Código de error                                                 | Numérico |
+| title            | Título del error                                                | Cadena de caracteres |
+| details          | Opcional. Detalles del error proporcionados, si están disponibles/aplicables | Cadena de caracteres |
+| href             | Opcional. Detalles de la ubicación del error.                   | Cadena de caracteres |
+
+### Notificaciones de mensajes entrantes <a href="#receiving" id="receiving"></a>
+
+ Recibe una notificación cuando su empresa recibe un mensaje. La [sección del objeto `messages`](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components) presenta toda la información que se puede recibir sobre un mensaje entrante.
+
+#### Ejemplo: Mensaje de texto recibido <a href="#exemplo--sms-recebido" id="exemplo--sms-recebido"></a>
+
+```json
+{
+  "contacts": [ {
+    "profile": {
+        "name": "Kerry Fisher"
+    },
+    "wa_id": "16315551234"
+  } ],
+  "messages":[{
+    "from": "16315551234",
+    "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+    "timestamp": "1518694235",
+    "text": {
+      "body": "Hello this is an answer"
+    },
+    "type": "text"
+  }]
+} 
+```
+
+#### Ejemplo: Mensaje de ubicación estática recibido <a href="#exemplo--mensagem-de-localiza--o-est-tica-recebida" id="exemplo--mensagem-de-localiza--o-est-tica-recebida"></a>
+
+```json
+{
+  "contacts": [ {
+    "profile": {
+        "name": "Kerry Fisher"
+    },
+    "wa_id": "16315551234"
+  } ],
+ "messages":[{
+   "from":"16315551234",
+   "id":"wamid.HBgLMTYzMTU1NTEyMzQ...",
+   "location":{
+      "address":"Main Street Beach, Santa Cruz, CA",
+      "latitude":38.9806263495,
+      "longitude":-131.9428612257,
+      "name":"Main Street Beach",
+      "url":"https://foursquare.com/v/4d7031d35b5df7744"},
+   "timestamp":"1521497875",
+   "type":"location"
+  }]
+} 
+```
+
+#### Ejemplo: Mensaje con contactos recibido <a href="#exemplo--mensagem-com-contatos-recebida" id="exemplo--mensagem-com-contatos-recebida"></a>
+
+```json
+{
+    "contacts": [ {
+        "profile": {
+          "name": "Kerry Fisher"
+        },
+        "wa_id": "16315551234"
+    } ],
+    "messages": [
+        {
+            "contacts": [
+                {
+                    "addresses": [
+                        {
+                            "city": "Menlo Park",
+                            "country": "United States",
+                            "country_code": "us",
+                            "state": "CA",
+                            "street": "1 Hacker Way",
+                            "type": "WORK",
+                            "zip": "94025"
+                        }
+                    ],
+                    "birthday": "2012-08-18",
+                    "contact_image": "/9j/4AAQSkZJRgABAQEAZABkAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD1NLloxyc0j3bNUHDGgoCMVNkBbhutvVqc9yGHNZ3kOW4Wn/ZnQZzSsgLLXAA61Xn1O2t4zLcyJHGvV3OAKMADmvOviLq9m11a2bO/l2xLzoqnliF2j9f1NTLRXHGHM7Hb2vivSL+8e0s7yKaVeyHg/Q9D+FXWuHPOzivFodT0WZkeF44bheVdE2EH+Rr2+zuVuNPt7gqh86JX+TkcjPFTCdy6lNQ2dyr5+G5WpRe4HTFWWSOQfwioZbCIn5XNaXRmQPegjmqrKLh+...",
+                    "emails": [
+                        {
+                            "email": "kfish@fb.com",
+                            "type": "WORK"
+                        }
+                    ],
+                    "ims": [
+                        {
+                            "service": "AIM",
+                            "user_id": "kfish"
+                        }
+                    ],
+                    "name": {
+                        "first_name": "Kerry",
+                        "formatted_name": "Kerry Fisher",
+                        "last_name": "Fisher"
+                    },
+                    "org": {
+                        "company": "Facebook"
+                    },
+                    "phones": [
+                        {
+                            "phone": "+1 (940) 555-1234",
+                            "type": "CELL"
+                        },
+                        {
+                            "phone": "+1 (650) 555-1234",
+                            "type": "WORK",
+                            "wa_id": "16505551234"
+                        }
+                    ],
+                    "urls": [
+                        {
+                            "url": "https://www.facebook.com",
+                            "type": "WORK"
+                        }
+                    ]
+                }
+            ],
+            "from": "16505551234",
+            "id": "wamid.HBgLMTY1MDU1NTEyMzQ...",
+            "timestamp": "1537248012",
+            "type": "contacts"
+        }
+    ]
+}
+```
+
+### Notificaciones de mensajes de medios entrantes <a href="#mediawebhook" id="mediawebhook"></a>
+
+ Cuando se recibe un mensaje con medios, la notificación enviada a su Webhook contiene un objeto de medios con los campos que identifican el archivo. En la Cloud API, el objeto de medios solo trae `id`, `mime_type` y `sha256` (más un `caption` opcional para imagen, documento y video). **No** hay campos `file` ni `link`.
+
+Para descargar el medio, use el `id` en el endpoint de descarga: `GET https://api.positus.global/v2/whatsapp/numbers/{chave}/media/{id}`.
+
+#### Ejemplo: Mensaje con imagen recibido <a href="#exemplo--mensagem-com-imagem-recebida" id="exemplo--mensagem-com-imagem-recebida"></a>
+
+```json
+{
+  "contacts": [
+    { "profile": { "name": "Kerry Fisher" }, "wa_id": "16315551234" }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1521497954",
+      "type": "image",
+      "image": {
+        "id": "1234567890",
+        "mime_type": "image/jpeg",
+        "sha256": "29ed500fa64eb55fc19dc4124acb300e5dcc54a0f822a301ae99944db",
+        "caption": "Check out my new phone!"
+      }
+    }
+  ]
+}
+```
+
+#### Ejemplo: Mensaje con documento recibido <a href="#exemplo--mensagem-com-documento-recebida" id="exemplo--mensagem-com-documento-recebida"></a>
+
+```json
+{
+  "contacts": [
+    { "profile": { "name": "Kerry Fisher" }, "wa_id": "16315551234" }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1522189546",
+      "type": "document",
+      "document": {
+        "id": "1234567890",
+        "mime_type": "application/pdf",
+        "sha256": "3b11fa6ef2bde1dd14726e09d3edaf782120919d06f6484f32d5d5caa4b8e",
+        "caption": "80skaraokesonglistartist"
+      }
+    }
+  ]
+}
+```
+
+#### Ejemplo: Mensaje con audio recibido <a href="#exemplo--mensagem-com-mensagem-de-voz-recebida" id="exemplo--mensagem-com-mensagem-de-voz-recebida"></a>
+
+<Info>
+En la Cloud API, los mensajes de audio (incluidos los mensajes de voz) se entregan con el tipo `audio`, no `voice`.
+</Info>
+
+```json
+{
+  "contacts": [
+    { "profile": { "name": "Kerry Fisher" }, "wa_id": "16315551234" }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1521827831",
+      "type": "audio",
+      "audio": {
+        "id": "1234567890",
+        "mime_type": "audio/ogg; codecs=opus",
+        "sha256": "fa9e1807d936b7cebe63654ea3a7912b1fa9479220258d823590521ef53b0710"
+      }
+    }
+  ]
+}
+```
+
+#### Ejemplo: Mensaje con video recibido <a href="#exemplo--mensagem-com-video-recebida" id="exemplo--mensagem-com-video-recebida"></a>
+
+```json
+{
+  "contacts": [
+    { "profile": { "name": "Kerry Fisher" }, "wa_id": "16315551234" }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1521827831",
+      "type": "video",
+      "video": {
+        "id": "1234567890",
+        "mime_type": "video/mp4",
+        "sha256": "fa9e1807d936b7cebe63654ea3a7912b1fa9479220258d823590521ef53b0710",
+        "caption": "Look at this!"
+      }
+    }
+  ]
+}
+```
+
+#### Ejemplo: Mensaje con sticker recibido <a href="#exemplo--mensagem-com-figurinha-recebida" id="exemplo--mensagem-com-figurinha-recebida"></a>
+
+```json
+{
+  "contacts": [
+    { "profile": { "name": "Kerry Fisher" }, "wa_id": "16315551234" }
+  ],
+  "messages": [
+    {
+      "from": "16315551234",
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1521827831",
+      "type": "sticker",
+      "sticker": {
+        "id": "1234567890",
+        "mime_type": "image/webp",
+        "sha256": "fa9e1807d936b7cebe63654ea3a7912b1fa9479220258d823590521ef53b0710"
+      }
+    }
+  ]
+}
+```
+
+### Respuestas entrantes a mensajes enviados <a href="#context" id="context"></a>
+
+ Los usuarios pueden responder a un mensaje específico en WhatsApp. Para que la empresa entienda el contexto de la respuesta a un mensaje, incluimos el objeto `context`. Este objeto `context` proporciona el `id` del mensaje al que el cliente respondió y el ID de WhatsApp del remitente del mensaje original.
+
+#### Ejemplo: El cliente respondió a su mensaje <a href="#exemplo--cliente-respondeu---sua-mensagem" id="exemplo--cliente-respondeu---sua-mensagem"></a>
+
+```json
+{
+  "contacts": [ {
+    "profile": {
+        "name": "Kerry Fisher"
+    },
+    "wa_id": "16315551234"
+  } ],
+   "messages":[{
+      "context":{
+         "from":"16315558011",
+         "id":"wamid.HBgLMTYzMTU1NTgwMTE..."
+         },
+      "from":"16315551234",
+      "id":"wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "text":{"body":"Yes, count me in!"},
+      "timestamp":"1521499915",
+      "type":"text"
+  }]
+}
+```
+
+## Documentación oficial de WhatsApp Cloud API
+
+<Info>
+Positus utiliza la **WhatsApp Cloud API** y entrega los objetos en el mismo formato que el estándar oficial de Meta. La documentación completa y actualizada se puede encontrar en el enlace a continuación:
+
+[https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components) 
+</Info>

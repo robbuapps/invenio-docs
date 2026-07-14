@@ -13,133 +13,275 @@
         "dark": "#0D9373"
     },
     "navigation": {
-        "groups": [
+        "languages": [
             {
-                "group": "Acesso",
-                "pages": [
-                    "docs/accounts/como-acessar-plataforma",
-                    "docs/accounts/sso"
+                "language": "pt",
+                "groups": [
+                    {
+                        "group": "Acesso",
+                        "pages": [
+                            "docs/accounts/como-acessar-plataforma",
+                            "docs/accounts/sso"
+                        ]
+                    },
+                    {
+                        "group": "Configurações Gerais",
+                        "pages": [
+                            "docs/configuracoes-gerais/lista-ips"
+                        ]
+                    },
+                    {
+                        "group": "Invenio Live",
+                        "pages": [
+                            "docs/live/adicionar-canal-invenio-live",
+                            "docs/live/como-criar-agendamento",
+                            "docs/live/busca-mensagem-historico",
+                            "docs/live/dados-da-mensagem",
+                            "docs/live/edicao-de-tags",
+                            "docs/live/enviar-mensagem",
+                            "docs/live/exportacao-de-conversas",
+                            "docs/live/fila-de-atendimento",
+                            "docs/live/filtro-por-canal",
+                            "docs/live/filtros-e-menus-de-busca",
+                            "docs/live/lista-de-desejos",
+                            "docs/live/lista-de-transmissao",
+                            "docs/live/metodos-de-distribuicao",
+                            "docs/live/meu-perfil",
+                            "docs/live/criar-contato",
+                            "docs/live/performance-do-usuario",
+                            "docs/live/sessao-de-24horas-no-whatsapp"
+                        ]
+                    },
+                    {
+                        "group": "Invenio Center",
+                        "pages": [
+                            "docs/center/campanhas-de-email",
+                            "docs/center/campanhas-de-whatsapp",
+                            "docs/center/criando-campanha-sms",
+                            "docs/center/cancelamento-inscricao",
+                            "docs/center/canais-atendimento",
+                            "docs/center/canal-whatsapp",
+                            "docs/center/canal-telegram",
+                            "docs/center/como-criar-templates-whatsapp",
+                            "docs/center/configuracoes-gerais-da conta",
+                            "docs/center/cadastrar-conta-de-email",
+                            "docs/center/criacao-de-contatos-invenio-center",
+                            "docs/center/dashboard-analitico",
+                            "docs/center/dashboard-linha-do-tempo-whatsapp",
+                            "docs/center/dashboard-kpi-eventos",
+                            "docs/center/dashboard-operacional",
+                            "docs/center/dashboard-advertising",
+                            "docs/center/endpoints-customizados",
+                            "docs/center/erros-meta",
+                            "docs/center/filtros-de-busca-de-contatos",
+                            "docs/center/gerenciar-host-de-acesso",
+                            "docs/center/gestao-frases-prontas",
+                            "docs/center/publico-importacao",
+                            "docs/center/carga-ftp",
+                            "docs/center/integracao-de-paginas",
+                            "docs/center/integracao-com-chatgpt",
+                            "docs/center/integracao-facebook-instagram",
+                            "docs/center/kpi-eventos",
+                            "docs/center/marcadores",
+                            "docs/center/bibliotecas-de-midias",
+                            "docs/center/omnichannel",
+                            "docs/center/otimizacao",
+                            "docs/center/painel-de-faturas",
+                            "docs/center/pausas-no-atendimento",
+                            "docs/center/privacidade-e-protecao",
+                            "docs/center/como-habilitar-protocolos-de-atendimento",
+                            "docs/center/agendamento-relatorio-ftp",
+                            "docs/center/relatorios",
+                            "docs/center/restricoes",
+                            "docs/center/segmentos",
+                            "docs/center/templates-de-email",
+                            "docs/center/usuarios",
+                            "docs/center/variaveis-de-sistema",
+                            "docs/center/web-chat",
+                            "docs/center/webhook",
+                            "docs/center/whastapp-flows",
+                            "docs/center/whatsapp-business-api"
+                        ]
+                    },
+                    {
+                        "group": "Maestro",
+                        "pages": [
+                            "docs/maestro/overview",
+                            "docs/maestro/brokers",
+                            "docs/maestro/motor-de-regras",
+                            "docs/maestro/api-direct-message",
+                            "docs/maestro/carga-ftp",
+                            "docs/maestro/webhook"
+                        ]
+                    },
+                    {
+                        "group": "Carteiro Digital",
+                        "pages": [
+                            "docs/carteiro-digital/carteiro-digital"
+                        ]
+                    },
+                    {
+                        "group": "Robbu APIs",
+                        "pages": [
+                            "docs/robbu-api/api-update-contact",
+                            "docs/robbu-api/api-busca-template",
+                            "docs/robbu-api/auth",
+                            "docs/carteiro-digital/carteiro-digital-api",
+                            "docs/robbu-api/verify",
+                            "docs/robbu-api/send-message"
+                        ]
+                    },
+                    {
+                        "group": "Orion",
+                        "pages": [
+                            "docs/orion/api-add-contact-mailing"
+                        ]
+                    },
+                    {
+                        "group": "Positus",
+                        "pages": [
+                            {
+                                "group": "Positus e WhatsApp Business API",
+                                "pages": [
+                                    "docs/positus/primeiros-passos/introducao",
+                                    "docs/positus/whatsapp-benchmark"
+                                ]
+                            },
+                            {
+                                "group": "Primeiros Passos",
+                                "pages": [
+                                    "docs/positus/primeiros-passos/como-comecar",
+                                    "docs/positus/primeiros-passos/criando-business-facebook"
+                                ]
+                            },
+                            {
+                                "group": "Integração WhatsApp API",
+                                "pages": [
+                                    "docs/positus/integracao/api",
+                                    "docs/positus/integracao/webhook",
+                                    "docs/positus/integracao/exemplos-de-codigos"
+                                ]
+                            },
+                            {
+                                "group": "Positus Studio",
+                                "pages": [
+                                    "docs/positus/studio/studio-positus",
+                                    "docs/positus/studio/sandbox",
+                                    "docs/positus/studio/webhook",
+                                    "docs/positus/studio/api-studio"
+                                ]
+                            },
+                            {
+                                "group": "Positus Messenger",
+                                "pages": [
+                                    "docs/positus/messenger/positus-messenger",
+                                    "docs/positus/messenger/faq"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Atualizações",
+                        "pages": [
+                            "changelog"
+                        ]
+                    }
                 ]
             },
             {
-                "group": "Configurações Gerais",
-                "pages": [
-                    "docs/configuracoes-gerais/lista-ips"
+                "language": "en",
+                "groups": [
+                    {
+                        "group": "Positus",
+                        "pages": [
+                            {
+                                "group": "Positus and WhatsApp Business API",
+                                "pages": [
+                                    "en/positus/getting-started/introduction",
+                                    "en/positus/whatsapp-benchmark"
+                                ]
+                            },
+                            {
+                                "group": "Getting Started",
+                                "pages": [
+                                    "en/positus/getting-started/how-to-start",
+                                    "en/positus/getting-started/creating-facebook-business"
+                                ]
+                            },
+                            {
+                                "group": "WhatsApp API Integration",
+                                "pages": [
+                                    "en/positus/integration/api",
+                                    "en/positus/integration/webhook",
+                                    "en/positus/integration/code-examples"
+                                ]
+                            },
+                            {
+                                "group": "Positus Studio",
+                                "pages": [
+                                    "en/positus/studio/positus-studio",
+                                    "en/positus/studio/sandbox",
+                                    "en/positus/studio/webhook",
+                                    "en/positus/studio/api-studio"
+                                ]
+                            },
+                            {
+                                "group": "Positus Messenger",
+                                "pages": [
+                                    "en/positus/messenger/positus-messenger",
+                                    "en/positus/messenger/faq"
+                                ]
+                            }
+                        ]
+                    }
                 ]
             },
             {
-                "group": "Invenio Live",
-                "pages": [
-                    "docs/live/adicionar-canal-invenio-live",
-                    "docs/live/como-criar-agendamento",
-                    "docs/live/busca-mensagem-historico",
-                    "docs/live/dados-da-mensagem",
-                    "docs/live/edicao-de-tags",
-                    "docs/live/enviar-mensagem",
-                    "docs/live/exportacao-de-conversas",
-                    "docs/live/fila-de-atendimento",
-                    "docs/live/filtro-por-canal",
-                    "docs/live/filtros-e-menus-de-busca",
-                    "docs/live/lista-de-desejos",
-                    "docs/live/lista-de-transmissao",
-                    "docs/live/metodos-de-distribuicao",
-                    "docs/live/meu-perfil",
-                    "docs/live/criar-contato",
-                    "docs/live/performance-do-usuario",
-                    "docs/live/sessao-de-24horas-no-whatsapp"
-                ]
-            },
-            {
-                "group": "Invenio Center",
-                "pages": [
-                    "docs/center/campanhas-de-email",
-                    "docs/center/campanhas-de-whatsapp",
-                    "docs/center/criando-campanha-sms",
-                    "docs/center/cancelamento-inscricao",
-                    "docs/center/canais-atendimento",
-                    "docs/center/canal-whatsapp",
-                    "docs/center/canal-telegram",
-                    "docs/center/como-criar-templates-whatsapp",
-                    "docs/center/configuracoes-gerais-da conta",
-                    "docs/center/cadastrar-conta-de-email",
-                    "docs/center/criacao-de-contatos-invenio-center",
-                    "docs/center/dashboard-analitico",
-                    "docs/center/dashboard-linha-do-tempo-whatsapp",
-                    "docs/center/dashboard-kpi-eventos",
-                    "docs/center/dashboard-operacional",
-                    "docs/center/dashboard-advertising",
-                    "docs/center/endpoints-customizados",
-                    "docs/center/erros-meta",
-                    "docs/center/filtros-de-busca-de-contatos",
-                    "docs/center/gerenciar-host-de-acesso",
-                    "docs/center/gestao-frases-prontas",
-                    "docs/center/publico-importacao",
-                    "docs/center/carga-ftp",
-                    "docs/center/integracao-de-paginas",
-                    "docs/center/integracao-com-chatgpt",
-                    "docs/center/integracao-facebook-instagram",
-                    "docs/center/kpi-eventos",
-                    "docs/center/marcadores",
-                    "docs/center/bibliotecas-de-midias",
-                    "docs/center/omnichannel",
-                    "docs/center/otimizacao",
-                    "docs/center/painel-de-faturas",
-                    "docs/center/pausas-no-atendimento",
-                    "docs/center/privacidade-e-protecao",
-                    "docs/center/como-habilitar-protocolos-de-atendimento",
-                    "docs/center/agendamento-relatorio-ftp",
-                    "docs/center/relatorios",
-                    "docs/center/restricoes",
-                    "docs/center/segmentos",
-                    "docs/center/templates-de-email",
-                    "docs/center/usuarios",
-                    "docs/center/variaveis-de-sistema",
-                    "docs/center/web-chat",
-                    "docs/center/webhook",
-                    "docs/center/whastapp-flows",
-                    "docs/center/whatsapp-business-api"
-                    
-                    
-                ]
-            },
-            {
-                "group": "Maestro",
-                "pages": [
-                    "docs/maestro/overview",
-                    "docs/maestro/brokers",
-                    "docs/maestro/motor-de-regras",
-                    "docs/maestro/api-direct-message",
-                    "docs/maestro/carga-ftp",
-                    "docs/maestro/webhook"
-                ]
-            },
-            {
-                "group": "Carteiro Digital",
-                "pages": [
-                    "docs/carteiro-digital/carteiro-digital"
-                ]
-            },
-            {
-                "group": "Robbu APIs",
-                "pages": [
-                    "docs/robbu-api/api-update-contact",
-                    "docs/robbu-api/api-busca-template",
-                    "docs/robbu-api/auth",
-                    "docs/carteiro-digital/carteiro-digital-api",
-                    "docs/robbu-api/verify",
-                    "docs/robbu-api/send-message"
-                ]
-            },
-            {
-                "group": "Orion",
-                "pages": [
-                    "docs/orion/api-add-contact-mailing"
-                ]
-            },            
-            {
-                "group": "Atualizações",
-                "pages": [
-                    "changelog"
+                "language": "es",
+                "groups": [
+                    {
+                        "group": "Positus",
+                        "pages": [
+                            {
+                                "group": "Positus y WhatsApp Business API",
+                                "pages": [
+                                    "es/positus/primeros-pasos/introduccion",
+                                    "es/positus/whatsapp-benchmark"
+                                ]
+                            },
+                            {
+                                "group": "Primeros Pasos",
+                                "pages": [
+                                    "es/positus/primeros-pasos/como-empezar",
+                                    "es/positus/primeros-pasos/crear-business-facebook"
+                                ]
+                            },
+                            {
+                                "group": "Integración WhatsApp API",
+                                "pages": [
+                                    "es/positus/integracion/api",
+                                    "es/positus/integracion/webhook",
+                                    "es/positus/integracion/ejemplos-de-codigo"
+                                ]
+                            },
+                            {
+                                "group": "Positus Studio",
+                                "pages": [
+                                    "es/positus/studio/positus-studio",
+                                    "es/positus/studio/sandbox",
+                                    "es/positus/studio/webhook",
+                                    "es/positus/studio/api-studio"
+                                ]
+                            },
+                            {
+                                "group": "Positus Messenger",
+                                "pages": [
+                                    "es/positus/messenger/positus-messenger",
+                                    "es/positus/messenger/faq"
+                                ]
+                            }
+                        ]
+                    }
                 ]
             }
         ],

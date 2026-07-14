@@ -1,0 +1,234 @@
+---
+title: Ejemplos de código
+description: Vea algunos ejemplos de código para realizar la integración de su API.
+---
+
+# Ejemplos de código
+
+## Postman file
+
+*El **Postman** es una herramienta cuyo objetivo es probar servicios RESTful (Web APIs) mediante el envío de solicitudes HTTP y el análisis de su respuesta.*\
+[Download Postman App](https://www.postman.com/downloads/)
+
+
+**Producción**\
+Deberá utilizar la siguiente URL:\
+[https://api.positus.global/v2/whatsapp/numbers/\{\{chave}}/messages](https://api.positus.global/v2/whatsapp/numbers/\{\{chave}}/messages)
+
+*Al contratar y activar su cuenta de WhatsApp Business API, le proporcionaremos una clave por número y usted podrá generar sus tokens desde la plataforma.*
+
+
+[⬇️ Descargar la colección de Postman — Producción (2026)](/assets/Positus-API-2026.postman_collection.json)
+
+
+## Sandbox API
+
+<Info>
+**Desarrollo**\
+Deberá utilizar la siguiente URL:\
+[https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{chave}}/messages](https://api.positus.global/v2/sandbox/whatsapp/numbers/\{\{chave}}/messages)<br />
+
+*Cree su cuenta en la sandbox a través del enlace* [*https://studio.posit.us/*](https://studio.posit.us/) *y genere un token siguiendo las instrucciones de la pantalla.* Navegue por el menú "Webhook" y copie la URL POST (utiliza la "Clave").
+
+*En el entorno de desarrollo no podrá enviar mensajes HSM, pero todos los demás recursos están disponibles para el envío y la recepción.*
+</Info>
+
+
+[⬇️ Descargar la colección de Postman — Sandbox (2026)](/assets/Positus-API-Sandbox-2026.postman_collection.json)
+
+
+## Ejemplos de código
+
+
+
+
+## C# - RestSharp
+
+```csharp
+var client = new RestClient("https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer xxxx");
+request.AddParameter("application/json,text/plain", "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"text\",\r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}",  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);
+```
+
+
+
+
+
+## PHP - cURL
+
+```php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS =>"{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"text\",\r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}",
+  CURLOPT_HTTPHEADER => array(
+    "Content-Type: application/json",
+    "Authorization: Bearer xxxx"
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+```
+
+
+
+
+
+## Python - http.client
+
+```python
+import http.client
+import mimetypes
+conn = http.client.HTTPSConnection("api.positus.global")
+payload = "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"text\",\r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}"
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer xxxx'
+}
+conn.request("POST", "/v2/sandbox/whatsapp/numbers/{{chave}}/messages", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
+```
+
+
+
+
+
+## Nodejs - Request
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': 'https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages',
+  'headers': {
+    'Content-Type': ['application/json'],
+    'Authorization': 'Bearer xxxx'
+  },
+  body: "{\r\n  \"to\": \"+55119999999999\",\r\n  \"type\": \"text\",\r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}"
+
+};
+request(options, function (error, response) { 
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+
+```
+
+
+
+
+
+## JavaScript - JQuery
+
+```javascript
+var settings = {
+  "url": "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": ["application/json"],
+    "Authorization": "Bearer xxxx"
+  },
+  "data": "{\r\n  \"to\": \"+55119999999999\",\r\n  \"type\": \"text\",\r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}",
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+
+
+
+
+## PowerShell - RestMethod
+
+```powershell
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Content-Type", "application/json")
+$headers.Add("Authorization", "Bearer xxxx")
+
+$body = "{
+`n  `"to`": `"+55119999999999`",
+`n  `"type`": `"text`",
+`n  `"text`": {
+`n      `"body`": `"your-message-content`"
+`n  }
+`n}"
+
+$response = Invoke-RestMethod 'https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json
+```
+
+
+
+
+
+## Go - Native
+
+```
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://api.positus.global/v2/sandbox/whatsapp/numbers/{{chave}}/messages"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+  "to": "+5511999999999",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer xxxx")
+
+  res, err := client.Do(req)
+  defer res.Body.Close()
+  body, err := ioutil.ReadAll(res.Body)
+
+  fmt.Println(string(body))
+}
+```
+
+
+
+
+<br />

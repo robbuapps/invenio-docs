@@ -1,0 +1,1540 @@
+{
+  "info": {
+    "_postman_id": "493c6cbd-5483-4426-972a-91f85445480f",
+    "name": "Positus API (2026)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Sticker Packs (WhatsApp Native)",
+      "item": [
+        {
+          "name": "/whatsapp/numbers/{number}/stickerpacks?namespace=whatsapp",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks?namespace=whatsapp",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks"
+              ],
+              "query": [
+                {
+                  "key": "namespace",
+                  "value": "whatsapp"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/whatsapp/numbers/{number}/stickerpacks/{pack}/stickers?namespace=whatsapp",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/CutiePets/stickers?namespace=whatsapp",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "CutiePets",
+                "stickers"
+              ],
+              "query": [
+                {
+                  "key": "namespace",
+                  "value": "whatsapp"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/whatsapp/numbers/{number}/stickerpacks/{pack}/stickers/{sticker}?namespace=whatsapp",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/CutiePets/stickers/3?namespace=whatsapp",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "CutiePets",
+                "stickers",
+                "3"
+              ],
+              "query": [
+                {
+                  "key": "namespace",
+                  "value": "whatsapp"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Message Stickers from ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"to\": \"+5511999999999\",\r\n    \"type\": \"sticker\",\r\n    \"recipient_type\": \"individual\",\r\n    \"sticker\": {\r\n              \"id\": \"stickers_id\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a9bc8528-9f2e-42e3-913b-8ce9bfeb4398",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "fce72590-195f-40ff-8133-ec2f7d433b8b",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "Sticker Packs (Created your Sticker Packs) ",
+      "item": [
+        {
+          "name": "1) List Your Sticker Packs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "namespace",
+                  "value": "whatsapp",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1) Create Your Sticker Packs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"publisher\": \"Robbu\",\r\n\t\"name\": \"Figurinhas do Grupo Robbu\",\r\n\t\"ios_app_store_link\": null,\r\n\t\"android_app_store_link\": null\r\n}",
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1) Delete Your Sticker Packs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/{pack}",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "{pack}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List the stickers index in your package",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/{pack_id}/stickers",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "{pack_id}",
+                "stickers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create the stickers in your package",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"link\" : \"https://studio.posit.us/api/samples/sticker.webp\",\r\n\t\"emojis\": [\"🐥\", \"😃\"]\r\n}   ",
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/{pack_id}/stickers",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "{pack_id}",
+                "stickers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get your sticker id for send message",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [],
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/{pack_id}/stickers/{index}",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "{pack_id}",
+                "stickers",
+                "{index}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete the stickers in your package",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"image_data_id\" : \"<Sticker Image Media Id>\",\r\n\t\"emojis\": [\"🐥\", \"😃\"]\r\n}",
+              "options": {
+                "formdata": {}
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/stickerpacks/{pack_id}/stickers/{index}",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "stickerpacks",
+                "{pack_id}",
+                "stickers",
+                "{index}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Message Stickers from ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTQyYzYzM2M3ZDg5OWRmMDM0YWVkNjc2ZGFkOTc2MDY1M2Q0MGUyY2E5ZGEyODQ5YmRmNmRhNjU0MDI1ZDdkM2JmY2E1YzU3NGIwMmEwYmIiLCJpYXQiOjE1ODY5MTMyMjAsIm5iZiI6MTU4NjkxMzIyMCwiZXhwIjoxNjE4NDQ5MjIwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.E---wqRuh8PD91WXRKviTgb78GXi5icwKoKF6cG1tzjnlvfQgKq-vSeQcJ_VfXoMnUAVpBLDvYDwWuNbcoMAgkP8Qg9MF_H5xRVwhFhDn-_hJV_1nTu7s3LKsnWvM0JhCeVpJFyd30n2WYvB_LVhr4nyIwmPlzaDM1HTxnUBVi6Y-K5hxgooitmG5Wfu2B_d6AgSqEYy0vvuZVlLK5EiWL6ovObGh2tbziP18ErDnWFNBMOVvW5QYkzlLINT8LyIcTp9uR0n2S68KxXS7s0Dxgit-9l9v55a-9Jx-VO9H8Wa22G3sFY4KPq2uOhFUqVHuGjM55WfVh6FGRRLjwqg57RInwKmJlWXPmkDq7Kv45yNOrWMsKWsXVZXTBkT0GT9hPDWmx57RxitlMVa31Z59FTwYGlAdJ-cvvrcYtFLWdj7Lk-g2_LxrqsKSeFJ0ssU41L6ixUuruh_91uGt4MecnYWxKbz3n_91E1G8bRp9KGBInSSM5B3jBcPv8ZbO2u7F6WxfDN2QuMJHA8jVTUHngCru0epAgZVIhWadTU0Tph4tZv0-A8I-xWSb_QU5bTtK64GO6NARQL5pw6hYYGicL9q7a4LV8L3zes9DmGhtbrxhlJqmwpbBDB__AuOQI0bFK_NCJqvXrtl0aryDChnSy4fv2jm3m77pQun1GFl4Vw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"to\": \"+5511999999999\",\r\n    \"type\": \"sticker\",\r\n    \"recipient_type\": \"individual\",\r\n    \"sticker\": {\r\n              \"id\": \"<Sticker Image Media Id>\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+              "protocol": "https",
+              "host": [
+                "api",
+                "positus",
+                "global"
+              ],
+              "path": [
+                "v2",
+                "whatsapp",
+                "numbers",
+                "{{chave}}",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "c6049b54-a9ae-4324-8df1-e9d7e96f8e9b",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "3799e58c-c83f-4466-a33a-87f0337df898",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "Test API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.positus.global/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Text",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\", \r\n  \"type\": \"text\", \r\n  \"text\": {\r\n      \"body\": \"your-message-content\"\r\n  }\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Stickers from URL",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"to\": \"+5511999999999\",\r\n    \"type\": \"sticker\",\r\n    \"recipient_type\": \"individual\",\r\n    \"sticker\": {\r\n        \"provider\": {\r\n            \"name\": \"Robbu\"\r\n        },\r\n        \"link\": \"https://studio.posit.us/api/samples/sticker.webp\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Template HSM - Body Text without Parameters",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\": \"+5511999999999\",\n    \"type\": \"template\",\n    \"template\": {\n        \"language\": {\n            \"policy\": \"deterministic\",\n            \"code\": \"pt_BR\"\n        },\n        \"name\": \"<template-name>\",\n        \"components\": [\n            {\n                \"type\": \"body\",\n                \"parameters\": []\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {}
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Template HSM - Body Text with Parameters",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\": \"+5511999999999\",\n    \"type\": \"template\",\n    \"template\": {\n        \"language\": {\n            \"policy\": \"deterministic\",\n            \"code\": \"pt_BR\"\n        },\n        \"name\": \"<template-name>\",\n        \"components\": [\n            {\n                \"type\": \"body\",\n                \"parameters\": [\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-01>\"\n                    },\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-02>\"\n                    }\n                ]\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {}
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Template HSM - Body And Button Quick Reply",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\": \"+5511999999999\",\n    \"type\": \"template\",\n    \"template\": {\n        \"language\": {\n            \"policy\": \"deterministic\",\n            \"code\": \"es\"\n        },\n        \"name\": \"<template-name>\",\n        \"components\": [\n            {\n                \"type\": \"body\",\n                \"parameters\": [\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-01>\"\n                    }\n                ]\n            },\n            {\n                \"type\": \"button\",\n                \"sub_type\": \"quick_reply\",\n                \"index\": \"0\"\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {}
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Template HSM - Image Header, Body, Button With URL Parameters",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\": \"+5511999999999\",\n    \"type\": \"template\",\n    \"template\": {\n        \"language\": {\n            \"policy\": \"deterministic\",\n            \"code\": \"pt_BR\"\n        },\n        \"name\": \"<template-name>\",\n        \"components\": [\n            {\n                \"type\": \"header\",\n                \"parameters\": [\n                    {\n                        \"type\": \"image\",\n                        \"image\": {\n                            \"link\": \"<image-link>\"\n                        }\n                    }\n                ]\n            },\n            {\n                \"type\": \"body\",\n                \"parameters\": [\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-01>\"\n                    },\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-02>\"\n                    },\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<var-03>\"\n                    }\n                ]\n            },\n            {\n                \"type\": \"button\",\n                \"sub_type\": \"url\",\n                \"index\": \"0\",\n                \"parameters\": [\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"<id-link-url-button>\"\n                    }\n                ]\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Contact",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"contacts\",\r\n  \"contacts\":[{\r\n\t\"addresses\": [],\r\n\t\"emails\": [],\r\n\t\"ims\": [],\r\n\t\"name\": {\r\n\t\t\"first_name\": \"Positus Provider\",\r\n\t\t\"formatted_name\": \"Positus Provider\"\r\n\t},\r\n\t\"org\": [],\r\n\t\"phones\": [{\r\n\t\t\"phone\": \"+55 11 2626-4234\",\r\n\t\t\"type\": \"CELL\",\r\n\t\t\"wa_id\": \"551126264234\"\r\n\t}],\r\n\t\"urls\": []\r\n}]\r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Location",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"location\",\r\n  \"location\": {\r\n        \"longitude\": -46.662787,\r\n        \"latitude\": -23.553610,\r\n        \"name\": \"Robbu Brazil\",\r\n        \"address\": \"Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200\"\r\n    }\r\n}\r\n"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Image",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"image\",\r\n \"image\": {\r\n      \"link\": \"https://olhardigital.com.br/uploads/acervo_imagens/2019/02/r16x9/20190226124316_1200_675_-_Agua_potavel.jpg\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Document",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"document\",\r\n \"document\": {\r\n      \"link\": \"http://www.pdf995.com/samples/pdf.pdf\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Video",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"video\",\r\n \"video\": {\r\n      \"link\": \"https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4\",\r\n      \"caption\": \"your-document-caption\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Audio",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"to\": \"+5511999999999\",\r\n  \"type\": \"audio\",\r\n \"audio\": {\r\n      \"link\": \"https://sample-videos.com/audio/mp3/crowd-cheering.mp3\"\r\n    }\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Typing Indicator",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages",
+            "typing-indicator"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message_id\": \"wamid.HBgMNTUxMTk5OTk5OTk5FMA==\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Interactive - List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"+5511999999999\",\n  \"type\": \"interactive\",\n  \"interactive\": {\n    \"type\": \"list\",\n    \"header\": {\n      \"type\": \"text\",\n      \"text\": \"CryptoBank\"\n    },\n    \"body\": {\n      \"text\": \"Veja as opções que preparamos para você!\"\n    },\n    \"footer\": {\n      \"text\": \"Demonstração Robbu\"\n    },\n    \"action\": {\n      \"button\": \"Opções de pagamento\",\n      \"sections\": [\n        {\n          \"title\": \"Atualização\",\n          \"rows\": [\n            {\n              \"id\": \"7\",\n              \"title\": \"Vencimento Hoje\",\n              \"description\": \"R$ 201,23\"\n            },\n            {\n              \"id\": \"1\",\n              \"title\": \"Vencimento Amanhã\",\n              \"description\": \"R$ 219,32\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Message Interactive - Buttons",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "messages"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"+5511999999999\",\n  \"type\": \"interactive\",\n  \"recipient_type\": \"individual\",\n  \"interactive\": {\n    \"type\": \"button\",\n    \"header\": {\n      \"type\": \"text\",\n      \"text\": \"1 mês grátis\"\n    },\n    \"body\": {\n      \"text\": \"Ative seu número e realize testes por 1 mês.\"\n    },\n    \"footer\": {\n      \"text\": \"https://posit.us\"\n    },\n    \"action\": {\n      \"buttons\": [\n        {\n          \"type\": \"reply\",\n          \"reply\": {\n            \"id\": \"unique-postback-id-1\",\n            \"title\": \"Criar conta grátis\"\n          }\n        },\n        {\n          \"type\": \"reply\",\n          \"reply\": {\n            \"id\": \"unique-postback-id-2\",\n            \"title\": \"Falar com atendente\"\n          }\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Media Download",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{media_id}}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "positus",
+            "global"
+          ],
+          "path": [
+            "v2",
+            "whatsapp",
+            "numbers",
+            "{{chave}}",
+            "media",
+            "{{media_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "8b6852b1-f4bb-4471-82c3-6ee1d2b6482d",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "d25a2f38-311c-4d2f-8c69-a03b68fa15ae",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "983c439d-8875-4d05-a373-aeba4c7c1b8c",
+      "key": "chave",
+      "value": "<sua-chave>"
+    },
+    {
+      "id": "b571a0bf-3a80-4924-b177-4b53bf355f8f",
+      "key": "access_token",
+      "value": "<your-token>"
+    },
+    {
+      "key": "media_id",
+      "value": "<media-id>"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

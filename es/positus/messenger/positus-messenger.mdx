@@ -1,0 +1,224 @@
+---
+title: Positus Messenger
+description: Una plataforma simple, objetiva y con bajo costo de inversión. Desarrollada para pequeñas empresas.
+---
+
+# Positus Messenger
+
+![Descripción general de Positus Messenger](/images/positus/messenger/positus-messenger-visao-geral.png)
+
+## Características principales
+
+💛 WhatsApp Business API, evita que tu número sea bloqueado.\
+💙 Atención a múltiples usuarios simultáneamente.\
+🧡 Organizar conversaciones por usuario con la opción de seguir conversación.\
+💜 Múltiples números de WhatsApp en la misma computadora.\
+🤎 Marcadores - Etiquetas personalizadas.\
+💚 Filtros avanzados de conversaciones por agente, marcadores y contenido.\
+🖤 Envío de HSM - Plantillas de mensajes activos.\
+💖 Integración con CRM u otras plataformas utilizando API oficial.\
+🤍 Monitoreo de la calidad de tu número.\
+🤖 Posibilidad de integración con el chatbot de Robbu.
+
+## Cuenta oficial vs. Sandbox
+
+Positus Messenger puede utilizarse de forma experimental a través de Sandbox o de forma oficial en producción después de que tu número de WhatsApp Business esté activo.
+
+* [Cómo activar mi sandbox](/es/positus/studio/sandbox)
+* [Cómo contratar y usar de forma oficial](/es/positus/primeros-pasos/como-empezar#contratacion-y-activacion)
+
+Después de crear tu cuenta en el sitio web [https://studio.posit.us/](https://studio.posit.us/) y elegir una de las dos opciones anteriores, tu cuenta de Positus Messenger estará lista para usarse. \
+Navega hasta el menú izquierdo "[Messenger](https://studio.posit.us/messenger)".
+
+<div align="left"><img src="/images/positus/messenger/menu-messenger.png" alt="Menú Messenger en Positus Studio" /></div>
+
+## Agregar nuevo contacto
+
+Agrega nuevos contactos y envía [mensajes de plantilla](/es/positus/messenger/positus-messenger#enviar-mensaje-de-plantilla) activos para iniciar una conversación.\
+Haz clic en el menú superior "Agregar nuevo contacto" y agrega el nombre, apodo y el teléfono con el código del país.
+
+Recuerda que en WhatsApp Business API solo podrás conversar con un contacto libremente si el mismo se pone en contacto contigo o si responde a tu mensaje de plantilla.
+
+📌 Positus Messenger valida automáticamente si el número de WhatsApp es válido antes de registrar un nuevo contacto.
+
+![Registrando un nuevo contacto en Positus Messenger](/images/positus/messenger/cadastrar-novo-contato.gif)
+
+<Info>
+Al recibir nuevos mensajes, el nombre del contacto se sincronizará con el nombre de WhatsApp. Si deseas mantener un nombre fijo, utiliza el campo apodo justo abajo.
+</Info>
+
+## Enviar mensaje de plantilla
+
+Las plantillas de WhatsApp, también conocidas como modelos de mensaje, son formatos para mensajes reutilizables y comunes que una empresa puede enviar a través de nuestra plataforma Positus Messenger. \
+\
+Toda plantilla debe ser aprobada por WhatsApp antes de usarla, de esta manera garantizan que estés siguiendo las directrices de contenido permitidas.
+
+Antes de enviar tu plantilla para aprobación, recuerda que debe contener el mensaje completo que deseas enviar, con parámetros como Nombre, Dirección, los cuales serán reemplazados por los datos de cada cliente al momento del envío.
+
+![Enviando un mensaje de plantilla HSM](/images/positus/messenger/enviar-template-hsm.gif)
+
+<Info>
+El envío de un mensaje de plantilla abre la ventana de 24 horas. La ventana solo se abrirá cuando el contacto destinatario responda tu mensaje.\
+[Aprende más.](/es/positus/messenger/positus-messenger#que-es-la-ventana-de-24-horas)
+</Info>
+
+## Datos del mensaje (estado)
+
+Para cualquier mensaje que envíes, podrás ver una pantalla de Datos del mensaje con detalles sobre cuándo fue entregado, leído u oído por alguien.
+
+* **Enviado por**
+  * Se mostrará el nombre del usuario de Positus Messenger que envió este mensaje.
+* <img src="/images/positus/messenger/status-enviada.png" alt="Icono de mensaje enviado" height="16" /> **Enviado**
+  * Se mostrará la fecha y hora del envío del mensaje al destinatario.
+* <img src="/images/positus/messenger/status-entregue.png" alt="Icono de mensaje entregado" height="16" /> **Entregado**
+  * Se mostrará la fecha y hora de cuando tu mensaje fue entregado al teléfono del destinatario.
+* <img src="/images/positus/messenger/status-lida.png" alt="Icono de mensaje leído" height="16" /> **Leído**
+  * Se mostrará la fecha y hora de cuando el destinatario leyó el mensaje o vio la foto, el archivo de audio o de vídeo. Para un mensaje de voz, el destinatario lo vio, pero no lo escuchó.
+* <img src="/images/positus/messenger/status-falha.png" alt="Icono de fallo en el envío" height="16" /> **Fallo**
+  * Se mostrará la fecha y hora de cuando tu mensaje recibió del servidor de WhatsApp el estado de Fallo en la entrega, esto significa que tu mensaje no fue entregado al destinatario. Este estado ocurre cuando la [ventana de conversación de 24 horas está cerrada](/es/positus/messenger/positus-messenger#que-es-la-ventana-de-24-horas).
+
+![Pantalla de Datos del mensaje con los estados de envío](/images/positus/messenger/dados-da-mensagem.gif)
+
+<Info>
+
+#### ¿La confirmación de lectura no aparece?
+
+De acuerdo con WhatsApp, hay varios motivos para que los dos palomillas no se pongan azules. Esto incluye la desactivación de la confirmación de lectura, bloqueos, teléfono apagado, etc.
+</Info>
+
+## ¿Qué es la ventana de 24 horas?
+
+Si un usuario inicia una conversación contigo, podrás continuarla por WhatsApp hasta 24 horas después del último mensaje que él envíe de forma gratuita ("Ventana de 24 horas"). Fuera de la Ventana de 24 horas, solo podrás enviar mensajes usando las Plantillas de mensaje (HSM) aprobadas, por las cuales se cobrará la tarifa aplicable.
+
+<Info>
+Para saber más accede a la **Política de WhatsApp Business** [https://www.whatsapp.com/legal/business-policy/?lang=es](https://www.whatsapp.com/legal/business-policy/?lang=es)
+</Info>
+
+## ¿Qué son los marcadores (Etiquetas)?
+
+Positus Messenger permite agregar marcadores a las conversaciones para gestionar conversaciones. Los marcadores o etiquetas son útiles para empresas y profesionales que desean mantener los mensajes de clientes, proveedores y asuntos internos definidos y listados de forma inteligente dentro del mensajero. La función agrega iconos de banderas de colores sobre la descripción de una conversación en la lista de chats.
+
+De esta manera, el usuario que gestiona contactos recibe una ayuda visual para reconocer rápidamente un asunto y reunir en una sola lista las conversaciones de cada categoría.
+
+## Agregar y remover marcadores de una conversación
+
+Para agregar un marcador, abre una conversación y haz clic en el icono indicativo de marcador, selecciona los marcadores deseados para señalizar y organizar la conversación. Al hacer clic en un marcador ya seleccionado para esta conversación, será removido automáticamente.
+
+![Agregando y removiendo marcadores de una conversación](/images/positus/messenger/adicionar-remover-marcadores.gif)
+
+<Info>
+No existe límite de marcadores por conversación.
+</Info>
+
+## Filtrar conversaciones por marcadores
+
+El filtro por marcador permite la organización de tus conversaciones por segmentación.\
+Puedes filtrar tus conversaciones utilizando el filtro "**Contacto con marcador específico**" y luego selecciona el marcador que deseas filtrar.
+
+![Filtrando conversaciones por marcador](/images/positus/messenger/filtro-por-marcadores.gif)
+
+## Gestionar marcadores
+
+Los marcadores pueden ser accedidos por una conversación directamente en Positus Messenger o a través de Positus Studio en el menú "Recursos" >> "Números" >> (Haz clic en el número para el cual deseas crear marcadores) >> "Marcadores" >> "Registrar marcador"
+
+![Gestionando marcadores en Positus Studio](/images/positus/messenger/gerenciar-marcadores.gif)
+
+📌 Actualmente no existe límite de marcadores\
+📌 Los marcadores son creados por números, siendo así que puedes tener varios números activos con marcadores diferentes.
+
+<Info>
+Solo usuarios con el perfil "owner" del número y del workspace pueden gestionar marcadores. Para saber más sobre perfil de acceso consulta este enlace: [Haz clic aquí](/es/positus/studio/positus-studio#como-invitar-un-nuevo-usuario-a-mi-workspace)
+</Info>
+
+## Cómo buscar una conversación por palabra clave, nombre del contacto o número de teléfono
+
+Al usar la función de búsqueda de Positus Messenger puedes encontrar fácilmente **contactos**, mensajes, fotos, vídeos, enlaces, GIFs, audios y documentos enviados en tus conversaciones.
+
+<div align="left"><img src="/images/positus/messenger/pesquisa-conversas.png" alt="Campo de búsqueda de conversaciones de Positus Messenger" /></div>
+
+## Buscar un mensaje dentro de una conversación
+
+Al usar la función de búsqueda de conversación de Positus Messenger puedes encontrar fácilmente mensajes, fotos, vídeos, enlaces, GIFs, audios y documentos enviados en tus conversaciones.
+
+![Buscando un mensaje dentro de una conversación](/images/positus/messenger/filtro-conversa.gif)
+
+## Filtros avanzados de conversaciones
+
+* **Todos los contactos**
+  * La listación será mostrada con **todos los contactos** disponibles para este número ordenados por el último mensaje recibido.
+* **Mis contactos**
+  * La listación será mostrada con todos los contactos seguidos por el usuario conectado, facilitando así que el usuario sepa qué contactos está atendiendo.
+* **Contactos sin seguidores**
+  * La listación será mostrada con todos los contactos sin seguidores, facilitando así saber qué clientes aún no están siendo atendidos por ningún otro usuario.
+* **Contacto con seguidor específico**
+  * Al seleccionar esta opción será presentada una nueva lista con los otros usuarios asociados a este número. Después de seleccionar un usuario, la listación será mostrada con todos los contactos que están siendo seguidos por el usuario filtrado.
+* **Contacto con marcador específico**
+  * Al seleccionar esta opción será presentada una nueva lista con los marcadores asociados a este número. Después de seleccionar un marcador, la listación será mostrada con todos los contactos que están marcados por el filtro seleccionado.
+
+## Enviar mensaje de texto
+
+## Enviar archivos de vídeo, fotos y documentos
+
+Abre una conversación, toca el icono <img src="/images/positus/messenger/icone-anexar.png" alt="Icono de adjuntar archivos" height="16" /> y luego selecciona uno o múltiples archivos. Será mostrada la pantalla de vista previa, donde podrás remover o agregar más archivos antes de enviar.
+
+![Enviando archivos de vídeo, fotos y documentos](/images/positus/messenger/enviar-arquivos.gif)
+
+<Info>
+**Consejo**: *También puedes arrastrar los archivos directamente dentro de la conversación.*
+</Info>
+
+## Cómo enviar un mensaje de texto
+
+Abre una conversación y utiliza la caja de texto para escribir tu mensaje. Haz clic en el icono <img src="/images/positus/messenger/icone-enviar.png" alt="Icono de enviar mensaje" height="16" /> para enviar un mensaje o presiona la tecla Enter.
+
+![Enviando un mensaje de texto en Positus Messenger](/images/positus/messenger/enviar-mensagem-texto.png)
+
+<Info>
+**Consejo:** Utiliza Shift + Enter para saltar de línea.
+</Info>
+
+## Cómo formatear tus mensajes
+
+WhatsApp permite que formatees los textos de tus mensajes. No es posible desactivar esta función.
+
+#### Itálica
+
+Para escribir tu mensaje en *itálica*, inserta el signo de guión bajo antes y después del texto:
+
+\_texto\_
+
+#### Negrita
+
+Para escribir tu mensaje en **negrita**, inserta un asterisco antes y después del texto:
+
+\*texto\*
+
+#### Tachado
+
+Para tachar tu mensaje, inserta una tilde antes y después del texto:
+
+\~texto\~
+
+#### Monoespacio
+
+Para escribir tu mensaje en monoespacio, inserta tres signos graves antes y después del texto:
+
+\`\`\`texto\`\`\`
+
+## Cómo eliminar mensajes enviados
+
+No es posible eliminar mensajes enviados usando Positus Messenger debido a una limitación de uso de la WhatsApp Business API. Esta función hace que tu empresa tenga un ambiente más seguro, evitando que mensajes inapropiados sean enviados y después eliminados.
+
+## Cómo responder un mensaje
+
+Actualmente no es posible responder un mensaje directamente; sin embargo, tu contacto puede responder el mensaje normalmente y será mostrado en Positus Messenger asociado al mensaje original. Ver imagen abajo.
+
+![Mensaje respondido mostrado asociado al mensaje original](/images/positus/messenger/responder-mensagem.png)
+
+## Múltiples números de WhatsApp para el mismo usuario
+
+Tu empresa puede tener varios números donde el mismo usuario podrá alternar la visualización de Positus Messenger sin la necesidad de reconectar.
+
+*Para esto haz clic en tus iniciales en el menú superior izquierdo y elige el número deseado. Esta función estará disponible si tienes más de 1 número activo en la plataforma.*
+
+![Alternando entre múltiples números de WhatsApp](/images/positus/messenger/trocar-numero.gif)

@@ -1,0 +1,967 @@
+---
+title: API - Documentação
+description: Integre agora mesmo com a maior plataforma de comunicação do mundo, WhatsApp Business API por Positus.
+---
+
+## Arquitetura Positus - WhatsApp Business API
+
+```mermaid
+flowchart LR
+    App["Sua aplicação / CRM"]
+    API["Positus API<br/>api.positus.global/v2"]
+    Cloud["WhatsApp Cloud API<br/>(Meta)"]
+    User(["Cliente no WhatsApp"])
+
+    App -->|"POST .../messages · Bearer"| API
+    API -->|encaminha| Cloud
+    Cloud -->|entrega| User
+    User -->|responde| Cloud
+    Cloud -->|webhook| API
+    API -->|"notificação: contacts / messages / statuses"| App
+```
+
+<Info>
+Você pode integrar diretamente com a Positus API (acima) ou usar uma plataforma de atendimento como o Invenio da Robbu, sem desenvolver a integração.
+</Info>
+
+| SDK                                                                                                    |                        |                                                        |
+| ------------------------------------------------------------------------------------------------------ | ---------------------- | ------------------------------------------------------ |
+| [https://github.com/positusapps/positus-api-laravel-client](https://github.com/positusapps/positus-api-laravel-client) | Laravel / PHP          | Youtube                                                |
+| [https://github.com/positusapps/positus-api-php-client](https://github.com/positusapps/positus-api-php-client)         | PHP                    | [Youtube](https://www.youtube.com/watch?v=6hhHz73bsc4) |
+| [https://www.nuget.org/packages/positus-api-csharp-client/](https://www.nuget.org/packages/positus-api-csharp-client/) | Nuget .NET / .NET Core | [YouTube](https://www.youtube.com/watch?v=E8MZWwfQSZY) |
+| [https://github.com/positusapps/positus-api-csharp-client](https://github.com/positusapps/positus-api-csharp-client)   | Github para .NET       |                                                        |
+
+<Info>
+**Token de Produção:** O seu token será gerado e fornecido pela Positus, ele dará acesso a todos os seus números de WhatsApp Business API. A chave será fornecido após ativação de cada número de WhatsApp Business API.
+
+**Sandbox - Token desenvolvimento**: Você poderá gerar o seu token diretamente pelo [http://studio.posit.us/](http://studio.posit.us/).
+</Info>
+
+## Postman file
+
+*O **Postman** é uma ferramenta que tem como objetivo testar serviços RESTful (Web APIs) por meio do envio de requisições HTTP e da análise do seu retorno.*
+[Download Postman App](https://www.postman.com/downloads/)
+
+<CardGroup cols={2}>
+  <Card title="API de produção" icon="file-arrow-down" href="/assets/Positus-API-2026.postman_collection.json">
+    Positus API (2026).postman_collection.json
+  </Card>
+  <Card title="API de desenvolvimento (Sandbox)" icon="file-arrow-down" href="/assets/Positus-API-Sandbox-2026.postman_collection.json">
+    Positus API Sandbox (2026).postman_collection.json
+  </Card>
+</CardGroup>
+
+## messages
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Utilize esta rota para enviar mensagens de texto via WhatsApp
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Content-Type   | string | application/json                 |
+| Authorization  | string | Autenticação usando Bearer Token |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Indicador de digitação
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator`
+
+Exibe o indicador "digitando…" para o cliente e marca como lida a mensagem recebida. Informe o `message_id` da mensagem enviada pelo cliente. O indicador é dispensado automaticamente após cerca de 25 segundos ou assim que você responde.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name          | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | string | Autenticação usando Bearer Token |
+| Content-Type  | string | application/json                 |
+
+#### Request Body
+
+| Name       | Type   | Description                                          |
+| ---------- | ------ | ---------------------------------------------------- |
+| message_id | string | **Obrigatório.** ID da mensagem recebida do cliente. |
+
+```json
+{
+  "message_id": "wamid.HBgMNTUxMTk5OTk5OTk5FMA=="
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "success": true,
+        "message": "The typing indicator was sent successfully"
+    }
+    ```
+  </Tab>
+  <Tab title="Erro">
+    ```json
+    {
+        "errors": [
+            {
+                "code": 0,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": "Unfortunately, we were unable to send the typing indicator"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## HSM
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Utilize esta rota para enviar mensagens de notificação via WhatsApp
+
+HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens de texto, midia ou arquivos.
+
+#### Path Parameters
+
+| Name  | Type   | Description |
+| ----- | ------ | ----------- |
+| Chave | string |             |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+<CodeGroup>
+
+```json Completo
+{
+  "to": "+551199999999",
+  "type": "template",
+  "template": {
+    "language": {
+      "policy": "deterministic",
+      "code": "pt_BR"
+    },
+    "name": "xxxxxx",
+    "components": [
+      {
+        "type": "header",
+        "parameters": [
+          {
+            "type": "image",
+            "image": {
+              "link": "https://dealers.rewebmkt.com/images/20190417084518-actros-3-1280.jpg"
+            }
+          }
+        ]
+      },
+      {
+        "type": "body",
+        "parameters": [
+          { "type": "text", "text": "Rafael" },
+          { "type": "text", "text": "Mercedes-Benz" },
+          { "type": "text", "text": "Actros" },
+          { "type": "text", "text": "Cardiesel - Belo Horizonte" },
+          { "type": "text", "text": "08/05/2020" }
+        ]
+      },
+      {
+        "type": "button",
+        "sub_type": "url",
+        "index": "0",
+        "parameters": [
+          { "type": "text", "text": "fMYMyV8x" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+```json Botões
+{
+  "to": "+5511999999999",
+  "type": "template",
+  "template": {
+    "language": {
+      "policy": "deterministic",
+      "code": "pt_BR"
+    },
+    "name": "carteiro_botoes",
+    "components": [
+      {
+        "type": "body",
+        "parameters": [
+          { "type": "text", "text": "Robbu" },
+          { "type": "text", "text": "Thiago Thamiel" }
+        ]
+      },
+      {
+        "type": "button",
+        "sub_type": "quick_reply",
+        "index": "0"
+      }
+    ]
+  }
+}
+```
+
+</CodeGroup>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Contact
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe contatos
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "contacts",
+  "contacts": [
+    {
+      "addresses": [],
+      "emails": [],
+      "ims": [],
+      "name": {
+        "first_name": "Positus Provider",
+        "formatted_name": "Positus Provider"
+      },
+      "org": [],
+      "phones": [
+        {
+          "phone": "+55 11 2626-4234",
+          "type": "CELL",
+          "wa_id": "551126264234"
+        }
+      ],
+      "urls": []
+    }
+  ]
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Location
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe localizações
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "location",
+  "location": {
+    "longitude": -46.662787,
+    "latitude": -23.553610,
+    "name": "Robbu Brazil",
+    "address": "Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Image
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe imagens
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "image",
+  "image": {
+    "link": "https://picsum.photos/200",
+    "caption": "your-document-caption"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Document
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe documentos
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511941489395",
+  "type": "document",
+  "document": {
+    "link": "http://www.pdf995.com/samples/pdf.pdf",
+    "caption": "your-document-caption"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Video
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe videos
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "video",
+  "video": {
+    "link": "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+    "caption": "your-document-caption"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Audio
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe audios
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "audio",
+  "audio": {
+    "link": "https://sample-videos.com/audio/mp3/crowd-cheering.mp3"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": ,
+                "title": "",
+                "details": ""
+            }
+        ],
+        "message": ""
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Sticker
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Compartilhe adesivos. O Formato do adesivo tem que ser exatamente 512x512
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "sticker",
+  "sticker": {
+    "link": "https://studio.posit.us/api/samples/sticker.webp"
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Download Midia
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{messages.type.id}}`
+
+Faça o download das mídias. Use o `id` da mídia recebido na notificação de webhook.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+| id    | string | ID da mídia (recebido no webhook)   |
+
+#### Headers
+
+| Name          | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | string | Autenticação usando Bearer Token |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Retorna o **conteúdo binário da mídia**, com o cabeçalho `Content-Type` correspondente ao tipo do arquivo (ex.: `image/jpeg`, `audio/ogg`, `application/pdf`).
+  </Tab>
+  <Tab title="404">
+    Mídia não encontrada (retorna o erro correspondente da Meta).
+  </Tab>
+  <Tab title="429">
+    Limite de requisições atingido na Meta. A resposta inclui o cabeçalho `Retry-After` (em segundos) indicando quando tentar novamente.
+
+    ```json
+    {
+        "message": "..."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Mensagens Interativas - Lista
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Listar Mensagens: Mensagens incluindo um menu de até 10 opções. Esse tipo de mensagem oferece uma maneira mais simples e consistente para os usuários fazerem uma seleção ao interagir com uma empresa.
+
+Mensagens de botão de lista ou de resposta não podem ser usadas como notificações. Atualmente, eles só podem ser enviados dentro de 24 horas da última mensagem enviada pelo usuário. Se você tentar enviar uma mensagem fora da janela de 24 horas, você receberá uma mensagem de erro.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "header": {
+      "type": "text",
+      "text": "CryptoBank"
+    },
+    "body": {
+      "text": "Olá senhor Thiago Thamiel, me chamo Francisco Dabus estou falando referente ao Banco CryptoBank e você já pode regular sua pendência financeira por aqui. Veja as opções que preparamos para você!\n\n💼 Contrato: 82782361236213\n🗓️ Vencimento: 01/01/2021\n💰 Valor Atualizado: 232,83"
+    },
+    "footer": {
+      "text": "Demonstração Robbu"
+    },
+    "action": {
+      "button": "Opções de pagamento",
+      "sections": [
+        {
+          "title": "Atualização",
+          "rows": [
+            {
+              "id": "7",
+              "title": "Vencimento Hoje",
+              "description": "💰 R$ 201,23 - Parcelas 17 até 19 de 24"
+            },
+            {
+              "id": "1",
+              "title": "Vencimento Amanha",
+              "description": "💰 R$ 219,32 - Parcelas 17 até 19 de 24"
+            }
+          ]
+        },
+        {
+          "title": "Quitação",
+          "rows": [
+            {
+              "id": "3",
+              "title": "Vencimento Hoje",
+              "description": "💰 R$ 1.323,21 - Todas as parcelas restantes"
+            },
+            {
+              "id": "4",
+              "title": "Vencimento Amanha",
+              "description": "💰 R$ 1.382,34 - Todas as parcelas restantes"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+Documentação completa: [https://developers.facebook.com/docs/whatsapp/guides/interactive-messages](https://developers.facebook.com/docs/whatsapp/guides/interactive-messages)
+</Info>
+
+## Mensagens Interativas - Botões
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages`
+
+Botões de resposta: Mensagens incluindo até 3 opções — cada opção é um botão. Esse tipo de mensagem oferece uma maneira mais rápida para os usuários fazerem uma seleção a partir de um menu ao interagir com uma empresa. Os botões de resposta têm a mesma experiência do usuário que modelos interativos com botões.
+
+Mensagens de botão de lista ou de resposta não podem ser usadas como notificações. Atualmente, eles só podem ser enviados dentro de 24 horas da última mensagem enviada pelo usuário. Se você tentar enviar uma mensagem fora da janela de 24 horas, você receberá uma mensagem de erro.
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name           | Type   | Description                      |
+| -------------- | ------ | -------------------------------- |
+| Authorization  | string | Autenticação usando Bearer Token |
+| Content-Type   | string | application/json                 |
+
+#### Request Body
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "interactive",
+  "recipient_type": "individual",
+  "interactive": {
+    "type": "button",
+    "header": {
+      "type": "text",
+      "text": "1 mês grátis"
+    },
+    "body": {
+      "text": "Ótima escolha, agora você já pode ativar o seu número e realizar testes por 1 mês sem compromisso."
+    },
+    "footer": {
+      "text": "https://posit.us"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "unique-postback-id-1",
+            "title": "Criar conta grátis"
+          }
+        },
+        {
+          "type": "reply",
+          "reply": {
+            "id": "unique-postback-id-2",
+            "title": "Falar com atendente"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+Documentação completa: [https://developers.facebook.com/docs/whatsapp/guides/interactive-messages](https://developers.facebook.com/docs/whatsapp/guides/interactive-messages)
+</Info>
