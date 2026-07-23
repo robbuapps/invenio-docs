@@ -1,0 +1,116 @@
+---
+title: Webhooks de Chamadas
+description: Receba eventos de chamadas VoIP no seu webhook e processe as notificações de conexão e encerramento de chamadas.
+---
+
+# Webhooks de Chamadas
+
+Eventos de chamadas VoIP chegam no webhook de chamadas (`calls_webhook`) do seu número, **separado do webhook de mensagens**. Cada notificação é enviada com o header `User-Agent: Positus`.
+
+## Tipos de eventos
+
+| Evento | Gera webhook? | Descrição |
+| --- | --- | --- |
+| connect | Sim | Chamada iniciada por um usuário. Contém identificadores da chamada, direção e dados de sessão (SDP) para WebRTC. |
+| pre_accept | Não | Ação interna da Positus. Não gera webhook. |
+| accept | Não | Ação da sua aplicação via API. Não gera webhook. |
+| reject | Não | Ação da sua aplicação via API para rejeitar. Não gera webhook. |
+| terminate | Sim | Chamada encerrada (pelo usuário, sua aplicação ou timeout). Inclui timestamps, duração e status final. |
+
+<Info>
+Apenas os eventos **connect** e **terminate** geram webhooks. As ações de aceitar, rejeitar ou encerrar uma chamada são feitas através da [API de Chamadas](/docs/positus/calling/api) e não geram notificações em webhook.
+</Info>
+
+## Envelope entregue ao cliente
+
+O webhook entregue segue o formato padrão de webhook da Meta, com o objeto de chamada dentro de `entry[].changes[].value.calls[]`:
+
+```json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1234567890123456",
+      "changes": [
+        {
+          "field": "calls",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "55 11 2236-1741",
+              "phone_number_id": "1234567890123456"
+            },
+            "calls": [
+              {
+                "id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggNTg0NjkxRTJGNjREQzNFRkJGQ0ZDMzRCMUQ0RTM5REQcGAw1NTExMzEzNjE3NDEVAgAA",
+                "from": "554399951234",
+                "to": "551122361741",
+                "event": "connect",
+                "connection": {
+                  "webrtc": {
+                    "sdp": "v=0\r\no=- 123456 2 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS stream\r\nm=application 54321 UDP/TLS/RTP/SAVPF 120\r\n..."
+                  }
+                },
+                "session": {
+                  "sdp_type": "answer",
+                  "sdp": "v=0\r\no=- 123456 2 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS stream\r\nm=application 54321 UDP/TLS/RTP/SAVPF 120\r\n..."
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Exemplo: evento terminate
+
+```json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1234567890123456",
+      "changes": [
+        {
+          "field": "calls",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "55 11 2236-1741",
+              "phone_number_id": "1234567890123456"
+            },
+            "calls": [
+              {
+                "id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggNTg0NjkxRTJGNjREQzNFRkJGQ0ZDMzRCMUQ0RTM5REQcGAw1NTExMzEzNjE3NDEVAgAA",
+                "from": "554399951234",
+                "to": "551122361741",
+                "event": "terminate",
+                "timestamp": "1747411095",
+                "direction": "USER_INITIATED",
+                "start_time": "1747411036",
+                "end_time": "1747411095",
+                "duration": 59,
+                "status": "COMPLETED"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Processamento
+
+<Info>
+O payload de webhook segue o padrão de notificações da Meta. Para processar os eventos, leia o objeto de chamada em `entry[0].changes[0].value.calls[]`. Cada chamada contém um identificador único (`id`) que você pode usar para rastrear a chamada na sua aplicação.
+</Info>
+
+## Próximos passos
+
+- [Introdução ao WhatsApp Calling](/docs/positus/calling/introducao) — conceito e pré-requisitos.
+- [API de Chamadas](/docs/positus/calling/api) — iniciar, aceitar, rejeitar e encerrar chamadas.

@@ -1,0 +1,233 @@
+---
+title: API de Llamadas
+description: Endpoints para gestionar llamadas de voz (VoIP) a través de WhatsApp usando la API de Positus.
+---
+
+# API de Llamadas
+
+La API de Llamadas de Positus te permite gestionar llamadas de voz a través de WhatsApp de forma programática. Puedes buscar permisos de llamada, iniciar, aceptar, rechazar y finalizar llamadas.
+
+## Autenticación y alcance
+
+Todas las rutas requieren autenticación mediante **Bearer Token** de usuario y se acceden bajo un número específico:
+
+```
+https://api.positus.global/v2/whatsapp/numbers/{number}/calls
+Authorization: Bearer <tu-token>
+Content-Type: application/json
+```
+
+| Parámetro de ruta | Descripción |
+| --- | --- |
+| `{number}` | UUID de un número activo del usuario |
+
+<Info>
+El número debe estar **activo** y tener calling **habilitado** en el workspace. Si no es así, la API responde con `404` o `403`.
+</Info>
+
+<Warning>
+Para recibir eventos de llamada (webhooks), el número debe tener un **calls_webhook** configurado. Sin esto, no recibirás notificaciones de llamadas entrantes.
+</Warning>
+
+## Buscar permiso de llamada
+
+Devuelve el estado de permiso para iniciar llamadas con un contacto específico.
+
+```
+GET https://api.positus.global/v2/whatsapp/numbers/{number}/calls/call-permissions?user_wa_id={USER_WA_ID}
+```
+
+| Parámetro | Tipo | Obligatorio | Descripción |
+| --- | --- | --- | --- |
+| `user_wa_id` | string | Sí | Número WhatsApp (sin formato) del contacto para el cual deseas buscar permiso |
+
+**Respuesta:**
+
+```json
+{
+  "number": {
+    "uuid": "5dbbbf01-2f92-4389-b512-45de86c4a66f",
+    "waba_id": "3243505955080424",
+    "user_wa_id": "5543999011234",
+    "to": "1131361234"
+  },
+  "calling": {
+    "messaging_product": "whatsapp",
+    "permission": {
+      "status": "temporary",
+      "expiration_time": 1748553340
+    },
+    "actions": [
+      {
+        "action_name": "send_call_permission_request",
+        "can_perform_action": true,
+        "limits": [
+          {
+            "time_period": "PT24H",
+            "max_allowed": 1,
+            "current_usage": 0
+          },
+          {
+            "time_period": "P7D",
+            "max_allowed": 2,
+            "current_usage": 0
+          }
+        ]
+      },
+      {
+        "action_name": "start_call",
+        "can_perform_action": true,
+        "limits": [
+          {
+            "time_period": "PT24H",
+            "max_allowed": 5,
+            "current_usage": 0
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Modelo de permiso
+
+Entiende los campos devueltos por el endpoint de búsqueda de permisos:
+
+| Campo | Descripción |
+| --- | --- |
+| `permission.status` | Estado del permiso: `no_permission` (sin permiso), `temporary` (permiso temporal) o `permanent` (permiso permanente) |
+| `permission.expiration_time` | Timestamp Unix de cuándo expira el permiso (si el estado es `temporary`) |
+| `actions[]` | Lista de acciones disponibles para el contacto |
+| `actions[].action_name` | Nombre de la acción (`send_call_permission_request` o `start_call`) |
+| `actions[].can_perform_action` | `true` si puedes realizar la acción en este momento, `false` en caso contrario |
+| `actions[].limits[]` | Límites aplicados a la acción |
+| `limits[].time_period` | Período del límite: `PT24H` (24 horas) o `P7D` (7 días) |
+| `limits[].max_allowed` | Número máximo de veces que se puede ejecutar la acción en el período |
+| `limits[].current_usage` | Número de veces ya ejecutado en el período actual |
+
+## Iniciar llamada
+
+Inicia una llamada VoIP con un contacto.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{number}/calls/make
+```
+
+| Campo | Tipo | Obligatorio | Descripción |
+| --- | --- | --- | --- |
+| `to` | string | Sí | Número WhatsApp (sin formato) del contacto que recibirá la llamada |
+| `connection.webrtc.sdp` | string | Sí | Descripción de sesión SDP (Session Description Protocol) de tu conexión WebRTC |
+| `session.sdp` | string | Sí | Descripción de sesión SDP para la sesión |
+| `session.sdp_type` | string | No | Tipo de SDP (ej.: `answer`) |
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "to": "551122361741",
+  "connection": {
+    "webrtc": {
+      "sdp": "<<SDP INFO>>"
+    }
+  },
+  "session": {
+    "sdp_type": "answer",
+    "sdp": "<<RFC 4566 SDP>>"
+  }
+}
+```
+
+**Respuesta:**
+
+```json
+{
+  "success": true
+}
+```
+
+## Aceptar llamada
+
+Acepta una llamada recibida.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{number}/calls/accept
+```
+
+| Campo | Tipo | Obligatorio | Descripción |
+| --- | --- | --- | --- |
+| `call_id` | string | Sí | ID único de la llamada (recibido en el webhook `connect`) |
+| `sdp` | string | Sí | Descripción de sesión SDP (Session Description Protocol) de tu respuesta |
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "call_id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggN0JFODFBM0IyMEY3QTNGQkFEQzA0NzhGNEIwNEVGQTQcGAw1NTExMzEzNjE3NDEVAgAA",
+  "sdp": "<<SDP INFO>>"
+}
+```
+
+**Respuesta:**
+
+```json
+{
+  "success": true
+}
+```
+
+## Rechazar llamada
+
+Rechaza una llamada recibida.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{number}/calls/reject
+```
+
+| Campo | Tipo | Obligatorio | Descripción |
+| --- | --- | --- | --- |
+| `call_id` | string | Sí | ID único de la llamada (recibido en el webhook `connect`) |
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "call_id": "wacid.ABGGFjFVU2AfAgo6V-Hc5eCgK5Gh"
+}
+```
+
+**Respuesta:**
+
+```json
+{
+  "success": true
+}
+```
+
+## Finalizar llamada
+
+Finaliza una llamada en curso.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{number}/calls/hang-up
+```
+
+| Campo | Tipo | Obligatorio | Descripción |
+| --- | --- | --- | --- |
+| `call_id` | string | Sí | ID único de la llamada |
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "call_id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggN0JFODFBM0IyMEY3QTNGQkFEQzA0NzhGNEIwNEVGQTQcGAw1NTExMzEzNjE3NDEVAgAA"
+}
+```
+
+**Respuesta:**
+
+```json
+{
+  "success": true
+}
+```

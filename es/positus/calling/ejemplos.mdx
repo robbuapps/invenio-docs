@@ -1,0 +1,348 @@
+---
+title: Ejemplos
+description: Ejemplos prácticos del ciclo de vida de una llamada WhatsApp.
+---
+
+# Ejemplos
+
+A continuación se presentan ejemplos prácticos de cómo usar la API de WhatsApp Calling para iniciar, aceptar y finalizar llamadas. Cada escenario muestra la secuencia de solicitudes y respuestas, así como los webhooks recibidos.
+
+Para más detalles sobre los endpoints y sus parámetros, consulte la [API de Calling](/es/positus/calling/api). Para entender los eventos de webhook, vea [Webhooks](/es/positus/calling/webhooks).
+
+## Escenario A — Llamada iniciada por la empresa (outbound)
+
+En este escenario, su empresa inicia una llamada a un usuario de WhatsApp.
+
+### Paso 1: Verificar permiso de llamada
+
+Antes de iniciar una llamada, verifique si su empresa tiene permiso para llamar al usuario. Meta impone limitaciones de llamadas que pueden variar según el historial de comunicación.
+
+**Solicitud:**
+```
+GET /v2/whatsapp/numbers/{number}/calls/call-permissions?user_wa_id=554399951234
+Authorization: Bearer YOUR_TOKEN
+```
+
+**Respuesta:**
+```json
+{
+  "number": {
+    "uuid": "5dbbbf01-2f92-4389-b512-45de86c4a66f",
+    "waba_id": "3243505955080424",
+    "user_wa_id": "5543999011234",
+    "to": "1131361234"
+  },
+  "calling": {
+    "messaging_product": "whatsapp",
+    "permission": {
+      "status": "temporary",
+      "expiration_time": 1748553340
+    },
+    "actions": [
+      {
+        "action_name": "send_call_permission_request",
+        "can_perform_action": true,
+        "limits": [
+          {
+            "time_period": "PT24H",
+            "max_allowed": 1,
+            "current_usage": 0
+          },
+          {
+            "time_period": "P7D",
+            "max_allowed": 2,
+            "current_usage": 0
+          }
+        ]
+      },
+      {
+        "action_name": "start_call",
+        "can_perform_action": true,
+        "limits": [
+          {
+            "time_period": "PT24H",
+            "max_allowed": 5,
+            "current_usage": 0
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+<Info>
+El campo `calling.permission.status` puede ser `no_permission`, `temporary` o `permanent`. Consulte la tabla de `actions` para saber si puede iniciar una llamada y cuáles son los límites (máximo de llamadas por período).
+</Info>
+
+### Paso 2: Iniciar la llamada
+
+Si el permiso está confirmado y tiene llamadas disponibles, inicie la llamada enviando la oferta SDP (Session Description Protocol).
+
+**Solicitud:**
+```
+POST /v2/whatsapp/numbers/{number}/calls/make
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+```
+
+```json
+{
+  "to": "551122361741",
+  "connection": {
+    "webrtc": {
+      "sdp": "<<SDP INFO>>"
+    }
+  },
+  "session": {
+    "sdp_type": "answer",
+    "sdp": "<<RFC 4566 SDP>>"
+  }
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true
+}
+```
+
+### Paso 3: Finalizar la llamada
+
+Cuando la llamada termina (el usuario colgó, quiere terminarla, etc.), envíe la solicitud de finalización con el `call_id` que obtuvo en el webhook de inicio (`connect`) o en el cuerpo de la respuesta.
+
+**Solicitud:**
+```
+POST /v2/whatsapp/numbers/{number}/calls/hang-up
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+```
+
+```json
+{
+  "call_id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggN0JFODFBM0IyMEY3QTNGQkFEQzA0NzhGNEIwNEVGQTQcGAw1NTExMzEzNjE3NDEVAgAA"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true
+}
+```
+
+### Paso 4: Recibir el webhook de finalización
+
+Después de que la llamada se finalice, recibe un webhook en el `calls_webhook` configurado del número con el evento `terminate`. El webhook entregado es el envoltorio sin procesar de Meta con la estructura a continuación:
+
+```json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "3243505955080424",
+      "changes": [
+        {
+          "field": "calls",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "55 11 3136-1741",
+              "phone_number_id": "122110101"
+            },
+            "calls": [
+              {
+                "id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggNTg0NjkxRTJGNjREQzNFRkJGQ0ZDMzRCMUQ0RTM5REQcGAw1NTExMzEzNjE3NDEVAgAA",
+                "from": "554399951234",
+                "to": "551122361741",
+                "event": "terminate",
+                "timestamp": "1747411095",
+                "direction": "USER_INITIATED",
+                "start_time": "1747411036",
+                "end_time": "1747411095",
+                "duration": 59,
+                "status": "COMPLETED"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+<Info>
+El objeto dentro de `calls[]` contiene información sobre cómo terminó la llamada: `direction` indica quién inició la finalización, `duration` es el tiempo en segundos y `status` muestra si se completó correctamente o no.
+</Info>
+
+---
+
+## Escenario B — Llamada recibida de un usuario (inbound)
+
+En este escenario, un usuario de WhatsApp inicia una llamada a su empresa.
+
+### Paso 1: Recibir el webhook de inicio de llamada
+
+Cuando un usuario intenta llamar a su número, recibe un webhook en `calls_webhook` con el evento `connect`. Este webhook contiene el `call_id` (en el campo `id`) y la oferta SDP del usuario.
+
+```json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "3243505955080424",
+      "changes": [
+        {
+          "field": "calls",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "55 11 3136-1741",
+              "phone_number_id": "122110101"
+            },
+            "calls": [
+              {
+                "id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggNTg0NjkxRTJGNjREQzNFRkJGQ0ZDMzRCMUQ0RTM5REQcGAw1NTExMzEzNjE3NDEVAgAA",
+                "from": "554399951234",
+                "to": "551122361741",
+                "event": "connect",
+                "connection": {
+                  "webrtc": {
+                    "sdp": "<<SDP INFO>>"
+                  }
+                },
+                "session": {
+                  "sdp_type": "answer",
+                  "sdp": "<<RFC 4566 SDP>>"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+<Info>
+Use el campo `id` (ejemplo: `wacid.HBgM...`) como el `call_id` para las siguientes acciones (aceptar o rechazar). El `connection.webrtc.sdp` es la oferta SDP del usuario.
+</Info>
+
+### Paso 2: Aceptar la llamada (o rechazar)
+
+Puede aceptar la llamada respondiendo con su propio SDP o rechazarla. Para aceptar:
+
+**Solicitud:**
+```
+POST /v2/whatsapp/numbers/{number}/calls/accept
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+```
+
+```json
+{
+  "call_id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggN0JFODFBM0IyMEY3QTNGQkFEQzA0NzhGNEIwNEVGQTQcGAw1NTExMzEzNjE3NDEVAgAA",
+  "sdp": "<<SDP INFO>>"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true
+}
+```
+
+Para rechazar la llamada:
+
+**Solicitud:**
+```
+POST /v2/whatsapp/numbers/{number}/calls/reject
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+```
+
+```json
+{
+  "call_id": "wacid.ABGGFjFVU2AfAgo6V-Hc5eCgK5Gh"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true
+}
+```
+
+### Paso 3: Finalizar la llamada
+
+Cuando la llamada activa termina (uno de los lados cuelga), finaliza la llamada:
+
+**Solicitud:**
+```
+POST /v2/whatsapp/numbers/{number}/calls/hang-up
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+```
+
+```json
+{
+  "call_id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggN0JFODFBM0IyMEY3QTNGQkFEQzA0NzhGNEIwNEVGQTQcGAw1NTExMzEzNjE3NDEVAgAA"
+}
+```
+
+**Respuesta:**
+```json
+{
+  "success": true
+}
+```
+
+### Paso 4: Recibir el webhook de finalización
+
+Después de la finalización, recibe un webhook con el evento `terminate`:
+
+```json
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "3243505955080424",
+      "changes": [
+        {
+          "field": "calls",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "55 11 3136-1741",
+              "phone_number_id": "122110101"
+            },
+            "calls": [
+              {
+                "id": "wacid.HBgMNTU0Mzk5MDU2MDQxFQIAEhggNTg0NjkxRTJGNjREQzNFRkJGQ0ZDMzRCMUQ0RTM5REQcGAw1NTExMzEzNjE3NDEVAgAA",
+                "from": "554399951234",
+                "to": "551122361741",
+                "event": "terminate",
+                "timestamp": "1747411095",
+                "direction": "USER_INITIATED",
+                "start_time": "1747411036",
+                "end_time": "1747411095",
+                "duration": 59,
+                "status": "COMPLETED"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+<Info>
+El webhook de `terminate` es igual para ambos escenarios (outbound e inbound). Use los campos `direction`, `duration` y `status` para registrar detalles sobre cómo terminó la llamada.
+</Info>

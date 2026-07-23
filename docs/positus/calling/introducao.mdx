@@ -1,0 +1,51 @@
+---
+title: Introdução ao WhatsApp Calling
+description: Com a API de WhatsApp Calling, sua empresa amplia a comunicação no WhatsApp ao oferecer chamadas de voz (VoIP) diretamente com seus clientes.
+---
+
+# Introdução ao WhatsApp Calling
+
+**WhatsApp Calling** permite que sua empresa amplie a comunicação no WhatsApp ao oferecer chamadas de voz (VoIP) diretamente com seus clientes. Use chamadas para confirmações rápidas, suporte técnico ou finalização de atendimentos iniciados via chat.
+
+## Quando usar WhatsApp Calling
+
+WhatsApp Calling é ideal para:
+
+- **Confirmações rápidas:** verificar informações com o cliente sem esperar respostas de texto
+- **Suporte técnico:** diagnosticar problemas de forma mais eficiente que mensagens
+- **Finalização de atendimentos:** concluir suporte iniciado via chat com uma chamada de voz
+- **Comunicação de alta prioridade:** alcançar o cliente de forma imediata e direta
+
+## Como funciona
+
+Quando sua empresa utiliza a API de WhatsApp Calling:
+
+- **Sua empresa inicia a chamada:** você pode iniciar chamadas de voz (VoIP) diretamente com os clientes pelo WhatsApp através da API.
+
+- **O cliente aceita ou rejeita:** o cliente recebe a chamada no seu app WhatsApp e pode aceitar ou rejeitar.
+
+- **Sua empresa encerra:** você pode encerrar a chamada em andamento a qualquer momento.
+
+## Pré-requisitos
+
+Para usar o WhatsApp Calling, seu número deve atender aos seguintes requisitos:
+
+<Warning>
+**Calling habilitado no número:** o recurso de WhatsApp Calling deve estar habilitado para o seu número de telefone. Isso é feito via Positus Studio ou com apoio do nosso suporte.
+</Warning>
+
+<Warning>
+**Webhook de chamadas configurado:** você deve configurar uma URL de webhook (`calls_webhook`) para receber eventos de chamadas. Isso também é feito via Positus Studio ou suporte — não está disponível via API pública.
+</Warning>
+
+<Info>
+Os eventos de chamada chegam em um **webhook separado** do webhook de mensagens. Certifique-se de que ambos estão configurados corretamente.
+</Info>
+
+## Próximos passos
+
+Explore os tópicos relacionados ao WhatsApp Calling:
+
+- [API de Calling](/docs/positus/calling/api)
+- [Webhooks de Calling](/docs/positus/calling/webhooks)
+- [Exemplos](/docs/positus/calling/exemplos)

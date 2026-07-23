@@ -1,0 +1,51 @@
+---
+title: Introduction to WhatsApp Calling
+description: With the WhatsApp Calling API, your company extends communication on WhatsApp by offering voice calls (VoIP) directly to your customers.
+---
+
+# Introduction to WhatsApp Calling
+
+**WhatsApp Calling** allows your company to extend communication on WhatsApp by offering voice calls (VoIP) directly to your customers. Use calls for quick confirmations, technical support, or finalizing interactions started via chat.
+
+## When to use WhatsApp Calling
+
+WhatsApp Calling is ideal for:
+
+- **Quick confirmations:** verify information with the customer without waiting for text responses
+- **Technical support:** diagnose issues more efficiently than through messages
+- **Finalizing interactions:** complete support started via chat with a voice call
+- **High-priority communication:** reach your customer immediately and directly
+
+## How it works
+
+When your company uses the WhatsApp Calling API:
+
+- **Your company initiates the call:** you can start voice calls (VoIP) directly with customers through WhatsApp via the API.
+
+- **The customer accepts or rejects:** the customer receives the call in their WhatsApp app and can accept or reject it.
+
+- **Your company ends the call:** you can end an ongoing call at any time.
+
+## Prerequisites
+
+To use WhatsApp Calling, your number must meet the following requirements:
+
+<Warning>
+**Calling enabled on the number:** the WhatsApp Calling feature must be enabled for your phone number. This is done via Positus Studio or with support from our team.
+</Warning>
+
+<Warning>
+**Calls webhook configured:** you must configure a webhook URL (`calls_webhook`) to receive call events. This is also done via Positus Studio or support — it is not available via public API.
+</Warning>
+
+<Info>
+Call events arrive in a **separate webhook** from the messaging webhook. Make sure both are configured correctly.
+</Info>
+
+## Next steps
+
+Explore topics related to WhatsApp Calling:
+
+- [Calling API](/en/positus/calling/api)
+- [Calling Webhooks](/en/positus/calling/webhooks)
+- [Samples](/en/positus/calling/samples)
