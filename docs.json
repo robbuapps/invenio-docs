@@ -192,6 +192,18 @@
                                     "docs/positus/flows/api",
                                     "docs/positus/flows/exemplos"
                                 ]
+                            },
+                            {
+                                "group": "Coexistência",
+                                "pages": [
+                                    "docs/positus/coex/introducao",
+                                    "docs/positus/coex/onboarding",
+                                    "docs/positus/coex/sincronizacao-de-contatos",
+                                    "docs/positus/coex/sincronizacao-de-historico",
+                                    "docs/positus/coex/mensagens-espelhadas",
+                                    "docs/positus/coex/webhooks",
+                                    "docs/positus/coex/api"
+                                ]
                             }
                         ]
                     },
