@@ -194,6 +194,15 @@
                                 ]
                             },
                             {
+                                "group": "WhatsApp Calling",
+                                "pages": [
+                                    "docs/positus/calling/introducao",
+                                    "docs/positus/calling/api",
+                                    "docs/positus/calling/webhooks",
+                                    "docs/positus/calling/exemplos"
+                                ]
+                            },
+                            {
                                 "group": "Coexistência",
                                 "pages": [
                                     "docs/positus/coex/introducao",
@@ -275,6 +284,15 @@
                                 ]
                             },
                             {
+                                "group": "WhatsApp Calling",
+                                "pages": [
+                                    "en/positus/calling/introduction",
+                                    "en/positus/calling/api",
+                                    "en/positus/calling/webhooks",
+                                    "en/positus/calling/samples"
+                                ]
+                            },
+                            {
                                 "group": "Coexistence",
                                 "pages": [
                                     "en/positus/coex/introduction",
@@ -347,6 +365,15 @@
                                     "es/positus/flows/webhooks",
                                     "es/positus/flows/api",
                                     "es/positus/flows/ejemplos"
+                                ]
+                            },
+                            {
+                                "group": "WhatsApp Calling",
+                                "pages": [
+                                    "es/positus/calling/introduccion",
+                                    "es/positus/calling/api",
+                                    "es/positus/calling/webhooks",
+                                    "es/positus/calling/ejemplos"
                                 ]
                             },
                             {
