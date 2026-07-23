@@ -1,0 +1,62 @@
+---
+title: Introduction to Coexistence
+description: Coexistence enables the same WhatsApp number to operate simultaneously on the WhatsApp Business app and Cloud API, keeping contacts and history synchronized.
+---
+
+# Introduction to Coexistence
+
+**Coexistence (CoEx)** is the ability to use the WhatsApp Business app and Cloud API **simultaneously on the same phone number**. With Coexistence, individual 1-to-1 conversations continue to flow through the app, while your integration leverages the Cloud API for automation, webhooks, and structured workflows. WhatsApp automatically keeps contacts and message history synchronized between the two environments.
+
+## Why use Coexistence?
+
+Coexistence is ideal for smooth migrations from one provider to another or for businesses that want to keep operators using the app while building parallel automations:
+
+- **Migration without history loss:** you don't lose conversations, contacts, or context when you enable the Cloud API
+- **Synchronized contacts:** names, phone numbers, and contact information remain consistent between the app and API
+- **Shared history:** previous messages will be available on both platforms
+- **Gradual transition:** adapt your processes to the Cloud API at your own pace
+
+## Eligibility
+
+To use Coexistence, you must meet the following requirements:
+
+| Requirement | Details |
+| --- | --- |
+| **App version** | WhatsApp Business ≥ v2.24.17 |
+| **Partner type** | Solution Partner or Tech Provider with Meta |
+| **Onboarding** | Performed by the customer themselves via **Embedded Signup**, from the WhatsApp Business app |
+
+<Info>
+If you have questions about your partner status or eligibility, consult the [official Meta onboarding guide](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users).
+</Info>
+
+## Important limitations
+
+<Warning>
+**Throughput:** Coexistence operates with a fixed limit of **20 messages per second**. Spikes above this limit may cause delivery delays.
+</Warning>
+
+<Warning>
+**Synchronization window:** you have **24 hours after onboarding** to successfully synchronize contacts and message history. If this period expires without completion, you will need to redo the entire onboarding process.
+</Warning>
+
+<Warning>
+**Credit line allocation conflicts:** when migrating from another provider to Positus with Coexistence, there may be temporary conflicts in your credit line allocation. Plan your transition in advance.
+</Warning>
+
+## Coexistence flow
+
+The Coexistence activation process follows these steps:
+
+1. **Embedded Signup:** the customer accesses Coexistence within the WhatsApp Business app
+2. **Contact synchronization:** importing contacts stored in the app to the cloud
+3. **History synchronization:** importing previous conversations in phases (up to 180 days)
+4. **Message mirroring:** messages sent via the app are replicated to the Cloud API (via `smb_message_echoes`)
+5. **Normal operation:** both platforms work in parallel
+
+## Learn more
+
+Explore topics related to Coexistence:
+
+- [Contact Synchronization](/en/positus/coex/contact-sync)
+- [History Synchronization](/en/positus/coex/history-sync)

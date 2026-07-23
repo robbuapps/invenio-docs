@@ -1,0 +1,79 @@
+---
+title: Mirrored messages
+description: When the business sends a message during Coexistence, Positus delivers the mirror via webhook.
+---
+
+# Mirrored messages
+
+During Coexistence, when you send a message through the WhatsApp Business app or a companion device, Positus **mirrors** that message to your integration via webhook. This functionality ensures that your system stays synchronized with all business messages, regardless of the sending channel.
+
+## What you receive
+
+Each message sent by the business is delivered to your webhook in **the same format as a normally received message** in Positus — the envelope `{ "contacts": [...], "messages": [...] }`. You receive **one webhook per mirrored message**; your existing webhook handler already processes these messages without modification.
+
+```json
+{
+  "contacts": [
+    {
+      "profile": { "name": "Contact name" },
+      "wa_id": "5511999999999"
+    }
+  ],
+  "messages": [
+    {
+      "from": "5511888888888",
+      "to": "5511999999999",
+      "id": "wamid.xyz",
+      "timestamp": "1739230955",
+      "type": "text",
+      "text": { "body": "message sent from app" }
+    }
+  ]
+}
+```
+
+<Info>
+**How to identify an echo:** the `from` field carries the **business's own number** (your WhatsApp Business number). In a message received from a customer, `from` would be the customer's number. Use this pattern to distinguish mirrored messages from normally received messages.
+</Info>
+
+<Info>
+This is the same format described in [Webhook](/en/positus/integration/webhook). Your existing handler processes mirrored messages without modification — just observe the `from` field to detect that it's a message sent by the business.
+</Info>
+
+### Message fields
+
+| Field | Description |
+| --- | --- |
+| `from` | Business's WhatsApp number (sender) |
+| `to` | Recipient contact number |
+| `id` | Unique message ID (wamid) |
+| `timestamp` | Date/time of send (Unix timestamp) |
+| `type` | Message type: `text`, `image`, `video`, `document`, `audio`, `sticker`, `location` |
+| `text.body` | Message body (for `type: "text"`) |
+| `image.caption` | Image caption (for `type: "image"`, optional) |
+
+### Supported types
+
+| Type | Additional field in body |
+| --- | --- |
+| `text` | `text.body` |
+| `image` | `image.caption` (optional) |
+| `video` | — |
+| `document` | — |
+| `audio` | — |
+| `sticker` | — |
+| `location` | — |
+
+<Info>
+Media messages (`image`, `video`, `document`, `audio`, `sticker`) are delivered in the same format as a normally received media message. See the [Webhook](/en/positus/integration/webhook) page for details on media objects.
+</Info>
+
+<Warning>
+There is no explicit field or flag marking a message as "echo" or "mirrored". The only way to identify that a message was sent by the business (not received from a customer) is to check if **`from` equals your WhatsApp Business number**. Implement this check in your handler to process the echo differently, if needed.
+</Warning>
+
+## Next steps
+
+- [Introduction to CoEx](/en/positus/coex/introduction) — concept and eligibility.
+- [History Synchronization](/en/positus/coex/history-sync) — import message history when activating Coexistence.
+- [Webhook](/en/positus/integration/webhook) — complete message envelope format.

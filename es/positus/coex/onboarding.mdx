@@ -1,0 +1,46 @@
+---
+title: Onboarding de la coexistencia
+description: Active la coexistencia en su número de WhatsApp a través de Embedded Signup, sincronice contactos e historial, y comience a recibir mensajes reflejados en la Cloud API.
+---
+
+# Onboarding de la coexistencia
+
+La activación de la coexistencia es iniciada por el propio cliente a través del **Embedded Signup**, accesible directamente en la aplicación WhatsApp Business. No hay un endpoint de API que llame para "activar" la coexistencia — el flujo es completamente conducido por Meta y finalizado automáticamente en Positus.
+
+## Flujo de activación
+
+Siga los pasos a continuación para entender cómo funciona el onboarding de la coexistencia:
+
+1. **El cliente inicia Embedded Signup:** el usuario accede a la opción de coexistencia en la aplicación WhatsApp Business y acepta compartir contactos e historial de mensajes con la Cloud API.
+
+2. **Meta valida y vincula el número:** Meta valida las credenciales y vincula el mismo número de teléfono tanto a la aplicación como a la Cloud API. A partir de ese momento, el número comienza a operar en régimen de coexistencia.
+
+3. **Positus finaliza la activación:** después de la validación de Meta, Positus completa automáticamente la activación del número con la coexistencia habilitada.
+
+4. **Sincronización automática:** Positus dispara automáticamente la sincronización de **contactos** e **historial de mensajes**. No necesita llamar a ningún endpoint manualmente para que esto ocurra — todo sucede detrás de escenas.
+
+5. **Recepción de mensajes:** los mensajes del historial sincronizado y, a partir de entonces, los ecos de mensajes enviados a través de la aplicación comienzan a llegar a su **webhook**.
+
+<Info>
+Los requisitos de elegibilidad (versión de la aplicación y tipo de socio) se describen en la página [Introducción a la coexistencia](/es/positus/coex/introduccion).
+</Info>
+
+## Ventana de sincronización
+
+<Warning>
+**24 horas para sincronizar:** después del onboarding, tiene un plazo de **24 horas para que la sincronización de contactos e historial se complete con éxito**. Si este período expira sin completarse, será necesario rehacer todo el proceso de Embedded Signup.
+</Warning>
+
+## Próximos pasos
+
+Después de la activación exitosa, explore los temas relacionados para entender cómo se sincronizan los datos y cómo fluyen los mensajes en su integración:
+
+- [Sincronización de contactos](/es/positus/coex/sincronizacion-de-contactos)
+- [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial)
+- [Mensajes espejados](/es/positus/coex/mensajes-espejados)
+
+## Más información
+
+Para más información sobre Embedded Signup y el proceso de onboarding de Meta, consulte la guía oficial:
+
+[Guía de onboarding de Meta para aplicaciones empresariales](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users)

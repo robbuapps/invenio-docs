@@ -1,0 +1,79 @@
+---
+title: Mensagens espelhadas
+description: Quando o negócio envia uma mensagem durante a Coexistência, a Positus entrega o espelhamento via webhook.
+---
+
+# Mensagens espelhadas
+
+Durante a Coexistência, quando você envia uma mensagem pelo aplicativo WhatsApp Business ou por um dispositivo companheiro, a Positus **espelha** essa mensagem para sua integração via webhook. Essa funcionalidade garante que seu sistema permaneça sincronizado com todas as mensagens do negócio, independentemente do canal de envio.
+
+## O que você recebe
+
+Cada mensagem enviada pelo negócio é entregue ao seu webhook no **mesmo formato de uma mensagem recebida** na Positus — o envelope `{ "contacts": [...], "messages": [...] }`. Você recebe **um webhook por mensagem** espelhada; o seu handler de webhook existente já trata essas mensagens sem alteração.
+
+```json
+{
+  "contacts": [
+    {
+      "profile": { "name": "Nome do contato" },
+      "wa_id": "5511999999999"
+    }
+  ],
+  "messages": [
+    {
+      "from": "5511888888888",
+      "to": "5511999999999",
+      "id": "wamid.xyz",
+      "timestamp": "1739230955",
+      "type": "text",
+      "text": { "body": "mensagem enviada pelo app" }
+    }
+  ]
+}
+```
+
+<Info>
+**Como identificar um eco:** o campo `from` traz o **número do próprio negócio** (seu número WhatsApp Business). Numa mensagem recebida de um cliente, `from` seria o número do cliente. Use esse padrão para distinguir mensagens espelhadas de mensagens recebidas normalmente.
+</Info>
+
+<Info>
+Este é o mesmo formato descrito em [Webhook](/docs/positus/integracao/webhook). O seu handler existente processa mensagens espelhadas sem alteração — basta observar o campo `from` para detectar que se trata de uma mensagem enviada pelo negócio.
+</Info>
+
+### Campos da mensagem
+
+| Campo | Descrição |
+| --- | --- |
+| `from` | Número WhatsApp Business do negócio (remetente) |
+| `to` | Número do contato destinatário |
+| `id` | ID único da mensagem (wamid) |
+| `timestamp` | Data/hora do envio (Unix timestamp) |
+| `type` | Tipo da mensagem: `text`, `image`, `video`, `document`, `audio`, `sticker`, `location` |
+| `text.body` | Corpo da mensagem (para `type: "text"`) |
+| `image.caption` | Legenda da imagem (para `type: "image"`, opcional) |
+
+### Tipos suportados
+
+| Tipo | Campo adicional no corpo |
+| --- | --- |
+| `text` | `text.body` |
+| `image` | `image.caption` (opcional) |
+| `video` | — |
+| `document` | — |
+| `audio` | — |
+| `sticker` | — |
+| `location` | — |
+
+<Info>
+Mensagens de mídia (`image`, `video`, `document`, `audio`, `sticker`) são entregues no mesmo formato de uma mensagem de mídia recebida normalmente. Consulte a página de [Webhook](/docs/positus/integracao/webhook) para o detalhamento dos objetos de mídia.
+</Info>
+
+<Warning>
+Não há um campo ou flag explícito marcando uma mensagem como "eco" ou "espelhada". A única forma de identificar que uma mensagem foi enviada pelo negócio (e não recebida de um cliente) é verificar se **`from` é igual ao seu número WhatsApp Business**. Implemente essa verificação no seu handler para processar o eco de forma diferente, se necessário.
+</Warning>
+
+## Próximos passos
+
+- [Introdução ao CoEx](/docs/positus/coex/introducao) — conceito e elegibilidade.
+- [Sincronização de histórico](/docs/positus/coex/sincronizacao-de-historico) — importar o histórico de mensagens ao ativar a Coexistência.
+- [Webhook](/docs/positus/integracao/webhook) — formato completo do envelope de mensagens.

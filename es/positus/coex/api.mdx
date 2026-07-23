@@ -1,0 +1,126 @@
+---
+title: API - Coexistencia
+description: Sincronice contactos e historial de mensajes de su cuenta de WhatsApp Business al activar la coexistencia.
+---
+
+# API - Coexistencia
+
+La API de coexistencia permite sincronizar contactos e historial de mensajes de su cuenta de WhatsApp Business a Positus de forma programática. Esta es una referencia rápida de los endpoints de sincronización.
+
+<Info>
+**Base de la API:** `https://api.positus.global/v2`
+
+**Autenticación:** todas las solicitudes deben incluir el encabezado `Authorization: Bearer <su-token>`, donde `<su-token>` es el token de autenticación de su espacio de trabajo.
+</Info>
+
+## Endpoints de sincronización
+
+| Endpoint | Método | Descripción |
+|----------|--------|-----------|
+| `/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-contacts` | POST | Solicita sincronización de contactos guardados en WhatsApp Business |
+| `/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-message-history` | POST | Solicita sincronización del historial de mensajes |
+
+---
+
+## Sincronizar contactos
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-contacts`
+
+Solicita la sincronización de los contactos guardados en la aplicación WhatsApp Business a su cuenta Positus.
+
+### Parámetros
+
+| Nombre | Tipo | Descripción |
+|------|------|-----------|
+| `{NUMBER_ID}` | string | ID del número de WhatsApp ya activado con coexistencia |
+
+### Encabezados
+
+| Nombre | Tipo | Descripción |
+|------|------|-----------|
+| `Authorization` | string | Token de autenticación Bearer |
+| `Content-Type` | string | `application/json` |
+
+### Cuerpo de la solicitud
+
+No se requiere cuerpo (body) para esta solicitud.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-contacts
+Authorization: Bearer <su-token>
+Content-Type: application/json
+```
+
+### Comportamiento
+
+<Info>
+La sincronización es **asincrónica**: la llamada solo solicita el inicio del proceso. La importación puede ser disparada **una sola vez por onboarding**, dentro de la **ventana de 24 horas** después de la activación de la coexistencia.
+</Info>
+
+<Warning>
+La sincronización de contactos **no genera un evento de webhook**. Positus procesa la importación internamente y refleja el resultado directamente en su cuenta. Después de la conclusión, los contactos son visibles en la **lista de contactos** de la plataforma y a través de la **API de contactos**.
+</Warning>
+
+### Respuesta
+
+Después de una llamada exitosa, el servidor responde con estado `200 OK` e inicia el proceso asincrónico. No hay cuerpo de respuesta específico — monitoree la aparición de los contactos en su cuenta.
+
+---
+
+## Sincronizar historial de mensajes
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-message-history`
+
+Solicita la sincronización del historial de mensajes de su cuenta de WhatsApp Business a Positus.
+
+### Parámetros
+
+| Nombre | Tipo | Descripción |
+|------|------|-----------|
+| `{NUMBER_ID}` | string | ID del número de WhatsApp ya activado con coexistencia |
+
+### Encabezados
+
+| Nombre | Tipo | Descripción |
+|------|------|-----------|
+| `Authorization` | string | Token de autenticación Bearer |
+| `Content-Type` | string | `application/json` |
+
+### Cuerpo de la solicitud
+
+No se requiere cuerpo (body) para esta solicitud.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-message-history
+Authorization: Bearer <su-token>
+Content-Type: application/json
+```
+
+### Comportamiento
+
+<Info>
+La sincronización es **asincrónica**: la llamada solo solicita el inicio del proceso. La importación puede ser disparada **una sola vez por onboarding**, dentro de la **ventana de 24 horas** después de la activación de la coexistencia.
+</Info>
+
+### Recepción de mensajes
+
+<Info>
+Los mensajes sincronizados llegan a su **webhook configurado** en el formato `{ contacts, messages }`. Cada mensaje incluye los metadatos completos: remitente, destinatario, tipo de contenido y timestamp.
+</Info>
+
+La carga útil del webhook sigue la estructura estándar de notificaciones de Positus, con el bloque `messages` que contiene todos los mensajes importados.
+
+---
+
+## Contexto de uso
+
+<Info>
+En el onboarding a través de **Embedded Signup**, Positus dispara estas sincronizaciones automáticamente. Estos endpoints existen para casos en que sea necesario **solicitar manualmente** la sincronización después del onboarding inicial.
+</Info>
+
+Consulte también:
+
+- [Sincronización de contactos](/es/positus/coex/sincronizacion-de-contactos) — detalles sobre el proceso de importación de contactos
+- [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial) — detalles sobre el proceso de importación de mensajes
+- [Introducción a la coexistencia](/es/positus/coex/introduccion) — conceptos y limitaciones de la coexistencia
+- [Onboarding](/es/positus/coex/onboarding) — cómo activar la coexistencia

@@ -1,0 +1,62 @@
+---
+title: Introducción a la Coexistencia
+description: La coexistencia permite que el mismo número de WhatsApp funcione simultáneamente en la aplicación WhatsApp Business y en la Cloud API, manteniendo los contactos e historial sincronizados.
+---
+
+# Introducción a la Coexistencia
+
+**Coexistencia (CoEx)** es la capacidad de usar la aplicación WhatsApp Business y la Cloud API **simultáneamente en el mismo número de teléfono**. Con la coexistencia, las conversaciones individuales 1 a 1 continúan fluyendo a través de la aplicación, mientras que su integración aprovecha la Cloud API para automatización, webhooks y flujos estructurados. WhatsApp mantiene los contactos e historial de mensajes automáticamente sincronizados entre los dos entornos.
+
+## ¿Por qué usar coexistencia?
+
+La coexistencia es ideal para migraciones suaves de un proveedor a otro o para empresas que desean mantener operadores usando la aplicación mientras crean automatizaciones paralelas:
+
+- **Migración sin pérdida de historial:** no pierdes conversaciones, contactos o contexto al activar la Cloud API
+- **Contactos sincronizados:** nombres, números de teléfono e información de contacto se mantienen consistentes entre la aplicación y la API
+- **Historial compartido:** los mensajes anteriores estarán disponibles en ambas plataformas
+- **Transición gradual:** adapta tus procesos a la Cloud API a tu propio ritmo
+
+## Elegibilidad
+
+Para usar la coexistencia, debe cumplir con los siguientes requisitos:
+
+| Requisito | Detalles |
+| --- | --- |
+| **Versión de la aplicación** | WhatsApp Business ≥ v2.24.17 |
+| **Tipo de socio** | Solution Partner o Tech Provider con Meta |
+| **Onboarding** | Realizado por el propio cliente a través de **Embedded Signup**, desde la aplicación WhatsApp Business |
+
+<Info>
+Si tiene dudas sobre su estado de socio o elegibilidad, consulte la [guía oficial de onboarding de Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users).
+</Info>
+
+## Limitaciones importantes
+
+<Warning>
+**Rendimiento:** la coexistencia opera con un límite fijo de **20 mensajes por segundo**. Los picos por encima de este límite pueden causar retrasos en la entrega.
+</Warning>
+
+<Warning>
+**Ventana de sincronización:** tiene **24 horas después del onboarding** para sincronizar contactos e historial de mensajes con éxito. Si este período expira sin completarse, será necesario rehacer todo el proceso de onboarding.
+</Warning>
+
+<Warning>
+**Conflictos de línea de crédito:** al migrar de otro proveedor a Positus con coexistencia, puede haber conflictos temporales de asignación de su línea de crédito. Planifique la transición con anticipación.
+</Warning>
+
+## Flujo de coexistencia
+
+El proceso de activación de la coexistencia sigue estos pasos:
+
+1. **Embedded Signup:** el cliente accede a la coexistencia dentro de la aplicación WhatsApp Business
+2. **Sincronización de contactos:** importación de contactos almacenados en la aplicación a la nube
+3. **Sincronización de historial:** importación de conversaciones anteriores en fases (hasta 180 días)
+4. **Espejado de mensajes:** los mensajes enviados a través de la aplicación se replican en la Cloud API (a través de `smb_message_echoes`)
+5. **Operación normal:** ambas plataformas funcionan en paralelo
+
+## Más información
+
+Explore los temas relacionados con la coexistencia:
+
+- [Sincronización de contactos](/es/positus/coex/sincronizacion-de-contactos)
+- [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial)

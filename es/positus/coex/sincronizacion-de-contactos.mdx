@@ -1,0 +1,42 @@
+---
+title: Sincronización de contactos
+description: Importe los contactos de su número de WhatsApp Business al activar la coexistencia.
+---
+
+# Sincronización de contactos
+
+Al activar la coexistencia, puede importar los contactos guardados en la aplicación WhatsApp Business a su cuenta en Positus. Los contactos pasan a estar disponibles en la plataforma junto con los contactos creados por las conversaciones normales.
+
+## Cómo disparar la sincronización
+
+Realice una solicitud `POST` al endpoint a continuación. No se requiere cuerpo (body).
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-contacts
+Authorization: Bearer <su-token>
+```
+
+**Parámetros:**
+- `{NUMBER_ID}` — ID del número de WhatsApp ya activado con coexistencia.
+
+<Info>
+La sincronización es **asincrónica**: la llamada solo solicita el inicio del proceso. La importación puede ser disparada **una sola vez por onboarding**, dentro de la **ventana de 24 horas** después de la activación de la coexistencia.
+</Info>
+
+## Lo que recibirá
+
+<Info>
+La sincronización de contactos **no genera un evento de webhook** en su endpoint. Positus procesa la importación internamente y refleja el resultado directamente en su cuenta.
+</Info>
+
+Al completarse, los contactos importados estarán disponibles:
+
+- En la **lista de contactos** de su cuenta en la plataforma Positus;
+- A través de la **API de contactos** (consulte la sección [Contactos](/es/positus/integracion/contactos)).
+
+Los contactos agregados, editados o eliminados en la aplicación WhatsApp Business durante la coexistencia se reflejan en su cuenta conforme Meta los informa — sin necesidad de tratamiento adicional de su parte.
+
+## Próximos pasos
+
+- [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial) — importar el historial de mensajes.
+- [Introducción a la coexistencia](/es/positus/coex/introduccion) — concepto y limitaciones de la coexistencia.

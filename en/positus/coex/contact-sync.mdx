@@ -1,0 +1,42 @@
+---
+title: Contact synchronization
+description: Import contacts from your WhatsApp Business number when you activate Coexistence.
+---
+
+# Contact synchronization
+
+When you activate Coexistence, you can import the contacts saved in the WhatsApp Business app to your Positus account. Contacts become available on the platform along with contacts created through normal conversations.
+
+## How to trigger synchronization
+
+Make a `POST` request to the endpoint below. No request body is required.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-contacts
+Authorization: Bearer <your-token>
+```
+
+**Parameters:**
+- `{NUMBER_ID}` — ID of the WhatsApp number already activated with Coexistence.
+
+<Info>
+Synchronization is **asynchronous**: the call only requests the start of the process. The import can be triggered **only once per onboarding**, within the **24-hour window** after Coexistence activation.
+</Info>
+
+## What you receive
+
+<Info>
+Contact synchronization **does not generate a webhook event** to your endpoint. Positus processes the import internally and reflects the result directly on your account.
+</Info>
+
+Once complete, imported contacts become available:
+
+- In the **contact list** of your Positus account;
+- Via the **contacts API** (see the [Contacts](/en/positus/integration/contacts) section).
+
+Contacts added, edited, or removed in the WhatsApp Business app during Coexistence are reflected in your account as Meta informs them — without requiring additional handling on your side.
+
+## Next steps
+
+- [History Synchronization](/en/positus/coex/history-sync) — import message history.
+- [Introduction to CoEx](/en/positus/coex/introduction) — Coexistence concept and limitations.
