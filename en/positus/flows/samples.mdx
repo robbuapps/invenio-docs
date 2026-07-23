@@ -1,0 +1,233 @@
+---
+title: Samples
+description: Practical examples of static and dynamic Flows.
+---
+
+# Samples
+
+Below are some Flows examples to be used as reference:
+
+## Static Flows
+
+<Note>
+No examples are available yet.
+</Note>
+
+## Dynamic Flows
+
+### Online Course Enrollment
+
+This is an example of a dynamic Flow that implements a registration form for an online class. The user fills in their personal information, confirms enrollment, and optionally can provide information about how they found out about the course.
+
+#### Flow Code (Flow JSON)
+
+```json
+{
+	"version":"3.1",
+	"data_api_version":"3.0",
+	"routing_model":{
+	  "REGISTER":[
+		"REGISTRATION_SUCCESS",
+		"REGISTRATION_DISABLED"
+	  ],
+	  "REGISTRATION_SUCCESS":[
+		
+	  ],
+	  "REGISTRATION_DISABLED":[
+		
+	  ]
+	},
+	"screens":[
+	  {
+		"id":"REGISTER",
+		"title":"Register for the class",
+		"data":{
+		  
+		},
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"Register for our next class"
+			},
+			{
+			  "type":"TextBody",
+			  "text":"Our next class will start on 08/01, register now."
+			},
+			{
+			  "type":"Form",
+			  "name":"form",
+			  "children":[
+				{
+				  "type":"TextInput",
+				  "name":"firstName",
+				  "label":"First name",
+				  "input-type":"text",
+				  "required":true
+				},
+				{
+				  "type":"TextInput",
+				  "label":"Last name",
+				  "name":"lastName",
+				  "input-type":"text",
+				  "required":true
+				},
+				{
+				  "type":"TextInput",
+				  "label":"Email",
+				  "name":"email",
+				  "input-type":"email",
+				  "required":true
+				},
+				{
+				  "type":"Footer",
+				  "label":"Register",
+				  "on-click-action":{
+					"name":"data_exchange",
+					"payload":{
+					  "firstName":"${form.firstName}",
+					  "lastName":"${form.lastName}",
+					  "email":"${form.email}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  },
+	  {
+		"id":"REGISTRATION_SUCCESS",
+		"title":"Registration completed",
+		"data":{
+		  "firstName":{
+			"type":"string",
+			"__example__":"Example"
+		  },
+		  "lastName":{
+			"type":"string",
+			"__example__":"Example"
+		  },
+		  "email":{
+			"type":"string",
+			"__example__":"Example"
+		  }
+		},
+		"terminal":true,
+		"success":true,
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"Registration completed successfully!"
+			},
+			{
+			  "type":"TextSubheading",
+			  "text":"Before you go..."
+			},
+			{
+			  "type":"TextBody",
+			  "text":"How did you find out about our course?"
+			},
+			{
+			  "type":"Form",
+			  "name":"form",
+			  "children":[
+				{
+				  "type":"RadioButtonsGroup",
+				  "label":"Choose an option",
+				  "required":true,
+				  "name":"source",
+				  "data-source":[
+					{
+					  "id":"0",
+					  "title":"Friend recommendation"
+					},
+					{
+					  "id":"1",
+					  "title":"Advertisements"
+					},
+					{
+					  "id":"2",
+					  "title":"Search engines"
+					},
+					{
+					  "id":"3",
+					  "title":"Social media"
+					}
+				  ]
+				},
+				{
+				  "type":"Footer",
+				  "label":"Done",
+				  "on-click-action":{
+					"name":"complete",
+					"payload":{
+					  "source":"${form.source}",
+					  "firstName":"${data.firstName}",
+					  "lastName":"${data.lastName}",
+					  "email":"${data.email}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  },
+	  {
+		"id":"REGISTRATION_DISABLED",
+		"title":"Class ended",
+		"terminal":true,
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"Class ended"
+			},
+			{
+			  "type":"TextBody",
+			  "text":"Unfortunately, registration for this class is no longer available, we will soon launch a new class."
+			},
+			{
+			  "type":"TextCaption",
+			  "text":"Check the option below if you want to be notified about the next class:"
+			},
+			{
+			  "type":"Form",
+			  "name":"sign_in_form",
+			  "children":[
+				{
+				  "type":"OptIn",
+				  "label":"I would like to be notified about the next class.",
+				  "name":"optin"
+				},
+				{
+				  "type":"Footer",
+				  "label":"Close",
+				  "on-click-action":{
+					"name":"complete",
+					"payload":{
+					  "optin":"${form.optin}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  }
+	]
+  }
+```
+
+#### Expected Endpoint Behavior
+
+To complete this Flow, you must implement an endpoint on your server that processes the form data. The expected behavior is described on the [Dynamic Flows](/en/positus/flows/dynamic-flows) page.
+
+<Info>
+This example demonstrates a simple dynamic Flow where the user interacts with forms. Screen transitions (REGISTER → REGISTRATION_SUCCESS or REGISTRATION_DISABLED) are controlled by your endpoint's response after form submission (`data_exchange`). For details on how to implement the server and control the flow, consult the Dynamic Flows documentation.
+</Info>

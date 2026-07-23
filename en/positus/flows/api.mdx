@@ -1,0 +1,219 @@
+---
+title: Flows API
+description: Endpoints to create, edit, publish, and preview Flows in a workspace.
+---
+
+# Flows API
+
+In addition to managing Flows through Positus Studio, you can administer them directly through the API. Flow endpoints are **workspace-scoped** and allow you to list, create, update, publish, preview, and remove Flows.
+
+## Authentication and Scope
+
+All routes require authentication via **Bearer Token** of a user and are accessed under the desired workspace:
+
+```
+https://api.positus.global/v2/workspaces/{workspace}/flows
+Authorization: Bearer <your-token>
+Content-Type: application/json
+```
+
+| Route Parameter | Description |
+| --- | --- |
+| `{workspace}` | Workspace UUID |
+| `{flow}` | Flow UUID (in routes that operate on a specific Flow) |
+
+<Info>
+Except for **listing**, all operations require that the authenticated user be an **owner** of the workspace. Otherwise, the API responds with `403`.
+</Info>
+
+<Warning>
+Creating and editing Flows depends on a WhatsApp Business Account (WABA) associated with the workspace. If the workspace does not have a WABA, the API responds with `400`.
+</Warning>
+
+## List Flows
+
+Returns the Flows of the workspace.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/flows
+```
+
+| Query String | Type | Description |
+| --- | --- | --- |
+| `status` | integer | Optional. Filters Flows by status (see [status table](#flow-statuses)) |
+
+**Response** — collection of Flow objects (see [Flow object structure](#flow-object-structure)).
+
+## Create Flow
+
+Creates a Flow in the workspace. The Flow is created first in Meta and, if successful, persisted in Positus.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Name of the Flow |
+| `categories` | array | Yes | List with at least one category (ids — see [categories](#categories)) |
+| `endpoint_url` | string (URL) | No | URL of the endpoint for dynamic Flows. Can be `null` |
+| `endpoint_encrypted` | boolean | Conditional | Required when `endpoint_url` is provided. Indicates whether the endpoint uses encryption |
+
+```json
+{
+  "name": "Lead registration",
+  "categories": [4],
+  "endpoint_url": "https://your-domain.com/flow-endpoint",
+  "endpoint_encrypted": true
+}
+```
+
+**Response** — created Flow object. In case of error in Meta, the API responds with `400` and `{ "message": "..." }`.
+
+## Update Flow
+
+Updates the Flow's metadata (name, categories, and endpoint). Accepts the same request body as the create endpoint.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}
+```
+
+**Response** — updated Flow object.
+
+## Update Flow JSON
+
+Updates the content (Flow JSON) that defines the screens and components of the Flow.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/json
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `json` | object | Yes | The Flow JSON (structure of screens and components). See [Structure and Components](/en/positus/flows/structure-and-components) |
+
+<Info>
+The content is sent to Meta and, if successful, persisted in the Flow. Consult the structure reference on the [Structure and Components](/en/positus/flows/structure-and-components) page.
+</Info>
+
+## Publish Flow
+
+Publishes the Flow, making it available for sending. After publication, the status changes to `PUBLISHED`.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/publish
+```
+
+**Response** — Flow object with updated status.
+
+## Remove Flow
+
+The behavior depends on the current status of the Flow:
+
+- **Draft (`DRAFT`)**: the Flow is deleted from Meta and removed from the workspace. Response `204 No Content`.
+- **Published**: the Flow cannot be deleted; it is **deprecated** (status `DEPRECATED`). Response with the updated Flow object.
+
+```
+DELETE https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}
+```
+
+## Preview Flow
+
+Generates a preview URL of the Flow for a number in the workspace.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/preview
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `number` | string (UUID) | Yes | UUID of an active number in the workspace |
+| `valid_until` | integer | Yes | Preview validity period (see table below) |
+| `invalidate_previous` | boolean | No | When `true`, invalidates previous previews of the Flow |
+
+| `valid_until` | Validity |
+| --- | --- |
+| 1 | 1 hour |
+| 2 | 2 hours |
+| 3 | 4 hours |
+| 4 | 8 hours |
+| 5 | 16 hours |
+| 6 | 24 hours |
+
+**Response:**
+
+```json
+{
+  "id": "uuid-da-preview",
+  "url": "https://.../preview/...",
+  "secret": "123456",
+  "valid_until": "2026-07-23T18:00:00.000000Z",
+  "created_at": "2026-07-23T17:00:00.000000Z",
+  "updated_at": "2026-07-23T17:00:00.000000Z"
+}
+```
+
+## Public Routes
+
+These routes do not require user authentication:
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `GET` | `https://api.positus.global/v2/flows/preview/{preview}` | Opens a public preview generated by the preview endpoint |
+| `POST` | `https://api.positus.global/v2/flows/{flow}/endpoint` | Data exchange endpoint for a dynamic Flow. See [Dynamic Flows](/en/positus/flows/dynamic-flows) |
+
+## Flow Object Structure
+
+The endpoints' responses return the Flow in the following format:
+
+```json
+{
+  "id": "uuid-do-flow",
+  "wa_id": "140652314281467",
+  "status": {
+    "id": 1,
+    "code": "DRAFT",
+    "description": "Rascunho"
+  },
+  "version": null,
+  "name": "Lead registration",
+  "categories": [
+    {
+      "id": 4,
+      "code": "LEAD_GENERATION",
+      "description": "Geração de leads"
+    }
+  ],
+  "json": { },
+  "endpoint_encrypted": true,
+  "endpoint_url": null,
+  "created_at": "2026-07-23T17:00:00.000000Z",
+  "updated_at": "2026-07-23T17:00:00.000000Z"
+}
+```
+
+### Flow Statuses
+
+| id | code | Description |
+| --- | --- | --- |
+| 0 | `UNKNOWN` | Unknown |
+| 1 | `DRAFT` | Draft |
+| 2 | `PUBLISHED` | Published |
+| 3 | `DEPRECATED` | Deprecated |
+| 4 | `BLOCKED` | Blocked |
+| 5 | `THROTTLED` | Throttled |
+
+### Categories
+
+Categories accepted in the `categories` field (send the **ids**):
+
+| id | code | Description |
+| --- | --- | --- |
+| 1 | `SIGN_UP` | Sign Up |
+| 2 | `SIGN_IN` | Sign In |
+| 3 | `APPOINTMENT_BOOKING` | Appointment Booking |
+| 4 | `LEAD_GENERATION` | Lead Generation |
+| 5 | `CONTACT_US` | Contact Us |
+| 6 | `CUSTOMER_SUPPORT` | Customer Support |
+| 7 | `SURVEY` | Survey |
+| 8 | `OTHER` | Other |

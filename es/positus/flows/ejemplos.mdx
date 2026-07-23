@@ -1,0 +1,233 @@
+---
+title: Ejemplos
+description: Ejemplos prácticos de Flujos estáticos y dinámicos.
+---
+
+# Ejemplos
+
+A continuación hay algunos ejemplos de Flujos para ser utilizados como referencia:
+
+## Flujos estáticos
+
+<Note>
+Aún no hay ejemplos disponibles.
+</Note>
+
+## Flujos dinámicos
+
+### Inscripción en curso en línea
+
+Este es un ejemplo de Flow dinámico que implementa un formulario de inscripción en una clase en línea. El usuario completa sus datos personales, confirma la inscripción y, opcionalmente, puede informar cómo conoció el curso.
+
+#### Código del Flow (Flow JSON)
+
+```json
+{
+	"version":"3.1",
+	"data_api_version":"3.0",
+	"routing_model":{
+	  "REGISTER":[
+		"REGISTRATION_SUCCESS",
+		"REGISTRATION_DISABLED"
+	  ],
+	  "REGISTRATION_SUCCESS":[
+		
+	  ],
+	  "REGISTRATION_DISABLED":[
+		
+	  ]
+	},
+	"screens":[
+	  {
+		"id":"REGISTER",
+		"title":"Inscribirse en la clase",
+		"data":{
+		  
+		},
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"Inscríbete en nuestra próxima clase"
+			},
+			{
+			  "type":"TextBody",
+			  "text":"Nuestra próxima clase comenzará el 01/08, inscríbete ahora."
+			},
+			{
+			  "type":"Form",
+			  "name":"form",
+			  "children":[
+				{
+				  "type":"TextInput",
+				  "name":"firstName",
+				  "label":"Primer nombre",
+				  "input-type":"text",
+				  "required":true
+				},
+				{
+				  "type":"TextInput",
+				  "label":"Apellido",
+				  "name":"lastName",
+				  "input-type":"text",
+				  "required":true
+				},
+				{
+				  "type":"TextInput",
+				  "label":"Correo electrónico",
+				  "name":"email",
+				  "input-type":"email",
+				  "required":true
+				},
+				{
+				  "type":"Footer",
+				  "label":"Inscribirse",
+				  "on-click-action":{
+					"name":"data_exchange",
+					"payload":{
+					  "firstName":"${form.firstName}",
+					  "lastName":"${form.lastName}",
+					  "email":"${form.email}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  },
+	  {
+		"id":"REGISTRATION_SUCCESS",
+		"title":"Inscripción realizada",
+		"data":{
+		  "firstName":{
+			"type":"string",
+			"__example__":"Example"
+		  },
+		  "lastName":{
+			"type":"string",
+			"__example__":"Example"
+		  },
+		  "email":{
+			"type":"string",
+			"__example__":"Example"
+		  }
+		},
+		"terminal":true,
+		"success":true,
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"¡Inscripción realizada con éxito!"
+			},
+			{
+			  "type":"TextSubheading",
+			  "text":"Antes de que te vayas..."
+			},
+			{
+			  "type":"TextBody",
+			  "text":"¿Cómo te enteraste de nuestro curso?"
+			},
+			{
+			  "type":"Form",
+			  "name":"form",
+			  "children":[
+				{
+				  "type":"RadioButtonsGroup",
+				  "label":"Elige una opción",
+				  "required":true,
+				  "name":"source",
+				  "data-source":[
+					{
+					  "id":"0",
+					  "title":"Recomendación de un amigo"
+					},
+					{
+					  "id":"1",
+					  "title":"Publicidad"
+					},
+					{
+					  "id":"2",
+					  "title":"Motores de búsqueda"
+					},
+					{
+					  "id":"3",
+					  "title":"Redes sociales"
+					}
+				  ]
+				},
+				{
+				  "type":"Footer",
+				  "label":"Done",
+				  "on-click-action":{
+					"name":"complete",
+					"payload":{
+					  "source":"${form.source}",
+					  "firstName":"${data.firstName}",
+					  "lastName":"${data.lastName}",
+					  "email":"${data.email}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  },
+	  {
+		"id":"REGISTRATION_DISABLED",
+		"title":"Clase finalizada",
+		"terminal":true,
+		"layout":{
+		  "type":"SingleColumnLayout",
+		  "children":[
+			{
+			  "type":"TextHeading",
+			  "text":"Clase finalizada"
+			},
+			{
+			  "type":"TextBody",
+			  "text":"Desafortunadamente, la inscripción para esta clase ya no está disponible, pronto lanzaremos una nueva clase."
+			},
+			{
+			  "type":"TextCaption",
+			  "text":"Marca la opción siguiente si deseas ser notificado sobre la próxima clase:"
+			},
+			{
+			  "type":"Form",
+			  "name":"sign_in_form",
+			  "children":[
+				{
+				  "type":"OptIn",
+				  "label":"Me gustaría ser notificado sobre la próxima clase.",
+				  "name":"optin"
+				},
+				{
+				  "type":"Footer",
+				  "label":"Cerrar",
+				  "on-click-action":{
+					"name":"complete",
+					"payload":{
+					  "optin":"${form.optin}"
+					}
+				  }
+				}
+			  ]
+			}
+		  ]
+		}
+	  }
+	]
+  }
+```
+
+#### Comportamiento esperado del endpoint
+
+Para completar este Flow, debes implementar un endpoint en tu servidor que procese los datos del formulario. El comportamiento esperado se describe en la página de [Flujos dinámicos](/es/positus/flows/flujos-dinamicos).
+
+<Info>
+Este ejemplo demuestra un Flow dinámico simple donde el usuario interactúa con formularios. Las transiciones entre pantallas (REGISTER → REGISTRATION_SUCCESS o REGISTRATION_DISABLED) son controladas por la respuesta de tu endpoint después del envío del formulario (`data_exchange`). Para detalles sobre cómo implementar el servidor y controlar el flujo, consulta la documentación de Flujos dinámicos.
+</Info>

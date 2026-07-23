@@ -1,0 +1,96 @@
+---
+title: Webhooks de Flujos
+description: Configura webhooks en el workspace para recibir actualizaciones de los flujos en tiempo real.
+---
+
+# Webhooks de Flujos
+
+Para hacer seguimiento de las actualizaciones de los flujos, se recomienda configurar un webhook en el workspace para recibir las actualizaciones sobre los flujos en tiempo real. Es necesario [configurar un webhook en el workspace](https://studio.posit.us/workspace/configuracoes) para recibir estos eventos.
+
+## Eventos de Flujos
+
+La tabla siguiente lista todos los eventos de flujos que pueden ser recibidos a través de los webhooks del workspace:
+
+| Evento | Descripción |
+| --- | --- |
+| flow_created | Este evento se recibe cuando se crea un nuevo flujo |
+| flow_updated | Este evento se recibe cuando se actualiza un flujo |
+| flow_published | Este evento se recibe cuando se publica un flujo |
+| flow_throttled | Este evento se recibe cuando un flujo es restringido |
+| flow_deprecated | Este evento se recibe cuando un flujo es descontinuado |
+| flow_blocked | Este evento se recibe cuando un flujo es bloqueado |
+| flow_deleted | Este evento se recibe cuando un flujo es eliminado |
+| flow_sync | Este evento se recibe cuando el sistema de Positus fuerza una sincronización con Meta |
+
+<Info>
+Es importante que tu Webhook devuelva una respuesta HTTPS 200 OK a las notificaciones. De lo contrario, el cliente de la API de WhatsApp Business considerará esa notificación como un fallo e intentará nuevamente después de un retraso.
+</Info>
+
+## Estructura del webhook
+
+La estructura de los webhooks recibidos relacionados con flujos es la siguiente:
+
+```json
+{
+    "event": "flow_sync",
+    "workspace": {
+      "id": "d4026ecf-f7cf-418b-b44e-8c1d8808c57d",
+      "name": "Cuenta de prueba Robbu",
+      "business_id": "221123502254868",
+      "waba_id": "1281352745326562"
+    },
+    "flow": {
+      "id": "647e664e-a25e-4ea1-bc88-584293994210",
+      "wa_id": "140652314281467",
+      "status": {
+        "id": 1,
+        "code": "DRAFT",
+        "description": "Borrador"
+      },
+      "version": null,
+      "name": "Flujo de prueba",
+      "categories": [
+        {
+          "id": 4,
+          "code": "LEAD_GENERATION",
+          "description": "Generación de prospectos"
+        }
+      ],
+      "json": {
+        "version": "3.1",
+        "screens": [
+          {
+            "id": "WELCOME_SCREEN",
+            "layout": {
+              "type": "SingleColumnLayout",
+              "children": [
+                {
+                  "type": "TextHeading",
+                  "text": "Hello World"
+                },
+                {
+                  "type": "TextBody",
+                  "text": "Let's start building things!"
+                },
+                {
+                  "type": "Footer",
+                  "label": "Complete",
+                  "on-click-action": {
+                    "name": "complete",
+                    "payload": []
+                  }
+                }
+              ]
+            },
+            "title": "Welcome",
+            "terminal": true,
+            "success": true,
+            "data": []
+          }
+        ]
+      },
+      "endpoint_encrypted": true,
+      "endpoint_url": null
+    }
+  }
+```

@@ -1,0 +1,39 @@
+---
+title: Structure and Components
+description: Understand the structure of the Flow JSON and the components available for building flows on WhatsApp.
+---
+
+# Structure and Components
+
+## Flow Structure
+
+A Flow on WhatsApp is defined by a **Flow JSON** — a configuration document that describes the structure, components, and behavior of your interactive flow. This JSON follows Meta's standard and determines everything, from the visual layout to validations and user actions.
+
+For a complete understanding of the Flow JSON structure and available properties, consult Meta's official documentation:
+
+[Flow JSON Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson)
+
+<Note>
+In **Positus Studio**, the visual editor for Flows abstracts much of the JSON assembly and validation. The editor processes your visual structure and automatically generates compatible JSON. However, for advanced scenarios or manual adjustments, the complete reference for structure and components is maintained by Meta in the link above.
+</Note>
+
+## Components
+
+Components are the fundamental building blocks of a Flow. They represent interface elements and behaviors that you can compose to create the user experience. Each component has configurable properties and can interact with other components through events and data bindings.
+
+The main types of components available include:
+
+- **TextHeading** — A title or text heading
+- **TextBody** — A body of text
+- **Form** — A container for forms with fields
+- **TextInput** — A text input field
+- **Footer** — A footer or bottom section
+- And other specialized components depending on the use case
+
+For the complete reference of components, their properties, and usage examples, consult Meta's official documentation:
+
+[Components Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson/components)
+
+<Info>
+Stay updated with Meta's documentation, as new components and properties may be added regularly to support new business scenarios and improvements in the WhatsApp platform.
+</Info>

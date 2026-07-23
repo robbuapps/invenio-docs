@@ -1,0 +1,219 @@
+---
+title: API de Flows
+description: Endpoints para criar, editar, publicar e pré-visualizar Flows de um workspace.
+---
+
+# API de Flows
+
+Além de gerenciar Flows pelo Positus Studio, é possível administrá-los diretamente pela API. Os endpoints de Flows são **escopados por workspace** e permitem listar, criar, atualizar, publicar, pré-visualizar e remover Flows.
+
+## Autenticação e escopo
+
+Todas as rotas exigem autenticação via **Bearer Token** de usuário e são acessadas sob o workspace desejado:
+
+```
+https://api.positus.global/v2/workspaces/{workspace}/flows
+Authorization: Bearer <seu-token>
+Content-Type: application/json
+```
+
+| Parâmetro de rota | Descrição |
+| --- | --- |
+| `{workspace}` | UUID do workspace |
+| `{flow}` | UUID do Flow (nas rotas que operam sobre um Flow específico) |
+
+<Info>
+Exceto a **listagem**, todas as operações exigem que o usuário autenticado seja **proprietário (owner)** do workspace. Caso contrário, a API responde `403`.
+</Info>
+
+<Warning>
+A criação e a edição de Flows dependem de um WhatsApp Business Account (WABA) associado ao workspace. Se o workspace não possuir um WABA, a API responde `400`.
+</Warning>
+
+## Listar Flows
+
+Retorna os Flows do workspace.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/flows
+```
+
+| Query string | Tipo | Descrição |
+| --- | --- | --- |
+| `status` | integer | Opcional. Filtra os Flows por status (ver [tabela de status](#status-dos-flows)) |
+
+**Resposta** — coleção de objetos Flow (ver [estrutura do Flow](#estrutura-do-objeto-flow)).
+
+## Criar Flow
+
+Cria um Flow no workspace. O Flow é criado primeiro na Meta e, em caso de sucesso, persistido na Positus.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows
+```
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `name` | string | Sim | Nome do Flow |
+| `categories` | array | Sim | Lista com ao menos uma categoria (ids — ver [categorias](#categorias)) |
+| `endpoint_url` | string (URL) | Não | URL do endpoint para Flows dinâmicos. Pode ser `null` |
+| `endpoint_encrypted` | boolean | Condicional | Obrigatório quando `endpoint_url` é informado. Indica se o endpoint utiliza criptografia |
+
+```json
+{
+  "name": "Cadastro de leads",
+  "categories": [4],
+  "endpoint_url": "https://seu-dominio.com/flow-endpoint",
+  "endpoint_encrypted": true
+}
+```
+
+**Resposta** — objeto Flow criado. Em caso de erro na Meta, a API responde `400` com `{ "message": "..." }`.
+
+## Atualizar Flow
+
+Atualiza os metadados do Flow (nome, categorias e endpoint). Aceita o mesmo corpo do endpoint de criação.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}
+```
+
+**Resposta** — objeto Flow atualizado.
+
+## Atualizar o JSON do Flow
+
+Atualiza o conteúdo (Flow JSON) que define as telas e componentes do Flow.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/json
+```
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `json` | object | Sim | O Flow JSON (estrutura de telas e componentes). Veja [Estrutura e componentes](/docs/positus/flows/estrutura-e-componentes) |
+
+<Info>
+O conteúdo é enviado à Meta e, em caso de sucesso, persistido no Flow. Consulte a referência de estrutura na página [Estrutura e componentes](/docs/positus/flows/estrutura-e-componentes).
+</Info>
+
+## Publicar Flow
+
+Publica o Flow, tornando-o disponível para envio. Após a publicação, o status passa a `PUBLISHED`.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/publish
+```
+
+**Resposta** — objeto Flow com o status atualizado.
+
+## Remover Flow
+
+O comportamento depende do status atual do Flow:
+
+- **Rascunho (`DRAFT`)**: o Flow é excluído na Meta e removido do workspace. Resposta `204 No Content`.
+- **Publicado**: o Flow não pode ser excluído; ele é **descontinuado** (status `DEPRECATED`). Resposta com o objeto Flow atualizado.
+
+```
+DELETE https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}
+```
+
+## Pré-visualizar Flow
+
+Gera uma URL de pré-visualização do Flow para um número do workspace.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/flows/{flow}/preview
+```
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `number` | string (UUID) | Sim | UUID de um número ativo do workspace |
+| `valid_until` | integer | Sim | Tempo de validade da pré-visualização (ver tabela abaixo) |
+| `invalidate_previous` | boolean | Não | Quando `true`, invalida as pré-visualizações anteriores do Flow |
+
+| `valid_until` | Validade |
+| --- | --- |
+| 1 | 1 hora |
+| 2 | 2 horas |
+| 3 | 4 horas |
+| 4 | 8 horas |
+| 5 | 16 horas |
+| 6 | 24 horas |
+
+**Resposta:**
+
+```json
+{
+  "id": "uuid-da-preview",
+  "url": "https://.../preview/...",
+  "secret": "123456",
+  "valid_until": "2026-07-23T18:00:00.000000Z",
+  "created_at": "2026-07-23T17:00:00.000000Z",
+  "updated_at": "2026-07-23T17:00:00.000000Z"
+}
+```
+
+## Rotas públicas
+
+Estas rotas não exigem autenticação de usuário:
+
+| Método | Rota | Descrição |
+| --- | --- | --- |
+| `GET` | `https://api.positus.global/v2/flows/preview/{preview}` | Abre uma pré-visualização pública gerada pelo endpoint de preview |
+| `POST` | `https://api.positus.global/v2/flows/{flow}/endpoint` | Endpoint de troca de dados de um Flow dinâmico. Veja [Flows dinâmicos](/docs/positus/flows/flows-dinamicos) |
+
+## Estrutura do objeto Flow
+
+As respostas dos endpoints retornam o Flow no seguinte formato:
+
+```json
+{
+  "id": "uuid-do-flow",
+  "wa_id": "140652314281467",
+  "status": {
+    "id": 1,
+    "code": "DRAFT",
+    "description": "Rascunho"
+  },
+  "version": null,
+  "name": "Cadastro de leads",
+  "categories": [
+    {
+      "id": 4,
+      "code": "LEAD_GENERATION",
+      "description": "Geração de leads"
+    }
+  ],
+  "json": { },
+  "endpoint_encrypted": true,
+  "endpoint_url": null,
+  "created_at": "2026-07-23T17:00:00.000000Z",
+  "updated_at": "2026-07-23T17:00:00.000000Z"
+}
+```
+
+### Status dos Flows
+
+| id | code | Descrição |
+| --- | --- | --- |
+| 0 | `UNKNOWN` | Desconhecido |
+| 1 | `DRAFT` | Rascunho |
+| 2 | `PUBLISHED` | Publicado |
+| 3 | `DEPRECATED` | Descontinuado |
+| 4 | `BLOCKED` | Bloqueado |
+| 5 | `THROTTLED` | Restrito |
+
+### Categorias
+
+Categorias aceitas no campo `categories` (envie os **ids**):
+
+| id | code | Descrição |
+| --- | --- | --- |
+| 1 | `SIGN_UP` | Cadastro |
+| 2 | `SIGN_IN` | Login |
+| 3 | `APPOINTMENT_BOOKING` | Agendamento de consulta |
+| 4 | `LEAD_GENERATION` | Geração de leads |
+| 5 | `CONTACT_US` | Contate-nos |
+| 6 | `CUSTOMER_SUPPORT` | Suporte ao cliente |
+| 7 | `SURVEY` | Pesquisa |
+| 8 | `OTHER` | Outro |

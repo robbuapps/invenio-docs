@@ -1,0 +1,96 @@
+---
+title: Flows Webhooks
+description: Configure webhooks in the workspace to receive flow updates in real time.
+---
+
+# Flows Webhooks
+
+To track flow updates, it is recommended that you configure a webhook in the workspace to receive real-time updates about the flows. You must [configure a webhook in the workspace](https://studio.posit.us/workspace/configuracoes) to receive these events.
+
+## Flow Events
+
+The table below lists all flow events that can be received through workspace webhooks:
+
+| Event | Description |
+| --- | --- |
+| flow_created | This event is received when a new flow is created |
+| flow_updated | This event is received when a flow is updated |
+| flow_published | This event is received when a flow is published |
+| flow_throttled | This event is received when a flow is throttled |
+| flow_deprecated | This event is received when a flow is deprecated |
+| flow_blocked | This event is received when a flow is blocked |
+| flow_deleted | This event is received when a flow is deleted |
+| flow_sync | This event is received when the Positus system forces a sync with Meta |
+
+<Info>
+It is important that your Webhook returns an HTTPS 200 OK response to notifications. Otherwise, the WhatsApp Business API client will consider that notification a failure and will retry after a delay.
+</Info>
+
+## Webhook Structure
+
+The structure of webhooks received related to flows is as follows:
+
+```json
+{
+    "event": "flow_sync",
+    "workspace": {
+      "id": "d4026ecf-f7cf-418b-b44e-8c1d8808c57d",
+      "name": "Conta teste Robbu",
+      "business_id": "221123502254868",
+      "waba_id": "1281352745326562"
+    },
+    "flow": {
+      "id": "647e664e-a25e-4ea1-bc88-584293994210",
+      "wa_id": "140652314281467",
+      "status": {
+        "id": 1,
+        "code": "DRAFT",
+        "description": "Rascunho"
+      },
+      "version": null,
+      "name": "Flow teste",
+      "categories": [
+        {
+          "id": 4,
+          "code": "LEAD_GENERATION",
+          "description": "Geração de leads"
+        }
+      ],
+      "json": {
+        "version": "3.1",
+        "screens": [
+          {
+            "id": "WELCOME_SCREEN",
+            "layout": {
+              "type": "SingleColumnLayout",
+              "children": [
+                {
+                  "type": "TextHeading",
+                  "text": "Hello World"
+                },
+                {
+                  "type": "TextBody",
+                  "text": "Let's start building things!"
+                },
+                {
+                  "type": "Footer",
+                  "label": "Complete",
+                  "on-click-action": {
+                    "name": "complete",
+                    "payload": []
+                  }
+                }
+              ]
+            },
+            "title": "Welcome",
+            "terminal": true,
+            "success": true,
+            "data": []
+          }
+        ]
+      },
+      "endpoint_encrypted": true,
+      "endpoint_url": null
+    }
+  }
+```
