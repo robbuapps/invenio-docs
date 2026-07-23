@@ -1,0 +1,96 @@
+---
+title: Webhooks de Flows
+description: Configure webhooks no workspace para receber atualizações dos flows em tempo real.
+---
+
+# Webhooks de Flows
+
+Para acompanhar as atualizações dos flows, é recomendado que se configure um webhook no workspace para receber as atualizações sobre os flows em tempo real. É necessário [configurar um webhook no workspace](https://studio.posit.us/workspace/configuracoes) para receber esses eventos.
+
+## Eventos de Flows
+
+A tabela abaixo lista todos os eventos de flows que podem ser recebidos através dos webhooks do workspace:
+
+| Evento | Descrição |
+| --- | --- |
+| flow_created | Este evento é recebido quando um novo flow é criado |
+| flow_updated | Este evento é recebido quando um flow é atualizado |
+| flow_published | Este evento é recebido quando um flow é publicado |
+| flow_throttled | Este evento é recebido quando um flow é restrito |
+| flow_deprecated | Este evento é recebido quando um flow é descontinuado |
+| flow_blocked | Este evento é recebido quando um flow é bloqueado |
+| flow_deleted | Este evento é recebido quando um flow é deletado |
+| flow_sync | Este evento é recebido quando o sistema da Positus força uma sincronização com a Meta |
+
+<Info>
+É importante que seu Webhook retorne uma resposta HTTPS 200 OK às notificações. Caso contrário, o cliente da API do WhatsApp Business considerará essa notificação uma falha e tentará novamente após um atraso.
+</Info>
+
+## Estrutura do webhook
+
+A estrutura dos webhooks recebidos relacionados a flows é a seguinte:
+
+```json
+{
+    "event": "flow_sync",
+    "workspace": {
+      "id": "d4026ecf-f7cf-418b-b44e-8c1d8808c57d",
+      "name": "Conta teste Robbu",
+      "business_id": "221123502254868",
+      "waba_id": "1281352745326562"
+    },
+    "flow": {
+      "id": "647e664e-a25e-4ea1-bc88-584293994210",
+      "wa_id": "140652314281467",
+      "status": {
+        "id": 1,
+        "code": "DRAFT",
+        "description": "Rascunho"
+      },
+      "version": null,
+      "name": "Flow teste",
+      "categories": [
+        {
+          "id": 4,
+          "code": "LEAD_GENERATION",
+          "description": "Geração de leads"
+        }
+      ],
+      "json": {
+        "version": "3.1",
+        "screens": [
+          {
+            "id": "WELCOME_SCREEN",
+            "layout": {
+              "type": "SingleColumnLayout",
+              "children": [
+                {
+                  "type": "TextHeading",
+                  "text": "Hello World"
+                },
+                {
+                  "type": "TextBody",
+                  "text": "Let's start building things!"
+                },
+                {
+                  "type": "Footer",
+                  "label": "Complete",
+                  "on-click-action": {
+                    "name": "complete",
+                    "payload": []
+                  }
+                }
+              ]
+            },
+            "title": "Welcome",
+            "terminal": true,
+            "success": true,
+            "data": []
+          }
+        ]
+      },
+      "endpoint_encrypted": true,
+      "endpoint_url": null
+    }
+  }
+```

@@ -1,0 +1,39 @@
+---
+title: Estrutura e componentes
+description: Entenda a estrutura do Flow JSON e os componentes disponíveis para construir fluxos no WhatsApp.
+---
+
+# Estrutura e componentes
+
+## Estrutura do Flow
+
+Um Flow no WhatsApp é definido por um **Flow JSON** — um documento de configuração que descreve a estrutura, os componentes e o comportamento do seu fluxo interativo. Este JSON segue o padrão da Meta e determina tudo, desde o layout visual até as validações e ações dos usuários.
+
+Para uma compreensão completa sobre a estrutura e as propriedades disponíveis do Flow JSON, consulte a documentação oficial da Meta:
+
+[Flow JSON Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson)
+
+<Note>
+No **Positus Studio**, o editor visual de Flows abstrai grande parte da montagem e validação do JSON. O editor processa sua estrutura visual e gera automaticamente o JSON compatível. No entanto, para cenários avançados ou ajustes manuais, a referência completa de estrutura e componentes é mantida pela Meta no link acima.
+</Note>
+
+## Componentes
+
+Os componentes são os blocos de construção fundamentais de um Flow. Eles representam elementos de interface e comportamento que você pode compor para criar a experiência do usuário. Cada componente possui propriedades configuráveis e pode interagir com outros componentes através de eventos e vinculações de dados.
+
+Os principais tipos de componentes disponíveis incluem:
+
+- **TextHeading** — Um título ou cabeçalho de texto
+- **TextBody** — Um corpo de texto
+- **Form** — Um contêiner para formulários com campos
+- **TextInput** — Um campo de entrada de texto
+- **Footer** — Um rodapé ou seção inferior
+- E outros componentes especializados conforme o caso de uso
+
+Para obter a referência completa de componentes, suas propriedades e exemplos de uso, consulte a documentação oficial da Meta:
+
+[Components Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson/components)
+
+<Info>
+Mantenha-se atualizado com a documentação da Meta, pois novos componentes e propriedades podem ser adicionados regularmente para suportar novos cenários de negócio e melhorias na plataforma do WhatsApp.
+</Info>

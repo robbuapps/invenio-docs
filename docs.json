@@ -157,7 +157,10 @@
                             {
                                 "group": "Integração WhatsApp API",
                                 "pages": [
+                                    "docs/positus/integracao/bsuid",
                                     "docs/positus/integracao/api",
+                                    "docs/positus/integracao/contatos",
+                                    "docs/positus/integracao/username-linha",
                                     "docs/positus/integracao/webhook",
                                     "docs/positus/integracao/exemplos-de-codigos"
                                 ]
@@ -176,6 +179,18 @@
                                 "pages": [
                                     "docs/positus/messenger/positus-messenger",
                                     "docs/positus/messenger/faq"
+                                ]
+                            },
+                            {
+                                "group": "Flows",
+                                "pages": [
+                                    "docs/positus/flows/introducao",
+                                    "docs/positus/flows/tipos-de-flows",
+                                    "docs/positus/flows/estrutura-e-componentes",
+                                    "docs/positus/flows/flows-dinamicos",
+                                    "docs/positus/flows/webhooks",
+                                    "docs/positus/flows/api",
+                                    "docs/positus/flows/exemplos"
                                 ]
                             }
                         ]
@@ -211,7 +226,10 @@
                             {
                                 "group": "WhatsApp API Integration",
                                 "pages": [
+                                    "en/positus/integration/bsuid",
                                     "en/positus/integration/api",
+                                    "en/positus/integration/contacts",
+                                    "en/positus/integration/line-username",
                                     "en/positus/integration/webhook",
                                     "en/positus/integration/code-examples"
                                 ]
@@ -230,6 +248,18 @@
                                 "pages": [
                                     "en/positus/messenger/positus-messenger",
                                     "en/positus/messenger/faq"
+                                ]
+                            },
+                            {
+                                "group": "Flows",
+                                "pages": [
+                                    "en/positus/flows/introduction",
+                                    "en/positus/flows/types-of-flows",
+                                    "en/positus/flows/structure-and-components",
+                                    "en/positus/flows/dynamic-flows",
+                                    "en/positus/flows/webhooks",
+                                    "en/positus/flows/api",
+                                    "en/positus/flows/samples"
                                 ]
                             }
                         ]
@@ -259,7 +289,10 @@
                             {
                                 "group": "Integración WhatsApp API",
                                 "pages": [
+                                    "es/positus/integracion/bsuid",
                                     "es/positus/integracion/api",
+                                    "es/positus/integracion/contactos",
+                                    "es/positus/integracion/username-linea",
                                     "es/positus/integracion/webhook",
                                     "es/positus/integracion/ejemplos-de-codigo"
                                 ]
@@ -278,6 +311,18 @@
                                 "pages": [
                                     "es/positus/messenger/positus-messenger",
                                     "es/positus/messenger/faq"
+                                ]
+                            },
+                            {
+                                "group": "Flows",
+                                "pages": [
+                                    "es/positus/flows/introduccion",
+                                    "es/positus/flows/tipos-de-flows",
+                                    "es/positus/flows/estructura-y-componentes",
+                                    "es/positus/flows/flujos-dinamicos",
+                                    "es/positus/flows/webhooks",
+                                    "es/positus/flows/api",
+                                    "es/positus/flows/ejemplos"
                                 ]
                             }
                         ]

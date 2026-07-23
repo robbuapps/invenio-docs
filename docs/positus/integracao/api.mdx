@@ -113,6 +113,82 @@ Utilize esta rota para enviar mensagens de texto via WhatsApp
   </Tab>
 </Tabs>
 
+### Destinatário: telefone (`to`) ou BSUID (`recipient`) <a href="#recipient" id="recipient"></a>
+
+Todas as rotas de envio de mensagem aceitam **duas formas** de identificar o destinatário. Use **uma OU outra**:
+
+| Campo       | Tipo   | Obrigatoriedade                          | Descrição                                                                                                                                                  |
+| ----------- | ------ | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `to`        | string | Obrigatório se `recipient` for omitido   | Telefone do destinatário no formato internacional (ex.: `+5511999999999`).                                                                                |
+| `recipient` | string | Opcional — envie no lugar de `to`          | **BSUID** (*Business-Scoped User ID*) ou **parent BSUID** do destinatário (ex.: `BR.1234567890`). Veja [BSUID e identificadores de usuário](/docs/positus/integracao/bsuid). |
+
+<Info>
+O **BSUID** é um identificador de usuário escopado ao portfólio de negócios, entregue no campo `user_id` dos webhooks. Ele é útil quando o usuário adotou um **username** e o telefone (`wa_id`) pode não vir no payload. Entenda o conceito em [BSUID e identificadores de usuário](/docs/positus/integracao/bsuid).
+</Info>
+
+<Warning>
+**Precedência quando `to` e `recipient` coexistem:** se você enviar os dois campos na mesma requisição, o **telefone (`to`) prevalece** — a mensagem é entregue ao telefone. Por isso, envie **apenas um dos dois**: só `to` (telefone) ou só `recipient` (BSUID/parent BSUID).
+</Warning>
+
+<Note>
+Números **on-premises** aceitam somente `to` (telefone). O envio por `recipient` (BSUID) está disponível apenas para números na **Cloud API** (Meta).
+</Note>
+
+#### Request Body (envio para BSUID)
+
+```json
+{
+  "recipient": "BR.1234567890",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}
+```
+
+#### Response (envio para BSUID)
+
+A resposta é a mesma dos demais envios, mas o bloco `contacts` — repassado da Meta — traz o identificador que você usou em `input`, além do telefone (`wa_id`, quando disponível) e do BSUID (`user_id`).
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "contacts": [
+            {
+                "input": "BR.1234567890",
+                "wa_id": "5511999999999",
+                "user_id": "BR.1234567890"
+            }
+        ],
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": 131062,
+                "title": "Business-scoped User ID (BSUID) recipients are not supported for this message.",
+                "details": "Business-scoped User ID (BSUID) recipients are not supported for this message."
+            }
+        ]
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+**Casos especiais que exigem telefone (não aceitam BSUID):** templates de **autenticação** dos tipos **one-tap**, **zero-tap** e **copy-code**. Nesses casos, informe sempre `to` (telefone). Se você enviar um BSUID onde ele não é suportado, a Meta responde com o erro `131062`.
+</Note>
+
 ## Indicador de digitação
 
 `POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator`
@@ -178,6 +254,10 @@ Exibe o indicador "digitando…" para o cliente e marca como lida a mensagem rec
 Utilize esta rota para enviar mensagens de notificação via WhatsApp
 
 HSM - São templates de mensagens pré-aprovadas pelo Facebook, podem mensagens de texto, midia ou arquivos.
+
+<Info>
+O destinatário pode ser informado por telefone (`to`) **ou** por BSUID (`recipient`), como descrito em [Destinatário: telefone (`to`) ou BSUID (`recipient`)](#recipient). **Exceção:** templates de **autenticação** one-tap, zero-tap e copy-code exigem o **telefone** (`to`) e não aceitam BSUID.
+</Info>
 
 #### Path Parameters
 

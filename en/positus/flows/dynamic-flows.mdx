@@ -1,0 +1,61 @@
+---
+title: Dynamic Flows
+description: Any dynamic Flow needs an endpoint configured to manage data exchanges between screens.
+---
+
+# Dynamic Flows
+
+## Endpoint
+
+Any `Flow` that is of dynamic type must have an `endpoint` configured during its creation so it can perform exchanges of data between screens. In addition to data exchange, the `endpoint` is also responsible for managing which will be the next screen of the flow.
+
+<Warning>
+The `endpoint` must always be active and responding. If the `endpoint` experiences issues, the `Flow` may suffer throttling by WhatsApp. Learn more in the section on [Endpoint Health / Throttle](#endpoint-health--throttle).
+</Warning>
+
+## Webhook
+
+The webhook of the number that sent the `Flow` will be called only after the `Flow` is filled out and sent by the user on a screen that has the `terminal: true` property.
+
+Example of webhook to be filled in after sending by the user:
+
+```json
+{
+  "contacts": [
+    {
+      "profile": {
+        "name": "Felipe Carvalho"
+      },
+      "wa_id": "5511999999999"
+    }
+  ],
+  "messages": [
+    {
+      "context": {
+        "from": "5511988888888",
+        "id": "wamid.HBgMNTU0Mzk2NDE2NTkwFQIAERgSRTc2QkUxMzk4MzEyMDM1OEU1AA=="
+      },
+      "from": "5511999999999",
+      "id": "wamid.HBgMNTU0Mzk2NDE2NTkwFQIAEhgUM0E4Njg5RkE1NzVGNjA4Mzg0NjEA",
+      "timestamp": "1721069262",
+      "type": "interactive",
+      "interactive": {
+        "type": "nfm_reply",
+        "nfm_reply": {
+          "response_json": "{\"flow_token\":\"flow-token\",\"source\":\"0\",\"lastName\":\"Carvalho\",\"email\":\"felipe.carv@gmail.com\",\"firstName\":\"Felipe\"}",
+          "body": "Sent",
+          "name": "flow"
+        }
+      }
+    }
+  ]
+}
+```
+
+<Info>
+This webhook belongs to one of our `Flows` examples. You can access the example `Flow` this webhook belongs to at [Flow Samples](/en/positus/flows/samples).
+</Info>
+
+## Endpoint Health / Throttle
+
+Flows with unstable endpoints may be throttled by WhatsApp. When the `endpoint` experiences failures or slow responses, WhatsApp may limit the number of allowed requests, affecting the Flow's availability to users. Monitor your endpoint health regularly to avoid these throttles.

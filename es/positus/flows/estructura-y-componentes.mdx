@@ -1,0 +1,39 @@
+---
+title: Estructura y componentes
+description: Entiende la estructura del Flow JSON y los componentes disponibles para construir flujos en WhatsApp.
+---
+
+# Estructura y componentes
+
+## Estructura del Flow
+
+Un Flow en WhatsApp se define por un **Flow JSON** — un documento de configuración que describe la estructura, los componentes y el comportamiento de tu flujo interactivo. Este JSON sigue el estándar de Meta y determina todo, desde el diseño visual hasta las validaciones y acciones de los usuarios.
+
+Para una comprensión completa sobre la estructura y las propiedades disponibles del Flow JSON, consulta la documentación oficial de Meta:
+
+[Flow JSON Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson)
+
+<Note>
+En **Positus Studio**, el editor visual de Flows abstrae gran parte del montaje y validación del JSON. El editor procesa tu estructura visual y genera automáticamente el JSON compatible. Sin embargo, para escenarios avanzados o ajustes manuales, la referencia completa de estructura y componentes es mantenida por Meta en el enlace anterior.
+</Note>
+
+## Componentes
+
+Los componentes son los bloques de construcción fundamentales de un Flow. Representan elementos de interfaz y comportamiento que puedes componer para crear la experiencia del usuario. Cada componente tiene propiedades configurables y puede interactuar con otros componentes a través de eventos y vinculaciones de datos.
+
+Los principales tipos de componentes disponibles incluyen:
+
+- **TextHeading** — Un título o encabezado de texto
+- **TextBody** — Un cuerpo de texto
+- **Form** — Un contenedor para formularios con campos
+- **TextInput** — Un campo de entrada de texto
+- **Footer** — Un pie de página o sección inferior
+- Y otros componentes especializados según el caso de uso
+
+Para obtener la referencia completa de componentes, sus propiedades y ejemplos de uso, consulta la documentación oficial de Meta:
+
+[Components Reference — Meta Developers](https://developers.facebook.com/docs/whatsapp/flows/reference/flowjson/components)
+
+<Info>
+Mantente actualizado con la documentación de Meta, ya que nuevos componentes y propiedades se pueden agregar regularmente para soportar nuevos escenarios de negocio y mejoras en la plataforma de WhatsApp.
+</Info>
