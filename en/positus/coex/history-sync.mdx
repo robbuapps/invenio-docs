@@ -1,0 +1,112 @@
+---
+title: History synchronization
+description: Import message history from your WhatsApp Business number when you activate Coexistence.
+---
+
+# History synchronization
+
+When you activate Coexistence, you can import the message history from your WhatsApp Business number to Positus. The import is **asynchronous** and messages arrive at your **webhook** in the same format as normally received messages.
+
+## How to trigger synchronization
+
+Make a `POST` request to the endpoint below. No request body is required.
+
+```
+POST https://api.positus.global/v2/whatsapp/numbers/{NUMBER_ID}/onboarding-smb-app/sync-message-history
+Authorization: Bearer <your-token>
+```
+
+**Parameters:**
+- `{NUMBER_ID}` — ID of the WhatsApp number already activated with Coexistence.
+
+<Info>
+The import can be triggered **only once per onboarding**, within the **24-hour window** after Coexistence activation. The server only confirms receipt of the request; messages are delivered later, across multiple webhooks.
+</Info>
+
+## What you receive
+
+Each message from history is delivered to your webhook in **the same format as a normally received message** in Positus — the envelope `{ "contacts": [...], "messages": [...] }`. You receive **one webhook per message** from history; your existing webhook handler already processes these messages without modification.
+
+```json
+{
+  "contacts": [
+    {
+      "profile": { "name": "Contact name" },
+      "wa_id": "5511999999999"
+    }
+  ],
+  "messages": [
+    {
+      "from": "5511999999999",
+      "id": "wamid.xyz",
+      "timestamp": "1739230955",
+      "type": "text",
+      "text": { "body": "message from history" },
+      "history_context": { "status": "READ" }
+    }
+  ]
+}
+```
+
+<Info>
+This is the same format described in [Webhook](/en/positus/integration/webhook). The difference is that history messages include the additional field `history_context`, indicating the state that the message had in the app. Internal progress metadata of the import (phase, batch order) **are not passed** to your webhook.
+</Info>
+
+### Message fields
+
+| Field | Description |
+| --- | --- |
+| `from` | Number of the message sender |
+| `id` | Unique message ID (wamid) |
+| `timestamp` | Date/time of original send (Unix timestamp) |
+| `type` | Message type: `text`, `media_placeholder`, `image`, `video`, `audio`, `document` etc. |
+| `text.body` | Message body (for `type: "text"`) |
+| `history_context.status` | State that the message had in the app (see table below) |
+
+### Values of `history_context.status`
+
+| Status | Meaning |
+| --- | --- |
+| `READ` | Message read |
+| `PLAYED` | Media (audio/video) played |
+| `DELIVERED` | Message delivered to device |
+| `SENT` | Message sent to WhatsApp server |
+| `PENDING` | Still awaiting send confirmation |
+| `ERROR` | Send error |
+
+## History coverage window
+
+Meta makes history available in three phases, defining **how far back** messages are imported:
+
+| Phase | Period covered |
+| --- | --- |
+| Phase 0 | Day 0 → Day 1 (last 24 hours) |
+| Phase 1 | Day 1 → Day 90 |
+| Phase 2 | Day 90 → Day 180 |
+
+Messages older than **180 days** are not imported. You don't need to handle these phases: they only determine the scope of the import — messages arrive at your webhook one by one, as described above.
+
+## Two-stage media
+
+Older media messages (more than ~14 days old) arrive in **two stages**:
+
+1. First, a message with `type: "media_placeholder"` — **without media content**.
+2. Then, a new webhook delivers the same message with the actual media content.
+
+<Warning>
+Wait for the second stage before considering the media complete. The `media_placeholder` signals that media exists, but has not yet been delivered.
+</Warning>
+
+## History rejected by business
+
+If history sharing is disabled in the WhatsApp Business app, Meta rejects the import (error `2593109` — *"History sync is turned off by the business"*).
+
+<Warning>
+When history is rejected, the import **does not proceed** and no messages are delivered. The user must enable history sharing in the WhatsApp Business app and redo the onboarding.
+</Warning>
+
+## Next steps
+
+- [Introduction to CoEx](/en/positus/coex/introduction) — concept and eligibility.
+- [Contact Synchronization](/en/positus/coex/contact-sync) — import the contact list.
+- [Webhook](/en/positus/integration/webhook) — complete message envelope format.

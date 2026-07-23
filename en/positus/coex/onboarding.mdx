@@ -1,0 +1,46 @@
+---
+title: Coexistence Onboarding
+description: Activate Coexistence on your WhatsApp number via Embedded Signup, synchronize contacts and history, and start receiving mirrored messages on the Cloud API.
+---
+
+# Coexistence Onboarding
+
+Coexistence activation is initiated by the customer themselves through **Embedded Signup**, accessed directly in the WhatsApp Business app. There is no API endpoint that you call to "activate" Coexistence — the flow is entirely conducted by Meta and finalized automatically on Positus.
+
+## Activation flow
+
+Follow the steps below to understand how Coexistence onboarding works:
+
+1. **Customer starts Embedded Signup:** the user accesses the Coexistence option in the WhatsApp Business app and agrees to share contacts and message history with the Cloud API.
+
+2. **Meta validates and links the number:** Meta validates the credentials and links the same phone number to both the app and Cloud API. From this point on, the number operates under Coexistence regime.
+
+3. **Positus completes the activation:** after Meta's validation, Positus automatically completes the number's activation with Coexistence enabled.
+
+4. **Automatic synchronization:** Positus automatically triggers the synchronization of **contacts** and **message history**. You don't need to call any endpoint manually for this to occur — everything happens behind the scenes.
+
+5. **Message receipt:** messages from the synchronized history and, from then on, echoes of messages sent via the app start arriving at your **webhook**.
+
+<Info>
+Eligibility requirements (app version and partner type) are described on the [Introduction to Coexistence](/en/positus/coex/introduction) page.
+</Info>
+
+## Synchronization window
+
+<Warning>
+**24 hours to synchronize:** after onboarding, you have a deadline of **24 hours for contact and history synchronization to be successfully completed**. If this period expires without completion, you will need to redo the entire Embedded Signup process.
+</Warning>
+
+## Next steps
+
+After successful activation, explore related topics to understand how data is synchronized and how messages flow in your integration:
+
+- [Contact Synchronization](/en/positus/coex/contact-sync)
+- [History Synchronization](/en/positus/coex/history-sync)
+- [Mirrored Messages](/en/positus/coex/mirrored-messages)
+
+## Learn more
+
+For more information about Embedded Signup and Meta's onboarding process, consult the official guide:
+
+[Meta Onboarding Guide for Business Apps](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users)

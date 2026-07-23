@@ -273,6 +273,18 @@
                                     "en/positus/flows/api",
                                     "en/positus/flows/samples"
                                 ]
+                            },
+                            {
+                                "group": "Coexistence",
+                                "pages": [
+                                    "en/positus/coex/introduction",
+                                    "en/positus/coex/onboarding",
+                                    "en/positus/coex/contact-sync",
+                                    "en/positus/coex/history-sync",
+                                    "en/positus/coex/mirrored-messages",
+                                    "en/positus/coex/webhooks",
+                                    "en/positus/coex/api"
+                                ]
                             }
                         ]
                     }
@@ -335,6 +347,18 @@
                                     "es/positus/flows/webhooks",
                                     "es/positus/flows/api",
                                     "es/positus/flows/ejemplos"
+                                ]
+                            },
+                            {
+                                "group": "Coexistencia",
+                                "pages": [
+                                    "es/positus/coex/introduccion",
+                                    "es/positus/coex/onboarding",
+                                    "es/positus/coex/sincronizacion-de-contactos",
+                                    "es/positus/coex/sincronizacion-de-historial",
+                                    "es/positus/coex/mensajes-espejados",
+                                    "es/positus/coex/webhooks",
+                                    "es/positus/coex/api"
                                 ]
                             }
                         ]

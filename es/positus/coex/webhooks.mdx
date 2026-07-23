@@ -1,0 +1,30 @@
+---
+title: Webhooks de CoEx
+description: Conozca qué eventos de la coexistencia llegan a su webhook y cómo procesarlos.
+---
+
+# Webhooks de CoEx
+
+Durante la coexistencia, su webhook recibe notificaciones de dos tipos de evento. Ambos usan el **mismo formato estándar de Positus** para mensajes: el sobre `{ "contacts": [...], "messages": [...] }`. Su manejador de webhook existente ya procesa estos eventos sin cambios.
+
+## Eventos de CoEx
+
+| Evento | ¿Llega al webhook? | Formato | Documentación |
+| --- | --- | --- | --- |
+| Historial de mensajes | Sí | `{ contacts, messages }` | [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial) |
+| Mensajes espejados | Sí | `{ contacts, messages }` | [Mensajes espejados](/es/positus/coex/mensajes-espejados) |
+| Sincronización de contactos | No | (aparece en la cuenta) | [Sincronización de contactos](/es/positus/coex/sincronizacion-de-contactos) |
+
+## Procesamiento
+
+<Info>
+Todos los eventos anteriores usan el mismo sobre `{ "contacts": [...], "messages": [...] }` descrito en [Webhook](/es/positus/integracion/webhook). Puede usar el mismo manejador existente para procesar historial, mensajes espejados y mensajes recibidos normalmente — sin lógica adicional.
+</Info>
+
+## Próximos pasos
+
+- [Introducción a la coexistencia](/es/positus/coex/introduccion) — concepto y elegibilidad.
+- [Sincronización de historial](/es/positus/coex/sincronizacion-de-historial) — importar mensajes antiguos.
+- [Mensajes espejados](/es/positus/coex/mensajes-espejados) — recibir mensajes de la aplicación WhatsApp Business.
+- [Sincronización de contactos](/es/positus/coex/sincronizacion-de-contactos) — importar lista de contactos.
+- [Webhook](/es/positus/integracion/webhook) — formato completo del sobre de mensajes.
