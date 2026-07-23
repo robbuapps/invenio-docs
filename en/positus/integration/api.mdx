@@ -113,6 +113,82 @@ Use this route to send text messages via WhatsApp
   </Tab>
 </Tabs>
 
+### Recipient: phone (`to`) or BSUID (`recipient`) <a href="#recipient" id="recipient"></a>
+
+Every message-sending route accepts **two ways** to identify the recipient. Use **one OR the other**:
+
+| Field       | Type   | Requirement                          | Description                                                                                                                                             |
+| ----------- | ------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `to`        | string | Required if `recipient` is omitted   | Recipient's phone number in international format (e.g. `+5511999999999`).                                                                              |
+| `recipient` | string | Optional — send instead of `to`          | Recipient's **BSUID** (*Business-Scoped User ID*) or **parent BSUID** (e.g. `BR.1234567890`). See [BSUID and user identifiers](/en/positus/integration/bsuid). |
+
+<Info>
+The **BSUID** is a user identifier scoped to the business portfolio, delivered in the `user_id` field of webhooks. It is useful when the user has adopted a **username** and the phone number (`wa_id`) may not be present in the payload. Learn the concept in [BSUID and user identifiers](/en/positus/integration/bsuid).
+</Info>
+
+<Warning>
+**Precedence when `to` and `recipient` coexist:** if you send both fields in the same request, the **phone number (`to`) takes precedence** — the message is delivered to the phone. Therefore, send **only one of them**: either `to` (phone) or `recipient` (BSUID/parent BSUID).
+</Warning>
+
+<Note>
+**On-premises** numbers accept only `to` (phone). Sending via `recipient` (BSUID) is available only for numbers on the **Cloud API** (Meta).
+</Note>
+
+#### Request Body (sending to a BSUID)
+
+```json
+{
+  "recipient": "BR.1234567890",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}
+```
+
+#### Response (sending to a BSUID)
+
+The response is the same as other sends, but the `contacts` block — forwarded from Meta — carries the identifier you used in `input`, along with the phone number (`wa_id`, when available) and the BSUID (`user_id`).
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "contacts": [
+            {
+                "input": "BR.1234567890",
+                "wa_id": "5511999999999",
+                "user_id": "BR.1234567890"
+            }
+        ],
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": 131062,
+                "title": "Business-scoped User ID (BSUID) recipients are not supported for this message.",
+                "details": "Business-scoped User ID (BSUID) recipients are not supported for this message."
+            }
+        ]
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+**Special cases that require a phone number (BSUID not accepted):** **authentication** templates of the **one-tap**, **zero-tap** and **copy-code** types. In these cases, always provide `to` (phone). If you send a BSUID where it is not supported, Meta responds with error `131062`.
+</Note>
+
 ## Typing indicator
 
 `POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator`
@@ -178,6 +254,10 @@ Displays the "typing…" indicator to the customer and marks the received messag
 Use this route to send notification messages via WhatsApp
 
 HSM - These are message templates pre-approved by Facebook; they can be text, media, or file messages.
+
+<Info>
+The recipient can be provided by phone (`to`) **or** by BSUID (`recipient`), as described in [Recipient: phone (`to`) or BSUID (`recipient`)](#recipient). **Exception:** **authentication** templates of the one-tap, zero-tap and copy-code types require the **phone** (`to`) and do not accept BSUID.
+</Info>
 
 #### Path Parameters
 

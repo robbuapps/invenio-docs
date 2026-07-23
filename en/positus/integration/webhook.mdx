@@ -58,6 +58,10 @@ Positus numbers use the **WhatsApp Cloud API**. On the registered Webhook URL, t
  Whenever possible, names will be kept constant across functions. (For example, all date and time stamps are named `timestamp`.
 </Info>
 
+<Info>
+**New user identifiers (BSUID).** With the arrival of WhatsApp **usernames**, webhook payloads now carry additional identification fields — `user_id` (BSUID), `parent_user_id` (parent BSUID) and `profile.username`. When a user adopts a username, the phone fields (`wa_id`, `from`, `recipient_id`) **may be omitted** from the payload. Handle this scenario by using `user_id` as the primary identifier. To understand these identifiers, see the [BSUID and user identifiers](/en/positus/integration/bsuid) page.
+</Info>
+
 ### Notification Webhook format <a href="#notifications" id="notifications"></a>
 
 An incoming message notification has the top-level `{ "contacts": [...], "messages": [...] }`. A status notification has the top-level `{ "statuses": [...], "contacts": [...] }` (`contacts` is only present when the status is **not** `failed`).
@@ -68,8 +72,13 @@ An incoming message notification has the top-level `{ "contacts": [...], "messag
 {
   "contacts": [
     {
-      "profile": { "name": "Kerry Fisher" },
-      "wa_id": "16315551234"
+      "profile": {
+        "name": "Kerry Fisher",
+        "username": "@kerryfisher"
+      },
+      "wa_id": "16315551234",
+      "user_id": "BR.1234567890",
+      "parent_user_id": "BR.ENT.1234567890"
     }
   ],
   "messages": [
@@ -84,6 +93,21 @@ An incoming message notification has the top-level `{ "contacts": [...], "messag
 }
 ```
 
+<Info>
+The `profile.username`, `user_id` and `parent_user_id` fields only appear in the scenarios described on the [BSUID](/en/positus/integration/bsuid) page. The `wa_id` (and the message `from`) **may be omitted** when the user has adopted a username. The fields below are added to the `contacts[]` object (they do not replace the existing ones):
+</Info>
+
+| Field                       | Description                                                                                      |
+| --------------------------- | ----------------------------------------------------------------------------------------------- |
+| `contacts[].user_id`        | User BSUID — identifier scoped to the business portfolio. Present in message webhooks.           |
+| `contacts[].parent_user_id` | Parent BSUID — only present if the portfolio is enrolled in a parent account.                    |
+| `contacts[].profile.username` | Public username (`@name`) — only present if the user has adopted a username.                   |
+| `contacts[].wa_id`          | User's phone number — **may be omitted** when a username is present (see [30-day rule](/en/positus/integration/bsuid#the-30-day-rule)). |
+
+<Info>
+The `messages[].from` field (sender's phone number) follows the same behavior as `wa_id`: it **may be absent** when the user has adopted a username. Use the `user_id` present in the corresponding `contacts[]` object to identify the sender durably.
+</Info>
+
 ### Message status updates <a href="#statuses" id="statuses"></a>
 
 In addition to incoming messages, the customer receives **status** notifications for the messages they sent. These notifications have the top-level `{ "statuses": [...], "contacts": [...] }`.
@@ -97,17 +121,34 @@ In addition to incoming messages, the customer receives **status** notifications
       "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
       "status": "delivered",
       "timestamp": "1521497954",
-      "recipient_id": "16315551234"
+      "recipient_id": "16315551234",
+      "recipient_user_id": "BR.1234567890",
+      "recipient_parent_user_id": "BR.ENT.1234567890"
     }
   ],
   "contacts": [
     {
-      "profile": { "name": "Kerry Fisher" },
-      "wa_id": "16315551234"
+      "profile": {
+        "name": "Kerry Fisher",
+        "username": "@kerryfisher"
+      },
+      "wa_id": "16315551234",
+      "user_id": "BR.1234567890",
+      "parent_user_id": "BR.ENT.1234567890"
     }
   ]
 }
 ```
+
+The BSUID identification fields in the status object:
+
+| Field                                | Description                                                                                       |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `statuses[].recipient_user_id`       | Recipient's BSUID. May be omitted if the message was sent to the phone number.                    |
+| `statuses[].recipient_parent_user_id`| Recipient's parent BSUID — only present if the portfolio is enrolled in a parent account.         |
+| `statuses[].recipient_id`            | Recipient's phone number — **now optional**; may be omitted when the user has adopted a username. |
+
+The `contacts` array that accompanies the status (when present) carries the same BSUID fields described in [incoming messages](#receiving): `user_id`, `parent_user_id` and `profile.username`.
 
 The `status` field can take the following values:
 
@@ -296,6 +337,43 @@ The `errors` object contains the following parameters:
 }
 ```
 
+#### System message: user changed identifier (`user_changed_user_id`) <a href="#user-changed-user-id" id="user-changed-user-id"></a>
+
+When a user's identifier changes (for example, when switching phone numbers), WhatsApp sends a **system message** of type `system` with `system.type` equal to `user_changed_user_id`. It arrives inside the `messages` array, in the same format as other incoming messages. Use it to update the contact's link to the new `user_id`.
+
+```json
+{
+  "contacts": [
+    {
+      "profile": { "name": "Kerry Fisher" },
+      "user_id": "BR.9876543210"
+    }
+  ],
+  "messages": [
+    {
+      "id": "wamid.HBgLMTYzMTU1NTEyMzQ...",
+      "timestamp": "1521827831",
+      "type": "system",
+      "system": {
+        "type": "user_changed_user_id",
+        "customer": "BR.1234567890",
+        "user_id": "BR.9876543210",
+        "parent_user_id": "BR.ENT.9876543210",
+        "body": "The user changed identifier"
+      }
+    }
+  ]
+}
+```
+
+| Field                     | Description                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| `system.type`             | `user_changed_user_id` — identifies the trigger.                                      |
+| `system.customer`         | User's **previous** BSUID — use it to locate the existing contact.                    |
+| `system.user_id`          | User's **new** BSUID.                                                                 |
+| `system.parent_user_id`   | New parent BSUID — present if the portfolio is enrolled in a parent account.          |
+| `system.body`             | Descriptive text of the system message.                                              |
+
 ### Incoming media message notifications <a href="#mediawebhook" id="mediawebhook"></a>
 
  When a message with media is received, the notification sent to your Webhook contains a media object with the fields that identify the file. In the Cloud API, the media object only carries `id`, `mime_type`, and `sha256` (plus an optional `caption` for image, document, and video). There are **no** `file` or `link` fields.
@@ -451,6 +529,84 @@ In the Cloud API, audio messages (including voice messages) are delivered with t
   }]
 }
 ```
+
+## Workspace event webhooks (BSUID) <a href="#workspace-events" id="workspace-events"></a>
+
+In addition to message and status notifications (delivered in the raw Cloud API format), Positus sends two **workspace events** related to BSUID. These events use a different envelope: a top-level object with the `event` field (event name), the `workspace` object (workspace identification) and an object with the event data — named `contact` or `number`, depending on the case.
+
+### BSUID update (`user_id_update`) <a href="#user-id-update" id="user-id-update"></a>
+
+Triggered when a user's BSUID (or parent BSUID) is updated. It carries the previous and current values of each identifier. The data comes in the `contact` object.
+
+```json
+{
+  "event": "user_id_update",
+  "workspace": {
+    "id": "9f8b7c6d-...",
+    "provider": { "id": 1, "name": "Positus V2" },
+    "type_workspace": "...",
+    "name": "My Company",
+    "business_id": "1234567890",
+    "waba_id": "9876543210"
+  },
+  "contact": {
+    "wa_id": "16315551234",
+    "previous_user_id": "BR.1234567890",
+    "current_user_id": "BR.9876543210",
+    "previous_parent_user_id": "BR.ENT.1234567890",
+    "current_parent_user_id": "BR.ENT.9876543210",
+    "timestamp": "1521827831",
+    "detail": "...",
+    "waba_id": "9876543210",
+    "phone_number_id": "16315551234"
+  }
+}
+```
+
+| Field                             | Description                                                                    |
+| --------------------------------- | ----------------------------------------------------------------------------- |
+| `contact.wa_id`                   | User's phone number associated with the event (may be omitted).               |
+| `contact.previous_user_id`        | User's previous BSUID.                                                         |
+| `contact.current_user_id`         | User's current BSUID.                                                          |
+| `contact.previous_parent_user_id` | Previous parent BSUID (if applicable).                                         |
+| `contact.current_parent_user_id`  | Current parent BSUID (if applicable).                                          |
+| `contact.timestamp`               | Time of the update.                                                            |
+| `contact.detail`                  | Additional event detail, when provided by Meta.                               |
+| `contact.waba_id`                 | WhatsApp Business Account (WABA) ID.                                           |
+| `contact.phone_number_id`         | Phone number ID of the line.                                                  |
+
+### Line username update (`business_username_update`) <a href="#business-username-update" id="business-username-update"></a>
+
+Triggered when the status of your official line's **username** changes (the public `@name` of the business number). The data comes in the `number` object.
+
+```json
+{
+  "event": "business_username_update",
+  "workspace": {
+    "id": "9f8b7c6d-...",
+    "provider": { "id": 1, "name": "Positus V2" },
+    "type_workspace": "...",
+    "name": "My Company",
+    "business_id": "1234567890",
+    "waba_id": "9876543210"
+  },
+  "number": {
+    "display_phone_number": "16315551234",
+    "username": "@mycompany",
+    "status": "approved",
+    "timestamp": "1521827831",
+    "waba_id": "9876543210"
+  }
+}
+```
+
+| Field                          | Description                                                                |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `number.display_phone_number`  | Phone number of the official line whose username changed.                  |
+| `number.username`              | Line username (`@name`).                                                  |
+| `number.status`                | Username status: `approved`, `deleted` or `reserved`.                      |
+| `number.timestamp`             | Time of the update.                                                        |
+| `number.waba_id`               | WhatsApp Business Account (WABA) ID.                                       |
 
 ## Official WhatsApp Cloud API documentation
 

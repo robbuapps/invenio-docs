@@ -1,0 +1,298 @@
+---
+title: Username da linha oficial
+description: Consulte, defina, altere, exclua e obtenha sugestões para o username (@nome público) da sua linha oficial de WhatsApp Business conectada à Positus.
+---
+
+# Username da linha oficial
+
+O **username da linha** é o `@nome` público da **sua** linha oficial de WhatsApp Business — o identificador que aparece no perfil do número comercial para os clientes. Não confunda com o **username do usuário final**, que identifica quem conversa com você e chega nos webhooks; este aqui é o `@` da **sua própria linha**.
+
+Estas rotas permitem que você, como titular do número, **consulte**, **defina/altere**, **exclua** e obtenha **sugestões** de username, repassando a operação para a Meta (WhatsApp Cloud API) e mantendo o estado local sincronizado.
+
+<Info>
+O username da linha é um conceito relacionado ao **BSUID**. Para entender como o `@nome` da linha se relaciona com o BSUID e com o telefone (`wa_id`) nos webhooks e requisições, veja [BSUID e identificadores de usuário](/docs/positus/integracao/bsuid).
+</Info>
+
+## Ciclo de vida do username
+
+O username passa por estados durante seu ciclo de vida. Cada estado é retornado no campo `status` (string da Meta), preservado tanto nas respostas da API quanto no webhook:
+
+| Status      | Significado                                                                                          |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| `reserved`  | O username está **reservado** para a sua linha, mas **ainda não visível** aos clientes no WhatsApp.  |
+| `approved`  | O username está **aprovado e visível** aos clientes no WhatsApp.                                     |
+| `deleted`   | O username foi **removido** da linha.                                                                |
+
+<Note>
+A propagação do estado é **assíncrona**. Ao definir/alterar um username, a Meta pode responder `reserved` e só depois promover para `approved`. Essa transição é confirmada pela Positus através do webhook `business_username_update` — veja a seção [Webhook de atualização](#webhook-business-username-update).
+</Note>
+
+## Autenticação e base URL
+
+Todas as rotas usam a mesma base e o mesmo esquema de autenticação das demais rotas da Positus API.
+
+`https://api.positus.global/v2`
+
+#### Path Parameters
+
+| Name  | Type   | Description                         |
+| ----- | ------ | ----------------------------------- |
+| Chave | string | Código único por número de WhatsApp |
+
+#### Headers
+
+| Name          | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| Authorization | string | Autenticação usando Bearer Token |
+| Content-Type  | string | application/json                 |
+
+<Info>
+**Token de Produção:** O seu token será gerado e fornecido pela Positus e dá acesso a todos os seus números de WhatsApp Business API.
+</Info>
+
+<Note>
+As rotas de **alteração** (definir, alterar e excluir) exigem que o usuário autenticado seja **owner** do número. Um usuário sem essa permissão recebe **403**.
+</Note>
+
+## Consultar username <a href="#consultar" id="consultar"></a>
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/username`
+
+Retorna o username atual da linha e o seu status. Por padrão a resposta é lida do **estado local** (mantido sincronizado pelo webhook `business_username_update`). Para forçar uma leitura direta na Meta, informe `?refresh=true`.
+
+#### Query Parameters
+
+| Name    | Type    | Description                                                                                             |
+| ------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| refresh | boolean | Opcional. Quando `true`, consulta o username diretamente na Meta em vez de ler o estado local. Padrão: `false`. |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "username": "robbu.positus",
+        "username_status": {
+            "id": 1,
+            "code": "APPROVED"
+        },
+        "business_phone_number_id": "1234567890"
+    }
+    ```
+  </Tab>
+  <Tab title="200 (sem username)">
+    ```json
+    {
+        "username": null,
+        "username_status": {
+            "id": 0,
+            "code": "UNKNOWN"
+        },
+        "business_phone_number_id": "1234567890"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+| Campo                      | Tipo          | Descrição                                                                                       |
+| -------------------------- | ------------- | ----------------------------------------------------------------------------------------------- |
+| `username`                 | string \| null| Username atual da linha (`null` se nunca foi definido).                                          |
+| `username_status`          | object        | Status do username no formato `{ id, code }`.                                                    |
+| `username_status.id`       | integer       | Código numérico interno: `0` UNKNOWN, `1` APPROVED, `2` DELETED, `3` RESERVED.                   |
+| `username_status.code`     | string        | Código textual: `UNKNOWN`, `APPROVED`, `DELETED` ou `RESERVED`.                                  |
+| `business_phone_number_id` | string        | ID do número de telefone da linha na Meta (o `wa_id` do número).                                 |
+
+<Note>
+Com `?refresh=true`, o campo `username_status` reflete o status retornado pela Meta no momento da consulta. Se a leitura na Meta falhar, a resposta traz o erro traduzido (veja [Tratamento de erros](#erros)).
+</Note>
+
+## Definir ou alterar username <a href="#definir" id="definir"></a>
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/username`
+
+Define um novo username para a linha (ou substitui o existente). O formato é validado localmente **antes** de chamar a Meta. Após o sucesso, o estado local é sincronizado (`username`, `username_status` e `previous_username`).
+
+#### Request Body
+
+| Name     | Type   | Description                                   |
+| -------- | ------ | --------------------------------------------- |
+| username | string | **Obrigatório.** Username desejado da linha.  |
+
+```json
+{
+  "username": "robbu.positus"
+}
+```
+
+<Info>
+**Regras de formato do username** (validadas localmente):
+
+- 3 a 35 caracteres.
+- Somente letras inglesas (`a-z`, `A-Z`), dígitos (`0-9`), ponto (`.`) e underline (`_`).
+- Ao menos uma letra.
+- Não pode começar nem terminar com ponto (`.`), nem conter ponto duplo (`..`).
+- Não pode começar com `www`.
+- Não pode terminar com domínio (`.com`, `.org`, `.net`, `.int`, `.edu`, `.gov`, `.mil`, `.us`, `.in`, `.html`).
+</Info>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Retorna o número completo atualizado (mesmo formato do `GET /whatsapp/numbers/{{chave}}`), já com `username` e `username_status`:
+
+    ```json
+    {
+        "id": "9f8b7c6d-...",
+        "display_phone_number": "16315551234",
+        "username": "robbu.positus",
+        "username_status": {
+            "id": 3,
+            "code": "RESERVED"
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="403">
+    Usuário não é owner do número, sem permissão na Meta (código `10`) ou conta não elegível (código `147002`).
+
+    ```json
+    {
+        "message": "Sem permissão para gerenciar o username deste número.",
+        "meta_error": "..."
+    }
+    ```
+  </Tab>
+  <Tab title="409">
+    Username indisponível (código `147001`), Facebook Page não vinculada (`147003`) ou conta Instagram não vinculada (`147004`).
+
+    ```json
+    {
+        "message": "Este username já está em uso ou não está disponível.",
+        "meta_error": "..."
+    }
+    ```
+  </Tab>
+  <Tab title="422">
+    Formato inválido. Retornado pela validação local ou pela Meta (código `100`).
+
+    ```json
+    {
+        "message": "Formato de username inválido. Use 3-35 caracteres alfanuméricos (letras a-z, dígitos, ponto e underline), com ao menos uma letra. Não pode começar/terminar com ponto, conter ponto duplo, começar com www ou terminar com domínio (.com, .org, etc)."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+Ao definir um novo username, a Meta pode retornar o status `reserved` (username reservado, ainda não público) ou `approved`. A promoção de `reserved` para `approved` é confirmada de forma **assíncrona** pelo webhook [`business_username_update`](#webhook-business-username-update).
+</Note>
+
+## Excluir username <a href="#excluir" id="excluir"></a>
+
+`DELETE` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/username`
+
+Remove o username da linha. Após o sucesso, o estado local é atualizado (`username` volta para `null` e `username_status` passa a `deleted`).
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Retorna o número completo atualizado, agora sem username:
+
+    ```json
+    {
+        "id": "9f8b7c6d-...",
+        "display_phone_number": "16315551234",
+        "username": null,
+        "username_status": {
+            "id": 2,
+            "code": "DELETED"
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="403">
+    ```json
+    {
+        "message": "Apenas owners do número podem realizar esta ação."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Sugestões de username <a href="#sugestoes" id="sugestoes"></a>
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/username/suggestions`
+
+Retorna uma lista de usernames disponíveis sugeridos pela Meta para a sua linha. Útil quando o username desejado está indisponível.
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "suggestions": [
+            "robbu.positus",
+            "robbu_positus",
+            "positus.robbu"
+        ]
+    }
+    ```
+  </Tab>
+  <Tab title="200 (sem sugestões)">
+    ```json
+    {
+        "suggestions": []
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Tratamento de erros <a href="#erros" id="erros"></a>
+
+As rotas de alteração repassam os erros da Meta traduzidos, com o código HTTP correspondente. A resposta traz a mensagem traduzida em `message` e a mensagem original da Meta em `meta_error`.
+
+| Código Meta | HTTP | Mensagem                                                                                       |
+| ----------- | ---- | ---------------------------------------------------------------------------------------------- |
+| `10`        | 403  | Sem permissão para gerenciar o username deste número.                                           |
+| `33`        | 404  | Número não encontrado na Meta.                                                                  |
+| `100`       | 422  | Formato de username inválido.                                                                   |
+| `147001`    | 409  | Este username já está em uso ou não está disponível.                                            |
+| `147002`    | 403  | Sua conta não atende aos requisitos de messaging limit para reservar um username.              |
+| `147003`    | 409  | Vincule a Facebook Page que já usa este username ao número antes de tentar novamente.           |
+| `147004`    | 409  | Vincule a conta Instagram que já usa este username ao número antes de tentar novamente.         |
+| `133010`    | 500  | Erro ao processar a solicitação na Meta.                                                        |
+| (outros)    | 500  | Erro ao processar a solicitação na Meta.                                                        |
+
+```json
+{
+    "message": "Este username já está em uso ou não está disponível.",
+    "meta_error": "..."
+}
+```
+
+## Webhook de atualização <a href="#webhook-business-username-update" id="webhook-business-username-update"></a>
+
+Além das rotas acima (ações que você inicia), a Positus notifica o seu webhook sempre que o status do username da linha muda — inclusive por ações feitas fora da API (por exemplo, no aplicativo WhatsApp Business Manager) ou pela promoção assíncrona de `reserved` para `approved`.
+
+O evento é o `business_username_update`, entregue no objeto `number` com `display_phone_number`, `username`, `status` (`approved` / `deleted` / `reserved`), `timestamp` e `waba_id`. Para o payload completo e a tabela de campos, veja a seção [Atualização de username da linha (`business_username_update`)](/docs/positus/integracao/webhook#business-username-update) na documentação de Webhook.
+
+## Estados do username e persistência
+
+O estado do username é persistido localmente no número e refletido nas respostas da API. As rotas de consulta (leitura local) e o `GET /whatsapp/numbers/{{chave}}` sempre retornam o estado mais recente sincronizado.
+
+| `username_status.id` | `username_status.code` | Significado                                              |
+| -------------------- | ---------------------- | ------------------------------------------------------- |
+| `0`                  | `UNKNOWN`              | Nenhum username definido / estado desconhecido.         |
+| `1`                  | `APPROVED`            | Username aprovado e visível aos clientes.               |
+| `2`                  | `DELETED`             | Username removido.                                      |
+| `3`                  | `RESERVED`            | Username reservado, ainda não visível.                  |
+
+<Note>
+- A operação de **excluir** define `username = null` e `username_status = deleted`.
+- Ao **alterar** o username, o valor anterior é preservado internamente (histórico do último username).
+- A sincronização é confirmada de forma assíncrona pelo webhook `business_username_update`, garantindo consistência entre a sua ação, o estado da Meta e o estado local da Positus.
+</Note>

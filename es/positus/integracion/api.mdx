@@ -113,6 +113,82 @@ Utiliza esta ruta para enviar mensajes de texto vía WhatsApp
   </Tab>
 </Tabs>
 
+### Destinatario: teléfono (`to`) o BSUID (`recipient`) <a href="#recipient" id="recipient"></a>
+
+Todas las rutas de envío de mensajes aceptan **dos formas** de identificar al destinatario. Usa **una U otra**:
+
+| Campo       | Tipo   | Obligatoriedad                           | Descripción                                                                                                                                                     |
+| ----------- | ------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `to`        | string | Obligatorio si se omite `recipient`      | Teléfono del destinatario en formato internacional (ej.: `+5511999999999`).                                                                                    |
+| `recipient` | string | Opcional — envíe en lugar de `to`             | **BSUID** (*Business-Scoped User ID*) o **parent BSUID** del destinatario (ej.: `BR.1234567890`). Consulta [BSUID e identificadores de usuario](/es/positus/integracion/bsuid). |
+
+<Info>
+El **BSUID** es un identificador de usuario acotado al portafolio de negocios, entregado en el campo `user_id` de los webhooks. Es útil cuando el usuario adoptó un **username** y el teléfono (`wa_id`) puede no venir en el payload. Entiende el concepto en [BSUID e identificadores de usuario](/es/positus/integracion/bsuid).
+</Info>
+
+<Warning>
+**Precedencia cuando `to` y `recipient` coexisten:** si envías ambos campos en la misma solicitud, el **teléfono (`to`) prevalece** — el mensaje se entrega al teléfono. Por eso, envía **solo uno de los dos**: solo `to` (teléfono) o solo `recipient` (BSUID/parent BSUID).
+</Warning>
+
+<Note>
+Los números **on-premises** aceptan solo `to` (teléfono). El envío por `recipient` (BSUID) está disponible únicamente para números en la **Cloud API** (Meta).
+</Note>
+
+#### Request Body (envío a un BSUID)
+
+```json
+{
+  "recipient": "BR.1234567890",
+  "type": "text",
+  "text": {
+    "body": "your-message-content"
+  }
+}
+```
+
+#### Response (envío a un BSUID)
+
+La respuesta es la misma que en los demás envíos, pero el bloque `contacts` — reenviado de Meta — trae el identificador que usaste en `input`, además del teléfono (`wa_id`, cuando esté disponible) y del BSUID (`user_id`).
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "contacts": [
+            {
+                "input": "BR.1234567890",
+                "wa_id": "5511999999999",
+                "user_id": "BR.1234567890"
+            }
+        ],
+        "messages": [
+            {
+                "id": "gBGHVRGZmZmZnwIJpWDiExk7olMZ"
+            }
+        ],
+        "message": "The message was successfully sent"
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    ```json
+    {
+        "errors": [
+            {
+                "code": 131062,
+                "title": "Business-scoped User ID (BSUID) recipients are not supported for this message.",
+                "details": "Business-scoped User ID (BSUID) recipients are not supported for this message."
+            }
+        ]
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+**Casos especiales que exigen teléfono (no aceptan BSUID):** plantillas de **autenticación** de los tipos **one-tap**, **zero-tap** y **copy-code**. En esos casos, informa siempre `to` (teléfono). Si envías un BSUID donde no es compatible, Meta responde con el error `131062`.
+</Note>
+
 ## Indicador de escritura
 
 `POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/messages/typing-indicator`
@@ -178,6 +254,10 @@ Muestra el indicador "escribiendo…" para el cliente y marca como leído el men
 Utiliza esta ruta para enviar mensajes de notificación vía WhatsApp
 
 HSM - Son plantillas de mensajes preaprobadas por Facebook, pueden ser mensajes de texto, medios o archivos.
+
+<Info>
+El destinatario puede informarse por teléfono (`to`) **o** por BSUID (`recipient`), como se describe en [Destinatario: teléfono (`to`) o BSUID (`recipient`)](#recipient). **Excepción:** las plantillas de **autenticación** one-tap, zero-tap y copy-code exigen el **teléfono** (`to`) y no aceptan BSUID.
+</Info>
 
 #### Path Parameters
 
@@ -745,7 +825,7 @@ Comparte stickers. El formato del sticker tiene que ser exactamente 512x512
   </Tab>
 </Tabs>
 
-## Download Midia
+## Download Medios
 
 `GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{messages.type.id}}`
 

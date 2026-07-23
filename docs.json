@@ -157,7 +157,10 @@
                             {
                                 "group": "Integração WhatsApp API",
                                 "pages": [
+                                    "docs/positus/integracao/bsuid",
                                     "docs/positus/integracao/api",
+                                    "docs/positus/integracao/contatos",
+                                    "docs/positus/integracao/username-linha",
                                     "docs/positus/integracao/webhook",
                                     "docs/positus/integracao/exemplos-de-codigos"
                                 ]
@@ -211,7 +214,10 @@
                             {
                                 "group": "WhatsApp API Integration",
                                 "pages": [
+                                    "en/positus/integration/bsuid",
                                     "en/positus/integration/api",
+                                    "en/positus/integration/contacts",
+                                    "en/positus/integration/line-username",
                                     "en/positus/integration/webhook",
                                     "en/positus/integration/code-examples"
                                 ]
@@ -259,7 +265,10 @@
                             {
                                 "group": "Integración WhatsApp API",
                                 "pages": [
+                                    "es/positus/integracion/bsuid",
                                     "es/positus/integracion/api",
+                                    "es/positus/integracion/contactos",
+                                    "es/positus/integracion/username-linea",
                                     "es/positus/integracion/webhook",
                                     "es/positus/integracion/ejemplos-de-codigo"
                                 ]

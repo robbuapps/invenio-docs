@@ -1,0 +1,493 @@
+---
+title: Contacts API
+description: List, retrieve, create, update, block, and export WhatsApp Business API contacts by Positus, with BSUID support (user_id, parent_user_id, and username).
+---
+
+# Contacts API
+
+The **Contacts API** lets you manage the contact book of the active WhatsApp number: list, search, retrieve, create, update the nickname, block/unblock, and export contacts.
+
+With the introduction of the **BSUID** (*Business-Scoped User ID*) by Meta, each contact can now carry — in addition to the phone number (`wa_id`) — the fields `user_id` (BSUID), `parent_user_id` (parent BSUID), and `username`. This allows a contact to exist **even without a phone number** (for example, when the user has adopted a username). Learn the concept in [BSUID and user identifiers](/en/positus/integration/bsuid).
+
+<Info>
+The BSUID fields (`user_id`, `parent_user_id`, `username`) are **returned by every contact endpoint** and appear populated when available or as `null` when absent. The `wa_id` field (phone) is still returned normally for backward compatibility.
+</Info>
+
+## Authentication and base URL
+
+Every endpoint on this page uses the production base URL and **Bearer Token** authentication:
+
+`https://api.positus.global/v2`
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+| Content-Type  | string | application/json                  |
+
+<Note>
+The **list, retrieve, create, nickname, block, and unblock** endpoints operate on the session's **active WhatsApp number** (the number currently selected by the authenticated user). They do **not** take the number code (`chave`) in the path. Only the **export** endpoint takes the number UUID in the path.
+</Note>
+
+## List contacts <a href="#list-contacts" id="list-contacts"></a>
+
+`GET` `https://api.positus.global/v2/messenger/contacts`
+
+Lists the active number's contacts, paginated (40 per page), ordered by the date of the last message. Supports text search and filters.
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+
+#### Query Parameters
+
+| Name          | Type    | Description                                                                                                                                                    |
+| ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `query`       | string  | Text search. Matches (via `LIKE`) against `name`, `nickname`, `wa_id` (phone), **`user_id` (BSUID)** and **`username`**. See [Search by BSUID](#search-by-user_id-or-username). |
+| `blocked`     | boolean | If true, returns only blocked contacts; otherwise only non-blocked ones.                                                                                       |
+| `follower_id` | string  | A follower's UUID, `own` (followed by you), or `without` (no followers).                                                                                       |
+| `tag_id`      | string  | A tag UUID; filters contacts that have the tag.                                                                                                                |
+| `messages`    | string  | `unread` (with unread messages) or `read` (all read).                                                                                                          |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": [
+        {
+          "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+          "name": "Maria Silva",
+          "nickname": null,
+          "wa_id": "5511999999999",
+          "user_id": "BR.1234567890",
+          "parent_user_id": "BR.PARENT123456789",
+          "username": "maria.silva",
+          "messages": [],
+          "last_message": null,
+          "unread_messages": 0,
+          "blocked": false,
+          "followers": [],
+          "tags": [],
+          "window_allowed_until": null,
+          "created_at": "2026-07-01T12:00:00.000000Z",
+          "updated_at": "2026-07-01T12:00:00.000000Z"
+        }
+      ],
+      "links": { "first": "...", "prev": null, "next": null },
+      "meta": { "path": "...", "per_page": 40 }
+    }
+    ```
+  </Tab>
+  <Tab title="403">
+    ```json
+    {
+      "message": "This action is unauthorized."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+Returns `403` when there is no active WhatsApp number associated with the session.
+</Note>
+
+## Retrieve a contact <a href="#retrieve-contact" id="retrieve-contact"></a>
+
+`GET` `https://api.positus.global/v2/messenger/contacts/{contact}`
+
+Returns a specific contact of the active number, identified by its **UUID** (`id`).
+
+#### Path Parameters
+
+| Name      | Type   | Description                             |
+| --------- | ------ | --------------------------------------- |
+| `contact` | string | Contact UUID (`id` field from the list) |
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": {
+        "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+        "name": "Maria Silva",
+        "nickname": null,
+        "wa_id": "5511999999999",
+        "user_id": "BR.1234567890",
+        "parent_user_id": "BR.PARENT123456789",
+        "username": "maria.silva",
+        "messages": [],
+        "last_message": null,
+        "unread_messages": 0,
+        "blocked": false,
+        "followers": [],
+        "tags": [],
+        "window_allowed_until": null,
+        "created_at": "2026-07-01T12:00:00.000000Z",
+        "updated_at": "2026-07-01T12:00:00.000000Z"
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="404">
+    ```json
+    {
+      "message": "No query results for model [Contact]."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Create / update a contact <a href="#create-contact" id="create-contact"></a>
+
+`POST` `https://api.positus.global/v2/messenger/contacts`
+
+Creates a contact on the active number. If a contact with the same lookup identifier already exists, it is **updated** instead of duplicated (*update-or-create* behavior).
+
+The contact can be identified by **phone (`phone`)** OR by **BSUID (`user_id`)** — you must provide **at least one of the two**. This allows creating contacts **without a phone number**, using only the BSUID.
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+| Content-Type  | string | application/json                  |
+
+#### Request Body
+
+| Name       | Type   | Description                                                                                                              |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `name`     | string | **Required.** Contact name.                                                                                            |
+| `nickname` | string | Optional. Contact nickname.                                                                                            |
+| `phone`    | string | **Required when `user_id` is omitted.** Contact phone number.                                                          |
+| `user_id`  | string | **Required when `phone` is omitted.** Contact BSUID (e.g. `BR.1234567890`). See [BSUID](/en/positus/integration/bsuid). |
+
+<Info>
+**Lookup key (avoids duplication):**
+- If `user_id` is provided, the contact is looked up/updated by `user_id` (BSUID priority). If `phone` is also present, the phone is stored in `wa_id`.
+- If only `phone` is provided, the contact is looked up/updated by `wa_id`.
+
+The `username` is **not** used as an identification key — it is populated by Meta's webhooks.
+</Info>
+
+<Note>
+**On-premises numbers:** when creating a contact by `phone` only (no `user_id`), the API validates the number against the WhatsApp API before storing — if the number does not exist, it returns `404`. When creating by `user_id` only (no phone), this validation is skipped. On **Cloud API** numbers there is no prior validation.
+</Note>
+
+#### Request Body (traditional contact — by phone)
+
+```json
+{
+  "name": "Maria Silva",
+  "nickname": "Maria",
+  "phone": "+5511999999999"
+}
+```
+
+#### Request Body (contact by BSUID — no phone)
+
+```json
+{
+  "name": "Maria Silva",
+  "user_id": "BR.1234567890"
+}
+```
+
+#### Request Body (BSUID + phone)
+
+```json
+{
+  "name": "Maria Silva",
+  "user_id": "BR.1234567890",
+  "phone": "+5511999999999"
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": {
+        "contact": {
+          "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+          "name": "Maria Silva",
+          "nickname": "Maria",
+          "wa_id": "5511999999999",
+          "user_id": "BR.1234567890",
+          "parent_user_id": null,
+          "username": null,
+          "messages": [],
+          "last_message": null,
+          "unread_messages": 0,
+          "blocked": false,
+          "followers": [],
+          "tags": [],
+          "window_allowed_until": null,
+          "created_at": "2026-07-01T12:00:00.000000Z",
+          "updated_at": "2026-07-01T12:00:00.000000Z"
+        },
+        "recently_created": true
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="404">
+    ```json
+    {
+      "errors": {
+        "phone": [
+          "Este número de WhatsApp não existe"
+        ]
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="422">
+    ```json
+    {
+      "message": "The phone field is required when user id is not present. (and 1 more error)",
+      "errors": {
+        "phone": [
+          "The phone field is required when user id is not present."
+        ],
+        "user_id": [
+          "The user id field is required when phone is not present."
+        ]
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Info>
+The `recently_created` field indicates whether the contact was **created** now (`true`) or an existing contact was **updated** (`false`).
+</Info>
+
+## Update nickname <a href="#update-nickname" id="update-nickname"></a>
+
+`PUT` `https://api.positus.global/v2/messenger/contacts/{contact}/nickname`
+
+Updates the nickname (`nickname`) of an existing contact, identified by its UUID.
+
+#### Path Parameters
+
+| Name      | Type   | Description   |
+| --------- | ------ | ------------- |
+| `contact` | string | Contact UUID  |
+
+#### Request Body
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `nickname` | string | New contact nickname.      |
+
+```json
+{
+  "nickname": "VIP Customer"
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": {
+        "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+        "name": "Maria Silva",
+        "nickname": "VIP Customer",
+        "wa_id": "5511999999999",
+        "user_id": "BR.1234567890",
+        "parent_user_id": null,
+        "username": null,
+        "blocked": false
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Block a contact <a href="#block-contact" id="block-contact"></a>
+
+`POST` `https://api.positus.global/v2/messenger/contacts/{contact}/block`
+
+Blocks an existing contact.
+
+#### Path Parameters
+
+| Name      | Type   | Description   |
+| --------- | ------ | ------------- |
+| `contact` | string | Contact UUID  |
+
+#### Request Body
+
+| Name     | Type   | Description         |
+| -------- | ------ | ------------------- |
+| `reason` | string | Reason for blocking.|
+
+```json
+{
+  "reason": "Spam"
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": {
+        "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+        "name": "Maria Silva",
+        "wa_id": "5511999999999",
+        "user_id": "BR.1234567890",
+        "parent_user_id": null,
+        "username": null,
+        "blocked": true,
+        "block_reason": "Spam"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Unblock a contact <a href="#unblock-contact" id="unblock-contact"></a>
+
+`POST` `https://api.positus.global/v2/messenger/contacts/{contact}/unblock`
+
+Unblocks a blocked contact.
+
+#### Path Parameters
+
+| Name      | Type   | Description   |
+| --------- | ------ | ------------- |
+| `contact` | string | Contact UUID  |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+      "data": {
+        "id": "3f2a1b0c-9d8e-4f7a-a6b5-c4d3e2f1a0b9",
+        "name": "Maria Silva",
+        "wa_id": "5511999999999",
+        "user_id": "BR.1234567890",
+        "parent_user_id": null,
+        "username": null,
+        "blocked": false
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Export contacts <a href="#export-contacts" id="export-contacts"></a>
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{number}/exports/contacts`
+
+Exports all contacts of a number (identified by its **UUID** in the path) as CSV or XLSX. The file includes **dedicated columns for the BSUID fields** (`user_id`, `parent_user_id`, `username`).
+
+#### Path Parameters
+
+| Name     | Type   | Description             |
+| -------- | ------ | ----------------------- |
+| `number` | string | WhatsApp number UUID    |
+
+#### Request Body
+
+| Name        | Type   | Description                                |
+| ----------- | ------ | ------------------------------------------ |
+| `extension` | string | **Required.** File format: `csv` or `xlsx`. |
+
+```json
+{
+  "extension": "xlsx"
+}
+```
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Returns the **binary file** for download (CSV or XLSX) with the columns: `id`, `name`, `nickname`, `wa_id`, `user_id`, `parent_user_id`, `username`, `blocked`, `block_reason`, `blocked_at`, `created_at`, `updated_at`.
+  </Tab>
+  <Tab title="422">
+    ```json
+    {
+      "message": "The selected extension is invalid.",
+      "errors": {
+        "extension": [
+          "The selected extension is invalid."
+        ]
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Contact object <a href="#contact-object" id="contact-object"></a>
+
+Fields returned in the contact object (list, retrieve, and create endpoints):
+
+| Field                  | Type         | Description                                                                                     |
+| ---------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| `id`                   | string       | Contact UUID (used as the identifier in the other routes).                                       |
+| `name`                 | string       | Contact name.                                                                                   |
+| `nickname`             | string\|null | Contact nickname.                                                                               |
+| `wa_id`                | string\|null | Contact phone (WhatsApp ID). May be `null` for BSUID-only contacts.                              |
+| `user_id`              | string\|null | Contact **BSUID** (*Business-Scoped User ID*). See [BSUID](/en/positus/integration/bsuid).      |
+| `parent_user_id`       | string\|null | Contact **parent BSUID**.                                                                        |
+| `username`             | string\|null | Contact public **username** (set by the user on WhatsApp).                                       |
+| `messages`             | array        | Reserved (returned empty on this route).                                                         |
+| `last_message`         | object\|null | The contact's last message.                                                                     |
+| `unread_messages`      | integer\|null| Number of unread messages.                                                                      |
+| `blocked`              | boolean      | Whether the contact is blocked.                                                                 |
+| `block_reason`         | string       | Reason for the block (present only when `blocked` is `true`).                                    |
+| `followers`            | array        | Users following the contact.                                                                     |
+| `tags`                 | array        | Tags associated with the contact.                                                               |
+| `window_allowed_until` | string\|null | Date/time until which the 24h service window is open.                                            |
+| `created_at`           | string       | Creation date.                                                                                  |
+| `updated_at`           | string       | Update date.                                                                                    |
+| `blocked_at`           | string       | Block date (present only when `blocked` is `true`).                                              |
+
+## Search by `user_id` or `username` <a href="#search-by-user_id-or-username" id="search-by-user_id-or-username"></a>
+
+The `query` parameter of the [contact list](#list-contacts) performs a text search (via `LIKE`, partial match) over the following fields:
+
+- `name`
+- `nickname`
+- `wa_id` (phone)
+- **`user_id`** (BSUID)
+- **`username`**
+
+This lets you find **BSUID-only** contacts (without a phone) by searching for the BSUID or the username.
+
+```bash
+# Search by BSUID
+GET https://api.positus.global/v2/messenger/contacts?query=BR.1234567890
+
+# Search by username
+GET https://api.positus.global/v2/messenger/contacts?query=maria.silva
+```
+
+<Note>
+The `username` is only a **text search** criterion — it is not a unique key. Do not use `username` to uniquely identify a contact; use the `id` (UUID) or the `user_id` (BSUID).
+</Note>

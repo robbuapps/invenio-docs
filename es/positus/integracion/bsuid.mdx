@@ -1,0 +1,142 @@
+---
+title: BSUID e identificadores de usuario
+description: Entienda el BSUID (Business-Scoped User ID), el parent BSUID, el username y cómo se relacionan con el teléfono (wa_id) en los webhooks y en las solicitudes de la WhatsApp Business API.
+---
+
+# BSUID e identificadores de usuario
+
+WhatsApp está introduciendo los **usernames** (nombres de usuario públicos, en el formato `@nombre`) a lo largo de 2026. Cuando un usuario adopta un username, su **teléfono puede dejar de aparecer** en los webhooks. Para que la integración pueda seguir identificando a cada usuario sin depender del teléfono, Meta creó el **BSUID (Business-Scoped User ID)**.
+
+Esta página explica, de forma conceptual, los identificadores de usuario y las reglas que deciden cuándo aparece el teléfono. Los campos exactos en cada payload de webhook y el formato de las solicitudes están en las páginas de [Webhook](/es/positus/integracion/webhook) y [API](/es/positus/integracion/api).
+
+<Warning>
+Este es un recurso en despliegue gradual por parte de Meta. **Los formatos, campos y fechas pueden cambiar** — trate las fechas de abajo como orientación, no como un compromiso. Referencia oficial: [Business-scoped user IDs (Meta)](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids).
+</Warning>
+
+## Qué es el BSUID
+
+El **BSUID** (*Business-Scoped User ID*), entregado en el campo `user_id`, es un identificador único **por par (portafolio de negocio × usuario)**. Es decir, el mismo usuario de WhatsApp recibe un BSUID distinto para cada portafolio de negocio con el que interactúa — de ahí "scoped" (acotado) al negocio.
+
+- **Formato:** código de país [ISO 3166 alpha-2](https://www.iso.org/iso-3166-country-codes.html) (2 letras) + punto + hasta 128 caracteres alfanuméricos.
+- **Ejemplo:** `BR.1234567890`
+
+<Info>
+Al usar un BSUID en solicitudes, **use el valor completo** — código de país, punto y todos los caracteres alfanuméricos. Omitir o alterar cualquier parte hace que la solicitud falle.
+</Info>
+
+**Por qué existe:** el teléfono deja de ser un identificador universal. Con el username, el usuario puede conversar con empresas sin exponer su número. El BSUID le da a su integración una "clave" estable para reconocer al mismo usuario incluso cuando el teléfono no viene en el payload. El BSUID **siempre aparece** en los webhooks de mensajes, haya adoptado el usuario un username o no.
+
+<Note>
+Como el BSUID está acotado al portafolio, cualquier número de teléfono comercial del mismo portafolio puede enviar un mensaje a ese BSUID. Intentar usar un BSUID de otro portafolio falla.
+</Note>
+
+## Los tres identificadores
+
+Ahora coexisten tres formas de identificar al usuario en los payloads:
+
+| Identificador | Campo | Qué es | Cuándo aparece | Estabilidad |
+| --- | --- | --- | --- | --- |
+| **Teléfono** | `wa_id` (y `from`, `to`, `recipient_id`…) | Número de teléfono del usuario | Solo bajo las [condiciones de los 30 días / contact book](#regla-de-los-30-dias) | Cambia si el usuario cambia de número |
+| **BSUID** | `user_id` | Identificador acotado al portafolio | **Siempre** en los webhooks de mensajes | Estable por portafolio; se regenera si el usuario cambia de número |
+| **Username** | `profile.username` | Nombre público `@nombre` | Solo si el usuario adoptó un username | El usuario puede cambiarlo periódicamente |
+
+<Tip>
+El BSUID es el identificador más confiable para persistir de extremo a extremo: siempre está presente y no expone el teléfono. Use `username` para visualización/personalización, no como clave; el `wa_id` puede simplemente no venir.
+</Tip>
+
+## Parent BSUID
+
+Las empresas gestionadas con **varios portafolios de negocio** pueden **inscribirse** (*enroll*) en una cuenta padre (*parent BSUID account*) para compartir un identificador entre ellos. En ese caso, cada usuario recibe también un **parent BSUID**, entregado en el campo `parent_user_id`.
+
+- **Formato:** igual al BSUID, pero con `ENT` entre el código de país y el identificador.
+- **Ejemplo:** `BR.ENT.1234567890`
+
+El parent BSUID puede ser usado por **cualquier número comercial dentro del conjunto de portafolios inscritos**, mientras que el BSUID normal está acotado a un solo portafolio.
+
+<Note>
+El `parent_user_id` **solo aparece si el portafolio está inscrito** en una cuenta padre, lo que requiere una solicitud a su punto de contacto de Meta. Una vez inscrito, todo webhook que trae `user_id` pasa a traer también `parent_user_id` (y los campos relacionados `*_parent_user_id`). Puede seguir usando el BSUID normal con normalidad.
+</Note>
+
+## Username (`@nombre`)
+
+El **username** es un nombre público y opcional que el usuario de WhatsApp puede definir para aparecer en lugar del teléfono. Cuando está presente, llega en `contacts[].profile.username` (ej.: `@pablomorales`).
+
+El punto crítico: **cuando el usuario adopta un username, el teléfono (`wa_id`) puede desaparecer de los webhooks**. Su integración debe manejar este escenario sin depender del teléfono — usando el BSUID como identificador principal y el username solo para visualización.
+
+## Regla de los 30 días <a href="#regla-de-los-30-dias" id="regla-de-los-30-dias"></a>
+
+<Warning>
+**Cuándo el teléfono (`wa_id`) NO vendrá en el payload.** Si el usuario adoptó un username, el `wa_id` (y campos relacionados como `from`, `to`, `recipient_id`) **solo se incluirá** si al menos una de estas condiciones es verdadera **para ese número de teléfono comercial específico**:
+
+1. Usted **envió** un mensaje o llamada al teléfono del usuario en los últimos **30 días**; **o**
+2. Usted **recibió** un mensaje o llamada del teléfono del usuario en los últimos **30 días**; **o**
+3. El usuario está en su [contact book](#contact-book).
+
+La ventana de 30 días se evalúa **por número de teléfono comercial** — no se comparte entre números distintos del mismo portafolio. Si conversó con el usuario desde un número, los webhooks de otro número del portafolio pueden no traer el teléfono.
+</Warning>
+
+En la práctica: **no confíe en la presencia del teléfono**. Siempre que necesite identificar al usuario de forma duradera, use el `user_id` (BSUID).
+
+## Precedencia: teléfono × BSUID
+
+En las solicitudes de envío, además del campo de teléfono puede informar el BSUID. Cuando ambos coexisten, **el teléfono tiene precedencia**.
+
+- **Envío de mensajes / marketing:** el teléfono va en `to`; el nuevo campo `recipient` acepta un BSUID o parent BSUID. Si envía `to` y `recipient` juntos, `to` (teléfono) prevalece; el envío se hace al teléfono.
+- **Puede usar solo uno de los dos:** solo teléfono (informe `to`, omita `recipient`) o solo BSUID/parent BSUID (informe `recipient`, omita `to`).
+
+<Info>
+Esta página describe el comportamiento conceptual. Los ejemplos de request/response con `to`, `recipient`, `user_id` y la respuesta (`contacts[].input`, `wa_id`, `user_id`) están en la página de [API](/es/positus/integracion/api).
+</Info>
+
+## Contact book
+
+El **contact book** es un recurso de Meta (alojado por Meta, sin trabajo de integración) que almacena el teléfono y el BSUID de los usuarios con los que ha interactuado. Cuando usted **envía o recibe** un mensaje/llamada hacia o desde un teléfono, el par teléfono + BSUID se registra en el contact book.
+
+Una vez registrado, ese dato se usa para **poblar el teléfono en los webhooks** — incluso si el usuario adoptó un username. Por eso el contact book cuenta como la tercera condición de la [regla de los 30 días](#regla-de-los-30-dias).
+
+<Note>
+El contact book está acotado al **portafolio de negocio**: cualquier interacción entre cualquier número del portafolio y un usuario registra el dato. Solo se capturan las interacciones **posteriores** al lanzamiento del recurso — nada se registra retroactivamente. El recurso puede desactivarse en la configuración de Meta Business Suite; al desactivarlo se eliminan los datos ya almacenados.
+</Note>
+
+## Casos especiales
+
+No todo flujo acepta BSUID — algunos exigen el teléfono:
+
+- Las **plantillas de autenticación** de los tipos **one-tap**, **zero-tap** y **copy-code** exigen el **teléfono** del usuario; **no aceptan** BSUID.
+- **Bloqueo / Desbloqueo (Block / Unblock)** acepta BSUID, pero **no acepta parent BSUID** — usar un parent BSUID en estas solicitudes hace que la operación falle.
+- **Estado `failed`** (fallo de mensaje): el bloque `contacts` se omite por completo, y el `recipient_user_id` se omite si el mensaje fue enviado al teléfono.
+
+## Línea de tiempo (Meta)
+
+Las fechas de abajo son de Meta y **están sujetas a cambios**. Úselas solo como orientación de planificación.
+
+| Período | Evento |
+| --- | --- |
+| Mar/2026 | Toggle del **contact book** disponible en Meta Business Suite. |
+| Inicio de Abr/2026 | BSUID y parent BSUID empiezan a aparecer en los webhooks. |
+| May/2026 | Las APIs empiezan a aceptar **envíos** a BSUIDs (fecha exacta pendiente). |
+| Jun/2026 | **Usernames** liberados en países seleccionados. |
+| Ago/2026 | Despliegue **global** de usernames. |
+
+<Info>
+El despliegue de usernames por país (Jun/2026) y el despliegue global (Ago/2026) reflejan el cronograma comunicado por Meta y pueden ajustarse. Consulte siempre la [documentación oficial](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids) para el estado actual.
+</Info>
+
+## Próximos pasos
+
+<CardGroup cols={2}>
+  <Card
+    title="Webhook"
+    icon="webhook"
+    href="/es/positus/integracion/webhook"
+  >
+    Vea dónde aparecen `user_id`, `parent_user_id` y `username` en los payloads de mensajes y de estado.
+  </Card>
+  <Card
+    title="API"
+    icon="code"
+    href="/es/positus/integracion/api"
+  >
+    Cómo usar `recipient` (BSUID) en el envío e interpretar la respuesta con teléfono × BSUID.
+  </Card>
+</CardGroup>
