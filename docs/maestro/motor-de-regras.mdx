@@ -84,24 +84,24 @@ Somente contatos presentes na lista poderão receber mensagens pelos canais sele
 
 A regra é aplicada apenas nos canais explicitamente configurados — outros canais não são afetados.
 
-| Campo               | Obrigatório                            | Descrição                                                                                    |
-| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **CPF_CNPJ**        | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
-| **NUCONTRATOGESTAO**| ❌                                     | Número do contrato do cliente.                                                               |
-| **NUMERO**          | ✅ se EMAIL não estiver preenchido     | Número de telefone com DDD do cliente.                                                       |
-| **EMAIL**           | ✅ se NUMERO não estiver preenchido    | E-mail do cliente.                                                                           |
+| Campo                     | Obrigatório                            | Descrição                                                                                    |
+| ------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **CPF_CNPJ**              | ❌                                     | Documento do cliente (para validações ou relatórios).                                        |
+| **CD_CONTRATO**           | ❌                                     | Número do contrato do cliente.                                                               |
+| **CD_TELEFONE_CONTATO**   | ✅ se EMAIL não estiver preenchido     | Número de telefone com DDD do cliente.                                                       |
+| **EMAIL**                 | ✅ se CD_TELEFONE_CONTATO não estiver preenchido    | E-mail do cliente.                                                                           |
 
-> ℹ️ É possível fazer combinações misturando os campos acima. **A combinação que não pode ser feita** no mesmo contato é o **"numero" e "email".**  
+> ℹ️ É possível fazer combinações misturando os campos acima. **A combinação que não pode ser feita** no mesmo contato é o **"cd_telefone_contato" e "email".**  
 > **Exemplo Inválido**
 > ```csv
->    CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
+>    CPF_CNPJ;CD_CONTRATO;CD_TELEFONE_CONTATO;EMAIL
 > 🚫 12345678965;456;+5511981236549;cliente@dominio.com
 > ```
 
 
 **Exemplo Válido**
 ```csv
-CPF_CNPJ;NUCONTRATOGESTAO;NUMERO;EMAIL
+CPF_CNPJ;CD_CONTRATO;CD_TELEFONE_CONTATO;EMAIL
 12345678965;456;+5511981236549;
 98765432156;654;;cliente@dominio.com
 ```
