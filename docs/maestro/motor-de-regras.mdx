@@ -123,7 +123,7 @@ Contatos presentes na lista são impedidos de receber mensagens em qualquer cana
 | **EMAIL**           | ❌                                             | E-mail do cliente.                                                                           |
 | **MOTIVO**          | ❌                                             | Motivo do bloqueio.                                                                          |
 
-> ℹ️ É possível fazer combinações misturando os campos acima. **A combinação que não pode ser feita** no mesmo contato é o **"numero" e "email".**  
+> ℹ️ É possível fazer combinações misturando os campos acima.__ **A combinação que não pode ser feita** no mesmo contato é o **"numero" e "email".**  
 > **Exemplo Inválido**
 > ```csv
 >    TIPO_BLOQUEIO;CPF_CNPJ;DATA_SOLICITACAO;DATA_EXPIRACAO;NUCONTRATOGESTAO;NUMERO;EMAIL;MOTIVO
@@ -153,6 +153,13 @@ Cada contrato tem uma cota diária de mensagens. Ao atingir o limite, novos disp
 Se um contato (e-mail ou telefone) estiver vinculado a mais de um contrato:
 - O contrato que ultrapassar o limite será bloqueado.
 - O contrato dentro do limite terá o disparo processado normalmente.
+
+> ℹ️ **Campanhas agendadas consomem a cota do dia do processamento, não do dia da entrega.**
+> O contador da cota diária é incrementado quando a campanha é **processada** (logo após a criação), e não quando a mensagem é efetivamente enviada. Portanto, uma campanha criada hoje e agendada para amanhã:
+> - consome a cota **de hoje** — dia em que foi processada;
+> - **não** consome a cota de amanhã — a contagem do dia expira à meia-noite, antes de a mensagem sair.
+>
+> Ou seja, o limite diário sempre vale para o **dia do processamento**, nunca para o dia da entrega.
 
 ---
 
@@ -234,5 +241,9 @@ FAQ
     
     <Accordion title="O que ocorre se o nome do arquivo enviado via SFTP estiver fora do padrão?">
         O arquivo será rejeitado e não será processado.
+    </Accordion>
+
+    <Accordion title="Uma mensagem agendada para amanhã consome o limite diário de hoje ou de amanhã?">
+        De hoje. O contador da cota diária é incrementado no momento em que a campanha é **processada** (logo após a criação), e não quando a mensagem é enviada. Assim, uma campanha agendada para amanhã gasta a cota do dia em que foi processada e **não** afeta a cota do dia da entrega — o limite sempre vale para o dia do processamento.
     </Accordion>
 </AccordionGroup>
