@@ -1,0 +1,77 @@
+---
+title: IPs para liberación de Webhook
+description: Lista de direcciones IP de origen que los clientes deben permitir en su firewall para recibir las notificaciones de Webhook de Positus.
+---
+
+# IPs para liberación de Webhook
+
+Las notificaciones de **Webhook** de Positus se envían desde un conjunto fijo de servidores. Si la URL de tu Webhook está detrás de un **firewall**, **WAF** o lista de permitidos (*allowlist*), debes permitir las IPs de origen listadas abajo. De lo contrario, las solicitudes `HTTP POST` de Positus serán bloqueadas y **no recibirás** las notificaciones de mensajes y de estado.
+
+<Info>
+Permite estas IPs solo para **tráfico de entrada** (*inbound*) en la URL donde tu Webhook está publicado. Positus entrega las notificaciones vía **HTTPS** (puerto `443`).
+</Info>
+
+## Direcciones IP
+
+Agrega **todas** las direcciones de abajo a tu *allowlist*:
+
+```text
+137.184.200.90
+192.241.141.129
+165.22.188.195
+68.183.16.25
+147.182.180.129
+206.81.14.55
+206.81.5.32
+167.71.22.122
+162.243.169.130
+161.35.15.88
+68.183.22.69
+161.35.125.232
+147.182.210.242
+206.189.184.8
+161.35.126.30
+206.81.10.95
+147.182.209.46
+147.182.209.155
+143.198.165.68
+134.122.21.201
+137.184.17.17
+159.223.157.231
+159.223.158.80
+137.184.215.49
+137.184.215.47
+137.184.107.83
+137.184.208.37
+137.184.129.254
+137.184.137.11
+137.184.58.6
+137.184.129.41
+137.184.129.39
+137.184.129.38
+137.184.129.37
+143.198.174.197
+137.184.75.213
+137.184.75.133
+159.203.190.65
+67.207.87.222
+157.230.225.208
+157.230.230.175
+157.230.213.12
+157.230.217.115
+157.230.209.84
+137.184.60.206
+143.198.160.80
+64.227.3.44
+134.122.23.247
+165.227.80.198
+198.199.80.216
+192.241.133.32
+165.227.80.11
+67.205.173.142
+198.199.87.218
+```
+
+<Warning>
+Esta lista puede **actualizarse** a medida que nuestra infraestructura evoluciona. Consulta esta página periódicamente y mantén tu *allowlist* sincronizada para evitar interrupciones en la recepción de los Webhooks.
+</Warning>

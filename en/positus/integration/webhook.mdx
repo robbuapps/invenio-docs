@@ -30,6 +30,10 @@ Content-Type: application/json
 The `webhook` field is optional (it can be `null` to remove it) and has a maximum of 255 characters. If the Webhook URL is not set, notifications will not be delivered.
 
 <Info>
+If your Webhook URL sits behind a firewall or allowlist, allow the Positus source IPs. See [Webhook IP addresses](/en/positus/integration/webhook-ips).
+</Info>
+
+<Info>
 In addition to the main Webhook, you can configure a **secondary webhook** (`secondary_webhook`). When set, it receives the same notifications as the main Webhook.
 </Info>
 
