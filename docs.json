@@ -162,6 +162,7 @@
                                     "docs/positus/integracao/contatos",
                                     "docs/positus/integracao/username-linha",
                                     "docs/positus/integracao/webhook",
+                                    "docs/positus/integracao/ips-webhook",
                                     "docs/positus/integracao/exemplos-de-codigos"
                                 ]
                             },
@@ -252,6 +253,7 @@
                                     "en/positus/integration/contacts",
                                     "en/positus/integration/line-username",
                                     "en/positus/integration/webhook",
+                                    "en/positus/integration/webhook-ips",
                                     "en/positus/integration/code-examples"
                                 ]
                             },
@@ -336,6 +338,7 @@
                                     "es/positus/integracion/contactos",
                                     "es/positus/integracion/username-linea",
                                     "es/positus/integracion/webhook",
+                                    "es/positus/integracion/ips-webhook",
                                     "es/positus/integracion/ejemplos-de-codigo"
                                 ]
                             },
