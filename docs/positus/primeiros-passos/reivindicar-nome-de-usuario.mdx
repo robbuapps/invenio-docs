@@ -1,0 +1,96 @@
+---
+title: Reivindicando o nome de usuário
+description: Passo a passo para reivindicar o nome de usuário (@) dos seus números de WhatsApp Business API pelo Gerenciador do WhatsApp.
+---
+
+# Reivindicando o nome de usuário
+
+O **nome de usuário** é o `@nome` público da sua linha oficial de WhatsApp Business. Ele é um novo jeito para os clientes entrarem em contato com você **sem precisar do seu número de telefone** — o número continua sendo exibido no perfil normalmente.
+
+Este guia mostra como reivindicar o nome de usuário diretamente no **Gerenciador do WhatsApp**, usando a conta de administrador do seu portfólio empresarial (Business Manager) na Meta.
+
+<Info>
+A mesma operação pode ser feita pela **API da Positus**, incluindo consulta, alteração, exclusão e sugestões de username. Veja [Username da linha oficial](/docs/positus/integracao/username-linha).
+</Info>
+
+## Pré-requisitos
+
+- Acesso à conta do Facebook com um **usuário administrador da BM** (portfólio empresarial no Meta).
+- O número de WhatsApp Business API já ativo dentro da conta de WhatsApp (WABA).
+
+## Passo a passo
+
+<Steps>
+  <Step title="Acessar o portfólio empresarial">
+    Entre no Facebook com o usuário **administrador da BM** (portfólio empresarial no Meta).
+  </Step>
+
+  <Step title="Abrir o menu Contas de WhatsApp">
+    Acesse o menu **CONTAS DE WHATSAPP** por este link: [business.facebook.com/latest/settings/whatsapp_account](https://business.facebook.com/latest/settings/whatsapp_account)
+  </Step>
+
+  <Step title="Abrir o Gerenciador do WhatsApp">
+    Clique na conta de WhatsApp onde está o número e depois em **GERENCIADOR DO WHATSAPP**.
+
+    <Frame caption="Botão Gerenciador do WhatsApp na tela da conta de WhatsApp">
+      <img src="/images/positus/primeiros-passos/gerenciador-do-whatsapp.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Criar o nome de usuário">
+    Clique no número desejado, abra a aba **PERFIL** e, em **Nome de usuário**, clique em **CRIAR**.
+
+    <Frame caption="Aba Perfil do número com a opção Criar em Nome de usuário">
+      <img src="/images/positus/primeiros-passos/nome-de-usuario-perfil-criar.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Preencher e salvar">
+    Preencha o nome desejado e clique em **SALVAR**. A Meta também exibe **sugestões** de nomes disponíveis.
+
+    <Frame caption="Janela de criação do nome de usuário com sugestões e botão Salvar">
+      <img src="/images/positus/primeiros-passos/nome-de-usuario-modal-salvar.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Observações importantes
+
+<Warning>
+- Cada número pode ter **apenas um** nome de usuário.
+- **Não é possível** ter mais de um número com o mesmo nome de usuário.
+</Warning>
+
+## Formato do nome de usuário <a href="#formato" id="formato"></a>
+
+Os nomes de usuário comerciais devem seguir o formato abaixo:
+
+- Podem conter apenas letras do alfabeto inglês (`a-z`), dígitos (`0-9`), ponto (`.`) e caractere de sublinhado (`_`);
+- Caracteres que não são letras do alfabeto inglês (como `ñ`, `é`, `ü`) não são compatíveis e causarão falhas na solicitação;
+- Devem ter entre **3 e 35 caracteres**;
+- Devem conter pelo menos uma letra do alfabeto inglês (`a-z`, `A-Z`);
+- Não podem começar nem terminar com ponto, nem ter dois pontos consecutivos (`..`);
+- Não podem começar com `www`;
+- Não podem terminar com um domínio (por exemplo `.com`, `.org`, `.net`, `.int`, `.edu`, `.gov`, `.mil`, `.us`, `.in`, `.html` e assim por diante);
+- A diferença entre maiúsculas e minúsculas é ignorada ao comparar nomes de usuário.
+
+## Depois de salvar
+
+A propagação do nome de usuário é **assíncrona**. A Meta pode primeiro **reservar** (`reserved`) o nome e só depois promovê-lo para **aprovado** (`approved`), quando ele passa a ficar visível aos clientes no WhatsApp.
+
+<Tip>
+A Positus notifica o seu webhook a cada mudança de status do nome de usuário — inclusive quando a alteração é feita pelo Gerenciador do WhatsApp, como neste guia. O evento é o `business_username_update`; veja [Atualização de username da linha](/docs/positus/integracao/webhook#business-username-update).
+</Tip>
+
+## Problemas comuns
+
+| Situação | O que fazer |
+| --- | --- |
+| O nome de usuário já está em uso ou indisponível | Escolha outro nome ou use uma das sugestões exibidas pela Meta. |
+| A conta não atende aos requisitos de limite de mensagens (messaging limit) | Aumente o limite de mensagens do número antes de reservar um nome de usuário. |
+| Já existe uma Página do Facebook ou conta do Instagram usando esse nome | Vincule a Página ou a conta do Instagram ao número antes de tentar novamente. |
+| A solicitação falha por formato inválido | Revise as regras da seção [Formato do nome de usuário](#formato). |
+
+<Info>
+A lista completa de códigos de erro retornados pela Meta está em [Username da linha oficial — Tratamento de erros](/docs/positus/integracao/username-linha#erros).
+</Info>

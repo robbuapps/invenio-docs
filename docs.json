@@ -151,7 +151,8 @@
                                 "group": "Primeiros Passos",
                                 "pages": [
                                     "docs/positus/primeiros-passos/como-comecar",
-                                    "docs/positus/primeiros-passos/criando-business-facebook"
+                                    "docs/positus/primeiros-passos/criando-business-facebook",
+                                    "docs/positus/primeiros-passos/reivindicar-nome-de-usuario"
                                 ]
                             },
                             {
@@ -242,7 +243,8 @@
                                 "group": "Getting Started",
                                 "pages": [
                                     "en/positus/getting-started/how-to-start",
-                                    "en/positus/getting-started/creating-facebook-business"
+                                    "en/positus/getting-started/creating-facebook-business",
+                                    "en/positus/getting-started/claiming-username"
                                 ]
                             },
                             {
@@ -327,7 +329,8 @@
                                 "group": "Primeros Pasos",
                                 "pages": [
                                     "es/positus/primeros-pasos/como-empezar",
-                                    "es/positus/primeros-pasos/crear-business-facebook"
+                                    "es/positus/primeros-pasos/crear-business-facebook",
+                                    "es/positus/primeros-pasos/reivindicar-nombre-de-usuario"
                                 ]
                             },
                             {
