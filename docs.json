@@ -160,6 +160,7 @@
                                 "pages": [
                                     "docs/positus/integracao/bsuid",
                                     "docs/positus/integracao/api",
+                                    "docs/positus/integracao/numero-e-perfil",
                                     "docs/positus/integracao/contatos",
                                     "docs/positus/integracao/username-linha",
                                     "docs/positus/integracao/webhook",
@@ -252,6 +253,7 @@
                                 "pages": [
                                     "en/positus/integration/bsuid",
                                     "en/positus/integration/api",
+                                    "en/positus/integration/number-and-profile",
                                     "en/positus/integration/contacts",
                                     "en/positus/integration/line-username",
                                     "en/positus/integration/webhook",
@@ -338,6 +340,7 @@
                                 "pages": [
                                     "es/positus/integracion/bsuid",
                                     "es/positus/integracion/api",
+                                    "es/positus/integracion/numero-y-perfil",
                                     "es/positus/integracion/contactos",
                                     "es/positus/integracion/username-linea",
                                     "es/positus/integracion/webhook",

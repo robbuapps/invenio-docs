@@ -1,0 +1,401 @@
+---
+title: Number and business profile
+description: Retrieve your WhatsApp Business number data and update the business profile (about, address, description, email, vertical, websites, and avatar) that the customer sees on WhatsApp.
+---
+
+# Number and business profile
+
+The **business profile** is the set of information the customer sees when opening your official line on WhatsApp: the picture (avatar), the **About** text, the company description, the address, the email, the business vertical, and the websites. Keeping this data correct increases customer trust and reduces blocks caused by an incomplete profile.
+
+These routes let you **retrieve** the complete number, **update** the business profile fields, and **replace the avatar** of the line, forwarding the operation to Meta (WhatsApp Cloud API).
+
+<Info>
+The public `@name` of the line is managed by its own routes. See [Line username](/en/positus/integration/line-username).
+
+For sending messages and downloading media, see [API](/en/positus/integration/api).
+</Info>
+
+## Authentication and base URL
+
+All routes use the same base URL and the same authentication scheme as the other Positus API routes.
+
+`https://api.positus.global/v2`
+
+#### Path Parameters
+
+| Name  | Type   | Description                     |
+| ----- | ------ | ------------------------------- |
+| Chave | string | Unique code per WhatsApp number |
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+| Content-Type  | string | application/json                  |
+
+<Info>
+**Production Token:** Your token is generated and provided by Positus and grants access to all of your WhatsApp Business API numbers.
+</Info>
+
+<Note>
+The number provided in `{{chave}}` must be **active** and linked to your user. Otherwise the response is **404**.
+
+The **change** routes (update profile and update avatar) also require the authenticated user to be an **owner** of the number. A user without this permission receives **403**. The **retrieve** route does not require ownership.
+</Note>
+
+## Retrieve number <a href="#retrieve" id="retrieve"></a>
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}`
+
+Returns the complete number data: operational status, quality, messaging limit, username, webhook, linked users, and every business profile field.
+
+<Note>
+Before responding, Positus **synchronizes the profile directly from the provider** (Meta or the on-premises server). If that read fails, the response returns the last known state stored at Positus, without an error.
+</Note>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "data": {
+            "id": "9f8b7c6d-1e2f-4a3b-8c9d-0e1f2a3b4c5d",
+            "status": {
+                "id": 7,
+                "description": "Número ativo"
+            },
+            "server_timeout": false,
+            "quality_status": {
+                "id": 1,
+                "code": "CONNECTED"
+            },
+            "quality_rating": {
+                "id": 1,
+                "code": "GREEN"
+            },
+            "messaging_limit": {
+                "id": 1,
+                "amount": 1000,
+                "formatted_amount": "1.000"
+            },
+            "official_business_account": false,
+            "global_search": {
+                "id": 1,
+                "code": "ELIGIBLE",
+                "description": "Search visibility can be enabled"
+            },
+            "global_search_enabled": false,
+            "type": {
+                "id": 1,
+                "name": "Default"
+            },
+            "messenger": null,
+            "namespace": null,
+            "business_id": "1234567890",
+            "name": "Your Company",
+            "tag": "Support",
+            "country_code": "55",
+            "number": "11999999999",
+            "display_phone_number": "5511999999999",
+            "username": "your.company",
+            "username_status": {
+                "id": 1,
+                "code": "APPROVED"
+            },
+            "webhook": "https://your-application.com/webhook",
+            "address": "Av. Paulista, 1000, São Paulo, SP",
+            "about": "Support from Monday to Friday, 9am to 6pm.",
+            "description": "Omnichannel communication platform.",
+            "email": "contact@yourcompany.com",
+            "avatar": {
+                "mime_type": "image/png",
+                "original_name": "logo.png",
+                "name": "3f2c9a1b-....png",
+                "url": "https://storage.positus.global/number-avatars/...",
+                "size": "245 KB"
+            },
+            "owners": [
+                {
+                    "data": {
+                        "id": "1a2b3c4d-....",
+                        "first_name": "Maria",
+                        "last_name": "Silva",
+                        "full_name": "Maria Silva",
+                        "email": "maria@yourcompany.com",
+                        "role": "owner"
+                    },
+                    "created_at": "2026-01-10T12:00:00.000000Z",
+                    "updated_at": "2026-01-10T12:00:00.000000Z"
+                }
+            ],
+            "users": [],
+            "vertical": {
+                "id": 13,
+                "description": "Professional Services"
+            },
+            "websites": [
+                "https://yourcompany.com"
+            ],
+            "activated_at": "2026-01-10T12:00:00.000000Z",
+            "created_at": "2026-01-05T09:30:00.000000Z",
+            "updated_at": "2026-08-20T18:45:12.000000Z"
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="404">
+    Number does not exist, is inactive, or is not linked to your user.
+
+    ```json
+    {
+        "message": "No resources were found."
+    }
+    ```
+  </Tab>
+</Tabs>
+
+#### Business profile fields in the response
+
+| Field         | Type           | Description                                                                                    |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------------ |
+| `about`       | string \| null | **About** text displayed on the line profile.                                                      |
+| `address`     | string \| null | Company address.                                                                                   |
+| `description` | string \| null | Company description.                                                                               |
+| `email`       | string \| null | Contact email displayed on the profile.                                                            |
+| `vertical`    | object         | Business vertical in the `{ id, description }` format. See the [verticals table](#verticals).      |
+| `websites`    | array          | List of company websites (empty array when no website is registered).                              |
+| `avatar`      | object \| null | Profile picture of the line with `mime_type`, `original_name`, `name`, `url`, and `size`.          |
+
+<Warning>
+On **retrieve**, the `vertical` field is an **object** (`{ id, description }`). On **update**, it is sent as an **integer** (the `id` only). See the next section.
+</Warning>
+
+## Update business profile <a href="#update" id="update"></a>
+
+`PUT` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}`
+
+Updates the business profile fields of the line. Only the fields below are considered: any other field sent in the body is ignored.
+
+#### Request Body
+
+| Name        | Type    | Description                                                                                              |
+| ----------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| about       | string  | **Required.** **About** text of the line. Maximum of 139 characters.                                         |
+| vertical    | integer | **Required.** Business vertical ID. See the [verticals table](#verticals).                                   |
+| address     | string  | Optional. Company address. Maximum of 255 characters. Accepts `null`.                                        |
+| description | string  | Optional. Company description. Maximum of 512 characters. Accepts `null`.                                    |
+| email       | string  | Optional. Valid contact email. Maximum of 128 characters. Accepts `null`.                                    |
+| websites    | array   | Optional. List of valid URLs, each with a maximum of 255 characters.                                         |
+
+```json
+{
+  "about": "Support from Monday to Friday, 9am to 6pm.",
+  "vertical": 13,
+  "address": "Av. Paulista, 1000, São Paulo, SP",
+  "description": "Omnichannel communication platform.",
+  "email": "contact@yourcompany.com",
+  "websites": [
+    "https://yourcompany.com",
+    "https://blog.yourcompany.com"
+  ]
+}
+```
+
+<Info>
+`about` and `vertical` are **required in every request**. Since the `PUT` replaces the profile, always send the current value of the fields you do not want to change (retrieve the number first with the `GET` above).
+</Info>
+
+#### Business verticals (`vertical` field) <a href="#verticals" id="verticals"></a>
+
+The `vertical` field is an **integer**. Send only the `id` from the table below. Any value outside this list is rejected with **422**.
+
+| ID | Meta code       | Vertical                    |
+| -- | --------------- | --------------------------- |
+| 1  | `AUTO`          | Automotive                  |
+| 2  | `BEAUTY`        | Beauty, Spa and Salon       |
+| 3  | `APPAREL`       | Clothing and Apparel        |
+| 4  | `EDU`           | Education                   |
+| 5  | `ENTERTAIN`     | Entertainment               |
+| 6  | `EVENT_PLAN`    | Event Planning and Service  |
+| 7  | `FINANCE`       | Finance and Banking         |
+| 8  | `GROCERY`       | Food and Grocery            |
+| 9  | `GOVT`          | Public Service              |
+| 10 | `HOTEL`         | Hotel and Lodging           |
+| 11 | `HEALTH`        | Medical and Health          |
+| 12 | `NONPROFIT`     | Non-profit                  |
+| 13 | `PROF_SERVICES` | Professional Services       |
+| 14 | `RETAIL`        | Shopping and Retail         |
+| 15 | `TRAVEL`        | Travel and Transportation   |
+| 16 | `RESTAURANT`    | Restaurant                  |
+| 17 | `OTHER`         | Other                       |
+
+<Note>
+ID `0` (`UNDEFINED`) exists only as the internal state of a number without a defined vertical and is **not accepted** on update.
+</Note>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Returns the updated complete number (same format as `GET /whatsapp/numbers/{{chave}}`):
+
+    ```json
+    {
+        "data": {
+            "id": "9f8b7c6d-1e2f-4a3b-8c9d-0e1f2a3b4c5d",
+            "display_phone_number": "5511999999999",
+            "about": "Support from Monday to Friday, 9am to 6pm.",
+            "address": "Av. Paulista, 1000, São Paulo, SP",
+            "description": "Omnichannel communication platform.",
+            "email": "contact@yourcompany.com",
+            "vertical": {
+                "id": 13,
+                "description": "Professional Services"
+            },
+            "websites": [
+                "https://yourcompany.com",
+                "https://blog.yourcompany.com"
+            ]
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="403">
+    The authenticated user is not an owner of the number.
+
+    ```json
+    {
+        "message": "Only number owners can perform this action."
+    }
+    ```
+  </Tab>
+  <Tab title="422">
+    Validation failure (missing required field, length exceeded, invalid email, invalid URL, or `vertical` outside the list).
+
+    ```json
+    {
+        "message": "The given data was invalid, verify the given data and try again.",
+        "errors": {
+            "vertical": [
+                "The selected Segmento is invalid."
+            ]
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Update avatar <a href="#avatar" id="avatar"></a>
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/avatar`
+
+Replaces the profile picture of the line. The request is **multipart/form-data**, with the file in the `avatar` field.
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+| Content-Type  | string | multipart/form-data               |
+
+#### Request Body
+
+| Name   | Type | Description                                                                                     |
+| ------ | ---- | ------------------------------------------------------------------------------------------------- |
+| avatar | file | **Required.** JPEG or PNG image, at least 640x640 pixels and at most 4.5 MB (4500 KB).              |
+
+| Requirement      | Value                                  |
+| ---------------- | -------------------------------------- |
+| Formats          | `image/jpeg`, `image/jpg`, `image/png` |
+| Minimum size     | 640 x 640 pixels                       |
+| Maximum file size| 4500 KB (approximately 4.5 MB)         |
+
+```bash
+curl -X POST "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/avatar" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "avatar=@/path/to/logo.png"
+```
+
+<Info>
+WhatsApp crops the profile picture into a circle. Use a square image to avoid cutting parts of your logo.
+</Info>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    Returns the complete number, already with the new `avatar`:
+
+    ```json
+    {
+        "data": {
+            "id": "9f8b7c6d-1e2f-4a3b-8c9d-0e1f2a3b4c5d",
+            "display_phone_number": "5511999999999",
+            "avatar": {
+                "mime_type": "image/png",
+                "original_name": "logo.png",
+                "name": "3f2c9a1b-....png",
+                "url": "https://storage.positus.global/number-avatars/...",
+                "size": "245 KB"
+            }
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="403">
+    The authenticated user is not an owner of the number.
+
+    ```json
+    {
+        "message": "Only number owners can perform this action."
+    }
+    ```
+  </Tab>
+  <Tab title="422">
+    Missing file, unsupported format, dimensions below 640x640, or file size above 4.5 MB.
+
+    ```json
+    {
+        "message": "The given data was invalid, verify the given data and try again.",
+        "errors": {
+            "avatar": [
+                "The minimum image size must be 640x640 pixels."
+            ]
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Warning>
+The avatar change is only completed if Meta accepts the new image. If Meta rejects the upload, the response is still **200** with the complete number, but the `avatar` field keeps showing the previous image. Check `avatar.url` in the response to confirm that the change was applied.
+</Warning>
+
+## Propagation to Meta and webhook <a href="#propagation" id="propagation"></a>
+
+The profile update is stored at Positus and sent to Meta **in the background**. The `about` field and the remaining fields (`address`, `description`, `email`, `vertical`, `websites`) are propagated by separate processes, so the update may appear on WhatsApp a few moments after the API returns **200**.
+
+Whenever any profile field changes (including the avatar), Positus notifies your webhook with the `phone_number_profile_update` event, carrying the `number` object and the `changes` object with the before and after values:
+
+```json
+{
+    "event": "phone_number_profile_update",
+    "number": {
+        "id": "9f8b7c6d-1e2f-4a3b-8c9d-0e1f2a3b4c5d",
+        "name": "Your Company",
+        "display_phone_number": "5511999999999"
+    },
+    "changes": {
+        "about": {
+            "before": "24/7 support.",
+            "after": "Support from Monday to Friday, 9am to 6pm."
+        }
+    }
+}
+```
+
+<Note>
+The same event is also triggered when the profile is changed outside the API (for example, through the Positus panel). To configure the receiving URL and see the other events, check [Webhook](/en/positus/integration/webhook).
+</Note>

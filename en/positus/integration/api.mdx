@@ -825,6 +825,185 @@ Share stickers. The sticker format must be exactly 512x512
   </Tab>
 </Tabs>
 
+## Upload Media <a href="#upload-media" id="upload-media"></a>
+
+`POST` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/send-media`
+
+Uploads a file to Meta and returns the **media ID**. Use this ID in the `id` field of media messages (`image`, `document`, `video`, `audio`, `sticker`) when you do not want to expose a public URL in the `link` field.
+
+#### Path Parameters
+
+| Name  | Type   | Description                     |
+| ----- | ------ | ------------------------------- |
+| Chave | string | Unique code per WhatsApp number |
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+| Content-Type  | string | multipart/form-data               |
+
+#### Request Body
+
+The request is **multipart/form-data**, with the file in the `media` field.
+
+| Name  | Type | Description                                                                    |
+| ----- | ---- | -------------------------------------------------------------------------------- |
+| media | file | **Required.** File to upload. Maximum size of 16000 KB (approximately 16 MB).      |
+
+```bash
+curl -X POST "https://api.positus.global/v2/whatsapp/numbers/{{chave}}/send-media" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "media=@/path/to/file.pdf"
+```
+
+<Info>
+Positus validates only the file size. The **accepted types** are defined by Meta according to the message type you intend to send (for example, `image/jpeg`, `image/png`, `application/pdf`, `video/mp4`, `audio/ogg`). A file of an unsupported type is refused by Meta and returns **422**.
+</Info>
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    The `id` field is the media ID at Meta, ready to be used when sending messages.
+
+    ```json
+    {
+        "id": "1234567890123456"
+    }
+    ```
+  </Tab>
+  <Tab title="422">
+    Meta refused the upload. The `error` object is forwarded exactly as returned by Meta.
+
+    ```json
+    {
+        "error": {
+            "message": "(#100) Invalid parameter",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "..."
+        }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+Example of sending a message using the returned `id`:
+
+```json
+{
+  "to": "+5511999999999",
+  "type": "document",
+  "document": {
+    "id": "1234567890123456",
+    "filename": "contract.pdf"
+  }
+}
+```
+
+<Warning>
+The media ID is **temporary** at Meta. Upload the file and send the message right after, without storing the ID for long periods.
+</Warning>
+
+## Get Media by ID <a href="#get-media-by-id" id="get-media-by-id"></a>
+
+`GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media-by-id/{{messages.type.id}}`
+
+Returns the **media metadata as JSON**, including a Positus URL to download the file.
+
+<Info>
+**Difference from [Download Media](#download-media):**
+
+- `GET /media/{{id}}` returns the **binary content** of the file, with the matching `Content-Type`.
+- `GET /media-by-id/{{id}}` returns a **JSON** with `id`, `url`, `mime_type`, `sha256`, `size`, and `messaging_product`. Use this route when you prefer to receive a link to download the file later instead of receiving the bytes in the response itself.
+</Info>
+
+#### Path Parameters
+
+| Name  | Type   | Description                                                                          |
+| ----- | ------ | ---------------------------------------------------------------------------------------- |
+| Chave | string | Unique code per WhatsApp number                                                            |
+| id    | string | Media ID at Meta (received in the webhook or returned by [Upload Media](#upload-media))    |
+
+#### Headers
+
+| Name          | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| Authorization | string | Authentication using Bearer Token |
+
+#### Response
+
+<Tabs>
+  <Tab title="200">
+    ```json
+    {
+        "id": "1234567890123456",
+        "url": "https://storage.positus.global/messenger/...",
+        "mime_type": "image/jpeg",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb924...",
+        "size": 245678,
+        "messaging_product": "whatsapp"
+    }
+    ```
+  </Tab>
+  <Tab title="404">
+    Media not found or already expired at Meta. The body is the error returned by Meta.
+
+    ```json
+    {
+        "error": {
+            "message": "Unsupported get request. Object with ID '1234567890123456' does not exist",
+            "type": "GraphMethodException",
+            "code": 100,
+            "fbtrace_id": "..."
+        }
+    }
+    ```
+  </Tab>
+  <Tab title="429">
+    Request limit reached at Meta. The response includes the `Retry-After` header (in seconds) indicating when to try again.
+
+    ```json
+    {
+        "message": "..."
+    }
+    ```
+  </Tab>
+  <Tab title="500">
+    The media was found at Meta, but downloading the file failed. The body carries the metadata returned by Meta.
+
+    ```json
+    {
+        "id": "1234567890123456",
+        "url": "https://lookaside.fbsbx.com/...",
+        "mime_type": "image/jpeg",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb924...",
+        "file_size": 245678,
+        "messaging_product": "whatsapp"
+    }
+    ```
+  </Tab>
+</Tabs>
+
+| Field               | Type           | Description                                                                          |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------- |
+| `id`                | string         | Media ID at Meta.                                                                          |
+| `url`               | string         | Positus URL to download the file.                                                          |
+| `mime_type`         | string         | File type (for example, `image/jpeg`, `application/pdf`).                                  |
+| `sha256`            | string \| null | Hash informed by Meta. Comes as `null` when the media was already stored at Positus.       |
+| `size`              | integer        | File size in bytes.                                                                        |
+| `messaging_product` | string         | Always `whatsapp`.                                                                         |
+
+<Note>
+If the media has already been downloaded before, Positus responds straight from its own storage, without calling Meta. In that case the `sha256` field comes as `null`. Otherwise, Positus fetches the media from Meta, stores the file, and returns the complete metadata.
+</Note>
+
+<Warning>
+The media ID at Meta is **ephemeral** and each query consumes the application request quota. Download and keep the file in your application instead of querying the same ID repeatedly. When Meta responds **429**, respect the `Retry-After` header before trying again.
+</Warning>
+
 ## Download Media
 
 `GET` `https://api.positus.global/v2/whatsapp/numbers/{{chave}}/media/{{messages.type.id}}`
