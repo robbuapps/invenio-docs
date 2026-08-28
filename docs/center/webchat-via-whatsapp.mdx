@@ -1,0 +1,102 @@
+---
+title: "Webchat via WhatsApp — Configuração e Fluxo"
+sidebarTitle: "Webchat via WhatsApp"
+description: "Envie um convite para o contato continuar o atendimento do WhatsApp em uma página web, com verificação por código e suporte a texto, botões, listas e links."
+---
+
+O **Webchat via WhatsApp** é uma forma de dar continuidade a um atendimento iniciado no WhatsApp dentro de uma página web, através de um botão enviado pelo próprio fluxo do bot. Diferente do Webchat tradicional do Invenio Center (widget embutido no site do cliente), esse canal nasce dentro de uma conversa de WhatsApp já em andamento.
+
+## Objetivo
+
+A Meta alterou o modelo de cobrança de mensagens do WhatsApp Business Platform, passando a cobrar por mensagem de resposta enviada dentro da janela de atendimento com o contato. Na prática, isso significa que quanto mais mensagens de resposta o bot ou o atendente enviam pelo WhatsApp para dar continuidade a um atendimento, maior o custo por conversa.
+
+O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato para a página web assim que o atendimento avança, as mensagens seguintes deixam de trafegar pelo WhatsApp e passam a acontecer dentro do Webchat — sem custo por mensagem de resposta. O WhatsApp continua sendo usado apenas para iniciar a conversa e enviar o convite de troca de canal.
+
+**Recursos principais:**
+
+- 🔀 **Troca de canal sob demanda** via ação no fluxo do IDR, sem precisar de widget instalado no site
+- 🔒 **Verificação por código** de 4 dígitos, com limite de tentativas (5 por sessão, bloqueio de 30 min) e expiração (24h)
+- 💬 **Múltiplos tipos de mensagem**: texto, botões de resposta rápida, listas de opções e links
+- 📎 **Anexos** (imagem, PDF, áudio) — <em>em desenvolvimento</em>
+
+## Acessar Configurações
+
+<Steps>
+  <Step title="Adicionar a ação no fluxo">
+    No **IDR Studio**, no fluxo desejado, adicione a ação **"Enviar botão para continuar no Webchat"**.
+
+    <Tip>
+      Essa ação está disponível na lista de ações do fluxo, dentro do IDR Studio.
+    </Tip>
+
+    Campos da ação:
+
+    - **Texto da mensagem** — texto exibido acima do botão no WhatsApp
+    - **Texto do botão** (máx. 20 caracteres)
+    - **Cabeçalho** e **Rodapé** (opcionais)
+    - **Exigir código de verificação para abrir o Webchat** — recomendado manter em "Sim"
+    - **Avisar que o contato pode continuar pelo WhatsApp** — oferece alternativa de não trocar de canal
+
+    <Frame caption="Tela de configuração da ação no IDR Studio">
+      <img src="/images/webchat-whatsapp/acao-idr.jpg" />
+    </Frame>
+  </Step>
+  <Step title="O que o contato recebe">
+    Uma mensagem no WhatsApp com o texto configurado, o código de verificação (se ativado) e o botão de continuar.
+
+    <Frame caption="Mensagem recebida no WhatsApp do contato">
+      <img src="/images/webchat-whatsapp/mensagem-whatsapp.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Domínio da Conversa
+
+A conversa aberta pelo contato acontece no domínio `webchat.invenio.robbu.com`, no formato `https://webchat.invenio.robbu.com/c/{id-da-conversa}`. É esse o link enviado no botão "Começar!" da mensagem do WhatsApp.
+
+## Fluxo
+
+### Verificação
+
+O contato recebe um código de 4 dígitos por WhatsApp e precisa confirmá-lo na página do Webchat antes de a conversa ser liberada.
+
+- **Limite de 5 tentativas erradas** por sessão
+- **Bloqueio de 30 minutos** ao atingir o limite, com reinício automático do contador depois
+- **Código expira em 24 horas**
+
+### Sessão do usuário
+
+A sessão permanece ativa mesmo se a página for recarregada — não é necessário reinserir o código de verificação.
+
+<Frame caption="Conversa sendo retomada automaticamente ao recarregar a página">
+  <img src="/images/webchat-whatsapp/retomando-sessao.jpg" />
+</Frame>
+
+## Segurança
+
+O acesso à conversa é protegido por um código de verificação de uso único, enviado via WhatsApp junto com o botão de troca de canal. Após a confirmação, um token de sessão válido por 24 horas libera o acesso à conversa.
+
+## Localizando o Contato no Invenio Center
+
+Cada conversa de Webchat gera um contato no Invenio Center, que pode ser localizado em **Contatos**.
+
+Use os filtros disponíveis para encontrar o contato desejado:
+
+- **Nome**, **E-mail** ou **CPF**
+- **Código** ou **Protocolo** do atendimento
+- **Telefone**
+- **Tags**, **Segmento específico** e **Responsável**
+
+<Frame caption="Filtros de busca de contatos, com resultado de uma pesquisa por nome">
+  <img src="/images/webchat-whatsapp/filtro-contatos.jpg" />
+</Frame>
+
+<Tip>
+  O identificador do contato criado é o mesmo identificador da conversa do Webchat (o trecho final da URL `webchat.invenio.robbu.com/c/{id}`) — útil para cruzar referências entre o painel de contatos e a conversa em si.
+</Tip>
+
+Ao abrir o contato, a tela de **Detalhes do contato** mostra nome, protocolo, responsável, prioridade, segmentos vinculados e demais dados cadastrais.
+
+<Frame caption="Tela de detalhes do contato">
+  <img src="/images/webchat-whatsapp/detalhes-contato.jpg" />
+</Frame>
