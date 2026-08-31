@@ -168,6 +168,8 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
 | `ContactMainWhatsAppPhoneNumber` | Número WhatsApp principal | `Long` |
 | `ContactMainSmsCountryCode` | Código do país (SMS) | `Int` |
 | `ContactMainSmsPhoneNumber` | Número SMS principal | `Long` |
+| `ContactWhatsAppBsuid` | Identificador do contato gerado pela Meta | `String` |
+| `ContactWhatsAppBusinessManagementId` | Portfólio de negócios a que o identificador pertence | `String` |
 | `QueueWaitingSince` | Início da espera na fila | `Datetime` |
 | `QueueFirstAnswerAt` | Primeira resposta ao contato | `Datetime` |
 | `ContactLastWalletCode` | Código do último segmento | `String` |
@@ -179,6 +181,7 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
 | `DigitalPostman` | Envio via Carteiro Digital | `Bool` |
 | `LocationLatitude` | Latitude de localização | `Double` |
 | `LocationLongitude` | Longitude de localização | `Double` |
+| `FileId` | ID do arquivo | `Long` |
 | `FileUrl` | URL do arquivo | `String` |
 | `FileName` | Nome do arquivo | `String` |
 | `FileExtension` | Extensão do arquivo | `String` |
@@ -192,6 +195,12 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
 
 **Enumeração – MessageChannel:**
 `1` E-mail · `2` SMS · `3` WhatsApp · `4` Chat · `5` Facebook · `6` Telegram · `7` Voz · `8` Instagram · `9` Viber
+
+<Note>
+**Identificação de contatos do WhatsApp sem telefone.** O WhatsApp permite que a pessoa converse com a empresa usando username, sem expor o número. Quando isso acontece, o telefone não é informado e o contato passa a ser identificado pelo `bsuid`, um código gerado pela Meta que é exclusivo por portfólio de negócios. O `businessManagementId` indica a qual portfólio aquele `bsuid` pertence.
+
+Se a sua integração reconhece a pessoa pelo número de telefone, passe a considerar também esses campos. O mesmo contato tem `bsuid` diferente em portfólios diferentes.
+</Note>
 
 <AccordionGroup>
   <Accordion title="Modelo JSON — Mensagem de Entrada (Incoming)">
@@ -215,6 +224,7 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
         "longitude": -46.6631181
       },
       "file": {
+        "id": 297246720,
         "url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
         "name": "robbu",
         "extension": "pdf"
@@ -226,7 +236,11 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
         "id": "00000000000",
         "mainWhatsapp": { "countryCode": 55, "phoneNumber": 11999999992 },
         "mainSMS": { "countryCode": 55, "phoneNumber": 11999999992 },
-        "mainEmail": "teste@robbu.global"
+        "mainEmail": "teste@robbu.global",
+        "whatsapp": {
+          "bsuid": "BR.3087873511408224",
+          "businessManagementId": "104839572610394"
+        }
       }
     }
     ```
@@ -252,6 +266,7 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
         "phoneNumber": 11999999992
       },
       "file": {
+        "id": 297246720,
         "url": "http://s.robbu.com.br/arquivo?hash=ROBBU",
         "name": "robbu",
         "extension": "pdf"
@@ -264,6 +279,10 @@ Reúne todas as informações relacionadas às mensagens trafegadas no contato, 
         "mainWhatsapp": { "countryCode": 55, "phoneNumber": 11999999992 },
         "mainSMS": { "countryCode": 55, "phoneNumber": 11999999992 },
         "mainEmail": "teste@robbu.global",
+        "whatsapp": {
+          "bsuid": "BR.3087873511408224",
+          "businessManagementId": "104839572610394"
+        },
         "queue": {
           "waitingSince": "2021-03-08 12:00:00",
           "firstAnswerAt": "2021-03-08 11:30:00"
@@ -292,6 +311,8 @@ Responsável por informar o estado atual da mensagem ao longo do seu ciclo de vi
 | `MessageStatusErrorCode` | Código de erro | `String` |
 | `MessageStatusErrorMessage` | Descrição do erro | `String` |
 | `ContactStatusRobbuId` | ID do contato na Robbu | `Long` |
+| `ContactStatusWhatsAppBsuid` | Identificador do contato gerado pela Meta | `String` |
+| `ContactStatusWhatsAppBusinessManagementId` | Portfólio de negócios a que o identificador pertence | `String` |
 
 <Accordion title="Modelo JSON — Status">
   ```json
@@ -301,7 +322,14 @@ Responsável por informar o estado atual da mensagem ao longo do seu ciclo de vi
       "source": { "sender": "User1" },
       "sentToProviderAt": "2020-01-31T15:50:39.9312405",
       "deliveredAt": "2020-01-31T15:51:52.9707831",
-      "readAt": "2020-01-31T15:53:14.6399299"
+      "readAt": "2020-01-31T15:53:14.6399299",
+      "contact": {
+        "robbuid": 11111111111,
+        "whatsapp": {
+          "bsuid": "BR.3087873511408224",
+          "businessManagementId": "104839572610394"
+        }
+      }
     }
   }
   ```
