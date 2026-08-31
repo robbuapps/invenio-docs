@@ -4,13 +4,13 @@ sidebarTitle: "Webchat via WhatsApp"
 description: "Envie um convite para o contato continuar o atendimento do WhatsApp em uma página web, com verificação por código e suporte a texto, botões, listas e links."
 ---
 
-O **Webchat via WhatsApp** é uma forma de dar continuidade a um atendimento iniciado no WhatsApp dentro de uma página web, através de um botão enviado pelo próprio fluxo do bot. Diferente do Webchat tradicional do Invenio Center (widget embutido no site do cliente), esse canal nasce dentro de uma conversa de WhatsApp já em andamento.
+O **Webchat via WhatsApp** é uma forma de dar continuidade a um atendimento iniciado no WhatsApp dentro de uma página web, através de um botão que pode ser enviado tanto por uma ação no fluxo do bot quanto por um template HSM disparado via campanha. Diferente do Webchat tradicional do Invenio Center (widget embutido no site do cliente), esse canal nasce dentro de uma conversa de WhatsApp já em andamento.
 
 ## Objetivo
 
 A Meta alterou o modelo de cobrança de mensagens do WhatsApp Business Platform, passando a cobrar por mensagem de resposta enviada dentro da janela de atendimento com o contato. Na prática, isso significa que quanto mais mensagens de resposta o bot ou o atendente enviam pelo WhatsApp para dar continuidade a um atendimento, maior o custo por conversa.
 
-O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato para a página web assim que o atendimento avança, as mensagens seguintes deixam de trafegar pelo WhatsApp e passam a acontecer dentro do Webchat — sem custo por mensagem de resposta. O WhatsApp continua sendo usado apenas para iniciar a conversa e enviar o convite de troca de canal.
+Essa mudança entra em vigor em 1º de outubro de 2026, quando tanto mensagens de serviço (texto livre) quanto templates de utilidade dentro da janela de 24h passam a ser cobrados. Mais detalhes na [documentação oficial da Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing). O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato para a página web assim que o atendimento avança, as mensagens seguintes deixam de trafegar pelo WhatsApp e passam a acontecer dentro do Webchat — sem custo por mensagem de resposta. O WhatsApp continua sendo usado apenas para iniciar a conversa e enviar o convite de troca de canal.
 
 **Recursos principais:**
 
@@ -18,6 +18,7 @@ O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato p
 - 🔒 **Verificação por código** de 4 dígitos, com limite de tentativas (5 por sessão, bloqueio de 30 min) e expiração (24h)
 - 💬 **Múltiplos tipos de mensagem**: texto, botões de resposta rápida, listas de opções e links
 - 📎 **Anexos** (imagem, PDF, áudio) — <em>em desenvolvimento</em>
+- 📣 **Envio via template HSM em campanha** com botão de redirecionamento para o Webchat — *em desenvolvimento*
 
 ## Acessar Configurações
 
@@ -52,7 +53,7 @@ O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato p
 
 ## Domínio da Conversa
 
-A conversa aberta pelo contato acontece no domínio `webchat.invenio.robbu.com`, no formato `https://webchat.invenio.robbu.com/c/{id-da-conversa}`. É esse o link enviado no botão "Começar!" da mensagem do WhatsApp.
+A conversa aberta pelo contato acontece no domínio `webchat.invenio.robbu.com`, no formato `https://webchat.invenio.robbu.com/c/{id-da-conversa}`. Esse é o domínio padrão da Robbu. Está prevista a possibilidade de o cliente configurar um domínio próprio (custom domain) para essa conversa.
 
 ## Fluxo
 
