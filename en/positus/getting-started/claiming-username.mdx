@@ -1,0 +1,96 @@
+---
+title: Claiming the username
+description: Step-by-step guide to claim the username (@) for your WhatsApp Business API numbers through the WhatsApp Manager.
+---
+
+# Claiming the username
+
+The **username** is the public `@name` of your official WhatsApp Business line. It is a new way for customers to reach you **without needing your phone number** — the number is still displayed on your profile.
+
+This guide shows how to claim the username directly in the **WhatsApp Manager**, using the administrator account of your business portfolio (Business Manager) on Meta.
+
+<Info>
+The same operation can be done through the **Positus API**, including reading, setting, deleting and getting username suggestions. See [Official line username](/en/positus/integration/line-username).
+</Info>
+
+## Prerequisites
+
+- Access to the Facebook account with a **BM administrator user** (business portfolio on Meta).
+- The WhatsApp Business API number already active inside the WhatsApp account (WABA).
+
+## Step by step
+
+<Steps>
+  <Step title="Access the business portfolio">
+    Log in to Facebook with the **BM administrator user** (business portfolio on Meta).
+  </Step>
+
+  <Step title="Open the WhatsApp Accounts menu">
+    Access the **WHATSAPP ACCOUNTS** menu through this link: [business.facebook.com/latest/settings/whatsapp_account](https://business.facebook.com/latest/settings/whatsapp_account)
+  </Step>
+
+  <Step title="Open the WhatsApp Manager">
+    Click on the WhatsApp account that holds the number and then on **WHATSAPP MANAGER**.
+
+    <Frame caption="WhatsApp Manager button on the WhatsApp account screen">
+      <img src="/images/positus/primeiros-passos/gerenciador-do-whatsapp.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Create the username">
+    Click on the desired number, open the **PROFILE** tab and, under **Username**, click **CREATE**.
+
+    <Frame caption="Profile tab of the number with the Create option under Username">
+      <img src="/images/positus/primeiros-passos/nome-de-usuario-perfil-criar.png" />
+    </Frame>
+  </Step>
+
+  <Step title="Fill in and save">
+    Type the desired name and click **SAVE**. Meta also displays **suggestions** of available names.
+
+    <Frame caption="Username creation window with suggestions and the Save button">
+      <img src="/images/positus/primeiros-passos/nome-de-usuario-modal-salvar.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Important notes
+
+<Warning>
+- Each number can have **only one** username.
+- It is **not possible** to have more than one number with the same username.
+</Warning>
+
+## Username format
+
+Business usernames must follow the format below:
+
+- May contain only English alphabet letters (`a-z`), digits (`0-9`), period (`.`) and underscore (`_`);
+- Characters that are not English alphabet letters (such as `ñ`, `é`, `ü`) are not supported and will cause the request to fail;
+- Must be between **3 and 35 characters**;
+- Must contain at least one English alphabet letter (`a-z`, `A-Z`);
+- Cannot start or end with a period, nor contain two consecutive periods (`..`);
+- Cannot start with `www`;
+- Cannot end with a domain (for example `.com`, `.org`, `.net`, `.int`, `.edu`, `.gov`, `.mil`, `.us`, `.in`, `.html` and so on);
+- Usernames are compared case-insensitively.
+
+## After saving
+
+Username propagation is **asynchronous**. Meta may first **reserve** (`reserved`) the name and only then promote it to **approved** (`approved`), when it becomes visible to customers on WhatsApp.
+
+<Tip>
+Positus notifies your webhook on every username status change — including changes made through the WhatsApp Manager, as in this guide. The event is `business_username_update`; see [Line username update](/en/positus/integration/webhook#business-username-update).
+</Tip>
+
+## Common issues
+
+| Situation | What to do |
+| --- | --- |
+| The username is already taken or unavailable | Choose another name or use one of the suggestions displayed by Meta. |
+| The account does not meet the messaging limit requirements | Increase the number's messaging limit before reserving a username. |
+| A Facebook Page or Instagram account already uses that name | Link the Page or the Instagram account to the number and try again. |
+| The request fails due to invalid format | Review the rules in [Username format](#username-format). |
+
+<Info>
+The full list of error codes returned by Meta is available in [Official line username — Error handling](/en/positus/integration/line-username#errors).
+</Info>

@@ -98,6 +98,7 @@
                             "docs/center/usuarios",
                             "docs/center/variaveis-de-sistema",
                             "docs/center/web-chat",
+                            "docs/center/webchat-via-whatsapp",
                             "docs/center/webhook",
                             "docs/center/whastapp-flows",
                             "docs/center/whatsapp-business-api"
@@ -140,7 +141,8 @@
                                 "group": "Primeiros Passos",
                                 "pages": [
                                     "docs/positus/primeiros-passos/como-comecar",
-                                    "docs/positus/primeiros-passos/criando-business-facebook"
+                                    "docs/positus/primeiros-passos/criando-business-facebook",
+                                    "docs/positus/primeiros-passos/reivindicar-nome-de-usuario"
                                 ]
                             },
                             {
@@ -148,6 +150,7 @@
                                 "pages": [
                                     "docs/positus/integracao/bsuid",
                                     "docs/positus/integracao/api",
+                                    "docs/positus/integracao/numero-e-perfil",
                                     "docs/positus/integracao/contatos",
                                     "docs/positus/integracao/username-linha",
                                     "docs/positus/integracao/webhook",
@@ -231,7 +234,8 @@
                                 "group": "Getting Started",
                                 "pages": [
                                     "en/positus/getting-started/how-to-start",
-                                    "en/positus/getting-started/creating-facebook-business"
+                                    "en/positus/getting-started/creating-facebook-business",
+                                    "en/positus/getting-started/claiming-username"
                                 ]
                             },
                             {
@@ -239,6 +243,7 @@
                                 "pages": [
                                     "en/positus/integration/bsuid",
                                     "en/positus/integration/api",
+                                    "en/positus/integration/number-and-profile",
                                     "en/positus/integration/contacts",
                                     "en/positus/integration/line-username",
                                     "en/positus/integration/webhook",
@@ -316,7 +321,8 @@
                                 "group": "Primeros Pasos",
                                 "pages": [
                                     "es/positus/primeros-pasos/como-empezar",
-                                    "es/positus/primeros-pasos/crear-business-facebook"
+                                    "es/positus/primeros-pasos/crear-business-facebook",
+                                    "es/positus/primeros-pasos/reivindicar-nombre-de-usuario"
                                 ]
                             },
                             {
@@ -324,6 +330,7 @@
                                 "pages": [
                                     "es/positus/integracion/bsuid",
                                     "es/positus/integracion/api",
+                                    "es/positus/integracion/numero-y-perfil",
                                     "es/positus/integracion/contactos",
                                     "es/positus/integracion/username-linea",
                                     "es/positus/integracion/webhook",
