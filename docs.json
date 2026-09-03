@@ -108,7 +108,6 @@
                         "group": "Robbu APIs",
                         "pages": [
                             "docs/robbu-api/api-update-contact",
-                            "docs/robbu-api/api-busca-template",
                             "docs/robbu-api/auth",
                             "docs/carteiro-digital/carteiro-digital-api",
                             "docs/robbu-api/verify",
