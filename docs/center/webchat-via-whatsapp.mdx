@@ -1,26 +1,25 @@
 ---
 title: "Webchat via WhatsApp — Configuração e Fluxo"
-sidebarTitle: "Webchat via WhatsApp"
 description: "Envie um convite para o contato continuar o atendimento do WhatsApp em uma página web, com verificação por código e suporte a texto, botões, listas e links."
 ---
 
-O **Webchat via WhatsApp** é uma forma de dar continuidade a um atendimento iniciado no WhatsApp dentro de uma página web, através de um botão que pode ser enviado tanto por uma ação no fluxo do bot quanto por um template HSM disparado via campanha. Diferente do Webchat tradicional do Invenio Center (widget embutido no site do cliente), esse canal nasce dentro de uma conversa de WhatsApp já em andamento.
+O **Webchat via WhatsApp** é uma forma de dar continuidade a um atendimento iniciado no WhatsApp dentro de uma página web, através de um botão enviado pelo fluxo do IDR ou por um template de WhatsApp (HSM), disparado em campanha ou pelo atendente no Live. Diferente do Webchat tradicional do Invenio Center (widget embutido no site do cliente), esse canal nasce dentro de uma conversa de WhatsApp já em andamento.
 
 ## Objetivo
 
-A Meta alterou o modelo de cobrança de mensagens do WhatsApp Business Platform, passando a cobrar por mensagem de resposta enviada dentro da janela de atendimento com o contato. Na prática, isso significa que quanto mais mensagens de resposta o bot ou o atendente enviam pelo WhatsApp para dar continuidade a um atendimento, maior o custo por conversa.
+A partir de 01/10/2026, a Meta altera o modelo de cobrança de mensagens do WhatsApp Business Platform, passando a cobrar por mensagem de resposta enviada dentro da janela de atendimento com o contato. Na prática, isso significa que quanto mais mensagens de resposta o bot ou o atendente enviam pelo WhatsApp para dar continuidade a um atendimento, maior o custo por conversa.
 
-Essa mudança entra em vigor em 1º de outubro de 2026, quando tanto mensagens de serviço (texto livre) quanto templates de utilidade dentro da janela de 24h passam a ser cobrados. Mais detalhes na [documentação oficial da Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing). O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato para a página web assim que o atendimento avança, as mensagens seguintes deixam de trafegar pelo WhatsApp e passam a acontecer dentro do Webchat — sem custo por mensagem de resposta. O WhatsApp continua sendo usado apenas para iniciar a conversa e enviar o convite de troca de canal.
+O Webchat via WhatsApp existe para reduzir esse custo: ao direcionar o contato para a página web assim que o atendimento avança, as mensagens seguintes deixam de trafegar pelo WhatsApp e passam a acontecer dentro do Webchat — sem custo por mensagem de resposta. O WhatsApp continua sendo usado apenas para iniciar a conversa e enviar o convite de troca de canal.
 
 **Recursos principais:**
 
 - 🔀 **Troca de canal sob demanda** via ação no fluxo do IDR, sem precisar de widget instalado no site
+- 📣 **Envio via template WhatsApp (HSM)** em campanha ou pelo atendente no Live, com botão de redirecionamento para o Webchat — em produção desde 24/09/2026
 - 🔒 **Verificação por código** de 4 dígitos, com limite de tentativas (5 por sessão, bloqueio de 30 min) e expiração (24h)
 - 💬 **Múltiplos tipos de mensagem**: texto, botões de resposta rápida, listas de opções e links
-- 📎 **Anexos** (imagem, PDF, áudio) — <em>em desenvolvimento</em>
-- 📣 **Envio via template HSM em campanha** com botão de redirecionamento para o Webchat — *em desenvolvimento*
+- 📎 **Anexos** (imagem, PDF, áudio)
 
-## Acessar Configurações
+## IDR - Envio do Botão de Webchat em Fluxo Receptivo
 
 <Steps>
   <Step title="Adicionar a ação no fluxo">
@@ -35,7 +34,7 @@ Essa mudança entra em vigor em 1º de outubro de 2026, quando tanto mensagens d
     - **Texto da mensagem** — texto exibido acima do botão no WhatsApp
     - **Texto do botão** (máx. 20 caracteres)
     - **Cabeçalho** e **Rodapé** (opcionais)
-    - **Exigir código de verificação para abrir o Webchat** — recomendado manter em "Sim"
+    - **Exigir código de verificação para abrir o Webchat** — recomendado manter em "Sim" por questões de segurança
     - **Avisar que o contato pode continuar pelo WhatsApp** — oferece alternativa de não trocar de canal
 
     <Frame caption="Tela de configuração da ação no IDR Studio">
@@ -43,7 +42,7 @@ Essa mudança entra em vigor em 1º de outubro de 2026, quando tanto mensagens d
     </Frame>
   </Step>
   <Step title="O que o contato recebe">
-    Uma mensagem no WhatsApp com o texto configurado, o código de verificação (se ativado) e o botão de continuar.
+    Uma mensagem no WhatsApp com o texto configurado, o código de verificação (se ativado) e o botão com o link que direciona para o webchat.
 
     <Frame caption="Mensagem recebida no WhatsApp do contato">
       <img src="/images/webchat-whatsapp/mensagem-whatsapp.png" />
@@ -51,31 +50,86 @@ Essa mudança entra em vigor em 1º de outubro de 2026, quando tanto mensagens d
   </Step>
 </Steps>
 
+## Envio via Template WhatsApp (HSM)
+
+Além da ação no fluxo do IDR, a troca de canal também pode ser oferecida por um template de WhatsApp (HSM), disparado em campanha ou enviado pelo atendente no Live.
+
+<Steps>
+  <Step title="Configurar template de HSM">
+    No cadastro de template, dê um nome a ele e selecione o idioma.
+
+    <Frame caption="Criando o template e definindo nome e idioma">
+      <img src="/images/webchat-whatsapp/hsm-criar-template.png" />
+    </Frame>
+
+    Na seção de botões ("Adicionar botão"), escolha o tipo **"Transferir conversa para o Webchat"** — ao lado de "Visitar website", "Ligar através do WhatsApp" etc.
+
+    <Frame caption="Selecionando o botão \"Transferir conversa para o Webchat\" nos componentes do template">
+      <img src="/images/webchat-whatsapp/hsm-selecionar-botao.png" />
+    </Frame>
+
+    Preencha o corpo da mensagem e o texto do botão, e clique em **Criar template**.
+
+    <Frame caption="Corpo e botão configurados, pronto para criar o template">
+      <img src="/images/webchat-whatsapp/hsm-corpo-botao-configurados.png" />
+    </Frame>
+  </Step>
+  <Step title="Esperar aprovação do template">
+    Após criado, o template aguarda aprovação da Meta antes de poder ser usado em disparos.
+
+    <Frame caption="Template aprovado, com qualidade \"UNKNOWN (APPROVED)\"">
+      <img src="/images/webchat-whatsapp/hsm-template-aprovado.png" />
+    </Frame>
+  </Step>
+  <Step title="Configurar segmentos e números">
+    Vincule o template ao(s) segmento(s) de contatos e ao(s) número(s) de WhatsApp que serão usados no disparo.
+
+    <Frame caption="Vinculando segmentos ao template">
+      <img src="/images/webchat-whatsapp/hsm-vincular-segmentos.png" />
+    </Frame>
+
+    <Frame caption="Vinculando números ao template">
+      <img src="/images/webchat-whatsapp/hsm-vincular-numeros.png" />
+    </Frame>
+  </Step>
+  <Step title="Disparar template por campanha">
+    Crie a campanha selecionando o template configurado, o remetente e o mapeamento de variáveis, e clique em **Criar**.
+
+    <Frame caption="Criando a campanha com o template do botão de Webchat">
+      <img src="/images/webchat-whatsapp/hsm-criar-campanha.png" />
+    </Frame>
+
+    <Frame caption="Mensagem recebida pelo contato no WhatsApp">
+      <img src="/images/webchat-whatsapp/hsm-mensagem-recebida.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+<Tip>
+  A URL do botão é sempre gerada pelo backend a partir do domínio configurado — não é possível informar uma URL própria nesse tipo de botão. Sem domínio próprio configurado para o cliente, o link cai no domínio padrão da Robbu.
+</Tip>
+
+O envio do botão está em produção desde 24/09/2026.
+
 ## Domínio da Conversa
 
-A conversa aberta pelo contato acontece no domínio `webchat.invenio.robbu.com`, no formato `https://webchat.invenio.robbu.com/c/{id-da-conversa}`. Esse é o domínio padrão da Robbu. Está prevista a possibilidade de o cliente configurar um domínio próprio (custom domain) para essa conversa.
+A conversa aberta pelo contato acontece no domínio `webchat.invenio.robbu.com`, no formato `https://webchat.invenio.robbu.com/c/{id-da-conversa}`. É esse o link enviado no botão "Começar!" da mensagem do WhatsApp.
 
-## Fluxo
+## Segurança
 
-### Verificação
+O acesso à conversa é protegido por um código de verificação de uso único, enviado via WhatsApp junto com o botão de troca de canal. Após a confirmação, um token de sessão válido por 24 horas libera o acesso à conversa.
 
-O contato recebe um código de 4 dígitos por WhatsApp e precisa confirmá-lo na página do Webchat antes de a conversa ser liberada.
+Essa verificação por código só acontece quando habilitada — seja na ação do fluxo do IDR ("Exigir código de verificação para abrir o Webchat") ou no template de HSM.
 
-- **Limite de 5 tentativas erradas** por sessão
-- **Bloqueio de 30 minutos** ao atingir o limite, com reinício automático do contador depois
-- **Código expira em 24 horas**
-
-### Sessão do usuário
+<Frame caption="Tela de verificação do código enviado por WhatsApp">
+  <img src="/images/webchat-whatsapp/tela-verificacao-codigo.png" />
+</Frame>
 
 A sessão permanece ativa mesmo se a página for recarregada — não é necessário reinserir o código de verificação.
 
 <Frame caption="Conversa sendo retomada automaticamente ao recarregar a página">
   <img src="/images/webchat-whatsapp/retomando-sessao.jpg" />
 </Frame>
-
-## Segurança
-
-O acesso à conversa é protegido por um código de verificação enviado via WhatsApp junto com o botão de troca de canal, com limite de tentativas e validade de 24 horas. Após a confirmação, um token de sessão válido por 24 horas libera o acesso à conversa.
 
 ## Localizando o Contato no Invenio Center
 
