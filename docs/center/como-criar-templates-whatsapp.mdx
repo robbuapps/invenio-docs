@@ -167,10 +167,89 @@ Podem conter **variáveis personalizáveis** como nome, data ou número de pedid
     | 📞 **Ligar via Telefone** | 1 | Número até 20 dígitos; até 25 chars |
     | 📱 **Ligar via WhatsApp** | 1 | Direciona para ligação WhatsApp; até 25 chars |
     | 🎟️ **Copiar Código** | 1 | Título padrão "Copiar código"; exemplo até 15 chars |
+    | 💬 **Transferir conversa para o Webchat** | 1 | Envia um link que leva o contato para o Webchat, dando continuidade ao atendimento fora do WhatsApp |
 
     <Frame caption="Configuração de botões interativos">
       <img src="https://robbublob.blob.core.windows.net/docs/invenio-center/templatewhatsapp/botoes.png" />
     </Frame>
+
+    O tipo **"Transferir conversa para o Webchat"** aparece na lista **"Adicionar botão"**, ao lado de "Visitar website", "Ligar através do WhatsApp" etc. Ele gera um link — sempre a partir do domínio configurado para o cliente — que leva o contato da conversa de WhatsApp direto para o Webchat, dando continuidade ao atendimento fora da janela do WhatsApp.
+
+    <Tip>
+      O passo a passo completo de configuração do botão, aprovação do template, vínculo de segmentos/números e disparo por campanha está em [Webchat via WhatsApp](/docs/center/webchat-via-whatsapp).
+    </Tip>
+
+    #### Código de verificação
+
+    Ao ligar **Exigir código de verificação para abrir o Webchat** no botão "Transferir conversa para o Webchat", a tela acrescenta ao fim do corpo a frase **"Informe `{{n}}` quando pedirmos."**. A cada envio, o contato recebe no lugar do `{{n}}` um número de 4 dígitos, que a página do Webchat pede antes de abrir a conversa.
+
+    - A frase é fixa e não pode ser editada.
+    - Vale para as categorias Utilidade e Marketing.
+    - Com a opção ligada, a tela não deixa usar a palavra "código" no corpo e avisa quando o corpo não tem nenhuma outra variável.
+
+    ##### Exemplos aprovados
+
+    Os quatro exemplos abaixo foram aprovados pela Meta nos testes de validação. As imagens mostram como a mensagem chega ao contato, com os exemplos das variáveis preenchidos.
+
+    **Exemplo 1 · Atendimento (Utilidade)**
+
+    <Frame caption="Exemplo 1: atendimento">
+      <img src="/images/templates-whatsapp/exemplo-1-atendimento.png" />
+    </Frame>
+
+    | | |
+    |---|---|
+    | **Você escreve no corpo** | `Olá, {{1}}! Seu atendimento continua pelo nosso chat. Toque no botão abaixo para seguir a conversa.` |
+    | **Exemplo da variável** | `{{1}}` = Maria (nome do contato) |
+    | **A tela acrescenta** | `Informe {{2}} quando pedirmos.` |
+
+    **Exemplo 2 · Cobrança (Utilidade)**
+
+    <Frame caption="Exemplo 2: cobrança">
+      <img src="/images/templates-whatsapp/exemplo-2-cobranca.png" />
+    </Frame>
+
+    | | |
+    |---|---|
+    | **Você escreve no corpo** | `Olá, {{1}}. Sua fatura de {{2}} vence em {{3}}. Para negociar, fale com a nossa equipe pelo chat.` |
+    | **Exemplos das variáveis** | `{{1}}` = Maria, `{{2}}` = R$ 150,00, `{{3}}` = 10/10 |
+    | **A tela acrescenta** | `Informe {{4}} quando pedirmos.` |
+
+    **Exemplo 3 · Pedido (Utilidade)**
+
+    <Frame caption="Exemplo 3: pedido">
+      <img src="/images/templates-whatsapp/exemplo-3-pedido.png" />
+    </Frame>
+
+    | | |
+    |---|---|
+    | **Você escreve no corpo** | `Olá! O atendimento do pedido {{1}} continua pelo nosso chat. Toque no botão abaixo para seguir a conversa.` |
+    | **Exemplo da variável** | `{{1}}` = 58213 (número do pedido) |
+    | **A tela acrescenta** | `Informe {{2}} quando pedirmos.` |
+
+    **Exemplo 4 · Oferta (Marketing)**
+
+    <Frame caption="Exemplo 4: oferta">
+      <img src="/images/templates-whatsapp/exemplo-4-oferta.png" />
+    </Frame>
+
+    | | |
+    |---|---|
+    | **Você escreve no corpo** | `Olá, {{1}}! Temos uma condição especial para você esta semana. Fale com a nossa equipe pelo chat e aproveite.` |
+    | **Exemplo da variável** | `{{1}}` = Maria (nome do contato) |
+    | **A tela acrescenta** | `Informe {{2}} quando pedirmos.` |
+
+    O texto do botão é livre: "Continuar no Webchat" e "Acessar conversa" foram aprovados.
+
+    ##### O que evitar
+
+    Os três casos abaixo foram rejeitados pela Meta nos testes.
+
+    | Evite | Por quê | Faça assim |
+    |---|---|---|
+    | A palavra "código" no corpo, mesmo com outro sentido. Ex.: "Tenha em mãos o código do pedido." ou "pague pelo código de barras" | A Meta lê o número do fim como código de acesso e rejeita o template. A tela não deixa enviar. | Cite o pedido pela variável, como no Exemplo 3. Na cobrança, deixe o boleto fora da mensagem, como no Exemplo 2. |
+    | Corpo sem nenhuma variável. Ex.: "Olá! Seu atendimento continua pelo nosso chat." | Quando o código é a única variável, a Meta costuma rejeitar. A tela avisa. | Inclua pelo menos uma variável antes, como o nome do contato (Exemplo 1). |
+    | Texto que conta uma verificação. Ex.: "Recebemos sua solicitação e um atendente vai falar com você pelo chat." | Soa como confirmação de identidade e foi rejeitado em Utilidade. | Diga só que o atendimento continua no chat (Exemplo 1). |
 
     ---
 
