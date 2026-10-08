@@ -1,0 +1,212 @@
+---
+title: Atributos dos Templates
+description: Status, qualidade, categorias, idiomas e demais campos do objeto de template.
+---
+
+# Atributos dos Templates
+
+Esta página descreve os valores que aparecem nos campos `status`, `quality_score`, `category`, `language`, `display_format` e `sub_category` do objeto de template, além dos demais campos retornados pela API.
+
+## Objeto de template
+
+As rotas de listagem, exibição e criação retornam o template neste formato:
+
+| Campo | Tipo | Descrição |
+| --- | --- | --- |
+| `id` | string (UUID) | Identificador do template na Positus. É o valor usado como `{template}` nas rotas |
+| `wa_id` | string | Identificador do template na Meta |
+| `meta_template_id` | string | Mesmo valor de `wa_id` |
+| `type_model` | string ou `null` | Texto livre, informado na criação |
+| `status` | objeto | `{ id, code, description }`. Veja [status](#status) |
+| `quality_score` | objeto | `{ id, code }`. Veja [quality score](#quality-score) |
+| `category` | objeto | `{ id, code, description }`. Veja [categorias](#categorias) |
+| `language` | objeto | `{ id, code, name }`. Veja [idiomas](#idiomas) |
+| `name` | string | Nome do template, já normalizado (ver [API de Templates](/docs/positus/templates/api#criar-template)) |
+| `message_send_ttl_seconds` | integer ou `null` | Tempo de vida (TTL) da mensagem, em segundos |
+| `components` | array | Componentes do template, no formato da Meta |
+| `display_format` | objeto | `{ id, code, description }`. Só aparece quando definido |
+| `sub_category` | objeto | `{ id, code, description }`. Só aparece quando definido |
+| `header_file` | objeto ou `null` | Arquivo do header (`mime_type`, `original_name`, `name`, `url`, `size`) |
+| `carousel_files` | array | Arquivos dos cards de um template de carrossel (mesmo formato de `header_file`) |
+| `created_at`, `updated_at` | string (ISO 8601) | Datas de criação e atualização |
+
+## Status
+
+Define o status do template. O campo `status` retorna `id`, `code` e `description`.
+
+| Id | Descrição | Code |
+| --- | --- | --- |
+| 0 | Indefinido | `UNDEFINED` |
+| 1 | Pendente | `PENDING` |
+| 2 | Aprovado | `APPROVED` |
+| 3 | Rejeitado | `REJECTED` |
+| 4 | Em recurso | `IN_APPEAL` |
+| 5 | Exclusão pendente | `PENDING_DELETION` |
+| 6 | Excluído | `DELETED` |
+| 7 | Desabilitado | `DISABLED` |
+| 8 | Sinalizado | `FLAGGED` |
+| 9 | Reinstalado | `REINSTATED` |
+| 10 | Pausado | `PAUSED` |
+| 11 | Pausado | `PAUSED` |
+| 12 | Arquivado | `ARCHIVED` |
+| 13 | Desarquivado | `UNARCHIVED` |
+| 14 | Bloqueado | `LOCKED` |
+| 15 | Limite excedido | `LIMIT_EXCEEDED` |
+
+<Info>
+Os ids `10` e `11` têm o mesmo `code` (`PAUSED`) e a mesma descrição. Eles representam a primeira e a segunda pausa do template, e a única forma de distingui-los na API e nos webhooks é pelo `status.id`.
+</Info>
+
+Para filtrar a listagem por status, use o **id numérico** (por exemplo, `status=2`). Veja [Listar templates](/docs/positus/templates/api#listar-templates).
+
+## Quality score
+
+Define a qualidade do template. O campo `quality_score` retorna `id` e `code`.
+
+| Id | Code |
+| --- | --- |
+| 0 | `UNKNOWN` |
+| 1 | `GREEN` |
+| 2 | `YELLOW` |
+| 3 | `RED` |
+
+## Categorias
+
+Define a categoria do template. O campo `category` retorna `id`, `code` e `description`.
+
+A coluna **Criação pela API** indica se a categoria é aceita no endpoint de criação. As categorias marcadas como descontinuadas continuam existindo na tabela, mas a criação com elas é rejeitada com `422`.
+
+| Id | Descrição | Code | Criação pela API |
+| --- | --- | --- | --- |
+| 0 | Indefinido | `UNDEFINED` | Não aceita |
+| 1 | Atualização da conta | `ACCOUNT_UPDATE` | Descontinuada |
+| 2 | Atualização de pagamento | `PAYMENT_UPDATE` | Descontinuada |
+| 3 | Atualização de finanças pessoais | `PERSONAL_FINANCE_UPDATE` | Descontinuada |
+| 4 | Atualização de envio | `SHIPPING_UPDATE` | Descontinuada |
+| 5 | Atualização de reserva | `RESERVATION_UPDATE` | Descontinuada |
+| 6 | Resolução de problemas | `ISSUE_RESOLUTION` | Descontinuada |
+| 7 | Atualização de compromisso | `APPOINTMENT_UPDATE` | Descontinuada |
+| 8 | Atualização de transporte | `TRANSPORTATION_UPDATE` | Descontinuada |
+| 9 | Atualização de suporte | `TICKET_UPDATE` | Descontinuada |
+| 10 | Atualização de alerta | `ALERT_UPDATE` | Descontinuada |
+| 11 | Resposta automática | `AUTO_REPLY` | Descontinuada |
+| 12 | Transacional | `TRANSACTIONAL` | Descontinuada |
+| 13 | Marketing | `MARKETING` | Aceita |
+| 14 | Senhas descartáveis | `OTP` | Descontinuada |
+| 15 | Serviços | `UTILITY` | Aceita |
+| 16 | Autenticação | `AUTHENTICATION` | Aceita |
+
+<Info>
+Na criação, envie o **code** da categoria (`MARKETING`, `UTILITY` ou `AUTHENTICATION`) no campo `category`.
+</Info>
+
+## Display format
+
+Define se um template é do tipo "detalhes do pedido". Aparece no objeto somente quando definido.
+
+| Id | Descrição | Code | Criação pela API |
+| --- | --- | --- | --- |
+| 0 | Desconhecido | `UNKNOWN` | Não aceita |
+| 1 | Detalhes do pedido | `ORDER_DETAILS` | Aceita |
+
+## Sub category
+
+Define se um template é do tipo "status do pedido". Aparece no objeto somente quando definido.
+
+| Id | Descrição | Code | Criação pela API |
+| --- | --- | --- | --- |
+| 0 | Desconhecido | `UNKNOWN` | Não aceita |
+| 1 | Status do pedido | `ORDER_STATUS` | Aceita |
+
+<Info>
+A rota [`GET /restrictions`](/docs/positus/templates/api#restrições) informa se o workspace possui a permissão `order_details`, relacionada ao uso de `display_format` e `sub_category`.
+</Info>
+
+## Idiomas
+
+Define o idioma do template. No campo `language` da criação, envie o **code** do idioma. O objeto retornado traz `id`, `code` e `name`.
+
+<Warning>
+O id `0` (`?`, indefinido) existe na tabela, mas não deve ser usado na criação de templates.
+</Warning>
+
+| Id | Nome | Code |
+| --- | --- | --- |
+| 0 | Undefined | `?` |
+| 1 | Afrikaans | `af` |
+| 2 | Albanian | `sq` |
+| 3 | Arabic | `ar` |
+| 4 | Azerbaijani | `az` |
+| 5 | Bengali | `bn` |
+| 6 | Bulgarian | `bg` |
+| 7 | Catalan | `ca` |
+| 8 | Chinese (CHN) | `zh_CN` |
+| 9 | Chinese (HKG) | `zh_HK` |
+| 10 | Chinese (TAI) | `zh_TW` |
+| 11 | Croatian | `hr` |
+| 12 | Czech | `cs` |
+| 13 | Danish | `da` |
+| 14 | Dutch | `nl` |
+| 15 | English | `en` |
+| 16 | English (UK) | `en_GB` |
+| 17 | English (US) | `en_US` |
+| 18 | Estonian | `et` |
+| 19 | Filipino | `fil` |
+| 20 | Finnish | `fi` |
+| 21 | French | `fr` |
+| 22 | German | `de` |
+| 23 | Greek | `el` |
+| 24 | Gujarati | `gu` |
+| 25 | Hausa | `ha` |
+| 26 | Hebrew | `he` |
+| 27 | Hindi | `hi` |
+| 28 | Hungarian | `hu` |
+| 29 | Indonesian | `id` |
+| 30 | Irish | `ga` |
+| 31 | Italian | `it` |
+| 32 | Japanese | `ja` |
+| 33 | Kannada | `kn` |
+| 34 | Kazakh | `kk` |
+| 35 | Korean | `ko` |
+| 36 | Lao | `lo` |
+| 37 | Latvian | `lv` |
+| 38 | Lithuanian | `lt` |
+| 39 | Macedonian | `mk` |
+| 40 | Malay | `ms` |
+| 41 | Malayalam | `ml` |
+| 42 | Marathi | `mr` |
+| 43 | Norwegian | `nb` |
+| 44 | Persian | `fa` |
+| 45 | Polish | `pl` |
+| 46 | Portuguese (BR) | `pt_BR` |
+| 47 | Portuguese (POR) | `pt_PT` |
+| 48 | Punjabi | `pa` |
+| 49 | Romanian | `ro` |
+| 50 | Russian | `ru` |
+| 51 | Serbian | `sr` |
+| 52 | Slovak | `sk` |
+| 53 | Slovenian | `sl` |
+| 54 | Spanish | `es` |
+| 55 | Spanish (ARG) | `es_AR` |
+| 56 | Spanish (SPA) | `es_ES` |
+| 57 | Spanish (MEX) | `es_MX` |
+| 58 | Swahili | `sw` |
+| 59 | Swedish | `sv` |
+| 60 | Tamil | `ta` |
+| 61 | Telugu | `te` |
+| 62 | Thai | `th` |
+| 63 | Turkish | `tr` |
+| 64 | Ukrainian | `uk` |
+| 65 | Urdu | `ur` |
+| 66 | Uzbek | `uz` |
+| 67 | Vietnamese | `vi` |
+| 68 | Zulu | `zu` |
+| 69 | Georgian | `ka` |
+| 70 | Kinyarwanda | `rw_RW` |
+| 71 | Kyrgyz (Kyrgyzstan) | `ky_KG` |
+
+## Saiba mais
+
+- [Introdução aos Templates](/docs/positus/templates/introducao)
+- [API de Templates](/docs/positus/templates/api)
+- [Webhooks](/docs/positus/templates/webhooks)

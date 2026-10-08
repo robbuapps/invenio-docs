@@ -1,0 +1,110 @@
+---
+title: Templates Webhooks
+description: Configure webhooks in the workspace to receive template updates in real time.
+---
+
+# Templates Webhooks
+
+To track template updates, it is recommended that you configure a webhook in the workspace to receive real-time updates. You must [configure a webhook in the workspace](https://studio.posit.us/workspace/configuracoes) to receive these events. If the workspace does not have a webhook configured, no events are sent.
+
+## Template Events
+
+The table below lists all template events that can be received through workspace webhooks:
+
+| Event | Description |
+| --- | --- |
+| `message_template_created` | Received when a template is registered: on creation through the API and also when a template is imported by the sync with Meta |
+| `message_template_status_update` | Received when the template status changes, for any status except `DELETED` (which uses `message_template_deleted`) |
+| `message_template_deleted` | Received when the template changes to the `DELETED` status, either through the delete API or by a Meta event |
+| `message_template_category_update` | Received when the template category changes |
+| `message_template_quality_update` | Received when the template quality score changes |
+| `message_template_category_update_scheduled` | Received when Meta announces a future category change for the template |
+| `message_template_sync` | Received when the Positus system forces a sync with Meta |
+
+<Info>
+The webhook must respond with `200 OK`. Positus sends each notification once (with `User-Agent: Positus` and a 30-second timeout), with no retry in case of failure. Keep your endpoint available.
+</Info>
+
+<Info>
+A Meta event is replicated to all workspaces that have the same template and share the same WABA.
+</Info>
+
+## Webhook Structure
+
+All events use the same envelope, with the `event`, `workspace`, and `template` fields:
+
+```json
+{
+  "event": "message_template_status_update",
+  "workspace": {
+    "id": "dddddddd-0000-4000-8000-444444444444",
+    "provider": {
+      "id": 1,
+      "name": "<nome-do-provedor>"
+    },
+    "type_workspace": "<tipo-do-workspace>",
+    "name": "Workspace de exemplo",
+    "business_id": "100000000000010",
+    "waba_id": "100000000000011"
+  },
+  "template": {
+    "id": "11111111-aaaa-4bbb-8ccc-222222222222",
+    "meta_template_id": "100000000000001",
+    "status": {
+      "id": 2,
+      "code": "APPROVED",
+      "description": "Aprovado"
+    },
+    "quality_score": {
+      "id": 0,
+      "code": "UNKNOWN"
+    },
+    "category": {
+      "id": 15,
+      "code": "UTILITY",
+      "description": "Serviços"
+    },
+    "language": {
+      "id": 46,
+      "code": "pt_BR",
+      "name": "Portuguese (BR)"
+    },
+    "name": "aviso_de_pedido",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Olá {{1}}, temos uma atualização sobre o seu pedido!"
+      }
+    ],
+    "header_file": null,
+    "carousel_files": []
+  }
+}
+```
+
+Fields of the `template` object:
+
+| Field | Description |
+| --- | --- |
+| `id` | Template UUID in Positus |
+| `meta_template_id` | Template identifier in Meta |
+| `status` | `{ id, code, description }`. See [status](/en/positus/templates/attributes#status) |
+| `quality_score` | `{ id, code }` |
+| `category` | `{ id, code, description }` |
+| `language` | `{ id, code, name }` |
+| `name` | Template name |
+| `components` | Components in Meta's format |
+| `display_format` | Only appears when defined |
+| `sub_category` | Only appears when defined |
+| `header_file` | Header file or `null` |
+| `carousel_files` | Carousel card files |
+
+<Info>
+The webhook `template` object is leaner than the object returned by the [API](/en/positus/templates/attributes#template-object): it does **not** include `wa_id`, `type_model`, `message_send_ttl_seconds`, `created_at`, or `updated_at`. Use `meta_template_id` as the identifier in Meta. When the status is `PAUSED`, `status.id` (`10` or `11`) is the only way to tell the first pause from the second.
+</Info>
+
+## Learn More
+
+- [Workspace webhooks](https://studio.posit.us/workspace/configuracoes)
+- [Attributes](/en/positus/templates/attributes)
+- [Templates API](/en/positus/templates/api)

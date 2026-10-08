@@ -1,0 +1,653 @@
+---
+title: Templates API
+description: Endpoints to list, retrieve, validate, create, and delete templates in a workspace.
+---
+
+# Templates API
+
+In addition to managing templates through Positus Studio, you can manage them directly through the API. The template endpoints are **scoped by workspace** and allow you to list, retrieve, validate the name of, create, and delete templates.
+
+## Authentication and Scope
+
+All routes require user **Bearer Token** authentication and are accessed under the desired workspace:
+
+```
+https://api.positus.global/v2/workspaces/{workspace}/message-templates
+Authorization: Bearer <your-token>
+```
+
+| Route Parameter | Description |
+| --- | --- |
+| `{workspace}` | Workspace UUID |
+| `{template}` | Template UUID in Positus (the `id` field of the object), **not** the Meta identifier (`wa_id`) |
+
+<Info>
+**Creating** and **deleting** templates require the authenticated user to be an **owner** of the workspace. Otherwise, the API responds with `403`. The other routes only require the user to have active access to the workspace.
+</Info>
+
+<Warning>
+There is no route to edit a template or to search by name. To change a template, create a new one.
+</Warning>
+
+## List Templates
+
+Returns the workspace templates.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates
+```
+
+| Query String | Type | Description |
+| --- | --- | --- |
+| `status` | integer | Optional. Filters by the **numeric id** of the [status](/en/positus/templates/attributes#status) (for example, `status=2`). The value `0` is equivalent to not filtering |
+
+- There is no pagination or other filters (name, category, or language).
+- Templates with `DELETED` status are **not** returned in the list.
+- The `PAUSED` status has two ids (`10` and `11`); to filter it, query one id at a time.
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+      "id": "11111111-aaaa-4bbb-8ccc-222222222222",
+      "wa_id": "100000000000001",
+      "meta_template_id": "100000000000001",
+      "type_model": null,
+      "status": {
+        "id": 2,
+        "code": "APPROVED",
+        "description": "Aprovado"
+      },
+      "quality_score": {
+        "id": 0,
+        "code": "UNKNOWN"
+      },
+      "category": {
+        "id": 15,
+        "code": "UTILITY",
+        "description": "Serviços"
+      },
+      "language": {
+        "id": 17,
+        "code": "en_US",
+        "name": "English (US)"
+      },
+      "name": "sample_flight_confirmation",
+      "message_send_ttl_seconds": null,
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "DOCUMENT"
+        },
+        {
+          "type": "BODY",
+          "text": "This is your flight confirmation for {{1}}-{{2}} on {{3}}."
+        },
+        {
+          "type": "FOOTER",
+          "text": "This message is from an unverified business."
+        }
+      ],
+      "header_file": null,
+      "carousel_files": [],
+      "created_at": "2026-01-10T10:00:00.000000Z",
+      "updated_at": "2026-01-10T10:00:00.000000Z"
+    }
+  ]
+}
+```
+
+See the description of each field in [Attributes](/en/positus/templates/attributes#template-object).
+
+## Show Template
+
+Returns a specific template from the workspace.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates/{template}
+```
+
+**Response** — `{ "data": { ...template object } }`, in the same format as each item in the list. If the template does not belong to the workspace, the API responds with `404`.
+
+<Info>
+Unlike the list, the show route also returns templates with `DELETED` status.
+</Info>
+
+## Validate Name
+
+Before creating a template, check whether the name is already in use in the workspace. Trying to create a template with an existing name results in an error.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/message-templates/validate
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | No | Name to be checked. If omitted, the API responds with `204` |
+
+```json
+{
+  "name": "Meu primeiro template"
+}
+```
+
+**Response**
+
+- `204 No Content`: there is no template with that name.
+- `422 Unprocessable Entity`: the name already exists.
+
+```json
+{
+  "message": "Já existe um template com este nome, insira um nome diferente."
+}
+```
+
+<Info>
+The name is normalized the same way as at creation (see [Create Template](#create-template)) and compared only with the templates registered in Positus for the workspace, **including those already deleted**. The check does not query Meta.
+</Info>
+
+## Create Template
+
+Creates a template in the workspace. The template is sent to Meta and, if successful, registered in Positus.
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/message-templates
+Content-Type: multipart/form-data
+```
+
+<Warning>
+Send the data as **FormData** (`multipart/form-data`). Templates with a document, image, or video header (and carousel cards with an image or video) require the file to be sent, which must be provided in `components[i][example][header_handle][0]`.
+</Warning>
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Template name (maximum of 512 characters). See the note below |
+| `category` | string | Yes | `MARKETING`, `UTILITY`, or `AUTHENTICATION`. See [categories](/en/positus/templates/attributes#categories) |
+| `language` | string | Yes | [Language](/en/positus/templates/attributes#languages) code, for example `pt_BR` |
+| `components` | array | Yes | Template components, in Meta's format |
+| `display_format` | string | No | `ORDER_DETAILS`. See [display format](/en/positus/templates/attributes#display-format) |
+| `sub_category` | string | No | `ORDER_STATUS`. See [sub category](/en/positus/templates/attributes#sub-category) |
+| `flow_id` | string (UUID) | No | UUID of a **published** [Flow](/en/positus/flows/introduction) in the workspace, to associate with the template. If it is not found or is not published, the API responds with `404` |
+| `message_send_ttl_seconds` | integer | No | Message time to live (TTL), in seconds. It is sent to Meta and returned in the object |
+| `type_model` | string | No | Free text, stored and returned in the object |
+
+<Info>
+The `name` is normalized before being saved: it becomes lowercase, and spaces and symbols become `_`. For example, `Meu primeiro template` is saved as `meu_primeiro_template`. The name returned in the response is the normalized one.
+</Info>
+
+### Components
+
+The `components` property is **passed to Meta unchanged**: Positus does not define or validate component types, parameters, or buttons, and Meta is the one that accepts or rejects the content. See all the possibilities in [Meta's documentation on components](https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/components).
+
+The only cases in which Positus inspects the content of `components` are header files:
+
+| Component | Handled Formats | Behavior |
+| --- | --- | --- |
+| `HEADER` | `DOCUMENT`, `IMAGE`, `VIDEO` | The file sent in `example.header_handle[0]` is stored, sent to Meta, and returned in `header_file` |
+| `CAROUSEL` (header of each card) | `IMAGE`, `VIDEO` | The card files are stored and returned in `carousel_files` |
+
+### Simple Template
+
+```json
+{
+  "name": "Meu primeiro template",
+  "category": "UTILITY",
+  "language": "pt_BR",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Olá {{1}}, tudo bem, temos uma atualização sobre o seu pedido!",
+      "example": {
+        "body_text": [
+          [
+            "Maria"
+          ]
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Response** — `200 OK`
+
+```json
+{
+  "data": {
+    "id": "33333333-aaaa-4bbb-8ccc-444444444444",
+    "wa_id": "100000000000002",
+    "meta_template_id": "100000000000002",
+    "type_model": null,
+    "status": {
+      "id": 1,
+      "code": "PENDING",
+      "description": "Pendente"
+    },
+    "quality_score": {
+      "id": 0,
+      "code": "UNKNOWN"
+    },
+    "category": {
+      "id": 15,
+      "code": "UTILITY",
+      "description": "Serviços"
+    },
+    "language": {
+      "id": 46,
+      "code": "pt_BR",
+      "name": "Portuguese (BR)"
+    },
+    "name": "meu_primeiro_template",
+    "message_send_ttl_seconds": null,
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Olá {{1}}, tudo bem, temos uma atualização sobre o seu pedido!",
+        "example": {
+          "body_text": [
+            [
+              "Maria"
+            ]
+          ]
+        }
+      }
+    ],
+    "header_file": null,
+    "carousel_files": [],
+    "created_at": "2026-01-10T15:06:09.000000Z",
+    "updated_at": "2026-01-10T15:06:09.000000Z"
+  }
+}
+```
+
+<Info>
+`status`, `category`, and `wa_id` come from Meta's response. For this reason, the category may differ from the one sent (Meta may recategorize the template) and the status is usually `PENDING`. Creation responds with `200`, not `201`.
+</Info>
+
+### Template with a File in the Header
+
+The file must be sent in the same FormData field `components[1][example][header_handle][0]` (index of the `HEADER` component within `components`). The example below shows the logical body, where `(binary)` represents the file.
+
+```json
+{
+  "name": "newsletter mensal",
+  "category": "MARKETING",
+  "language": "pt_BR",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "IMAGE",
+      "example": {
+        "header_handle": [
+          "(binary)"
+        ]
+      }
+    },
+    {
+      "type": "BODY",
+      "text": "Olá {{1}}, a nossa newsletter mensal está no ar, clique no botão abaixo agora mesmo.",
+      "example": {
+        "body_text": [
+          [
+            "Maria"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "text": "Acessar newsletter",
+          "url": "https://exemplo.com.br/newsletter"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Response** — `200 OK` (excerpt). The uploaded file becomes available in `header_file`, and `header_handle[0]` now contains the identifier generated by Meta.
+
+```json
+{
+  "data": {
+    "id": "55555555-aaaa-4bbb-8ccc-666666666666",
+    "wa_id": "100000000000003",
+    "status": {
+      "id": 1,
+      "code": "PENDING",
+      "description": "Pendente"
+    },
+    "category": {
+      "id": 13,
+      "code": "MARKETING",
+      "description": "Marketing"
+    },
+    "language": {
+      "id": 46,
+      "code": "pt_BR",
+      "name": "Portuguese (BR)"
+    },
+    "name": "newsletter_mensal",
+    "components": [
+      {
+        "type": "HEADER",
+        "format": "IMAGE",
+        "example": {
+          "header_handle": [
+            "4::<identificador-gerado-pela-meta>"
+          ]
+        }
+      }
+    ],
+    "header_file": {
+      "mime_type": "image/jpeg",
+      "original_name": "banner.jpg",
+      "name": "aaaaaaaa-1111-4222-8333-bbbbbbbbbbbb.jpg",
+      "url": "https://cdn.exemplo.com/templates/aaaaaaaa-1111-4222-8333-bbbbbbbbbbbb.jpg",
+      "size": "161.41 KB"
+    },
+    "created_at": "2026-01-10T17:33:23.000000Z",
+    "updated_at": "2026-01-10T17:33:23.000000Z"
+  }
+}
+```
+
+### Carousel Template
+
+Each card with an image or video header requires the corresponding file in `components[i][cards][j][components][k][example][header_handle][0]` (FormData). The example below shows the logical body.
+
+```json
+{
+  "name": "Exemplo template carrossel",
+  "category": "MARKETING",
+  "language": "pt_BR",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Olá {{1}}, os produtos que você estava de olho acabaram de chegar na nossa loja!",
+      "example": {
+        "body_text": [
+          [
+            "Maria"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "CAROUSEL",
+      "cards": [
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "(binary)"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "Produto: {{1}}",
+              "example": {
+                "body_text": [
+                  [
+                    "Blusa preta"
+                  ]
+                ]
+              }
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "URL",
+                  "text": "Comprar agora",
+                  "url": "https://exemplo.com.br/loja"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "(binary)"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "Produto: {{1}}",
+              "example": {
+                "body_text": [
+                  [
+                    "Blusa verde"
+                  ]
+                ]
+              }
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "URL",
+                  "text": "Comprar agora",
+                  "url": "https://exemplo.com.br/loja"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Response** — `200 OK`. The card files are returned in `carousel_files`, in the order of the cards:
+
+```json
+{
+  "data": {
+    "id": "77777777-aaaa-4bbb-8ccc-888888888888",
+    "wa_id": "100000000000004",
+    "status": {
+      "id": 1,
+      "code": "PENDING",
+      "description": "Pendente"
+    },
+    "category": {
+      "id": 13,
+      "code": "MARKETING",
+      "description": "Marketing"
+    },
+    "name": "exemplo_template_carrossel",
+    "carousel_files": [
+      {
+        "mime_type": "image/png",
+        "original_name": "01.png",
+        "name": "bbbbbbbb-1111-4222-8333-cccccccccccc.png",
+        "url": "https://cdn.exemplo.com/templates/bbbbbbbb-1111-4222-8333-cccccccccccc.png",
+        "size": "2.54 MB"
+      },
+      {
+        "mime_type": "image/png",
+        "original_name": "02.png",
+        "name": "cccccccc-1111-4222-8333-dddddddddddd.png",
+        "url": "https://cdn.exemplo.com/templates/cccccccc-1111-4222-8333-dddddddddddd.png",
+        "size": "2.52 MB"
+      }
+    ],
+    "created_at": "2026-01-10T17:25:23.000000Z",
+    "updated_at": "2026-01-10T17:25:23.000000Z"
+  }
+}
+```
+
+### Authentication Template
+
+```json
+{
+  "name": "Exemplo template autenticação",
+  "category": "AUTHENTICATION",
+  "language": "pt_BR",
+  "components": [
+    {
+      "type": "BODY",
+      "add_security_recommendation": true
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "OTP",
+          "otp_type": "copy_code",
+          "text": "Copiar código"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Response** — `200 OK` (excerpt):
+
+```json
+{
+  "data": {
+    "id": "99999999-aaaa-4bbb-8ccc-000000000000",
+    "wa_id": "100000000000005",
+    "status": {
+      "id": 1,
+      "code": "PENDING",
+      "description": "Pendente"
+    },
+    "category": {
+      "id": 16,
+      "code": "AUTHENTICATION",
+      "description": "Autenticação"
+    },
+    "language": {
+      "id": 46,
+      "code": "pt_BR",
+      "name": "Portuguese (BR)"
+    },
+    "name": "exemplo_template_autenticacao",
+    "created_at": "2026-01-10T18:32:29.000000Z",
+    "updated_at": "2026-01-10T18:32:29.000000Z"
+  }
+}
+```
+
+<Info>
+The authentication component options (such as the body and the `OTP` button) are validated by Meta. To see the default text of authentication templates, use the [previews](#previews) route.
+</Info>
+
+### Limits and Errors
+
+| Status | Condition |
+| --- | --- |
+| `422` | Field validation failure (for example, invalid category or language). Response in the format `{ "message", "errors" }` |
+| `404` | Workspace not found or inactive, or `flow_id` nonexistent or not published |
+| `409` | Limit of **100 templates created per hour** per workspace reached, or workspace active templates limit reached (**250** or **6000**, depending on the workspace) |
+| `403` | The user is not the workspace owner |
+| `400` | The workspace has no associated WABA |
+| Meta status (e.g., `400`) | Meta rejected the creation. The response contains `{ "message": "..." }` with a translated message. The mapped cases include name already existing, body size, category mismatch, and blocked WABA |
+| `500` | Unexpected error: `{ "message": "..." }` |
+
+<Info>
+When a template is created through the API, the [`message_template_created`](/en/positus/templates/webhooks) event is sent to the workspace webhook.
+</Info>
+
+## Delete Template
+
+Deletes a template from the workspace. Requires the workspace owner user.
+
+```
+DELETE https://api.positus.global/v2/workspaces/{workspace}/message-templates/{template}
+```
+
+**Response**
+
+- `204 No Content`: the template was deleted in Meta and marked as `DELETED` in Positus.
+- `400`: Meta did not delete the template. The response contains `{ "message": "..." }` with the message returned by Meta.
+- `403`: the user is not the workspace owner.
+
+<Warning>
+Deletion is done **by the name** of the template in Meta. If the same name exists in more than one language, consider that the deletion may reach all of them, according to Meta's behavior.
+</Warning>
+
+## Previews
+
+Returns the authentication template previews provided by Meta for the workspace WABA.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates/previews
+```
+
+| Query String | Type | Default | Description |
+| --- | --- | --- | --- |
+| `category` | string | `AUTHENTICATION` | Category |
+| `languages` | string | — | Language(s) sent to Meta |
+| `add_security_recommendation` | boolean | `true` | Passed to Meta |
+| `code_expiration_minutes` | boolean | `true` | Passed to Meta as a boolean value |
+
+The response is the JSON returned by Meta, without transformation, and is cached for 1 hour for the same combination of workspace, category, languages, and options. If the workspace has no WABA, the API responds with `400`.
+
+## Restrictions
+
+Returns the template restrictions of the workspace.
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates/restrictions
+```
+
+**Response**
+
+```json
+{
+  "data": {
+    "order_details": false
+  }
+}
+```
+
+| Field | Description |
+| --- | --- |
+| `order_details` | Indicates whether the workspace has the permission related to `display_format` and `sub_category` |
+
+<Info>
+This route is informational only: the create endpoint only validates whether `display_format` and `sub_category` belong to the accepted values, and does **not** block submission when `order_details` is `false`.
+</Info>
+
+## List Templates of a Number
+
+Returns the templates of the workspace to which a number belongs.
+
+```
+GET https://api.positus.global/v2/whatsapp/numbers/{number}/message-templates
+```
+
+| Route Parameter | Description |
+| --- | --- |
+| `{number}` | UUID of an active number of the user. The user must be the **owner of the number**, otherwise the API responds with `403` |
+
+**Response** — `{ "data": [ ...template objects ] }`, with all non-deleted templates of the number's workspace, with no status filter.
+
+## Learn More
+
+- [Attributes](/en/positus/templates/attributes)
+- [Bulk Sending](/en/positus/templates/bulk-sending)
+- [Webhooks](/en/positus/templates/webhooks)
+- [Examples](/en/positus/templates/examples)

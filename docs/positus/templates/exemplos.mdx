@@ -1,0 +1,115 @@
+---
+title: Exemplos
+description: Passo a passo com curl para validar o nome, criar, consultar e excluir um template.
+---
+
+# Exemplos
+
+O passo a passo abaixo usa dados fictícios. Substitua `{workspace}`, `{template}` e o token pelos seus valores.
+
+```bash
+export TOKEN="<seu-token>"
+export WORKSPACE="<uuid-do-workspace>"
+export BASE="https://api.positus.global/v2/workspaces/$WORKSPACE/message-templates"
+```
+
+<Info>
+A criação e a exclusão exigem que o token pertença a um usuário **proprietário (owner)** do workspace.
+</Info>
+
+## 1. Validar o nome
+
+```bash
+curl -i -X POST "$BASE/validate" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json" \
+  -F "name=Aviso de pedido"
+```
+
+- `204 No Content`: o nome está livre.
+- `422`: o nome já existe. Escolha outro.
+
+## 2. Criar o template
+
+Os dados são enviados como FormData. Os campos de `components` usam a notação de colchetes.
+
+```bash
+curl -X POST "$BASE" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json" \
+  -F "name=Aviso de pedido" \
+  -F "category=UTILITY" \
+  -F "language=pt_BR" \
+  -F "components[0][type]=BODY" \
+  -F "components[0][text]=Olá {{1}}, temos uma atualização sobre o seu pedido!" \
+  -F "components[0][example][body_text][0][0]=Maria"
+```
+
+Resposta (`200 OK`):
+
+```json
+{
+  "data": {
+    "id": "33333333-aaaa-4bbb-8ccc-444444444444",
+    "wa_id": "100000000000002",
+    "status": { "id": 1, "code": "PENDING", "description": "Pendente" },
+    "category": { "id": 15, "code": "UTILITY", "description": "Serviços" },
+    "language": { "id": 46, "code": "pt_BR", "name": "Portuguese (BR)" },
+    "name": "aviso_de_pedido"
+  }
+}
+```
+
+O nome foi normalizado para `aviso_de_pedido`. Guarde o `id`, que é o `{template}` das próximas rotas.
+
+Para criar um template com imagem no header, envie o arquivo no campo `components[0][example][header_handle][0]` (e declare `components[0][type]=HEADER` e `components[0][format]=IMAGE`):
+
+```bash
+curl -X POST "$BASE" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json" \
+  -F "name=Newsletter mensal" \
+  -F "category=MARKETING" \
+  -F "language=pt_BR" \
+  -F "components[0][type]=HEADER" \
+  -F "components[0][format]=IMAGE" \
+  -F "components[0][example][header_handle][0]=@banner.jpg" \
+  -F "components[1][type]=BODY" \
+  -F "components[1][text]=Nossa newsletter mensal está no ar!"
+```
+
+## 3. Acompanhar a aprovação
+
+Liste os templates aprovados (`status=2`):
+
+```bash
+curl "$BASE?status=2" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json"
+```
+
+Ou consulte um template específico:
+
+```bash
+curl "$BASE/33333333-aaaa-4bbb-8ccc-444444444444" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json"
+```
+
+Em vez de consultar repetidamente, configure um [webhook no workspace](/docs/positus/templates/webhooks) e aguarde o evento `message_template_status_update`.
+
+## 4. Excluir o template
+
+```bash
+curl -i -X DELETE "$BASE/33333333-aaaa-4bbb-8ccc-444444444444" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json"
+```
+
+Resposta: `204 No Content`. Após a exclusão, o template deixa de aparecer na listagem, mas ainda pode ser consultado pela rota de exibição com o status `DELETED`.
+
+## Saiba mais
+
+- [API de Templates](/docs/positus/templates/api)
+- [Atributos](/docs/positus/templates/atributos)
+- [Webhooks](/docs/positus/templates/webhooks)

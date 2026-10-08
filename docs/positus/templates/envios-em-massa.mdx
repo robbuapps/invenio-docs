@@ -1,0 +1,148 @@
+---
+title: Envios em massa
+description: Envie um template já existente para muitos destinatários a partir de um arquivo CSV.
+---
+
+# Envios em massa
+
+<Warning>
+Os endpoints de `bulks` **não criam templates em lote**. Eles enviam um template **já existente** para vários destinatários, a partir de uma planilha CSV. Para criar templates, use a [API de Templates](/docs/positus/templates/api#criar-template).
+</Warning>
+
+Um envio em massa (campanha) associa um template do workspace, um número ativo e um arquivo CSV. Depois que você mapeia as colunas do CSV para os parâmetros do template, a Positus envia as mensagens uma a uma, e você pode pausar, retomar ou cancelar a campanha.
+
+## Autenticação e escopo
+
+As rotas usam o mesmo escopo e a mesma autenticação da [API de Templates](/docs/positus/templates/api#autenticação-e-escopo):
+
+```
+https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+Authorization: Bearer <seu-token>
+```
+
+| Parâmetro de rota | Descrição |
+| --- | --- |
+| `{workspace}` | UUID do workspace |
+| `{bulk}` | UUID do envio em massa |
+
+## Fluxo de uso
+
+1. Crie o envio em massa enviando o CSV (`POST /bulks`). O envio fica no status `1`, aguardando confirmação de dados.
+2. Informe o mapeamento das colunas (`PUT /bulks/{bulk}/header-mapping`). A Positus importa as linhas do CSV e inicia o processamento.
+3. Acompanhe o andamento (`GET /bulks`) e, se necessário, pause, retome ou cancele.
+
+## Status do envio
+
+| Id | Descrição |
+| --- | --- |
+| 1 | Aguardando confirmação de dados |
+| 2 | Preparando para processamento |
+| 3 | Em processamento |
+| 4 | Em pausa |
+| 5 | Finalizado |
+| 6 | Cancelado |
+| 7 | Limite de mensagens atingido |
+| 8 | Falhou |
+
+<Info>
+O envio é considerado `Falhou` (`8`) quando ocorre um erro na importação do CSV ou quando o workspace está banido. Cada linha do CSV também tem seu próprio resultado (pendente, sucesso ou falha), refletido nos contadores `processed_items_count` e `failed_items_count`.
+</Info>
+
+## Listar envios em massa
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+```
+
+Retorna todos os envios em massa do workspace, do mais recente para o mais antigo, com os contadores de itens. Não há paginação nem filtros.
+
+## Criar envio em massa
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+Content-Type: multipart/form-data
+```
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `name` | string | Sim | Nome do envio |
+| `template_id` | string (UUID) | Sim | UUID de um template do workspace |
+| `number_id` | string (UUID) | Sim | UUID de um número ativo do workspace |
+| `file` | arquivo | Sim | Arquivo `.csv` ou `.txt` com a primeira linha de cabeçalho |
+
+Se o template ou o número não forem encontrados no workspace, a API responde `404`.
+
+**Resposta** — `200 OK`. A primeira linha do CSV é lida e retornada em `headers`, para você montar o mapeamento:
+
+```json
+{
+  "data": {
+    "id": "aaaaaaaa-0000-4000-8000-111111111111",
+    "status": {
+      "id": 1,
+      "description": "Aguardando confirmação de dados"
+    },
+    "name": "Campanha de janeiro",
+    "headers": ["telefone", "nome", "pedido"],
+    "items_count": 0,
+    "processed_items_count": 0,
+    "failed_items_count": 0,
+    "number": {
+      "id": "bbbbbbbb-0000-4000-8000-222222222222",
+      "display_phone_number": "+55 11 90000-0000"
+    },
+    "template": {
+      "id": "cccccccc-0000-4000-8000-333333333333",
+      "name": "aviso_de_pedido"
+    },
+    "created_at": "2026-01-10T12:00:00.000000Z",
+    "updated_at": "2026-01-10T12:00:00.000000Z"
+  }
+}
+```
+
+<Info>
+A resposta acima está abreviada. O objeto de envio também traz `mapping`, `user`, `report` (relatório gerado) e as datas `started_at`, `finished_at` e `canceled_at`, que só aparecem quando definidas. Os contadores aparecem zerados nas respostas de criação e de mapeamento.
+</Info>
+
+## Mapear colunas
+
+Define quais colunas do CSV preenchem o número do destinatário e os parâmetros do template. Só é possível enquanto o envio está no status `1`; caso contrário, a API responde `403`.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks/{bulk}/header-mapping
+```
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `number` | string | Sim | Nome da coluna do CSV que contém o telefone do destinatário |
+| `body` | array de strings | Não | Nomes das colunas que preenchem as variáveis do corpo. A ordem corresponde a `{{1}}`, `{{2}}`, e assim por diante |
+| `buttons` | array de strings | Não | Nomes das colunas que preenchem os botões dinâmicos |
+| `header` | string | Não | Nome da coluna com a URL da mídia do header, por linha |
+| `header_variable` | string | Não | Valor de texto do header |
+| `header_from_file` | boolean | Não | Quando `true`, usa o arquivo enviado em `header_file` como mídia do header para todas as linhas |
+| `header_file` | arquivo | Condicional | Obrigatório quando `header_from_file` é `true` |
+
+Para o header, a precedência é: `header_variable` (header de texto), depois `header_from_file` (arquivo enviado) e, por fim, `header` (coluna com a URL por linha). Linhas com o telefone vazio são registradas como falha (`Contact number was not provided`).
+
+Após o mapeamento, o envio passa para o status `2` e a importação das linhas é iniciada.
+
+## Pausar, retomar e cancelar
+
+As três rotas não recebem corpo e retornam o objeto do envio com os contadores.
+
+| Ação | Rota | Efeito |
+| --- | --- | --- |
+| Pausar | `PUT /bulks/{bulk}/pause` | Status passa para `4` |
+| Retomar | `PUT /bulks/{bulk}/resume` | Status passa para `3` e o processamento é retomado |
+| Cancelar | `PUT /bulks/{bulk}/cancel` | Status passa para `6`. Gera o relatório quando algum item já foi processado |
+
+<Warning>
+Essas rotas não validam o status atual do envio. Confirme o status do envio antes de chamá-las.
+</Warning>
+
+## Saiba mais
+
+- [API de Templates](/docs/positus/templates/api)
+- [Atributos](/docs/positus/templates/atributos)
+- [Exemplos](/docs/positus/templates/exemplos)

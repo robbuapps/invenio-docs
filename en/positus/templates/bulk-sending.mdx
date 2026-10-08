@@ -1,0 +1,148 @@
+---
+title: Bulk Sending
+description: Send an existing template to many recipients from a CSV file.
+---
+
+# Bulk Sending
+
+<Warning>
+The `bulks` endpoints **do not create templates in bulk**. They send an **existing** template to multiple recipients, from a CSV spreadsheet. To create templates, use the [Templates API](/en/positus/templates/api#create-template).
+</Warning>
+
+A bulk sending (campaign) associates a workspace template, an active number, and a CSV file. After you map the CSV columns to the template parameters, Positus sends the messages one by one, and you can pause, resume, or cancel the campaign.
+
+## Authentication and Scope
+
+The routes use the same scope and authentication as the [Templates API](/en/positus/templates/api#authentication-and-scope):
+
+```
+https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+Authorization: Bearer <your-token>
+```
+
+| Route Parameter | Description |
+| --- | --- |
+| `{workspace}` | Workspace UUID |
+| `{bulk}` | Bulk sending UUID |
+
+## Usage Flow
+
+1. Create the bulk sending by uploading the CSV (`POST /bulks`). The sending stays in status `1`, awaiting data confirmation.
+2. Provide the column mapping (`PUT /bulks/{bulk}/header-mapping`). Positus imports the CSV rows and starts processing.
+3. Track progress (`GET /bulks`) and, if necessary, pause, resume, or cancel.
+
+## Sending Status
+
+| Id | Description |
+| --- | --- |
+| 1 | Awaiting data confirmation |
+| 2 | Preparing for processing |
+| 3 | Processing |
+| 4 | Paused |
+| 5 | Finished |
+| 6 | Canceled |
+| 7 | Message limit reached |
+| 8 | Failed |
+
+<Info>
+The sending is considered `Failed` (`8`) when an error occurs while importing the CSV or when the workspace is banned. Each CSV row also has its own result (pending, success, or failure), reflected in the `processed_items_count` and `failed_items_count` counters.
+</Info>
+
+## List Bulk Sendings
+
+```
+GET https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+```
+
+Returns all bulk sendings of the workspace, from newest to oldest, with the item counters. There is no pagination or filters.
+
+## Create Bulk Sending
+
+```
+POST https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks
+Content-Type: multipart/form-data
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Sending name |
+| `template_id` | string (UUID) | Yes | UUID of a workspace template |
+| `number_id` | string (UUID) | Yes | UUID of an active number of the workspace |
+| `file` | file | Yes | `.csv` or `.txt` file with a header in the first row |
+
+If the template or the number is not found in the workspace, the API responds with `404`.
+
+**Response** — `200 OK`. The first row of the CSV is read and returned in `headers`, so you can build the mapping:
+
+```json
+{
+  "data": {
+    "id": "aaaaaaaa-0000-4000-8000-111111111111",
+    "status": {
+      "id": 1,
+      "description": "Aguardando confirmação de dados"
+    },
+    "name": "Campanha de janeiro",
+    "headers": ["telefone", "nome", "pedido"],
+    "items_count": 0,
+    "processed_items_count": 0,
+    "failed_items_count": 0,
+    "number": {
+      "id": "bbbbbbbb-0000-4000-8000-222222222222",
+      "display_phone_number": "+55 11 90000-0000"
+    },
+    "template": {
+      "id": "cccccccc-0000-4000-8000-333333333333",
+      "name": "aviso_de_pedido"
+    },
+    "created_at": "2026-01-10T12:00:00.000000Z",
+    "updated_at": "2026-01-10T12:00:00.000000Z"
+  }
+}
+```
+
+<Info>
+The response above is abbreviated. The sending object also includes `mapping`, `user`, `report` (generated report), and the dates `started_at`, `finished_at`, and `canceled_at`, which only appear when defined. The counters appear zeroed in the create and mapping responses.
+</Info>
+
+## Map Columns
+
+Defines which CSV columns fill the recipient number and the template parameters. This is only possible while the sending is in status `1`; otherwise, the API responds with `403`.
+
+```
+PUT https://api.positus.global/v2/workspaces/{workspace}/message-templates/bulks/{bulk}/header-mapping
+```
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `number` | string | Yes | Name of the CSV column that contains the recipient's phone number |
+| `body` | array of strings | No | Names of the columns that fill the body variables. The order corresponds to `{{1}}`, `{{2}}`, and so on |
+| `buttons` | array of strings | No | Names of the columns that fill the dynamic buttons |
+| `header` | string | No | Name of the column with the header media URL, per row |
+| `header_variable` | string | No | Header text value |
+| `header_from_file` | boolean | No | When `true`, uses the file sent in `header_file` as the header media for all rows |
+| `header_file` | file | Conditional | Required when `header_from_file` is `true` |
+
+For the header, the precedence is: `header_variable` (text header), then `header_from_file` (uploaded file), and finally `header` (column with the URL per row). Rows with an empty phone number are recorded as a failure (`Contact number was not provided`).
+
+After mapping, the sending moves to status `2` and the import of the rows starts.
+
+## Pause, Resume, and Cancel
+
+The three routes do not receive a body and return the sending object with the counters.
+
+| Action | Route | Effect |
+| --- | --- | --- |
+| Pause | `PUT /bulks/{bulk}/pause` | Status changes to `4` |
+| Resume | `PUT /bulks/{bulk}/resume` | Status changes to `3` and processing resumes |
+| Cancel | `PUT /bulks/{bulk}/cancel` | Status changes to `6`. Generates the report when any item has already been processed |
+
+<Warning>
+These routes do not validate the current status of the sending. Check the sending status before calling them.
+</Warning>
+
+## Learn More
+
+- [Templates API](/en/positus/templates/api)
+- [Attributes](/en/positus/templates/attributes)
+- [Examples](/en/positus/templates/examples)

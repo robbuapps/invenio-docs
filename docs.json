@@ -186,6 +186,17 @@
                                 ]
                             },
                             {
+                                "group": "Templates",
+                                "pages": [
+                                    "docs/positus/templates/introducao",
+                                    "docs/positus/templates/atributos",
+                                    "docs/positus/templates/api",
+                                    "docs/positus/templates/envios-em-massa",
+                                    "docs/positus/templates/webhooks",
+                                    "docs/positus/templates/exemplos"
+                                ]
+                            },
+                            {
                                 "group": "WhatsApp Calling",
                                 "pages": [
                                     "docs/positus/calling/introducao",
@@ -276,6 +287,17 @@
                                     "en/positus/flows/webhooks",
                                     "en/positus/flows/api",
                                     "en/positus/flows/samples"
+                                ]
+                            },
+                            {
+                                "group": "Templates",
+                                "pages": [
+                                    "en/positus/templates/introduction",
+                                    "en/positus/templates/attributes",
+                                    "en/positus/templates/api",
+                                    "en/positus/templates/bulk-sending",
+                                    "en/positus/templates/webhooks",
+                                    "en/positus/templates/examples"
                                 ]
                             },
                             {
