@@ -172,7 +172,7 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 
 | **Campo**         | **Descrição** |
 |-------------------|---------------|
-| **ParameterName** | Nome da variável conforme definido no template. |
+| **ParameterName** | Nome da variável conforme definido no template, sem o `@` (por exemplo, `Coringa1`). Com o `@` (`@Coringa1`), o nome não casa com a variável e ela é preenchida com o dado do contato. |
 | **ParameterValue** | Valor que substituirá a variável no envio. |
 
 #### Botões do template
@@ -182,10 +182,10 @@ Os mesmos parâmetros preenchem os botões que exigem um valor por mensagem: **U
 | Situação | O que acontece |
 |----------|----------------|
 | O botão usa uma variável e a requisição envia o parâmetro com o mesmo nome | O `ParameterValue` substitui a variável no botão. |
-| O botão usa uma variável e a requisição não envia o parâmetro | A variável é preenchida com o dado do contato (por exemplo, um coringa). |
+| O botão usa uma variável e a requisição não envia o parâmetro, ou envia o nome com `@` | A variável é preenchida com o dado do contato (por exemplo, um coringa). |
 | O botão tem um texto fixo | O texto é enviado como está. |
 
-- Informe o `ParameterName` sem o `@` (por exemplo, `Code`). Nos botões, o nome com `@` também é aceito.
+- Informe o `ParameterName` sem o `@` (por exemplo, `Code`), como no corpo da mensagem. Com o `@`, o nome não casa e o botão usa o dado do contato.
 - O valor do botão é preenchido mesmo quando o template não tem variável no corpo da mensagem.
 - Quando o template tem mais de um botão com valor (por exemplo, URL dinâmica e Copiar código), cada botão usa o parâmetro da sua própria variável.
 - A soma dos valores de todos os botões de uma mensagem pode ter até 1000 caracteres.
