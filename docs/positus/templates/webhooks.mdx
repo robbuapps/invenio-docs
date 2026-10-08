@@ -1,0 +1,110 @@
+---
+title: Webhooks de Templates
+description: Configure webhooks no workspace para receber atualizações dos templates em tempo real.
+---
+
+# Webhooks de Templates
+
+Para acompanhar as atualizações dos templates, é recomendado que se configure um webhook no workspace para receber as atualizações em tempo real. É necessário [configurar um webhook no workspace](https://studio.posit.us/workspace/configuracoes) para receber esses eventos. Se o workspace não tiver um webhook configurado, nenhum evento é enviado.
+
+## Eventos de Templates
+
+A tabela abaixo lista todos os eventos de templates que podem ser recebidos através dos webhooks do workspace:
+
+| Evento | Descrição |
+| --- | --- |
+| `message_template_created` | Recebido quando um template é registrado: na criação pela API e também quando um template é importado pela sincronização com a Meta |
+| `message_template_status_update` | Recebido quando o status do template muda, para qualquer status exceto `DELETED` (que usa `message_template_deleted`) |
+| `message_template_deleted` | Recebido quando o template passa para o status `DELETED`, seja pela API de exclusão, seja por evento da Meta |
+| `message_template_category_update` | Recebido quando a categoria do template muda |
+| `message_template_quality_update` | Recebido quando o quality score do template muda |
+| `message_template_category_update_scheduled` | Recebido quando a Meta anuncia uma mudança de categoria futura para o template |
+| `message_template_sync` | Recebido quando o sistema da Positus força uma sincronização com a Meta |
+
+<Info>
+O webhook deve responder com `200 OK`. A Positus envia cada notificação uma vez (com `User-Agent: Positus` e timeout de 30 segundos), sem nova tentativa em caso de falha. Mantenha seu endpoint disponível.
+</Info>
+
+<Info>
+Um evento da Meta é replicado para todos os workspaces que possuem o mesmo template e compartilham o mesmo WABA.
+</Info>
+
+## Estrutura do webhook
+
+Todos os eventos usam o mesmo envelope, com os campos `event`, `workspace` e `template`:
+
+```json
+{
+  "event": "message_template_status_update",
+  "workspace": {
+    "id": "dddddddd-0000-4000-8000-444444444444",
+    "provider": {
+      "id": 1,
+      "name": "<nome-do-provedor>"
+    },
+    "type_workspace": "<tipo-do-workspace>",
+    "name": "Workspace de exemplo",
+    "business_id": "100000000000010",
+    "waba_id": "100000000000011"
+  },
+  "template": {
+    "id": "11111111-aaaa-4bbb-8ccc-222222222222",
+    "meta_template_id": "100000000000001",
+    "status": {
+      "id": 2,
+      "code": "APPROVED",
+      "description": "Aprovado"
+    },
+    "quality_score": {
+      "id": 0,
+      "code": "UNKNOWN"
+    },
+    "category": {
+      "id": 15,
+      "code": "UTILITY",
+      "description": "Serviços"
+    },
+    "language": {
+      "id": 46,
+      "code": "pt_BR",
+      "name": "Portuguese (BR)"
+    },
+    "name": "aviso_de_pedido",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Olá {{1}}, temos uma atualização sobre o seu pedido!"
+      }
+    ],
+    "header_file": null,
+    "carousel_files": []
+  }
+}
+```
+
+Campos do objeto `template`:
+
+| Campo | Descrição |
+| --- | --- |
+| `id` | UUID do template na Positus |
+| `meta_template_id` | Identificador do template na Meta |
+| `status` | `{ id, code, description }`. Veja [status](/docs/positus/templates/atributos#status) |
+| `quality_score` | `{ id, code }` |
+| `category` | `{ id, code, description }` |
+| `language` | `{ id, code, name }` |
+| `name` | Nome do template |
+| `components` | Componentes no formato da Meta |
+| `display_format` | Só aparece quando definido |
+| `sub_category` | Só aparece quando definido |
+| `header_file` | Arquivo do header ou `null` |
+| `carousel_files` | Arquivos dos cards de carrossel |
+
+<Info>
+O objeto `template` do webhook é mais enxuto que o objeto retornado pela [API](/docs/positus/templates/atributos#objeto-de-template): ele **não** inclui `wa_id`, `type_model`, `message_send_ttl_seconds`, `created_at` nem `updated_at`. Use `meta_template_id` como identificador na Meta. Quando o status é `PAUSED`, o `status.id` (`10` ou `11`) é a única forma de distinguir a primeira da segunda pausa.
+</Info>
+
+## Saiba mais
+
+- [Webhooks do workspace](https://studio.posit.us/workspace/configuracoes)
+- [Atributos](/docs/positus/templates/atributos)
+- [API de Templates](/docs/positus/templates/api)

@@ -1,0 +1,47 @@
+---
+title: Introduction to Templates
+description: Templates are pre-approved WhatsApp messages used to start marketing, utility, and authentication conversations.
+---
+
+# Introduction to Templates
+
+`Templates` (message templates) are used in template messages to open marketing, utility, and authentication conversations with your customers. Unlike free-form messages, template messages are the only type of message that can be sent to customers who have not yet sent you a message or who have not sent you a message in the last 24 hours.
+
+## Categories
+
+Each template belongs to a category. The Positus public API accepts template creation only in the categories below:
+
+| Category | Code | Use |
+| --- | --- | --- |
+| Marketing | `MARKETING` | Promotions, news, and commercial communications |
+| Services | `UTILITY` | Transactional messages and follow-ups on an order or service |
+| Authentication | `AUTHENTICATION` | Sending verification codes (one-time passwords) |
+
+<Info>
+Meta may recategorize a template during review. For this reason, the category returned by the API may differ from the category sent at creation. See the [attributes](/en/positus/templates/attributes) for the complete list of categories.
+</Info>
+
+## Lifecycle and Approval
+
+Templates must be approved by Meta before they can be sent. A template created through the API normally starts with the `PENDING` status and evolves according to the review and usage:
+
+- **Approved (`APPROVED`)**: the template is cleared for sending.
+- **Rejected (`REJECTED`)**: the template did not pass the review.
+- **Paused, disabled, or limited**: templates can also be changed automatically based on customer feedback and engagement. While the template is not eligible, it cannot be sent in a template message.
+- **Deleted (`DELETED`)**: the template was removed.
+
+The complete list of statuses is on the [attributes](/en/positus/templates/attributes#status) page. Each relevant change generates a [webhook](/en/positus/templates/webhooks) event in the workspace.
+
+<Info>
+For Meta's guidelines on templates, see the [template guidelines](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines). For Meta's complete documentation, see the [template management API](https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates).
+</Info>
+
+## Learn More
+
+Explore topics related to WhatsApp Templates:
+
+- [Attributes](/en/positus/templates/attributes)
+- [Templates API](/en/positus/templates/api)
+- [Bulk Sending](/en/positus/templates/bulk-sending)
+- [Webhooks](/en/positus/templates/webhooks)
+- [Examples](/en/positus/templates/examples)
