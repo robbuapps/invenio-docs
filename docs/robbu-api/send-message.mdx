@@ -172,8 +172,23 @@ O envio deve incluir no cabeçalho a autenticação no formato: `Authorization: 
 
 | **Campo**         | **Descrição** |
 |-------------------|---------------|
-| **ParameterName** | Nome da variável conforme definido no template. |
+| **ParameterName** | Nome da variável conforme definido no template, sem o `@` (por exemplo, `Coringa1`). Com o `@` (`@Coringa1`), o nome não casa com a variável e ela é preenchida com o dado do contato. |
 | **ParameterValue** | Valor que substituirá a variável no envio. |
+
+#### Botões do template
+
+Os mesmos parâmetros preenchem os botões que exigem um valor por mensagem: **URL dinâmica** e **Copiar código**. O valor de cada botão é definido no mapeamento do template (Invenio Center > Recursos > Canais > WhatsApp > Templates > Editar). Pode ser um texto fixo ou uma variável, como `@Code` ou `@Coringa1`.
+
+| Situação | O que acontece |
+|----------|----------------|
+| O botão usa uma variável e a requisição envia o parâmetro com o mesmo nome | O `ParameterValue` substitui a variável no botão. |
+| O botão usa uma variável e a requisição não envia o parâmetro, ou envia o nome com `@` | A variável é preenchida com o dado do contato (por exemplo, um coringa). |
+| O botão tem um texto fixo | O texto é enviado como está. |
+
+- Informe o `ParameterName` sem o `@` (por exemplo, `Code`), como no corpo da mensagem. Com o `@`, o nome não casa e o botão usa o dado do contato.
+- O valor do botão é preenchido mesmo quando o template não tem variável no corpo da mensagem.
+- Quando o template tem mais de um botão com valor (por exemplo, URL dinâmica e Copiar código), cada botão usa o parâmetro da sua própria variável.
+- A soma dos valores de todos os botões de uma mensagem pode ter até 1000 caracteres.
 
 ---
 
@@ -610,9 +625,69 @@ Ao realizar uma chamada à API, diferentes códigos de status podem ser retornad
 
   ```
 > ⚠️**Observação**:<br/>
-> Nesse caso, a única exigência é a utilização da variável `@Code` no botão, seja em um template de autenticação ou em um template tradicional que utilize a função de copiar e colar. No corpo do texto, é possível utilizar outras variáveis — como coringas, por exemplo — conforme sua preferência, sem impacto no funcionamento.
+> Nesse caso, a única exigência é a utilização da variável `@Code` no botão, seja em um template de autenticação ou em um template tradicional que utilize a função de copiar e colar. No corpo do texto, é possível utilizar outras variáveis — como coringas, por exemplo — conforme sua preferência, sem impacto no funcionamento. O corpo também pode não ter nenhuma variável. Veja [Botões do template](#botões-do-template).
 
 <img src="https://robbublob.blob.core.windows.net/docs/API/AutenticaSend.png" /> 
+
+</Accordion>
+
+<Accordion title="Envio de template com botões (URL dinâmica e Copiar código)">
+
+  Template com um botão de URL dinâmica e um botão de Copiar código. No mapeamento do template, o valor do botão de URL é `@Link` e o do botão de Copiar código é `@Cupom`.
+
+  ```json title="POST https://api.robbu.global/v1/sendmessage" showLineNumbers
+
+    {
+  "invenioPrivateToken": "xxxxxx-xxxxxxx-xxxxxxxx-xxxxxxxx",
+  "text": "",
+  "emailSubject": "",
+  "channel": 3,
+  "templateName": "oferta_botoes",
+  "attendantUserName": "",
+  "templateParameters": [
+        {
+            "parameterName": "Link",
+            "parameterValue": "promocao-123"
+        },
+        {
+            "parameterName": "Cupom",
+            "parameterValue": "CUPOM10"
+        }
+  ],
+  "source": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "prospect": false
+  },
+  "destination": {
+      "countryCode": 55,
+      "phoneNumber": 11999999999,
+      "email": ""
+  },
+  "discardSettings": {
+      "recentContactLastHours": 0,
+      "InAttendance": false
+  },
+  "contact": {
+      "name": "",
+      "customCode": "",
+      "id": "",
+      "tag": "",
+      "jokers": [
+          "",
+          "",
+          "",
+          "",
+          ""
+      ],
+      "walletClientCode": "comercial",
+      "updateIfExists": false
+  }
+}
+
+  ```
+> ⚠️**Observação**:<br/>
+> O `ParameterName` vai sem o `@`. Cada botão com valor usa o parâmetro da sua variável, na ordem em que aparece no template, e a soma dos valores dos botões pode ter até 1000 caracteres. Veja [Botões do template](#botões-do-template).
 
 </Accordion>
 
