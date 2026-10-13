@@ -1,5 +1,104 @@
 ---
 title: "Fluxo Disparado Externamente"
 sidebarTitle: "Fluxo Externo"
-description: "Robbu Verify permite verificar se um número de telefone está ativo no WhatsApp. Este serviço é ideal para integrar em sistemas que precisam confirmar a presença no WhatsApp antes de interagir com um usuário."
+description: "Inicie um fluxo da IDR a partir do seu sistema, enviando os dados do contato para o webhook da condição Fluxo disparado externamente com origem Invenio API."
 ---
+
+## Como funciona
+
+A condição **Fluxo disparado externamente** da IDR gera uma URL de webhook. Quando o seu sistema envia uma requisição para essa URL, o Invenio identifica o contato (ou cria um novo, se ele não existir) e executa as ações configuradas no fluxo para ele.
+
+<Note>
+Esta página trata da origem **Invenio API**, em que o seu próprio sistema monta e envia o payload. As demais origens da condição (RD Station, Shopify, Monetizze, WooCommerce, Eduzz, Hotmart, Stripe, ActiveCampaign, Nuvemshop e Mercado Pago) recebem o payload no formato de cada plataforma e não seguem este documento.
+</Note>
+
+## Configuração na IDR
+
+<Steps>
+  <Step title="Adicione a condição">
+    No editor da IDR, adicione uma condição do tipo **Fluxo disparado externamente** e selecione a origem **Invenio API**.
+  </Step>
+  <Step title="Copie a URL do webhook">
+    O campo **Webhook** mostra a URL que o seu sistema deve chamar, no formato:
+
+    ```
+    https://i-dr.io/v1/idr/webhook/api/{idIdr}/{idWebhook}
+    ```
+  </Step>
+  <Step title="Mapeie os campos do contato">
+    Informe em que caminho do JSON enviado estão os dados do contato. O caminho é livre e usa ponto para objetos aninhados:
+
+    | Campo | Valor sugerido |
+    |-------|----------------|
+    | Nome Pessoa | `contact.name` |
+    | Documento | `contact.document` |
+    | Telefone | `contact.channel.phone` |
+    | E-mail | `contact.channel.email` |
+
+    Se o seu sistema envia os dados em outro formato, ajuste o caminho. Por exemplo, `PhoneNumber` para um telefone na raiz do JSON, ou `data.customer.mobile` para um telefone dentro de outro objeto.
+  </Step>
+</Steps>
+
+<Warning>
+A URL do webhook não exige token de autenticação. Trate-a como uma credencial e não a exponha publicamente.
+</Warning>
+
+## Requisição
+
+Envie um `POST` com `Content-Type: application/json` para a URL do webhook.
+
+### Payload
+
+Os dados do contato vão nos caminhos mapeados na condição. O identificador do contato, `hashPessoa`, vai sempre na **raiz** do JSON:
+
+```json
+{
+  "hashPessoa": "A1B2C3D4E5F60718293A4B5C6D7E8F90",
+  "contact": {
+    "name": "Maria Silva",
+    "document": "12345678900",
+    "channel": {
+      "phone": "11999999999",
+      "email": "maria@email.com"
+    }
+  }
+}
+```
+
+| Campo | Obrigatório | Descrição |
+|-------|-------------|-----------|
+| `hashPessoa` | Não | Identificador do contato no Invenio. Quando enviado, o fluxo é executado exatamente para esse contato. |
+| Campos mapeados | Ao menos um | Nome, documento, telefone e e-mail, nos caminhos configurados na condição. |
+
+<Warning>
+O `hashPessoa` não tem campo de mapeamento: ele só é lido na raiz do JSON. Se ele for enviado dentro de outro objeto, como `contact`, o Invenio não o encontra e identifica o contato pelos outros dados, o que pode gerar um contato duplicado.
+</Warning>
+
+### Identificação do contato
+
+- **Com `hashPessoa`:** o fluxo é executado para o contato correspondente.
+- **Sem `hashPessoa`:** o contato é procurado pelos dados enviados (telefone, documento e e-mail). Se nenhum contato for encontrado, um novo é criado.
+
+Sempre que o seu sistema já conhecer o contato, envie o `hashPessoa`: é o que garante que o fluxo rode no contato certo, sem criar duplicado. Dentro de um fluxo da IDR, ele está disponível na variável de sistema `{{contactrobbuid}}`.
+
+### Formato do telefone
+
+- **Número do Brasil sem DDI:** DDD + número, por exemplo `11999999999`.
+- **Número com DDI:** prefixe com `+`, por exemplo `+5511999999999`.
+
+<Tip>
+Um número sem `+` é sempre tratado como brasileiro. Se enviar o DDI, use o `+` na frente.
+</Tip>
+
+## Respostas
+
+| Status | Quando |
+|--------|--------|
+| `204 No Content` | A requisição foi processada e o fluxo foi iniciado. |
+| `200 OK` | O fluxo foi iniciado, mas algum campo mapeado não foi encontrado no payload. O corpo traz o aviso no campo `warning`, por exemplo `{"warning": "invalid document;"}`. |
+| `401 Unauthorized` | O identificador da IDR na URL é inválido. |
+| `404 Not Found` | Não existe condição ativa com esse webhook na IDR informada. |
+
+## Uso dos dados no fluxo
+
+O JSON recebido fica salvo no contato na variável `{{lastapiresponse}}`, que pode ser usada nas ações do fluxo, como **Criar ou atualizar variável** ou **Enviar mensagem**.
