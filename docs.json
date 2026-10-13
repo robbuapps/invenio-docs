@@ -111,7 +111,8 @@
                             "docs/robbu-api/auth",
                             "docs/carteiro-digital/carteiro-digital-api",
                             "docs/robbu-api/verify",
-                            "docs/robbu-api/send-message"
+                            "docs/robbu-api/send-message",
+                            "docs/robbu-api/idr-external-flow"
                         ]
                     },                    
                     {
