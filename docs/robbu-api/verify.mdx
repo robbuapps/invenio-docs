@@ -8,9 +8,17 @@ Essa verificação aumenta a assertividade das comunicações, evita tentativas 
 Para utilizar o serviço, é necessário solicitar a habilitação junto à equipe comercial da Robbu."
 ---
 
+<Warning>
+  **A URL do Robbu Verify mudou.** Use `https://api.verify.robbu.global/v1`.
+
+  A URL antiga, `https://api.robbu.global/v1/verify`, funciona até **31/10/2026**. A partir de **01/11/2026**, ela deixa de verificar números: primeiro responde `410 Gone` indicando a URL nova e depois deixa de responder.
+
+  Só a URL muda. Tokens, body e resposta continuam iguais. Veja [Migração da URL antiga](#migração-da-url-antiga).
+</Warning>
+
 ## Integração
 
-Para usar a API, você deve realizar uma requisição `POST` para o endpoint `/verify`, enviando um **array de números de telefone** no corpo da requisição.
+Para usar a API, você deve realizar uma requisição `POST` para o endpoint `https://api.verify.robbu.global/v1`, enviando um **array de números de telefone** no corpo da requisição.
 
 #### Regras para os números de telefone
 
@@ -28,9 +36,15 @@ Para usar a API, você deve realizar uma requisição `POST` para o endpoint `/v
 423 Locked
 ```
 
+#### Boas práticas
+
+- **Envie os números em lote.** Uma chamada com 200 números é melhor que 200 chamadas com 1 número cada.
+- **Aguarde a resposta antes de enviar a próxima chamada** com o mesmo PrivateToken.
+- **Ao receber `423`, aguarde alguns segundos e tente de novo.** O `423` indica que já existe uma chamada em andamento para a sua conta; não é uma falha na verificação.
+
 ####  Base Url
 ```
-https://api.robbu.global/v1/verify
+https://api.verify.robbu.global/v1
 ```
 ####  Autenticação
 Para acessar os endpoints da API da Robbu, você precisa autenticar suas requisições utilizando dois tipos de token:
@@ -91,7 +105,7 @@ URL: https://api.robbu.global/v1/login
 xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 </ParamField>
 
-<ParamField header="Authentication" type="string" placeholder="Bearer" required="true">
+<ParamField header="Authorization" type="string" placeholder="Bearer" required="true">
 Bearer TOKEN
 </ParamField>
 
@@ -106,7 +120,7 @@ Bearer TOKEN
 <CodeGroup>
 
 ```bash Curl
-curl --location 'https://api.robbu.global/v1/verify' \
+curl --location 'https://api.verify.robbu.global/v1' \
 --header 'Content-Type: application/json' \
 --header 'PrivateToken: teste' \
 --header 'Authorization: Bearer TOKEN' \
@@ -122,12 +136,12 @@ curl --location 'https://api.robbu.global/v1/verify' \
         "18402846702",
         "15097929172"
     ]
-}
+}'
 ```
 
 ```csharp C# HttpClient
 var client = new HttpClient();
-var request = new HttpRequestMessage(HttpMethod.Post, "https://api.robbu.global/v1/verify");
+var request = new HttpRequestMessage(HttpMethod.Post, "https://api.verify.robbu.global/v1");
 request.Headers.Add("PrivateToken", "teste");
 request.Headers.Add("Authorization", "Bearer TOKEN");
 var content = new StringContent("{\n    \"PhoneNumbers\": [\n        \"14128880043\",\n        \"56971332420\",\n        \"17077878069\",\n        \"18176475163\",\n        \"50431999232\",\n        \"51941700660\",\n        \"18057965469\",\n        \"18402846702\",\n        \"15097929172\"\n    ]\n}\n", null, "application/json");
@@ -162,7 +176,7 @@ xhr.addEventListener("readystatechange", function() {
   }
 });
 
-xhr.open("POST", "https://api.robbu.global/v1/verify");
+xhr.open("POST", "https://api.verify.robbu.global/v1");
 xhr.setRequestHeader("Content-Type", "application/json");
 xhr.setRequestHeader("PrivateToken", "teste");
 xhr.setRequestHeader("Authorization", "Bearer TOKEN");
@@ -236,8 +250,25 @@ xhr.send(data);
 | `400`           | Erro no request. Verifique os parâmetros enviados na requisição.                      |
 | `401`           | Não autorizado. O token de autenticação é inválido ou está ausente.                   |
 | `403`           | Sem permissão. O cliente não possui autorização para acessar este recurso.            |
-| `423`           | Não é permitido realizar chamadas simultâneas para este endpoint utilizando o mesmo PrivateToken.            |
+| `410`           | URL descontinuada. Retornado pela URL antiga (`api.robbu.global/v1/verify`) a partir de 01/11/2026. Use a URL nova. |
+| `423`           | Já existe uma requisição em andamento para este PrivateToken. Aguarde a anterior terminar e tente de novo.            |
 | `500`           | Erro interno. Entre em contato com o suporte.                    |
+
+## Migração da URL antiga
+
+Se a sua integração usa `https://api.robbu.global/v1/verify`, troque para `https://api.verify.robbu.global/v1` até **31/10/2026**.
+
+| | **URL** |
+|---|---|
+| Antiga (descontinuada) | `POST https://api.robbu.global/v1/verify` |
+| Nova | `POST https://api.verify.robbu.global/v1` |
+
+- A URL nova termina em `/v1`, **sem** `/verify` no final.
+- Headers (`PrivateToken` e `Authorization`), body e resposta não mudam.
+- O token gerado no login continua válido; não é preciso gerar um novo.
+- A partir de **01/11/2026**, a URL antiga responde `410 Gone` e, depois, deixa de responder.
+
+Dúvidas: **[suporte@robbu.global](mailto:suporte@robbu.global)** ou **[help@robbu.global](mailto:help@robbu.global)**.
 
 ## ⁉️ Perguntas Frequentes (FAQ)
 
@@ -252,6 +283,14 @@ xhr.send(data);
 
   <Accordion title="Existe algum custo para usar o Robbu Verify?">
     Entre em contato com a equipe comercial da Robbu para detalhes sobre custos e planos disponíveis.
+  </Accordion>
+
+  <Accordion title="Preciso mudar alguma coisa além da URL?">
+    Não. Os headers, o token, o body e a resposta continuam iguais. Basta trocar `https://api.robbu.global/v1/verify` por `https://api.verify.robbu.global/v1`.
+  </Accordion>
+
+  <Accordion title="Recebi 423. O que fazer?">
+    O `423` indica que já existe uma requisição em andamento para o seu PrivateToken. Aguarde alguns segundos e envie de novo. Para evitar o erro, envie os números em lote (até 1000 por chamada) e só envie a próxima requisição depois de receber a resposta da anterior.
   </Accordion>
 
 </AccordionGroup>
