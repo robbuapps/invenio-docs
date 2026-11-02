@@ -51,75 +51,125 @@ A plataforma Invenio by Robbu atualmente suporta autenticação SSO com os segui
 
 ## Integração com Microsoft Entra ID
 
-A integração com **Microsoft Entra ID** (anteriormente Azure AD) utiliza o protocolo **OpenID Connect (OIDC)**, baseado em OAuth 2.0.
+A integração com **Microsoft Entra ID** (anteriormente Azure AD) usa o protocolo **OpenID Connect (OIDC)** e é configurada pelo próprio cliente, no Invenio Center, sem abrir chamado.
+
+### Onde configurar
+
+No Invenio Center, abra o menu do seu usuário e vá em **Configurações > SSO e provisionamento > Configurar**.
+
+<Note>
+**Quem acessa:** administradores e supervisores da empresa. Os demais usuários não veem a tela.
+</Note>
+
+A configuração tem **3 passos**, nas abas **Conexão**, **Provisionamento** e **Mapeamento**. Você pode parar e voltar depois. Nada muda para quem entra com senha até você ligar o **Login apenas por SSO**.
+
+### Passo 1: Conexão
+
+Na aba **Conexão**, escolha o protocolo **Microsoft Entra ID** e conecte de uma das duas formas.
+
+<Tabs>
+  <Tab title="Conectar com a Microsoft">
+    Forma mais simples: não precisa criar registro de aplicativo.
+
+    <Steps>
+      <Step title="Clique em Conectar com a Microsoft">
+        Na aba **Conexão**, clique em **Conectar com a Microsoft**.
+      </Step>
+      <Step title="Autorize com um administrador do Entra ID">
+        Entre com uma conta de **administrador do Microsoft Entra ID** da sua empresa e aceite as permissões do aplicativo do Invenio.
+
+        A permissão de leitura de grupos serve para o Invenio conferir os grupos do usuário no login. O Invenio só lê, e nunca escreve nada no seu Entra ID.
+      </Step>
+      <Step title="Confira o status">
+        De volta ao Center, a conexão aparece como **Conectado com a Microsoft**, com o ID do locatário (tenant) conectado.
+      </Step>
+    </Steps>
+
+    <Warning>
+    **Grupos com membros ocultos:** nesta forma de conexão, não mapeie grupo com membros ocultos. O Invenio não enxerga os membros desse grupo e trata o usuário como fora dele.
+    </Warning>
+  </Tab>
+  <Tab title="Registro de aplicativo próprio">
+    Use quando a sua empresa prefere manter um aplicativo próprio no Entra ID.
+
+    <Steps>
+      <Step title="Crie o registro de aplicativo">
+        1. No [Portal do Azure](https://portal.azure.com), abra **Microsoft Entra ID > App registrations > New registration**.
+        2. **Name:** `Invenio SSO` (ou o nome que preferir).
+        3. **Supported account types:** **Accounts in this organizational directory only (Single tenant)**.
+        4. **Redirect URI:** tipo **Web**, com a **URL de retorno (Entra ID)** que a tela mostra em **Dados para cadastrar no provedor**:
+
+        ```
+        https://api.invenio.common.robbu.global/v1/login/sso/authentication
+        ```
+
+        5. Clique em **Register**.
+
+        <Warning>
+        **URL exata:** qualquer diferença na Redirect URI impede o login.
+        </Warning>
+      </Step>
+      <Step title="Ligue a emissão de ID tokens">
+        Em **Authentication > Implicit grant and hybrid flows**, marque **ID tokens** e salve.
+      </Step>
+      <Step title="Inclua os grupos no token (para o provisionamento)">
+        Em **Token configuration > Add groups claim**, escolha **Groups assigned to the application** e marque o **ID token**.
+
+        Alternativa: use **App roles** e atribua usuários ou grupos a elas. O Invenio lê as duas formas.
+
+        <Tip>
+        **Por que "Groups assigned to the application":** quando o usuário está em grupos demais, o Entra deixa de mandar a lista no token, e o Invenio nega o login por não conseguir provar o grupo. Limitar aos grupos atribuídos ao aplicativo evita isso.
+        </Tip>
+      </Step>
+      <Step title="Informe o ID do aplicativo no Center">
+        Copie o **Application (client) ID** da página **Overview** do aplicativo, cole em **ID do aplicativo (cliente)** e clique em **Salvar e testar conexão**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+Com a conexão gravada, a aba fica **só para leitura**. Para trocar de aplicativo ou de protocolo, clique em **Desconectar** e conecte de novo.
+
+### Passo 2: Provisionamento
 
 <Steps>
-  <Step title="Criar aplicativo no Microsoft Entra ID">
-    1. Acesse o [Portal do Azure](https://portal.azure.com)
-    2. Navegue até o menu **Microsoft Entra ID**
-    3. Clique em **App registrations** (Registros de aplicativo)
-    4. Clique em **New Registration** (Novo registro)
-    
-    <Tip>
-    **Acesso direto:** No portal do Azure, use a barra de pesquisa e digite "Microsoft Entra ID" para acesso rápido.
-    </Tip>
-  </Step>
-  
-  <Step title="Configurar o aplicativo">
-    **Preencha as informações:**
-    
-    1. **Name (Nome):** `Invenio SSO` (ou nome de sua preferência)
-    
-    2. **Supported account types:**
-       - Selecione: **Accounts in this organizational directory only (Single tenant)**
-       - Isso garante que apenas usuários da sua organização possam autenticar
-    
-    3. **Redirect URI:**
-       - Tipo: **Web**
-       - URL:
-       ```
-       https://api.invenio.common.robbu.global/v1/login/sso/authentication
-       ```
-    
-    4. Clique em **Register** (Registrar)
-    
+  <Step title="Provisionamento automático">
+    Com **Criar e atualizar usuários automaticamente no login** ligado, cada login pelo SSO acerta o usuário no Invenio:
+
+    | Situação no login | O que o Invenio faz |
+    | --- | --- |
+    | O usuário ainda não existe e está num grupo mapeado | Cria o usuário no grupo de acesso mapeado |
+    | O usuário existe com outro grupo de acesso | Atualiza para o grupo mapeado |
+    | O usuário estava inativo ou excluído e está num grupo mapeado | Reativa no grupo mapeado |
+    | O Entra ID mandou os grupos e nenhum está mapeado | Desativa o usuário e nega o acesso |
+    | O Entra ID não mandou os grupos | Só nega o acesso, sem mexer no usuário |
+
+    Com vários grupos mapeados, vale o de **maior privilégio**: Administrador, depois Supervisor, depois Atendente.
+
     <Warning>
-    **URL exata:** A Redirect URI deve ser **exatamente** como fornecida acima. Qualquer diferença impedirá a autenticação.
+    Com o provisionamento ligado e **nenhum grupo mapeado**, todo acesso pelo SSO é negado. Mapeie os grupos no passo 3 antes de liberar para a equipe.
     </Warning>
   </Step>
-  
-  <Step title="Habilitar ID Tokens">
-    1. No aplicativo criado, vá para o menu **Authentication** (Autenticação)
-    2. Na seção **Implicit grant and hybrid flows**, marque os checkboxes:
-       - ✅ **Access tokens** (recommended)
-       - ✅ **ID tokens** (recommended)
-    3. Clique em **Save** (Salvar)
-    
-    <Note>
-    **Necessário:** Esses tokens são essenciais para o fluxo de autenticação OpenID Connect funcionar corretamente.
-    </Note>
-  </Step>
-  
-  <Step title="Obter Application ID">
-    1. Acesse o menu **Overview** (Visão geral) do aplicativo
-    2. Localize e copie o valor de **Application (client) ID**
-    3. **Envie** esse ID para a equipe técnica da Robbu
-    
-    <Check>
-    **Formato do ID:** UUID (exemplo: `a1b2c3d4-e5f6-7890-abcd-ef1234567890`)
-    </Check>
-  </Step>
-  
-  <Step title="Finalizar com a Robbu">
-    Compartilhe as seguintes informações com a equipe técnica da Robbu:
-    
-    - ✅ **Application (client) ID**
-    - ✅ **Tenant ID** (encontrado também no Overview)
-    - ✅ **Redirect URI** configurada
-    
-    A equipe Robbu finalizará a configuração no backend do Invenio.
+  <Step title="Login apenas por SSO">
+    Com **Login apenas por SSO** ligado, a senha local fica desabilitada, e todo acesso passa pelo Entra ID.
+
+    Enquanto ele estiver desligado, quem tem senha ainda entra com ela, fora do controle do Entra ID. Ligue quando a equipe já estiver entrando pelo SSO.
   </Step>
 </Steps>
+
+### Passo 3: Mapeamento
+
+Cada mapeamento liga um **grupo do Entra ID** a um **grupo de acesso do Invenio** (Administrador, Supervisor, Atendente ou Carteiro Digital).
+
+1. Em **Grupo no provedor (ID do objeto)**, informe o **Object ID** do grupo ou o **valor da app role**.
+2. Em **Grupo de acesso no Invenio**, escolha o grupo.
+3. Clique em **Incluir mapeamento**.
+
+<Tip>
+**Use o ID do objeto, não o nome:** o nome do grupo pode mudar; o ID não.
+</Tip>
+
+Ao excluir um mapeamento, quem só tinha aquele grupo passa a ter o acesso negado no próximo login. O SSO nunca atribui o perfil Super-Admin.
 
 ---
 
@@ -290,16 +340,11 @@ O **ADFS** pode ser configurado como Provedor de Identidade SAML para autenticar
 
 ## Finalização da Integração
 
-Após configurar o provedor de identidade (Microsoft Entra ID, JumpCloud ou ADFS), você deve:
+Para **JumpCloud** e **ADFS** (SAML 2.0), depois de configurar o provedor, você deve:
 
 <Steps>
   <Step title="Enviar informações para a Robbu">
     **Compartilhe com a equipe técnica da Robbu:**
-    
-    **Para Microsoft Entra ID (OpenID Connect):**
-    - ✅ Application (client) ID
-    - ✅ Tenant ID
-    - ✅ Directory (tenant) name
     
     **Para JumpCloud ou ADFS (SAML 2.0):**
     - ✅ Arquivo XML de metadados SAML
@@ -466,19 +511,11 @@ Após configurar o provedor de identidade (Microsoft Entra ID, JumpCloud ou ADFS
   </Accordion>
 
   <Accordion title="📤 É necessário enviar algo para a Robbu após configurar o IdP?">
-    **Sim, é essencial** enviar informações de configuração para a Robbu após criar a aplicação no seu provedor de identidade.
-    
-    **O que enviar depende do provedor:**
+    **Depende do provedor.**
     
     **Para Microsoft Entra ID (OpenID Connect)** 🔵
     
-    Envie as seguintes informações:
-    - ✅ **Application (client) ID** (UUID da aplicação)
-    - ✅ **Tenant ID** (UUID do diretório)
-    - ✅ **Directory (tenant) name** (exemplo: `minhaempresa.onmicrosoft.com`)
-    
-    **Onde encontrar:**
-    **Portal do Azure > Microsoft Entra ID > App registrations > Seu App > Overview**
+    Não é preciso enviar nada. Um administrador ou supervisor da sua empresa configura tudo em **Invenio Center > Configurações > SSO e provisionamento**. Veja a seção **Integração com Microsoft Entra ID**, acima.
     
     **Para JumpCloud (SAML 2.0)** 🔶
     
@@ -531,10 +568,9 @@ Após configurar o provedor de identidade (Microsoft Entra ID, JumpCloud ou ADFS
     
     **Como definir:**
     
-    A configuração é feita pela equipe Robbu durante a ativação do SSO. Informe sua preferência ao enviar os dados de configuração.
+    **Microsoft Entra ID:** ligue ou desligue o **Login apenas por SSO** em **Invenio Center > Configurações > SSO e provisionamento > Provisionamento**, quando quiser.
     
-    **Caminho para trocar depois:**
-    **Entre em contato com suporte@robbu.global** para solicitar mudança entre os modos.
+    **JumpCloud ou ADFS:** a configuração é feita pela equipe Robbu durante a ativação do SSO. Informe sua preferência ao enviar os dados de configuração, e para trocar depois, fale com **suporte@robbu.global**.
     
     <Tip>
     **Boa prática:** Comece com SSO opcional para testar e treinar usuários, depois migre para obrigatório quando todos estiverem familiarizados.
