@@ -57,6 +57,10 @@ A integração com **Microsoft Entra ID** (anteriormente Azure AD) usa o protoco
 
 No Invenio Center, abra o menu do seu usuário e vá em **Configurações > SSO e provisionamento > Configurar**.
 
+<Frame caption="Cartão SSO e provisionamento em Configurações, no Invenio Center">
+  <img src="/images/sso/center-configuracoes.jpg" alt="Cartão SSO e provisionamento em Configurações, no Invenio Center" />
+</Frame>
+
 <Note>
 **Quem acessa:** administradores e supervisores da empresa. Os demais usuários não veem a tela.
 </Note>
@@ -128,7 +132,11 @@ Na aba **Conexão**, escolha o protocolo **Microsoft Entra ID** e conecte de uma
   </Tab>
 </Tabs>
 
-Com a conexão gravada, a aba fica **só para leitura**. Para trocar de aplicativo ou de protocolo, clique em **Desconectar** e conecte de novo.
+Com a conexão gravada, a aba fica **só para leitura**. Para trocar de aplicativo ou de protocolo, clique em **Desconectar** e conecte de novo. O bloco **Dados para cadastrar no provedor** mostra a URL de retorno que vai no registro de aplicativo.
+
+<Frame caption="Passo 1: conexão com o Microsoft Entra ID gravada, com Testar conexão e Desconectar">
+  <img src="/images/sso/passo-1-conexao.jpg" alt="Passo 1: conexão com o Microsoft Entra ID gravada, com Testar conexão e Desconectar" />
+</Frame>
 
 ### Passo 2: Provisionamento
 
@@ -157,6 +165,10 @@ Com a conexão gravada, a aba fica **só para leitura**. Para trocar de aplicati
   </Step>
 </Steps>
 
+<Frame caption="Passo 2: provisionamento automático e login apenas por SSO, os dois desligados">
+  <img src="/images/sso/passo-2-provisionamento.jpg" alt="Passo 2: provisionamento automático e login apenas por SSO, os dois desligados" />
+</Frame>
+
 ### Passo 3: Mapeamento
 
 Cada mapeamento liga um **grupo do Entra ID** a um **grupo de acesso do Invenio** (Administrador, Supervisor, Atendente ou Carteiro Digital).
@@ -165,11 +177,87 @@ Cada mapeamento liga um **grupo do Entra ID** a um **grupo de acesso do Invenio*
 2. Em **Grupo de acesso no Invenio**, escolha o grupo.
 3. Clique em **Incluir mapeamento**.
 
+<Frame caption="Passo 3: três grupos do provedor mapeados para Supervisor, Atendente e Carteiro Digital (IDs de exemplo)">
+  <img src="/images/sso/passo-3-mapeamento.jpg" alt="Passo 3: três grupos do provedor mapeados para Supervisor, Atendente e Carteiro Digital (IDs de exemplo)" />
+</Frame>
+
 <Tip>
 **Use o ID do objeto, não o nome:** o nome do grupo pode mudar; o ID não.
 </Tip>
 
-Ao excluir um mapeamento, quem só tinha aquele grupo passa a ter o acesso negado no próximo login. O SSO nunca atribui o perfil Super-Admin.
+Cada pessoa só mapeia para os grupos de acesso que ela mesma pode conceder: um supervisor não vê a opção Administrador. O SSO nunca atribui o perfil Super-Admin.
+
+Ao excluir um mapeamento, o Invenio avisa o efeito antes de confirmar: quem só tinha aquele grupo passa a ter o acesso negado no próximo login.
+
+<Frame caption="Confirmação ao excluir um mapeamento">
+  <img src="/images/sso/excluir-mapeamento.jpg" alt="Confirmação ao excluir um mapeamento" />
+</Frame>
+
+### Como o usuário entra
+
+1. Acesse `https://accounts.robbu.global/` e clique em **Login com SSO**.
+2. Informe o **nome da empresa** e clique em **Entrar**.
+3. Entre com a conta corporativa na página da Microsoft. O Invenio abre já autenticado.
+
+<Frame caption="Botão Login com SSO no Accounts">
+  <img src="/images/sso/login-accounts.jpg" alt="Botão Login com SSO no Accounts" />
+</Frame>
+
+<Frame caption="Passo do Login com SSO, que pede o nome da empresa">
+  <img src="/images/sso/login-sso-empresa.jpg" alt="Passo do Login com SSO, que pede o nome da empresa" />
+</Frame>
+
+---
+
+## Como funciona o provisionamento automático
+
+O provisionamento é **sob demanda, no login** (just-in-time): o Invenio acerta o usuário no momento em que ele entra pelo SSO, com base nos grupos que o provedor informa. O provedor da empresa é a fonte da verdade, e a integração é de **mão única**: o Invenio só lê, e nada do que muda no Invenio é escrito de volta no provedor.
+
+<Steps>
+  <Step title="O usuário se autentica no provedor">
+    O Invenio manda o usuário para o Microsoft Entra ID da empresa. O Entra devolve um **ID token** assinado, com a identidade e os grupos do usuário.
+  </Step>
+  <Step title="O Invenio valida a identidade">
+    Antes de qualquer outra coisa, o token é conferido contra as chaves publicadas pela Microsoft: assinatura, emissor, aplicativo de destino e validade. Token adulterado, vencido ou emitido para outro aplicativo é recusado.
+  </Step>
+  <Step title="O Invenio lê os grupos">
+    Os grupos vêm do token (`groups`) e das app roles (`roles`). Na conexão pela Microsoft, os grupos mapeados também são conferidos no Microsoft Graph, só para leitura. Se o Entra avisa que a lista de grupos foi cortada por excesso, o login é negado sem mexer no usuário, porque uma lista incompleta poderia esconder o grupo certo.
+  </Step>
+  <Step title="O Invenio correlaciona grupos e permissões">
+    Cada grupo recebido é comparado aos **mapeamentos** do passo 3. Com mais de um grupo mapeado, vale o de maior privilégio. O resultado decide se o usuário é criado, atualizado, reativado, desativado ou só recusado, conforme a tabela do passo 2.
+  </Step>
+  <Step title="O Invenio confere as regras de acesso e grava">
+    As regras de acesso da empresa (licenças, créditos, horário de trabalho e lista de IPs permitidos) são conferidas **antes** de qualquer gravação. Um login recusado não deixa usuário criado, reativado ou promovido. Só então o Invenio grava a mudança, registra a trilha de auditoria e libera o acesso.
+  </Step>
+</Steps>
+
+**Usuário criado pelo provisionamento:** o login é o próprio e-mail, o grupo de acesso é o mapeado e as permissões do Invenio Center são as padrão de um usuário novo, sem as de faturas, templates do WhatsApp e permissões de página de usuário. O idioma é o padrão da empresa.
+
+<Note>
+**Mudança no provedor vale no próximo login.** Quem foi tirado dos grupos mapeados é desativado quando tenta entrar de novo. Para cortar também quem nunca mais entra, ligue o **Login apenas por SSO**, que impede o acesso por senha.
+</Note>
+
+---
+
+## Trilha de auditoria e evidências
+
+Cada ação do provisionamento gera um evento na **trilha de auditoria de segurança** da plataforma:
+
+| Evento | Quando acontece |
+| --- | --- |
+| `usuario_criado` | Primeiro acesso de alguém num grupo mapeado |
+| `permissoes_atualizadas` | O grupo de acesso do usuário mudou conforme o provedor |
+| `usuario_reativado` | Usuário inativo ou excluído voltou por estar num grupo mapeado |
+| `usuario_desativado` | O provedor mandou os grupos e nenhum está mapeado |
+| `login.sso` (falha) | Login recusado, com o motivo (por exemplo, `sem_grupo_mapeado` ou token inválido) |
+
+Cada evento registra o usuário, a empresa, o grupo de acesso, o tipo de login, o motivo, o IP de origem e a data e hora. A criação do usuário também fica na auditoria de usuários da empresa.
+
+<Tip>
+**Para auditoria e compliance:** o extrato da trilha de uma empresa, num período, é pedido ao suporte da Robbu em [suporte@robbu.global](mailto:suporte@robbu.global). A consulta direto na tela, na aba **Atividade**, está em desenvolvimento.
+</Tip>
+
+**Evidências da configuração:** a própria tela **SSO e provisionamento** mostra o estado da integração (conexão, provisionamento, login apenas por SSO e mapeamentos), como nos prints acima. Todas as alterações nessa tela exigem um administrador ou supervisor da empresa.
 
 ---
 
