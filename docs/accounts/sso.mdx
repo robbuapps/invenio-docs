@@ -284,13 +284,15 @@ A plataforma suporta autenticação com **JumpCloud** utilizando o protocolo **S
     
     2. **SP Entity ID:**
        ```
-       https://api.invenio.common.robbu.global/v1/login/sso/metadata
+       https://api.invenio.common.robbu.global/v1/login/sso/metadata/{nome-da-empresa}
        ```
     
     3. **ACS URL (Assertion Consumer Service URL):**
        ```
-       https://api.invenio.common.robbu.global/v1/login/sso/acs
+       https://api.invenio.common.robbu.global/v1/login/sso/acs/{nome-da-empresa}
        ```
+    
+    Troque `{nome-da-empresa}` pelo nome da sua empresa no Invenio, em minúsculas. As duas URLs aparecem prontas, já com o nome, no Center em **Configurações > SSO**, no Passo 1, com a conexão SAML 2.0 selecionada.
     
     4. **IdP Entity ID:** Fornecido automaticamente pelo JumpCloud (não precisa alterar)
     
@@ -359,7 +361,7 @@ O **ADFS** pode ser configurado como Provedor de Identidade SAML para autenticar
     
     **SAML Assertion Consumer Service (ACS) URL:**
     ```
-    https://api.invenio.common.robbu.global/v1/login/sso/acs
+    https://api.invenio.common.robbu.global/v1/login/sso/acs/{nome-da-empresa}
     ```
     - Tipo: **SAML Assertion Consumer**
     - Binding: **POST**
@@ -367,8 +369,10 @@ O **ADFS** pode ser configurado como Provedor de Identidade SAML para autenticar
     
     2. **Relying party trust identifier (Entity ID):**
     ```
-    https://api.invenio.common.robbu.global/v1/login/sso/metadata
+    https://api.invenio.common.robbu.global/v1/login/sso/metadata/{nome-da-empresa}
     ```
+    
+    Troque `{nome-da-empresa}` pelo nome da sua empresa no Invenio, em minúsculas. As duas URLs aparecem prontas no Center em **Configurações > SSO**, no Passo 1, com a conexão SAML 2.0 selecionada.
     
     <Warning>
     **URLs exatas:** Use as URLs exatamente como fornecidas para garantir compatibilidade com o Invenio.
