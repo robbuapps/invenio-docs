@@ -116,6 +116,13 @@ Na aba **Conexão**, escolha o protocolo **Microsoft Entra ID** e conecte de uma
       <Step title="Ligue a emissão de ID tokens">
         Em **Authentication > Implicit grant and hybrid flows**, marque **ID tokens** e salve.
       </Step>
+      <Step title="Conceda as permissões de login">
+        Em **API permissions > Add a permission > Microsoft Graph > Delegated permissions**, marque **openid**, **profile** e **email** e clique em **Add permissions**. Depois clique em **Grant admin consent** para a sua empresa.
+
+        <Note>
+        **Por que o consentimento do administrador:** quando o Entra ID da sua empresa não deixa o próprio usuário consentir, cada pessoa vê "aprovação do administrador necessária" no primeiro login. Com o consentimento dado pelo administrador, ninguém vê esse aviso.
+        </Note>
+      </Step>
       <Step title="Inclua os grupos no token (para o provisionamento)">
         Em **Token configuration > Add groups claim**, escolha **Groups assigned to the application** e marque o **ID token**.
 
@@ -131,6 +138,10 @@ Na aba **Conexão**, escolha o protocolo **Microsoft Entra ID** e conecte de uma
     </Steps>
   </Tab>
 </Tabs>
+
+<Warning>
+**Preencha o e-mail dos usuários no Entra ID.** O Invenio identifica o usuário pelo e-mail que o Entra ID manda no login. Quando o campo de e-mail do usuário está vazio, o Entra ID manda só o nome de login (UPN), por exemplo `joao@empresa.onmicrosoft.com`. Se ele for diferente do e-mail cadastrado no Invenio, por exemplo `joao@empresa.com.br`, o login não encontra o usuário. Com o provisionamento automático ligado, é criado um usuário novo com o UPN como login.
+</Warning>
 
 Com a conexão gravada, a aba fica **só para leitura**. Para trocar de aplicativo ou de protocolo, clique em **Desconectar** e conecte de novo. O bloco **Dados para cadastrar no provedor** mostra a URL de retorno que vai no registro de aplicativo.
 
