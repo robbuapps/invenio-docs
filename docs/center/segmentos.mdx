@@ -1,7 +1,7 @@
 ---
 title: "Segmentos"
 sidebarTitle: "Segmentos"
-description: "Organize o espaço de trabalho com segmentos no Invenio Center: vincule contatos ao grupo correto, configure distribuição, IDR, restrições de arquivo e permissões de acesso."
+description: "Organize o espaço de trabalho com segmentos no Invenio Center: vincule contatos ao grupo correto, configure distribuição, IDR, restrições de arquivo, bloqueio de disparo de template e permissões de acesso."
 ---
 
 Os **Segmentos** (ou carteiras) organizam o espaço de trabalho, vinculando contatos ao grupo de atendimento correto e restringindo o acesso dos operadores apenas aos seus segmentos autorizados.
@@ -182,6 +182,75 @@ Define como os contatos são distribuídos entre os atendentes do segmento.
 
 ---
 
+## Disparo de Template (WhatsApp)
+
+Bloqueia o envio de **templates** (mensagens ativas) do segmento pelo **WhatsApp oficial**. Use quando o segmento precisa parar de disparar, por exemplo, ao esgotar o orçamento do mês.
+
+**Caminho:** Invenio Center > Recursos > Segmentos > Editar > **Disparo de template (WhatsApp)**
+
+<Warning>
+Apenas **Super-administrador**, **Administrador** e **Supervisor** podem alterar o bloqueio. Para os demais perfis, a seção aparece travada.
+</Warning>
+
+### Campos
+
+| Campo | Descrição |
+|-------|-----------|
+| **Bloquear o disparo de template deste segmento** | Liga ou desliga o bloqueio |
+| **Origens bloqueadas** | De onde vêm os templates que deixam de ser enviados. Escolha ao menos uma |
+| **Válido até (opcional)** | Data em que o bloqueio deixa de valer sozinho. Sem data, vale até alguém desligar |
+| **Motivo (opcional)** | Texto livre para registrar por que o segmento foi bloqueado. Visível só para Super-administrador, Administrador e Supervisor |
+
+### Origens
+
+| Origem | O que bloqueia |
+|--------|----------------|
+| **Todas as origens** | Qualquer template do segmento, inclusive os que chegam **sem origem identificada**, como agendamentos e integrações antigas |
+| **IDR (bot)** | Templates enviados pelo fluxo da IDR |
+| **Live (atendente, 1:1)** | Templates enviados pelo atendente no Invenio Live |
+| **API / integração** | Templates enviados pela [API Send Message](https://docs.robbu.global/docs/robbu-api/send-message) |
+| **Campanha** | Templates de campanhas de WhatsApp |
+
+<Note>
+Marcando as origens uma a uma, só os templates com origem identificada são bloqueados. Para bloquear também agendamentos e integrações sem origem, use **Todas as origens**.
+</Note>
+
+### O que nunca é bloqueado
+
+- ✅ Template de **autenticação** (categoria Authentication), para não impedir o acesso do cliente a sites e sistemas
+- ✅ **Resposta do bot** e **resposta do atendente** que não sejam template
+- ✅ **SMS**, **RCS** e **e-mail**
+
+### Como o bloqueio funciona
+
+- ⏱️ Depois de ligar ou desligar, o bloqueio leva **até 1 minuto** para valer no envio.
+- 🚫 O template bloqueado **não é enviado à Meta** e fica registrado como **falha**, com o motivo **"Bloqueada por configuração do segmento"**. Ele não é reenviado depois.
+- 📊 Cada template bloqueado registra o KPI **"Disparo de template bloqueado"** no contato.
+- 🗂️ Nas campanhas, vale o segmento da **campanha**. Nas demais origens, vale o segmento atual do contato.
+- 🔁 O bloqueio vale a partir do momento em que é ligado. Não há contagem de disparos.
+
+### Data de validade
+
+Com **Válido até** preenchido, o bloqueio vale até **23:59:59 do dia escolhido**, no fuso horário da conta. Depois disso, os templates voltam a sair sem ninguém precisar desligar o bloqueio.
+
+- A data não pode ser anterior a hoje.
+- Depois que a data passa, a lista e o detalhe do segmento avisam que o desbloqueio veio da validade.
+
+### Onde acompanhar
+
+| Onde | O que aparece |
+|------|---------------|
+| **Lista de segmentos** | Selo **"Disparo bloqueado"** no segmento com bloqueio ligado, ou **"Desbloqueado pela validade em"** a data, quando a validade venceu |
+| **Detalhe do segmento** | A seção de disparo de template, só para leitura |
+| **Invenio Live** | A bolha do template mostra o ícone vermelho de **"Não enviada"**. Passe o mouse para ver o motivo. Na linha do tempo, aparece o KPI **"Disparo de template bloqueado"** |
+| **Relatórios** | O relatório **KPI - Eventos** pode ser filtrado pelo evento **"Disparo de template bloqueado"** |
+
+<Note>
+No Invenio Live, o aviso de envio aparece ao enviar o template mesmo quando ele é bloqueado: o resultado chega em seguida, pela bolha e pelo KPI na linha do tempo.
+</Note>
+
+---
+
 ## Inativar Segmento
 
 Segmentos **não podem ser excluídos**, apenas inativados. Dois caminhos disponíveis:
@@ -243,6 +312,14 @@ Invenio Center > Recursos > Segmentos > Três pontinhos > **Inativar**
     href="https://docs.robbu.global/docs/center/relatorios"
   >
     Relatórios por segmento
+  </Card>
+
+  <Card
+    title="KPI Eventos"
+    icon="flag"
+    href="https://docs.robbu.global/docs/center/kpi-eventos"
+  >
+    Eventos e KPI do atendimento
   </Card>
 
   <Card
@@ -344,6 +421,25 @@ Invenio Center > Recursos > Segmentos > Três pontinhos > **Inativar**
     **Distribuição Preditiva** possui 3 lógicas: Média de Fidelizados, Média de Pendentes e TMR Baixo.
 
     Consulte: [Métodos de Distribuição](https://docs.robbu.global/docs/live/metodos-de-distribuicao)
+  </Accordion>
+
+  <Accordion title="🚫 Como bloquear o disparo de template de um segmento?">
+    **Caminho:** Invenio Center > Recursos > Segmentos > Editar > Disparo de template (WhatsApp)
+
+    1. Ligue **Bloquear o disparo de template deste segmento**
+    2. Marque as **origens** a bloquear (ou **Todas as origens**)
+    3. Se quiser, preencha **Válido até** e o **Motivo**
+    4. Salve
+
+    O bloqueio leva até 1 minuto para valer. Vale só para template pelo **WhatsApp oficial**; autenticação, respostas de bot e atendente, SMS, RCS e e-mail continuam saindo.
+  </Accordion>
+
+  <Accordion title="❓ O template bloqueado é enviado depois?">
+    **Não.** O template bloqueado fica registrado como **falha**, com o motivo "Bloqueada por configuração do segmento", e não é reenviado quando o bloqueio é desligado ou a validade vence. Depois disso, só os novos disparos voltam a sair.
+  </Accordion>
+
+  <Accordion title="📅 Até quando vale a data de validade?">
+    Até **23:59:59 do dia escolhido**, no fuso horário da conta. No dia seguinte, os templates voltam a sair sozinhos, e a lista de segmentos mostra **"Desbloqueado pela validade em"** a data.
   </Accordion>
 
   <Accordion title="🗑️ Posso excluir um segmento?">
