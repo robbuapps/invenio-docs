@@ -33,7 +33,7 @@ A autenticação deve ser realizada exclusivamente com usuários do tipo Intergr
 ```json
 { 
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5...", 
-  "expires_in": 287971200, 
+  "expires_in": 21600, 
   "refresh_token": "", 
   "token_type": "bearer" 
 } 
@@ -46,7 +46,7 @@ A autenticação deve ser realizada exclusivamente com usuários do tipo Intergr
 | `expires_in`    | Tempo de expiração do token, em segundos.                                     | 
 | `token_type`    | Tipo do token retornado, que deve ser informado no header das requisições. 
 
-> Não é necessário gerar um novo token de forma recorrente. O campo expires_in informa o tempo de validade do token em segundos e, por padrão, ele pode ser considerado válido por até 3333 dias.
+> Não é necessário gerar um novo token de forma recorrente. O campo expires_in informa o tempo de validade do token em segundos e, por padrão, o token vale **6 horas**. Armazene o token e renove-o antes de vencer, ou quando a API retornar `401 Unauthorized`: um token vencido deixa de ser aceito.
 Vale ressaltar que, ao realizar uma nova chamada à rota de login, o token anteriormente emitido será automaticamente invalidado, passando a valer apenas o token mais recente.
 
 ---
@@ -86,7 +86,7 @@ Vale ressaltar que, ao realizar uma nova chamada à rota de login, o token anter
   <Accordion title="Preciso gerar um novo token a cada requisição?">
     Não. O token possui validade definida pelo campo expires_in (em segundos).
 
-    Por padrão, ele pode ser considerado válido por até 3333 dias, não sendo necessário gerar tokens de forma recorrente.
+    Por padrão, ele vale 6 horas. Reutilize o token enquanto estiver válido e gere um novo ao se aproximar do vencimento ou ao receber `401 Unauthorized`; um token vencido deixa de ser aceito.
   </Accordion>
 
   <Accordion title="O que acontece se eu executar novamente a rota de login?">
