@@ -54,15 +54,15 @@ Para realizar a autenticação preencha a requisição conforme o exemplo abaixo
 ```
 {
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5...",
-  "expires_in": 287971200,
+  "expires_in": 21600,
   "refresh_token": "",
   "token_type": "bearer"
 }
 
 ```
 
-Não é necessário gerar um novo token a cada envio. O campo **expires_in** define sua validade em segundos e, por padrão, pode ser considerado válido por até 3333 dias. É importante lembrar que, caso a rota de login seja
- executada novamente, o token anterior será invalidado. Por isso, a recomendação é armazená-lo e solicitar um novo apenas quando a requisição de envio retornar **401 Unauthorized**.
+Não é necessário gerar um novo token a cada envio. O campo **expires_in** define sua validade em segundos e, por padrão, o token vale **6 horas**. Armazene o token e renove-o antes de vencer, ou quando a API retornar `401 Unauthorized`. É importante lembrar que, caso a rota de login seja
+ executada novamente, o token anterior será invalidado. Por isso, a recomendação é armazená-lo e solicitar um novo ao se aproximar do vencimento ou quando a requisição de envio retornar **401 Unauthorized**.
 
 ---
 

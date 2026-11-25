@@ -48,7 +48,7 @@ Cada perfil assegura uma experiência de uso alinhada às responsabilidades de c
     <Warning>
     **Restrição:** Apenas perfis **Administrador** ou **Supervisor** conseguem acessar o ambiente através da URL `accounts.robbu.global`.
     
-    Atendentes que tentarem acessar essa URL receberão erro de permissão.
+    Atendentes que tentarem acessar essa URL verão a tela **"Sem acesso ao Invenio Center"**, com o botão **"Voltar ao Accounts"**. Eles não são deslogados e continuam usando o Invenio Live normalmente.
     </Warning>
   </Tab>
   
@@ -440,6 +440,10 @@ Ao concluir a contratação, você receberá as credenciais de acesso para o pri
     - ❌ Não enviar mensagens, não clicar em nada, não navegar entre telas
     - ⚠️ O sistema não detecta atividade apenas por estar com a aba aberta
     
+    **Validade do login:**
+
+    Além da inatividade, cada login tem **validade de 12 horas**. Depois disso, a sessão deixa de ser aceita e a plataforma leva você de volta à tela de login, uma única vez, para entrar de novo. Quem trabalha em turnos longos pode precisar entrar novamente ao longo do dia.
+
     **O que acontece após o timeout:**
     
     - 🔐 **Sessão encerrada:** Você será automaticamente deslogado
@@ -485,14 +489,14 @@ Ao concluir a contratação, você receberá as credenciais de acesso para o pri
     - 📝 **Uso:** Mesmas credenciais em ambas URLs
     
     **Atendente** 💬
-    - ❌ **Invenio Center** (`accounts.robbu.global`) → **Sem acesso** (erro de permissão)
+    - ❌ **Invenio Center** (`accounts.robbu.global`) → **Sem acesso** (tela "Sem acesso ao Invenio Center")
     - ✅ **Invenio Live** (`invenio.robbu.global/painel/`) → Acesso apenas para atendimento
     - 📝 **Uso:** Mesmas credenciais, mas só funciona no Invenio Live
     
     **Resumo:**
     - 🔑 **Credenciais:** Sempre as mesmas
     - 🚪 **Acesso:** Segmentado por perfil
-    - ⚠️ **Erro:** Atendente que tentar acessar `accounts.robbu.global` verá mensagem de permissão negada
+    - ⚠️ **Aviso:** Atendente que tentar acessar `accounts.robbu.global` verá a tela "Sem acesso ao Invenio Center" e pode voltar ao Accounts pelo botão "Voltar ao Accounts". Quem precisa do Center deve ter o perfil Supervisor ou Administrador (decisão do administrador da conta)
   </Accordion>
 
   <Accordion title="📚 Onde encontro mais informações relacionadas ao acesso e uso da plataforma?">
